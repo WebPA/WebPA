@@ -1,0 +1,102 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns="http://usefulinc.com/ns/doap#">
+
+<Project>
+	
+<!-- Copyright 2007 Loughborough University
+
+	$LastChangedDate: 2007-08-07 (Tues, 07 Aug 2007) $
+	$LastChangedRevision: 0.3 $
+	$LastChangedBy: Nic $
+
+-->
+
+	<!-- About the project -->
+	<name>WebPA - Online Peer and Self Assessment Application</name>
+	<shortname xml:lang="en">WebPA</shortname>
+	<created>2007-03-07</created>
+	<shortdesc xml:lang="en">The project will make an open source version of an existing online peer moderated marking system, for the assessment of group work, already in use at Loughborough University since 1998.</shortdesc>
+	<description>The project will make an open source version of an existing online peer moderated marking system, for the assessment of group work, already in use at Loughborough University since 1998.
+		
+		WebPA will also include a number of significant enhancements that will help integrate good practice being developed locally and at our partner site at the University of Hull and will benefit the entire JISC community. It will build upon existing evaluation and developments to the system, across a range of subject disciplines. The project will also be informed by the experience of both Hull and Loughborough universitys experience of research into online peer assessment methods as well as technical expertise.
+		
+		The project will use a service-orientated approach within the e-Framework for Education and Research. The new system will be piloted at Loughborough University and the University of Hull and be developed within the context of each institutions VLE and online delivery (Moodle at Loughborough and portal/learning services at Hull).
+		
+		Further developments will be undertaken as a result of the evaluation of needs from these two institutions and through the wider community via the Higher Education Academy Engineering Subject Centre and Physical Sciences Subject Centre.
+	</description>
+	<homepage rdf:resource="http://webpaproject.lboro.ac.uk/"/>
+	
+	<!-- blogs -->
+	<foaf:seeAlso rdf:resource="http://webpa-tec.blogspot.com/feeds/posts/default" dc:format="application/rss+xml" dc:title="Technical Blog"/>
+	<foaf:seeAlso rdf:resource="http://webparesearch.blogspot.com/feeds/posts/default" dc:format="application/rss+xml" dc:title="Research Blog"/>	
+	
+	<mailing-list rdf:resource="http://www.jiscmail.ac.uk/lists/webpa.html" />
+	<!-- <wiki rdf:resource=""/> -->
+	<download-page rdf:resource="http://sourceforge.net/project/showfiles.php?group_id=194016"/>
+	<bug-database rdf:resource="http://sourceforge.net/tracker/?group_id=194016&amp;atid=947737"/>
+	<category rdf:resource="http://www.jisc.ac.uk/whatwedo/programmes/programme_elearning_capital.aspx"/>
+	<!--<os></os>-->
+	<programming-language>PHP</programming-language>
+	
+	<!-- About the project team-->
+	<maintainer>
+		<foaf:Person>
+			<foaf:name>Nicola  Wilkinson</foaf:name>
+			<foaf:title>Miss</foaf:title>
+			<foaf:givenname>Nicola </foaf:givenname>
+			<foaf:family_name>Wilkinson</foaf:family_name>
+			<foaf:mbox rdf:resource="mailto:n.wilkinson@lboro.ac.uk"/>
+			<foaf:workplaceHomepage rdf:resource="http://webpaproject.lboro.ac.uk"/>
+		</foaf:Person>
+	</maintainer>
+	<developer>
+		<foaf:Person>
+			<foaf:name>Nicola  Wilkinson</foaf:name>
+			<foaf:title>Miss</foaf:title>
+			<foaf:givenname>Nicola </foaf:givenname>
+			<foaf:family_name>Wilkinson</foaf:family_name>
+			<foaf:mbox rdf:resource="mailto:n.wilkinson@lboro.ac.uk"/>
+			<foaf:workplaceHomepage rdf:resource="http://webpaproject.lboro.ac.uk"/>
+		</foaf:Person>
+	</developer>
+	<developer>
+		<foaf:Person>
+			<foaf:name>Paul Newman</foaf:name>
+			<foaf:title>Mr</foaf:title>
+			<foaf:givenname>Paul </foaf:givenname>
+			<foaf:family_name>Newman</foaf:family_name>
+			<foaf:mbox rdf:resource="mailto:p.m.newman@lboro.ac.uk"/>
+			<foaf:workplaceHomepage rdf:resource="http://www.engcetl.ac.uk"/>
+		</foaf:Person>
+	</developer>
+	<helper>
+		<foaf:Person>
+			<foaf:name>Melanine King</foaf:name>
+			<foaf:title>Mrs</foaf:title>
+			<foaf:givenname>Melanie </foaf:givenname>
+			<foaf:family_name>King</foaf:family_name>
+			<foaf:mbox rdf:resource="mailto:m.r.n.king@lboro.ac.uk"/>
+			<foaf:workplaceHomepage rdf:resource="http://www.engcetl.ac.uk"/>
+		</foaf:Person>
+	</helper>
+	<helper>
+		<foaf:Person>
+			<foaf:name>Steve Loddington</foaf:name>
+			<foaf:title>Mr</foaf:title>
+			<foaf:givenname>Steve </foaf:givenname>
+			<foaf:family_name>Loddington</foaf:family_name>
+		</foaf:Person>
+	</helper>
+	<!-- Licence information -->
+	<license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
+	<!-- Repository information -->
+	<repository>
+		<SVNRepository>
+			<browse rdf:resource="http://webpa.svn.sourceforge.net/viewvc/webpa/trunk/"/>
+			<location rdf:resource="https://webpa.svn.sourceforge.net/svnroot/webpa"/>
+		</SVNRepository>
+	</repository>
+</Project>
+</rdf:RDF>
