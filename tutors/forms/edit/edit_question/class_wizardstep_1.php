@@ -1,133 +1,129 @@
 <?php
 /**
- * 
+ *
  * Class : WizardStep1  (edit criterion wizard)
  *
- * 			
- * 
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
+
 class WizardStep1 {
 
-	// Public
-	public $wizard = null;
-	public $step = 1;
+  // Public
+  public $wizard = null;
+  public $step = 1;
 
+  /*
+  * CONSTRUCTOR
+  */
+  function WizardStep1(&$wizard) {
+    $this->wizard =& $wizard;
 
-	/*
-	* CONSTRUCTOR
-	*/
-	function WizardStep1(&$wizard) {
-		$this->wizard =& $wizard;
-	
-		$this->wizard->back_button = null;
-		$this->wizard->next_button = 'Next &gt;';
-		$this->wizard->cancel_button = 'Cancel';
-	}// /WizardStep1()
+    $this->wizard->back_button = null;
+    $this->wizard->next_button = 'Next &gt;';
+    $this->wizard->cancel_button = 'Cancel';
+  }// /WizardStep1()
 
-
-	function head() {
-		?>
+  function head() {
+?>
 <script language="JavaScript" type="text/javascript">
 <!--
 
-	function body_onload() {
-		document.getElementById('question_text').focus();
-	}// /body_onload()
+  function body_onload() {
+    document.getElementById('question_text').focus();
+  }// /body_onload()
 
 //-->
 </script>
 <?php
-	}// /->head()
-	
-	
-	function form() {
-		$config = $this->wizard->get_var('config');
-		$form =& $this->wizard->get_var('form');
+  }// /->head()
 
-		$question = $form->get_question($this->wizard->get_var('question_id'));		
+  function form() {
+    $config = $this->wizard->get_var('config');
+    $form =& $this->wizard->get_var('form');
 
-		if ( (!$this->wizard->get_field('set_original_data')) && (is_array($question)) ) {
-			$range_bits = explode('-',$question['range']['_data']);
-			$range_start = $range_bits[0];
-			$range_end = $range_bits[1];
+    $question = $form->get_question($this->wizard->get_var('question_id'));
 
-			if (!$this->wizard->get_field('question_text')) { $this->wizard->set_field('question_text', $question['text']['_data']); }
+    if ( (!$this->wizard->get_field('set_original_data')) && (is_array($question)) ) {
+      $range_bits = explode('-',$question['range']['_data']);
+      $range_start = $range_bits[0];
+      $range_end = $range_bits[1];
 
-			$question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
-			if (!$this->wizard->get_field('question_desc')) { $this->wizard->set_field('question_desc', $question_desc); }
+      if (!$this->wizard->get_field('question_text')) { $this->wizard->set_field('question_text', $question['text']['_data']); }
 
-			if (!$this->wizard->get_field('question_range_start')) { $this->wizard->set_field('question_range_start',$range_start); }
-			if (!$this->wizard->get_field('question_range_end')) { $this->wizard->set_field('question_range_end',$range_end); }
-			
-			for ($i=$range_start; $i<=$range_end; $i++) {
-				if (array_key_exists("scorelabel{$i}", $question)) {
-					$this->wizard->set_field("scorelabel{$i}", $question["scorelabel{$i}"]);
-				}
-			}
-		
-			$this->wizard->set_field('set_original_data',true);
-		}
-		
-		require_once('../../../../library/functions/lib_form_functions.php');
-		?>
-		<p>Here you can edit the text and description of the criterion.</p>
+      $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
+      if (!$this->wizard->get_field('question_desc')) { $this->wizard->set_field('question_desc', $question_desc); }
 
-		<div class="form_section">
-			<table cellpadding="2" cellspacing="2" width="100%">
-			<tr>
-				<th width="100"><label for="question_text">Criterion Text</label></th>
-				<td><input type="text" name="question_text" id="question_text" maxlength="255" size="50" value="<?php echo( $this->wizard->get_field('question_text') ); ?>" style="width: 90%;" /></td>
-			</tr>
-			<tr>
-				<th valign="top" width="100"><label for="question_desc">Description</label><br /><span style="font-size: 0.8em; font-weight: normal;">(optional)</span></th>
-				<td><textarea name="question_desc" id="question_desc" cols="60" rows="3" style="width: 90%;"><?php echo( $this->wizard->get_field('question_desc') ); ?></textarea></td>
-			</tr>
-			</table>
-		</div>
+      if (!$this->wizard->get_field('question_range_start')) { $this->wizard->set_field('question_range_start',$range_start); }
+      if (!$this->wizard->get_field('question_range_end')) { $this->wizard->set_field('question_range_end',$range_end); }
 
-		<p>Here you can select the range of scores you will allow for this assessment criterion.</p>
-		<div class="form_section">
-			<table class="form" cellpadding="2" cellspacing="2">
-			<tr>
-				<th><label for="question_range_start">Scores range from</label></th>
-				<td>
-					<select name="question_range_start" id="question_range_start">
-						<?php render_options_range(0,1,1,(int) $this->wizard->get_field('question_range_start')); ?>
-					</select>
-				</td>
-				<th><label>to</label></th>
-				<td>
-					<select name="question_range_end" id="question_range_end">
-						<?php render_options_range(3,10,1,(int) $this->wizard->get_field('question_range_end')); ?>
-					</select>
-				</td>
-			</tr>
-			</table>
-		</div>
-		<p><strong>Please Note</strong> - allowing 0 scores means students can receive no marks if they failed to contribute at all.</p>
-		<?php
-	}// /->form()
+      for ($i=$range_start; $i<=$range_end; $i++) {
+        if (array_key_exists("scorelabel{$i}", $question)) {
+          $this->wizard->set_field("scorelabel{$i}", $question["scorelabel{$i}"]);
+        }
+      }
 
-	
-	function process_form() {
-		$errors = null;
-		
-		$this->wizard->set_field('question_text',fetch_POST('question_text'));
-		if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
+      $this->wizard->set_field('set_original_data',true);
+    }
 
-		$this->wizard->set_field('question_desc',fetch_POST('question_desc'));
-		
-		$this->wizard->set_field('question_range_start',fetch_POST('question_range_start'));
-		$this->wizard->set_field('question_range_end',fetch_POST('question_range_end'));
-		
-		return $errors;
-	}// /->process_form()
-	
+    require_once('../../../../includes/functions/lib_form_functions.php');
+?>
+    <p>Here you can edit the text and description of the criterion.</p>
+
+    <div class="form_section">
+      <table cellpadding="2" cellspacing="2" width="100%">
+      <tr>
+        <th width="100"><label for="question_text">Criterion Text</label></th>
+        <td><input type="text" name="question_text" id="question_text" maxlength="255" size="50" value="<?php echo( $this->wizard->get_field('question_text') ); ?>" style="width: 90%;" /></td>
+      </tr>
+      <tr>
+        <th valign="top" width="100"><label for="question_desc">Description</label><br /><span style="font-size: 0.8em; font-weight: normal;">(optional)</span></th>
+        <td><textarea name="question_desc" id="question_desc" cols="60" rows="3" style="width: 90%;"><?php echo( $this->wizard->get_field('question_desc') ); ?></textarea></td>
+      </tr>
+      </table>
+    </div>
+
+    <p>Here you can select the range of scores you will allow for this assessment criterion.</p>
+    <div class="form_section">
+      <table class="form" cellpadding="2" cellspacing="2">
+      <tr>
+        <th><label for="question_range_start">Scores range from</label></th>
+        <td>
+          <select name="question_range_start" id="question_range_start">
+            <?php render_options_range(0,1,1,(int) $this->wizard->get_field('question_range_start')); ?>
+          </select>
+        </td>
+        <th><label>to</label></th>
+        <td>
+          <select name="question_range_end" id="question_range_end">
+            <?php render_options_range(3,10,1,(int) $this->wizard->get_field('question_range_end')); ?>
+          </select>
+        </td>
+      </tr>
+      </table>
+    </div>
+    <p><strong>Please Note</strong> - allowing 0 scores means students can receive no marks if they failed to contribute at all.</p>
+<?php
+  }// /->form()
+
+  function process_form() {
+    $errors = null;
+
+    $this->wizard->set_field('question_text',fetch_POST('question_text'));
+    if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
+
+    $this->wizard->set_field('question_desc',fetch_POST('question_desc'));
+
+    $this->wizard->set_field('question_range_start',fetch_POST('question_range_start'));
+    $this->wizard->set_field('question_range_end',fetch_POST('question_range_end'));
+
+    return $errors;
+  }// /->process_form()
+
 }// /class: WizardStep1
-
 
 ?>

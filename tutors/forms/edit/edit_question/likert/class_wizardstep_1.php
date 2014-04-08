@@ -1,14 +1,14 @@
 <?php
 /**
- * 
+ *
  * Class : WizardStep1  (edit criterion wizard)
  *
- * 			
- * 
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
 class WizardStep1 {
 
@@ -22,7 +22,7 @@ class WizardStep1 {
 	*/
 	function WizardStep1(&$wizard) {
 		$this->wizard =& $wizard;
-	
+
 		$this->wizard->back_button = null;
 		$this->wizard->next_button = 'Next &gt;';
 		$this->wizard->cancel_button = 'Cancel';
@@ -42,13 +42,13 @@ class WizardStep1 {
 </script>
 <?php
 	}// /->head()
-	
-	
+
+
 	function form() {
 		$config = $this->wizard->get_var('config');
 		$form =& $this->wizard->get_var('form');
 
-		$question = $form->get_question($this->wizard->get_var('question_id'));		
+		$question = $form->get_question($this->wizard->get_var('question_id'));
 
 		if ( (!$this->wizard->get_field('set_original_data')) && (is_array($question)) ) {
 			$range_bits = explode('-',$question['range']['_data']);
@@ -62,17 +62,17 @@ class WizardStep1 {
 
 			if (!$this->wizard->get_field('question_range_start')) { $this->wizard->set_field('question_range_start',$range_start); }
 			if (!$this->wizard->get_field('question_range_end')) { $this->wizard->set_field('question_range_end',$range_end); }
-			
+
 			for ($i=$range_start; $i<=$range_end; $i++) {
 				if (array_key_exists("scorelabel{$i}", $question)) {
 					$this->wizard->set_field("scorelabel{$i}", $question["scorelabel{$i}"]);
 				}
 			}
-		
+
 			$this->wizard->set_field('set_original_data',true);
 		}
-		
-		require_once('../../../../library/functions/lib_form_functions.php');
+
+		require_once('../../../../includes/functions/lib_form_functions.php');
 		?>
 		<p>Here you can edit the text and description of the criterion.</p>
 
@@ -112,21 +112,21 @@ class WizardStep1 {
 		<?php
 	}// /->form()
 
-	
+
 	function process_form() {
 		$errors = null;
-		
+
 		$this->wizard->set_field('question_text',fetch_POST('question_text'));
 		if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
 
 		$this->wizard->set_field('question_desc',fetch_POST('question_desc'));
-		
+
 		$this->wizard->set_field('question_range_start',fetch_POST('question_range_start'));
 		$this->wizard->set_field('question_range_end',fetch_POST('question_range_end'));
-		
+
 		return $errors;
 	}// /->process_form()
-	
+
 }// /class: WizardStep1
 
 

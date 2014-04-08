@@ -1,29 +1,28 @@
 <?php
 /**
- * 
+ *
  * Contact Us
- * 
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 0.9
- * 
+ *
  */
 
-require_once("../include/inc_global.php");
-require_once('../library/classes/class_email.php');
+require_once("../includes/inc_global.php");
+require_once('../includes/classes/class_email.php');
 
 check_user($_user);
-
 
 // Process GET/POST
 
 $contact_app_id = APP__ID;
 
-$contact_to = APP__EMAIL_HELP;
+$contact_to = $BRANDING['email.help'];
 
 $contact_user_id = $_user->id;
 $contact_user_username = $_user->username;
-$contact_user_fullname = "{$_user->forename} {$_user->surname}";
+$contact_user_fullname = "{$_user->forename} {$_user->lastname}";
 $contact_user_email = $_user->email;
 
 $contact_username = fetch_POST('contact_username');
@@ -67,7 +66,6 @@ $contact_message
 ----------------------------------------
 EndBody;
 
-
 // Send the email
 $email = new Email();
 $email->set_to($contact_to);
@@ -76,13 +74,12 @@ $email->set_subject("$contact_app_id : $contact_type");
 $email->set_body($email_body);
 $email->send();
 
-
 // Begin Page
- 
+
 $UI->page_title = APP__NAME . ' Message Sent';
 $UI->menu_selected = 'contact';
-$UI->breadcrumbs = array	('home'		=> '/' ,
-							'contact'	=> null ,);
+$UI->breadcrumbs = array  ('home'   => '/' ,
+              'contact' => null ,);
 
 $UI->head();
 $UI->body();
@@ -90,12 +87,11 @@ $UI->body();
 $UI->content_start();
 ?>
 
-	<div class="content_box">
-		<p>Your message has now been sent.</p>
-		<p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
-		<p>Thanks for your time</p>
-		<p>The engCETL team</p>
-	</div>
+  <div class="content_box">
+    <p>Your message has now been sent.</p>
+    <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
+    <p>Thanks for your time</p>
+  </div>
 <?php
 
 $UI->content_end();

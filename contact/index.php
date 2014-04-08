@@ -11,8 +11,8 @@
  * 
  */
 
-require_once("../include/inc_global.php");
-require_once('../library/functions/lib_form_functions.php');
+require_once("../includes/inc_global.php");
+require_once('../includes/functions/lib_form_functions.php');
 
 check_user($_user);
 
@@ -46,7 +46,7 @@ $UI->body();
 $UI->content_start();
 
 ?>
-	<p>If you want to report a problem or bug with any part of the Web-PA system, have a technical query, or just need to ask a specific question regarding Web-PA, please complete the form below.</p>
+	<p>If you want to report a problem or bug with any part of the WebPA system, have a technical query, or just need to ask a specific question regarding WebPA, please complete the form below.</p>
 		
 	<div class="content_box">
 		<p>Please supply as much information with your message as possible (especially when sending a bug report!), this will allow us to respond to your message much faster!</p>
@@ -58,7 +58,7 @@ $UI->content_start();
 			<table class="form" cellpadding="2" cellspacing="2">
 			<tr>
 				<td><label for="contact_name">Your Name</label></td>
-				<td><input type="text" name="contact_name" id="contact_name" maxlength="60" size="50" value="<?php echo("{$_user->forename} {$_user->surname}"); ?>" /></td>
+				<td><input type="text" name="contact_name" id="contact_name" maxlength="60" size="50" value="<?php echo("{$_user->forename} {$_user->lastname}"); ?>" /></td>
 			</tr>
 			<tr>
 				<td><label for="contact_username">Your Username</label></td>

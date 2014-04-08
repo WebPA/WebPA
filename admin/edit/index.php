@@ -18,304 +18,446 @@
  *
  */
 
- //get the include file required
- require_once("../../include/inc_global.php");
+//get the include file required
+require_once('../../includes/inc_global.php');
+require_once('../../includes/functions/lib_string_functions.php');
 
- if (!check_user($_user, 'staff')){
-	header('Location:'. APP__WWW .'/logout.php?msg=denied');
-	exit;
+if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  exit;
 }
 
- //set the page information
+//set the page information
 $UI->page_title = APP__NAME . ' Edit system users';
 $UI->menu_selected = 'view data';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-$UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
+  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+}
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array ('home' => '../../../','review data'=>'../review/','edit'=>null, );
+$UI->breadcrumbs = array ('home' => '../','review data'=>'../review/','edit'=>null, );
 $UI->help_link = '?q=node/237';
-$UI->head();
-$UI->body();
-$UI->content_start();
+
 //build the content to be written to the screen
 
-//get the passed user ID passed as u
-$user = fetch_GET('u');
+//get the posted information
 
-$action =  fetch_POST('command');
+$action = fetch_POST('save');
+
+//get the passed user ID passed as u
+$user_id = fetch_POST('u', fetch_GET('u'));
+$username = fetch_POST('username');
+$new_user = empty($user_id);
+$type = fetch_POST('t', fetch_GET('t', ''));
+$user_found = FALSE;
 
 $sScreenMsg = '';
 
 //-----------------------------------------------------------------------
-
 //collect all the information about the person to populate the fields
-$user_id = $CIS->get_user($user);
 $edit_user = new User();
-$edit_user->load_from_row($user_id);
-
+if (!$new_user) {
+  $user_row = $CIS->get_user($user_id);
+  $edit_user->load_from_row($user_row);
+} else {
+  if (!empty($username)) {
+    $user_row = $CIS->get_user_for_username($username);
+    if ($user_row) {
+      $user_found = TRUE;
+      $edit_user->load_from_row($user_row);
+      $user_id = $edit_user->id;
+    }
+  }
+  if ($_user->is_admin() && ($type == APP__USER_TYPE_ADMIN)) {
+    if ($user_found) {
+      $user_found = FALSE;
+      $user_id = '';
+      $edit_user = new User();
+      $action = '';
+      $sScreenMsg = 'The username already exists; please use another.';
+    }
+    $edit_user->admin = 1;
+  }
+}
+if ($edit_user->is_admin() && ($type != APP__USER_TYPE_ADMIN)) {
+  $user_found = FALSE;
+  $user_id = '';
+  $edit_user = new User();
+  $action = '';
+  $sScreenMsg = 'Administrators cannot be enrolled in modules.';
+}
 
 //----------------------------------------------------------------------
 //process form
 
-	//get the posted information
+$canEdit = ($_source_id == '') && (($new_user || $_user->is_admin()) && !$user_found);
 
+if ($canEdit) {
 
-	$action = fetch_POST('save');
+  //put all the elements back into the structures
+  $value = fetch_POST('name');
+  if (!empty($value)) {
+    $edit_user->forename = $value;
+  }
+  $value = fetch_POST('lastname');
+  if (!empty($value)) {
+    $edit_user->lastname = $value;
+  }
+  $value = fetch_POST('id_number');
+  if (!empty($value)) {
+    $edit_user->id_number = $value;
+  }
+  $value = fetch_POST('department_id');
+  if (!empty($value)) {
+    $edit_user->department_id = $value;
+  }
+  $value = fetch_POST('email');
+  if (!empty($value)) {
+    $edit_user->email = $value;
+  }
+  //check to see if the password needs to be saved
+  $password = fetch_POST('password', '');
+  if ((($password != '!!!!!!') && !empty($password)) || empty($user_id)) {
+    if (($password == '!!!!!!') || empty($password)) {
+      $password = str_random();
+    }
+    $edit_user->update_password(md5($password));
+  }
 
-	if (($action)) {					//incase we want to do more than save changes in the future
-		switch ($action) {
-			case 'Save Changes':
-			//put all the elements back into the structures
-			$edit_user->forename = fetch_POST('name');
-			$edit_user->surname = fetch_POST('surname');
-			$edit_user->email = fetch_POST('email');
-			$edit_user->type = fetch_POST('rdo_type');
-			switch ($edit_user->type) {
-				case 'staff':
-					$edit_user->staff_id = $user_id;
-					break;
-				// --------------------
-				case 'student':
-					$edit_user->student_id = $user_id;
-					break;
-				// --------------------
-				default: break;
-			}// /switch
+  if ((($new_user && !$user_found) || $_user->is_admin()) && fetch_POST('username')) {
+    $edit_user->update_username(fetch_POST('username'));
+  }
+}
 
-			$edit_user->institutional_ref = fetch_POST('inst_ref');
-			$edit_user->department_id = fetch_POST('dept');
-			$edit_user->course_id = fetch_POST('course');
+if ($action) {          //incase we want to do more than save changes in the future
+  switch ($action) {
+    case 'Save Changes':
 
-			//check to see if the password needs to be saved
-			if(!(fetch_POST('password')=='!!!!!!')) {
-				$password = md5(fetch_POST('password'));
-				$edit_user->update_password($password);
-			}
+      $complete = !empty($edit_user->forename) && !empty($edit_user->lastname) &&
+                  !empty($edit_user->password) && !empty($edit_user->username);
+      if (!$complete) {
 
-			if((fetch_POST('username'))){
-				$edit_user->update_username(fetch_POST('username'));
-			}
+        $sScreenMsg = "Unable to save user: please make sure the user has a username, first name, last name and password.";
 
-			//set the admin permission
-			if (fetch_POST('chk_admin')== 'on'){
-				$edit_user->admin = 1;
-			}else{
-				$edit_user->admin = 0;
-			}
+      } else {
 
-			$edit_user->set_dao_object($DB);
+        //send notification to the screen that the save has occured.
+        if ($new_user && !$user_found) {
+          $sScreenMsg = 'The user has been created';
+        } else {
+          $sScreenMsg = 'The changes made for the user have been saved';
+        }
 
-			//save all of the data
-			$edit_user->save_user();
+        if ($canEdit) {
 
-			//reload user
-			$edit_user = new User();
-			$edit_user->load_from_row($user_id);
+          $edit_user->set_dao_object($DB);
+          //save all of the data
+          if ($new_user && !$user_found) {
+            $user = $edit_user->add_user();
+            $user_row = $CIS->get_user($user);
+            //reload user
+            $edit_user = new User();
+            $edit_user->load_from_row($user_row);
+            $user_id = $edit_user->id;
+          } else {
+            $edit_user->save_user();
+          }
+        }
 
-			//now process the module information and save the changes
+        if (!$new_user && !$edit_user->is_admin()) {
+          $modules = $CIS->get_module(NULL, 'name');
+          $user_modules = $CIS->get_user_modules($user_id);
 
-			//the fetch brings back an array of the module codes, this
-			//is the key used in the user_module table
-			$modules = fetch_POST('module_id');
+          foreach ($modules as $module) {
 
-			//build the fields that we will process
-			foreach($modules as $module => $modules) {
-				$fields[] = array ('user_id' => $edit_user->id ,
-							       'module_id' => $modules,
-							      );
-			}
-			//delete all the entrys for this user first
-			$DB->execute("DELETE FROM user_module " .
-						   "WHERE user_id='{$edit_user->id}'");
+            if (empty($user_modules) || !array_key_exists($module['module_id'], $user_modules)) {
+              $old_role = '';
+            } else {
+              $old_role = $user_modules[$module['module_id']]['user_type'];
+            }
+            if (isset($_POST["rdo_type_{$module['module_id']}"])) {
+              $new_role = $_POST["rdo_type_{$module['module_id']}"];
+            } else {
+              $new_role = '';
+            }
+            if ($old_role != $new_role) {
+              if (empty($new_role)) {
+                $delete[] = $module['module_id'];
+              } else {
+                $update[$new_role][] = $module['module_id'];
+              }
+            }
+          }
+        } else if (!$edit_user->is_admin() && ($type != APP__USER_TYPE_ADMIN)) {
+          $user_modules = $CIS->get_user_modules($user_id);
+          if (!is_array($user_modules)) {
+            $user_modules = array();
+          }
+          if (!array_key_exists($_module_id, $user_modules)) {
+            $update[$type][] = $_module_id;
+          } else if ($user_modules[$_module_id]['user_type'] == $type) {
+            $sScreenMsg = 'User is already enrolled';
+          } else {
+            $sScreenMsg = 'User currently has a different role in this module - change not saved';
+          }
+        }
+        if (isset($update)) {
+          if (isset($update[APP__USER_TYPE_TUTOR])) {
+            $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
+                   "VALUES ";
+            $sep = '';
+            foreach ($update[APP__USER_TYPE_TUTOR] as $module) {
+              $sql .= "{$sep}({$user_id}, {$module}, '" . APP__USER_TYPE_TUTOR . "')";
+              $sep = ', ';
+            }
+            $sql .= " ON DUPLICATE KEY UPDATE user_type = '" . APP__USER_TYPE_TUTOR . "'";
+            $DB->execute($sql);
+          }
+          if (isset($update[APP__USER_TYPE_STUDENT])) {
+            $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
+                   "VALUES ";
+            $sep = '';
+            foreach ($update[APP__USER_TYPE_STUDENT] as $module) {
+              $sql .= "{$sep}({$user_id}, {$module}, '" . APP__USER_TYPE_STUDENT . "')";
+              $sep = ', ';
+            }
+            $sql .= " ON DUPLICATE KEY UPDATE user_type = '" . APP__USER_TYPE_STUDENT . "'";
+            $DB->execute($sql);
+          }
+        }
+        if (isset($delete)) {
+          $sql = "DELETE FROM " . APP__DB_TABLE_PREFIX . "user_module " .
+                 "WHERE (user_id = {$user_id}) AND (module_id IN (";
+          $sep = '';
+          foreach ($delete as $module) {
+            $sql .= "{$sep}{$module}";
+            $sep = ', ';
+          }
+          $sql .= '))';
+          $DB->execute($sql);
+          if (in_array($_module_id, $delete)) {
+            header('Location: ../review/');
+          }
+        }
 
-			//set up the SQL to be run
-			$SQL = "REPLACE INTO user_module ({fields}) VALUES {values} ";
+        if (isset($update) || isset($delete)) {
+          //collect all the updated information
+          $user_row = $CIS->get_user($user_id);
+          $edit_user = new User();
+          $edit_user->load_from_row($user_row);
+        }
+      }
 
-			//re instate all the users modules
-			$DB->do_insert_multi($SQL, $fields);
+      break;
 
-			//send notification to the screen that the save has occured.
-			$sScreenMsg = "The changes made for the user have been saved";
+  }
 
+}
 
-			//collect all the updated information
-			$user_id = $CIS->get_user($user);
-			$edit_user = new User();
-			$edit_user->load_from_row($user_id);
-		}
-
-	}
-
-
-
+$UI->head();
+$UI->body();
+$UI->content_start();
 
 //-----------------------------------------------------------------------
 //build the page and fill in the spaces
 
-
-$page_intro = '<p>Here you are able to edit the details of a user within the system. There may be some elements of the information which do not appear' .
-		'		to have been completed and this will be dependant on the information stored in the system.</p>';
-
-if ( AUTH__CLASS=='DBAuthenticator'){
-	$page_conditions = '<p>N.B. <strong>Database authentication</strong> has been set as the for the login of a user. You will need to ensure that a username and password are included.</p>';
-}else{
-	$page_conditions = '<p>N.B. <strong>LDAP authenication</strong> has been set for the login of the users. No username or password needs to be set.';
+$page_intro = 'Here you are able to edit the details of a user within the system. There may be some elements of the information which do not appear' .
+    '   to have been completed and this will be dependant on the information stored in the system.';
+if (empty($user_id)) {
+  $page_intro .= ' Just enter the username for users already added to the system.';
 }
-?>
-<?php echo $page_intro; ?>
 
+if (!in_array('LDAP', $LOGIN_AUTHENTICATORS)) {
+  $page_conditions = 'N.B. Users authenticated directly from the WebPA <strong>database</strong> must be given a password.';
+} else if (LDAP__AUTO_CREATE_USER) {
+  $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> will automatically be added to the database and updated each time they log in; the password stored is a random value.';
+}else{
+  $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> must be added to the database before they are able to log in; a random password will be added automatically.';
+}
+
+echo '<p>' . $page_intro . '</p>';
+
+if ($type == APP__USER_TYPE_ADMIN) {
+  $cancel = '../review/admin/';
+} else if ($type == APP__USER_TYPE_TUTOR) {
+  $cancel = '../review/staff/';
+} else if ($type == APP__USER_TYPE_STUDENT) {
+  $cancel = '../review/student/';
+} else {
+  $cancel = '../review/';
+}
+
+?>
 
 <div class="content_box">
 
-<?php echo $page_conditions;
+<?php
+echo '<p>' . $page_conditions . '</p>';
 
-	if(!empty($sScreenMsg)){
-		echo "<div class=\"success_box\">{$sScreenMsg}</div>";
-	}
-
+if (!empty($sScreenMsg)) {
+  echo "<div class=\"success_box\">{$sScreenMsg}</div>";
+}
 ?>
 
-<form action="index.php?u=<?php echo $user; ?>" method="post" name="edit_user">
+<form action="index.php?u=<?php echo $user_id; ?>" method="post" name="edit_user">
 <table class="option_list" style="width: 100%;">
 <tr><td colspan=2><h2>User Details</h2></td></tr>
-	<tr>
-		<td width="17%"><label for="name">First name</label>
-		</td>
-		<td width="25%">
-			<input type="text" id="name" name="name" value="<?php echo $edit_user->forename; ?>">
-		</td>
+  <tr>
+    <td><label for="username">Username</label></td>
+    <td colspan="3">
+<?php
+$canEdit = ($_source_id == '') && (empty($user_id) || ($_user->is_admin()));
 
-		<td width="20%"><label for="surname">Last name</label>
-		</td>
-		<td>
-			<input type="text" id="surname" name="surname" value="<?php echo $edit_user->surname; ?>">
-		</td>
-	</tr>
-	<tr>
-		<td><label for="inst_ref">Institutional reference</label>
-		</td>
-		<td>
-			<input type="text" name="inst_ref" id="inst_ref" value="<?php echo $edit_user->institutional_ref; ?>">
-		</td>
+if (!$canEdit) {
+  $disabled = ' disabled="disabled"';
+} else {
+  $disabled = '';
+}
+?>
+      <input type="text" name="username" id="username" value="<?php echo $edit_user->username; ?>"<?php echo $disabled; ?>>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="name">First name</label>
+    </td>
+    <td>
+      <input type="text" id="name" name="name" value="<?php echo $edit_user->forename; ?>" size="20"<?php echo $disabled; ?>>
+    </td>
 
-		<td><label for="email">Email</label>
-		</td>
-		<td>
-			<input type="text" name="email" id="email" value="<?php echo $edit_user->email; ?>">
-		</td>
-	</tr>
-		<tr>
-		<td><label for="username">Username</label>
-		</td>
-		<td>
-			<input type="text" name="username" id="username" value="<?php echo $edit_user->username; ?>">
-		</td>
+    <td><label for="lastname">Last name</label>
+    </td>
+    <td>
+      <input type="text" id="lastname" name="lastname" value="<?php echo $edit_user->lastname; ?>" size="30"<?php echo $disabled; ?>>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="email">Email</label>
+    </td>
+    <td colspan="4">
+      <input type="text" name="email" id="email" value="<?php echo $edit_user->email; ?>" size="50"<?php echo $disabled; ?>>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="id_number">ID number</label></td>
+    <td>
+      <input type="text" name="id_number" id="id_number" value="<?php echo $edit_user->id_number; ?>"<?php echo $disabled; ?>>
+    </td>
 
-		<td><label for="password">Password</label>
-		<p style="font-size:xx-small;">N.B. If a password is present in the system then 6 characters are shown. For security reasons the password is not displayed in clear text.</p>
-		</td>
-		<td>
-		<?php
-		if (!empty($edit_user->password)) {
-			$show = '!!!!!!';
-		}
-		?>
-			<input id="password" name="password" type="password" value="<?php echo $show; ?>">
-		</td>
-	</tr>
-		<tr>
-		<td><label for="dept">Department ID</label>
-		</td>
-		<td>
-			<input type="text" name="dept" id="dept" value="<?php echo $edit_user->department_id; ?>">
-		</td>
+    <td><label for="department_id">Department ID</label></td>
+    <td>
+      <input type="text" name="department_id" id="department_id" value="<?php echo $edit_user->department_id; ?>"<?php echo $disabled; ?>>
+    </td>
+  </tr>
+  <tr>
+    <td><label for="password">Password</label></td>
+    <td>
+<?php
+if (!empty($edit_user->password)) {
+  $show = '!!!!!!';
+} else {
+  $show = '';
+}
+?>
+      <input id="password" name="password" type="password" value="<?php echo $show; ?>"<?php echo $disabled; ?>>
+    </td>
+    <td colspan="2">
+      <p style="font-size:xx-small;">N.B. If a password is present in the system then 6 characters are shown. For security reasons the password is not displayed in clear text.</p>
+    </td>
+  </tr>
 
-		<td><label for="course">Course ID</label>
-		</td>
-		<td>
-			<input type="text" name="course" id="course" value="<?php echo $edit_user->course_id; ?>">
-		</td>
-	</tr>
-<tr><td colspan='4'><hr/></td></tr>
-	<tr><td colspan=2><h2>User type information</h2></td></tr>
+<?php
+if (!empty($user_id) && !check_user($edit_user, APP__USER_TYPE_ADMIN)) {
+?>
+  <tr><td colspan="4"><hr/></td></tr>
+  <tr><td colspan="4"><h2>Module</h2></td></tr>
+  <tr>
+    <td colspan="4">
 
+<?php
+  $canEdit = ($_source_id == '') && ($user_id != $_user_id);
+  if (!$canEdit) {
+    $disabled = ' disabled="disabled"';
+  } else {
+    $disabled = '';
+  }
 
-		<tr>
-		<td >
-			<input type='radio' value="staff" id="staff" name="rdo_type" <?php if (!empty($edit_user->staff_id)){echo "checked";}?>> <label for="staff">Staff</label><br/>
-			<input type="radio" value="student" id="student" name="rdo_type" <?php if (!empty($edit_user->student_id)){echo "checked";}?>> <label for="student">Student</label>
-		</td>
-		<td>
-		</td>
+  echo "<table>\n";
+  echo "<tr>\n";
+  echo "  <th>Title</th><th style=\"width: 5em; text-align: center;\">NA</th><th style=\"width: 5em; text-align: center;\">Tutor</th><th style=\"width: 5em; text-align: center;\">Student</th>\n";
+  echo "</tr>\n";
 
-		<td><input type="checkbox" id="admin" name="chk_admin" <?php if ($edit_user->admin=='1'){echo "checked";}?>> <label for="admin">Administrator</label>
-		</td>
-		<td>
-		</td>
-	</tr>
-	<tr><td colspan='4'><hr/></td></tr>
-	<tr><td colspan='2'><h2>Module</h2></td></tr>
-			<tr>
+  $modules = $CIS->get_module(NULL, 'name');
+  $user_modules = $CIS->get_user_modules($user_id);
 
-			<?php
-				//get all the modules in the system and write them to the screen
-				$modules = $CIS->get_all_modules();
-				$module_select = 'multiple';
+  foreach ($modules as $module) {
 
-				//get the modules associated with the user being edited
-				if(!empty($edit_user->staff_id)){
-					$users_modules = $CIS->get_staff_modules($edit_user->staff_id);
-				}else{
-					$users_modules = $CIS->get_student_modules($edit_user->student_id);
-				}
+    if (empty($user_modules) || !array_key_exists($module['module_id'], $user_modules)) {
+      $role = '';
+    } else {
+      $role = $user_modules[$module['module_id']]['user_type'];
+    }
+    if ($module['module_id'] == $_module_id) {
+      $tagStart = '<em>';
+      $tagEnd = '</em>';
+    } else {
+      $tagStart = '';
+      $tagEnd = '';
+    }
 
-				$user_mods=null;
+    echo "<tr>\n";
+    echo "  <td>\n    {$tagStart}{$module['module_title']}{$tagEnd}&nbsp;&nbsp;&nbsp;\n  </td>\n";
+    echo "  <td style=\"text-align: center;\">\n";
+    echo '    <input type="radio" value="" name="rdo_type_' . $module['module_id'] . '"';
+    if (empty($role)) {
+      echo ' checked="checked"';
+    }
+    echo "{$disabled}>\n";
+    echo "  </td>\n";
+    echo "  <td style=\"text-align: center;\">\n";
+    echo '    <input type="radio" value="' . APP__USER_TYPE_TUTOR . '" name="rdo_type_' . $module['module_id'] . '"';
+    if ($role == APP__USER_TYPE_TUTOR) {
+      echo ' checked="checked"';
+    }
+    echo "{$disabled}>\n";
+    echo "  </td>\n";
+    echo "  <td style=\"text-align: center;\">\n";
+    echo '    <input type="radio" value="' . APP__USER_TYPE_STUDENT . '" name="rdo_type_' . $module['module_id'] . '"';
+    if ($role == APP__USER_TYPE_STUDENT) {
+      echo ' checked="checked"';
+    }
+    echo "{$disabled}>\n";
+    echo "  </td>\n";
+    echo "</tr>\n";
 
-				//return just the module _id's for comparision later on
-				if (is_array($users_modules)){
-					foreach ($users_modules as $mods){
-						$user_mods[] = $mods['module_id'];
-					}
-				}
+  }
 
-				if (!$modules) {
-			?>
-			<td><p>There are no modules in the system. You will need to add modules before a user can be linked to one.</p></td>
+  echo "</table>\n";
 
-			<?php
+?>
+    </td>
+  </tr>
+<?php
+}
+?>
+  <tr><td colspan="4"><hr/></td></tr>
+  <tr>
 
-				} else {
-					$input_type = ($module_select=='multiple') ? 'checkbox' : 'radio' ;
-
-					echo "<table>";
-					foreach ($modules as $i => $module) {
-						$checked_str = ( (is_array($user_mods)) && (in_array($module['module_id'],$user_mods)) ) ? 'checked="checked"' : '' ;
-						echo('<tr>');
-						echo("<td><input type=\"$input_type\" name=\"module_id[]\" id=\"module_{$module['module_id']}\" value=\"{$module['module_id']}\" $checked_str /></td>");
-						echo("<td><label style=\"font-weight: normal;\" for=\"module_{$module['module_id']}\">{$module['module_id']} : {$module['module_title']}</label></td>");
-						echo('</tr>');
-					}
-					echo "</table>";
-				}
-
-
-			?>
-
-	</tr>
-	<tr><td colspan='2'><hr/></td></tr>
-	<tr>
-
-		<td>
-		</td>
-		<td>
-			<input type="submit" value="Save Changes" name="save" id="save">
-		</td>
-	</tr>
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      <input type="submit" value="Save Changes" name="save" id="save">&nbsp;&nbsp;&nbsp;
+      <input type="button" value="Cancel" onclick="location.href='<?php echo $cancel; ?>';">
+      <input type="hidden" name="t" value="<?php echo $type; ?>" />
+    </td>
+  </tr>
 </table>
 </form>
 </div>
 <?php
+
 $UI->content_end();
 
 ?>

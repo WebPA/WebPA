@@ -1,35 +1,34 @@
 <?php
 /**
- * 
+ *
  * WIZARD : Create new groups
- * 			
- * 
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
 
-require_once("../../../include/inc_global.php");
-require_once(DOC__ROOT . '/library/classes/class_group_handler.php');
-require_once(DOC__ROOT . '/library/classes/class_wizard.php');
+require_once("../../../includes/inc_global.php");
+require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
+require_once(DOC__ROOT . 'includes/classes/class_wizard.php');
 
-if (!check_user($_user, 'staff')){
-	header('Location:'. APP__WWW .'/logout.php?msg=denied');
-	exit;
+if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  exit;
 }
 
 // --------------------------------------------------------------------------------
 // Initialise wizard
 
 $wizard = new Wizard('create new groups wizard');
-$wizard->cancel_url = '../../../../tutors/groups/';
+$wizard->cancel_url = '../../../tutors/groups/';
 
 $wizard->add_step(1,'class_wizardstep_1.php');
 $wizard->add_step(2,'class_wizardstep_2.php');
 $wizard->add_step(3,'class_wizardstep_3.php');
 $wizard->add_step(4,'class_wizardstep_4.php');
-$wizard->add_step(5,'class_wizardstep_5.php');
 
 $wizard->set_var('CIS',$CIS);
 $wizard->set_var('db', $DB);
@@ -43,18 +42,16 @@ $wiz_step = $wizard->get_step();
 // --------------------------------------------------------------------------------
 // Start the wizard
 
-
-
 // --------------------------------------------------------------------------------
 // Begin Page
 
 $UI->page_title = APP__NAME . ' Create new groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array	(
-	'home' 											=> '../../' ,
-	'my groups'									=> '../' ,
-	'create new groups wizard'	=> null ,
+$UI->breadcrumbs = array  (
+  'home'                      => '../../' ,
+  'my groups'                 => '../' ,
+  'create new groups wizard'  => null ,
 );
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
@@ -77,13 +74,13 @@ $wizard->draw_errors();
 <div class="content_box">
 
 <?php
-	$wizard->draw_wizard();
+$wizard->draw_wizard();
 ?>
 
 </div>
 
-
-
 <?php
+
 $UI->content_end();
+
 ?>

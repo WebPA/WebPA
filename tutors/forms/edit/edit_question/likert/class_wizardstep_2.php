@@ -1,14 +1,14 @@
 <?php
 /**
- * 
+ *
  * Class : WizardStep2  (edit qcriterion wizard)
  *
- * 			
- * 
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
 class WizardStep2 {
 
@@ -22,7 +22,7 @@ class WizardStep2 {
 	*/
 	function WizardStep2(&$wizard) {
 		$this->wizard =& $wizard;
-	
+
 		$this->wizard->back_button = '&lt; Back';
 		$this->wizard->next_button = 'Finish';
 		$this->wizard->cancel_button = 'Cancel';
@@ -41,14 +41,14 @@ class WizardStep2 {
 </script>
 <?php
 	}// /->head()
-	
-	
+
+
 	function form() {
 		$form =& $this->wizard->get_var('form');
 
 		$range_start = $this->wizard->get_field('question_range_start');
 		$range_end = $this->wizard->get_field('question_range_end');
-		
+
 		$question = $form->get_question($this->wizard->get_var('question_id'));
 
 		if ( (is_array($question)) ) {
@@ -83,13 +83,13 @@ class WizardStep2 {
 					}
 					echo('</tr>');
 				}
-			?>				
+			?>
 			</table>
 		</div>
 		<?php
 	}// /->form()
 
-	
+
 	function process_form() {
 		$errors = null;
 
@@ -103,7 +103,7 @@ class WizardStep2 {
 
 		return $errors;
 	}// /->process_form()
-	
+
 }// /class: WizardStep2
 
 

@@ -1,28 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="desc">
     <xs:complexType mixed="true" />
   </xs:element>
-
   <xs:element name="form">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="formid" />
         <xs:element ref="formname" />
+        <xs:element ref="formtype" />
         <xs:element ref="question" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="formid">
     <xs:complexType mixed="true" />
   </xs:element>
-
   <xs:element name="formname">
     <xs:complexType mixed="true" />
   </xs:element>
-
+  <xs:element name="formtype">
+    <xs:complexType mixed="true" />
+  </xs:element>
   <xs:element name="question">
     <xs:complexType>
       <xs:sequence>
@@ -40,37 +39,20 @@
         <xs:element ref="scorelabel8" minOccurs="0" />
         <xs:element ref="scorelabel9" minOccurs="0" />
         <xs:element ref="scorelabel10" minOccurs="0" />
-        
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="range" type="xs:string" />
-
   <xs:element name="scorelabel0" type="xs:string" />
-
   <xs:element name="scorelabel1" type="xs:string" />
- 
   <xs:element name="scorelabel2" type="xs:string" />
-
   <xs:element name="scorelabel3" type="xs:string" />
-
   <xs:element name="scorelabel4" type="xs:string" />
-
   <xs:element name="scorelabel5" type="xs:string" />
-  
   <xs:element name="scorelabel6" type="xs:string" />
-  
   <xs:element name="scorelabel7" type="xs:string" />
-  
   <xs:element name="scorelabel8" type="xs:string" />
-  
   <xs:element name="scorelabel9" type="xs:string" />
-  
   <xs:element name="scorelabel10" type="xs:string" />
-
   <xs:element name="text" type="xs:string" />
-
 </xs:schema>
-
-

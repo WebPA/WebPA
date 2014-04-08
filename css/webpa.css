@@ -1,9 +1,8 @@
-
-/**
- * 
+﻿/**
+ *
  * WebPA Layout Stylesheet
  *
- * 
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.1
@@ -90,7 +89,7 @@ Page Components
 
 	margin: 50px 0px 0px 176px;	/* margin-top set incorrectly for IE */
 	padding: 0px;
-	
+
 	background-color: #f6f6f6;
 	border-left: 2px solid #ddd;
 	border-bottom: 2px solid #ddd;
@@ -112,7 +111,7 @@ Page Components
 	position: relative; /* 'relative' so we can use z-index for the other elements */
 	min-height: 50px;
 	width: auto;
-	
+
 	margin: 0px;
 	padding: 0px 1px 0px 0px;
 
@@ -135,22 +134,21 @@ a.page_bar_link:active { background-color: transparent; }
 	z-index: 2;
 
 	font-size: 0.85em;
-	
+
 	text-align: left;
 }
 
 
 #app_bar {
-	height: <?php echo APP__INST_HEIGHT;?>;
 	background-color: #399;
-	
+
 	border-top: 1px solid #600;
 	border-bottom: 1px solid #600;
 
 	color: #cee;
-	
+
 	font-weight: bold;
-	
+
 	line-height: 30px;
 	vertical-align: middle;
 }
@@ -159,14 +157,22 @@ a.page_bar_link:active { background-color: transparent; }
 #app_bar #title_logo {
 	width: 175px;
 	padding-left: 10px;
-	
+
 }
 
 #app_bar #inst_logo{
-	width: <?php echo APP__INST_WIDTH;?>;
 	padding-right: 10px;
 }
 
+
+#module_bar {
+	height: 14px;
+	padding: 2px 2px 2px 6px;
+	background-color: #399;
+	border-bottom: 1px dashed #600;
+	color: #fff;
+	font-size: 0.85em;
+}
 
 #breadcrumb_bar {
 	height: 14px;
@@ -223,7 +229,7 @@ div.content_box {
 
 	border-radius: 10px;
 	-moz-border-radius: 10px;
-	
+
 	line-height: 1.1em;
 }
 
@@ -236,7 +242,7 @@ Menu Elements
 */
 
 div.menu_section { margin-bottom: 10px; border-top: 1px solid #66cccc; font-size: 0.8em; }
-div.menu_title { padding: 3px;  color: #339999; font-size: 1.05em; font-weight: bold; }
+div.menu_title { padding: 3px;  color: #399; font-size: 1.05em; font-weight: bold; }
 
 div.menu { margin: 6px 0px 10px 0px; padding-top: 2px; line-height: 1.3em; }
 ul.menu_list { margin: 0px; padding: 0px; list-style: none; }
@@ -318,7 +324,7 @@ table.tab_bar td.tab_off { background: #f6f6f6 url(../images/tab_bar/tab_off.png
 a.tab { height: 23px; display: block; line-height: 23px; color: #000; text-decoration: none; text-align: center; vertical-align: middle; }
 a.tab:link { color: #000; }
 a.tab:visited { color: #000; }
-a.tab:hover { color: #000; background: url(/images/tab_bar/tab_hover.png) no-repeat scroll center bottom; text-decoration: none; }
+a.tab:hover { color: #000; background: url(../images/tab_bar/tab_hover.png) no-repeat scroll center bottom; text-decoration: none; }
 a.tab:active { color: #000; }
 
 div.tab_content { padding: 12px 8px 8px 8px; background-color: #fff; border: 1px solid #bbb; border-top: 0px; -moz-border-radius: 0px 0px 10px 10px; }
@@ -351,7 +357,7 @@ div.alert_box {
 	background-color: #fcc;
 	border: 1px solid #990000;
 	color: #000;
-	
+
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	line-height: 1.1em;
@@ -449,17 +455,17 @@ MOST ARE DEPRECATED
 
 div.assessment_list { margin: 15px 15px 10px 15px; }
 
-div.assessment { margin-bottom: 16px; padding: 4px; background: #c8e9ff url(/images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
+div.assessment { margin-bottom: 16px; padding: 4px; background: #c8e9ff url(../images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
 
-div.assessment_open { margin-bottom: 16px; padding: 4px; background: #c9ffd6 url(/images/backgrounds/gradient_light_green-white_l-r.png) repeat-y right; border: 1px solid #cfc; border-right: 0px; }
-div.assessment_finished { margin-bottom: 16px; padding: 4px; background: #ffc9c9 url(/images/backgrounds/gradient_pink-white_l-r.png) repeat-y right; border: 1px solid #fcc; border-right: 0px; }
+div.assessment_open { margin-bottom: 16px; padding: 4px; background: #c9ffd6 url(../images/backgrounds/gradient_light_green-white_l-r.png) repeat-y right; border: 1px solid #cfc; border-right: 0px; }
+div.assessment_finished { margin-bottom: 16px; padding: 4px; background: #ffc9c9 url(../images/backgrounds/gradient_pink-white_l-r.png) repeat-y right; border: 1px solid #fcc; border-right: 0px; }
 
 table.assessment_info { width: 100%; }
 table.assessment_info td { vertical-align: top; }
 table.assessment_info td.buttons { padding: 4px 4px 4px 4px; font-size: 0.9em; white-space: nowrap; }
 
-div.status_pending { background: transparent url(/images/icons/pending_icon.gif) no-repeat scroll left top; }
-div.status_open { background: transparent url(/images/icons/open_icon.gif) no-repeat scroll left top; }
+div.status_pending { background: transparent url(../images/icons/pending_icon.gif) no-repeat scroll left top; }
+div.status_open { background: transparent url(../images/icons/open_icon.gif) no-repeat scroll left top; }
 
 div.assessment_info { margin: 4px 4px 4px 8px; }
 
@@ -508,11 +514,13 @@ Obj List Classes
 
 div.obj_list { margin: 16px; }
 
-div.obj { margin-bottom: 12px; padding: 2px 2px 4px 2px; background: #c8e9ff url(/images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
+div.obj { margin-bottom: 12px; padding: 2px 2px 4px 2px; background: #c8e9ff url(../images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
 
 table.obj { width: 100%; }
+table.obj th { text-align: left; }
+table.obj th.icon { width: 40px; }
 table.obj td { vertical-align: top; margin: 2px; padding: 2px; }
-table.obj td.icon { width: 24px; text-align: center; }
+table.obj td.icon { width: 40px; text-align: center; }
 table.obj td.obj_info { width: 100%; padding: 8px 4px 0px 6px; }
 table.obj td.button { padding: 4px; font-size: 0.9em; text-align: right; white-space: nowrap; }
 table.obj td.buttons { padding: 4px; font-size: 0.9em; line-height: 20px; text-align: right; white-space: nowrap; }

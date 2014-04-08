@@ -1,64 +1,88 @@
 <?php
 /**
- * 
- * Groups Index - List the user's collections
  *
- * 
+ * WIZARD : Clone own groups
+ *
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
-require_once("../../../include/inc_global.php");
 
-if (!check_user($_user, 'staff')){
-	header('Location:'. APP__WWW .'/logout.php?msg=denied');
-	exit;
+require_once('../../../includes/inc_global.php');
+require_once(DOC__ROOT . 'includes/classes/class_wizard.php');
+require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
+
+if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  exit;
 }
 
 // --------------------------------------------------------------------------------
+// Initialise wizard
 
+$wizard = new Wizard('clone own groups wizard');
+$wizard->cancel_url = "../";
+
+$wizard->add_step(1,'class_wizardstep_1.php');
+$wizard->add_step(2,'class_wizardstep_2.php');
+$wizard->add_step(3,'class_wizardstep_3.php');
+
+$wizard->set_var('config', $_config);
+$wizard->set_var('module', $_module_id);
+
+$group_handler = new GroupHandler();
+$wizard->set_var('group_handler', $group_handler);
+
+$wizard->prepare();
+
+$wiz_step = $wizard->get_step();
+
+// --------------------------------------------------------------------------------
+// Start the wizard
 
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME .' clone existing groups';
+$UI->page_title = APP__NAME . ' Clone own groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array	('home' 		=> '/' ,
-							 'my groups'	=> '/tutors/groups/' ,
-							 'clone groups'	=> null ,
-							);
-													
+$UI->breadcrumbs = array  (
+  'home'                      => '../../' ,
+  'my groups'                 => '../' ,
+  'clone groups'              => '../clone/' ,
+  'clone own groups wizard'   => null ,
+);
+
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
 $UI->set_page_bar_button('Clone Groups', '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
-
 $UI->head();
+$wizard->head();
+$UI->body('onload="body_onload()"');
 $UI->content_start();
 ?>
 
-<p>Here you can clone groups, or copy those created by other staff members.</p>
+<p>This wizard takes you through the process of cloning an existing collection of associated groups. When it is complete, you will be able to edit the groups and reassign students.</p>
+
+<?php
+$wizard->title();
+$wizard->draw_errors();
+?>
 
 <div class="content_box">
 
-<p>Select the type of groups you want to clone.</p>
-
-<table class="option_list" style="width: 500px;">
-<tr>
-	<td><a href="own/"><img src="../../../images/icons/groups_clone2.gif" width="32" height="32" alt="clone" /></a></td>
-	<td>
-		<div class="option_list">
-			<div class="option_list_title"><a class="hidden" href="own/">Clone my own groups</a></div>
-			<p>Clone a collection of groups you have already created. Once cloned, you can change the student groupings as much as you like while leaving the original groups untouched.</p>
-		</div>
-	</td>
-</tr>
-</table>
+<?php
+  $wizard->draw_wizard();
+?>
 
 </div>
 
 <?php
+
 $UI->content_end();
+
 ?>

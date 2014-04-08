@@ -9,7 +9,7 @@
  *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.2
+ * @version 0.0.0.3
  * @since 28 Jul 2008
  *
  * + Added implementation for Student Data with Groups upload. This is marked with the
@@ -21,304 +21,255 @@
  *
  * + Implemented new duplicate checking that consists simply of an "INSERT ON DUPLICATE
  * KEY UPDATE" SQL call.
- * !! This code relies on the existence of a unique key on (`institutional_reference`,
+ * !! This code relies on the existence of a unique key on (`id_number`,
  * `username`). The SQL call to create this key is currently commented out in the code -
  * in order to implement it either:
- * 		a) uncomment the line following '//Uncomment this line to initialise duplicate
- * 		   checking', or
- * 		b) enter the following at a mysql prompt:
- * 		   ALTER TABLE user ADD UNIQUE KEY(`institutional_reference`,`username`);
+ *    a) uncomment the line following '//Uncomment this line to initialise duplicate
+ *       checking', or
+ *    b) enter the following at a mysql prompt:
+ *       ALTER TABLE user ADD UNIQUE KEY(`id_number`,`username`);
  *
  * The second is probably easier and means one less database call with every page load.
  *
  * Morgan Harris [morgan@snowproject.net] as of 15/10/09
+ *
+ *** 19-Dec-10 (Stephen Vickers stephen.vickers@ed.ac.uk)
+ *
+ * Rewrite of import process to fit new database structure:
+ *  - duplicates handled by constraints already in place on tables
+ *  - option to select an existing collection or create a new one
+ *  - automatically adds modules to collection
+ *  - automatically adds groups to collection
+ * Could probably be made more efficient in handling groups if done as a set rather than by record
+ *
  */
 
- require_once("../../include/inc_global.php");
-require_once("../../library/classes/class_group_handler.php");
+require_once('../../includes/inc_global.php');
+require_once('../../includes/classes/class_group_handler.php');
+require_once('../../includes/functions/lib_string_functions.php');
 
- $uploadtype = $_REQUEST["rdoFileContentType"];
- $filename = $_FILES['uploadedfile']['tmp_name'];
+if (!check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
+ header('Location:'. APP__WWW .'/logout.php?msg=denied');
+ exit;
+}
 
- //define variable we are using
- $user_warning = '';
- $user_msg = '';
+$uploadtype = $_REQUEST["rdoFileContentType"];
+$filename = $_FILES['uploadedfile']['tmp_name'];
 
- $filecontenttype[1] = array('screen'=>'<b>Student Data</b>',);
- $filecontenttype[2] = array('screen'=>'<b>Staff Data</b>',);
- $filecontenttype[3] = array('screen'=>'<b>Module Data</b>');
- $filecontenttype[4] = array('screen'=>'<b>Student Data with Groups</b>');
+//define variable we are using
+$user_warning = '';
+$user_msg = '';
 
- $expected_fields[1] = array(0=>'institutional_reference', 'forename', 'lastname', 'email', 'username', 'module_code');
- $expected_fields[2] = array(0=>'institutional_reference', 'forename', 'lastname', 'email', 'username', 'module_code');
- $expected_fields[3] = array(0=>'module_code', 'module_title');
- $expected_fields[4] = array(0=>'institutional_reference', 'forename', 'lastname', 'email', 'username', 'module_code', 'group_name');
- $flg_match=null;
+$filecontenttype[1] = array('screen'=>'<strong>Student Data</strong>',);
+$filecontenttype[2] = array('screen'=>'<strong>Staff Data</strong>',);
+$filecontenttype[3] = array('screen'=>'<strong>Module Data</strong>');
+$filecontenttype[4] = array('screen'=>'<strong>Student Data with Groups</strong>');
 
- //increase the execution time to handle large files
- ini_set('max_execution_time',120);
+$expected_fields[1] = array(0=>'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
+$expected_fields[2] = array(0=>'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
+$expected_fields[3] = array(0=>'module_code', 'module_title');
+$expected_fields[4] = array(0=>'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id', 'group_name');
 
- $row = 0;
- $fields = array();
- $final_rows = array();
- $handle = fopen("$filename", "r");
- while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+if ($_user->is_admin()) {
+ $expected_fields[1][] = 'module_code';
+ $expected_fields[2][] = 'module_code';
+ $expected_fields[4][] = 'module_code';
+}
+$flg_match = false;
+
+//increase the execution time to handle large files
+ini_set('max_execution_time', 120);
+
+$row = 0;
+$fields = array();
+$final_rows = array();
+if (($handle = fopen($filename, "r")) !== FALSE) {
+  while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
     $num = count($data);
 
     //if in the first row we should be getting the field names
-   	//make them into an array
-   	if($row == 0){
-   		for ($c=0; $c < $num; $c++) {
-        	$fields[$c]=trim($data[$c]);
-    	}
+    //make them into an array
+    if ($row == 0) {
+      for ($c = 0; $c < $num; $c++) {
+        $fields[$c] = trim($data[$c]);
+      }
 
-    	//check to see that we have the correct information in the array
-    	if(array_diff($expected_fields, $fields)){
+      //check to see that we have the correct information in the array
+      if (array_diff($expected_fields[$uploadtype], $fields)) {
 
-    		//we have diferences. We need to check to see if any of the key elements have matched
-    		foreach($expected_fields[$uploadtype] as $key_field){
-    			if(array_search($key_field, $fields)== false){
-    				//no match
-    				$flg_match = false;
-    			}else{  				  			}
-    				$flg_match=true;
-    			}
-    		}
+        //we have diferences. We need to check to see if any of the key elements have matched
+        foreach ($expected_fields[$uploadtype] as $key_field) {
+          if (array_search($key_field, $fields) !== false) {
+            $flg_match = true;
+          }
+        }
+        if (!$flg_match) {
+          for ($c = 0; $c < $num; $c++) {
+            $final_rows[$row][$c] = trim($data[$c]);
+            $fields[$c] = $c;
+          }
+          $row++;
+        }
 
-    if(!$flg_match){
-    			for ($c=0; $c < $num; $c++) {
-        			$final_rows[$row][$c] = trim($data[$c]);
-        			$fields[$c] = $c;
-    			}
+      } else {
+        $flg_match = true;
+      }
 
-
-    	}else{
-    		$flg_match = true;
-    	}
-
-   	}else{
-	    //build the associative array for the table entrys
-	    for ($c=0; $c < $num; $c++) {
-	    	if($flg_match){
-	    		$final_rows[$row-1][$fields[$c]] =trim($data[$c]);
-	    	}else{
-	    		$final_rows[$row][$fields[$c]] =trim($data[$c]);
-	    	}
-	    }
-   	}
-   	$row++;
- }
+    } else {
+      //build the associative array for the table entrys
+      for ($c = 0; $c < $num; $c++) {
+        $final_rows[$row-1][$fields[$c]] = trim($data[$c]);
+      }
+    }
+    $row++;
+  }
 
 //now we have the information in arrays continue to process.
-fclose($handle);
+  fclose($handle);
 
+}
 
 //check which array we are being given at this point (the one with the named fields or the other)
-if($flg_match){
-	//we can process this very easily into the database
+if ($flg_match) {
+  //we can process this very easily into the database
 
-	//check to see if we have staff or student.
-	if(($uploadtype=='1')||($uploadtype=='2')||($uploadtype=='4')){
+  //check to see if we have staff or student.
+  if (($uploadtype == '1') || ($uploadtype == '2') || ($uploadtype == '4')) {
 
-		$process_copy = $final_rows;
-//print_r(count($process_copy));
-		//remove the modules from this copy
-		for($counter = 0; $counter<count($process_copy); $counter++){
-			unset($process_copy[$counter]['module_code']);
-			unset($process_copy[$counter]['group_name']);
+    //set the user type
+    if ($uploadtype=='2') {
+      $user_type = APP__USER_TYPE_TUTOR;
+    } else {
+      $user_type = APP__USER_TYPE_STUDENT;
+    }
+    for ($counter = 0; $counter<count($final_rows); $counter++) {
 
-			//tag on the user type
-			if($uploadtype=='2'){
-				$process_copy[$counter]['user_type']='staff';
-			}else{
-				$process_copy[$counter]['user_type']='student';
-			}
+      //if there are passwords in the list, they will need to be MD5 hashed
+      if (!empty($final_rows[$counter]['password'])) {
+        $final_rows[$counter]['password'] = md5($final_rows[$counter]['password']);
+      } else {
+        $final_rows[$counter]['password'] = md5(str_random());
+      }
+    }
 
-			//set the admin option
-			$process_copy[$counter]['admin'] =0;
+    $_module_id = fetch_SESSION('_module_id', null);
 
+    if ($uploadtype == '4') {
 
-			//if there are passwords in the list, they will need to be MD5 hashed
-			if (!empty($process_copy[$counter]['password'])){
-				$process_copy[$counter]['password']=md5($process_copy[$counter]['password']);
-			}
-		}
+// get collection
+      $collection = new GroupCollection($DB);
+      $collection_id = null;
+      if (isset($_REQUEST['collectionlist'])) {
+        $collection_id = $_REQUEST['collectionlist'];
+      }
+      $modules = array();
+      if (empty($collection_id)) {
+        $collection_name = $_REQUEST['collection'];
+        if (!empty($collection_name)) {
+          $collection->create();
+          $collection->module_id = $_module_id;
+          $collection->name = $collection_name;
+          $collection->save();
+          $collection_id = $collection->id;
+        }
+      } else {
+        $collection->load($collection_id);
+        $modules = $collection->get_modules();
+      }
+      $module_count = count($modules);
 
-		/* CHANGED 14/10/09 by Morgan Harris [morgan@snowproject.net]
-		 * This was basically the old way of doing things, that had an unfortunate side effect of
-		 * adding a huge number of indices to the table, and deleting old data when it found it.
-		 * The new method relies on the existence of a
-		 * 			UNIQUE KEY(`institutional_reference`,`username`)
-		 * on the `user` table.
-		 *
+    }
 
-		//set up the SQL to be run
-		$SQL = "REPLACE INTO user ({fields}) VALUES {values} ";
+    $fields = $expected_fields[$uploadtype];
+    foreach ($final_rows as $i) {
 
-		//re instate all the users modules
-		$DB->do_insert_multi($SQL, $process_copy);
+      $module_code = '';
+      $group_name = '';
+      $els = array();
+      $els[] = "source_id = '{$_source_id}'";
+      for ($c = 0; $c < count($fields); $c++) {
+        $key = $fields[$c];
+        if (isset($i[$key])) {
+          $val = $i[$key];
+          if ($key == 'module_code') {
+            $module_code = $val;
+          } else if ($key == 'group_name') {
+            $group_name = $val;
+          } else {
+            $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+          }
+        }
+      }
+      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ',$els) . ', admin = 0';
+      if ($_user->is_admin()) {
+        $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ',$els);
+      }
+      $DB->execute($sql);
+      $id = $DB->get_insert_id();
+      if (!$id) {
+        $id = $DB->fetch_value('SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE source_id = '{$_source_id}' AND username = '{$i['username']}'");
+      }
 
-		//check for and remove user duplicates in the database
-		$temp_fields = $fields;
-		$flipped = array_flip($temp_fields);
-		//unset all the non-unique fields
-		unset($flipped['module_code']);
-		unset($flipped['group_name']);
-		unset($flipped['password']);
-		$temp_fields = array_flip($flipped);
+      if ($_user->is_admin() && !empty($module_code)) {
+        $sql = "SELECT module_id FROM " . APP__DB_TABLE_PREFIX . "module WHERE source_id = '{$_source_id}' AND module_code = '$module_code'";
+        $module_id = $DB->fetch_value($sql);
+      } else {
+        $module_id = $_module_id;
+      }
+      if (!empty($module_id)) {
+        $sql = "INSERT INTO " . APP__DB_TABLE_PREFIX . "user_module SET user_id = {$id}, module_id = {$module_id}, user_type = '{$user_type}'";
+        $sql .= " ON DUPLICATE KEY UPDATE user_type = '{$user_type}'";
+        $DB->execute($sql);
+        if (!empty($collection_id) && !empty($group_name)) {
+          if (!in_array($module_id, $modules)) {
+            $modules[] = $module_id;
+          }
+          if (!$collection->group_exists($group_name)) {
+            $group = $collection->new_group($group_name);
+            $group->save();
+            $collection->refresh_groups();
+          }
+          $collection->add_member($id, $group_name);
+        }
+      }
 
-		print_r($temp_fields);
+    }
 
-		$str_fields = implode(',',$temp_fields);
-		$SQL = "ALTER IGNORE TABLE user ADD UNIQUE KEY ({$str_fields})";
-		$DB->execute($SQL);
-//echo $SQL;
-		//now deal with the module information, by finding the user in the database and then adding the information to the module table
-		foreach ($final_rows as $entry){
-			$sql = "SELECT user_id FROM user WHERE institutional_reference='{$entry['institutional_reference']}' AND email='{$entry['email']}'";
-			$user_id = $DB->fetch_value($sql);
-//echo $sql;
-			$sql = "INSERT INTO user_module(user_id,module_id) VALUES ('$user_id','{$entry['module_code']}')";
-			$DB->execute($sql);
+  } else {
 
-			//check for duplicates in module tables
-			$SQL = "ALTER IGNORE TABLE user_module ADD UNIQUE KEY (user_id,module_id)";
-			$DB->execute($SQL);
-//echo $SQL;
-		} */
+  //as we don't have staff or student then we must have "module"
 
-		/*
-		NEW METHOD FOR INSERTING/UPDATING IMPLEMENTED 14/10/09 by Morgan Harris [morgan@snowproject.net]
-		*/
+    $fields = $expected_fields[$uploadtype];
+    foreach($final_rows as $i) {
 
-		//Uncomment this line to initialise duplicate checking
-		//This code only needs to be run once, but it won't matter if it runs multiple times -
-		//although you will get MySQL error 1061 showing up in your logs
+    //build the SQL
+      $els = array();
+      $els[] = "source_id = '{$_source_id}'";
+      for ($c = 0; $c < count($fields); $c++) {
+        $key = $fields[$c];
+        $val = $i[$key];
+        $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+      }
+      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module SET ' . implode(', ',$els);
+      $els = array();
+      for ($c = 0; $c < count($fields); $c++) {
+        $key = $fields[$c];
+        $val = $i[$key];
+        if ($key != 'module_code') {
+          $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+        }
+      }
+      $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ',$els);
+      $DB->execute($sql);
+    }
 
-		//$DB->execute("CREATE INDEX institutional_reference(`institutional_reference`,`username`) ON user");
-//print_r($process_copy);
-		foreach($process_copy as $i)
-		{
-			$els = array();
-			foreach($i as $key => $val)
-			{
-				$els[] = "$key = '$val'";
-			}
-			$sql = "INSERT INTO user SET " . implode(', ',$els);
-			unset($els['institutional_reference']);
-			unset($els['username']);
-			$sql .= " ON DUPLICATE KEY UPDATE " . implode(', ',$els);
-//echo $sql . "\n";
-			$DB->execute($sql);
-		}
+  }
 
-		//GROUP HANDLING
-		//If the type is 4, then the table contains group data.
-		if($uploadtype=='4')
-		{
-			if(!isset($_REQUEST['collection']))
-			{
-				$user_warning .= "Collection name not set. Group creation aborted.<br/>";
-			}
-			else
-			{
-				//first we need to create this collection
-				//for this we need the following data:
-				//-collection name
-				//-each module name
-				$collection = new GroupCollection($DB);
-				$collection->create();
-				$collection->name = $_REQUEST['collection'];
-				$collection->set_owner_info($_REQUEST['owner'],'webpa','user');
-				//get all the modules (and the groups at the same time)
-				$modules = $groups = array();
-				foreach($final_rows as $entry)
-				{
-					if(!in_array($entry['module_code'],$modules))
-						$modules[] = $entry['module_code'];
-					if(!in_array($entry['group_name'],$groups))
-						$groups[] = $entry['group_name'];
-				}
-				$collection->set_modules($modules);
+  $user_msg = "<p>Successful upload of the {$filecontenttype[$uploadtype]['screen']} information to the database.</p>";
 
-				$collection->save();
-
-				$fails = array();
-				//create all the groups
-				foreach($groups as $a)
-				{
-					$group = $collection->new_group($a);
-					//for every student who is a member of that group, add them to that group.
-					foreach($final_rows as $entry)
-					{
-						if($entry['group_name']==$a)
-						{
-							$sql = "SELECT user_id FROM user WHERE institutional_reference='$entry[institutional_reference]' AND email='$entry[email]'";
-							$user_id = $DB->fetch_value($sql);
-							$group->add_member($user_id,'member');
-						}
-					}
-					if($group->save()!=true)
-						$fails[] = $a;
-				}
-				if(count($fails))
-				{
-					$user_warning .= "Failed to save the following groups:<ul>";
-					foreach($fails as $f)
-						$user_warning .= "<li>$f</li>";
-					$user_warning .= "</ul>";
-				}
-
-				//save it to the database and we're done!
-
-				$user_warning .= $collection->save() ? "" : "Failed to save collection.<br/>";
-
-			}
-			//this code is for use when you want the tutor to create the collection/groups, then the admin to upload data
-			/*$crow = $DB->fetch_row("SELECT * FROM user_collection WHERE collection_id = '$_REQUEST[collection]'");
-			$collexion = new GroupCollection($DB);
-			$collexion->load_from_row($crow);
-			$groupsarr = $collexion->get_groups_array(); //this is a 2-dim array
-			$groups = array();
-			foreach($groupsarr as $g)
-			{
-				$groups[$g['group_name']] = $g['group_id'];
-			}
-			foreach($final_rows as $entry)
-			{
-				if(array_key_exists($entry['group_name'],$groups))
-				{
-					$group = $collexion->get_group_object($groups[$entry['group_name']]);
-					$sql = "SELECT user_id FROM user WHERE institutional_reference='{$entry['institutional_reference']}' AND email='{$entry['email']}'";
-					$user_id = $DB->fetch_value($sql);
-					$group->add_member($user_id,'member');
-					$group->save();
-				}
-			}*/
-		}
-
-
-	}else{
-
-	//as we don't have staff or student then we must have "module"
-
-		//build the SQL
-		$sql = "REPLACE INTO module({fields}) VALUES {values}";
-		$DB->do_insert_multi($sql,$final_rows);
-
-		//check for and remove the duplicates
-		$temp_fields = $fields;
-		$str_fields = implode(',',$temp_fields);
-		$sql = "ALTER IGNORE TABLE module ADD UNIQUE KEY ({$str_fields})";
-
-		$DB->execute($sql);
-	}
-
-	$user_msg = "<p>Successful up load of the {$filecontenttype[$uploadtype]} information to the database.</p>";
-
-}else{
-	//we want to notify that the information is not structured as expected therefore bounce back to the user
-	$user_warning .= "The information supplied can not be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.</p>";
+} else {
+  //we want to notify that the information is not structured as expected therefore bounce back to the user
+  $user_warning .= "The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.</p>";
 }
 
 //write to screen the page information
@@ -329,7 +280,10 @@ $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-$UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
+  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+}
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../review/search/index.php');
 
 $UI->head();
@@ -345,5 +299,7 @@ $UI->content_start();
 
 
 <?php
+
 $UI->content_end();
+
 ?>

@@ -1,138 +1,109 @@
 <?php
-
 /**
- * 
+ *
  * Class : WizardStep3  (Create new groups wizard)
  *
- * 
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
+
 class WizardStep3 {
 
-	// Public
-	public $wizard = null;
-	public $step = 3;
-	
+  // Public
+  public $wizard = null;
+  public $step = 3;
 
-	/*
-	* CONSTRUCTOR
-	*/
-	function WizardStep3(&$wizard) {
-		$this->wizard =& $wizard;
-	
-		$this->wizard->back_button = '&lt; Back';
-		$this->wizard->next_button = 'Next &gt;';
-		$this->wizard->cancel_button = 'Cancel';
-	}// /WizardStep3()
+  /*
+  * CONSTRUCTOR
+  */
+  function WizardStep3(&$wizard) {
+    $this->wizard =& $wizard;
 
+    $this->wizard->back_button = '&lt; Back';
+    $this->wizard->next_button = 'Finish';
+    $this->wizard->cancel_button = 'Cancel';
+  }// /WizardStep3()
 
-	function head() {
-		$html = <<<HTMLEnd
+  function head() {
+    $html = <<<HTMLEnd
 <script language="JavaScript" type="text/javascript">
 <!--
 
-	function body_onload() {
-		document.getElementById('num_groups').focus();
-	}// /body_onload()
+  function body_onload() {
+  }// /body_onload()
 
 //-->
 </script>
 HTMLEnd;
 
-		echo($html);
-	}// /->head()
-	
-	
-	function form() {
-		$CIS = $this->wizard->get_var('CIS');
-		$config = $this->wizard->get_var('config');
-		
-		require_once("../../../library/functions/lib_form_functions.php");
-		
-		$arr_module_id = (array) $this->wizard->get_field('module_id');	// always an array, even if there's only 1
+    echo($html);
+  }// /->head()
 
-		$module_count = count($arr_module_id);
-		$module_plural = ($module_count==1) ? 'module' : 'modules';
-		$total_students = $CIS->get_module_students_count($arr_module_id);
+  function form() {
 
-		$students_plural = ($total_students==1) ? 'student' : 'students';
+    global $_module_id;
 
-		if ($total_students==0) {
-			echo("<div class=\"warning_box\"><p><strong>Warning!</strong></p><p>There are no students associated with the $module_plural you have selected.</p><p>You can continue to create your groups if you wish but there are no students available, so your groups cannot be populated at this time.</p><p>To choose a different module, click <em>back</em> to view the list of modules available.</p></div>");
-		} else {
-			echo("<p>You have chosen <strong>$module_count $module_plural</strong>, containing <strong>$total_students $students_plural</strong> in total.</p>");
-		}
-		?>
-		<p>Now you can set how the new groups will be created. To save time, the system can automatically create sequentially named groups for you. If you do not want to use sequential names, or if you just want to create all your groups yourself, select <em>0</em> in the <em>Number of groups to create</em> box below.</p>		
+    $CIS = $this->wizard->get_var('CIS');
 
-		<h2>Auto-create groups</h2>
-		<div class="form_section">
-			<p>Select how many groups you want to create.</p>
-			
-			<table class="form" cellpadding="1" cellspacing="1">
-			<tr>
-				<th><label for="num_groups">Number of groups to create</label></th>
-				<td>
-					<select name="num_groups" id="num_groups">
-					<?php render_options_range(0,100,1,(int) $this->wizard->get_field('num_groups')); ?>
-					</select>
-				</td>
-			</tr>
-			</table>
-			
-			<br />
-			<p>If you are auto-creating groups, decide how the groups will be named, e.g.  <em>Group X</em> or <em>Team X</em>.</p>
-			<table class="form" cellpadding="1" cellspacing="1">
-			<tr>
-				<th><label for="group_name_stub">Group names begin with</label></th>
-				<td><input type="text" name="group_name_stub" id="group_name_stub" maxlength="40" size="25" value="<?php echo($this->wizard->get_field('group_name_stub')); ?>" /></td>
-			</tr>
-			</table>
+    $total_students = $CIS->get_module_students_count($_module_id);
+    if (!$total_students) {
+      $total_students = 0;
+    }
+    $students_plural = ($total_students==1) ? 'student' : 'students';
+?>
+    <p>Please confirm the following settings are correct before proceeding.</p>
+    <p>If you wish to amend any details, click <em>Back</em>. When you are ready to create your groups, click <em>Finish</em>.</p>
 
-			<br />
-			<p>Select the style of numbering to use for your new groups.</p>
-			<table class="form" cellpadding="1" cellspacing="1">
-			<tr>
-				<th><label for="group_numbering">Numbering Style</label></th>
-				<td>
-					<select name="group_numbering" id="group_numbering">
-						<?php
-						$options = array	('alphabetic'	=> 'Alphabetic (Group A, Group B, ..)' ,
-											 'numeric'		=> 'Numeric (Group 1, Group 2, ..)' ,
-											 'hashed'		=> 'Hashed-Numeric (Group #1, Group #2, ..)' ,
-											);
-						render_options($options, $this->wizard->get_field('group_numbering'));
-						?>
-					</select>
-				</td>
-			</tr>
-			</table>
-		</div>		
-		<?php
-	}// /->form()
-	
-	
-	function process_form() {
-		$errors = null;
-		
-		$this->wizard->set_field('num_groups', fetch_POST('num_groups',null));
-		if (is_null($this->wizard->get_field('num_groups'))) { $errors[] = 'You must choose how many groups to create'; }
+    <h2>Name</h2>
+    <div style="margin: 0px 0px 16px 25px;">This collection of groups will be called: <?php echo($this->wizard->get_field('collection_name')); ?></div>
 
-		if ($this->wizard->get_field('num_groups')>0) {
-			$this->wizard->set_field('group_name_stub', trim( fetch_POST('group_name_stub') ) );
-			if (is_empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
+    <h2>Students</h2>
+    <div style="margin: 0px 0px 16px 25px;">
+    <p><?php  echo("$total_students $students_plural"); ?> available.</p>
+    </div>
 
-			$this->wizard->set_field('group_numbering', fetch_POST('group_numbering'));
-			if (is_empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
-		}
-		
-		return $errors;
-	}// /->process_form()
-	
+    <h2>Groups</h2>
+<?php
+    $num_groups = (int) $this->wizard->get_field('num_groups');
+    if ($num_groups>0) {
+?>
+      <div style="margin: 0px 0px 16px 25px;">
+        <p>The following groups will be created in the new <strong><?php echo($this->wizard->get_field('groupset_name')); ?></strong> collection:</p>
+        <div style="margin-left: 25px;">
+<?php
+      $num_groups = (int) $this->wizard->get_field('num_groups');
+      $group_names = GroupHandler::generate_group_names(  $num_groups, $this->wizard->get_field('group_name_stub'), $this->wizard->get_field('group_numbering') );
+
+      if ($num_groups<=5) {
+        foreach($group_names as $group_name) {
+          echo("<div>$group_name</div>");
+        }
+      } else {
+        echo("<div>{$group_names[0]}</div>");
+        echo("<div>{$group_names[1]}</div>");
+        echo("<div>&nbsp; ...</div>");
+        echo('<div>'. $group_names[$num_groups-2] .'</div>');
+        echo('<div>'. $group_names[$num_groups-1] .'</div>');
+      }
+?>
+        </div>
+      </div>
+<?php
+    } else {
+?>
+      <div style="margin: 0px 0px 16px 25px;">You have chosen not to create any groups at this time.</div>
+<?php
+    }
+  }// /->form()
+
+  function process_form() {
+    $errors = null;
+    return $errors;
+  }// /->process_form()
+
 }// /class: WizardStep3
-
 
 ?>

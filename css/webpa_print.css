@@ -1,10 +1,10 @@
 
 /**
- * 
+ *
  * WebPA Layout Stylesheet
  *
- * @author	Paul Newman 
- * 
+ * @author	Paul Newman
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 0.9
@@ -91,7 +91,7 @@ Page Components
 
 	margin: 50px 0px 0px 176px;	/* margin-top set incorrectly for IE */
 	padding: 0px;
-	
+
 	background-color: #f6f6f6;
 	border-left: 2px solid #ddd;
 	border-bottom: 2px solid #ddd;
@@ -113,7 +113,7 @@ Page Components
 	position: relative; /* 'relative' so we can use z-index for the other elements */
 	min-height: 50px;
 	width: auto;
-	
+
 	margin: 0px;
 	padding: 0px 1px 0px 0px;
 
@@ -136,7 +136,7 @@ a.page_bar_link:active { background-color: transparent; }
 	z-index: 2;
 
 	font-size: 0.85em;
-	
+
 	text-align: left;
 }
 
@@ -144,14 +144,14 @@ a.page_bar_link:active { background-color: transparent; }
 #app_bar {
 	height: 30px;
 	background-color: #399;
-	
+
 	border-top: 1px solid #600;
 	border-bottom: 1px solid #600;
 
 	color: #cee;
-	
+
 	font-weight: bold;
-	
+
 	line-height: 30px;
 	vertical-align: middle;
 }
@@ -220,7 +220,7 @@ div.content_box {
 
 	border-radius: 10px;
 	-moz-border-radius: 10px;
-	
+
 	line-height: 1.1em;
 }
 
@@ -307,15 +307,15 @@ table.radio_grid td { padding: 2px; text-align: center; vertical-align: top; }
 Tab Styling
 */
 
-div.tab_bar { background: #f6f6f6 url(/images/tab_bar/tab_padding.png) repeat-x bottom; }
+div.tab_bar { background: #f6f6f6 url(../images/tab_bar/tab_padding.png) repeat-x bottom; }
 table.tab_bar { height: 23px; }
-table.tab_bar td.tab_on { background: #f6f6f6 url(/images/tab_bar/tab_on.png) no-repeat scroll center bottom; }
-table.tab_bar td.tab_off { background: #f6f6f6 url(/images/tab_bar/tab_off.png) no-repeat scroll center bottom; }
+table.tab_bar td.tab_on { background: #f6f6f6 url(../images/tab_bar/tab_on.png) no-repeat scroll center bottom; }
+table.tab_bar td.tab_off { background: #f6f6f6 url(../images/tab_bar/tab_off.png) no-repeat scroll center bottom; }
 
 a.tab { height: 23px; display: block; line-height: 23px; color: #000; text-decoration: none; text-align: center; vertical-align: middle; }
 a.tab:link { color: #000; }
 a.tab:visited { color: #000; }
-a.tab:hover { color: #000; background: url(/images/tab_bar/tab_hover.png) no-repeat scroll center bottom; text-decoration: none; }
+a.tab:hover { color: #000; background: url(../images/tab_bar/tab_hover.png) no-repeat scroll center bottom; text-decoration: none; }
 a.tab:active { color: #000; }
 
 div.tab_content { padding: 12px 8px 8px 8px; background-color: #fff; border: 1px solid #bbb; border-top: 0px; -moz-border-radius: 0px 0px 10px 10px; }
@@ -348,7 +348,7 @@ div.alert_box {
 	background-color: #fcc;
 	border: 1px solid #990000;
 	color: #000;
-	
+
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	line-height: 1.1em;
@@ -442,17 +442,17 @@ MOST ARE DEPRECATED
 
 div.assessment_list { margin: 15px 15px 10px 15px; }
 
-div.assessment { margin-bottom: 16px; padding: 4px; background: #c8e9ff url(/images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
+div.assessment { margin-bottom: 16px; padding: 4px; background: #c8e9ff url(../images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
 
-div.assessment_open { margin-bottom: 16px; padding: 4px; background: #c9ffd6 url(/images/backgrounds/gradient_light_green-white_l-r.png) repeat-y right; border: 1px solid #cfc; border-right: 0px; }
-div.assessment_finished { margin-bottom: 16px; padding: 4px; background: #ffc9c9 url(/images/backgrounds/gradient_pink-white_l-r.png) repeat-y right; border: 1px solid #fcc; border-right: 0px; }
+div.assessment_open { margin-bottom: 16px; padding: 4px; background: #c9ffd6 url(../images/backgrounds/gradient_light_green-white_l-r.png) repeat-y right; border: 1px solid #cfc; border-right: 0px; }
+div.assessment_finished { margin-bottom: 16px; padding: 4px; background: #ffc9c9 url(../images/backgrounds/gradient_pink-white_l-r.png) repeat-y right; border: 1px solid #fcc; border-right: 0px; }
 
 table.assessment_info { width: 100%; }
 table.assessment_info td { vertical-align: top; }
 table.assessment_info td.buttons { padding: 4px 4px 4px 4px; font-size: 0.9em; white-space: nowrap; }
 
-div.status_pending { background: transparent url(/images/icons/pending_icon.gif) no-repeat scroll left top; }
-div.status_open { background: transparent url(/images/icons/open_icon.gif) no-repeat scroll left top; }
+div.status_pending { background: transparent url(../images/icons/pending_icon.gif) no-repeat scroll left top; }
+div.status_open { background: transparent url(../images/icons/open_icon.gif) no-repeat scroll left top; }
 
 div.assessment_info { margin: 4px 4px 4px 8px; }
 
@@ -500,7 +500,7 @@ Obj List Classes
 
 div.obj_list { margin: 16px; }
 
-div.obj { margin-bottom: 12px; padding: 2px 2px 4px 2px; background: #c8e9ff url(/images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
+div.obj { margin-bottom: 12px; padding: 2px 2px 4px 2px; background: #c8e9ff url(../images/backgrounds/gradient_light_blue-white_l-r.png) repeat-y right; border: 1px solid #ccf; border-right: 0px; }
 
 table.obj { width: 100%; }
 table.obj td { vertical-align: top; margin: 2px; padding: 2px; }

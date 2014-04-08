@@ -1,6 +1,8 @@
-WebPA - An Online Peer Assessment System for HE
-Copyright (c) 2004-2008, Loughborough University
 ================================================
+WebPA - An Online Peer Assessment System for HE
+Copyright (c) 2004-2013, Loughborough University
+================================================
+
 
 What is it?
 ===========
@@ -14,26 +16,12 @@ individual grade. The individual grade reflects the students contribution to the
 group.
 
 ----------------------------------------------------------------------------------
-Latest Version
-==============
-
-Details of the latest version can be found at <http://webpaproject.lboro.ac.uk>
-
-----------------------------------------------------------------------------------
-
-Documentation
-=============
-
-The most up-to-date documentation for the releases can be found at 
-<http://webpaproject.lboro.ac.uk/>.
-
-----------------------------------------------------------------------------------
 
 Getting Started
 ===============
 
-First, you'll need to install and configure WebPA.  Details of the installation
-process can be found at <http://webpaproject.lboro.ac.uk/?q=node/30>
+First, you'll need to install and configure WebPA.
+Details of the installation process can be found in the file: install.txt
 
 ----------------------------------------------------------------------------------
 
@@ -48,7 +36,7 @@ Contributing
 ============
 
 WebPA is Open Source and licensed under the GPL.  To read about the
-specifics of the GPL, please see the licence.txt file or go to 
+specifics of the GPL, please see the licence.txt file or go to
 <http://usefulinc.com/doap/licenses/gpl>.
 
 You are free to use and redistribute it, and make changes / fix bugs. The
@@ -68,7 +56,7 @@ looking for contributions in the following area:
     * Testing - As with every software application, there are bound to be
 	  bugs. We think the system is stable enough to use, but we are always
 	  looking for more testers; people to use WebPA that expose bugs.
-	  The more bugs we find and fix, the better off the package is. 
+	  The more bugs we find and fix, the better off the package is.
 	  You can report a bug at
 	  <http://sourceforge.net/tracker/?group_id=194016&atid=947737>
 
@@ -77,7 +65,7 @@ looking for contributions in the following area:
 Support / Questions
 ===================
 
-For questions, support, or further information, please visit 
+For questions, support, or further information, please visit
 <http://webpaproject.lboro.ac.uk/>
 
 

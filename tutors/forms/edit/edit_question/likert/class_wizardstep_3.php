@@ -1,13 +1,13 @@
 <?php
 /**
- * 
+ *
  * Class : WizardStep3  (edit criterion wizard)
- * 			
- * 
+ *
+ *
  * @copyright 2007 Loughborough University
  * @license http://www.gnu.org/licenses/gpl.txt
  * @version 1.0.0.0
- * 
+ *
  */
 class WizardStep3 {
 
@@ -15,13 +15,13 @@ class WizardStep3 {
 	public $wizard = null;
 	public $step = 3;
 
-	
+
 	/*
 	* CONSTRUCTOR
 	*/
 	function WizardStep3(&$wizard) {
 		$this->wizard =& $wizard;
-	
+
 		$this->wizard->back_button = null;
 		$this->wizard->next_button = null;
 		$this->wizard->cancel_button = null;
@@ -40,14 +40,14 @@ class WizardStep3 {
 </script>
 <?php
 	}// /->head()
-	
-	
+
+
 	function form() {
 		$form =& $this->wizard->get_var('form');
-	
+
 		$range_start = $this->wizard->get_field('question_range_start');
 		$range_end = $this->wizard->get_field('question_range_end');
-	
+
 		$new_question['text']['_data'] = $this->wizard->get_field('question_text');
 		$new_question['desc']['_data'] = $this->wizard->get_field('question_desc');
 		$new_question['range']['_data'] = "{$range_start}-{$range_end}";
@@ -64,7 +64,7 @@ class WizardStep3 {
 			$form->set_question($this->wizard->get_var('question_id'), $new_question);
 			$form->save();
 		}
-		
+
 		// If errors, show them
 		if (is_array($errors)) {
 			$this->wizard->back_button = '&lt; Back';
@@ -82,17 +82,17 @@ class WizardStep3 {
 				}
 			//-->
 			</script>
-			<?php	
+			<?php
 		}
 	}// /->form()
-	
-	
+
+
 	function process_form() {
 		$this->wizard->_fields = array();	// kill the wizard's stored fields
 		return null;
 	}// /->process_form()
-	
-	
+
+
 }// /class: WizardStep3
 
 
