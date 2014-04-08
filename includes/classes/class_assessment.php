@@ -147,7 +147,8 @@ class Assessment {
       return false;
     } else {
       // Save the Form
-      $fields = array ('assessment_id'    => $this->id ,
+      $fields = array (
+      	       'assessment_id'    => $this->id ,
                'assessment_name'    => $this->name ,
                'module_id'       => $this->module_id ,
                'collection_id'    => $this->_collection_id ,
@@ -164,14 +165,19 @@ class Assessment {
                'email_closing'    =>($this->email_closing)? 1 : 0 ,
                'feedback_name'    => $this->feedback_name ,
                'feedback_length'    => 0 ,
-               'feedback_optional'    => 0);
+               'feedback_optional'    => 0
+      );
+
+      $ass_name = $this->_DAO->escape_str($fields['assessment_name']);
+      $ass_intro = $this->_DAO->escape_str($fields['introduction']);
       $xml = $this->_DAO->_prepare_field_value($fields['form_xml']);
+
       $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'assessment ({fields}) VALUES ({values}) ';
-      $sql .= "ON DUPLICATE KEY UPDATE assessment_name = '{$fields['assessment_name']}', module_id = {$fields['module_id']}, " .
+      $sql .= "ON DUPLICATE KEY UPDATE assessment_name = '{$ass_name}', module_id = {$fields['module_id']}, " .
               "collection_id = '{$fields['collection_id']}', form_xml = {$xml}, " .
               "open_date = '{$fields['open_date']}', close_date = '{$fields['close_date']}', " .
               "retract_date = '{$fields['retract_date']}', " .
-              "introduction = '{$fields['introduction']}', allow_feedback = {$fields['allow_feedback']}, " .
+              "introduction = '{$ass_intro}', allow_feedback = {$fields['allow_feedback']}, " .
               "assessment_type = {$fields['assessment_type']}, student_feedback = {$fields['student_feedback']}, " .
               "contact_email = '{$fields['contact_email']}', " .
               "email_opening = {$fields['email_opening']}, email_closing = {$fields['email_closing']}, " .

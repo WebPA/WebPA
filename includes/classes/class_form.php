@@ -133,8 +133,8 @@ class Form {
 
       // Save the Form
       $this->_DAO->execute('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form (form_id, form_name, form_type, form_xml) ' .
-         "VALUES ('{$this->id}', '{$this->name}', '{$this->type}', '') " .
-         "ON DUPLICATE KEY UPDATE form_name = '{$this->name}', form_type = '{$this->type}'");
+         "VALUES ('{$this->id}', '" . $this->_DAO->escape_str($this->name) . "', '" . $this->_DAO->escape_str($this->type) . "', '') " .
+         "ON DUPLICATE KEY UPDATE form_name = '" . $this->_DAO->escape_str($this->name) . "', form_type = '" . $this->_DAO->escape_str($this->type) . "'");
       $this->_DAO->execute('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET form_xml = '{$form_xml}' WHERE form_id = '{$this->id}'");
 
       if (count($this->modules) > 0) {
