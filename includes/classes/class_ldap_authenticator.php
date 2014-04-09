@@ -82,8 +82,11 @@ class LDAPAuthenticator extends Authenticator {
     }
 
     $info = ldap_get_entries($ldapconn,$result);
-    ldap_close($ldapconn);
-
+	ldap_close($ldapconn);
+	if($info['count']==0) {
+		return false;
+	}
+	
     $_fields = array('forename' => $info[0]['givenname'][0],
                      'lastname'  => $info[0]['sn'][0],
                      'email'     => $info[0]['mail'][0],
