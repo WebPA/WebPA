@@ -35,9 +35,9 @@ define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
 define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', 'root');
-define('APP__DB_PASSWORD', 'novell');
-define('APP__DB_DATABASE', 'webpa');
+define('APP__DB_USERNAME', '');
+define('APP__DB_PASSWORD', '');
+define('APP__DB_DATABASE', '');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
