@@ -35,9 +35,9 @@ define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
 define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', '');
-define('APP__DB_PASSWORD', '');
-define('APP__DB_DATABASE', '');
+define('APP__DB_USERNAME', 'root');
+define('APP__DB_PASSWORD', 'novell');
+define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
@@ -72,8 +72,9 @@ ini_set('smtp_port','25');
 ini_set('sendmail_from','someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
-$LOGIN_AUTHENTICATORS[] = 'DB';
+// $LOGIN_AUTHENTICATORS[] = 'DB';
 // $LOGIN_AUTHENTICATORS[] = 'LDAP';
+$LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings
 define('LDAP__HOST', "kdc.lboro.ac.uk");
@@ -86,6 +87,11 @@ $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
 define('LDAP__DEBUG_LEVEL', 7);
 define('LDAP__AUTO_CREATE_USER', TRUE);
+
+// SAML settings
+define('SAML__SIMPLESAMLPATH', ''); // Path to the root of the simpleSAMLPHP install which contains the lib folder, must include training /
+define('SAML__SP_NAME', 'webpa:simplesaml'); // EntityID within simpleSAMLPHP for this session
+define('SAML__USERNAME_ATTRIBUTE', 'username'); // Name of the attribute holding the username from the SAML assertion
 
 // define installed modules
 $INSTALLED_MODS = array();
