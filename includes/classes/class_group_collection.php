@@ -40,7 +40,7 @@ class GroupCollection {
   */
   function GroupCollection(&$DAO) {
     $this->_DAO =& $DAO;
-    $this->_created_on = mktime();
+    $this->_created_on = time();
     $this->_groups = null;
     $this->_group_objects = null;
     $this->_assessment_id = null;
@@ -201,7 +201,7 @@ class GroupCollection {
   * The locked_on datetime is IMMEDIATELY SAVED to the database (no other fields are saved)
   */
   function lock() {
-    $this->_locked_on = mktime();
+    $this->_locked_on = time();
     if ($this->id) {
       $_fields = array  (
                           'collection_locked_on'  => date(MYSQL_DATETIME_FORMAT,$this->_locked_on) ,
