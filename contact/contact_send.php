@@ -18,7 +18,29 @@ check_user($_user);
 
 $contact_app_id = APP__ID;
 
-$contact_to = $BRANDING['email.help'];
+$contact_person = fetch_POST('contact_person');
+if($contact_person < 1) {
+  switch($contact_person) {
+    case -1:
+      $contact_to = $BRANDING['email.help'];
+      break;
+    case 0:
+      if($_module_id) {
+        $query = 'SELECT u.email FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+                    . ' JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id'
+                  . ' WHERE (um.module_id = '. mysql_real_escape_string($_module_id) . ' AND um.user_type = \'T\')';
+        $contact_to = $DB->fetch_col($query, 0);
+      }
+
+      if(empty($contact_to)) {
+        $contact_to = $BRANDING['email.help'];
+      }
+      break;
+  }
+} else {
+  $query = 'SELECT u.email FROM ' . APP__DB_TABLE_PREFIX . 'user u WHERE (u.user_id = '. mysql_real_escape_string($contact_person) .')';
+  $contact_to = $DB->fetch_value($query);
+}
 
 $contact_user_id = $_user->id;
 $contact_user_username = $_user->username;

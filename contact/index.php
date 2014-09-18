@@ -20,6 +20,24 @@ check_user($_user);
 
 $contact_type = fetch_GET('q');
 
+// Get tutors to contact
+
+$_module_id = fetch_SESSION('_module_id', null);
+$type = APP__USER_TYPE_TUTOR;
+$query = 'SELECT u.user_id, u.source_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, u.date_last_login AS `last login` FROM ' .
+         APP__DB_TABLE_PREFIX . 'user u INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id ' .
+         "WHERE (um.module_id = {$_module_id}) AND (um.user_type = '{$type}') " .  // AND (source_id = '{$_source_id}')";
+         'ORDER BY u.lastname, u.forename, u.source_id, u.username';
+         
+$rs = $DB->fetch($query);
+if(!is_array($rs))
+  $rs = array();
+
+$fixed_contacts = array(
+  array('user_id' => 0, 'forename' => 'All', 'lastname' => 'Tutors'),
+  array('user_id' => -1, 'forename' => 'WebPA', 'lastname' => 'Helpdesk'),
+);
+$rs = array_merge($fixed_contacts, $rs);
 // Begin Page
  
 $UI->page_title = APP__NAME . ' Contact';
@@ -57,6 +75,16 @@ $UI->content_start();
 		<div class="form_section">
 			<table class="form" cellpadding="2" cellspacing="2">
 			<tr>
+			        <td><label for="contact_person">Contact Person</label></td>
+			        <td>
+                                    <select name="contact_person" id="contact_person">
+                                      <?php foreach($rs as $usr){
+                                      echo '<option value="'.$usr['user_id'].'">'.$usr['forename'].' '.$usr['lastname'].'</option>';
+                                      } ?>
+                                    </select>
+                                </td>
+                        </tr>
+                        <tr>
 				<td><label for="contact_name">Your Name</label></td>
 				<td><input type="text" name="contact_name" id="contact_name" maxlength="60" size="50" value="<?php echo("{$_user->forename} {$_user->lastname}"); ?>" /></td>
 			</tr>
