@@ -70,6 +70,7 @@ if (!$assessments) {
     $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
     $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}";
     $mark_url = "marks/mark_assessment.php?a={$assessment->id}&{$qs}";
+    $student_inputs_url = "reports/report_student_inputs.php?a={$assessment->id}&{$qs}";
 ?>
     <div class="obj">
       <table class="obj" cellpadding="2" cellspacing="2">
@@ -86,6 +87,7 @@ if (!$assessments) {
           <a href="<?php echo($responded_url); ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
           <a href="<?php echo($groupmark_url); ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
           <a href="<?php echo($mark_url); ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
+          <a href="<?php echo($student_inputs_url); ?>"><img src="../../images/icons/view_data.gif" width="16" height="16" alt="View student inputs" title="View student inputs" /></a>
         </td>
       </tr>
       </table>
