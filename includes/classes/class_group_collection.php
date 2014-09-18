@@ -278,7 +278,11 @@ class GroupCollection {
       ORDER BY group_name ASC
     ");
     if (!$this->_groups) { $this->_groups = array(); }
+    uasort($this->_groups, array('GroupCollection', 'group_title_natural_sort'));
   }// /->refresh_groups()
+  private static function group_title_natural_sort($group_a, $group_b) {
+    return strnatcmp($group_a['group_name'], $group_b['group_name']);
+  }
 
 /*
 * ----------------------------------------
