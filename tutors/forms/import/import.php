@@ -43,7 +43,7 @@ if ($empty>0) {
 
     if ($results){
       //we need to prompt that they are the same - or send to clone form
-      $action_notify = "<p>You already have this form in your forms list.</p><p>If you would like to make a copy of the form please use the <a href=\"index.php\">'clone form'</a> function.</p>";
+      $action_notify = "<p>".gettext('You already have this form in your forms list.</p><p>If you would like to make a copy of the form please use the <a href=\"index.php\">\'clone form\'</a> function.')."</p>";
     } else {
       //need to replace the ID number before replacing in the system.
       $new_id = uuid_create();
@@ -72,28 +72,28 @@ if ($empty>0) {
                  'module_id' => $_module_id
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module ({fields}) VALUES ({values})', $fields);
-      $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"../index.php\">'my forms'</a> list.</p>";
+      $action_notify = "<p>".gettext('The form has been uploaded and can be found in your <a href=\"../index.php\">\'my forms\'</a> list.')."</p>";
     }
   } else {
 
-    $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
+    $action_notify = "<p>".gettext('The import has failed due to the following reasons')." &#59; <br/>{$isValid}</p>";
 
   }
 
 } else {
-  $action_notify = "<p>There was no form information to upload.<br> Please go back and try again</p>";
+  $action_notify = "<p>".gettext('There was no form information to upload.<br> Please go back and try again</p>');
 }
 
-$UI->page_title = APP__NAME . ' load form';
-$UI->menu_selected = 'my forms';
+$UI->page_title = APP__NAME .' '.gettext('load form');
+$UI->menu_selected = gettext('my forms');
 $UI->help_link = '?q=node/244';
 $UI->breadcrumbs = array('home'      => '/' ,
-            'my forms'  => null ,);
+    gettext('my forms')  => null ,);
 
-$UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
-$UI->set_page_bar_button('Create a new Form', '../../../../images/buttons/button_form_create.gif', '../create/');
-$UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
-$UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', '../import/');
+$UI->set_page_bar_button(gettext('List Forms'), '../../../../images/buttons/button_form_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create a new Form'), '../../../../images/buttons/button_form_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('Clone a Form'), '../../../../images/buttons/button_form_clone.gif', '../clone/');
+$UI->set_page_bar_button(gettext('Import a Form'), '../../../../images/buttons/button_form_import.gif', '../import/');
 
 $UI->head();
 $UI->body();
@@ -101,7 +101,7 @@ $UI->content_start();
 
 ?>
 <div class="content_box">
-  <h2>form loading</h2>
+  <h2><?php echo gettext('form loading');?></h2>
   <?php echo $action_notify; ?>
 </div>
 <?php

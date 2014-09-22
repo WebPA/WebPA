@@ -113,7 +113,7 @@ if (!$assessments) {
         echo('      <table class="mark_sheet_info" cellpadding="0" cellspacing="0">');
         echo('      <tr>');
         echo('        <td>');
-        echo('          <div class="mark_sheet_title">Mark Sheet</div>');
+        echo('          <div class="mark_sheet_title">'.gettext('Mark Sheet').'</div>');
         echo("          <div class=\"info\" style=\"font-weight: bold;\">".gettext('Algorithm:')." {$algorithm}.</div>");
         echo("          <div class=\"info\">".gettext('PA weighting:')." {$params['weighting']}%</div>");
         echo("          <div class=\"info\">".gettext('Non-completion penalty:')." {$params['penalty']}{$penalty_type}</div>");

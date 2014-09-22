@@ -22,7 +22,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Initialise wizard
 
-$wizard = new Wizard('clone an existing form wizard');
+$wizard = new Wizard(gettext('clone an existing form wizard'));
 $wizard->cancel_url = "../";
 
 $wizard->add_step(1,'class_wizardstep_1.php');
@@ -44,19 +44,19 @@ $wiz_step = $wizard->get_step();
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Clone an existing form';
-$UI->menu_selected = 'my forms';
+$UI->page_title = APP__NAME . ' '.gettext('Clone an existing form');
+$UI->menu_selected = gettext('my forms');
 $UI->help_link = '?q=node/244';
 $UI->breadcrumbs = array  (
   'home'          => '../../' ,
-  'my forms'        => '../' ,
-  'clone a form wizard' => null ,
+    gettext('my forms')        => '../' ,
+    gettext('clone a form wizard') => null ,
 );
 
-$UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
-$UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
-$UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
-$UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', '../import/');
+$UI->set_page_bar_button(gettext('List Forms'), '../../../../images/buttons/button_form_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Form'), '../../../../images/buttons/button_form_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('Clone a Form'), '../../../../images/buttons/button_form_clone.gif', '../clone/');
+$UI->set_page_bar_button(gettext('Import a Form'), '../../../../images/buttons/button_form_import.gif', '../import/');
 
 $UI->head();
 $wizard->head();
@@ -64,7 +64,7 @@ $UI->body('onload="body_onload()"');
 $UI->content_start();
 ?>
 
-<p>This wizard takes you through the process of cloning an existing assessment form. When it is complete, you will have a new copy of the form, which you can then edit normally.</p>
+<p><?php echo gettext('This wizard takes you through the process of cloning an existing assessment form. When it is complete, you will have a new copy of the form, which you can then edit normally.');?></p>
 
 <?php
 $wizard->title();

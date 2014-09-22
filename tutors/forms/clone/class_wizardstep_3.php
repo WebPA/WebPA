@@ -56,21 +56,21 @@ class WizardStep3 {
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to create your new form.</strong></p>');
-      echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to create your new form.').'</strong></p>');
+      echo('<p>'.gettext('To correct the problem, click <em>back</em> and amend the details entered.').'</p>');
     } else {// Else.. create the form!
       if ($clone_form->save()) {
 ?>
-        <p><strong>Your new assessment form has been created.</strong></p>
-        <p style="margin-top: 20px;">To add questions and marking information to your new form, you can use the <a href="../edit/edit_form.php?f=<?php echo($clone_form->id); ?>">form editor</a>.</p>
-        <p style="margin-top: 20px;">Alternatively, you can return to <a href="../">my forms</a>, or to the <a href="../../../">WebPA home page</a>.</p>
+        <p><strong><?php echo gettext('Your new assessment form has been created.');?></strong></p>
+        <p style="margin-top: 20px;"><?php echo sprintf(gettext('To add questions and marking information to your new form, you can use the <a href="../edit/edit_form.php?f=%s">form editor</a>.'), $clone_form->id);?></p>
+        <p style="margin-top: 20px;"><?php echo gettext('Alternatively, you can return to <a href="../">my forms</a>, or to the <a href="../../../">WebPA home page</a>.');?></p>
 <?php
       } else {
 ?>
-        <p><strong>An error occurred while trying to create your new assessment form.</strong></p>
-        <p>You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.</p>
+        <p><strong><?php echo gettext('An error occurred while trying to create your new assessment form.');?></strong></p>
+        <p><?php echo gettext('You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.');?></p>
 <?php
       }
     }

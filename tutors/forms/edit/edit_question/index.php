@@ -34,7 +34,7 @@ if ($form->load($form_id)) {
 // --------------------------------------------------------------------------------
 // Initialise wizard
 
-$wizard = new Wizard('edit criterion wizard');
+$wizard = new Wizard(gettext('edit criterion wizard'));
 
 if ($form) {
   $wizard->set_wizard_url("index.php?f=$form_id&q=$question_id");
@@ -74,20 +74,20 @@ if ($form) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME.' Edit a criterion';
-$UI->menu_selected = 'my forms';
+$UI->page_title = APP__NAME.' '.gettext('Edit a criterion');
+$UI->menu_selected = gettext('my forms');
 $UI->help_link = '?q=node/244';
 $UI->breadcrumbs = array  (
   'home'          => '../../../' ,
-  'my forms'        => '../../' ,
-  "edit: {$form->name}" => "../edit_form.php?$form_qs" ,
-  "edit: criterion"   => null ,
+    gettext('my forms')        => '../../' ,
+    gettext("edit:")." {$form->name}" => "../edit_form.php?$form_qs" ,
+    gettext("edit: criterion")   => null ,
 );
 
-$UI->set_page_bar_button('List Forms', '../../../../../images/buttons/button_form_list.gif', '../../');
-$UI->set_page_bar_button('Create Form', '../../../../../images/buttons/button_form_create.gif', '../../create/index.php');
-$UI->set_page_bar_button('Clone a Form', '../../../../../images/buttons/button_form_clone.gif', '../../clone/');
-$UI->set_page_bar_button('Import a Form', '../../../../../images/buttons/button_form_import.gif', '../../import/');
+$UI->set_page_bar_button(gettext('List Forms'), '../../../../../images/buttons/button_form_list.gif', '../../');
+$UI->set_page_bar_button(gettext('Create Form'), '../../../../../images/buttons/button_form_create.gif', '../../create/index.php');
+$UI->set_page_bar_button(gettext('Clone a Form'), '../../../../../images/buttons/button_form_clone.gif', '../../clone/');
+$UI->set_page_bar_button(gettext('Import a Form'), '../../../../../images/buttons/button_form_import.gif', '../../import/');
 
 $UI->head();
 if ($form) {
@@ -99,7 +99,7 @@ if ($form) {
 $UI->content_start();
 ?>
 
-<p>This wizard takes you through the process of editing an existing assessment criterion.</p>
+<p><?php echo gettext('This wizard takes you through the process of editing an existing assessment criterion.');?></p>
 
 <?php
 if ($form) {
@@ -114,7 +114,7 @@ if ($form) {
 if ($form) {
   $wizard->draw_wizard();
 } else {
-  echo("<p>The given assessment form failed to load so this wizard cannot be started.</p>");
+  echo("<p>".gettext('The given assessment form failed to load so this wizard cannot be started.')."</p>");
 }
 ?>
 

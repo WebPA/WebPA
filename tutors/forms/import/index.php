@@ -18,7 +18,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   exit;
 }
 
-$UI->page_title = APP__NAME . ' load form';
+$UI->page_title = APP__NAME .' load form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
 $UI->breadcrumbs = array('home'      => '../../' ,

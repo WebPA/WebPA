@@ -23,8 +23,8 @@ class WizardStep1 {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep1()
 
   function head() {
@@ -65,14 +65,14 @@ class WizardStep1 {
     if (!$forms) {
       $this->wizard->next_button = null;
 ?>
-      <p>You have not created any forms yet, so you cannot select one to clone.</p>
-      <p>Please <a href="../create/">create a new form</a> instead.</p>
+      <p><?php echo gettext('You have not created any forms yet, so you cannot select one to clone.');?></p>
+      <p><?php echo gettext('Please <a href="../create/">create a new form</a> instead.');?></p>
 <?php
     } else {
 ?>
-      <p>To create a clone you must first select which assessment form you wish to copy. Please choose one from the list below.</p>
+      <p><?php echo gettext('To create a clone you must first select which assessment form you wish to copy. Please choose one from the list below.');?></p>
 
-      <h2>Choose a form to clone</h2>
+      <h2><?php echo gettext('Choose a form to clone');?></h2>
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
 <?php
@@ -100,7 +100,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('form_id',fetch_POST('form_id'));
-    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select which assessment form you wish to clone.'; }
+    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = gettext('You must select which assessment form you wish to clone.'); }
 
     return $errors;
   }// /->process_form()

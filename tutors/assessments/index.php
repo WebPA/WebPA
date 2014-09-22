@@ -44,10 +44,10 @@ $this_year .= APP__ACADEMIC_YEAR_START_MONTH . '-01 00:00:00';
 $next_year = strval($year + 1) . $this_year;
 $this_year = strval($year) . $this_year;
 
-$tabs = array ('pending'  => "?tab=pending&y={$year}" ,
-         'open'   => "?tab=open&y={$year}" ,
-         'closed'   => "?tab=closed&y={$year}" ,
-         'marked'   => "?tab=marked&y={$year}" ,
+$tabs = array (gettext('pending')  => "?tab=pending&y={$year}" ,
+    gettext('open')   => "?tab=open&y={$year}" ,
+    gettext('closed')   => "?tab=closed&y={$year}" ,
+    gettext('marked')   => "?tab=marked&y={$year}" ,
 );
 
 $tab = fetch_GET('tab','pending');
@@ -77,16 +77,16 @@ $page_url = APP__WWW . "/tutors/assessments/index.php";
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' my assessments';
-$UI->menu_selected = 'my assessments';
+$UI->page_title = APP__NAME . ' '.gettext('my assessments');
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  (
   'home'      => '../' ,
-  'my assessments'  => null ,
+    gettext('my assessments')  => null ,
 );
 
-$UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '');
-$UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', 'create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../images/buttons/button_assessment_list.gif', '');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../images/buttons/button_assessment_create.gif', 'create/');
 
 $UI->head();
 $change_onclick = ' onclick="change_academic_year()"';
@@ -107,8 +107,8 @@ $UI->body();
 $UI->content_start();
 ?>
 
-<p>Use the tabs below to manage your different categories of assessment.</p>
-<p>You can also <a class="button" href="create/">create a new assessment</a></p>
+<p><?php echo gettext('Use the tabs below to manage your different categories of assessment.');?></p>
+<p><?php echo gettext('You can also <a class="button" href="create/">create a new assessment');?></a></p>
 
 <br />
 
@@ -133,7 +133,7 @@ $UI->content_start();
   <table cellpadding="2" cellspacing="2" style="font-size: 0.8em;">
   <tr>
     <td width="100%">&nbsp;</td>
-    <td nowrap="nowrap"><label for="academic_year">Academic year to display</label></td>
+    <td nowrap="nowrap"><label for="academic_year"><?php echo gettext('Academic year to display');?></label></td>
     <td>
       <select name="academic_year" id="academic_year">
         <?php
@@ -148,7 +148,7 @@ $UI->content_start();
         ?>
       </select>
     </td>
-    <td><input type="button" name="change_year" value="change"<?php echo $change_onclick; ?> /></td>
+    <td><input type="button" name="change_year" value="<?php echo gettext('change');?>"<?php echo $change_onclick; ?> /></td>
   </tr>
   </table>
 
