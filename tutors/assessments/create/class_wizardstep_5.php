@@ -24,9 +24,9 @@ class WizardStep5 {
   function WizardStep5(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Finish';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Finish');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep4()
 
   function head() {
@@ -51,22 +51,22 @@ class WizardStep5 {
     require_once(DOC__ROOT . 'includes/classes/class_form.php');
     require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 ?>
-    <p>Your assessment is now ready for creation.</p>
-    <p>Please review the details below. When you're are satisfied, click <em>Finish</em> to create your peer assessment.</p>
+    <p><?php echo gettext('Your assessment is now ready for creation.');?></p>
+    <p><?php echo gettext('Please review the details below. When you\'re are satisfied, click <em>Finish</em> to create your peer assessment.');?>'</p>
 
-    <h2>Assessment Details</h2>
+    <h2><?php echo gettext('Assessment Details');?></h2>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
-        <th width="100">Name:</th>
+        <th width="100"><?php echo gettext('Name:');?></th>
         <td><?php echo($this->wizard->get_field('assessment_name'));?></td>
       </tr>
       <tr>
-        <th>Opens at:</th>
+        <th><?php echo gettext('Opens at:');?></th>
         <td><?php echo(  date('G:i \o\n l, jS F Y',$this->wizard->get_field('open_date') )  );?></td>
       </tr>
       <tr>
-        <th>Closes at:</th>
+        <th><?php echo gettext('Closes at:');?></th>
         <td><?php echo(  date('G:i \o\n l, jS F Y',$this->wizard->get_field('close_date') )  );?></td>
       </tr>
 <?php
@@ -76,7 +76,7 @@ class WizardStep5 {
             <td>&nbsp;</td>
             <td>
               <div class="warning_box" style="width: 60%">
-                Using these scheduled times, this assessment will be open for students to use immediately.
+                <?php echo gettext('Using these scheduled times, this assessment will be open for students to use immediately.');?>
               </div>
             </td>
           </tr>
@@ -84,28 +84,28 @@ class WizardStep5 {
     }
 
     if (!is_empty($this->wizard->get_field('introduction'))) {
-      echo('<tr><td colspan="2" style="font-weight: bold;">Includes an introduction</td></tr>');
+      echo('<tr><td colspan="2" style="font-weight: bold;">'.gettext('Includes an introduction').'</td></tr>');
     }
 
     if ($this->wizard->get_field('email')== '1') {
-      echo('<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will be emailed when you finish.</td></tr>');
+      echo('<tr><td colspan="2" style="font-weight: bold;">'.gettext('All students for the assessment will be emailed when you finish.'.'</td></tr>'));
     }else{
-      echo('<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will <b>NOT</b> be emailed when you finish.</td></tr>');
+      echo('<tr><td colspan="2" style="font-weight: bold;">'.gettext('All students for the assessment will <b>NOT</b> be emailed when you finish.'.'</td></tr>'));
     }
 ?>
       </table>
     </div>
 
-    <h2>Assessment Type</h2>
+    <h2><?php echo gettext('Assessment Type');?></h2>
     <div class="form_section">
       <?php if ($this->wizard->get_field('assessment_type')=='1'){
-        echo "Self and peer assessment";
+        echo gettext("Self and peer assessment");
       }else{
-        echo "Peer assessment only";
+        echo gettext("Peer assessment only");
       } ?>
     </div>
 
-    <h2>Assessment Form</h2>
+    <h2><?php echo gettext('Assessment Form');?></h2>
     <div class="form_section">
 <?php
     $form = new Form($DB);
@@ -113,15 +113,15 @@ class WizardStep5 {
       $form = null;
       $this->wizard->next_button = null;
 ?>
-          <div class="error_box"><p><strong>ERROR : </strong>unable to load the selected form</p></div>
+          <div class="error_box"><p><strong><?php echo gettext('ERROR : </strong>unable to load the selected form');?></p></div>
 <?php
     } else {
-      echo("<p><strong>Form : </strong>{$form->name}</p>");
+      echo("<p><strong>".gettext('Form :')." </strong>{$form->name}</p>");
       $question_count = (int) $form->get_question_count();
       if ($question_count==0) {
         $this->wizard->next_button = null;
 ?>
-            <div class="error_box"><p><strong>ERROR : </strong>this form contains no questions</p></div>
+            <div class="error_box"><p><strong><?php echo gettext('ERROR : </strong>this form contains no questions');?></p></div>
 <?php
       } else {
         echo('<div style="margin-left: 10px;">');
@@ -137,7 +137,7 @@ class WizardStep5 {
 ?>
     </div>
 
-    <h2>Groups</h2>
+    <h2><?php echo gettext('Groups');?></h2>
     <div class="form_section">
 <?php
     $group_handler = new GroupHandler();
@@ -146,15 +146,15 @@ class WizardStep5 {
     if (!$collection) {
       $this->wizard->next_button = null;
 ?>
-          <div class="error_box"><p><strong>ERROR : </strong>unable to load the selected collection of groups</p></div>
+          <div class="error_box"><p><strong><?php echo gettext('ERROR : </strong>unable to load the selected collection of groups');?></p></div>
 <?php
     } else {
-      echo("<p><strong>Collection : </strong>{$collection->name}</p>");
+      echo("<p><strong>".gettext('Collection')." : </strong>{$collection->name}</p>");
       $groups = $collection->get_groups_array();
       if (count((array) $groups)==0) {
         $this->wizard->next_button = null;
 ?>
-            <div class="error_box"><p><strong>ERROR : </strong>this collection does not contain any groups</p></div>
+            <div class="error_box"><p><strong><?php echo gettext('ERROR : </strong>this collection does not contain any groups');?></p></div>
 <?php
       } else {
 

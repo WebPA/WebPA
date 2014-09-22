@@ -85,7 +85,7 @@ class WizardStep6 {
     $collection = $group_handler->clone_collection($coll_id);
 
     if (!$collection) {
-      $errors[] = 'There was an error when trying to set the groups to be assessed - please use the contact system to report the error!';
+      $errors[] = gettext('There was an error when trying to set the groups to be assessed - please use the contact system to report the error!');
     } else {
       $collection->set_owner_info($assessment->id, APP__COLLECTION_ASSESSMENT);
       $collection->save();
@@ -97,14 +97,14 @@ class WizardStep6 {
     $send_email = $this->wizard->get_field('email');
     if($send_email == '1'){
       $_user_id = fetch_SESSION('_user_id', null);
-      $subjectLn = 'Your Tutor has set a WebPA assessment';
-      $body = "Your tutor has set a WebPA assessment for your group. The details are as below;" .
-          "\n Assessment Name:  " . $this->wizard->get_field('assessment_name') .
-          "\n Open from:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date')) .
-          "\n Closes on:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date')) .
-          "\n To complete your assessment please go to: " . APP__WWW .
+      $subjectLn = gettext('Your Tutor has set a WebPA assessment');
+      $body = gettext("Your tutor has set a WebPA assessment for your group. The details are as below;") .
+          "\n ".gettext("Assessment Name:") . "  " . $this->wizard->get_field('assessment_name') .
+          "\n ".gettext("Open from:"). "  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date')) .
+          "\n ".gettext("Closes on:"). "  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date')) .
+          "\n ".gettext("To complete your assessment please go to:")." " . APP__WWW .
           "\n \n -------------------------------------------------------------------------------" .
-          "\n This is an automated email sent by the WebPA tool \n\n";
+          "\n ".gettext("This is an automated email sent by the WebPA tool")."\n\n";
       $returned = mail_assessment_notification ($coll_id, $subjectLn,$body, $_user_id);
 
       //deal will any errors that are returned.
@@ -116,23 +116,23 @@ class WizardStep6 {
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to create your new assessment.</strong></p>');
-      echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to create your new assessment.').'</strong></p>');
+      echo('<p>'.gettext('To correct the problem, click <em>back</em> and amend the details entered.').'</p>');
     } else {// Else.. create the form!
       if ($assessment) {
         $assessment_qs = "a={$assessment->id}";
 ?>
-        <p><strong>Your new assessment has been created.</strong></p>
-        <p style="margin-top: 20px;">To view or amend the details of your new assessment, you can use the <a href="../edit/edit_assessment.php?<?php echo($assessment_qs); ?>">assessment editor</a>.</p>
-        <p style="margin-top: 20px;">To send an email alert to the students due to take this new assessment, use the <a href="../email/index.php?<?php echo($assessment_qs); ?>">email wizard</a>.</p>
-        <p style="margin-top: 20px;">Alternatively, you can return to <a href="../index.php">my assessments</a>, or to the <a href="../../../">WebPA home page</a>.</p>
+        <p><strong><?php echo gettext('Your new assessment has been created.');?></strong></p>
+        <p style="margin-top: 20px;"><?php echo sprintf(gettext('To view or amend the details of your new assessment, you can use the <a href="../edit/edit_assessment.php?%s">assessment editor'),$assessment_qs);?></a>.</p>
+        <p style="margin-top: 20px;"><?php echo sprintf(gettext('To send an email alert to the students due to take this new assessment, use the <a href="../email/index.php?%s">email wizard'), $assessment_qs);?></a>.</p>
+        <p style="margin-top: 20px;"><?php echo gettext('Alternatively, you can return to <a href="../index.php">my assessments</a>, or to the <a href="../../../">WebPA home page');?></a>.</p>
 <?php
       } else {
 ?>
-        <p><strong>An error occurred while trying to create your new assessment form.</strong></p>
-        <p>You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.</p>
+        <p><strong><?php echo gettext('An error occurred while trying to create your new assessment form.');?></strong></p>
+        <p><?php echo gettext('You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again');?></p>
 <?php
       }
     }

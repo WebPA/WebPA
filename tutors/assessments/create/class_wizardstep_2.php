@@ -24,9 +24,9 @@ class WizardStep2 {
   function WizardStep2(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep2()
 
   function head() {
@@ -77,16 +77,16 @@ class WizardStep2 {
     if (!$forms) {
       $this->button_next = '';
 ?>
-      <p>You haven't yet created any assessment forms.</p>
-      <p>You need to <a href="../../forms/create/">create a new form</a> before you will be able to run any peer assessments.</p>
+      <p><?php echo gettext('You haven\'t yet created any assessment forms.');?></p>
+      <p><?php echo gettext('You need to <a href="../../forms/create/">create a new form</a> before you will be able to run any peer assessments.');?></p>
 <?php
     } else {
 ?>
-      <p>Now you have named and scheduled your new assessment, you need to select which form you will use when assessing your students.</p>
-      <p>Please select a form from the list below. You can see how a form will look to students by clicking <em>preview</em>.</p>
-      <p>The form you select will be copied into your new assessment.  Subsequent changes to the form '''will not''' affect your assessment.</p>
+      <p><?php echo gettext('Now you have named and scheduled your new assessment, you need to select which form you will use when assessing your students.');?></p>
+      <p><?php echo gettext('Please select a form from the list below. You can see how a form will look to students by clicking <em>preview</em>');?>.</p>
+      <p><?php echo gettext('The form you select will be copied into your new assessment.  Subsequent changes to the form \'\'\'will not\'\'\' affect your assessment.');?></p>
 
-      <h2>Your assessment forms</h2>
+      <h2><?php echo gettext('Your assessment forms');?></h2>
       <div class="form_section">
         <table cellpadding="0" cellspacing="0">
 <?php
@@ -114,39 +114,39 @@ class WizardStep2 {
       if (APP__ALLOW_TEXT_INPUT){
         //provide the academic the option
 ?>
-      <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
+      <div style="float:right"><b><?php echo gettext('Advanced Options');?></b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="<?php echo gettext('view / hide advanced options');?>"></a>
       <br/><br/></div>
       <div id="advanced" style="display:none;" class="advanced_options">
-      <h2>Feedback / justification</h2>
-      <p><label>Do you want students to be able to view feedback for this assesment?</label></p>
-      <p>Once an assessment is completed, students can login and view feedback related to their performance within the group for this assessment. The feedback simply shows whether they were rated as performing below, at, or above average for each criterion within the group for this assessment.</p>
+      <h2><?php echo gettext('Feedback / justification');?></h2>
+      <p><label><?php echo gettext('Do you want students to be able to view feedback for this assesment?');?></label></p>
+      <p><?php echo gettext('Once an assessment is completed, students can login and view feedback related to their performance within the group for this assessment. The feedback simply shows whether they were rated as performing below, at, or above average for each criterion within the group for this assessment.');?></p>
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
           <td><input type="radio" name="allow_feedback" id="allow_feedback_yes" value="1" <?php echo( ($allow_feedback) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="allow_feedback_yes">Yes, allow students to view feedback.</label></td>
+          <td valign="top"><label class="small" for="allow_feedback_yes"><?php echo gettext('Yes, allow students to view feedback.');?></label></td>
         </tr>
         <tr>
           <td><input type="radio" name="allow_feedback" id="allow_feedback_no" value="0" <?php echo( (!$allow_feedback) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="allow_feedback_no">No, there is no feedback for this assessment.</label></td>
+          <td valign="top"><label class="small" for="allow_feedback_no"><?php echo gettext('No, there is no feedback for this assessment.');?></label></td>
         </tr>
         </table>
       </div>
-        <p><label>Would you like students to enter feedback textually?</label></p>
-        <p>If you would like students to provide textual information as either feedback or justification on the scores that they have assigned in the assessment, then you will need to select the option from below. The default option is to provide <b>no</b> mechanism for students to comment.</p>
+        <p><label><?php echo gettext('Would you like students to enter feedback textually?');?></label></p>
+        <p><?php echo gettext('If you would like students to provide textual information as either feedback or justification on the scores that they have assigned in the assessment, then you will need to select the option from below. The default option is to provide <b>no</b> mechanism for students to comment.');?></p>
         <div class="form_section">
           <table cellpadding="0" cellspacing="0">
             <tr>
-              <td><label class="small" for="feedback_name">Title  </label></td>
+              <td><label class="small" for="feedback_name"><?php echo gettext('Title');?>  </label></td>
               <td><input type="text" name="feedback_name" id="feedback_name"  maxlength="100" size="40"  value="<?php echo( $this->wizard->get_field('feedback_name') ); ?>" ></td>
             </tr>
             <tr>
               <td><input type="radio" name="allow_text_input" id="allow_text_input_yes" value="1" <?php echo (($this->wizard->get_field('allow_student_input'))? 'checked="checked"' : '' );?>></td>
-              <td><label class="small" for="allow_text_input_yes"><b>Yes</b>, allow students to comment.</label></td>
+              <td><label class="small" for="allow_text_input_yes"><b><?php echo gettext('Yes</b>, allow students to comment.');?></label></td>
             </tr>
             <tr>
               <td><input type="radio" name="allow_text_input" id="allow_text_input_no" value="0" <?php echo((!$this->wizard->get_field('allow_student_input'))? 'checked="checked"' : ''); ?>></td>
-              <td><label class="small" for="allow_text_input_no"><b>No</b>, don't allow students to comment.</label></td>
+              <td><label class="small" for="allow_text_input_no"><b><?php echo gettext('No</b>, don\'t allow students to comment.');?>'</label></td>
             </tr>
           </table>
         </div>
@@ -161,7 +161,7 @@ class WizardStep2 {
     $errors = null;
 
     $this->wizard->set_field('form_id',fetch_POST('form_id'));
-    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select a form to use with your new assessment'; }
+    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = gettext('You must select a form to use with your new assessment'); }
 
     $this->wizard->set_field('allow_feedback', fetch_POST('allow_feedback'));
     $this->wizard->set_field('feedback_name', fetch_POST('feedback_name'));

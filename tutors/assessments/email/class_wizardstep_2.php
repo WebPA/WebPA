@@ -23,9 +23,9 @@ class WizardStep2 {
   function WizardStep2(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep2()
 
   function head() {
@@ -43,10 +43,10 @@ class WizardStep2 {
   }// /->head()
 
   function form() {
-    $send_to_desc = array ('all'    => 'everyone taking this assessment' ,
-                 'groups' => 'selected groups taking this assessment' ,
-                 'have'   => 'all the students who HAVE responded' ,
-                 'havenot'  => 'any students who HAVE NOT responded' ,
+    $send_to_desc = array ('all'    => gettext('everyone taking this assessment') ,
+                 'groups' => gettext('selected groups taking this assessment') ,
+                 'have'   => gettext('all the students who HAVE responded') ,
+                 'havenot'  => gettext('any students who HAVE NOT responded') ,
                 );
 
     $send_email_to = $this->wizard->get_field('send_to');
@@ -61,15 +61,15 @@ class WizardStep2 {
 
     if (array_key_exists($send_email_to, $send_to_desc)) {
 ?>
-      <p>You have opted to send this email to <em><?php echo($send_to_desc["$send_email_to"]); ?></em>.</p>
+      <p><?php echo gettext('You have opted to send this email to');?> <em><?php echo($send_to_desc["$send_email_to"]); ?></em>.</p>
 <?php
       if ($send_email_to=='groups') {
         $email_groups = explode('|',$this->wizard->get_field('email_groups'));
         $num_targets = $collection_member_count;
 ?>
-        <h2>Select Groups To Email</h2>
+        <h2><?php echo gettext('Select Groups To Email');?></h2>
         <div class="form_section">
-          <p>Tick all the groups you wish to include in this email. The number of students in each group is shown in brackets after the group name.</p>
+          <p><?php echo gettext('Tick all the groups you wish to include in this email. The number of students in each group is shown in brackets after the group name.');?></p>
 <?php
         $groups_cbox_array = null;
 
@@ -96,7 +96,7 @@ class WizardStep2 {
         switch ($send_email_to) {
           case 'all':
             $num_targets = $collection_member_count;
-            echo("<p>This email will be sent to all $collection_member_count students.</p>");
+            echo("<p>".sprintf(gettext('This email will be sent to all %d students'), $collection_member_count)."</p>");
             break;
 
           // --------------------
@@ -105,7 +105,7 @@ class WizardStep2 {
             $result_handler->set_assessment($assessment);
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_targets = $num_responses;
-            echo("<p>This email will be sent to the $num_responses students who have taken this assessment.</p>");
+            echo("<p>".sprintft(gettext('This email will be sent to the %d students who have taken this assessment'), $num_responses)."</p>");
             break;
 
           // --------------------
@@ -115,7 +115,7 @@ class WizardStep2 {
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_no_responses = $collection_member_count - $num_responses;
             $num_targets = $num_no_responses;
-            echo("<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>");
+            echo("<p>".sprintf(gettext('This email will be sent to the %d students who have not yet taken this assessment'), $num_no_responses)."</p>");
             break;
         }
       }
@@ -124,22 +124,22 @@ class WizardStep2 {
         $this->wizard->next_button = null;  // default NEXT to off
 ?>
         <div class="error_box">
-          <p><strong>There are no students matching your criteria.</strong></p>
-          <p>You may have groups with no students in them.</p>
-          <p>Please go back and choose a different set of students to contact.</p>
+          <p><strong><?php echo gettext('There are no students matching your criteria.');?></strong></p>
+          <p><?php echo gettext('You may have groups with no students in them.');?></p>
+          <p><?php echo gettext('Please go back and choose a different set of students to contact.');?></p>
         </div>
 <?php
       } else {
 ?>
-        <h2>Email Details</h2>
+        <h2><?php echo gettext('Email Details');?></h2>
         <div class="form_section">
           <table class="form" cellpadding="2" cellspacing="2">
           <tr>
-            <th><label for="email_subject">Subject</label></th>
+            <th><label for="email_subject"><?php echo gettext('Subject');?></label></th>
             <td><input name="email_subject" id="email_subject" maxlength="100" size="64" value="<?php echo($this->wizard->get_field('email_subject')); ?>" /></td>
           </tr>
           <tr>
-            <th style="vertical-align: top"><label for="email_text">Text</label></th>
+            <th style="vertical-align: top"><label for="email_text"><?php echo gettext('Text');?></label></th>
             <td><textarea name="email_text" id="email_text" cols="60" rows="8"><?php echo($this->wizard->get_field('email_text')); ?></textarea></td>
           </tr>
           </table>
@@ -180,18 +180,18 @@ class WizardStep2 {
       }
       $this->wizard->set_field('email_groups', $email_groups);
       if ( ($num_students===0) ) {
-        $errors[] = 'The group(s) you have selected contain no students. There must be at least one recepient for this email.';
+        $errors[] = gettext('The group(s) you have selected contain no students. There must be at least one recepient for this email.');
       }
     }
 
     $this->wizard->set_field('email_subject', fetch_POST('email_subject'));
     if (is_empty($this->wizard->get_field('email_subject'))) {
-      $errors[] = 'You must enter a subject for this email.';
+      $errors[] = gettext('You must enter a subject for this email.');
     }
 
     $this->wizard->set_field('email_text', fetch_POST('email_text'));
     if (is_empty($this->wizard->get_field('email_text'))) {
-      $errors[] = 'You must enter the text of this email.';
+      $errors[] = gettext('You must enter the text of this email.');
     }
 
     return $errors;

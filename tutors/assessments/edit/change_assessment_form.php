@@ -55,10 +55,10 @@ if (($command) && ($assessment)) {
   switch ($command) {
     case 'save':
       if ($assessment->is_locked()) {
-        $errors[] = 'This assessment has been marked, and therefore the assessment form being used cannot be changed.';
+        $errors[] = gettext('This assessment has been marked, and therefore the assessment form being used cannot be changed.');
       } else {
         if (!$form_id) {
-          $errors[] = 'You must select an assessment form to use.';
+          $errors[] = gettext('You must select an assessment form to use.');
         } else {
           // Change of name
           $new_form = new Form($DB);
@@ -78,19 +78,19 @@ if (($command) && ($assessment)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = 'change form';
-$manage_text = ($assessment) ? "manage: {$assessment->name}" : 'manage assessment';
+$page_title = gettext('change form');
+$manage_text = ($assessment) ? gettext("manage:")."{$assessment->name}" : gettext('manage assessment');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  ('home'       => '../../' ,
-               'my assessments' => '../' ,
+    gettext('my assessments') => '../' ,
                $manage_text   => $assessment_url ,
-               "change form"    => null ,);
+    gettext("change form")    => null ,);
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 ?>
@@ -121,11 +121,11 @@ span.question_range { font-size: 0.8em; }
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('No changes have been saved. Please check the details in the form and try again.'));
 
 ?>
 
-<p>On this page you can change the assessment form being used.</p>
+<p><?php echo gettext('On this page you can change the assessment form being used.');?></p>
 
 <div class="content_box">
 
@@ -133,17 +133,17 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
   ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
+    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to the assessment');?></a>
   </div>
 
-  <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
+  <p><?php echo gettext('The assessment you selected could not be loaded for some reason - please go back and try again.');?></p>
 <?php
 } else {
 ?>
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
+      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to the assessment');?></a></td>
     </tr>
     </table>
   </div>
@@ -152,8 +152,8 @@ if (!$assessment) {
   if ($assessment->is_locked()) {
 ?>
     <div class="warning_box">
-      <p><strong>Marks have been recorded for this assessment.</strong></p>
-      <p>You can still edit the assessment's name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.</p>
+      <p><strong><?php echo gettext('Marks have been recorded for this assessment.');?></strong></p>
+      <p><?php echo gettext('You can still edit the assessment\'s name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.');?>'</p>
     </div>
     <?php
   } else {
@@ -162,26 +162,26 @@ if (!$assessment) {
     <form action="change_assessment_form.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
     <input type="hidden" name="command" value="none" />
 
-    <h2>Current Form</h2>
+    <h2><?php echo gettext('Current Form');?></h2>
     <div class="form_section form_line">
 <?php
-    echo("<p><label>You are currently using form: </label><em>{$form->name}</em></p>");
+    echo("<p><label>".gettext('You are currently using form:')." </label><em>{$form->name}</em></p>");
 
     $question_count = (int) $form->get_question_count();
     if ($question_count==0) {
 ?>
-        <p>This form has no questions.</p>
+        <p><?php echo gettext('This form has no questions.');?></p>
 <?php
       } else {
 ?>
-        <p>Below are the questions that your students will use to mark each other.</p>
+        <p><?php echo gettext('Below are the questions that your students will use to mark each other.');?></p>
 
         <ul class="compact">
 <?php
         for($i=0; $i<$question_count; $i++) {
           $question = $form->get_question($i);
 ?>
-          <li><div class="question"><?php echo( $question['text']['_data']); ?> <span class="question_range">(scoring range: <?php echo($question['range']['_data']); ?>)</span></div></li>
+          <li><div class="question"><?php echo( $question['text']['_data']); ?> <span class="question_range">(<?php echo gettext('scoring range:');?> <?php echo($question['range']['_data']); ?>)</span></div></li>
 <?php
         }
         echo('</ul>');
@@ -189,7 +189,7 @@ if (!$assessment) {
 ?>
     </div>
 
-    <h2>Available Forms</h2>
+    <h2><?php echo gettext('Available Forms');?></h2>
     <div class="form_section">
 <?php
       $sql = 'SELECT f.* FROM ' . APP__DB_TABLE_PREFIX .
@@ -201,11 +201,11 @@ if (!$assessment) {
       if (!$forms) {
         $this->button_next = '';
 ?>
-        <p>You haven't yet created any assessment forms.</p>
+        <p><?php echo gettext('You haven\'t yet created any assessment forms.');?>'</p>
 <?php
       } else {
 ?>
-        <p>Please select a form from the list below. You can see how the form appears to students by clicking <em>preview</em>.</p>
+        <p><?php echo gettext('Please select a form from the list below. You can see how the form appears to students by clicking <em>preview</em>');?>.</p>
 
         <div class="form_section">
           <table cellpadding="2" cellspacing="2">
@@ -227,7 +227,7 @@ if (!$assessment) {
 ?>
 
       <div style="text-align: right">
-        <input type="button" name="savebutton1" id="savebutton1" value="save changes" onclick="do_command('save');" />
+        <input type="button" name="savebutton1" id="savebutton1" value="<?php echo gettext('save changes');?>" onclick="do_command('save');" />
       </div>
     </div>
 
