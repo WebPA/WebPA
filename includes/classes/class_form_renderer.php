@@ -200,21 +200,21 @@ class FormRenderer {
 <?php
         if ($remainder==0) {
 ?>
-              <p>You have <span style="font-weight: bold;"><?php echo($group_total); ?> marks</span> to divide between your teammates.</p>
+              <p><?php echo sprintf(gettext('You have %s %d marks</span> to divide between your teammates.'), '<span style="font-weight: bold;">', $group_total);?></p>
 <?php
         } else {
 ?>
-              <p>For a group of <?php echo($participant_count); ?>, you have <span style="font-weight: bold;"><?php echo($group_total); ?> marks</span> to divide between your teammates.</p>
+              <p><?php echo sprintf(gettext('For a group of %d, you have %d marks</span> to divide between your teammates.'), $participant_count, '<span style="font-weight: bold;">', $group_total);?></p>
 <?php
         }
 ?>
-            <p style="font-weight: bold;">For equal performance, every student should receive <?php echo($default_score); ?> marks.</p>
+            <p style="font-weight: bold;"><?php echo sprintf(gettext('For equal performance, every student should receive %d.'), $default_score);?></p>
           </div>
 
           <table class="question_grid" cellpadding="3" cellspacing="1">
 <?php
         // header row
-        echo('<tr><td style="background-color: transparent">&nbsp;</td><th align="center">score</th></tr>');
+        echo('<tr><td style="background-color: transparent">&nbsp;</td><th align="center">'.gettext('score').'</th></tr>');
 
         // show participant rows
         $initial_total = 0;
@@ -245,7 +245,7 @@ class FormRenderer {
           }
         }
 
-        echo("<tr><th style=\"text-align: right;\">Total&nbsp;</th><th><div style=\"background-color: $bgcolor;\" id=\"total_{$q}\">$initial_total</div></th></tr>");
+        echo("<tr><th style=\"text-align: right;\">".gettext('Total')."&nbsp;</th><th><div style=\"background-color: $bgcolor;\" id=\"total_{$q}\">$initial_total</div></th></tr>");
 ?>
           </table>
         </div>
@@ -273,7 +273,7 @@ class FormRenderer {
         foreach ($question as $k => $v) {
           if (strpos($k,'scorelabel')===0) {
             $num = str_replace('scorelabel','',$k);
-            echo("<div class=\"question_score_label\">Score $num : {$v['_data']}</div>");
+            echo("<div class=\"question_score_label\">".gettext('Score')." $num : {$v['_data']}</div>");
           }
         }
 ?>
@@ -317,7 +317,7 @@ class FormRenderer {
 ?>
         <div class="question">
         <p><b><?php echo $this->assessment_feedback_title; ?></b></p>
-          <p>This section of the assessment is for you to provide general feedback and/or justification of the <?php echo APP__MARK_TEXT; ?> you have awarded in the section above.</p>
+          <p><?php echo sprintf(gettext('This section of the assessment is for you to provide general feedback and/or justification of the %s you have awarded in the section above.'), APP__MARK_TEXT);?></p>
           <table class="question_grid" >
 <?php
           //now we know that the assessment feedback is allowed by the system we need to find out if the tutor has set feedback

@@ -100,7 +100,7 @@ class DAO {
         $db_selected = mysql_select_db($this->_database, $this->_conn);
         //$db_selected = mysql_select_db($this->_database);
         if (!$db_selected) {
-          die ('Can\'t use database due to  : ' .mysql_errno(). " -  " . mysql_error());
+          die (gettext('Can\'t use database due to').'  : ' .mysql_errno(). " -  " . mysql_error());
           return false;
         }else{
           return true;
@@ -111,7 +111,7 @@ class DAO {
         $db_selected = mysql_select_db($this->_database, $this->_conn);
 
         if (!$db_selected) {
-          die ('Can\'t use database due to  : ' .mysql_errno(). " -  " . mysql_error());
+          die (gettext('Can\'t use database due to').'  : ' .mysql_errno(). " -  " . mysql_error());
           return false;
         }else{
           return true;
@@ -157,7 +157,7 @@ class DAO {
     $this->_last_sql = trim( $sql );  // Save query
 
     if ($this->_debug) {
-      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error('Executing SQL');
+      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error(gettext('Executing SQL'));
     } else {
       $this->_result_set = @mysql_query($sql, $this->_conn);
     }
@@ -538,7 +538,7 @@ class DAO {
     $this->_last_sql = trim( $sql );  // Save query
 
     if ($this->_debug) {
-      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error('Querying database');
+      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error(gettext('Querying database'));
     } else {
       $this->_result_set = @mysql_query($sql, $this->_conn);
     }
@@ -586,9 +586,9 @@ class DAO {
    */
   function _throw_error($err_msg) {
     if ($this->_conn) {
-      die("<hr />DATABASE ERROR<hr />$err_msg :: ". mysql_error($this->_conn) .'<hr />'. $this->get_last_sql().'<hr />');
+      die("<hr />".gettext('DATABASE ERROR')."<hr />$err_msg :: ". mysql_error($this->_conn) .'<hr />'. $this->get_last_sql().'<hr />');
     } else {
-      die("<hr />DATABASE ERROR<hr />$err_msg :: &lt;NO SERVER&gt;<hr />". $this->get_last_sql().'<hr />');
+      die("<hr />".gettext('DATABASE ERROR')."<hr />$err_msg :: &lt;NO SERVER&gt;<hr />". $this->get_last_sql().'<hr />');
     }
     return false;
   }// /->_throw_error()

@@ -203,10 +203,10 @@ HTMLEnd;
   function title() {
     if (!is_null($this->_override_num_steps)) {
       if ($this->_current_step<=$this->_override_num_steps) {
-        echo("<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_override_num_steps}</strong> in the {$this->name}.</p>");
+        echo("<p>".sprintf(gettext('You are on <strong>step %d</strong> of <strong>%d</strong> in the %s'), $this->_current_step, $this->_override_num_steps, $this->name).".</p>");
       }
     } else {
-      echo("<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_total_steps}</strong> in the {$this->name}.</p>");
+      echo("<p>".sprintf(gettext('You are on <strong>step %d</strong> of <strong>%d</strong> in the %s'), $this->_current_step, $this->_total_steps, $this->name).".</p>");
     }
   }// /->title()
 

@@ -30,30 +30,25 @@ switch($action) {
   case "init":
     //phase 2
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
-    isset($_POST['username']) or die("Username not set.");
+    isset($_POST['username']) or die(gettext("Username not set."));
     $hash = md5(rand());
     $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$_POST['username']}' AND source_id = '' AND " .
            '(email IS NOT NULL) AND (email != \'\')';
     $uid = $DB->fetch_value($sql);
     if (!$uid) {
-      $content = "Unable to reset the password for this account.";
+      $content = gettext("Unable to reset the password for this account.");
       break;
     }
     //inserts the user/hash pair into the database
     $sql = "INSERT INTO " . APP__DB_TABLE_PREFIX . "user_reset_request SET hash = '$hash', user_id = $uid";
     $appname = APP__NAME; $appwww = APP__WWW;
     $DB->execute($sql);
-    $email = <<<TXT
-You have requested for your password to be reset on {$appname}. Please click or copy and paste the following link into your browser to continue the password reset process.
+    $email = sprintf(gettext('You have requested for your password to be reset on %s. Please click or copy and paste the following link into your browser to continue the password reset process.\n\n%s/accounts/reset.php?u=%d&hash=%s\n\n If you have not requested a password reset, please ignore this email - your password will not be reset without further action.'), $appname, $appwww, $uid, $hash);
 
-{$appwww}/accounts/reset.php?u=$uid&hash=$hash
-
-If you have not requested a password reset, please ignore this email - your password will not be reset without further action.
-TXT;
     //echo $email;
     $uemail = $DB->fetch_value("SELECT email FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = $uid");
-    mail($uemail,APP__NAME. " Password Reset",$email,"From: " . $BRANDING['email.noreply']);
-    $content = "An email has been sent to $uemail.";
+    mail($uemail,APP__NAME.' '.gettext("Password Reset"),$email,"From: " . $BRANDING['email.noreply']);
+    $content = sprintf(gettext("An email has been sent to %s."), $uemail);
     break;
   case "reset":
     //phase 4
@@ -69,12 +64,12 @@ TXT;
         $user->update_password(md5($_POST['newpass']));
         $user->save_user();
         $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE user_id = $uid");
-        $content = 'Your password has been reset. <a href="'.APP__WWW.'/login.php">Click here</a> to log in again.';
+        $content = gettext('Your password has been reset.').'<a href="'.APP__WWW.'/login.php">'.gettext('Click here</a> to log in again.');
       } else {
-        $content = "The two passwords did not match.";
+        $content = gettext("The two passwords did not match.");
       }
     } else {
-      $content = "There was an error resetting this password.";
+      $content = gettext("There was an error resetting this password.");
     }
     break;
   default:
@@ -83,58 +78,54 @@ TXT;
       $hash = $_GET['hash'];
       $uid = $_GET['u'];
       if ((!isset($_GET['hash'])) || (!isset($_GET['u']))) {
-        $content = "Error: reset link incorrect. If you copied and pasted the link from your mail client, be sure you did so correctly.";
+        $content = gettext("Error: reset link incorrect. If you copied and pasted the link from your mail client, be sure you did so correctly.");
         break;
       }
       $rslt = $DB->fetch_value("SELECT COUNT(*) FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE hash = '$hash' AND user_id = $uid");
       if ($rslt) {
-      $content = <<<HTML
-      <form action="reset.php" method="post">
+      $content = '<form action="reset.php" method="post">
         <table>
           <tr>
-            <th scope="row">New Password</th>
+            <th scope="row">'.gettext('New Password').'</th>
             <td><input type="password" name="newpass" value="" id="newpass"/></td>
           </tr>
           <tr>
-            <th scope="row">New Password (again)</th>
+            <th scope="row">'.gettext('New Password (again)').'</th>
             <td><input type="password" name="confirmpass" value="" id="confirmpass"/></td>
           </tr>
           <tr>
             <td></td>
-            <td><input type="submit" value="Reset Password" /></td>
+            <td><input type="submit" value="'.gettext('Reset Password').'" /></td>
           </tr>
         </table>
-        <input type="hidden" name="hash" value="$hash"/>
-        <input type="hidden" name="uid" value="$uid"/>
+        <input type="hidden" name="hash" value="'.$hash.'"/>
+        <input type="hidden" name="uid" value="'.$uid.'"/>
         <input type="hidden" name="action" value="reset" />
-      </form>
-HTML;
+      </form>';
       } else {
-        $content = "There was an error resetting this password. Please contact the site administrator.";
+        $content = gettext("There was an error resetting this password.<br/>Please contact the site administrator.");
       }
       break;
     }
     //phase 1
     //just display the form confirming the password reset.
-    $content = <<<HTML
-<strong>You are about to reset your password.</strong> In order to do so, a link will be sent to your student email account. This link will take you to a page that will enable you to reset your password.<br/>
+    $content = '<strong>'.gettext('You are about to reset your password.<br/>').'</strong>'.gettext('In order to do so, a link will be sent to your student email account. This link will take you to a page that will enable you to reset your password.').'<br/>
 <br/>
 <form action="reset.php" method="post">
   <table>
     <tr>
-      <th scope="row">Username</th>
+      <th scope="row">'.gettext('Username').'</th>
       <td><input type="text" name="username" /></td>
     </tr>
     <tr>
       <td></td>
       <td>
-        <input type="submit" value="Reset My Password"/>
+        <input type="submit" value="'.gettext('Reset My Password').'"/>
       </td>
     </tr>
   </table>
   <input type="hidden" name="action" value="init"/>
-</form>
-HTML;
+</form>';
     break;
 }
 

@@ -14,32 +14,32 @@
  *
  */
 
-define ('MY__FORMS', 'my forms');
-define ('MY__GROUPS', 'my groups');
-define ('MY__ASSESSMENTS', 'my assessments');
+define ('MY__FORMS', gettext('my forms'));
+define ('MY__GROUPS', gettext('my groups'));
+define ('MY__ASSESSMENTS', gettext('my assessments'));
 
-define ('GROUPS', 'Groups');
-define ('NO__GROUPS','Number of Groups');
-define ('EDIT__GROUP', 'edit group');
-define ('DELETE__GROUP', 'delete group');
+define ('GROUPS', gettext('Groups'));
+define ('NO__GROUPS',gettext('Number of Groups'));
+define ('EDIT__GROUP', gettext('edit group'));
+define ('DELETE__GROUP', gettext('delete group'));
 
-define ('EDIT_QUESTION','edit question');
+define ('EDIT_QUESTION',gettext('edit question'));
 
-define('PLEASE__NOTE','<strong>Please Note:</strong>');
+define('PLEASE__NOTE','<strong>'.gettext('Please Note').':</strong>');
 
-define('UNKNOWN__COLLECTION', 'Unknown Collection');
-define('EDDITING__UNKNOWN_GROUP','Editing: Unknown Group');
-define('EDDITING__GROUP','Editing group');
+define('UNKNOWN__COLLECTION', gettext('Unknown Collection'));
+define('EDDITING__UNKNOWN_GROUP',gettext('Editing: Unknown Group'));
+define('EDDITING__GROUP',gettext('Editing group'));
 
 //buttons
-define('BTN__LIST_GROUPS', 'List Groups');
-define('BTN__CREATE_GROUPS', 'Create Groups');
-define('BTN__CLONE_GROUPS', 'Clone Groups');
+define('BTN__LIST_GROUPS', gettext('List Groups'));
+define('BTN__CREATE_GROUPS', gettext('Create Groups'));
+define('BTN__CLONE_GROUPS', gettext('Clone Groups'));
 
-define('BTN__SAVE_CHANGES', 'save changes');
+define('BTN__SAVE_CHANGES', gettext('save changes'));
 
 //errors
-define('FOLLOWING__FOUND', 'The following errors were found:');
-define('NO_CHANGES', 'No changes have been saved. Please check the details in the form, and try again.');
+define('FOLLOWING__FOUND', gettext('The following errors were found:'));
+define('NO_CHANGES', gettext('No changes have been saved. Please check the details in the form, and try again.'));
 
 ?>
