@@ -129,7 +129,7 @@ if ($assessment->load($assessment_id)) {
 } else {
   $assessment = null;
 
-  echo('Error: The assessment could not be loaded.');
+  echo(gettext('Error: The assessment could not be loaded.'));
   exit;
 }
 
@@ -141,7 +141,7 @@ if ($assessment->load($assessment_id)) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -164,7 +164,7 @@ if ($type == 'view') {
 
   <div class="content_box">
 
-  <h2 style="font-size: 150%;">Student Response Information</h2>
+  <h2 style="font-size: 150%;"><?php echo gettext('Student Response Information');?></h2>
 
 <?php
   if (($assessment) && ($groups_iterator->size()>0)) {
@@ -245,15 +245,15 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_student_response_info.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Student Response Information"'."\n\n");
+  echo(gettext('"Student Response Information"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
   if (($assessment) && ($groups_iterator->size()>0)) {
     foreach ($group_members as $group_id => $g_members) {
-      echo("\"Group\",\"{$group_names[$group_id]}\"\n");
-      echo("\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n");
+      echo("\"".gettext("Group")."\",\"{$group_names[$group_id]}\"\n");
+      echo("\"".gettext("Overall group mark")."\",\"{$groups_and_marks[$group_id]}\"\n");
 
-      echo('"Name","Started","Finished","Time Taken","IP Address","Computer Name"'."\n");
+      echo(gettext('"Name","Started","Finished","Time Taken","IP Address","Computer Name"')."\n");
 
       foreach ($g_members as $i => $member_id) {
 

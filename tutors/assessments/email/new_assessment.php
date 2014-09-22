@@ -56,7 +56,7 @@ function mail_assessment_notification ($collectionId, $subjectLn,$body_content, 
     $bcc_list[] = $this_user['email'];
 
   } else {
-    $errors[] = 'Unable to build email list - no students to email.';
+    $errors[] = gettext('Unable to build email list - no students to email.');
     return $errors;
   }
 
@@ -69,7 +69,7 @@ function mail_assessment_notification ($collectionId, $subjectLn,$body_content, 
     $email->set_body($body_content);
     $email->send();
   } else {
-    $errors[] = 'No list of students to email.';
+    $errors[] = gettext('No list of students to email.');
     return $errors;
   }
 

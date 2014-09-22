@@ -41,7 +41,7 @@ $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
 
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -49,7 +49,7 @@ if (!$assessment->load($assessment_id)) {
   // Get the marking parameters used for the marksheet this report will display
   $marking_params = $assessment->get_marking_params($marking_date);
   if (!$marking_params) {
-    echo('Error: The requested marksheet could not be loaded.');
+    echo(gettext('Error: The requested marksheet could not be loaded.'));
     exit;
   }
 
@@ -58,7 +58,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_assessment($assessment);
@@ -149,7 +149,7 @@ if ($assessment) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -174,7 +174,7 @@ if ($type == 'view') {
 
   <div class="content_box">
 
-  <h1 style="font-size: 150%;">Student Responses</h1>
+  <h1 style="font-size: 150%;"><?php echo gettext('Student Responses');?></h1>
 
   <table class="grid" cellpadding="2" cellspacing="1">
   <tr>
@@ -190,7 +190,7 @@ if ($type == 'view') {
     echo "<h2>{$team}</h2>";
     $team_members = array_keys($score_array[$team]);
     foreach ($team_members as $team_member) {
-      echo "<h3>Results for: {$team_member}</h3>";
+      echo "<h3>".gettext("Results for:")." {$team_member}</h3>";
       $questions = array_keys($score_array[$team][$team_member]);
       //print_r($questions);
       echo "<table class='grid' cellpadding='2' cellspacing='1' style='font-size: 0.8em'>";
@@ -247,7 +247,7 @@ if ($type == 'download-rtf') {
     echo "\n{$team}\n";
     $team_members = array_keys($score_array[$team]);
     foreach ($team_members as $team_member) {
-      echo "\nResults for: {$team_member}\n";
+      echo "\n".gettext("Results for:")." {$team_member}\n";
       $questions = array_keys($score_array[$team][$team_member]);
 
       $q_count = 0;
@@ -289,7 +289,7 @@ if ($type == 'download-csv') {
     echo "\n{$team}\n";
     $team_members = array_keys($score_array[$team]);
     foreach ($team_members as $team_member) {
-      echo "\n\"Results for: {$team_member}\"";
+      echo "\n\"".gettext("Results for:")." {$team_member}\"";
       $questions = array_keys($score_array[$team][$team_member]);
 
       $q_count = 0;

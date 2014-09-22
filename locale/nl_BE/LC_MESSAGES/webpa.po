@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-22 13:56+0100\n"
-"PO-Revision-Date: 2014-09-22 13:56+0100\n"
+"POT-Creation-Date: 2014-09-22 17:00+0100\n"
+"PO-Revision-Date: 2014-09-22 17:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -125,6 +125,8 @@ msgid "Fullname"
 msgstr ""
 
 #: contact/contact_send.php:72 contact/contact_send.php:81
+#: tutors/assessments/inc_list_closed.php:86
+#: tutors/assessments/inc_list_marked.php:93
 msgid "Email"
 msgstr ""
 
@@ -325,6 +327,7 @@ msgid "For equal performance, every student should receive %d."
 msgstr ""
 
 #: includes/classes/class_form_renderer.php:217
+#: tutors/assessments/reports/report_student_grades.php:334
 msgid "score"
 msgstr ""
 
@@ -364,6 +367,28 @@ msgstr ""
 #: students/assessments/take/finished.php:42
 #: students/assessments/take/index.php:296
 #: students/assessments/take/not_open.php:42
+#: tutors/assessments/clone/index.php:24 tutors/assessments/clone/index.php:27
+#: tutors/assessments/create/index.php:50
+#: tutors/assessments/create/index.php:53
+#: tutors/assessments/delete_marks.php:74
+#: tutors/assessments/delete_marks.php:77
+#: tutors/assessments/edit/change_assessment_collection.php:106
+#: tutors/assessments/edit/change_assessment_collection.php:109
+#: tutors/assessments/edit/change_assessment_form.php:85
+#: tutors/assessments/edit/change_assessment_form.php:88
+#: tutors/assessments/edit/edit_assessment.php:199
+#: tutors/assessments/edit/edit_assessment.php:201
+#: tutors/assessments/email/index.php:79 tutors/assessments/email/index.php:83
+#: tutors/assessments/marks/mark_assessment.php:140
+#: tutors/assessments/marks/mark_assessment.php:144
+#: tutors/assessments/marks/set_group_marks.php:134
+#: tutors/assessments/marks/set_group_marks.php:137
+#: tutors/assessments/reports/index.php:115
+#: tutors/assessments/reports/index.php:118
+#: tutors/assessments/reports/report_demo.php:181
+#: tutors/assessments/reports/report_demo.php:183
+#: tutors/assessments/reports/students_who_responded.php:58
+#: tutors/assessments/reports/students_who_responded.php:60
 msgid "my assessments"
 msgstr "Mijn assessments"
 
@@ -429,58 +454,82 @@ msgid "You are on <strong>step %d</strong> of <strong>%d</strong> in the %s"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "January"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "February"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "March"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "April"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "May"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "June"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "July"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "August"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "September"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "October"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "November"
 msgstr ""
 
 #: includes/functions/lib_form_functions.php:14
+#: tutors/assessments/create/class_wizardstep_1.php:82
+#: tutors/assessments/edit/edit_assessment.php:160
 msgid "December"
 msgstr ""
 
-#: lang/en/generic.php:21
+#: lang/en/generic.php:21 tutors/assessments/create/class_wizardstep_5.php:140
 msgid "Groups"
 msgstr ""
 
-#: lang/en/generic.php:22
+#: lang/en/generic.php:22 tutors/assessments/create/class_wizardstep_3.php:92
 msgid "Number of Groups"
 msgstr ""
 
@@ -525,14 +574,26 @@ msgid "Clone Groups"
 msgstr ""
 
 #: lang/en/generic.php:39
+#: tutors/assessments/edit/change_assessment_collection.php:241
+#: tutors/assessments/edit/change_assessment_form.php:230
+#: tutors/assessments/edit/edit_assessment.php:336
+#: tutors/assessments/edit/edit_assessment.php:557
+#: tutors/assessments/marks/set_group_marks.php:261
 msgid "save changes"
 msgstr ""
 
 #: lang/en/generic.php:42 students/assessments/take/index.php:340
+#: tutors/assessments/edit/change_assessment_collection.php:145
+#: tutors/assessments/edit/change_assessment_form.php:124
+#: tutors/assessments/edit/edit_assessment.php:247
+#: tutors/assessments/marks/mark_assessment.php:186
+#: tutors/assessments/marks/set_group_marks.php:179
 msgid "The following errors were found:"
 msgstr "Volgende fouten werden gevonden:"
 
-#: lang/en/generic.php:43
+#: lang/en/generic.php:43 tutors/assessments/edit/edit_assessment.php:247
+#: tutors/assessments/marks/mark_assessment.php:186
+#: tutors/assessments/marks/set_group_marks.php:179
 #, fuzzy
 msgid ""
 "No changes have been saved. Please check the details in the form, and try "
@@ -755,10 +816,26 @@ msgid "Select module"
 msgstr ""
 
 #: students/assessments/assessment_feedback.php:44
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:37
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:40
+#: tutors/assessments/reports/report_student_grades.php:37
+#: tutors/assessments/reports/report_student_grades_bygroup.php:37
+#: tutors/assessments/reports/report_student_grades_comments.php:40
+#: tutors/assessments/reports/report_student_inputs.php:37
+#: tutors/assessments/reports/report_uea.php:44
+#: tutors/assessments/reports/report_uea_anonymous.php:43
 msgid "Error: The requested assessment could not be loaded."
 msgstr ""
 
 #: students/assessments/assessment_feedback.php:68
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:59
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:64
+#: tutors/assessments/reports/report_student_grades.php:59
+#: tutors/assessments/reports/report_student_grades_bygroup.php:59
+#: tutors/assessments/reports/report_student_grades_comments.php:62
+#: tutors/assessments/reports/report_student_inputs.php:67
+#: tutors/assessments/reports/report_uea.php:61
+#: tutors/assessments/reports/report_uea_anonymous.php:60
 msgid "Error: The requested algorithm could not be loaded."
 msgstr ""
 
@@ -834,7 +911,8 @@ msgid "These assessments are now open for you to take and record your group"
 msgstr ""
 
 #: students/assessments/index.php:143 students/index.php:145
-#: students/index.php:181
+#: students/index.php:181 tutors/assessments/inc_list_closed.php:81
+#: tutors/assessments/inc_list_marked.php:88
 msgid "scheduled:"
 msgstr "gepland:"
 
@@ -868,6 +946,8 @@ msgid ""
 msgstr ""
 
 #: students/assessments/index.php:207
+#: tutors/assessments/inc_list_closed.php:66
+#: tutors/assessments/inc_list_marked.php:72
 msgid "COMPLETED"
 msgstr "VERVOLLEDIGD"
 
@@ -887,6 +967,12 @@ msgstr "reeds ingediend"
 #: students/assessments/take/index.php:364
 #: students/assessments/take/not_open.php:58
 #: students/assessments/take/not_open.php:69
+#: tutors/assessments/delete_marks.php:103
+#: tutors/assessments/edit/edit_assessment.php:259
+#: tutors/assessments/marks/mark_assessment.php:199
+#: tutors/assessments/marks/set_group_marks.php:191
+#: tutors/assessments/reports/index.php:148
+#: tutors/assessments/reports/students_who_responded.php:86
 msgid "back to assessments list"
 msgstr "terug naar de assessmentlijst"
 
@@ -994,6 +1080,11 @@ msgstr ""
 "te controleren en opnieuw te proberen."
 
 #: students/assessments/take/index.php:352
+#: tutors/assessments/edit/change_assessment_collection.php:160
+#: tutors/assessments/edit/change_assessment_form.php:139
+#: tutors/assessments/edit/edit_assessment.php:262
+#: tutors/assessments/marks/mark_assessment.php:202
+#: tutors/assessments/marks/set_group_marks.php:194
 msgid ""
 "The assessment you selected could not be loaded for some reason - please go "
 "back and try again."
@@ -1039,6 +1130,8 @@ msgid "Your Team"
 msgstr "Uw team"
 
 #: students/assessments/take/index.php:388
+#: tutors/assessments/create/class_wizardstep_1.php:145
+#: tutors/assessments/edit/edit_assessment.php:329
 msgid "Introduction"
 msgstr "Inleiding"
 
@@ -1149,4 +1242,2081 @@ msgstr ""
 
 #: students/index.php:196
 msgid "Getting Help"
+msgstr ""
+
+#: tutors/assessments/clone/index.php:23
+#: tutors/assessments/create/index.php:49
+#, fuzzy
+msgid "Create a new assessment"
+msgstr "Doe Assessment."
+
+#: tutors/assessments/clone/index.php:28
+#, fuzzy
+msgid "clone an assessment"
+msgstr "Open Assessments."
+
+#: tutors/assessments/clone/index.php:30
+#: tutors/assessments/create/index.php:56
+#: tutors/assessments/delete_marks.php:80
+#: tutors/assessments/edit/change_assessment_collection.php:113
+#: tutors/assessments/edit/change_assessment_form.php:92
+#: tutors/assessments/edit/edit_assessment.php:204
+#: tutors/assessments/email/index.php:87
+#: tutors/assessments/marks/mark_assessment.php:148
+#: tutors/assessments/marks/set_group_marks.php:140
+#: tutors/assessments/reports/index.php:122
+#: tutors/assessments/reports/report_demo.php:186
+#: tutors/assessments/reports/students_who_responded.php:63
+#, fuzzy
+msgid "List Assessments"
+msgstr "Vervolledigde Assessments."
+
+#: tutors/assessments/clone/index.php:31
+#: tutors/assessments/create/index.php:57
+#: tutors/assessments/delete_marks.php:81
+#: tutors/assessments/edit/change_assessment_collection.php:114
+#: tutors/assessments/edit/change_assessment_form.php:93
+#: tutors/assessments/edit/edit_assessment.php:205
+#: tutors/assessments/email/index.php:88
+#: tutors/assessments/marks/mark_assessment.php:149
+#: tutors/assessments/marks/set_group_marks.php:141
+#: tutors/assessments/reports/index.php:123
+#: tutors/assessments/reports/report_demo.php:187
+#: tutors/assessments/reports/students_who_responded.php:64
+#, fuzzy
+msgid "Create Assessments"
+msgstr "Doe Assessment."
+
+#: tutors/assessments/clone/index.php:37
+msgid "This function is not yet available"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:27
+#: tutors/assessments/create/class_wizardstep_2.php:28
+#: tutors/assessments/create/class_wizardstep_3.php:28
+#: tutors/assessments/create/class_wizardstep_4.php:29
+#: tutors/assessments/email/class_wizardstep_1.php:28
+#: tutors/assessments/email/class_wizardstep_2.php:27
+msgid "Next &gt;"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:28
+#: tutors/assessments/create/class_wizardstep_2.php:29
+#: tutors/assessments/create/class_wizardstep_3.php:29
+#: tutors/assessments/create/class_wizardstep_4.php:30
+#: tutors/assessments/create/class_wizardstep_5.php:29
+#: tutors/assessments/create/class_wizardstep_6.php:120
+#: tutors/assessments/email/class_wizardstep_1.php:29
+#: tutors/assessments/email/class_wizardstep_2.php:28
+#: tutors/assessments/email/class_wizardstep_3.php:28
+#: tutors/assessments/email/class_wizardstep_4.php:124
+msgid "Cancel"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:115
+msgid ""
+"To create a new assessment you must first give it a name. To avoid "
+"confusion, the name should be unique, but you can create assessments using "
+"the same name if you wish."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:120
+#, fuzzy
+msgid "Name for this new assessment"
+msgstr "Mijn opdrachten."
+
+#: tutors/assessments/create/class_wizardstep_1.php:126
+msgid ""
+"Now choose a schedule for when, and for how long, this assessment will run."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:130
+#: tutors/assessments/edit/edit_assessment.php:315
+msgid "Opening date"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:134
+#: tutors/assessments/edit/edit_assessment.php:319
+msgid "Closing date"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:140
+msgid ""
+"Now enter the text to use as the introduction to your assessment (optional)."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:141
+msgid ""
+"This text will act as a pre-amble to your assessment, and is an opportunity "
+"to instruct students on how you want them to complete the assessment, and "
+"score each criteria."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:151
+#: tutors/assessments/create/class_wizardstep_2.php:117
+#: tutors/assessments/create/class_wizardstep_4.php:79
+#: tutors/assessments/marks/mark_assessment.php:258
+msgid "Advanced Options"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:151
+#: tutors/assessments/create/class_wizardstep_2.php:117
+#: tutors/assessments/create/class_wizardstep_4.php:79
+#: tutors/assessments/marks/mark_assessment.php:258
+msgid "view / hide advanced options"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:155
+msgid "notification emails"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:157
+msgid "Do you want to email all students when this assessment is created?"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:158
+msgid ""
+"This option will send an email to all of the students who are in the groups "
+"for this assessment as soon as you click the finish button at the end of the "
+"wizard."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:163
+#: tutors/assessments/create/class_wizardstep_1.php:181
+#: tutors/assessments/create/class_wizardstep_1.php:200
+#: tutors/assessments/edit/edit_assessment.php:354
+#: tutors/assessments/edit/edit_assessment.php:374
+msgid "Yes, email all students."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:167
+#: tutors/assessments/create/class_wizardstep_1.php:185
+#: tutors/assessments/create/class_wizardstep_1.php:204
+#: tutors/assessments/edit/edit_assessment.php:358
+#: tutors/assessments/edit/edit_assessment.php:378
+msgid "No, don't email all students."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:175
+msgid ""
+"Do you want an email reminder sent to all students 48 hours before the "
+"assessment is opened?"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:176
+msgid ""
+"This option will send an email to all of the students who are in the groups "
+"for this assessment 48 hours (approx.) before the assessment opens."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:194
+msgid ""
+"Do you want to email all students 48 hours before the assessment closes?"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:195
+msgid ""
+"This option will send an email to all of the students who are in the groups "
+"for this assessment 48 hours (approx.) before the assessment closes."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:223
+msgid "You must enter a name for your new assessment"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_1.php:241
+#: tutors/assessments/edit/edit_assessment.php:123
+msgid "You must select a closing date/time that is after your opening date"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:27
+#: tutors/assessments/create/class_wizardstep_3.php:27
+#: tutors/assessments/create/class_wizardstep_4.php:28
+#: tutors/assessments/create/class_wizardstep_5.php:27
+#: tutors/assessments/create/class_wizardstep_6.php:119
+#: tutors/assessments/email/class_wizardstep_2.php:26
+#: tutors/assessments/email/class_wizardstep_3.php:26
+#: tutors/assessments/email/class_wizardstep_4.php:123
+msgid "&lt; Back"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:80
+#: tutors/assessments/edit/change_assessment_form.php:204
+msgid "You haven't yet created any assessment forms."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:81
+msgid ""
+"You need to <a href=\"../../forms/create/\">create a new form</a> before you "
+"will be able to run any peer assessments."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:85
+msgid ""
+"Now you have named and scheduled your new assessment, you need to select "
+"which form you will use when assessing your students."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:86
+msgid ""
+"Please select a form from the list below. You can see how a form will look "
+"to students by clicking <em>preview</em>"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:87
+msgid ""
+"The form you select will be copied into your new assessment.  Subsequent "
+"changes to the form '''will not''' affect your assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:89
+#, fuzzy
+msgid "Your assessment forms"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/create/class_wizardstep_2.php:120
+msgid "Feedback / justification"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:121
+msgid "Do you want students to be able to view feedback for this assesment?"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:122
+msgid ""
+"Once an assessment is completed, students can login and view feedback "
+"related to their performance within the group for this assessment. The "
+"feedback simply shows whether they were rated as performing below, at, or "
+"above average for each criterion within the group for this assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:127
+#: tutors/assessments/edit/edit_assessment.php:433
+msgid "Yes, allow students to view feedback."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:131
+#: tutors/assessments/edit/edit_assessment.php:437
+msgid "No, there is no feedback for this assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:135
+msgid "Would you like students to enter feedback textually?"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:136
+msgid ""
+"If you would like students to provide textual information as either feedback "
+"or justification on the scores that they have assigned in the assessment, "
+"then you will need to select the option from below. The default option is to "
+"provide <b>no</b> mechanism for students to comment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:140
+#: tutors/assessments/edit/edit_assessment.php:446
+msgid "Title"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:145
+msgid "Yes</b>, allow students to comment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:149
+msgid "No</b>, don't allow students to comment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_2.php:164
+msgid "You must select a form to use with your new assessment"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:65
+#: tutors/assessments/edit/change_assessment_collection.php:211
+msgid "You haven't yet created any group collections."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:66
+#: tutors/assessments/edit/change_assessment_collection.php:212
+msgid ""
+"You need to <a href=\"../../groups/create/\">create some groups</a> before "
+"you will be able to run any peer assessments."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:71
+msgid ""
+"Please select the collection of groups you wish to use in this assessment "
+"from the list below."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:72
+msgid ""
+"The collection you select will be copied into your new assessment.  "
+"Subsequent changes to the collection of groups <strong>will not</strong> "
+"affect your assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:73
+msgid "Your collections"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_3.php:106
+msgid "You must select a collection of groups to use in your new assessment"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_4.php:66
+#: tutors/assessments/create/class_wizardstep_5.php:99
+#: tutors/assessments/edit/edit_assessment.php:524
+#, fuzzy
+msgid "Assessment Type"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/create/class_wizardstep_4.php:74
+#: tutors/assessments/create/class_wizardstep_5.php:102
+#: tutors/assessments/edit/edit_assessment.php:543
+#, fuzzy
+msgid "Self and peer assessment"
+msgstr "Doe Assessment."
+
+#: tutors/assessments/create/class_wizardstep_4.php:88
+#: tutors/assessments/create/class_wizardstep_5.php:104
+#: tutors/assessments/edit/edit_assessment.php:551
+#, fuzzy
+msgid "Peer assessment only"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/create/class_wizardstep_5.php:28
+msgid "Finish"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:54
+msgid "Your assessment is now ready for creation."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:55
+msgid ""
+"Please review the details below. When you're are satisfied, click "
+"<em>Finish</em> to create your peer assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:57
+#: tutors/assessments/edit/edit_assessment.php:299
+#, fuzzy
+msgid "Assessment Details"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/create/class_wizardstep_5.php:61
+#: tutors/assessments/reports/report_student_grades.php:369
+#: tutors/assessments/reports/report_student_grades_bygroup.php:354
+msgid "Name:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:65
+msgid "Opens at:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:69
+msgid "Closes at:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:79
+msgid ""
+"Using these scheduled times, this assessment will be open for students to "
+"use immediately."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:87
+#, fuzzy
+msgid "Includes an introduction"
+msgstr "Inleiding"
+
+#: tutors/assessments/create/class_wizardstep_5.php:91
+msgid ""
+"All students for the assessment will be emailed when you finish.</td></tr>"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:93
+msgid ""
+"All students for the assessment will <b>NOT</b> be emailed when you finish.</"
+"td></tr>"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:108
+#: tutors/assessments/edit/edit_assessment.php:387
+#, fuzzy
+msgid "Assessment Form"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/create/class_wizardstep_5.php:116
+msgid "ERROR : </strong>unable to load the selected form"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:119
+msgid "Form :"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:124
+msgid "ERROR : </strong>this form contains no questions"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:149
+msgid "ERROR : </strong>unable to load the selected collection of groups"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:152
+msgid "Collection"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_5.php:157
+msgid "ERROR : </strong>this collection does not contain any groups"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:88
+msgid ""
+"There was an error when trying to set the groups to be assessed - please use "
+"the contact system to report the error!"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:100
+msgid "Your Tutor has set a WebPA assessment"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:101
+msgid ""
+"Your tutor has set a WebPA assessment for your group. The details are as "
+"below;"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:102
+#: tutors/assessments/email/closing_reminder.php:31
+#: tutors/assessments/email/trigger_reminder.php:31
+#: tutors/assessments/reports/report_student_grades.php:351
+#, fuzzy
+msgid "Assessment Name:"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/create/class_wizardstep_6.php:103
+#: tutors/assessments/email/closing_reminder.php:32
+#: tutors/assessments/email/trigger_reminder.php:32
+msgid "Open from:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:104
+#: tutors/assessments/email/closing_reminder.php:33
+#: tutors/assessments/email/trigger_reminder.php:33
+msgid "Closes on:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:105
+#: tutors/assessments/edit/edit_assessment.php:114
+#: tutors/assessments/email/closing_reminder.php:34
+#: tutors/assessments/email/trigger_reminder.php:34
+msgid "To complete your assessment please go to:"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:107
+#: tutors/assessments/edit/edit_assessment.php:116
+#: tutors/assessments/email/closing_reminder.php:36
+#: tutors/assessments/email/trigger_reminder.php:36
+msgid "This is an automated email sent by the WebPA tool"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:121
+msgid "Unable to create your new assessment."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:122
+msgid ""
+"To correct the problem, click <em>back</em> and amend the details entered."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:127
+msgid "Your new assessment has been created."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:128
+#, php-format
+msgid ""
+"To view or amend the details of your new assessment, you can use the <a href="
+"\"../edit/edit_assessment.php?%s\">assessment editor"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:129
+#, php-format
+msgid ""
+"To send an email alert to the students due to take this new assessment, use "
+"the <a href=\"../email/index.php?%s\">email wizard"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:130
+msgid ""
+"Alternatively, you can return to <a href=\"../index.php\">my assessments</"
+"a>, or to the <a href=\"../../../\">WebPA home page"
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:134
+msgid "An error occurred while trying to create your new assessment form."
+msgstr ""
+
+#: tutors/assessments/create/class_wizardstep_6.php:135
+msgid ""
+"You may be able to correct the problem by clicking <em>back</em>, and then "
+"<em>next</em> again"
+msgstr ""
+
+#: tutors/assessments/create/index.php:25
+#: tutors/assessments/create/index.php:54
+msgid "create a new assessment wizard"
+msgstr ""
+
+#: tutors/assessments/create/index.php:65
+msgid ""
+"This wizard takes you through the process of creating a new assessment. When "
+"it is complete, you will have scheduled your assessment, and set the form "
+"and groups to assess."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:73
+#: tutors/assessments/delete_marks.php:78
+#: tutors/assessments/reports/students_who_responded.php:57
+#: tutors/assessments/reports/students_who_responded.php:61
+msgid "students who responded"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:98
+#: tutors/assessments/reports/students_who_responded.php:81
+msgid ""
+"This page shows all the students assigned this assessment and which have "
+"responded."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:103
+#: tutors/assessments/edit/edit_assessment.php:273
+#: tutors/assessments/marks/mark_assessment.php:199
+#: tutors/assessments/marks/set_group_marks.php:191
+#: tutors/assessments/marks/set_group_marks.php:205
+#: tutors/assessments/reports/index.php:148
+#: tutors/assessments/reports/report_demo.php:210
+#: tutors/assessments/reports/students_who_responded.php:86
+msgid "back"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:106
+msgid ""
+"The following list shows which students in each group have submitted their "
+"responses to the assessment."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:107
+#: tutors/assessments/reports/students_who_responded.php:90
+msgid ""
+"To email an individual student, click on the email link next to their name."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:108
+#, php-format
+msgid ""
+"To delete the entries provided by a student click on the %s alt=\"Delete "
+"submission\" /> image (if not greyed out)."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:118
+#: tutors/assessments/reports/students_who_responded.php:100
+msgid "This group has no members."
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:123
+#: tutors/assessments/reports/report_demo.php:217
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:156
+#: tutors/assessments/reports/report_student_grades.php:153
+#: tutors/assessments/reports/report_student_grades.php:269
+#: tutors/assessments/reports/report_student_grades.php:272
+#: tutors/assessments/reports/report_student_grades_bygroup.php:150
+#: tutors/assessments/reports/report_student_grades_bygroup.php:295
+#: tutors/assessments/reports/report_student_grades_bygroup.php:298
+#: tutors/assessments/reports/students_who_responded.php:105
+msgid "name"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:124
+#: tutors/assessments/reports/students_who_responded.php:107
+msgid "responded"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:125
+msgid "delete submission"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:131
+#: tutors/assessments/reports/students_who_responded.php:112
+msgid "Responded"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:133
+#: tutors/assessments/delete_marks.php:137
+msgid "Delete submission"
+msgstr ""
+
+#: tutors/assessments/delete_marks.php:135
+#: tutors/assessments/reports/students_who_responded.php:115
+msgid "Not Responded"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:59
+#: tutors/assessments/edit/change_assessment_form.php:58
+msgid ""
+"This assessment has been marked, and therefore the assessment form being "
+"used cannot be changed."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:64
+msgid "You must select a collection of associated groups to use."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:68
+msgid ""
+"There was an error when trying to remove the original collection of groups - "
+"please use the contact system to report the error!"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:73
+msgid ""
+"There was an error when loading the new collection of groups - please use "
+"the contact system to report the error!"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:102
+#: tutors/assessments/edit/change_assessment_collection.php:111
+#, fuzzy
+msgid "change collection"
+msgstr "gepland:"
+
+#: tutors/assessments/edit/change_assessment_collection.php:103
+#: tutors/assessments/edit/change_assessment_form.php:82
+#: tutors/assessments/edit/edit_assessment.php:196
+msgid "manage:"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:103
+#: tutors/assessments/edit/change_assessment_form.php:82
+#: tutors/assessments/edit/edit_assessment.php:196
+#, fuzzy
+msgid "manage assessment"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/edit/change_assessment_collection.php:145
+#: tutors/assessments/edit/change_assessment_form.php:124
+#, fuzzy
+msgid ""
+"No changes have been saved. Please check the details in the form and try "
+"again."
+msgstr ""
+"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
+"te controleren en opnieuw te proberen."
+
+#: tutors/assessments/edit/change_assessment_collection.php:149
+#: tutors/assessments/edit/change_assessment_form.php:128
+msgid "On this page you can change the assessment form being used."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:157
+#: tutors/assessments/edit/change_assessment_collection.php:167
+#: tutors/assessments/edit/change_assessment_form.php:136
+#: tutors/assessments/edit/change_assessment_form.php:146
+#, fuzzy
+msgid "back to the assessment"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/assessments/edit/change_assessment_collection.php:176
+#: tutors/assessments/edit/change_assessment_form.php:155
+msgid "Marks have been recorded for this assessment."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:177
+#: tutors/assessments/edit/change_assessment_form.php:156
+msgid ""
+"You can still edit the assessment's name, schedule information and "
+"introductory text, but you can no longer change which form, or collection of "
+"groups, is used in this assessment."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:186
+msgid "Current Collection"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:189
+msgid "You are currently using collection:"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:195
+#: tutors/assessments/edit/change_assessment_collection.php:231
+msgid "Number of Groups :"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:200
+msgid "Available Collections"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_collection.php:217
+msgid ""
+"Please select the collection of groups you wish to use in this assessment "
+"from from the list below."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:61
+msgid "You must select an assessment form to use."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:81
+#: tutors/assessments/edit/change_assessment_form.php:90
+#, fuzzy
+msgid "change form"
+msgstr "gepland:"
+
+#: tutors/assessments/edit/change_assessment_form.php:165
+msgid "Current Form"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:168
+msgid "You are currently using form:"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:173
+#: tutors/assessments/edit/edit_assessment.php:395
+msgid "This form has no questions."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:177
+#: tutors/assessments/edit/edit_assessment.php:399
+msgid "Below are the questions that your students will use to mark each other."
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:184
+msgid "scoring range:"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:192
+msgid "Available Forms"
+msgstr ""
+
+#: tutors/assessments/edit/change_assessment_form.php:208
+msgid ""
+"Please select a form from the list below. You can see how the form appears "
+"to students by clicking <em>preview</em>"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:69
+msgid "You must give this assessment a name."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:109
+msgid "Your Assessment has been re-opened"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:110
+msgid "Your tutor has re-opend your assessment."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:111
+msgid "The new dates for the assessment are;"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:112
+msgid "Open:"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:113
+msgid "Close:"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:173
+msgid "at"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:226
+msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:227
+msgid "delete"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:233
+msgid "preview"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:251
+msgid ""
+"On this page you can change the name of this assessment, and change the "
+"collection of groups to assess, and the form to use."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:273
+#: tutors/assessments/marks/mark_assessment.php:211
+#: tutors/assessments/marks/set_group_marks.php:205
+#, fuzzy
+msgid "back to assessment list"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/assessments/edit/edit_assessment.php:279
+#, fuzzy
+msgid "delete assessment"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/edit/edit_assessment.php:292
+msgid "Student marks have been recorded for this assessment."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:293
+msgid "Some parts of the assessment are now locked for editing."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:301
+msgid ""
+"You can change this assessment's name, schedule and details using the box "
+"below. When you've made your changes, click the <em>save changes</em> button."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:305
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:207
+#, fuzzy
+msgid "Name"
+msgstr "Uw team"
+
+#: tutors/assessments/edit/edit_assessment.php:311
+msgid "The schedule for when, and for how long, this assessment will run."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:325
+msgid "The text to use as the introduction to your assessment (optional)."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:340
+msgid "Email Notifications"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:348
+msgid ""
+"Email a reminder to all students 48 hours before the assessment is opened"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:368
+msgid "Email all students 48 hours before the assessment closes"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:390
+msgid "You are using a copy of form:"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:416
+msgid "Student marks have been recorded, so you can no longer change forms."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:421
+#, php-format
+msgid ""
+"You cannot directly change any aspect of this form or its criteria. If you "
+"need to change it, you must <a href=\"change_assessment_form.php?%s\">select "
+"a different assessment form to use"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:426
+msgid "Feedback / Justification"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:428
+msgid ""
+"Allow the students to view feedback on their performance in this assessment?"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:442
+msgid ""
+"Allow the students to enter feedback / justification for this assessment?"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:451
+msgid "Yes, allow students to give feedback / justification."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:455
+msgid "No, don't allow feedback / justification."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:462
+#, fuzzy
+msgid "Assessment Groups"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/edit/edit_assessment.php:466
+msgid "You are using a copy of collection:"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:474
+#: tutors/assessments/marks/set_group_marks.php:219
+msgid "This collection does not contain any groups"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:480
+#, fuzzy
+msgid "Group Name"
+msgstr "Uw team"
+
+#: tutors/assessments/edit/edit_assessment.php:481
+#: tutors/assessments/marks/set_group_marks.php:226
+msgid "Members"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:482
+msgid "Responses"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:504
+msgid "person remains"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:504
+msgid "people remain"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:505
+msgid ""
+"Warning</strong></p><p>Not all of the people within this collection have "
+"been allocated a group."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:505
+#, php-format
+msgid "%d %s unallocated"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:513
+msgid ""
+"Student marks have been recorded, so you can no longer change collections."
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:518
+#, php-format
+msgid ""
+"You cannot directly change the composition of any of these groups. If you "
+"need to change them, you must <a href=\"change_assessment_collection.php?%s"
+"\">select a different collection of groups to use"
+msgstr ""
+
+#: tutors/assessments/edit/edit_assessment.php:564
+msgid ""
+"Student marks have been recorded, so you can no longer change then "
+"assessment type."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_1.php:47
+#: tutors/assessments/email/class_wizardstep_2.php:46
+#: tutors/assessments/email/class_wizardstep_3.php:46
+#, fuzzy
+msgid "everyone taking this assessment"
+msgstr "Mijn opdrachten."
+
+#: tutors/assessments/email/class_wizardstep_1.php:48
+#: tutors/assessments/email/class_wizardstep_2.php:47
+#: tutors/assessments/email/class_wizardstep_3.php:47
+#, fuzzy
+msgid "selected groups taking this assessment"
+msgstr "Mijn opdrachten."
+
+#: tutors/assessments/email/class_wizardstep_1.php:49
+msgid "students who HAVE responded"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_1.php:50
+msgid "students who HAVE NOT responded"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_1.php:52
+msgid ""
+"To begin, you need to select exactly which students should receive your "
+"email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_1.php:54
+msgid "Send Email To"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_1.php:67
+msgid "You must select who to send this email to."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:48
+#: tutors/assessments/email/class_wizardstep_3.php:48
+msgid "all the students who HAVE responded"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:49
+#: tutors/assessments/email/class_wizardstep_3.php:49
+msgid "any students who HAVE NOT responded"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:64
+msgid "You have opted to send this email to"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:70
+msgid "Select Groups To Email"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:72
+msgid ""
+"Tick all the groups you wish to include in this email. The number of "
+"students in each group is shown in brackets after the group name."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:99
+#, php-format
+msgid "This email will be sent to all %d students"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:108
+#, php-format
+msgid ""
+"This email will be sent to the %d students who have taken this assessment"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:118
+#, php-format
+msgid ""
+"This email will be sent to the %d students who have not yet taken this "
+"assessment"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:127
+#: tutors/assessments/email/class_wizardstep_3.php:123
+msgid "There are no students matching your criteria."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:128
+msgid "You may have groups with no students in them."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:129
+#: tutors/assessments/email/class_wizardstep_3.php:124
+msgid "Please go back and choose a different set of students to contact."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:134
+msgid "Email Details"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:138
+msgid "Subject"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:142
+msgid "Text"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:183
+msgid ""
+"The group(s) you have selected contain no students. There must be at least "
+"one recepient for this email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:189
+msgid "You must enter a subject for this email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_2.php:194
+msgid "You must enter the text of this email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:27
+#, fuzzy
+msgid "Send Email"
+msgstr "Uw team"
+
+#: tutors/assessments/email/class_wizardstep_3.php:62
+msgid "Please confirm the following settings are correct before proceeding."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:63
+msgid ""
+"If you wish to amend any details, click <em>Back</em>. When you are ready to "
+"create your groups, click <em>Send Email</em>."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:65
+msgid "Recipients"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:67
+#, php-format
+msgid "You have opted to send this email to <em>%s</em>."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:72
+#, php-format
+msgid "This email will be sent to all %d students."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:81
+msgid "The groups you selected were:"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:102
+#, php-format
+msgid ""
+"This email will be sent to the %d students who have taken this assessment."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:112
+#, php-format
+msgid ""
+"This email will be sent to the %d students who have not yet taken this "
+"assessment."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:129
+msgid "Email Preview"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_3.php:132
+msgid "Subject:"
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:106
+#: tutors/assessments/email/new_assessment.php:59
+msgid "Unable to build email list - no students to email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:118
+#: tutors/assessments/email/new_assessment.php:72
+msgid "No list of students to email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:125
+msgid "Unable to send email."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:126
+msgid ""
+"To try correcting the problem, click <em>back</em> and amend the details "
+"entered."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:129
+msgid "Your email has been sent."
+msgstr ""
+
+#: tutors/assessments/email/class_wizardstep_4.php:130
+#, php-format
+msgid ""
+"You can now return to <a href=\"%s\">your assessment list</a>, or to the <a "
+"href=\"/\">WebPA home page</a>."
+msgstr ""
+
+#: tutors/assessments/email/closing_reminder.php:29
+msgid "Reminder: WebPA Assessment closing"
+msgstr ""
+
+#: tutors/assessments/email/closing_reminder.php:30
+msgid ""
+"This is a reminder that the assessment your tutor set is due to close. The "
+"details are as below;"
+msgstr ""
+
+#: tutors/assessments/email/index.php:48
+msgid "email your students wizard"
+msgstr ""
+
+#: tutors/assessments/email/index.php:78
+msgid "email your students"
+msgstr ""
+
+#: tutors/assessments/email/index.php:84
+msgid "email students"
+msgstr ""
+
+#: tutors/assessments/email/index.php:100
+msgid ""
+"This wizard takes you through the process of sending an email to the "
+"students taking this assessment."
+msgstr ""
+
+#: tutors/assessments/email/index.php:115
+msgid "The given assessment failed to load so this wizard cannot be started."
+msgstr ""
+
+#: tutors/assessments/email/trigger_reminder.php:29
+msgid "Reminder: WebPA Assessment opening"
+msgstr ""
+
+#: tutors/assessments/email/trigger_reminder.php:30
+msgid ""
+"This is a reminder that the assessment your tutor set is due to open. The "
+"details are as below;"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:22
+#, fuzzy, php-format
+msgid "Closed assessments for %s"
+msgstr "Vervolledigde Assessments."
+
+#: tutors/assessments/inc_list_closed.php:24
+msgid ""
+"These assessments were scheduled for some time in the past, and are now "
+"closed. No further student submissions can be made to closed assessments, "
+"but no marks have yet been generated."
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:78
+msgid "Closed"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:82
+#: tutors/assessments/inc_list_marked.php:89
+msgid "student responses:"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:85
+#: tutors/assessments/inc_list_marked.php:92
+msgid "Edit"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:85
+#: tutors/assessments/inc_list_marked.php:92
+#, fuzzy
+msgid "Edit assessment"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/inc_list_closed.php:86
+#: tutors/assessments/inc_list_marked.php:93
+msgid "Email students"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:87
+#: tutors/assessments/inc_list_marked.php:94
+msgid "Students responded"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:87
+#: tutors/assessments/inc_list_marked.php:94
+msgid "Check which students have responded"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:88
+#: tutors/assessments/inc_list_marked.php:95
+#: tutors/assessments/marks/set_group_marks.php:210
+msgid "Group Marks"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:88
+#: tutors/assessments/inc_list_marked.php:95
+msgid "Set group marks"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:89
+#: tutors/assessments/inc_list_marked.php:96
+msgid "Mark Sheet"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:89
+#: tutors/assessments/inc_list_marked.php:96
+msgid "New mark sheet"
+msgstr ""
+
+#: tutors/assessments/inc_list_closed.php:90
+msgid "View student inputs"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:24
+#, fuzzy, php-format
+msgid "Marked assessments for %s"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/assessments/inc_list_marked.php:26
+msgid ""
+"These assessments are both closed and have been marked to produce student "
+"grades."
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:49
+msgid "You do not have any assessments in this category."
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:50
+msgid "Please choose another category from the tabs above."
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:85
+msgid "Finished"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:110
+msgid "Numeric (%)"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:117
+msgid "Algorithm:"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:118
+msgid "PA weighting:"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:119
+msgid "Non-completion penalty:"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:124
+msgid "Grading:"
+msgstr ""
+
+#: tutors/assessments/inc_list_marked.php:127
+msgid "View&nbsp;Reports"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:73
+msgid "The PA Weighting must be a number between 1 - 100"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:79
+#, php-format
+msgid "The Non-completion Penalty must be a number between %d - %d"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:137
+#: tutors/assessments/marks/mark_assessment.php:145
+#: tutors/assessments/marks/mark_assessment.php:359
+msgid "create mark sheet"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:190
+msgid ""
+"On this page you can setup the parameters for the WebPA scoring algorithm."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:191
+msgid ""
+"You can repeat this process many times, creating several mark sheets for the "
+"same assessment but using different parameters."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:215
+msgid "Algorithm Parameters"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:217
+msgid ""
+"Enter the parameters to use below. When you've made your changes, click the "
+"<em>create mark sheet</em> button."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:221
+msgid "What percentage of the group's total mark should be peer-assessed?"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:224
+msgid "PA Weighting"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:239
+msgid ""
+"If a student has not submitted any marks for the assessment, how much should "
+"they be penalised?"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:242
+msgid "Penalty for non-completion"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:253
+msgid "of their final grade."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:264
+msgid "What type of penalty do you want to apply?"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:267
+msgid "Penalty Type"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:270
+msgid "Percentage (%)"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:271
+msgid "Percentage Points (pp)"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:310
+msgid "How do you want student grades to be displayed?"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:311
+msgid ""
+"A-F Grades will be calculated using the levels defined by your WebPA "
+"administrator."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:314
+msgid "Grading Type"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:317
+msgid "Percentage Grades"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:318
+msgid "Alphabetic Grades (A-F)"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:326
+msgid "Which algorithm do you wish to use to generate the student's grades?"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:330
+msgid "WebPA Algorithm (default)"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:331
+msgid "This is the usual, WebPA way of calculating grades."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:332
+msgid ""
+"The marks awarded to each student are normalised based on the generosity of "
+"the student doing the marking."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:344
+msgid "PETS Algorithm"
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:345
+msgid "The marks awarded to each student are not normalised."
+msgstr ""
+
+#: tutors/assessments/marks/mark_assessment.php:346
+msgid ""
+"This algorithm, together with the Split100 style criteria, are recommended "
+"by the Pro-actively Ensuring Team Success (PETS) process, produced by Lydia "
+"Kavanagh at the University of Queensland, Australia."
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:92
+msgid "You must enter a score for each group."
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:94
+#, php-format
+msgid "You must enter a score for each group. %s is not a valid score."
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:131
+#: tutors/assessments/marks/set_group_marks.php:138
+msgid "set group marks"
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:183
+msgid ""
+"On this page you can enter the overall marks each group has achieved. These "
+"marks are used in the WebPA scoring algorithm, and will form the basis of "
+"the final student marks."
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:213
+msgid "This assessment is using collection:"
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:225
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:205
+#: tutors/assessments/reports/report_student_grades_bygroup.php:216
+#: tutors/assessments/reports/report_student_response_info.php:253
+msgid "Group"
+msgstr ""
+
+#: tutors/assessments/marks/set_group_marks.php:227
+msgid "Group Mark"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:86
+#, php-format
+msgid ""
+"You have not recorded the group marks for this assessment so some reports "
+"are not available.<br />Please %s%s\">enter the overall group marks</a> "
+"before viewing your reports."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:95
+#, php-format
+msgid ""
+"There have been no student responses to this assessment. Please select "
+"another assessment, or %s%s\">re-schedule this one</a>."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:102
+msgid ""
+"The assessment you selected could not be loaded for some reason. Please go "
+"back and try again."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:112
+msgid "reports"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:143
+#: tutors/assessments/reports/report_demo.php:205
+msgid ""
+"On this page you can select the different reports to view for this "
+"assessment."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:151
+msgid "Reports available for:"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:169
+#: tutors/assessments/reports/report_student_grades.php:140
+#: tutors/assessments/reports/report_student_grades_bygroup.php:131
+msgid "Numeric (%)."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:182
+msgid "Unable to display reports"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:188
+msgid "Choose a report"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:190
+msgid "Please select a report to display or download from the list below."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:196
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:120
+#: tutors/assessments/reports/report_student_inputs.php:132
+msgid "Marks Awarded For Each Question"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:197
+msgid ""
+"A breakdown of the marks given by each student for every question in the "
+"assessment."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:200
+#: tutors/assessments/reports/index.php:219
+#: tutors/assessments/reports/index.php:268
+#: tutors/assessments/reports/index.php:305
+#: tutors/assessments/reports/index.php:375
+#: tutors/assessments/reports/index.php:404
+msgid "View Report:"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:201
+#: tutors/assessments/reports/index.php:220
+#: tutors/assessments/reports/index.php:239
+#: tutors/assessments/reports/index.php:269
+#: tutors/assessments/reports/index.php:306
+#: tutors/assessments/reports/index.php:336
+#: tutors/assessments/reports/index.php:376
+#: tutors/assessments/reports/index.php:405
+msgid "Report - View the report"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:204
+#: tutors/assessments/reports/index.php:223
+#: tutors/assessments/reports/index.php:242
+#: tutors/assessments/reports/index.php:272
+#: tutors/assessments/reports/index.php:276
+#: tutors/assessments/reports/index.php:283
+#: tutors/assessments/reports/index.php:290
+#: tutors/assessments/reports/index.php:309
+#: tutors/assessments/reports/index.php:313
+#: tutors/assessments/reports/index.php:317
+#: tutors/assessments/reports/index.php:339
+#: tutors/assessments/reports/index.php:353
+#: tutors/assessments/reports/index.php:379
+#: tutors/assessments/reports/index.php:389
+#: tutors/assessments/reports/index.php:408
+#: tutors/assessments/reports/index.php:418
+msgid "Download:"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:205
+#: tutors/assessments/reports/index.php:224
+#: tutors/assessments/reports/index.php:243
+#: tutors/assessments/reports/index.php:273
+#: tutors/assessments/reports/index.php:310
+#: tutors/assessments/reports/index.php:340
+#: tutors/assessments/reports/index.php:354
+#: tutors/assessments/reports/index.php:380
+#: tutors/assessments/reports/index.php:409
+msgid "CSV - Excel Spreadsheet"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:215
+#: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:171
+msgid "Marks Awarded For Each Question (anonymous)"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:216
+msgid ""
+"A breakdown of the marks given by each student for every question in the "
+"assessment.<br />Student names/numbers are <strong>NOT</strong> displayed."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:234
+#: tutors/assessments/reports/report_student_response_info.php:167
+msgid "Student Response Information"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:235
+msgid ""
+"Shows the date, time and location that each student took the assessment."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:238
+#, fuzzy
+msgid "View Report"
+msgstr "Feedbackverslag"
+
+#: tutors/assessments/reports/index.php:253
+msgid "Unable to display the other reports"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:264
+#: tutors/assessments/reports/report_demo.php:213
+#: tutors/assessments/reports/report_student_grades.php:149
+msgid "Student Grades"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:265
+msgid ""
+"A list of students (by lastname) and their final WebPA scores and grades."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:277
+#: tutors/assessments/reports/index.php:314
+msgid "XML -  XML File"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:284
+msgid "Moodle - Moodle Gradebook Import XML"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:291
+#: tutors/assessments/reports/index.php:318
+#: tutors/assessments/reports/index.php:390
+#: tutors/assessments/reports/index.php:419
+msgid "RTF -  Rich Text File / MS Word"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:301
+msgid "Student Grades (by group)"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:302
+msgid "A list of students (by group) and their final WebPA scores and grades."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:331
+msgid "Student Feedback and Justification (by group)"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:332
+msgid ""
+"A list of students (by group) and their feedback about the assessment and "
+"justification of the WebPA scores and grades."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:335
+#, fuzzy
+msgid " Report:"
+msgstr "Feedbackverslag"
+
+#: tutors/assessments/reports/index.php:349
+msgid "Student Grades and Feedback"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:350
+msgid ""
+"This report can be used to upload WebPA assessment marks into the grade "
+"book.  Comments are not currently supported for upload.  If you would like "
+"the comments emailed to your students please contact your WebPA "
+"administrator."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:371
+msgid "Responses per student"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:372
+msgid ""
+"This report was requested by UEA and provides the reponses given for each "
+"individual student per group."
+msgstr ""
+
+#: tutors/assessments/reports/index.php:400
+msgid "Responses per student (anonymous)"
+msgstr ""
+
+#: tutors/assessments/reports/index.php:401
+msgid ""
+"This report was requested by UEA and provides the reponses given for each "
+"individual student per group. The data on who gave the response has been "
+"anonymised"
+msgstr ""
+
+#: tutors/assessments/reports/report_demo.php:178
+#: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:146
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:93
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:119
+#: tutors/assessments/reports/report_student_grades.php:101
+#: tutors/assessments/reports/report_student_grades_bygroup.php:90
+#: tutors/assessments/reports/report_student_inputs.php:105
+#: tutors/assessments/reports/report_student_response_info.php:144
+#: tutors/assessments/reports/report_uea.php:152
+#: tutors/assessments/reports/report_uea_anonymous.php:152
+msgid "report"
+msgstr ""
+
+#: tutors/assessments/reports/report_demo.php:210
+#, fuzzy
+msgid "back to reports list"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/assessments/reports/report_demo.php:218
+#: tutors/assessments/reports/report_student_grades.php:154
+#: tutors/assessments/reports/report_student_grades_bygroup.php:151
+msgid "WebPA<br />score"
+msgstr ""
+
+#: tutors/assessments/reports/report_demo.php:219
+msgid "Grade"
+msgstr ""
+
+#: tutors/assessments/reports/report_demo.php:220
+msgid "Did not<br />submit"
+msgstr ""
+
+#: tutors/assessments/reports/report_demo.php:230
+#: tutors/assessments/reports/report_student_grades.php:170
+#: tutors/assessments/reports/report_student_grades.php:222
+#: tutors/assessments/reports/report_student_grades.php:263
+#: tutors/assessments/reports/report_student_grades.php:319
+#: tutors/assessments/reports/report_student_grades.php:364
+#: tutors/assessments/reports/report_student_grades_bygroup.php:168
+#: tutors/assessments/reports/report_student_grades_bygroup.php:231
+#: tutors/assessments/reports/report_student_grades_bygroup.php:287
+#: tutors/assessments/reports/report_student_grades_bygroup.php:347
+#: tutors/assessments/reports/report_student_grades_comments.php:133
+msgid "no penalty"
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:134
+#: tutors/assessments/reports/report_student_response_info.php:132
+msgid "Error: The assessment could not be loaded."
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:227
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:190
+#: tutors/assessments/reports/report_student_inputs.php:202
+msgid "Score Received"
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:259
+msgid "\"Marks Awarded For Each Question (anonymous)\""
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:46
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:51
+#: tutors/assessments/reports/report_student_grades.php:46
+#: tutors/assessments/reports/report_student_grades_bygroup.php:46
+#: tutors/assessments/reports/report_student_grades_comments.php:49
+#: tutors/assessments/reports/report_student_inputs.php:54
+#: tutors/assessments/reports/report_uea.php:52
+#: tutors/assessments/reports/report_uea_anonymous.php:51
+msgid "Error: The requested marksheet could not be loaded."
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:132
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:240
+#: tutors/assessments/reports/report_student_inputs.php:144
+#: tutors/assessments/reports/report_student_inputs.php:252
+msgid "range:"
+msgstr ""
+
+#: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:222
+#: tutors/assessments/reports/report_student_inputs.php:234
+msgid "\"Marks Awarded For Each Question\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:144
+msgid "Student feedback and Justification (by Group)"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:157
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:207
+#, fuzzy
+msgid "feedback recipient"
+msgstr "Feedbackverslag"
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:158
+msgid "feedback / justification<br/> comments"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:201
+msgid "\"Student feedback and Justification (by Group)\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:206
+#: tutors/assessments/reports/report_student_grades_bygroup.php:217
+#: tutors/assessments/reports/report_student_response_info.php:254
+msgid "Overall group mark"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_feedback_bygroup.php:207
+msgid "feedback / justification comments"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:155
+#: tutors/assessments/reports/report_student_grades_bygroup.php:152
+msgid "Intermediate<br />Grade"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:156
+#: tutors/assessments/reports/report_student_grades_bygroup.php:153
+msgid "Non-Submission</span><br />Penalty"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:157
+#: tutors/assessments/reports/report_student_grades_bygroup.php:154
+msgid "Final<br />Grade"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:208
+msgid "\"Student Grades (by student)\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:211
+msgid ""
+"\"name\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty\","
+"\"Final grade\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:249
+#: tutors/assessments/reports/report_student_grades.php:287
+#: tutors/assessments/reports/report_student_grades_bygroup.php:266
+#: tutors/assessments/reports/report_student_grades_bygroup.php:315
+#, fuzzy
+msgid "assessment"
+msgstr "Mijn assessments"
+
+#: tutors/assessments/reports/report_student_grades.php:250
+#: tutors/assessments/reports/report_student_grades_bygroup.php:267
+#, fuzzy
+msgid "assessment_title"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/reports/report_student_grades.php:251
+#: tutors/assessments/reports/report_student_grades_bygroup.php:268
+msgid "weighting"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:252
+#: tutors/assessments/reports/report_student_grades.php:282
+#: tutors/assessments/reports/report_student_grades_bygroup.php:269
+#: tutors/assessments/reports/report_student_grades_bygroup.php:308
+msgid "penalty"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:268
+#: tutors/assessments/reports/report_student_grades.php:284
+#: tutors/assessments/reports/report_student_grades.php:327
+#: tutors/assessments/reports/report_student_grades.php:333
+#: tutors/assessments/reports/report_student_grades_bygroup.php:294
+#: tutors/assessments/reports/report_student_grades_bygroup.php:310
+msgid "student"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:270
+#: tutors/assessments/reports/report_student_grades_bygroup.php:296
+#, fuzzy
+msgid "forename"
+msgstr "Uw team"
+
+#: tutors/assessments/reports/report_student_grades.php:271
+#: tutors/assessments/reports/report_student_grades_bygroup.php:297
+msgid "lastname"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:273
+#: tutors/assessments/reports/report_student_grades.php:279
+#: tutors/assessments/reports/report_student_grades_bygroup.php:299
+#: tutors/assessments/reports/report_student_grades_bygroup.php:305
+msgid "institutional_student_number"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:280
+#: tutors/assessments/reports/report_student_grades_bygroup.php:306
+msgid "webpa_score"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:281
+#: tutors/assessments/reports/report_student_grades_bygroup.php:307
+msgid "intermediate_grade"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:283
+#: tutors/assessments/reports/report_student_grades_bygroup.php:309
+msgid "final_grade"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:324
+#: tutors/assessments/reports/report_student_grades.php:335
+msgid "result"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:325
+msgid "state"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:326
+msgid "assignment"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:338
+msgid "results"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:351
+#: tutors/assessments/reports/report_student_grades_bygroup.php:329
+msgid "Weighting:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:352
+#: tutors/assessments/reports/report_student_grades.php:378
+#: tutors/assessments/reports/report_student_grades_bygroup.php:330
+#: tutors/assessments/reports/report_student_grades_bygroup.php:363
+msgid "Penalty:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:370
+msgid "Student Number:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:376
+msgid "Webpa Score:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:377
+#: tutors/assessments/reports/report_student_grades_bygroup.php:362
+msgid "Intermediate grade:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades.php:379
+msgid "Final Grade:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:140
+msgid "Student Grades (by Group)"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:147
+msgid "Overall group mark:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:212
+msgid "\"Student Grades (by group)\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:219
+msgid ""
+"\"Name\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty\","
+"\"Final Grade\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:273
+#: tutors/assessments/reports/report_student_grades_bygroup.php:313
+msgid "group"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:274
+msgid "group_name"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:275
+msgid "group_mark"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:276
+#: tutors/assessments/reports/report_student_grades_bygroup.php:312
+msgid "group_members"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:328
+#, fuzzy
+msgid "Assessment Title:"
+msgstr "Beoordelingscriteria"
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:334
+msgid "Group name:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:335
+msgid "Group mark:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:355
+msgid "Institutional student number:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:361
+msgid "Webpa score:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_bygroup.php:364
+msgid "Final grade:"
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_comments.php:119
+msgid "\"Student Grades and Feedback (by student)\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_grades_comments.php:122
+msgid ""
+"\"User Id\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty"
+"\",\"Final grade\",\"Group\",\"Comments\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_response_info.php:248
+msgid "\"Student Response Information\""
+msgstr ""
+
+#: tutors/assessments/reports/report_student_response_info.php:256
+msgid ""
+"\"Name\",\"Started\",\"Finished\",\"Time Taken\",\"IP Address\",\"Computer "
+"Name\""
+msgstr ""
+
+#: tutors/assessments/reports/report_uea.php:177
+#: tutors/assessments/reports/report_uea_anonymous.php:177
+msgid "Student Responses"
+msgstr ""
+
+#: tutors/assessments/reports/report_uea.php:193
+#: tutors/assessments/reports/report_uea.php:250
+#: tutors/assessments/reports/report_uea.php:292
+#: tutors/assessments/reports/report_uea_anonymous.php:189
+#: tutors/assessments/reports/report_uea_anonymous.php:244
+#: tutors/assessments/reports/report_uea_anonymous.php:285
+msgid "Results for:"
+msgstr ""
+
+#: tutors/assessments/reports/students_who_responded.php:89
+msgid ""
+"The following list shows which students in each group have submitted there "
+"responses to the assessment."
+msgstr ""
+
+#: tutors/assessments/reports/students_who_responded.php:106
+msgid "email"
 msgstr ""

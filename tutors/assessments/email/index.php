@@ -45,7 +45,7 @@ if ($assessment->load($assessment_id)) {
 // Initialise wizard
 
 if ($assessment) {
-  $wizard = new Wizard('email your students wizard');
+  $wizard = new Wizard(gettext('email your students wizard'));
   $wizard->set_wizard_url("index.php?a={$assessment->id}&tab={$tab}&y={$year}");
 
   $wizard->set_field('list_url',$list_url);
@@ -75,17 +75,17 @@ if ($assessment) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' email your students';
-$UI->menu_selected = 'my assessments';
+$UI->page_title = APP__NAME .' '.gettext('email your students');
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  (
   'home'        => '../../' ,
-  'my assessments'  => '../' ,
-  'email students'  => null ,
+    gettext('my assessments')  => '../' ,
+    gettext('email students')  => null ,
 );
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 if ($assessment) {
@@ -97,7 +97,7 @@ if ($assessment) {
 $UI->content_start();
 ?>
 
-<p>This wizard takes you through the process of sending an email to the students taking this assessment.</p>
+<p><?php echo gettext('This wizard takes you through the process of sending an email to the students taking this assessment.');?></p>
 
 <?php
 if ($assessment) {
@@ -112,7 +112,7 @@ if ($assessment) {
 if ($assessment) {
   $wizard->draw_wizard();
 } else {
-  echo("<p>The given assessment failed to load so this wizard cannot be started.</p>");
+  echo("<p>".gettext('The given assessment failed to load so this wizard cannot be started.')."</p>");
 }
 ?>
 

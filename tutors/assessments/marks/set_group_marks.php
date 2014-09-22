@@ -89,9 +89,9 @@ if ( ($command) && ($assessment) ) {
           $mark = trim( str_replace('%','',$v) );
           if (!is_numeric($mark)) {
             if (empty($mark)) {
-              $errors[] = "You must enter a score for each group.";
+              $errors[] = gettext("You must enter a score for each group.");
             } else {
-              $errors[] = "You must enter a score for each group. $v is not a valid score.";
+              $errors[] = sprintf(gettext("You must enter a score for each group. %s is not a valid score."), $v);
             }
 
             $bad_group_ids[] = $group_id; // used to highlight the row later
@@ -128,17 +128,17 @@ if ( ($command) && ($assessment) ) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = 'set group marks';
+$page_title = gettext('set group marks');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  ('home'       => '../../' ,
-               'my assessments' => '../' ,
-               'set group marks'  => null ,);
+    gettext('my assessments') => '../' ,
+    gettext('set group marks')  => null ,);
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 ?>
@@ -176,11 +176,11 @@ span.id_number { color: #666; }
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('No changes have been saved. Please check the details in the form, and try again.'));
 
 ?>
 
-<p>On this page you can enter the overall marks each group has achieved. These marks are used in the WebPA scoring algorithm, and will form the basis of the final student marks.</p>
+<p><?php echo gettext('On this page you can enter the overall marks each group has achieved. These marks are used in the WebPA scoring algorithm, and will form the basis of the final student marks.');?></p>
 
 <div class="content_box">
 
@@ -188,10 +188,10 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
 ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessments list');?></a>
   </div>
 
-  <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
+  <p><?php echo gettext('The assessment you selected could not be loaded for some reason - please go back and try again.');?></p>
 <?php
 } else {
 ?>
@@ -202,29 +202,29 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a></td>
+      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessment list');?></a></td>
     </tr>
     </table>
   </div>
 
-  <h2>Group Marks</h2>
+  <h2><?php echo gettext('Group Marks');?></h2>
   <div class="form_section">
 <?php
-  echo("<p><label>This assessment is using collection: </label><em>{$collection->name}</em></p>");
+  echo("<p><label>".gettext('This assessment is using collection:')." </label><em>{$collection->name}</em></p>");
 
   $groups = $collection->get_groups_iterator();
 
   if ($groups->size()==0) {
 ?>
-      <p>This collection does not contain any groups</p>
+      <p><?php echo gettext('This collection does not contain any groups');?></p>
 <?php
   } else {
 ?>
       <table class="grid" cellpadding="5" cellspacing="1">
       <tr>
-        <th>Group</th>
-        <th>Members</th>
-        <th>Group Mark</th>
+        <th><?php echo gettext('Group');?></th>
+        <th><?php echo gettext('Members');?></th>
+        <th><?php echo gettext('Group Mark');?></th>
       </tr>
 <?php
     for($groups->reset(); $groups->is_valid(); $groups->next()) {
@@ -258,7 +258,7 @@ if (!$assessment) {
   </div>
 
   <div style="text-align: center">
-      <input type="button" name="savebutton1" id="savebutton1" value="save changes" onclick="do_command('save');" />
+      <input type="button" name="savebutton1" id="savebutton1" value="<?php echo gettext('save changes');?>" onclick="do_command('save');" />
     </div>
 
   </form>

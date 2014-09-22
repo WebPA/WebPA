@@ -34,7 +34,7 @@ $marking_date = (int) fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -43,7 +43,7 @@ if (!$assessment->load($assessment_id)) {
   $marking_params = $assessment->get_marking_params($marking_date);
 
   if (!$marking_params) {
-    echo('Error: The requested marksheet could not be loaded.');
+    echo(gettext('Error: The requested marksheet could not be loaded.'));
     exit;
   }
 
@@ -56,7 +56,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_grade_ordinals($ordinal_scale);
@@ -87,7 +87,7 @@ if (!$assessment->load($assessment_id)) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -128,7 +128,7 @@ if ($type == 'view') {
         if ($marking_params['grading']=='grade_af') {
           echo('A-F.');
         } else {
-          echo('Numeric (%).');
+          echo(gettext('Numeric (%).'));
         }
       ?>
       )
@@ -137,21 +137,21 @@ if ($type == 'view') {
   }
 ?>
 
-  <h2 style="font-size: 150%;">Student Grades (by Group)</h2>
+  <h2 style="font-size: 150%;"><?php echo gettext('Student Grades (by Group)');?></h2>
 
 <?php
   foreach ($group_members as $group_id => $g_members) {
 ?>
     <div style="margin-top: 40px;">
       <h3><?php echo($group_names[$group_id]); ?></h3>
-      <p>Overall group mark: <?php echo($groups_and_marks[$group_id]);?>%.</p>
+      <p><?php echo gettext('Overall group mark:');?> <?php echo($groups_and_marks[$group_id]);?>%.</p>
       <table class="grid" cellpadding="2" cellspacing="1">
       <tr>
-        <th>name</th>
-        <th align="center">WebPA<br />score</th>
-        <th align="center">Intermediate<br />Grade</th>
-        <th align="center"><span style="font-size: 0.9em;">Non-Submission</span><br />Penalty</th>
-        <th align="center">Final<br />Grade</th>
+        <th><?php echo gettext('name');?></th>
+        <th align="center"><?php echo gettext('WebPA<br />score');?></th>
+        <th align="center"><?php echo gettext('Intermediate<br />Grade');?></th>
+        <th align="center"><span style="font-size: 0.9em;"><?php echo gettext('Non-Submission</span><br />Penalty');?></th>
+        <th align="center"><?php echo gettext('Final<br />Grade');?></th>
       </tr>
 <?php
     foreach ($g_members as $i => $member_id) {
@@ -165,7 +165,7 @@ if ($type == 'view') {
 
       // If this user was penalised
       if (array_key_exists($member_id, $penalties)) {
-        $penalty_str = ($penalties[$member_id]==0) ? 'no penalty' : $penalties[$member_id] ;
+        $penalty_str = ($penalties[$member_id]==0) ? gettext('no penalty') : $penalties[$member_id] ;
       } else {
         $penalty_str = '&nbsp;';
       }
@@ -209,14 +209,14 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_grades_by_group.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Student Grades (by group)"'."\n\n");
+  echo(gettext('"Student Grades (by group)"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
   foreach( $group_members as $group_id => $g_members) {
-    echo("\"Group\",\"{$group_names[$group_id]}\"\n");
-    echo("\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n");
+    echo("\"".gettext('Group')."\",\"{$group_names[$group_id]}\"\n");
+    echo("\"".gettext('Overall group mark')."\",\"{$groups_and_marks[$group_id]}\"\n");
 
-    echo('"Name","WebPA score","Intermediate Grade","Non-Submission Penalty","Final Grade"'."\n");
+    echo(gettext('"Name","WebPA score","Intermediate Grade","Non-Submission Penalty","Final Grade"')."\n");
 
     foreach ($g_members as $i => $member_id) {
 
@@ -228,7 +228,7 @@ if ($type == 'download-csv') {
 
       // If this user was penalised
       if (array_key_exists($member_id, $penalties)) {
-        $penalty_str = ($penalties[$member_id]==0) ? 'no penalty' : $penalties[$member_id] ;
+        $penalty_str = ($penalties[$member_id]==0) ? gettext('no penalty') : $penalties[$member_id] ;
       } else {
         $penalty_str = '';
       }
@@ -263,17 +263,17 @@ if ($type == 'download-xml') {
 
   echo("<?xml version=\"1.0\" ?>\n");
 
-  echo("<assessment>\n");
-  echo("\t<assessment_title>{$assessment->name}</assessment_title>\n");
-  echo("\t<weighting>{$marking_params['weighting'] }</weighting>\n");
-  echo("\t<penalty>{$marking_params['penalty']}</penalty>\n");
+  echo("<".gettext('assessment').">\n");
+  echo("\t<".gettext("assessment_title").">{$assessment->name}</".gettext("assessment_title").">\n");
+  echo("\t<".gettext("weighting").">{$marking_params['weighting'] }</".gettext("weighting").">\n");
+  echo("\t<".gettext("penalty").">{$marking_params['penalty']}</".gettext("penalty").">\n");
 
   foreach ($group_members as $group_id => $g_members) {
 
-    echo("\t<group>\n");
-    echo("\t\t<group_name>{$group_names[$group_id]}</group_name>\n");
-    echo("\t\t<group_mark>{$groups_and_marks[$group_id]}</group_mark>\n");
-    echo("\t\t<group_members>\n");
+    echo("\t<".gettext("group").">\n");
+    echo("\t\t<".gettext("group_name").">{$group_names[$group_id]}</".gettext("group_name").">\n");
+    echo("\t\t<".gettext("group_mark").">{$groups_and_marks[$group_id]}</".gettext("group_mark").">\n");
+    echo("\t\t<".gettext("group_members").">\n");
 
     foreach ($g_members as $i => $member_id) {
       $score = (array_key_exists($member_id, $webpa_scores)) ? $webpa_scores[$member_id] : '-' ;
@@ -284,35 +284,35 @@ if ($type == 'download-xml') {
 
       // If this user was penalised
       if (array_key_exists($member_id, $penalties)) {
-        $penalty_str = ($penalties[$member_id]==0) ? 'no penalty' : $penalties[$member_id] ;
+        $penalty_str = ($penalties[$member_id]==0) ? gettext('no penalty') : $penalties[$member_id] ;
       } else {
         $penalty_str = '';
       }
 
       $individ = $CIS->get_user($member_id);
 
-      echo("\t\t\t<student>\n");
-      echo("\t\t\t\t<name>\n");
-      echo("\t\t\t\t\t<forename>{$individ['forename']}</forename>\n");
-      echo("\t\t\t\t\t<lastname>{$individ['lastname']}</lastname>\n");
-      echo("\t\t\t\t</name>\n");
-      echo("\t\t\t\t<institutional_student_number>");
+      echo("\t\t\t<".gettext("student").">\n");
+      echo("\t\t\t\t<".gettext("name").">\n");
+      echo("\t\t\t\t\t<".gettext("forename").">{$individ['forename']}</".gettext("forename").">\n");
+      echo("\t\t\t\t\t<".gettext("lastname").">{$individ['lastname']}</".gettext("lastname").">\n");
+      echo("\t\t\t\t</".gettext("name").">\n");
+      echo("\t\t\t\t<".gettext("institutional_student_number").">");
       if (!empty($individ['id_number'])) {
         echo($individ['id_number']);
       } else {
         echo($individ['username']);
       }
-      echo("</institutional_student_number>\n");
-      echo("\t\t\t\t<webpa_score>$score</webpa_score>\n");
-      echo("\t\t\t\t<intermediate_grade>$intermediate_grade</intermediate_grade>\n");
-      echo("\t\t\t\t<penalty>$penalty_str</penalty>\n");
-      echo("\t\t\t\t<final_grade>$grade</final_grade>\n");
-      echo("\t\t\t</student>\n");
+      echo("</".gettext("institutional_student_number").">\n");
+      echo("\t\t\t\t<".gettext("webpa_score").">$score</".gettext("webpa_score").">\n");
+      echo("\t\t\t\t<".gettext("intermediate_grade").">$intermediate_grade</".gettext("intermediate_grade").">\n");
+      echo("\t\t\t\t<".gettext("penalty").">$penalty_str</".gettext("penalty").">\n");
+      echo("\t\t\t\t<".gettext("final_grade").">$grade</".gettext("final_grade").">\n");
+      echo("\t\t\t</".gettext("student").">\n");
     }
-    echo("\t\t</group_members>\n");
-    echo("\t</group>\n");
+    echo("\t\t</".gettext("group_members").">\n");
+    echo("\t</".gettext("group").">\n");
   }
-  echo("</assessment>\n");
+  echo("</".gettext("assessment").">\n");
 }
 
 /*
@@ -325,14 +325,14 @@ if ($type == 'download-rtf') {
   header("Content-Disposition: attachment; filename=\"webpa_grades_by_group.rtf\"");
   header("Content-Type: text/enriched\n");
 
-  echo("Assessment Title: \t{$assessment->name}");
-  echo("\nWeighting: \t{$marking_params['weighting'] }");
-  echo("\nPenalty: \t{$marking_params['penalty']}");
+  echo(gettext("Assessment Title:")." \t{$assessment->name}");
+  echo("\n".gettext("Weighting:")." \t{$marking_params['weighting'] }");
+  echo("\n".gettext("Penalty:")." \t{$marking_params['penalty']}");
 
   foreach ($group_members as $group_id => $g_members) {
 
-    echo("\n\n\nGroup name: \t{$group_names[$group_id]}");
-    echo("\nGroup mark: \t{$groups_and_marks[$group_id]}");
+    echo("\n\n\n".gettext("Group name:")." \t{$group_names[$group_id]}");
+    echo("\n".gettext("Group mark:")." \t{$groups_and_marks[$group_id]}");
 
     foreach ($g_members as $i => $member_id) {
 
@@ -344,24 +344,24 @@ if ($type == 'download-rtf') {
 
       // If this user was penalised
       if (array_key_exists($member_id, $penalties)) {
-        $penalty_str = ($penalties[$member_id]==0) ? 'no penalty' : $penalties[$member_id] ;
+        $penalty_str = ($penalties[$member_id]==0) ? gettext('no penalty') : $penalties[$member_id] ;
       } else {
         $penalty_str = '';
       }
 
       $individ = $CIS->get_user($member_id);
 
-      echo("\n\n\tName:\t{$individ['forename']} {$individ['lastname']}");
-      echo("\n\tInstitutional student number:\t");
+      echo("\n\n\t".gettext("Name:")."\t{$individ['forename']} {$individ['lastname']}");
+      echo("\n\t".gettext("Institutional student number:")."\t");
       if (!empty($individ['id_number'])) {
         echo($individ['id_number']);
       } else {
         echo($individ['username']);
       }
-      echo("\n\tWebpa score:\t{$score}");
-      echo("\n\tIntermediate grade:\t{$intermediate_grade}");
-      echo("\n\tPenalty:\t{$penalty_str}");
-      echo("\n\tFinal grade:\t{$grade}");
+      echo("\n\t".gettext("Webpa score:")."\t{$score}");
+      echo("\n\t".gettext("Intermediate grade:")."\t{$intermediate_grade}");
+      echo("\n\t".gettext("Penalty:")."\t{$penalty_str}");
+      echo("\n\t".gettext("Final grade:")."\t{$grade}");
     }
   }
 }

@@ -70,13 +70,13 @@ if ( ($command) && ($assessment) ) {
       $weighting = fetch_POST('pa_weighting', null);
       $weighting = (is_numeric($weighting)) ? (int) $weighting : null;
       if ( (is_null($weighting)) || ($weighting<=0) || ($weighting>100) ) {
-        $errors[] = 'The PA Weighting must be a number between 1 - 100';
+        $errors[] = gettext('The PA Weighting must be a number between 1 - 100');
       }
 
       $penalty = fetch_POST('pa_penalty', null);
       $penalty = (is_numeric($penalty)) ? (int) $penalty : null;
       if ( (is_null($penalty)) || ($penalty<$min_penalty) || ($penalty>$max_penalty) ) {
-        $errors[] = "The Non-completion Penalty must be a number between $min_penalty - $max_penalty";
+        $errors[] = sprintf(gettext("The Non-completion Penalty must be a number between %d - %d"), $min_penalty, $max_penalty);
       }
 
       $penalty_type = fetch_POST('pa_penalty_type', null);
@@ -134,19 +134,19 @@ if ( ($command) && ($assessment) ) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = 'create mark sheet';
+$page_title = gettext('create mark sheet');
 
 $UI->page_title = $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  (
   'home'        => '../../' ,
-  'my assessments'  => '../' ,
-  'create mark sheet' => null ,
+    gettext('my assessments')  => '../' ,
+    gettext('create mark sheet') => null ,
 );
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 ?>
@@ -183,12 +183,12 @@ $UI->head();
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('No changes have been saved. Please check the details in the form, and try again.'));
 
 ?>
 
-<p>On this page you can setup the parameters for the WebPA scoring algorithm.</p>
-<p>You can repeat this process many times, creating several mark sheets for the same assessment but using different parameters.</p>
+<p><?php echo gettext('On this page you can setup the parameters for the WebPA scoring algorithm.');?></p>
+<p><?php echo gettext('You can repeat this process many times, creating several mark sheets for the same assessment but using different parameters.');?></p>
 
 <div class="content_box">
 
@@ -196,10 +196,10 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
 ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessments list');?></a>
   </div>
 
-  <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
+  <p><?php echo gettext('The assessment you selected could not be loaded for some reason - please go back and try again.');?></p>
 <?php
 } else {
 ?>
@@ -208,20 +208,20 @@ if (!$assessment) {
   <input type="hidden" name="command" value="none" />
 
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a>
+    <a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to assessment list');?></a>
   </div>
 
 
-  <h2>Algorithm Parameters</h2>
+  <h2><?php echo gettext('Algorithm Parameters');?></h2>
   <div class="form_section">
-    <p>Enter the parameters to use below. When you've made your changes, click the <em>create mark sheet</em> button.</p>
+    <p><?php echo gettext('Enter the parameters to use below. When you\'ve made your changes, click the <em>create mark sheet</em> button.');?>'</p>
 
     <br />
 
-    <p>What percentage of the group's total mark should be peer-assessed?</p>
+    <p><?php echo gettext('What percentage of the group\'s total mark should be peer-assessed?');?></p>
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
-      <th><label for="pa_weighting">PA Weighting</label></th>
+      <th><label for="pa_weighting"><?php echo gettext('PA Weighting');?></label></th>
       <td>
         <select name="pa_weighting" id="pa_weighting">
 <?php
@@ -236,10 +236,10 @@ if (!$assessment) {
     </table>
 
     <br />
-    <p>If a student has not submitted any marks for the assessment, how much should they be penalised?</p>
+    <p><?php echo gettext('If a student has not submitted any marks for the assessment, how much should they be penalised?');?></p>
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
-      <th><label for="pa_penalty">Penalty for non-completion</label></th>
+      <th><label for="pa_penalty"><?php echo gettext('Penalty for non-completion');?></label></th>
       <td>
         <select name="pa_penalty" id="pa_penalty">
 <?php
@@ -250,25 +250,25 @@ if (!$assessment) {
 ?>
         </select>
       </td>
-      <td>of their final grade.</td>
+      <td><?php echo gettext('of their final grade.');?></td>
     </tr>
     </table>
     <br />
 
-    <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a></div>
+    <div style="float:right"><b><?php echo gettext('Advanced Options');?></b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="<?php echo gettext('view / hide advanced options');?>"></a></div>
 
     <div id="advanced" style="display:none;" class="advanced_options">
 
       <br />
       <br />
-      <p>What type of penalty do you want to apply?</p>
+      <p><?php echo gettext('What type of penalty do you want to apply?');?></p>
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
-        <th><label for="pa_penalty_type">Penalty Type</label></th>
+        <th><label for="pa_penalty_type"><?php echo gettext('Penalty Type');?></label></th>
         <td>
           <select name="pa_penalty_type" id="pa_penalty_type">
-            <option value="%" selected="selected"> Percentage (%) </option>
-            <option value="pp"> Percentage Points (pp) </option>
+            <option value="%" selected="selected"> <?php echo gettext('Percentage (%)');?> </option>
+            <option value="pp"> <?php echo gettext('Percentage Points (pp)');?> </option>
           </select>
         </td>
       </tr>
@@ -307,15 +307,15 @@ if (!$assessment) {
 ?>
 
       <br />
-      <p>How do you want student grades to be displayed?</p>
-      <p>A-F Grades will be calculated using the levels defined by your WebPA administrator.</p>
+      <p><?php echo gettext('How do you want student grades to be displayed?');?></p>
+      <p><?php echo gettext('A-F Grades will be calculated using the levels defined by your WebPA administrator.');?></p>
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
-        <th><label for="pa_grading">Grading Type</label></th>
+        <th><label for="pa_grading"><?php echo gettext('Grading Type');?></label></th>
         <td>
           <select name="pa_grading" id="pa_grading">
-            <option value="numeric"> Percentage Grades </option>
-            <option value="grade_af"> Alphabetic Grades (A-F) </option>
+            <option value="numeric"> <?php echo gettext('Percentage Grades');?> </option>
+            <option value="grade_af"> <?php echo gettext('Alphabetic Grades (A-F)');?> </option>
           </select>
         </td>
       </tr>
@@ -323,13 +323,13 @@ if (!$assessment) {
 
 
       <br />
-      <p>Which algorithm do you wish to use to generate the student's grades?</p>
+      <p><?php echo gettext('Which algorithm do you wish to use to generate the student\'s grades?');?></p>
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <td><input type="radio" name="pa_algorithm" id="alg_webpa" value="webpa" checked="checked" /></td>
-        <td style="padding-bottom: 8px;"><label for="alg_webpa">WebPA Algorithm (default)
-          <br /><span style="font-weight: normal;">This is the usual, WebPA way of calculating grades.
-          <br />The marks awarded to each student are normalised based on the generosity of the student doing the marking.</span></label>
+        <td style="padding-bottom: 8px;"><label for="alg_webpa"><?php echo gettext('WebPA Algorithm (default)');?>
+          <br /><span style="font-weight: normal;"><?php echo gettext('This is the usual, WebPA way of calculating grades.');?>
+          <br /><?php echo gettext('The marks awarded to each student are normalised based on the generosity of the student doing the marking.');?></span></label>
           <br />
         </td>
       </tr>
@@ -341,9 +341,9 @@ if (!$assessment) {
 	      ?>
 	      <tr>
 	        <td><input type="radio" name="pa_algorithm" id="alg_pets" value="pets" /></td>
-	        <td style="padding-bottom: 8px;"><label for="alg_pets">PETS Algorithm
-	          <br /><span style="font-weight: normal;">The marks awarded to each student are not normalised.
-	          <br />This algorithm, together with the Split100 style criteria, are recommended by the Pro-actively Ensuring Team Success (PETS) process, produced by Lydia Kavanagh at the University of Queensland, Australia.</span></label>
+	        <td style="padding-bottom: 8px;"><label for="alg_pets"><?php echo gettext('PETS Algorithm');?>
+	          <br /><span style="font-weight: normal;"><?php echo gettext('The marks awarded to each student are not normalised.');?>
+	          <br /><?php echo gettext('This algorithm, together with the Split100 style criteria, are recommended by the Pro-actively Ensuring Team Success (PETS) process, produced by Lydia Kavanagh at the University of Queensland, Australia.');?></span></label>
 	        </td>
 	      </tr>
 	      <?php
@@ -356,7 +356,7 @@ if (!$assessment) {
     <br /><br />
 
     <div style="text-align: center">
-      <input type="button" name="savebutton1" id="savebutton1" value="create mark sheet" onclick="do_command('save');" />
+      <input type="button" name="savebutton1" id="savebutton1" value="<?php echo gettext('create mark sheet');?>" onclick="do_command('save');" />
     </div>
   </div>
 

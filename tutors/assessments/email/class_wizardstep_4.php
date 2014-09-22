@@ -103,7 +103,7 @@ class WizardStep4 {
       $bcc_list = array_extract_column($users_arr, 'email');
       $bcc_list[] = $user->email;
     } else {
-      $errors[] = 'Unable to build email list - no students to email.';
+      $errors[] = gettext('Unable to build email list - no students to email.');
     }
 
     if (is_array($bcc_list)) {
@@ -115,19 +115,19 @@ class WizardStep4 {
       $email->set_body($this->wizard->get_field('email_text'));
       $email->send();
     } else {
-      $errors[] = 'No list of students to email.';
+      $errors[] = gettext('No list of students to email.');
     }
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to send email.</strong></p>');
-      echo('<p>To try correcting the problem, click <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to send email.').'</strong></p>');
+      echo('<p>'.gettext('To try correcting the problem, click <em>back</em> and amend the details entered.').'</p>');
     } else {
 ?>
-      <p><strong>Your email has been sent.</strong></p>
-      <p style="margin-top: 20px;">You can now return to <a href="<?php echo($this->wizard->get_field('list_url')); ?>">your assessment list</a>, or to the <a href="/">WebPA home page</a>.</p>
+      <p><strong><?php echo gettext('Your email has been sent.');?></strong></p>
+      <p style="margin-top: 20px;"><?php echo sprintf(gettext('You can now return to <a href="%s">your assessment list</a>, or to the <a href="/">WebPA home page</a>.'), $this->wizard->get_field('list_url'));?></p>
 <?php
     }
   }// /->form()

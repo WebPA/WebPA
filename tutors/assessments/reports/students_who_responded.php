@@ -54,14 +54,14 @@ if ($assessment->load($assessment_id)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' ' . 'students who responded';
-$UI->menu_selected = 'my assessments';
+$UI->page_title = APP__NAME . ' ' . gettext('students who responded');
+$UI->menu_selected = gettext('my assessments');
 $UI->breadcrumbs = array  ('home'           => '/' ,
-               'my assessments'     => $list_url ,
-               'students who responded' => null ,);
+    gettext('my assessments')     => $list_url ,
+    gettext('students who responded') => null ,);
 
-$UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '../assessments/index.php');
-$UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../images/buttons/button_assessment_list.gif', '../assessments/index.php');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 ?>
@@ -78,16 +78,16 @@ $UI->body();
 $UI->content_start();
 ?>
 
-<p>This page shows all the students assigned this assessment and which have responded.</p>
+<p><?php echo gettext('This page shows all the students assigned this assessment and which have responded.');?></p>
 
 <div class="content_box">
 
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo($list_url) ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessments list');?></a>
   </div>
 
-  <p>The following list shows which students in each group have submitted there responses to the assessment.</p>
-  <p>To email an individual student, click on the email link next to their name.</p>
+  <p><?php echo gettext('The following list shows which students in each group have submitted there responses to the assessment.');?></p>
+  <p><?php echo gettext('To email an individual student, click on the email link next to their name.');?></p>
 <?php
 if ($groups_iterator->size()>0) {
   for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
@@ -97,22 +97,22 @@ if ($groups_iterator->size()>0) {
     echo("<h2>{$group->name}</h2>");
 
     if (!$members) {
-      echo('<p>This group has no members.</p>');
+      echo('<p>'.gettext('This group has no members.').'</p>');
     } else {
 ?>
         <table class="grid" cellspacing="1" cellpadding="2" style="width: 90%">
         <tr>
-          <th>name</th>
-          <th>email</th>
-          <th>responded</th>
+          <th><?php echo gettext('name');?></th>
+          <th><?php echo gettext('email');?></th>
+          <th><?php echo gettext('responded');?></th>
         </tr>
 <?php
       foreach ($members as $i => $member) {
         if (in_array($member['user_id'], (array)$responded_users)) {
-          $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
+          $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="'.gettext('Responded').'" />';
           $responded_class = 'class="responded"';
         } else {
-          $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
+          $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="'.gettext('Not Responded').'"/>';
           $responded_class = 'class="notresponded"';
         }
         echo("<tr $responded_class><td>{$member['lastname']}, {$member['forename']} (");

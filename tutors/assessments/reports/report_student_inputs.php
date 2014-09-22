@@ -34,7 +34,7 @@ $marking_date = (int) fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -51,7 +51,7 @@ if (!$assessment->load($assessment_id)) {
 
 
   if (!$marking_params) {
-    echo('Error: The requested marksheet could not be loaded.');
+    echo(gettext('Error: The requested marksheet could not be loaded.'));
     exit;
   }
 
@@ -64,7 +64,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_grade_ordinals($ordinal_scale);
@@ -102,7 +102,7 @@ if (!$assessment->load($assessment_id)) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -129,7 +129,7 @@ if ($type == 'view') {
 
   <div class="content_box">
 
-  <h2 style="font-size: 150%;">Marks Awarded For Each Question</h2>
+  <h2 style="font-size: 150%;"><?php echo gettext('Marks Awarded For Each Question');?></h2>
 
 <?php
   foreach ($group_members as $group_id => $g_members) {
@@ -141,7 +141,7 @@ if ($type == 'view') {
     foreach ($questions as $question_id => $question) {
       $q_index = $question_id+1;
 
-      echo("<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>");
+      echo("<p>Q{$q_index} : {$question['text']['_data']} (".gettext("range:")." {$question['range']['_data']})</p>");
 ?>
         <table class="grid" cellpadding="2" cellspacing="1" style="font-size: 0.8em">
         <tr>
@@ -199,7 +199,7 @@ if ($type == 'view') {
       }
 ?>
         <tr class="q_total">
-          <th>Score Received</th>
+          <th><?php echo gettext('Score Received');?></th>
 <?php
       foreach($g_members as $i => $member_id) {
         echo("<th>{$q_total[$member_id]}</th>");
@@ -231,7 +231,7 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_marks_awarded_byquestion.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Marks Awarded For Each Question"'."\n\n");
+  echo(gettext('"Marks Awarded For Each Question"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
   foreach ($group_members as $group_id => $g_members) {
@@ -249,7 +249,7 @@ if ($type == 'download-csv') {
       $q_index = $question_id+1;
 
       echo("\n");
-      echo("\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n");
+      echo("\"Q{$q_index} : {$question['text']['_data']} (".gettext("range:")." {$question['range']['_data']})\"\n");
 
       echo("\"\",");
 

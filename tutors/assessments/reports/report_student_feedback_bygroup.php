@@ -37,7 +37,7 @@ $marking_date = (int) fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -48,7 +48,7 @@ if (!$assessment->load($assessment_id)) {
   $marking_params = $assessment->get_marking_params($marking_date);
 
   if (!$marking_params) {
-    echo('Error: The requested marksheet could not be loaded.');
+    echo(gettext('Error: The requested marksheet could not be loaded.'));
     exit;
   }
 
@@ -61,7 +61,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_grade_ordinals($ordinal_scale);
@@ -116,7 +116,7 @@ if (!$assessment->load($assessment_id)) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -141,7 +141,7 @@ if ($type == 'view') {
 
   <div class="content_box">
 
-  <h2 style="font-size: 150%;">Student feedback and Justification (by Group)</h2>
+  <h2 style="font-size: 150%;"><?php echo gettext('Student feedback and Justification (by Group)');?></h2>
 
 <?php
   if (($assessment) && ($groups_and_marks)) {
@@ -153,9 +153,9 @@ if ($type == 'view') {
         <p>Overall group mark: <?php echo($groups_and_marks[$group_id]);?>%.</p>
         <table class="grid" cellpadding="2" cellspacing="1">
         <tr>
-          <th>name</th>
-          <th>feedback recipient</th>
-          <th>feedback / justification<br/> comments</th>
+          <th><?php echo gettext('name');?></th>
+          <th><?php echo gettext('feedback recipient');?></th>
+          <th><?php echo gettext('feedback / justification<br/> comments');?></th>
         </tr>
 <?php
       $j = 0;
@@ -198,13 +198,13 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_student_feedback.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Student feedback and Justification (by Group)"'."\n\n");
+  echo(gettext('"Student feedback and Justification (by Group)"')."\n\n");
 
   if (($assessment) && ($groups_and_marks)) {
     foreach ($group_members as $group_id => $g_members) {
-      echo("\"Group\",\"{$group_names[$group_id]}\"\n");
-      echo("\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n");
-      echo("\"Name\",\"feedback recipient\",\"feedback / justification comments\"\n");
+      echo("\"".gettext('Group')."\",\"{$group_names[$group_id]}\"\n");
+      echo("\"".gettext('Overall group mark')."\",\"{$groups_and_marks[$group_id]}\"\n");
+      echo("\"".gettext('Name')."\",\"".gettext('feedback recipient')."\",\"".gettext('feedback / justification comments')."\"\n");
       $j = 0;
       foreach ($g_members as $i => $member_id) {
         //loop round the array with all the user data, so that we can out put it
