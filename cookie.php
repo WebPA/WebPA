@@ -28,7 +28,7 @@ if ($_user) {
   } else {
     $url .= '&';
   }
-  header('Location: ' . $url . 'lti_errormsg=' . urlencode('Unable to connect to ' . APP__NAME . '; please ensure that your browser is not blocking third-party cookies'));
+  header('Location: ' . $url . 'lti_errormsg=' . urlencode(sprintf(gettext('Unable to connect to ' . APP__NAME . '; please ensure that your browser is not blocking third-party cookies'), APP__NAME)));
 } else {
   header('Location: ' . APP__WWW . '/login.php?msg=cookies');
 }

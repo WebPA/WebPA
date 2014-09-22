@@ -106,11 +106,11 @@ $UI->content_start();
   <div style="width: 300px;">
     <table class="form" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-      <th><label for="username">Username</label></th>
+      <th><label for="username"><?php echo gettext('Username'); ?></label></th>
       <td><input type="text" name="username" id="username" maxlength="30" size="10" value="" onfocus="username_focussed=true" onblur="username_focussed=false" /></td>
     </tr>
     <tr>
-      <th><label for="password">Password</label></th>
+      <th><label for="password"><?php echo gettext('Password'); ?></label></th>
       <td><input type="password" name="password" id="password" maxlength="16" size="10" value="" onfocus="password_focussed=true" onblur="password_focussed=false" /></td>
     </tr>
     </table>
@@ -121,7 +121,7 @@ $UI->content_start();
   </div>
   </form>
   <p><strong><a href="accounts/reset.php"><?php echo gettext('Forgotten your password?'); ?></a></strong></p>
-  <p>This site requires cookies - If you have trouble logging in, please check your cookie settings.</p>
+  <p><?php echo gettext('This site requires cookies - If you have trouble logging in, please check your cookie settings.'); ?></p>
 
 </div>
 
