@@ -1,0 +1,447 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webpa\n"
+"POT-Creation-Date: 2014-09-22 11:44+0100\n"
+"PO-Revision-Date: 2014-09-22 11:45+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: /srv/http/WebPA-Source/\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: login.php:26
+msgid ""
+"A connection to the authentication server could not be established.<br /"
+">Please try again later."
+msgstr ""
+
+#: login.php:31
+msgid ""
+"You attempted to access a restricted page.<br />It may be that your session "
+"has timed out so please re-enter your details."
+msgstr ""
+"U heeft geen toegang tot deze pagina.<br />Mogelijks is uw sessie "
+"automatisch beëindigd en moet u opnieuw inloggen."
+
+#: login.php:36
+msgid ""
+"Your account has been disabled.<br />Please contact support if you do not "
+"think this should be the case."
+msgstr ""
+
+#: login.php:41
+msgid ""
+"Your username and password were rejected.<br />Please check your details and "
+"try again."
+msgstr ""
+"Uw gebruikersnaam en wachtwoord werden geweigerd.<br />Gelieve uw gegevens "
+"te controleren en opnieuw te proberen."
+
+#: login.php:46
+#, php-format
+msgid ""
+"Unable to connect to %s; please ensure that your browser is not blocking "
+"third-party cookies"
+msgstr ""
+
+#: login.php:51
+msgid ""
+"You have logged out.<br />If you wish to log back in, please re-enter your "
+"details."
+msgstr ""
+
+#: login.php:56
+#, php-format
+msgid "To start using %s you have to log in."
+msgstr "Om %s te gebruiken moet u inloggen."
+
+#: login.php:123
+msgid "Forgotten your password?"
+msgstr "Wachtwoord vergeten?"
+
+#: students/assessments/assessment_feedback.php:44
+msgid "Error: The requested assessment could not be loaded."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:68
+msgid "Error: The requested algorithm could not be loaded."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:112
+msgid "Feedback Report"
+msgstr "Feedbackverslag"
+
+#: students/assessments/assessment_feedback.php:132
+#, php-format
+msgid ""
+"The following is based on your relative contribution in the group, measured "
+"from the self and peer assessment %s only and does <b>not</b> take account "
+"of the overall group %s for the project."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:140
+msgid "WebPA could not generate feedback for your assessment."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:141
+msgid "There was a technical problem retrieving your information."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:212
+msgid ""
+"Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are "
+"unable to provide feedback on your relative performance for different "
+"assessment criteria."
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:236
+#: students/assessments/assessment_feedback.php:242
+msgid ""
+"Your strongest contribution within this project was rated by your group as:"
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:250
+#: students/assessments/assessment_feedback.php:303
+msgid "WebPA has been unable to generate any feedback"
+msgstr ""
+
+#: students/assessments/assessment_feedback.php:274
+#: students/assessments/assessment_feedback.php:281
+#: students/assessments/assessment_feedback.php:296
+msgid "An area you may wish to develop is your contribution to:"
+msgstr ""
+
+#: students/assessments/index.php:98
+msgid "my assessments"
+msgstr "Mijn assessments"
+
+#: students/assessments/index.php:112
+msgid ""
+"This page lists all the assessments you are registered on in this module."
+msgstr ""
+
+#: students/assessments/index.php:118
+msgid ""
+"You are not registered with any peer assessments in this module at the "
+"moment."
+msgstr ""
+
+#: students/assessments/index.php:120
+msgid "You are registered on the following peer assessments in this module:"
+msgstr ""
+
+#: students/assessments/index.php:124 students/index.php:127
+msgid "Open Assessments"
+msgstr "Open Assessments."
+
+#: students/assessments/index.php:125
+msgid "These assessments are now open for you to take and record your group"
+msgstr ""
+
+#: students/assessments/index.php:143
+msgid "scheduled:"
+msgstr "gepland:"
+
+#: students/assessments/index.php:147
+msgid "Take Assessment"
+msgstr "Doe Assessment."
+
+#: students/assessments/index.php:159 students/index.php:162
+msgid "Pending Assessments"
+msgstr "Open Assessments"
+
+#: students/assessments/index.php:160 students/index.php:163
+msgid "These assessments scheduled for some point in the future."
+msgstr ""
+
+#: students/assessments/index.php:192
+msgid "Finished Assessments"
+msgstr "Vervolledigde Assessments."
+
+#: students/assessments/index.php:193
+msgid ""
+"These assessments you have already taken, or which have passed their "
+"deadline for completion."
+msgstr ""
+
+#: students/assessments/index.php:194
+msgid ""
+"Some of your assessments may allow you to see feedback on your performance. "
+"Click <em>view feedback</em> (if available) for a particular assessment to "
+"see the feedback."
+msgstr ""
+
+#: students/assessments/index.php:207
+msgid "COMPLETED"
+msgstr "VERVOLLEDIGD"
+
+#: students/assessments/index.php:207
+msgid "DID NOT<br />SUBMIT"
+msgstr "NIET<br />INGEDIEND"
+
+#: students/assessments/take/already_submitted.php:42
+msgid "already submitted"
+msgstr "reeds ingediend"
+
+#: students/assessments/take/already_submitted.php:59
+#: students/assessments/take/already_submitted.php:70
+#: students/assessments/take/finished.php:59
+#: students/assessments/take/finished.php:70
+#: students/assessments/take/index.php:349
+#: students/assessments/take/index.php:364
+#: students/assessments/take/not_open.php:58
+#: students/assessments/take/not_open.php:69
+msgid "back to assessments list"
+msgstr "terug naar de assessmentlijst"
+
+#: students/assessments/take/already_submitted.php:62
+#, php-format
+msgid ""
+"The assessment you selected could not be loaded for some reason - However, "
+"you have already submitted your %s for this assessment."
+msgstr ""
+
+#: students/assessments/take/already_submitted.php:63
+#: students/assessments/take/not_open.php:62
+msgid ""
+"If the problem loading this assessment persists, please use the contact "
+"system to <a href=\"/students/support/contact/index.php?q=bug\">report the "
+"error"
+msgstr ""
+
+#: students/assessments/take/already_submitted.php:75
+#, php-format
+msgid "You have already submitted your %s for this assessment:"
+msgstr ""
+
+#: students/assessments/take/already_submitted.php:76
+msgid ""
+"If you have another assessment to take, please select it from your <a href="
+"\"<?php echo($list_url); ?>\">assessments list"
+msgstr ""
+
+#: students/assessments/take/finished.php:41
+msgid "finished:"
+msgstr ""
+
+#: students/assessments/take/finished.php:62
+#, php-format
+msgid ""
+"The assessment you selected could not be loaded for some reason - Your %s "
+"for this assessment should have been saved so please check this from the <a "
+"href=\"../../\">my assessments</a> section."
+msgstr ""
+
+#: students/assessments/take/finished.php:63
+msgid ""
+"If the problem persists, please use the contact system to <a href=\"../../"
+"support/contact/index.php?q=bug\">report the error"
+msgstr ""
+
+#: students/assessments/take/finished.php:75
+msgid "Thank you, your marks have now been saved."
+msgstr ""
+
+#: students/assessments/take/finished.php:76
+msgid ""
+"You can now check your <a href=\"../../\">assessments list</a> and take "
+"another assessment, or finish with WebPA and <a href=\"<?php echo APP__WWW;?"
+">/logout.php\">logout"
+msgstr ""
+
+#: students/assessments/take/index.php:122
+msgid ""
+"You were too late in submitting your answers, the assessment is now closed."
+msgstr ""
+
+#: students/assessments/take/index.php:133
+msgid "Unable to load question data!"
+msgstr ""
+
+#: students/assessments/take/index.php:153
+#: students/assessments/take/index.php:200
+#, php-format
+msgid "You didn't give a %s for '%s' in Q%d."
+msgstr "U gaf geen %s voor '%s' in Q%d."
+
+#: students/assessments/take/index.php:157
+#, php-format
+msgid "You didn't give a valid %s for '%s' in Q%d."
+msgstr "U gaf geen geldige %s voor '%s' in Q%d."
+
+#: students/assessments/take/index.php:162
+#, php-format
+msgid ""
+"Your %s of %d for '%s' in Q%d is invalid.<br /> %s must be between 0 and "
+"%.2f."
+msgstr ""
+
+#: students/assessments/take/index.php:180
+#, php-format
+msgid "The total %s for Q%d should be %d. You have %s totalling %d."
+msgstr ""
+
+#: students/assessments/take/index.php:208
+#, php-format
+msgid ""
+"The %s of %d given in Q%d for %s is not allowed. %s must be between %d and "
+"%d."
+msgstr ""
+
+#: students/assessments/take/index.php:340
+msgid "The following errors were found:"
+msgstr "Volgende fouten werden gevonden:"
+
+#: students/assessments/take/index.php:340
+msgid ""
+"Your responses have not been saved. Please check the details in the form, "
+"and try again."
+msgstr ""
+"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
+"te controleren en opnieuw te proberen."
+
+#: students/assessments/take/index.php:352
+msgid ""
+"The assessment you selected could not be loaded for some reason - please go "
+"back and try again."
+msgstr ""
+
+#: students/assessments/take/index.php:353
+msgid ""
+"If the problem persists, please use the contact system to <a href=\"/"
+"students/support/contact/index.php?q=bug\">report the error"
+msgstr ""
+
+#: students/assessments/take/index.php:370
+#, fuzzy
+msgid "Taking This Assessment"
+msgstr "Mijn opdrachten."
+
+#: students/assessments/take/index.php:372
+#, php-format
+msgid ""
+"Please complete the assessment below. For each question <em>you must give a "
+"%s to each group member"
+msgstr ""
+
+#: students/assessments/take/index.php:372
+msgid ", including yourself"
+msgstr ""
+
+#: students/assessments/take/index.php:373
+#, php-format
+msgid ""
+"To save your %s, you must click the <em>Save %s</em> button.  Once you have "
+"successfully submitted your responses you cannot go back and change your %s."
+msgstr ""
+
+#: students/assessments/take/index.php:374
+msgid ""
+"To leave this assessment without saving, click the <em>back to assessments "
+"list</em> link above, or choosing an option from the menu."
+msgstr ""
+
+#: students/assessments/take/index.php:378
+msgid "Your Team"
+msgstr "Uw team"
+
+#: students/assessments/take/index.php:388
+msgid "Introduction"
+msgstr "Inleiding"
+
+#: students/assessments/take/index.php:397
+msgid "Assessment Criteria"
+msgstr "Beoordelingscriteria"
+
+#: students/assessments/take/index.php:403
+#, php-format
+msgid ""
+"That concludes this peer assessment. To finish and submit your response "
+"click the <em>save %s</em> button below."
+msgstr ""
+
+#: students/assessments/take/index.php:404
+#, php-format
+msgid ""
+"Once you have successfully submitted your responses you cannot go back and "
+"change your %s."
+msgstr ""
+
+#: students/assessments/take/not_open.php:61
+#, php-format
+msgid ""
+"The assessment you selected could not be loaded for some reason - However, "
+"in this case, the assessment is <em>not open and cannot accept student %s"
+msgstr ""
+
+#: students/assessments/take/not_open.php:74
+#, php-format
+msgid ""
+"This assessment is not open at the present time, so you cannot submit any %s."
+msgstr ""
+
+#: students/assessments/take/not_open.php:75
+#, php-format
+msgid ""
+"If you have missed the deadline, contact your lecturer. Otherwise, if you "
+"have another assessment to take, please select it from your <a href=\"%s"
+"\">assessments list</a>"
+msgstr ""
+
+#: students/groups/index.php:65
+msgid ""
+"Here you can view which groups you are a member of, and who the other "
+"members are."
+msgstr ""
+
+#: students/groups/index.php:69
+msgid "Your Groups"
+msgstr ""
+
+#: students/groups/index.php:74
+msgid "You are not listed as a member of any group."
+msgstr ""
+
+#: students/groups/index.php:75
+msgid ""
+"Only groups that have been scheduled an assessment will appear in this list."
+msgstr ""
+
+#: students/index.php:96
+msgid "You will need to seek help from your tutor."
+msgstr ""
+
+#: students/index.php:113
+msgid ""
+"Welcome to WebPA, the easiest way for you to complete your peer assessment "
+"on the web."
+msgstr ""
+
+#: students/index.php:119
+msgid ""
+"There are no assessments in this module available for you to take at the "
+"moment."
+msgstr ""
+
+#: students/index.php:120
+msgid ""
+"To view all the assessments you are registered on, please check the <a href="
+"\"assessments/\">my assessments</a> section."
+msgstr ""
+
+#: students/index.php:124
+msgid "Below is a list of the assessments in this module you can take now."
+msgstr ""
+"Hieronder is een lijst van de assessments in deze module die u nu kan "
+"starten."
+
+#: students/index.php:125
+msgid ""
+"To view all the assessments you are registered on in this module, please "
+"check the <a href=\"assessments/\">my assessments</a> section."
+msgstr ""

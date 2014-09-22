@@ -95,7 +95,7 @@ if ($assessments) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' my assessments';
+$UI->page_title = APP__NAME .' '.gettext('my assessments');
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  (
@@ -109,20 +109,20 @@ $UI->body();
 $UI->content_start();
 ?>
 
-<p>This page lists all the assessments you are registered on in this module.</p>
+<p><?php echo gettext('This page lists all the assessments you are registered on in this module.'); ?></p>
 
 <div class="content_box">
 
 <?php
 if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments) ) {
-  echo('<p>You are not registered with any peer assessments in this module at the moment.</p>');
+  echo('<p>'.gettext('You are not registered with any peer assessments in this module at the moment.').'</p>');
 } else {
-  echo('<p>You are registered on the following peer assessments in this module:</p>');
+  echo('<p>'.gettext('You are registered on the following peer assessments in this module:').'</p>');
 
   if ($open_assessments) {
 ?>
-      <h2>Open Assessments</h2>
-      <p>These assessments are now open for you to take and record your group <?php echo APP__MARK_TEXT; ?>.</p>
+      <h2><?php echo gettext('Open Assessments'); ?></h2>
+      <p><?php echo gettext('These assessments are now open for you to take and record your group').' '.APP__MARK_TEXT; ?>.</p>
       <div class="form_section form_line">
 <?php
     $status = 'open';
@@ -140,11 +140,11 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
       echo('  <td valign="top">');
       echo('    <div class="assessment_info">');
       echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-      echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
+      echo('      <div class="assessment_schedule">'.gettext('scheduled:'). $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
       echo('    </div>');
       echo('  </td>');
       echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
-      echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
+      echo("    <a class=\"button\" href=\"$take_url\">".gettext('Take Assessment')."</a>");
       echo('  </td>');
       echo('</tr>');
       echo('</table>');
@@ -156,8 +156,8 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
   }
   if ($pending_assessments) {
 ?>
-      <h2>Pending Assessments</h2>
-      <p>These assessments scheduled for some point in the future.</p>
+      <h2><?php echo gettext('Pending Assessments');?></h2>
+      <p><?php echo gettext('These assessments scheduled for some point in the future.'); ?></p>
       <div class="form_section form_line">
 <?php
     $status = 'pending';
@@ -189,9 +189,9 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
 
   if ($finished_assessments) {
 ?>
-      <h2>Finished Assessments</h2>
-      <p>These assessments you have already taken, or which have passed their deadline for completion.</p>
-      <p>Some of your assessments may allow you to see feedback on your performance. Click <em>view feedback</em> (if available) for a particular assessment to see the feedback.</p>
+      <h2><?php echo gettext('Finished Assessments'); ?></h2>
+      <p><?php echo gettext('These assessments you have already taken, or which have passed their deadline for completion.');?></p>
+      <p><?php echo gettext('Some of your assessments may allow you to see feedback on your performance. Click <em>view feedback</em> (if available) for a particular assessment to see the feedback.');?></p>
       <div class="form_section">
 <?php
     $status = 'finished';
@@ -204,7 +204,7 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
       $assessment =& $assessment_iterator->current();
       $take_url = "take/index.php?a={$assessment->id}";
 
-      $completed_msg = ( (is_array($assessments_with_response)) && (in_array($assessment->id, $assessments_with_response)) ) ? 'COMPLETED': 'DID NOT<br />SUBMIT';
+      $completed_msg = ( (is_array($assessments_with_response)) && (in_array($assessment->id, $assessments_with_response)) ) ? gettext('COMPLETED'): gettext('DID NOT<br />SUBMIT');
 
       echo("<div class=\"assessment_finished\">");
       echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');

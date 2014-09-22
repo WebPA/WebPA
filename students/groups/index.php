@@ -62,22 +62,22 @@ div.own_member_name { font-style: italic; }
 $UI->content_start();
 ?>
 
-<p>Here you can view which groups you are a member of, and who the other members are.</p>
+<p><?php echo gettext('Here you can view which groups you are a member of, and who the other members are.');?></p>
 
 <div class="content_box">
 
-<h2>Your Groups</h2>
+<h2><?php echo gettext('Your Groups');?></h2>
 <div class="form_section">
 <?php
 if (!$collections) {
 ?>
-    <p>You are not listed as a member of any group.</p>
-    <p>Only groups that have been scheduled an assessment will appear in this list.</p>
+    <p><?php echo gettext('You are not listed as a member of any group.');?></p>
+    <p><?php echo gettext('Only groups that have been scheduled an assessment will appear in this list.');?></p>
 <?php
 } else {
   $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
 ?>
-    <p>You belong to the following groups.</p>
+    <p><?php echo gettext('You belong to the following groups.');?></p>
 <?php
   for($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next() ) {
     $collection =& $collection_iterator->current();

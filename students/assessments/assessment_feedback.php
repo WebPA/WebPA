@@ -41,7 +41,7 @@ function extract_min($input_array){
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -65,7 +65,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_grade_ordinals($ordinal_scale);
@@ -109,7 +109,7 @@ if (!$assessment->load($assessment_id)) {
 }// /if-else(is assessment)
 
 
-$UI->page_title = APP__NAME . ' Feedback Report';
+$UI->page_title = APP__NAME .' '.gettext('Feedback Report');
 $UI->head();
 ?>
 <style type="text/css">
@@ -129,8 +129,7 @@ $UI->content_start();
 
 
 <h2><?php echo($assessment->name); ?></h2>
-<p style="margin-bottom: 2em;">The following is based on your relative contribution in the group, measured from the self and peer assessment
-   <?php echo APP__MARK_TEXT; ?> only and does <b>not</b> take account of the overall group <?php echo APP__MARK_TEXT; ?> for the project.</p>
+<p style="margin-bottom: 2em;"><?php echo sprintf(gettext('The following is based on your relative contribution in the group, measured from the self and peer assessment %s only and does <b>not</b> take account of the overall group %s for the project.'), APP__MARK_TEXT, APP__MARK_TEXT); ?></p>
 </p>
 
 
@@ -138,8 +137,8 @@ $UI->content_start();
 if ( (!$assessment) || (!$group_names) ) {
 ?>
   <div class="warning_box">
-    <p style="font-weight: bold;">WebPA could not generate feedback for your assessment.</p>
-    <p>There was a technical problem retrieving your information.</p>
+    <p style="font-weight: bold;"><?php echo gettext('WebPA could not generate feedback for your assessment.'); ?></p>
+    <p><?php echo gettext('There was a technical problem retrieving your information.'); ?></p>
   </div>
 <?php
 } else {
@@ -210,7 +209,7 @@ if ( (!$assessment) || (!$group_names) ) {
   //check to see if the answer are all the same for all questions
   if ($match==$question_count) {
 
-    echo "<p>Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria.</p>";
+    echo "<p>".gettext("Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria.")."</p>";
 
   } else {
 
@@ -234,13 +233,13 @@ if ( (!$assessment) || (!$group_names) ) {
         if ($max_score[$returned_max[0]]['mark_received']==$max_score[$returned_max[1]]['mark_received']){
           //leave in incase we want to offer more than one result
           $element = $form->get_question($returned_max[0]);
-          echo "<h3>Your strongest contribution within this project was rated by your group as:</h3>";
+          echo "<h3>".gettext("Your strongest contribution within this project was rated by your group as:")."</h3>";
           echo "<p><b>" . $element['text']['_data'];
           echo "</b><br/>" . $element['desc']['_data'];
           echo "</p>";
         }else{
           $element = $form->get_question($returned_max[0]);
-          echo "<h3>Your strongest contribution within this project was rated by your group as:</h3>";
+          echo "<h3>".gettext("Your strongest contribution within this project was rated by your group as:")."</h3>";
           echo "<p><b>" . $element['text']['_data'];
           echo "</b><br/>" . $element['desc']['_data'];
           echo "</p>";
@@ -248,7 +247,7 @@ if ( (!$assessment) || (!$group_names) ) {
       }
 
     } else {
-      $msg_failure = "<p>WebPA has been unable to generate any feedback</p>";
+      $msg_failure = "<p>".gettext("WebPA has been unable to generate any feedback")."</p>";
     }
 
     echo "<br/><br/>";
@@ -272,14 +271,14 @@ if ( (!$assessment) || (!$group_names) ) {
 
           //compare to ensure that the lowest if below the median
           if ($min_score_per_question[$returned_min[0]]<$median) {
-            echo "<h3>An area you may wish to develop is your contribution to:</h3>";
+            echo "<h3>".gettext("An area you may wish to develop is your contribution to:")."</h3>";
             echo "<p><b>" . $element['text']['_data'];
             echo "</b><br/>" . $element['desc']['_data'];
             echo "</p>";
           }
         } else {
           $element = $form->get_question($returned_min[0]);
-          echo "<h3>An area you may wish to develop is your contribution to:</h3>";
+          echo "<h3>".gettext("An area you may wish to develop is your contribution to:")."</h3>";
           echo "<p><b>" . $element['text']['_data'];
           echo "</b><br/>" . $element['desc']['_data'];
           echo "</p>";
@@ -294,14 +293,14 @@ if ( (!$assessment) || (!$group_names) ) {
 
         //compare to ensure that the lowest if below the median
         if ($min_score_per_question[$returned_min[0]]<$median){
-          echo "<h3>An area you may wish to develop is your contribution to:</h3>";
+          echo "<h3>".gettext("An area you may wish to develop is your contribution to:")."</h3>";
           echo "<p><b>" . $element['text']['_data'];
           echo "</b><br/>" . $element['desc']['_data'];
           echo "</p>";
         }
       }
     } else {
-      $msg_failure = "<p>WebPA has been unable to generate any feedback</p>";
+      $msg_failure = "<p>".gettext("WebPA has been unable to generate any feedback")."</p>";
     }
   }
   echo "  </div>\n";

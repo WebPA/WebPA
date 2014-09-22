@@ -119,7 +119,7 @@ if (($command) && ($assessment)) {
       // Check date/time of submission
       $now = mktime();
       if ($now>$assessment->close_date) {
-        $errors[] = 'You were too late in submitting your answers, the assessment is now closed.';
+        $errors[] = gettext('You were too late in submitting your answers, the assessment is now closed.');
       } else {
 
         $participant_count = count($people);
@@ -130,7 +130,7 @@ if (($command) && ($assessment)) {
         $questions = null;
 
         if (!$question_count>0) {
-          $errors[] = 'Unable to load question data!';
+          $errors[] = gettext('Unable to load question data!');
         } else {
           if ($form->type == 'split100') {
 
@@ -150,16 +150,16 @@ if (($command) && ($assessment)) {
                 $score = fetch_POST($q_id, null);
 
                 if (($score!=0) && (empty($score))) {
-                  $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                  $errors[] = sprintf(gettext("You didn't give a %s for '%s' in Q%d."), APP__MARK_TEXT, $name, $q_num);
                   $error_style_ids["$q_id"] = 1;
                 } else {
                   if (!is_numeric($score)) {
-                    $errors[] = "You didn't give a valid " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                    $errors[] = sprintf(gettext("You didn't give a valid %s for '%s' in Q%d."), APP__MARK_TEXT, $name, $q_num);
                     $error_style_ids["$q_id"] = 1;
                   } else {
                     $score = (int) $score;
                     if (($score<0) || ($score>$group_total)) {
-                      $errors[] = "Your " . APP__MARK_TEXT . " of $score for '$name' in Q{$q_num} is invalid.<br /> " . APP__MARK_TEXT . " must be between 0 and $group_total.";
+                      $errors[] = sprintf(gettext("Your %s of %d for '%s' in Q%d is invalid.<br /> %s must be between 0 and %.2f."), APP__MARK_TEXT, $score, $name, $q_num, APP__MARK_TEXT, $group_total);
                       $error_style_ids["$q_id"] = 1;
                     }
                     $results["$q"]["$id"] = $score;
@@ -177,7 +177,7 @@ if (($command) && ($assessment)) {
               $q_num = $q + 1;
 
               if ($q_total!==$group_total) {
-                $errors[] = "The total " . APP__MARK_TEXT . " for Q{$q_num} should be $group_total.  You have " . APP__MARK_TEXT . " totalling $q_total.";
+                $errors[] = sprintf(gettext("The total %s for Q%d should be %d. You have %s totalling %d."), APP__MARK_TEXT, $q_num, $group_total, APP__MARK_TEXT, $q_total);
               }
             }
           } else {
@@ -197,7 +197,7 @@ if (($command) && ($assessment)) {
                 $score = fetch_POST($q_id, null);
 
                 if (is_null($score)) {
-                  $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                  $errors[] = sprintf(gettext("You didn't give a %s for '%s' in Q%d."), APP__MARK_TEXT, $name, $q_num);
                   $error_style_ids["$q_id"] = 1;
                 } else {
                   // Check the score is within the allowed range
@@ -205,7 +205,7 @@ if (($command) && ($assessment)) {
                   if (($score>=$min_score) && ($score<=$max_score)) {
                     $results["$q"]["$id"] = $score;
                   } else {
-                    $errors[] = "The " . APP__MARK_TEXT . " of '$score' given in Q{$q_num} for '$name' is not allowed. " . APP__MARK_TEXT . " must be between $min_score and $max_score.";
+                    $errors[] = sprintf(gettext("The %s of %d given in Q%d for %s is not allowed. %s must be between %d and %d."), APP__MARK_TEXT, $score, $q_num, $name, APP__MARK_TEXT, $min_score, $max_score);
                     $error_style_ids["$q_id"] = 1;
                   }
                 }
@@ -337,7 +337,7 @@ if ($assessment) {
 }
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'Your responses have not been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('Your responses have not been saved. Please check the details in the form, and try again.'));
 ?>
 
 <div class="content_box">
@@ -346,11 +346,11 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
 ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to assessments list');?></a>
   </div>
 
-  <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
-  <p>If the problem persists, please use the contact system to <a href="/students/support/contact/index.php?q=bug">report the error</a>.</p>
+  <p><?php echo gettext('The assessment you selected could not be loaded for some reason - please go back and try again.');?></p>
+  <p><?php echo gettext('If the problem persists, please use the contact system to <a href="/students/support/contact/index.php?q=bug">report the error');?></a>.</p>
 <?php
 } else {
 ?>
@@ -361,21 +361,21 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
+      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to assessments list');?></a></td>
     </tr>
     </table>
   </div>
 
 
-  <h3>Taking This Assessment</h3>
+  <h3><?php echo gettext('Taking This Assessment');?></h3>
   <div class="form_section">
-    <p>Please complete the assessment below. For each question <em>you must give a <?php echo APP__MARK_TEXT; ?> to each group member</em><?php if ($assessment->assessment_type != '0') echo ', including yourself'; ?>.</p>
-    <p>To save your <?php echo APP__MARK_TEXT; ?>, you must click the <em>Save <?php echo APP__MARK_TEXT; ?></em> button.  Once you have successfully submitted your responses you cannot go back and change your <?php echo APP__MARK_TEXT; ?>.</p>
-    <p>To leave this assessment without saving, click the <em>back to assessments list</em> link above, or choosing an option from the menu.</p>
+    <p><?php echo sprintf(gettext('Please complete the assessment below. For each question <em>you must give a %s to each group member'), APP__MARK_TEXT);?></em><?php if ($assessment->assessment_type != '0') echo gettext(', including yourself'); ?>.</p>
+    <p><?php echo sprintf(gettext('To save your %s, you must click the <em>Save %s</em> button.  Once you have successfully submitted your responses you cannot go back and change your %s.'), APP__MARK_TEXT, APP__MARK_TEXT, APP__MARK_TEXT);?></p>
+    <p><?php echo gettext('To leave this assessment without saving, click the <em>back to assessments list</em> link above, or choosing an option from the menu.');?></p>
   </div>
 
 
-  <h3><?php echo APP__MARK_TEXT; ?> Your Team</h3>
+  <h3><?php echo APP__MARK_TEXT; ?> <?php echo gettext('Your Team');?></h3>
   <div class="form_section">
 <?php
   $form_renderer->draw_description();
@@ -385,7 +385,7 @@ if (!$assessment) {
 <?php
   if (!empty($assessment->introduction)) {
 ?>
-    <h3>Introduction</h3>
+    <h3><?php echo gettext('Introduction');?></h3>
     <div class="form_section">
       <p class="introduction"><?php echo(nl2br(htmlentities($assessment->introduction))); ?></p>
     </div>
@@ -394,14 +394,14 @@ if (!$assessment) {
 ?>
 
   <div class="form_line">
-  <h2>Assessment Criteria</h2>
+  <h2><?php echo gettext('Assessment Criteria');?></h2>
 <?php
   $form_renderer->draw_form();
 ?>
   </div>
 
-  <p>That concludes this peer assessment. To finish and submit your response click the <em>save <?php echo APP__MARK_TEXT; ?></em> button below.</p>
-  <p>Once you have successfully submitted your responses you cannot go back and change your <?php echo APP__MARK_TEXT; ?>.</p>
+  <p><?php echo sprintf(gettext('That concludes this peer assessment. To finish and submit your response click the <em>save %s</em> button below.'), APP__MARK_TEXT);?></p>
+  <p><?php echo sprintf(gettext('Once you have successfully submitted your responses you cannot go back and change your %s.'), APP__MARK_TEXT);?></p>
 
   <center>
     <input type="button" name="save_button" value="save <?php echo APP__MARK_TEXT; ?>" onclick="do_command('save');" />
