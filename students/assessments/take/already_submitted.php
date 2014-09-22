@@ -40,7 +40,7 @@ if ($assessment->load($assessment_id)) {
 // Begin Page
 
 $UI->page_title = ($assessment) ? $assessment->name : gettext("already submitted");
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/329';
 
 $UI->breadcrumbs = array  ('home'       => '/' ,
@@ -73,7 +73,7 @@ if (!$assessment) {
   </div>
 
   <p><?php echo sprintf(gettext('You have already submitted your %s for this assessment:'), APP__MARK_TEXT);?> <?php echo($assessment->name); ?>.</p>
-  <p><?php echo gettext('If you have another assessment to take, please select it from your <a href="<?php echo($list_url); ?>">assessments list');?></a>.</p>
+  <p><?php echo sprintf(gettext('If you have another assessment to take, please select it from your <a href="%s">assessments list'), $list_url);?></a>.</p>
 <?php
 }
 ?>

@@ -60,11 +60,11 @@ switch ($msg) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Login';
+$UI->page_title = APP__NAME .' Login';
 $UI->menu_selected = '';
 $UI->help_link = '?q=node/26';
 $UI->breadcrumbs = array  (
-  'login page'  => null ,
+    gettext('login page')  => null ,
 );
 
 
@@ -100,7 +100,7 @@ $UI->content_start();
 
 <div class="content_box">
 
-  <p>Please enter your details below:</p>
+  <p><?php echo gettext('Please enter your details below');?>:</p>
 
   <form action="login_check.php" method="post" name="login_form" style="margin-bottom: 2em;">
   <div style="width: 300px;">
@@ -116,7 +116,7 @@ $UI->content_start();
     </table>
 
     <div class="form_button_bar">
-      <input class="safe_button" type="submit" name="submit" value="login" />
+      <input class="safe_button" type="submit" name="submit" value="<?php echo gettext('login');?>" />
     </div>
   </div>
   </form>

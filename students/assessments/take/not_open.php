@@ -38,8 +38,8 @@ if ($assessment->load($assessment_id)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' ' . ($assessment) ? $assessment->name : "not open";
-$UI->menu_selected = 'my assessments';
+$UI->page_title = APP__NAME . ' ' . ($assessment) ? $assessment->name : gettext("not open");
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  ('home'       => '/' ,
                $assessment->name  => null ,

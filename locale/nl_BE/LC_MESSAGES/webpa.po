@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-22 11:45+0100\n"
-"PO-Revision-Date: 2014-09-22 13:17+0100\n"
+"POT-Creation-Date: 2014-09-22 13:56+0100\n"
+"PO-Revision-Date: 2014-09-22 13:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -13,6 +13,652 @@ msgstr ""
 "X-Poedit-Basepath: /srv/http/WebPA-Source/\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: accounts/reset.php:33
+msgid "Username not set."
+msgstr ""
+
+#: accounts/reset.php:39
+msgid "Unable to reset the password for this account."
+msgstr ""
+
+#: accounts/reset.php:46
+#, php-format
+msgid ""
+"You have requested for your password to be reset on %s. Please click or copy "
+"and paste the following link into your browser to continue the password "
+"reset process.\n"
+"\n"
+"    %s/accounts/reset.php?u=%d&hash=%s\n"
+"\n"
+"    If you have not requested a password reset, please ignore this email - "
+"your password will not be reset without further action."
+msgstr ""
+
+#: accounts/reset.php:54
+msgid "Password Reset"
+msgstr ""
+
+#: accounts/reset.php:55
+#, php-format
+msgid "An email has been sent to %s."
+msgstr ""
+
+#: accounts/reset.php:71
+msgid "Your password has been reset."
+msgstr ""
+
+#: accounts/reset.php:71
+msgid "Click here</a> to log in again."
+msgstr ""
+
+#: accounts/reset.php:73
+msgid "The two passwords did not match."
+msgstr ""
+
+#: accounts/reset.php:76
+msgid "There was an error resetting this password."
+msgstr ""
+
+#: accounts/reset.php:85
+msgid ""
+"Error: reset link incorrect. If you copied and pasted the link from your "
+"mail client, be sure you did so correctly."
+msgstr ""
+
+#: accounts/reset.php:93
+msgid "New Password"
+msgstr ""
+
+#: accounts/reset.php:97
+msgid "New Password (again)"
+msgstr ""
+
+#: accounts/reset.php:102
+msgid "Reset Password"
+msgstr ""
+
+#: accounts/reset.php:110
+msgid ""
+"There was an error resetting this password.<br/>Please contact the site "
+"administrator."
+msgstr ""
+
+#: accounts/reset.php:116
+#, fuzzy
+msgid "You are about to reset your password.<br/>"
+msgstr "Wachtwoord vergeten?"
+
+#: accounts/reset.php:116
+msgid ""
+"In order to do so, a link will be sent to your student email account. This "
+"link will take you to a page that will enable you to reset your password."
+msgstr ""
+
+#: accounts/reset.php:121 contact/contact_send.php:71
+#: contact/contact_send.php:80 login.php:109
+msgid "Username"
+msgstr ""
+
+#: accounts/reset.php:127
+msgid "Reset My Password"
+msgstr ""
+
+#: contact/contact_send.php:63
+msgid "Application"
+msgstr ""
+
+#: contact/contact_send.php:64
+msgid "Contact Type"
+msgstr ""
+
+#: contact/contact_send.php:65
+msgid "Date"
+msgstr ""
+
+#: contact/contact_send.php:68
+msgid "Contact Details"
+msgstr ""
+
+#: contact/contact_send.php:70 contact/contact_send.php:79
+msgid "Fullname"
+msgstr ""
+
+#: contact/contact_send.php:72 contact/contact_send.php:81
+msgid "Email"
+msgstr ""
+
+#: contact/contact_send.php:73
+msgid "Phone"
+msgstr ""
+
+#: contact/contact_send.php:76
+msgid "User Account Details"
+msgstr ""
+
+#: contact/contact_send.php:78
+msgid "User ID"
+msgstr ""
+
+#: contact/contact_send.php:84
+msgid "Message"
+msgstr ""
+
+#: contact/contact_send.php:99
+msgid "Message Sent"
+msgstr ""
+
+#: contact/contact_send.php:100 contact/contact_send.php:102
+#: contact/index.php:44 contact/index.php:47
+msgid "contact"
+msgstr ""
+
+#: contact/contact_send.php:111
+msgid "Your message has now been sent."
+msgstr ""
+
+#: contact/contact_send.php:112
+msgid ""
+"We will try and respond as soon as possible, but at times our team can be "
+"very busy. We apologise in advance for any delay in getting back to you."
+msgstr ""
+
+#: contact/contact_send.php:113
+msgid "Thanks for your time"
+msgstr ""
+
+#: contact/index.php:43
+msgid "Contact"
+msgstr ""
+
+#: contact/index.php:67
+msgid ""
+"If you want to report a problem or bug with any part of the WebPA system, "
+"have a technical query, or just need to ask a specific question regarding "
+"WebPA, please complete the form below."
+msgstr ""
+
+#: contact/index.php:70
+msgid ""
+"Please supply as much information with your message as possible (especially "
+"when sending a bug report!), this will allow us to respond to your message "
+"much faster!"
+msgstr ""
+
+#: contact/index.php:78
+msgid "Contact Person"
+msgstr ""
+
+#: contact/index.php:88
+#, fuzzy
+msgid "Your Name"
+msgstr "Uw team"
+
+#: contact/index.php:92
+#, fuzzy
+msgid "Your Username"
+msgstr "Uw team"
+
+#: contact/index.php:96
+#, fuzzy
+msgid "Your Email"
+msgstr "Uw team"
+
+#: contact/index.php:100
+msgid "Your Phone Number"
+msgstr ""
+
+#: contact/index.php:105
+msgid "Type of Message"
+msgstr ""
+
+#: contact/index.php:109
+msgid "Request for help!"
+msgstr ""
+
+#: contact/index.php:110
+msgid "Information request"
+msgstr ""
+
+#: contact/index.php:111
+msgid "Bug / Error report"
+msgstr ""
+
+#: contact/index.php:112
+msgid "Suggestion / Wish List"
+msgstr ""
+
+#: contact/index.php:113
+msgid "Other type of message"
+msgstr ""
+
+#: contact/index.php:121
+msgid "Message Text"
+msgstr ""
+
+#: contact/index.php:128
+msgid "reset form"
+msgstr ""
+
+#: contact/index.php:130
+msgid "send message"
+msgstr ""
+
+#: cookie.php:31
+#, php-format
+msgid "Unable to connect to "
+msgstr ""
+
+#: includes/classes/abstract_webpa_algorithm.php:225
+msgid ""
+"ERROR: WebPAAlgorithm->calculate() is an abstract method and should be "
+"overridden."
+msgstr ""
+
+#: includes/classes/class_dao.php:103 includes/classes/class_dao.php:114
+msgid "Can't use database due to"
+msgstr ""
+
+#: includes/classes/class_dao.php:160
+msgid "Executing SQL"
+msgstr ""
+
+#: includes/classes/class_dao.php:541
+msgid "Querying database"
+msgstr ""
+
+#: includes/classes/class_dao.php:589 includes/classes/class_dao.php:591
+msgid "DATABASE ERROR"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:71
+msgid "No file data given"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:76
+msgid "No upload path set"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:94
+#, php-format
+msgid "Error uploading '%s' : File exceeded the maximum upload size: %d bytes"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:99
+#, php-format
+msgid "Error uploading '%s' : You can only upload files with the extension(s)"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:104
+#, php-format
+msgid ""
+"Error uploading '%s' of type '%s' : You can only upload files with the mime "
+"type(s) "
+msgstr ""
+
+#: includes/classes/class_file_upload.php:109
+#, php-format
+msgid "Error uploading '%s' : File already exists"
+msgstr ""
+
+#: includes/classes/class_file_upload.php:118
+#: includes/classes/class_file_upload.php:126
+#, php-format
+msgid ""
+"Error uploading '%s' : Could not move the file from the upload directory"
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:203
+#, php-format
+msgid "You have %s %d marks</span> to divide between your teammates."
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:207
+#, php-format
+msgid ""
+"For a group of %d, you have %d marks</span> to divide between your teammates."
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:211
+#, php-format
+msgid "For equal performance, every student should receive %d."
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:217
+msgid "score"
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:248
+msgid "Total"
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:276
+msgid "Score"
+msgstr ""
+
+#: includes/classes/class_form_renderer.php:320
+#, php-format
+msgid ""
+"This section of the assessment is for you to provide general feedback and/or "
+"justification of the %s you have awarded in the section above."
+msgstr ""
+
+#: includes/classes/class_ui.php:55
+msgid "Tutors"
+msgstr ""
+
+#: includes/classes/class_ui.php:56 lang/en/generic.php:17
+msgid "my forms"
+msgstr ""
+
+#: includes/classes/class_ui.php:57 includes/classes/class_ui.php:63
+#: lang/en/generic.php:18 students/groups/index.php:31
+#: students/groups/index.php:32 students/groups/index.php:35
+msgid "my groups"
+msgstr ""
+
+#: includes/classes/class_ui.php:58 includes/classes/class_ui.php:64
+#: lang/en/generic.php:19 students/assessments/index.php:98
+#: students/assessments/index.php:99 students/assessments/index.php:102
+#: students/assessments/take/already_submitted.php:43
+#: students/assessments/take/finished.php:42
+#: students/assessments/take/index.php:296
+#: students/assessments/take/not_open.php:42
+msgid "my assessments"
+msgstr "Mijn assessments"
+
+#: includes/classes/class_ui.php:62
+msgid "Students"
+msgstr ""
+
+#: includes/classes/class_ui.php:69
+msgid "admin home"
+msgstr ""
+
+#: includes/classes/class_ui.php:70
+msgid "upload data"
+msgstr ""
+
+#: includes/classes/class_ui.php:71
+msgid "view data"
+msgstr ""
+
+#: includes/classes/class_ui.php:75
+msgid "Admin"
+msgstr ""
+
+#: includes/classes/class_ui.php:89
+msgid "Support"
+msgstr ""
+
+#: includes/classes/class_ui.php:99 module.php:44
+#, fuzzy
+msgid "change module"
+msgstr "gepland:"
+
+#: includes/classes/class_ui.php:378
+msgid "Version:"
+msgstr ""
+
+#: includes/classes/class_ui.php:384
+msgid "Source:"
+msgstr ""
+
+#: includes/classes/class_ui.php:424 includes/classes/class_ui.php:431
+msgid "Technical Problem?"
+msgstr ""
+
+#: includes/classes/class_ui.php:425
+#, php-format
+msgid ""
+"If you have a problem, find a bug or discover a technical problem in the "
+"system, <a href=\"%s/contact/index.php?q=bug\">contact us</a> to report it!"
+msgstr ""
+
+#: includes/classes/class_ui.php:432
+#, php-format
+msgid ""
+"If you have a problem, find a bug or discover a technical problem in the "
+"system, please <a href=\"mailto:%s\" title=\"(email:%s)\">email us</a> to "
+"report it!"
+msgstr ""
+
+#: includes/classes/class_wizard.php:206 includes/classes/class_wizard.php:209
+#, php-format
+msgid "You are on <strong>step %d</strong> of <strong>%d</strong> in the %s"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "January"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "February"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "March"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "April"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "May"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "June"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "July"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "August"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "September"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "October"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "November"
+msgstr ""
+
+#: includes/functions/lib_form_functions.php:14
+msgid "December"
+msgstr ""
+
+#: lang/en/generic.php:21
+msgid "Groups"
+msgstr ""
+
+#: lang/en/generic.php:22
+msgid "Number of Groups"
+msgstr ""
+
+#: lang/en/generic.php:23
+msgid "edit group"
+msgstr ""
+
+#: lang/en/generic.php:24
+msgid "delete group"
+msgstr ""
+
+#: lang/en/generic.php:26
+msgid "edit question"
+msgstr ""
+
+#: lang/en/generic.php:28
+msgid "Please Note"
+msgstr ""
+
+#: lang/en/generic.php:30
+msgid "Unknown Collection"
+msgstr ""
+
+#: lang/en/generic.php:31
+msgid "Editing: Unknown Group"
+msgstr ""
+
+#: lang/en/generic.php:32
+msgid "Editing group"
+msgstr ""
+
+#: lang/en/generic.php:35
+msgid "List Groups"
+msgstr ""
+
+#: lang/en/generic.php:36
+msgid "Create Groups"
+msgstr ""
+
+#: lang/en/generic.php:37
+msgid "Clone Groups"
+msgstr ""
+
+#: lang/en/generic.php:39
+msgid "save changes"
+msgstr ""
+
+#: lang/en/generic.php:42 students/assessments/take/index.php:340
+msgid "The following errors were found:"
+msgstr "Volgende fouten werden gevonden:"
+
+#: lang/en/generic.php:43
+#, fuzzy
+msgid ""
+"No changes have been saved. Please check the details in the form, and try "
+"again."
+msgstr ""
+"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
+"te controleren en opnieuw te proberen."
+
+#: lang/en/tutors/tutors.php:18
+msgid ""
+"Welcome to WebPA, the easiest way for your students to carry out peer "
+"assessment reviews on the web. Using this system, students doing group work "
+"activities can mark each other's contributions, providing each student with "
+"an overall score."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:19
+msgid "WebPA contains the following sections:"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:20
+msgid ""
+"Create peer assessment forms for your students to complete. You can re-use "
+"your forms with many different assessments."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:21
+msgid ""
+"Organise your students into groups. You can create new groups from scratch, "
+"or use existing groups that have been set up by other staff members."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:22
+msgid ""
+"Create, edit and schedule your peer assessments sessions so they only run "
+"how and when you want."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:23
+msgid "Getting Started"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:24
+msgid ""
+"The fastest way to get started is for you to choose <a href=\"forms/\">my "
+"forms</a> from the left-hand menu, there you can begin creating a peer "
+"assessment form that your students will use later to grade each other."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:27
+msgid ""
+"Here you can edit your groups, and organise how students are allocated to "
+"the individual groups."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:28
+msgid "Existing Groups"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:29
+msgid ""
+"You have no groups. To add a collection use the <a href=\"create/\">create "
+"new groups wizard</a>."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:30
+msgid ""
+"These are your groups. To view or edit a collection of groups, click on "
+msgstr ""
+
+#: lang/en/tutors/tutors.php:31
+msgid "in the list below."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:33
+msgid ""
+"Any changes you make to your groups here will <strong>not</strong> affect "
+"any assessments you may have created. If you want to change the groups in "
+"use with an assessment, you must edit the assessment and choose the option "
+"to select a new set of groups."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:36
+msgid ""
+"Here you can edit your collections of groups, and organise how students are "
+"allocated to the individual groups."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:37
+msgid "Group Collections"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:38
+msgid ""
+"You have no collections. To add a collection use the <a href=\"../create/"
+"\">create new groups wizard</a>."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:39
+msgid ""
+"These are your group collections. To view or edit a collection, click on its "
+"name in the list below:"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:42
+msgid "You must give this group a name."
+msgstr ""
+
+#: lang/en/tutors/tutors.php:44
+msgid ""
+"<p>This group belongs to a collection that has been locked, and cannot be "
+"edited. You can still view the details of this group, but not edit its name "
+"or members.</p>"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:46
+msgid ""
+"<p>On this page you can change the name of this group, and add/remove "
+"students from it.</p>"
+msgstr ""
+
+#: lang/en/tutors/tutors.php:47
+msgid ""
+"<p>The group you selected could not be loaded for some reason - please go "
+"back and try again.</p>"
+msgstr ""
 
 #: login.php:26
 msgid ""
@@ -60,9 +706,53 @@ msgstr ""
 msgid "To start using %s you have to log in."
 msgstr "Om %s te gebruiken moet u inloggen."
 
+#: login.php:67
+msgid "login page"
+msgstr ""
+
+#: login.php:103
+msgid "Please enter your details below"
+msgstr ""
+
+#: login.php:113
+msgid "Password"
+msgstr ""
+
+#: login.php:119
+msgid "login"
+msgstr ""
+
 #: login.php:123
 msgid "Forgotten your password?"
 msgstr "Wachtwoord vergeten?"
+
+#: login.php:124
+msgid ""
+"This site requires cookies - If you have trouble logging in, please check "
+"your cookie settings."
+msgstr ""
+
+#: module.php:43
+#, fuzzy
+msgid "Change Module"
+msgstr "gepland:"
+
+#: module.php:45
+#, fuzzy
+msgid "change source"
+msgstr "gepland:"
+
+#: module.php:53
+msgid "Use this page to change the currently selected module."
+msgstr ""
+
+#: module.php:81
+msgid "No modules"
+msgstr ""
+
+#: module.php:91
+msgid "Select module"
+msgstr ""
 
 #: students/assessments/assessment_feedback.php:44
 msgid "Error: The requested assessment could not be loaded."
@@ -93,10 +783,10 @@ msgid "There was a technical problem retrieving your information."
 msgstr ""
 
 #: students/assessments/assessment_feedback.php:212
+#, php-format
 msgid ""
-"Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are "
-"unable to provide feedback on your relative performance for different "
-"assessment criteria."
+"Your group has %s everyone equally, hence we are unable to provide feedback "
+"on your relative performance for different assessment criteria."
 msgstr ""
 
 #: students/assessments/assessment_feedback.php:236
@@ -116,9 +806,9 @@ msgstr ""
 msgid "An area you may wish to develop is your contribution to:"
 msgstr ""
 
-#: students/assessments/index.php:98
-msgid "my assessments"
-msgstr "Mijn assessments"
+#: students/assessments/assessment_feedback.php:312
+msgid "close"
+msgstr ""
 
 #: students/assessments/index.php:112
 msgid ""
@@ -143,11 +833,12 @@ msgstr "Open Assessments."
 msgid "These assessments are now open for you to take and record your group"
 msgstr ""
 
-#: students/assessments/index.php:143
+#: students/assessments/index.php:143 students/index.php:145
+#: students/index.php:181
 msgid "scheduled:"
 msgstr "gepland:"
 
-#: students/assessments/index.php:147
+#: students/assessments/index.php:147 students/index.php:149
 msgid "Take Assessment"
 msgstr "Doe Assessment."
 
@@ -220,9 +911,10 @@ msgid "You have already submitted your %s for this assessment:"
 msgstr ""
 
 #: students/assessments/take/already_submitted.php:76
+#, php-format
 msgid ""
 "If you have another assessment to take, please select it from your <a href="
-"\"<?php echo($list_url); ?>\">assessments list"
+"\"%s\">assessments list"
 msgstr ""
 
 #: students/assessments/take/finished.php:41
@@ -248,10 +940,10 @@ msgid "Thank you, your marks have now been saved."
 msgstr ""
 
 #: students/assessments/take/finished.php:76
+#, php-format
 msgid ""
 "You can now check your <a href=\"../../\">assessments list</a> and take "
-"another assessment, or finish with WebPA and <a href=\"<?php echo APP__WWW;?"
-">/logout.php\">logout"
+"another assessment, or finish with WebPA and <a href=\"%s/logout.php\">logout"
 msgstr ""
 
 #: students/assessments/take/index.php:122
@@ -292,10 +984,6 @@ msgid ""
 "The %s of %d given in Q%d for %s is not allowed. %s must be between %d and "
 "%d."
 msgstr ""
-
-#: students/assessments/take/index.php:340
-msgid "The following errors were found:"
-msgstr "Volgende fouten werden gevonden:"
 
 #: students/assessments/take/index.php:340
 msgid ""
@@ -372,6 +1060,15 @@ msgid ""
 "change your %s."
 msgstr ""
 
+#: students/assessments/take/index.php:407
+#, php-format
+msgid "save %s"
+msgstr ""
+
+#: students/assessments/take/not_open.php:41
+msgid "not open"
+msgstr ""
+
 #: students/assessments/take/not_open.php:61
 #, php-format
 msgid ""
@@ -412,6 +1109,10 @@ msgid ""
 "Only groups that have been scheduled an assessment will appear in this list."
 msgstr ""
 
+#: students/groups/index.php:80
+msgid "You belong to the following groups."
+msgstr ""
+
 #: students/index.php:96
 msgid "You will need to seek help from your tutor."
 msgstr ""
@@ -444,4 +1145,8 @@ msgstr ""
 msgid ""
 "To view all the assessments you are registered on in this module, please "
 "check the <a href=\"assessments/\">my assessments</a> section."
+msgstr ""
+
+#: students/index.php:196
+msgid "Getting Help"
 msgstr ""

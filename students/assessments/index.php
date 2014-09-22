@@ -96,10 +96,10 @@ if ($assessments) {
 // Begin Page
 
 $UI->page_title = APP__NAME .' '.gettext('my assessments');
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  (
-                'my assessments'      => null ,
+    gettext('my assessments')      => null ,
               );
 
 

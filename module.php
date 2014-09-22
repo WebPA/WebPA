@@ -40,9 +40,9 @@ if ($module_id) {
 }
 
 //set the page information
-$UI->page_title = 'Change Module';
-$UI->menu_selected = 'change module';
-$UI->breadcrumbs = array ('home' => './', 'change source' => null);
+$UI->page_title = gettext('Change Module');
+$UI->menu_selected = gettext('change module');
+$UI->breadcrumbs = array ('home' => './', gettext('change source') => null);
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();

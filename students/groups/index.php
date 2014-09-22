@@ -28,11 +28,11 @@ $collections = $group_handler->get_member_collections($_user->id, APP__ID, 'user
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' my groups';
-$UI->menu_selected = 'my groups';
+$UI->page_title = APP__NAME .' '.gettext('my groups');
+$UI->menu_selected = gettext('my groups');
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  ('home'         => '/' ,
-               'my groups'    => null );
+    gettext('my groups')    => null );
 
 $UI->head();
 ?>

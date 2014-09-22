@@ -43,7 +43,11 @@ switch($action) {
     $sql = "INSERT INTO " . APP__DB_TABLE_PREFIX . "user_reset_request SET hash = '$hash', user_id = $uid";
     $appname = APP__NAME; $appwww = APP__WWW;
     $DB->execute($sql);
-    $email = sprintf(gettext('You have requested for your password to be reset on %s. Please click or copy and paste the following link into your browser to continue the password reset process.\n\n%s/accounts/reset.php?u=%d&hash=%s\n\n If you have not requested a password reset, please ignore this email - your password will not be reset without further action.'), $appname, $appwww, $uid, $hash);
+    $email = sprintf(gettext('You have requested for your password to be reset on %s. Please click or copy and paste the following link into your browser to continue the password reset process.
+
+    %s/accounts/reset.php?u=%d&hash=%s
+
+    If you have not requested a password reset, please ignore this email - your password will not be reset without further action.'), $appname, $appwww, $uid, $hash);
 
     //echo $email;
     $uemail = $DB->fetch_value("SELECT email FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = $uid");

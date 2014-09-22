@@ -40,11 +40,11 @@ $fixed_contacts = array(
 $rs = array_merge($fixed_contacts, $rs);
 // Begin Page
  
-$UI->page_title = APP__NAME . ' Contact';
-$UI->menu_selected = 'contact';
+$UI->page_title = APP__NAME .' '.gettext('Contact');
+$UI->menu_selected = gettext('contact');
 $UI->help_link = '?q=node/379#intool';	
 $UI->breadcrumbs = array	('home'		=> '../' ,
-							 'contact'	=> null ,);
+    gettext('contact')	=> null ,);
 
 
 $UI->head();

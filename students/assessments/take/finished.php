@@ -39,7 +39,7 @@ if ($assessment->load($assessment_id)) {
 // Begin Page
 
 $UI->page_title = APP__NAME . ' ' .  gettext("finished:")." $assessment->name";
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  (
   'home'             => '/' ,
@@ -73,7 +73,7 @@ if (!$assessment) {
   </div>
 
   <p><?php echo gettext('Thank you, your marks have now been saved.');?></p>
-  <p><?php echo gettext('You can now check your <a href="../../">assessments list</a> and take another assessment, or finish with WebPA and <a href="<?php echo APP__WWW;?>/logout.php">logout');?></a>.</p>
+  <p><?php echo sprintf(gettext('You can now check your <a href="../../">assessments list</a> and take another assessment, or finish with WebPA and <a href="%s/logout.php">logout'), APP__WWW);?></a>.</p>
 <?php
 }
 ?>

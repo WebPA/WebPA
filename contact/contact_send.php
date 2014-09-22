@@ -96,10 +96,10 @@ $email->send();
 
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Message Sent';
-$UI->menu_selected = 'contact';
+$UI->page_title = APP__NAME .' '. gettext('Message Sent');
+$UI->menu_selected = gettext('contact');
 $UI->breadcrumbs = array  ('home'   => '/' ,
-              'contact' => null ,);
+    gettext('contact') => null ,);
 
 $UI->head();
 $UI->body();

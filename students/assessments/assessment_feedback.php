@@ -209,7 +209,7 @@ if ( (!$assessment) || (!$group_names) ) {
   //check to see if the answer are all the same for all questions
   if ($match==$question_count) {
 
-    echo "<p>".gettext("Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria.")."</p>";
+    echo "<p>".sprintf(gettext("Your group has %s everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria."), APP__MARK_TEXT)."</p>";
 
   } else {
 
@@ -309,7 +309,7 @@ if ( (!$assessment) || (!$group_names) ) {
 <br />
 <form action="#" method="post" name="feedbackform">
 <div style="text-align: center;">
-  <input type="button" name="closebutton" value="close" onclick="window.close();" />
+  <input type="button" name="closebutton" value="<?php echo gettext('close');?>" onclick="window.close();" />
 </div>
 </form>
 </div>

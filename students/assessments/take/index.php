@@ -293,7 +293,7 @@ if (($command) && ($assessment)) {
 // Begin Page
 
 $UI->page_title = APP__NAME . ' ' . $assessment->name;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = array  (
   'home'             => '/' ,
@@ -404,7 +404,7 @@ if (!$assessment) {
   <p><?php echo sprintf(gettext('Once you have successfully submitted your responses you cannot go back and change your %s.'), APP__MARK_TEXT);?></p>
 
   <center>
-    <input type="button" name="save_button" value="save <?php echo APP__MARK_TEXT; ?>" onclick="do_command('save');" />
+    <input type="button" name="save_button" value="<?php echo sprintf(gettext('save %s'), APP__MARK_TEXT);?>" onclick="do_command('save');" />
   </center>
 
   </form>
