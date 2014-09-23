@@ -90,7 +90,7 @@ $UI->body();
 $UI->content_start();
 //build the content to be written to the screen
 
-$page_intro = '<p>'.gettext('Search the WebPA system for a user within the ').'</p>';
+$page_intro = '<p>'.gettext('Search the WebPA system for a user within the system.').'</p>';
 $page_description = '<p>'.gettext('Enter the any combination of the information below for the individual that you would like to locate in the WebPA system. The person being searched for can be a student or staff member. When you are ready click the "Search Button".').'</p>';
 $rstitle = gettext("Search results");
 ?>
