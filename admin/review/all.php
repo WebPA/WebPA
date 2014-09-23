@@ -33,7 +33,7 @@ if ($type == 'module') {
            'ORDER BY u.lastname, u.forename, u.source_id, u.username';
 }
 if (!isset($query)) {
-  echo ' <p>You need to be logged into the system to see this information.</p>';
+  echo ' <p>'.gettext('You need to be logged into the system to see this information.').'</p>';
 } else {
   //run the query
   $rs = $DB->fetch($query);
@@ -69,7 +69,7 @@ if (!isset($query)) {
     foreach ($rs[$recordcounter] as $field_name => $field_value){
 
       if (($field_name == 'id') && ($type != 'module')) {
-        $field_value = "<a href=\"../log.php?u={$uid}\" title=\"View activity log\">{$field_value}</a>";
+        $field_value = "<a href=\"../log.php?u={$uid}\" title=\"".gettext('View activity log')."\">{$field_value}</a>";
       }
       if ($field_name == 'source_id') {
         $source_id = $field_value;
@@ -78,11 +78,11 @@ if (!isset($query)) {
         if (!$_source_id) {
           echo '<td class="icon">';
           echo '<a href="../../edit/index.php?u=' .$field_value . '&amp;t=' . $type . '">';
-          echo '<img src="../../../images/buttons/edit.gif" width="16" height="16" alt="Edit user" title="Edit user" /></a>';
+          echo '<img src="../../../images/buttons/edit.gif" width="16" height="16" alt="'.gettext('Edit user').'" title="'.gettext('Edit user').'" /></a>';
           if (APP__ENABLE_USER_DELETE) {
             if ($_SESSION['_user_id'] != $field_value) {
-              echo '&nbsp;<a href="../../delete/index.php?u=' .$field_value . '" onclick="return confirm(\'Delete user; are you sure?\');">';
-              echo '<img src="../../../images/buttons/cross.gif" width="16" height="16" alt="Delete user" title="Delete user" /></a>';
+              echo '&nbsp;<a href="../../delete/index.php?u=' .$field_value . '" onclick="return confirm(\''.gettext('Delete user; are you sure?').'\');">';
+              echo '<img src="../../../images/buttons/cross.gif" width="16" height="16" alt="'.gettext('Delete user').'" title="'.gettext('Delete user').'" /></a>';
             } else {
               echo '<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />';
             }
@@ -93,14 +93,14 @@ if (!isset($query)) {
         echo "<td class=\"icon\">";
         if (!$_source_id) {
           echo '<a href="../../edit/module.php?m=' .$field_value . '">';
-          echo '<img src="../../../images/buttons/edit.gif" width="16" height="16" alt="Edit module" title="Edit module" /></a>';
+          echo '<img src="../../../images/buttons/edit.gif" width="16" height="16" alt="'.gettext('Edit module').'" title="'.gettext('Edit module').'" /></a>';
         } else {
           echo '<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />';
         }
         if (APP__ENABLE_MODULE_DELETE) {
           if ($_SESSION['_module_id'] != $field_value) {
-            echo '<a href="../../delete/index.php?m=' .$field_value . '" onclick="return confirm(\'Delete module; are you sure?\');">';
-            echo '<img src="../../../images/buttons/cross.gif" width="16" height="16" alt="Delete module" title="Delete module" /></a>';
+            echo '<a href="../../delete/index.php?m=' .$field_value . '" onclick="return confirm(\''.gettext('Delete module; are you sure?').'\');">';
+            echo '<img src="../../../images/buttons/cross.gif" width="16" height="16" alt="'.gettext('Delete module').'" title="'.gettext('Delete module').'" /></a>';
           } else {
             echo '<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />';
           }
@@ -111,9 +111,9 @@ if (!isset($query)) {
       } else if ($field_name == 'enabled') {
         echo "<td class=\"obj_info_text\">";
         if ($field_value == 1) {
-          echo 'Yes';
+          echo gettext('Yes');
         } else {
-          echo 'No';
+          echo gettext('No');
         }
         echo '</td>';
       } else if (strlen($field_value) <= 0) {
@@ -129,16 +129,16 @@ if (!isset($query)) {
     echo "</tr>\n";
   }
   if (count($rs) <= 0) {
-    echo "<tr><td>No records</td></tr>\n";
+    echo "<tr><td>".gettext('No records')."</td></tr>\n";
   }
 
   echo '</table>';
   echo '</div>';
   if ($_source_id == '') {
     if ($type == 'module') {
-      echo '<form action="../../edit/module.php?m=" method="GET"><p><input type="submit" value="Create new module" /></p></form>';
+      echo '<form action="../../edit/module.php?m=" method="GET"><p><input type="submit" value="'.gettext('Create new module').'" /></p></form>';
     } else {
-      echo '<form action="../../edit/index.php" method="GET"><p><input type="hidden" name="u" value="" /><input type="hidden" name="t" value="' . $type . '" /><input type="submit" value="Add new ' . $user_type . '" /></p></form>';
+      echo '<form action="../../edit/index.php" method="GET"><p><input type="hidden" name="u" value="" /><input type="hidden" name="t" value="' . $type . '" /><input type="submit" value="'.gettext('Add new').' ' . $user_type . '" /></p></form>';
     }
   }
 }

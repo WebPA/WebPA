@@ -21,10 +21,10 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 
 //write to screen the page information
 //set the page information
-$UI->page_title = APP__NAME ." Upload templates";
-$UI->menu_selected = 'upload data';
+$UI->page_title = APP__NAME .' '.gettext("Upload templates");
+$UI->menu_selected = gettext('upload data');
 $UI->breadcrumbs = array ('home' => '../../',
-              'Upload'=>'../');
+    gettext('Upload')=>'../');
 $UI->help_link = '?q=node/237';
 
 $UI->head();
@@ -38,17 +38,17 @@ if ($_user->is_admin()) {
 }
 ?>
 <div class="content_box">
-  <p>The following are the template files for the uploading of information to the WebPA database.</p>
-  <p>To download the files right mouse button click on the link and 'Save link as...'</p>
+  <p><?php echo gettext('The following are the template files for the uploading of information to the WebPA database.');?></p>
+  <p><?php echo gettext('To download the files right mouse button click on the link and \'Save link as...\'');?></p>
   <div class="obj_list">
     <div class="obj">
     <tableclass="obj" cellpadding="2" cellspacing="2">
-      <tr><td class="obj_info"><div class="obj_name"><a href="<?php echo $usersfile; ?>" target="_blank">Staff or student data</a></div><p>The information for the user is vital. The first five columns of information are the most important aspects of information. If not all of the columns are filled then please delete the column titles before uploading the file.</p></td></tr>
+      <tr><td class="obj_info"><div class="obj_name"><a href="<?php echo $usersfile; ?>" target="_blank"><?php echo gettext('Staff or student data');?></a></div><p><?php echo gettext('The information for the user is vital. The first five columns of information are the most important aspects of information. If not all of the columns are filled then please delete the column titles before uploading the file.');?></p></td></tr>
     </table>
     </div>
     <div class="obj">
     <tableclass="obj" cellpadding="2" cellspacing="2">
-      <tr><td class="obj_info"><div class="obj_name"><a href="modules.csv" target="_blank">Module data</a></div><p>All elements of information for the module data is required. The module information can not be loaded unless fully complete.</p></td></tr>
+      <tr><td class="obj_info"><div class="obj_name"><a href="modules.csv" target="_blank"><?php echo gettext('Module data');?></a></div><p><?php echo gettext('All elements of information for the module data is required. The module information can not be loaded unless fully complete.');?></p></td></tr>
     </table>
     </div>
   </div>

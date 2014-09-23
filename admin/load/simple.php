@@ -60,10 +60,10 @@ $filename = $_FILES['uploadedfile']['tmp_name'];
 $user_warning = '';
 $user_msg = '';
 
-$filecontenttype[1] = array('screen'=>'<strong>Student Data</strong>',);
-$filecontenttype[2] = array('screen'=>'<strong>Staff Data</strong>',);
-$filecontenttype[3] = array('screen'=>'<strong>Module Data</strong>');
-$filecontenttype[4] = array('screen'=>'<strong>Student Data with Groups</strong>');
+$filecontenttype[1] = array('screen'=>'<strong>'.gettext('Student Data').'</strong>',);
+$filecontenttype[2] = array('screen'=>'<strong>'.gettext('Staff Data').'</strong>',);
+$filecontenttype[3] = array('screen'=>'<strong>'.gettext('Module Data').'</strong>');
+$filecontenttype[4] = array('screen'=>'<strong>'.gettext('Student Data with Groups').'</strong>');
 
 $expected_fields[1] = array(0=>'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
 $expected_fields[2] = array(0=>'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
@@ -265,26 +265,26 @@ if ($flg_match) {
 
   }
 
-  $user_msg = "<p>Successful upload of the {$filecontenttype[$uploadtype]['screen']} information to the database.</p>";
+  $user_msg = "<p>".sprintf(gettext('Successful upload of the %s information to the database.'), $filecontenttype[$uploadtype]['screen'])."</p>";
 
 } else {
   //we want to notify that the information is not structured as expected therefore bounce back to the user
-  $user_warning .= "The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.</p>";
+  $user_warning .= gettext("The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.")."</p>";
 }
 
 //write to screen the page information
 //set the page information
 $UI->page_title = APP__NAME;
-$UI->menu_selected = 'upload data';
+$UI->menu_selected = gettext('upload data');
 $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../images/buttons/button_student_user.png', '../review/student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
-  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+  $UI->set_page_bar_button(gettext('View Admin Data'), '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
+  $UI->set_page_bar_button(gettext('View Module Data'), '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../review/search/index.php');
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../images/buttons/button_search_user.png', '../review/search/index.php');
 
 $UI->head();
 $UI->body();

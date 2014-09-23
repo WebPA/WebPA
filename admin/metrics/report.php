@@ -124,8 +124,8 @@ $run_students_assessed_SQL = 'SELECT COUNT(DISTINCT ugm.user_id) as \'Total uniq
 //view on screen
 if($format == 'html') {
   //set the page information
-  $UI->page_title = APP__NAME . " general usage report";
-  $UI->menu_selected = 'metrics';
+  $UI->page_title = APP__NAME .' '.gettext(" general usage report");
+  $UI->menu_selected = gettext('metrics');
   $UI->breadcrumbs = array ('home' => '../../');
   $UI->help_link = '?q=node/237';
   $UI->head();
@@ -138,7 +138,7 @@ if($format == 'html') {
 
     $rs_assessments = $DB->fetch($run_assessments_SQL);
 
-    echo "<h2>Assessments run in WebPA ({$academic_year})</h2>";
+    echo "<h2>".gettext('Assessments run in WebPA')." ({$academic_year})</h2>";
 
     if ($rs_assessments) {
       echo "<table class=\"grid\">";
@@ -164,7 +164,7 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
 
@@ -195,13 +195,13 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
 
   if(!empty($assessment_students)){
     $rs_students = $DB->fetch($run_students_per_assessment_SQL);
-    echo "<h2>Number of students per assessment ({$academic_year})</h2>";
+    echo "<h2>".gettext('Number of students per assessment')." ({$academic_year})</h2>";
 
     if ($rs_students) {
       echo "<table class=\"grid\">";
@@ -225,12 +225,12 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
   if(!empty($assessment_feedback)){
     $rs_feedback = $DB->fetch($run_feedback_SQL);
-    echo "<h2>Assessments where feedback has been used ({$academic_year})</h2>";
+    echo "<h2>".gettext('Assessments where feedback has been used')." ({$academic_year})</h2>";
 
     if ($rs_feedback) {
       echo "<table class=\"grid\">";
@@ -256,13 +256,13 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+      echo '<p>'.gettext('None').'</p>';
     }
   }
 
   if(!empty($assessment_respondents)){
     $rs_respondents = $DB->fetch($run_respondents);
-    echo "<h2>Number of Respondents per assessment ({$academic_year})</h2>";
+    echo "<h2>".gettext('Number of Respondents per assessment')." ({$academic_year})</h2>";
 
     if ($rs_respondents) {
       echo "<table class=\"grid\">";
@@ -287,13 +287,13 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
 
   if(!empty($assessment_modules)){
     $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
-    echo "<h2>Modules which have run an assessment ({$academic_year})</h2>";
+    echo "<h2>".gettext('Modules which have run an assessment')." ({$academic_year})</h2>";
 
     if ($rs_runners) {
       echo "<table class=\"grid\">";
@@ -318,13 +318,13 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
 
   if(!empty($assessment_students_thisyear)){
     $rs_students = $DB->fetch($run_students_assessed_SQL);
-    echo "<h2>Number of students who have carried out an assessment ({$academic_year})</h2>";
+    echo "<h2>".gettext('Number of students who have carried out an assessment')." ({$academic_year})</h2>";
 
     if ($rs_students) {
       echo "<table class=\"grid\">";
@@ -338,7 +338,7 @@ if($format == 'html') {
       }
       echo "</table>";
     } else {
-      echo '<p>None</p>';
+        echo '<p>'.gettext('None').'</p>';
     }
   }
 
@@ -352,12 +352,12 @@ if ($format == 'csv') {
     header("Content-Disposition: attachment; filename=\"metrics.csv\"");
     header('Content-Type: text/csv');
 
-    echo('"WebPA - Metrics report"'."\n");
+    echo(gettext('"WebPA - Metrics report"')."\n");
 
 
   if (!empty($assessments_run)){
     $rs_assessments = $DB->fetch($run_assessments_SQL);
-    echo "\n\"Assessments run in WebPA ({$academic_year})\"\n";
+    echo "\n\"".gettext('Assessments run in WebPA')." ({$academic_year})\"\n";
     if ($rs_assessments) {
       $icounter = 0;
       //loop round the initial array
@@ -383,7 +383,7 @@ if ($format == 'csv') {
 
   if (!empty($assessment_groups)) {
     $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
-    echo "\n\"Number of groups per assessment ({$academic_year})\"\n";
+    echo "\n\"".gettext('Number of groups per assessment')." ({$academic_year})\"\n";
     if ($rs_groups) {
       $icounter = 0;
       //loop round the initial array
@@ -407,7 +407,7 @@ if ($format == 'csv') {
 
   if (!empty($assessment_students)) {
     $rs_students = $DB->fetch($run_students_per_assessment_SQL);
-    echo "\n\"Number of students per assessment ({$academic_year})\"\n";
+    echo "\n\"".gettext('Number of students per assessment')." ({$academic_year})\"\n";
     if ($rs_students) {
       $icounter = 0;
       //loop round the initial array
@@ -431,7 +431,7 @@ if ($format == 'csv') {
 
   if (!empty($assessment_feedback)) {
     $rs_feedback = $DB->fetch($run_feedback_SQL);
-    echo "\n\"Assessments where feedback has been used ({$academic_year})\"\n";
+    echo "\n\"".gettext('Assessments where feedback has been used')." ({$academic_year})\"\n";
     if ($rs_feedback) {
       $icounter = 0;
       //loop round the initial array
@@ -455,7 +455,7 @@ if ($format == 'csv') {
 
   if (!empty($assessment_respondents)) {
     $rs_respondents = $DB->fetch($run_respondents);
-    echo "\n\"Number of respondents per assessment ({$academic_year})\"\n";
+    echo "\n\"".gettext('Number of respondents per assessment')." ({$academic_year})\"\n";
     if ($rs_respondents) {
       $icounter=0;
       //loop round the initial array
@@ -479,7 +479,7 @@ if ($format == 'csv') {
 
   if (!empty($assessment_modules)) {
     $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
-    echo "\n\"Modules which have run an assessment ({$academic_year})\"\n";
+    echo "\n\"".gettext('Modules which have run an assessment')." ({$academic_year})\"\n";
     if ($rs_runners) {
       $icounter = 0;
       //loop round the initial array
@@ -503,7 +503,7 @@ if ($format == 'csv') {
 
   if(!empty($assessment_students_thisyear)){
     $rs_students = $DB->fetch($run_students_assessed_SQL);
-    echo "\n\"Number of students who have carried out an assessment ({$academic_year})\"\n";
+    echo "\n\"".gettext('Number of students who have carried out an assessment')." ({$academic_year})\"\n";
     if ($rs_students) {
       //loop round the initial array
       echo "\n";
@@ -523,11 +523,11 @@ if ($format == 'rtf'){
   header("Content-Disposition: attachment;filename=student_grades.rtf");
   header("Content-Type: text/enriched\n");
 
-  echo('WebPA - Metrics report'."\n\n");
+  echo(gettext('WebPA - Metrics report')."\n\n");
 
   if (!empty($assessments_run)){
     $rs_assessments = $DB->fetch($run_assessments_SQL);
-    echo "\nAssessments run in WebPA ({$academic_year})\n\n";
+    echo "\n".gettext('Assessments run in WebPA')." ({$academic_year})\n\n";
     $icounter = 0;
     //loop round the initial array
     foreach($rs_assessments as $assessment ){
@@ -549,7 +549,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_groups)){
     $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
-    echo "\nNumber of groups per assessment ({$academic_year})\n\n";
+    echo "\n".gettext('Number of groups per assessment')." ({$academic_year})\n\n";
     if ($rs_groups) {
       $icounter = 0;
       //loop round the initial array
@@ -571,7 +571,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_students)){
     $rs_students = $DB->fetch($run_students_per_assessment_SQL);
-    echo "\nNumber of students per assessment ({$academic_year})\n\n";
+    echo "\n".gettext('Number of students per assessment')." ({$academic_year})\n\n";
     if ($rs_students) {
       $icounter = 0;
       //loop round the initial array
@@ -594,7 +594,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_feedback)){
     $rs_feedback = $DB->fetch($run_feedback_SQL);
-    echo "\nAssessments where feedback has been used ({$academic_year})\n\n";
+    echo "\n".gettext('Assessments where feedback has been used')." ({$academic_year})\n\n";
     if ($rs_feedback) {
       $icounter = 0;
       //loop round the initial array
@@ -617,7 +617,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_respondents)){
     $rs_respondents = $DB->fetch($run_respondents);
-    echo "\nNumber of Respondents per assessment ({$academic_year})\n\n";
+    echo "\n".gettext('Number of Respondents per assessment')." ({$academic_year})\n\n";
     if ($rs_respondents) {
       $icounter=0;
       //loop round the initial array
@@ -640,7 +640,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_modules)){
     $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
-    echo "\nModules which have run an assessment ({$academic_year})\n\n";
+    echo "\n".gettext('Modules which have run an assessment')." ({$academic_year})\n\n";
     if ($rs_runners) {
       $icounter = 0;
       //loop round the initial array
@@ -663,7 +663,7 @@ if ($format == 'rtf'){
 
   if(!empty($assessment_students_thisyear)){
     $rs_students = $DB->fetch($run_students_assessed_SQL);
-    echo "\nNumber of students who have carried out an assessment ({$academic_year})\n\n";
+    echo "\n".gettext('Number of students who have carried out an assessment')." ({$academic_year})\n\n";
     if ($rs_students) {
       //loop round the initial array
       foreach($rs_students as $student){
@@ -688,7 +688,7 @@ if ($format == 'xml'){
   if (!empty($assessments_run)){
     $rs_assessments = $DB->fetch($run_assessments_SQL);
     echo "<metrics>";
-    echo "<description>Assessments run in WebPA ({$academic_year})</description>";
+    echo "<description>".gettext('Assessments run in WebPA')." ({$academic_year})</description>";
     if ($rs_assessments) {
       //loop round the initial array
       foreach($rs_assessments as $assessment ){
@@ -713,7 +713,7 @@ if ($format == 'xml'){
   if(!empty($assessment_groups)){
     $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
     echo "<metrics>";
-    echo "<description>Number of groups per assessment ({$academic_year})</description>";
+    echo "<description>".gettext('Number of groups per assessment')." ({$academic_year})</description>";
     if ($rs_groups) {
       foreach($rs_groups as $groups ){
         //get an array of the key to the $groups array
@@ -736,7 +736,7 @@ if ($format == 'xml'){
   if(!empty($assessment_students)){
     $rs_students = $DB->fetch($run_students_per_assessment_SQL);
     echo "<metrics>";
-    echo "<description>Number of students per assessment ({$academic_year})</description>";
+    echo "<description>".gettext('Number of students per assessment')." ({$academic_year})</description>";
 
     if ($rs_students) {
       //loop round the initial array
@@ -761,7 +761,7 @@ if ($format == 'xml'){
   if(!empty($assessment_feedback)){
     $rs_feedback = $DB->fetch($run_feedback_SQL);
     echo "<metrics>";
-    echo "<description>Assessments where feedback has been used ({$academic_year})</description>";
+    echo "<description>".gettext('Assessments where feedback has been used')." ({$academic_year})</description>";
     if ($rs_feedback) {
       //loop round the initial array
       foreach($rs_feedback as $feedback){
@@ -785,7 +785,7 @@ if ($format == 'xml'){
   if(!empty($assessment_respondents)){
     $rs_respondents = $DB->fetch($run_respondents);
     echo "<metrics>";
-    echo "<description>Number of Respondents per assessment ({$academic_year})</description>";
+    echo "<description>".gettext('Number of Respondents per assessment')." ({$academic_year})</description>";
     if ($rs_respondents) {
       //loop round the initial array
       foreach($rs_respondents as $responses){
@@ -809,7 +809,7 @@ if ($format == 'xml'){
   if(!empty($assessment_modules)){
     $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
     echo "<metrics>";
-    echo "<description>Modules which have run an assessment ({$academic_year})</description>";
+    echo "<description>".gettext('Modules which have run an assessment')." ({$academic_year})</description>";
     if ($rs_runners) {
       //loop round the initial array
       foreach($rs_runners as $runner){
@@ -833,7 +833,7 @@ if ($format == 'xml'){
   if(!empty($assessment_students_thisyear)){
     $rs_students = $DB->fetch($run_students_assessed_SQL);
     echo "<metrics>";
-    echo "<description>Number of students who have carried out an assessment ({$academic_year})</description>";
+    echo "<description>".gettext('Number of students who have carried out an assessment')." ({$academic_year})</description>";
     if ($rs_students) {
       //loop round the initial array
       foreach($rs_students as $student){

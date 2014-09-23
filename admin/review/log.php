@@ -21,20 +21,20 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 }
 
 $type = "log";
-$rstitle = "Log Data";
+$rstitle = gettext("Log Data");
 
 //set the page information
-$UI->page_title = APP__NAME . " view log data";
-$UI->menu_selected = 'view data';
-$UI->breadcrumbs = array ('home' => '../','review data'=>'./','log data'=>null);
+$UI->page_title = APP__NAME .' '.gettext("view log data");
+$UI->menu_selected = gettext('view data');
+$UI->breadcrumbs = array ('home' => '../',gettext('review data')=>'./',gettext('log data')=>null);
 $UI->help_link = '?q=node/237';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../images/buttons/button_student_user.png', 'student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../images/buttons/button_staff_user.png', 'staff/index.php');
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', 'admin/index.php');
-  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', 'module/index.php');
+  $UI->set_page_bar_button(gettext('View Admin Data'), '../../../images/buttons/button_admin_user.png', 'admin/index.php');
+  $UI->set_page_bar_button(gettext('View Module Data'), '../../../images/buttons/button_view_modules.png', 'module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../images/buttons/button_search_user.png', '../search/index.php');
 $UI->head();
 $UI->body();
 $UI->content_start();
@@ -88,7 +88,7 @@ for ($recordcounter = 0; $recordcounter < count($rs); $recordcounter++) {
   echo "</tr>\n";
 }
 if (count($rs) <= 0) {
-  echo "<tr><td>No records</td></tr>\n";
+  echo "<tr><td>".gettext('No records')."</td></tr>\n";
 }
 
 echo '</table>';
