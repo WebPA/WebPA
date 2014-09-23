@@ -22,7 +22,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Initialise wizard
 
-$wizard = new Wizard('create new groups wizard');
+$wizard = new Wizard(gettext('create new groups wizard'));
 $wizard->cancel_url = '../../../tutors/groups/';
 
 $wizard->add_step(1,'class_wizardstep_1.php');
@@ -45,18 +45,18 @@ $wiz_step = $wizard->get_step();
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Create new groups';
-$UI->menu_selected = 'my groups';
+$UI->page_title = APP__NAME .' '.gettext('Create new groups');
+$UI->menu_selected = gettext('my groups');
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home'                      => '../../' ,
-  'my groups'                 => '../' ,
-  'create new groups wizard'  => null ,
+    gettext('my groups')                 => '../' ,
+    gettext('create new groups wizard')  => null ,
 );
 
-$UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
-$UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
-$UI->set_page_bar_button('Clone Groups', '../../../../images/buttons/button_group_clone.gif', '../clone/');
+$UI->set_page_bar_button(gettext('List Groups'), '../../../../images/buttons/button_group_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Groups'), '../../../../images/buttons/button_group_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('Clone Groups'), '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
 $UI->head();
 $wizard->head();
@@ -64,7 +64,7 @@ $UI->body('onload="body_onload()"');
 $UI->content_start();
 ?>
 
-<p>This wizard takes you through the process of creating a new collection of associated groups. When it is complete, you will be able to edit the groups and assign students to them.</p>
+<p><?php echo gettext('This wizard takes you through the process of creating a new collection of associated groups. When it is complete, you will be able to edit the groups and assign students to them.');?></p>
 
 <?php
 $wizard->title();

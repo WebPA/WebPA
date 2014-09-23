@@ -70,10 +70,10 @@ HTMLEnd;
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to create your new collection of groups.</strong></p>');
-      echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to create your new collection of groups.').'</strong></p>');
+      echo('<p>'.gettext('To correct the problem, click <em>back</em> and amend the details entered.').'</p>');
     } else {// Else.. create the groups!
       if ($collection->save()) {
         if ($num_groups>0) {
@@ -83,14 +83,14 @@ HTMLEnd;
           }
         }
       } else {
-        echo('<p><strong>An error occurred while trying to create your new collection of groups.</strong></p>');
-        echo('<p>You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.</p>');
+        echo('<p><strong>'.gettext('An error occurred while trying to create your new collection of groups.').'</strong></p>');
+        echo('<p>'.gettext('You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.').'</p>');
       }
 
 ?>
-      <p><strong>Your new groups have been created.</strong></p>
-      <p style="margin-top: 20px;">To allocate students to your new groups, you can use the <a href="../edit/edit_collection.php?c=<?php echo($collection->id); ?>">group editor</a>.</p>
-      <p style="margin-top: 20px;">Alternatively, you can return to <a href="../">my groups</a>, or to the <a href="../../index.php">WebPA home page</a>.</p>
+      <p><strong><?php echo gettext('Your new groups have been created.');?></strong></p>
+      <p style="margin-top: 20px;"><?php echo sprintf(gettext('To allocate students to your new groups, you can use the <a href="../edit/edit_collection.php?c=%s">group editor</a>.'), $collection->id);?></p>
+      <p style="margin-top: 20px;"><?php echo gettext('Alternatively, you can return to <a href="../">my groups</a>, or to the <a href="../../index.php">WebPA home page</a>.');?></p>
 <?php
     }
   }// /->form()

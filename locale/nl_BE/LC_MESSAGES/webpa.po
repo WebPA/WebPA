@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-22 17:00+0100\n"
-"PO-Revision-Date: 2014-09-22 17:00+0100\n"
+"POT-Creation-Date: 2014-09-23 13:48+0100\n"
+"PO-Revision-Date: 2014-09-23 13:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -127,6 +127,8 @@ msgstr ""
 #: contact/contact_send.php:72 contact/contact_send.php:81
 #: tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
+#: tutors/assessments/inc_list_open.php:81
+#: tutors/assessments/inc_list_pending.php:80
 msgid "Email"
 msgstr ""
 
@@ -336,6 +338,9 @@ msgid "Total"
 msgstr ""
 
 #: includes/classes/class_form_renderer.php:276
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:57
+#: tutors/forms/edit/edit_form.php:227
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:71
 msgid "Score"
 msgstr ""
 
@@ -351,12 +356,34 @@ msgid "Tutors"
 msgstr ""
 
 #: includes/classes/class_ui.php:56 lang/en/generic.php:17
+#: tutors/forms/clone/clone_example.php:57
+#: tutors/forms/clone/clone_example.php:60 tutors/forms/clone/index.php:48
+#: tutors/forms/clone/index.php:52 tutors/forms/edit/add_question/index.php:79
+#: tutors/forms/edit/add_question/index.php:83
+#: tutors/forms/edit/edit_form.php:77 tutors/forms/edit/edit_form.php:81
+#: tutors/forms/edit/edit_question/index.php:78
+#: tutors/forms/edit/edit_question/index.php:82
+#: tutors/forms/import/import.php:88 tutors/forms/import/import.php:91
+#: tutors/forms/import/index.php:22 tutors/forms/import/index.php:25
+#: tutors/forms/import/xml_file.php:92 tutors/forms/import/xml_file.php:93
+#: tutors/forms/index.php:30 tutors/forms/index.php:31
+#: tutors/forms/index.php:35
 msgid "my forms"
 msgstr ""
 
 #: includes/classes/class_ui.php:57 includes/classes/class_ui.php:63
 #: lang/en/generic.php:18 students/groups/index.php:31
 #: students/groups/index.php:32 students/groups/index.php:35
+#: tutors/groups/clone/index.php:50 tutors/groups/clone/index.php:54
+#: tutors/groups/create/index.php:49 tutors/groups/create/index.php:53
+#: tutors/groups/edit/edit_collection.php:80
+#: tutors/groups/edit/edit_collection.php:84
+#: tutors/groups/edit/edit_collection_groups.php:84
+#: tutors/groups/edit/edit_collection_groups.php:87
+#: tutors/groups/edit/edit_collection_members.php:83
+#: tutors/groups/edit/edit_collection_members.php:87
+#: tutors/groups/edit/edit_group.php:100 tutors/groups/edit/edit_group.php:104
+#: tutors/groups/edit/index.php:39 tutors/groups/index.php:39
 msgid "my groups"
 msgstr ""
 
@@ -379,6 +406,8 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:199
 #: tutors/assessments/edit/edit_assessment.php:201
 #: tutors/assessments/email/index.php:79 tutors/assessments/email/index.php:83
+#: tutors/assessments/index.php:80 tutors/assessments/index.php:81
+#: tutors/assessments/index.php:85
 #: tutors/assessments/marks/mark_assessment.php:140
 #: tutors/assessments/marks/mark_assessment.php:144
 #: tutors/assessments/marks/set_group_marks.php:134
@@ -389,10 +418,13 @@ msgstr ""
 #: tutors/assessments/reports/report_demo.php:183
 #: tutors/assessments/reports/students_who_responded.php:58
 #: tutors/assessments/reports/students_who_responded.php:60
+#: tutors/assessments/students_who_responded.php:59
+#: tutors/assessments/students_who_responded.php:62
 msgid "my assessments"
 msgstr "Mijn assessments"
 
 #: includes/classes/class_ui.php:62
+#: tutors/groups/create/class_wizardstep_3.php:63
 msgid "Students"
 msgstr ""
 
@@ -526,6 +558,10 @@ msgid "December"
 msgstr ""
 
 #: lang/en/generic.php:21 tutors/assessments/create/class_wizardstep_5.php:140
+#: tutors/groups/create/class_wizardstep_3.php:68
+#: tutors/groups/edit/edit_collection.php:170
+#: tutors/groups/edit/edit_collection.php:201
+#: tutors/groups/edit/edit_collection_groups.php:81
 msgid "Groups"
 msgstr ""
 
@@ -533,7 +569,7 @@ msgstr ""
 msgid "Number of Groups"
 msgstr ""
 
-#: lang/en/generic.php:23
+#: lang/en/generic.php:23 tutors/groups/edit/edit_collection.php:207
 msgid "edit group"
 msgstr ""
 
@@ -541,7 +577,7 @@ msgstr ""
 msgid "delete group"
 msgstr ""
 
-#: lang/en/generic.php:26
+#: lang/en/generic.php:26 tutors/forms/edit/edit_form.php:234
 msgid "edit question"
 msgstr ""
 
@@ -549,7 +585,8 @@ msgstr ""
 msgid "Please Note"
 msgstr ""
 
-#: lang/en/generic.php:30
+#: lang/en/generic.php:30 tutors/groups/edit/edit_collection_groups.php:79
+#: tutors/groups/edit/edit_collection_members.php:78
 msgid "Unknown Collection"
 msgstr ""
 
@@ -561,15 +598,24 @@ msgstr ""
 msgid "Editing group"
 msgstr ""
 
-#: lang/en/generic.php:35
+#: lang/en/generic.php:35 tutors/groups/clone/index.php:59
+#: tutors/groups/create/index.php:57 tutors/groups/edit/edit_collection.php:88
+#: tutors/groups/edit/edit_collection_groups.php:92
+#: tutors/groups/edit/edit_collection_members.php:92
 msgid "List Groups"
 msgstr ""
 
-#: lang/en/generic.php:36
+#: lang/en/generic.php:36 tutors/groups/clone/index.php:60
+#: tutors/groups/create/index.php:58 tutors/groups/edit/edit_collection.php:89
+#: tutors/groups/edit/edit_collection_groups.php:93
+#: tutors/groups/edit/edit_collection_members.php:93
 msgid "Create Groups"
 msgstr ""
 
-#: lang/en/generic.php:37
+#: lang/en/generic.php:37 tutors/groups/clone/index.php:61
+#: tutors/groups/create/index.php:59 tutors/groups/edit/edit_collection.php:90
+#: tutors/groups/edit/edit_collection_groups.php:94
+#: tutors/groups/edit/edit_collection_members.php:94
 msgid "Clone Groups"
 msgstr ""
 
@@ -579,6 +625,9 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:336
 #: tutors/assessments/edit/edit_assessment.php:557
 #: tutors/assessments/marks/set_group_marks.php:261
+#: tutors/forms/edit/edit_form.php:182
+#: tutors/groups/edit/edit_collection_members.php:187
+#: tutors/groups/edit/edit_collection_members.php:196
 msgid "save changes"
 msgstr ""
 
@@ -588,12 +637,20 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:247
 #: tutors/assessments/marks/mark_assessment.php:186
 #: tutors/assessments/marks/set_group_marks.php:179
+#: tutors/forms/edit/edit_form.php:119
+#: tutors/groups/edit/edit_collection.php:123
+#: tutors/groups/edit/edit_collection_groups.php:113
+#: tutors/groups/edit/edit_collection_members.php:111
 msgid "The following errors were found:"
 msgstr "Volgende fouten werden gevonden:"
 
 #: lang/en/generic.php:43 tutors/assessments/edit/edit_assessment.php:247
 #: tutors/assessments/marks/mark_assessment.php:186
 #: tutors/assessments/marks/set_group_marks.php:179
+#: tutors/forms/edit/edit_form.php:119
+#: tutors/groups/edit/edit_collection.php:123
+#: tutors/groups/edit/edit_collection_groups.php:113
+#: tutors/groups/edit/edit_collection_members.php:111
 #, fuzzy
 msgid ""
 "No changes have been saved. Please check the details in the form, and try "
@@ -913,6 +970,8 @@ msgstr ""
 #: students/assessments/index.php:143 students/index.php:145
 #: students/index.php:181 tutors/assessments/inc_list_closed.php:81
 #: tutors/assessments/inc_list_marked.php:88
+#: tutors/assessments/inc_list_open.php:76
+#: tutors/assessments/inc_list_pending.php:75
 msgid "scheduled:"
 msgstr "gepland:"
 
@@ -948,6 +1007,8 @@ msgstr ""
 #: students/assessments/index.php:207
 #: tutors/assessments/inc_list_closed.php:66
 #: tutors/assessments/inc_list_marked.php:72
+#: tutors/assessments/inc_list_open.php:61
+#: tutors/assessments/inc_list_pending.php:62
 msgid "COMPLETED"
 msgstr "VERVOLLEDIGD"
 
@@ -973,6 +1034,8 @@ msgstr "reeds ingediend"
 #: tutors/assessments/marks/set_group_marks.php:191
 #: tutors/assessments/reports/index.php:148
 #: tutors/assessments/reports/students_who_responded.php:86
+#: tutors/assessments/students_who_responded.php:89
+#: tutors/forms/edit/preview_form.php:82
 msgid "back to assessments list"
 msgstr "terug naar de assessmentlijst"
 
@@ -1097,6 +1160,7 @@ msgid ""
 msgstr ""
 
 #: students/assessments/take/index.php:370
+#: tutors/forms/edit/preview_form.php:87
 #, fuzzy
 msgid "Taking This Assessment"
 msgstr "Mijn opdrachten."
@@ -1120,6 +1184,7 @@ msgid ""
 msgstr ""
 
 #: students/assessments/take/index.php:374
+#: tutors/forms/edit/preview_form.php:91
 msgid ""
 "To leave this assessment without saving, click the <em>back to assessments "
 "list</em> link above, or choosing an option from the menu."
@@ -1132,10 +1197,12 @@ msgstr "Uw team"
 #: students/assessments/take/index.php:388
 #: tutors/assessments/create/class_wizardstep_1.php:145
 #: tutors/assessments/edit/edit_assessment.php:329
+#: tutors/forms/edit/preview_form.php:102
 msgid "Introduction"
 msgstr "Inleiding"
 
-#: students/assessments/take/index.php:397
+#: students/assessments/take/index.php:397 tutors/forms/edit/edit_form.php:187
+#: tutors/forms/edit/preview_form.php:111
 msgid "Assessment Criteria"
 msgstr "Beoordelingscriteria"
 
@@ -1189,7 +1256,7 @@ msgid ""
 "members are."
 msgstr ""
 
-#: students/groups/index.php:69
+#: students/groups/index.php:69 tutors/groups/clone/class_wizardstep_1.php:65
 msgid "Your Groups"
 msgstr ""
 
@@ -1261,12 +1328,13 @@ msgstr "Open Assessments."
 #: tutors/assessments/edit/change_assessment_collection.php:113
 #: tutors/assessments/edit/change_assessment_form.php:92
 #: tutors/assessments/edit/edit_assessment.php:204
-#: tutors/assessments/email/index.php:87
+#: tutors/assessments/email/index.php:87 tutors/assessments/index.php:88
 #: tutors/assessments/marks/mark_assessment.php:148
 #: tutors/assessments/marks/set_group_marks.php:140
 #: tutors/assessments/reports/index.php:122
 #: tutors/assessments/reports/report_demo.php:186
 #: tutors/assessments/reports/students_who_responded.php:63
+#: tutors/assessments/students_who_responded.php:65
 #, fuzzy
 msgid "List Assessments"
 msgstr "Vervolledigde Assessments."
@@ -1277,12 +1345,13 @@ msgstr "Vervolledigde Assessments."
 #: tutors/assessments/edit/change_assessment_collection.php:114
 #: tutors/assessments/edit/change_assessment_form.php:93
 #: tutors/assessments/edit/edit_assessment.php:205
-#: tutors/assessments/email/index.php:88
+#: tutors/assessments/email/index.php:88 tutors/assessments/index.php:89
 #: tutors/assessments/marks/mark_assessment.php:149
 #: tutors/assessments/marks/set_group_marks.php:141
 #: tutors/assessments/reports/index.php:123
 #: tutors/assessments/reports/report_demo.php:187
 #: tutors/assessments/reports/students_who_responded.php:64
+#: tutors/assessments/students_who_responded.php:66
 #, fuzzy
 msgid "Create Assessments"
 msgstr "Doe Assessment."
@@ -1297,6 +1366,15 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_4.php:29
 #: tutors/assessments/email/class_wizardstep_1.php:28
 #: tutors/assessments/email/class_wizardstep_2.php:27
+#: tutors/forms/clone/class_wizardstep_1.php:26
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:26
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:26
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:27
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:27
+#: tutors/groups/clone/class_wizardstep_1.php:26
+#: tutors/groups/create/class_wizardstep_1.php:26
+#: tutors/groups/create/class_wizardstep_2.php:27
+#: tutors/groups/create/class_wizardstep_x.php:26
 msgid "Next &gt;"
 msgstr ""
 
@@ -1310,6 +1388,35 @@ msgstr ""
 #: tutors/assessments/email/class_wizardstep_2.php:28
 #: tutors/assessments/email/class_wizardstep_3.php:28
 #: tutors/assessments/email/class_wizardstep_4.php:124
+#: tutors/forms/clone/class_wizardstep_1.php:27
+#: tutors/forms/clone/class_wizardstep_2.php:27
+#: tutors/forms/clone/class_wizardstep_3.php:60
+#: tutors/forms/create/class_wizardstep_1.php:27
+#: tutors/forms/create/class_wizardstep_2.php:62
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:27
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:27
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:76
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:27
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:27
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:76
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:27
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:66
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:28
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:28
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:69
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:28
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:28
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:71
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:28
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:65
+#: tutors/groups/clone/class_wizardstep_1.php:27
+#: tutors/groups/clone/class_wizardstep_2.php:28
+#: tutors/groups/clone/class_wizardstep_3.php:62
+#: tutors/groups/create/class_wizardstep_1.php:27
+#: tutors/groups/create/class_wizardstep_2.php:28
+#: tutors/groups/create/class_wizardstep_3.php:27
+#: tutors/groups/create/class_wizardstep_4.php:74
+#: tutors/groups/create/class_wizardstep_x.php:27
 msgid "Cancel"
 msgstr ""
 
@@ -1437,6 +1544,25 @@ msgstr ""
 #: tutors/assessments/email/class_wizardstep_2.php:26
 #: tutors/assessments/email/class_wizardstep_3.php:26
 #: tutors/assessments/email/class_wizardstep_4.php:123
+#: tutors/forms/clone/class_wizardstep_2.php:25
+#: tutors/forms/clone/class_wizardstep_3.php:59
+#: tutors/forms/create/class_wizardstep_2.php:61
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:25
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:75
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:25
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:75
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:65
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:26
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:68
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:26
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:70
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:64
+#: tutors/groups/clone/class_wizardstep_2.php:26
+#: tutors/groups/clone/class_wizardstep_3.php:61
+#: tutors/groups/create/class_wizardstep_2.php:26
+#: tutors/groups/create/class_wizardstep_3.php:25
+#: tutors/groups/create/class_wizardstep_4.php:73
+#: tutors/groups/create/class_wizardstep_x.php:25
 msgid "&lt; Back"
 msgstr ""
 
@@ -1584,6 +1710,16 @@ msgid "Peer assessment only"
 msgstr "Mijn assessments"
 
 #: tutors/assessments/create/class_wizardstep_5.php:28
+#: tutors/forms/clone/class_wizardstep_2.php:26
+#: tutors/forms/create/class_wizardstep_1.php:26
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:26
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:26
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:26
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:27
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:27
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:27
+#: tutors/groups/clone/class_wizardstep_2.php:27
+#: tutors/groups/create/class_wizardstep_3.php:26
 msgid "Finish"
 msgstr ""
 
@@ -1662,6 +1798,7 @@ msgid "ERROR : </strong>unable to load the selected collection of groups"
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:152
+#: tutors/groups/edit/edit_collection.php:156
 msgid "Collection"
 msgstr ""
 
@@ -1724,6 +1861,15 @@ msgid "Unable to create your new assessment."
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_6.php:122
+#: tutors/forms/clone/class_wizardstep_3.php:62
+#: tutors/forms/create/class_wizardstep_2.php:64
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:78
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:78
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:68
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:71
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:73
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:67
+#: tutors/groups/create/class_wizardstep_4.php:76
 msgid ""
 "To correct the problem, click <em>back</em> and amend the details entered."
 msgstr ""
@@ -1753,6 +1899,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_6.php:134
+#: tutors/forms/clone/class_wizardstep_3.php:72
+#: tutors/forms/create/class_wizardstep_2.php:71
 msgid "An error occurred while trying to create your new assessment form."
 msgstr ""
 
@@ -1778,11 +1926,14 @@ msgstr ""
 #: tutors/assessments/delete_marks.php:78
 #: tutors/assessments/reports/students_who_responded.php:57
 #: tutors/assessments/reports/students_who_responded.php:61
+#: tutors/assessments/students_who_responded.php:58
+#: tutors/assessments/students_who_responded.php:63
 msgid "students who responded"
 msgstr ""
 
 #: tutors/assessments/delete_marks.php:98
 #: tutors/assessments/reports/students_who_responded.php:81
+#: tutors/assessments/students_who_responded.php:84
 msgid ""
 "This page shows all the students assigned this assessment and which have "
 "responded."
@@ -1796,10 +1947,18 @@ msgstr ""
 #: tutors/assessments/reports/index.php:148
 #: tutors/assessments/reports/report_demo.php:210
 #: tutors/assessments/reports/students_who_responded.php:86
+#: tutors/assessments/students_who_responded.php:89
+#: tutors/forms/edit/edit_form.php:131 tutors/forms/edit/edit_form.php:144
+#: tutors/forms/edit/preview_form.php:82
+#: tutors/groups/edit/edit_collection.php:136
+#: tutors/groups/edit/edit_collection_groups.php:119
+#: tutors/groups/edit/edit_collection_members.php:119
+#: tutors/groups/edit/edit_group.php:158
 msgid "back"
 msgstr ""
 
 #: tutors/assessments/delete_marks.php:106
+#: tutors/assessments/students_who_responded.php:92
 msgid ""
 "The following list shows which students in each group have submitted their "
 "responses to the assessment."
@@ -1807,6 +1966,7 @@ msgstr ""
 
 #: tutors/assessments/delete_marks.php:107
 #: tutors/assessments/reports/students_who_responded.php:90
+#: tutors/assessments/students_who_responded.php:93
 msgid ""
 "To email an individual student, click on the email link next to their name."
 msgstr ""
@@ -1820,6 +1980,7 @@ msgstr ""
 
 #: tutors/assessments/delete_marks.php:118
 #: tutors/assessments/reports/students_who_responded.php:100
+#: tutors/assessments/students_who_responded.php:103
 msgid "This group has no members."
 msgstr ""
 
@@ -1833,11 +1994,13 @@ msgstr ""
 #: tutors/assessments/reports/report_student_grades_bygroup.php:295
 #: tutors/assessments/reports/report_student_grades_bygroup.php:298
 #: tutors/assessments/reports/students_who_responded.php:105
+#: tutors/assessments/students_who_responded.php:108
 msgid "name"
 msgstr ""
 
 #: tutors/assessments/delete_marks.php:124
 #: tutors/assessments/reports/students_who_responded.php:107
+#: tutors/assessments/students_who_responded.php:110
 msgid "responded"
 msgstr ""
 
@@ -1847,6 +2010,7 @@ msgstr ""
 
 #: tutors/assessments/delete_marks.php:131
 #: tutors/assessments/reports/students_who_responded.php:112
+#: tutors/assessments/students_who_responded.php:115
 msgid "Responded"
 msgstr ""
 
@@ -1857,6 +2021,7 @@ msgstr ""
 
 #: tutors/assessments/delete_marks.php:135
 #: tutors/assessments/reports/students_who_responded.php:115
+#: tutors/assessments/students_who_responded.php:118
 msgid "Not Responded"
 msgstr ""
 
@@ -2036,6 +2201,11 @@ msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
 msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:227
+#: tutors/forms/edit/edit_form.php:99 tutors/forms/edit/edit_form.php:256
+#: tutors/forms/index.php:83 tutors/forms/index.php:117
+#: tutors/groups/edit/edit_collection.php:108
+#: tutors/groups/edit/edit_collection_groups.php:177
+#: tutors/groups/index.php:86
 msgid "delete"
 msgstr ""
 
@@ -2077,6 +2247,10 @@ msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:305
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:207
+#: tutors/forms/edit/edit_form.php:156
+#: tutors/groups/create/class_wizardstep_3.php:60
+#: tutors/groups/edit/edit_collection.php:161
+#: tutors/groups/edit/edit_group.php:176
 #, fuzzy
 msgid "Name"
 msgstr "Uw team"
@@ -2151,16 +2325,19 @@ msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:474
 #: tutors/assessments/marks/set_group_marks.php:219
+#: tutors/groups/edit/edit_collection_groups.php:182
 msgid "This collection does not contain any groups"
 msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:480
+#: tutors/groups/edit/edit_group.php:171
 #, fuzzy
 msgid "Group Name"
 msgstr "Uw team"
 
 #: tutors/assessments/edit/edit_assessment.php:481
 #: tutors/assessments/marks/set_group_marks.php:226
+#: tutors/groups/edit/edit_collection_members.php:80
 msgid "Members"
 msgstr ""
 
@@ -2330,6 +2507,7 @@ msgid "Send Email"
 msgstr "Uw team"
 
 #: tutors/assessments/email/class_wizardstep_3.php:62
+#: tutors/groups/create/class_wizardstep_3.php:57
 msgid "Please confirm the following settings are correct before proceeding."
 msgstr ""
 
@@ -2469,48 +2647,65 @@ msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:82
 #: tutors/assessments/inc_list_marked.php:89
+#: tutors/assessments/inc_list_open.php:77
+#: tutors/assessments/inc_list_pending.php:76
 msgid "student responses:"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:85
 #: tutors/assessments/inc_list_marked.php:92
+#: tutors/assessments/inc_list_open.php:80
+#: tutors/assessments/inc_list_pending.php:79
 msgid "Edit"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:85
 #: tutors/assessments/inc_list_marked.php:92
+#: tutors/assessments/inc_list_open.php:80
+#: tutors/assessments/inc_list_pending.php:79
 #, fuzzy
 msgid "Edit assessment"
 msgstr "Mijn assessments"
 
 #: tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
+#: tutors/assessments/inc_list_open.php:81
+#: tutors/assessments/inc_list_pending.php:80
 msgid "Email students"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:87
 #: tutors/assessments/inc_list_marked.php:94
+#: tutors/assessments/inc_list_open.php:82
+#: tutors/assessments/inc_list_pending.php:81
 msgid "Students responded"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:87
 #: tutors/assessments/inc_list_marked.php:94
+#: tutors/assessments/inc_list_open.php:82
+#: tutors/assessments/inc_list_pending.php:81
 msgid "Check which students have responded"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:88
 #: tutors/assessments/inc_list_marked.php:95
+#: tutors/assessments/inc_list_open.php:83
+#: tutors/assessments/inc_list_pending.php:82
 #: tutors/assessments/marks/set_group_marks.php:210
 msgid "Group Marks"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:88
 #: tutors/assessments/inc_list_marked.php:95
+#: tutors/assessments/inc_list_open.php:83
+#: tutors/assessments/inc_list_pending.php:82
 msgid "Set group marks"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:89
 #: tutors/assessments/inc_list_marked.php:96
+#: tutors/assessments/inc_list_marked.php:116
 msgid "Mark Sheet"
 msgstr ""
 
@@ -2520,6 +2715,7 @@ msgid "New mark sheet"
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:90
+#: tutors/assessments/inc_list_open.php:85
 msgid "View student inputs"
 msgstr ""
 
@@ -2535,6 +2731,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/inc_list_marked.php:49
+#: tutors/assessments/inc_list_open.php:42
+#: tutors/assessments/inc_list_pending.php:43
 msgid "You do not have any assessments in this category."
 msgstr ""
 
@@ -2569,6 +2767,84 @@ msgstr ""
 #: tutors/assessments/inc_list_marked.php:127
 msgid "View&nbsp;Reports"
 msgstr ""
+
+#: tutors/assessments/inc_list_open.php:21
+#, fuzzy, php-format
+msgid "Open assessments for %s"
+msgstr "Vervolledigde Assessments."
+
+#: tutors/assessments/inc_list_open.php:23
+msgid "These assessments are now open and available for students to take."
+msgstr ""
+
+#: tutors/assessments/inc_list_open.php:43
+msgid ""
+"Please choose another category from the tabs above, or <a href=\"/tutors/"
+"assessments/create/\">create a new assessment"
+msgstr ""
+
+#: tutors/assessments/inc_list_open.php:73
+msgid "Open"
+msgstr ""
+
+#: tutors/assessments/inc_list_open.php:84
+msgid "Delete individual marks"
+msgstr ""
+
+#: tutors/assessments/inc_list_pending.php:22
+#, fuzzy, php-format
+msgid "Pending assessments for %s"
+msgstr "Vervolledigde Assessments."
+
+#: tutors/assessments/inc_list_pending.php:24
+msgid ""
+"These assessments are scheduled to open for students at some point in the "
+"future."
+msgstr ""
+
+#: tutors/assessments/inc_list_pending.php:44
+msgid ""
+"Please choose another category from the tabs above, or <a href=\"create/"
+"\">create a new assessment"
+msgstr ""
+
+#: tutors/assessments/inc_list_pending.php:72
+msgid "Pending"
+msgstr ""
+
+#: tutors/assessments/index.php:47
+msgid "pending"
+msgstr ""
+
+#: tutors/assessments/index.php:48
+msgid "open"
+msgstr ""
+
+#: tutors/assessments/index.php:49
+msgid "closed"
+msgstr ""
+
+#: tutors/assessments/index.php:50
+msgid "marked"
+msgstr ""
+
+#: tutors/assessments/index.php:110
+msgid "Use the tabs below to manage your different categories of assessment."
+msgstr ""
+
+#: tutors/assessments/index.php:111
+msgid ""
+"You can also <a class=\"button\" href=\"create/\">create a new assessment"
+msgstr ""
+
+#: tutors/assessments/index.php:136
+msgid "Academic year to display"
+msgstr ""
+
+#: tutors/assessments/index.php:151
+#, fuzzy
+msgid "change"
+msgstr "gepland:"
 
 #: tutors/assessments/marks/mark_assessment.php:73
 msgid "The PA Weighting must be a number between 1 - 100"
@@ -3134,6 +3410,8 @@ msgstr ""
 #: tutors/assessments/reports/report_student_grades.php:333
 #: tutors/assessments/reports/report_student_grades_bygroup.php:294
 #: tutors/assessments/reports/report_student_grades_bygroup.php:310
+#: tutors/groups/create/class_wizardstep_2.php:58
+#: tutors/groups/edit/edit_collection.php:217
 msgid "student"
 msgstr ""
 
@@ -3236,6 +3514,8 @@ msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:273
 #: tutors/assessments/reports/report_student_grades_bygroup.php:313
+#: tutors/groups/clone/class_wizardstep_1.php:74
+#: tutors/groups/edit/edit_collection.php:177
 msgid "group"
 msgstr ""
 
@@ -3318,5 +3598,1386 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/reports/students_who_responded.php:106
+#: tutors/assessments/students_who_responded.php:109
 msgid "email"
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_1.php:68
+msgid "You have not created any forms yet, so you cannot select one to clone."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_1.php:69
+msgid "Please <a href=\"../create/\">create a new form</a> instead."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_1.php:73
+msgid ""
+"To create a clone you must first select which assessment form you wish to "
+"copy. Please choose one from the list below."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_1.php:75
+msgid "Choose a form to clone"
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_1.php:103
+msgid "You must select which assessment form you wish to clone."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_2.php:54
+msgid ""
+"The select form could not be loaded, please click <em>Back</em> and try "
+"again."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_2.php:58
+#: tutors/groups/clone/class_wizardstep_2.php:54
+msgid "You have chosen to clone:"
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_2.php:60
+msgid "Now enter a name for your new form."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_2.php:65
+#: tutors/forms/clone/clone_example.php:79
+#, fuzzy
+msgid "Name for new form"
+msgstr "Mijn opdrachten."
+
+#: tutors/forms/clone/class_wizardstep_2.php:79
+msgid "You must enter a name for your new assessment form."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_3.php:61
+#: tutors/forms/create/class_wizardstep_2.php:63
+msgid "Unable to create your new form."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_3.php:66
+#: tutors/forms/create/class_wizardstep_2.php:79
+#, fuzzy
+msgid "Your new assessment form has been created."
+msgstr "Mijn assessments"
+
+#: tutors/forms/clone/class_wizardstep_3.php:67
+#, php-format
+msgid ""
+"To add questions and marking information to your new form, you can use the "
+"<a href=\"../edit/edit_form.php?f=%s\">form editor</a>."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_3.php:68
+msgid ""
+"Alternatively, you can return to <a href=\"../\">my forms</a>, or to the <a "
+"href=\"../../../\">WebPA home page</a>."
+msgstr ""
+
+#: tutors/forms/clone/class_wizardstep_3.php:73
+#: tutors/forms/create/class_wizardstep_2.php:72
+#: tutors/groups/create/class_wizardstep_4.php:87
+msgid ""
+"You may be able to correct the problem by clicking <em>back</em>, and then "
+"<em>next</em> again."
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:56
+#, php-format
+msgid " Copy %s form"
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:61
+#, fuzzy
+msgid "copy form"
+msgstr "gepland:"
+
+#: tutors/forms/clone/clone_example.php:63 tutors/forms/clone/index.php:56
+#: tutors/forms/edit/add_question/index.php:88
+#: tutors/forms/edit/edit_form.php:85
+#: tutors/forms/edit/edit_question/index.php:87
+#: tutors/forms/import/import.php:93 tutors/forms/import/index.php:28
+#: tutors/forms/import/xml_file.php:95 tutors/forms/index.php:38
+msgid "List Forms"
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:64 tutors/forms/clone/index.php:57
+#: tutors/forms/edit/add_question/index.php:89
+#: tutors/forms/edit/edit_form.php:86
+#: tutors/forms/edit/edit_question/index.php:88
+msgid "Create Form"
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:65 tutors/forms/clone/index.php:58
+#: tutors/forms/edit/add_question/index.php:90
+#: tutors/forms/edit/edit_form.php:87
+#: tutors/forms/edit/edit_question/index.php:89
+#: tutors/forms/import/import.php:95 tutors/forms/import/index.php:30
+#: tutors/forms/import/xml_file.php:97 tutors/forms/index.php:40
+msgid "Clone a Form"
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:66 tutors/forms/clone/index.php:59
+#: tutors/forms/edit/add_question/index.php:91
+#: tutors/forms/edit/edit_form.php:88
+#: tutors/forms/edit/edit_question/index.php:90
+#: tutors/forms/import/import.php:96 tutors/forms/import/index.php:31
+#: tutors/forms/import/xml_file.php:98 tutors/forms/index.php:41
+msgid "Import a Form"
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:72
+#, php-format
+msgid "You have chosen to take a copy of the : <em>%s</em> form."
+msgstr ""
+
+#: tutors/forms/clone/clone_example.php:74
+msgid "Now enter a name for your copy of the form."
+msgstr ""
+
+#: tutors/forms/clone/index.php:25
+msgid "clone an existing form wizard"
+msgstr ""
+
+#: tutors/forms/clone/index.php:47
+msgid "Clone an existing form"
+msgstr ""
+
+#: tutors/forms/clone/index.php:53
+msgid "clone a form wizard"
+msgstr ""
+
+#: tutors/forms/clone/index.php:67
+msgid ""
+"This wizard takes you through the process of cloning an existing assessment "
+"form. When it is complete, you will have a new copy of the form, which you "
+"can then edit normally."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:49
+msgid ""
+"To create a new form you just need to give it a name. To avoid confusion, "
+"the name should be unique, but you can create forms using the same name if "
+"you wish."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:50
+msgid ""
+"Your form will be reusable with any number of assessments, so if you intend "
+"to use it again you should give the form a more generic name and not name it "
+"after a module in a particular academic year."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:51
+msgid ""
+"For example, <em>\"Teamwork Assessment\"</em> or <em>\"ABC123 Group "
+"Coursework\"</em>."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:54
+#, fuzzy
+msgid "Name for this new form"
+msgstr "Mijn opdrachten."
+
+#: tutors/forms/create/class_wizardstep_1.php:62
+msgid "What type scoring will your criteria use?"
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:63
+msgid ""
+"WebPA offers two different ways that your students can score each other."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:71
+#: tutors/forms/edit/edit_form.php:163
+msgid "Likert Scale"
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:72
+msgid ""
+"The standard WebPA scoring.  Students rate each other against a small likert "
+"scale, typically 1-5 or 1-10, by simply clicking the appropriate radio "
+"button."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:78
+#: tutors/forms/edit/edit_form.php:164
+msgid "Split 100"
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:79
+msgid ""
+"Students must split 100 marks between their teammates for each criterion, "
+"with each score being entered manually into the appropriate box.  The score "
+"for each criterion must total 100, so students using this method will be "
+"made more aware of the effects of their peer assessment scores, as giving "
+"more marks to one team mate means another must get less."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:91
+msgid "You must provide a name for your new assessment form"
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_1.php:94
+msgid "You must select at least one module"
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_2.php:80
+#, php-format
+msgid ""
+"To add question and marking information to your form, you can use the <a "
+"href=\"../index.php?f=%s\">form editor</a>."
+msgstr ""
+
+#: tutors/forms/create/class_wizardstep_2.php:81
+msgid ""
+"Alternatively, you can return to <a href=\"/tutors/forms/\">my forms</a>, or "
+"to the <a href=\"/\">WebPA home page</a>."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:54
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:50
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:50
+msgid ""
+"To create a new marking question, you firstly need to enter the text of the "
+"question."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:57
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:53
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:53
+msgid ""
+"You can phrase the assessment criteria however you like, either as "
+"statements or questions. The important thing is that it's clear what "
+"criteria the student is assessing."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:59
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:55
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:55
+msgid ""
+"Use the description box to further clarify what you want the student's to "
+"assess when scoring this criterion."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:62
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:58
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:58
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:80
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:82
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:73
+msgid "Criterion Text"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:66
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:62
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:62
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:84
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:86
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:77
+msgid "Description"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:66
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:62
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:62
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:84
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:86
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:77
+msgid "(optional)"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:72
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:68
+msgid "Now select the range of scores you will allow for this question."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:76
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:72
+msgid "Scores can range from"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:82
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:78
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:100
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:102
+msgid "to"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:91
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:87
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:109
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:111
+msgid ""
+"<strong>Please Note</strong> - allowing 0 scores means students can receive "
+"no marks if they failed to contribute at all."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_1.php:99
+#: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:95
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:77
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:117
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:120
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:90
+msgid "You must provide some text for your new criterion"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:47
+#, php-format
+msgid ""
+"Your new assessment criterion allows scores from %d to %d to $range_end\"); ?"
+">. You can use the boxes below to provide a description what those scores "
+"should mean."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:48
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:48
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:62
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:64
+msgid ""
+"It's good practice to describe the meaning of at least the top and bottom "
+"scores, but you are free to provide as many, or as few, descriptions as you "
+"like. Leave a description blank and it will not be displayed on the form."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:50
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:50
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:64
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:66
+msgid "Score descriptions"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:60
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:60
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:74
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:76
+msgid "Lowest"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_2.php:63
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:63
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:77
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:79
+msgid "Highest"
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:67
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:67
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:57
+msgid "Unable to load the form that this question is to be added to."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:77
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:77
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:67
+msgid "Unable to create your new criterion."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:84
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:84
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:74
+msgid "Your new assessment criterion has been created."
+msgstr ""
+
+#: tutors/forms/edit/add_question/class_wizardstep_3.php:85
+#: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:85
+#: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:75
+#, php-format
+msgid ""
+"You can now return to <a href=\"../edit_form.php?f=%s\">editing your form</"
+"a>."
+msgstr ""
+
+#: tutors/forms/edit/add_question/index.php:38
+#, fuzzy
+msgid "add a new assessment criterion wizard"
+msgstr "Beoordelingscriteria"
+
+#: tutors/forms/edit/add_question/index.php:78
+msgid "Add a new criterion"
+msgstr ""
+
+#: tutors/forms/edit/add_question/index.php:84
+#: tutors/forms/edit/edit_question/index.php:83
+msgid "edit:"
+msgstr ""
+
+#: tutors/forms/edit/add_question/index.php:85
+msgid "add a new question"
+msgstr ""
+
+#: tutors/forms/edit/add_question/index.php:103
+msgid ""
+"This wizard takes you through the process of adding a new criterion to your "
+"assessment form."
+msgstr ""
+
+#: tutors/forms/edit/add_question/index.php:118
+#: tutors/forms/edit/edit_question/index.php:117
+msgid ""
+"The given assessment form failed to load so this wizard cannot be started."
+msgstr ""
+
+#: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:47
+msgid ""
+"Your new assessment criterion allows scores from <?php echo(\"$range_start "
+"to $range_end\"); ?>. You can use the boxes below to provide a description "
+"what those scores should mean."
+msgstr ""
+
+#: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:67
+msgid ""
+"You are using a Split 100 assessment form, so students will automatically be "
+"given 100 marks to distribute between all the team members."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:49
+msgid "You must give this form a name."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:74
+msgid "Edit form"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:98 tutors/forms/index.php:83
+#: tutors/forms/index.php:117
+msgid "This assessment form will be deleted.\\n\\nClick OK to confirm."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:123
+msgid ""
+"On this page you can change the name of this form, and add/remove assessment "
+"criteria."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:131 tutors/forms/edit/edit_form.php:144
+#, fuzzy
+msgid "back to forms list"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/forms/edit/edit_form.php:134
+msgid ""
+"The form you selected could not be loaded for some reason - please go back "
+"and try again."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:145
+msgid "preview form"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:146 tutors/forms/index.php:83
+#: tutors/forms/index.php:117
+msgid "delete form"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:151
+#, fuzzy
+msgid "Form Name"
+msgstr "Uw team"
+
+#: tutors/forms/edit/edit_form.php:153
+msgid ""
+"You can change this form's name using the box below. When you've made your "
+"changes, click the <em>save changes</em> button."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:160
+msgid "Scoring Type"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:169
+msgid ""
+"Changing from <em>likert scale</em> to <em>split 100</em> will keep your "
+"criteria's text, but delete the scoring ranges and labels."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:173
+msgid ""
+"Changing from <em>split 100</em> to <em>likert scale</em> will keep your "
+"criteria's text, and set all scoring ranges to 1-5."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:193
+#, php-format
+msgid ""
+"You have not added any assessment criteria to this form yet. You need to <a "
+"class=\"button\" href=\"../edit/add_question/index.php?%s\">add&nbsp;a&nbsp;"
+"new&nbsp;criterion</a> before the form can be used."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:197
+msgid ""
+"The group will rate themselves and each other against the assessment "
+"criteria you specify."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:198
+msgid ""
+"e.g. <em>\"Ability to communicate\"</em> or <em>\"Contribution to the "
+"analysis of the experimental data\"</em>."
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:199
+msgid ""
+"You can edit a criterion by clicking on the <img src=\"../../../images/"
+"buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title="
+"\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/"
+"add_question/index.php?<?php echo($form_qs); ?>\">add&nbsp;a&nbsp;new&nbsp;"
+"criterion</a>"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:222
+msgid "Scoring range:"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:234 tutors/forms/index.php:82
+#: tutors/forms/index.php:116 tutors/groups/edit/edit_collection.php:207
+#: tutors/groups/index.php:85
+msgid "edit"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:239
+msgid "move up"
+msgstr ""
+
+#: tutors/forms/edit/edit_form.php:249
+msgid "move down"
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:75
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:77
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:68
+msgid "Here you can edit the text and description of the criterion."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:90
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:92
+msgid ""
+"Here you can select the range of scores you will allow for this assessment "
+"criterion."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_1.php:94
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:96
+#, fuzzy
+msgid "Scores range from"
+msgstr "gepland:"
+
+#: tutors/forms/edit/edit_question/class_wizardstep_2.php:61
+#, php-format
+msgid ""
+"Your new assessment criterion allows scores from %d to %d You can use the "
+"boxes below to provide a description what those scores should mean."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:60
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:62
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:56
+msgid "Unable to load the form that this question belongs to."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:70
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:72
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:66
+#, fuzzy
+msgid "Unable to create your new assessment criterion."
+msgstr "Doe Assessment."
+
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:74
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:76
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:70
+msgid "Your changes to this criterion have been saved."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/class_wizardstep_3.php:75
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:77
+#: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:71
+#, php-format
+msgid ""
+"You can now return to <a href=\"/tutors/forms/edit/edit_form.php?f=%s"
+"\">editing your form</a>."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/index.php:37
+msgid "edit criterion wizard"
+msgstr ""
+
+#: tutors/forms/edit/edit_question/index.php:77
+msgid "Edit a criterion"
+msgstr ""
+
+#: tutors/forms/edit/edit_question/index.php:84
+msgid "edit: criterion"
+msgstr ""
+
+#: tutors/forms/edit/edit_question/index.php:102
+msgid ""
+"This wizard takes you through the process of editing an existing assessment "
+"criterion."
+msgstr ""
+
+#: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:63
+#, php-format
+msgid ""
+"Your new assessment criterion allows scores from %d to %d. You can use the "
+"boxes below to provide a description what those scores should mean."
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:33
+msgid "<< Your introduction text will go in here >>"
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:44
+msgid "Yourself"
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:56
+msgid "Preview Form"
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:82
+#: tutors/forms/edit/preview_form.php:121
+msgid "disabled in preview"
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:89
+msgid ""
+"Please complete the assessment below. For each question <em>you must give a "
+"mark to each group member</em>, including yourself."
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:90
+msgid ""
+"To save your marks, you must click the <em>Save Marks</em> button.  Once you "
+"have successfully submitted your responses you cannot go back and change "
+"your marks."
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:94
+#, fuzzy
+msgid "Marking Your Team"
+msgstr "Uw team"
+
+#: tutors/forms/edit/preview_form.php:117
+msgid ""
+"That concludes this peer assessment. To finish and submit your response "
+"click the <em>save marks</em> button below."
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:118
+msgid ""
+"Once you have successfully submitted your responses you cannot go back and "
+"change your marks."
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:121
+msgid "save marks"
+msgstr ""
+
+#: tutors/forms/edit/preview_form.php:127
+msgid "close preview"
+msgstr ""
+
+#: tutors/forms/import/import.php:46
+msgid ""
+"You already have this form in your forms list.</p><p>If you would like to "
+"make a copy of the form please use the <a href=\\\"index.php\\\">'clone "
+"form'</a> function."
+msgstr ""
+
+#: tutors/forms/import/import.php:75
+msgid ""
+"The form has been uploaded and can be found in your <a href=\\\"../index.php"
+"\\\">'my forms'</a> list."
+msgstr ""
+
+#: tutors/forms/import/import.php:79 tutors/forms/import/xml_file.php:83
+msgid "The import has failed due to the following reasons"
+msgstr ""
+
+#: tutors/forms/import/import.php:84
+msgid ""
+"There was no form information to upload.<br> Please go back and try again</p>"
+msgstr ""
+
+#: tutors/forms/import/import.php:87 tutors/forms/import/index.php:21
+#: tutors/forms/import/index.php:26 tutors/forms/import/xml_file.php:91
+#, fuzzy
+msgid "load form"
+msgstr "gepland:"
+
+#: tutors/forms/import/import.php:94 tutors/forms/import/index.php:29
+#: tutors/forms/import/xml_file.php:96 tutors/forms/index.php:39
+#, fuzzy
+msgid "Create a new Form"
+msgstr "Doe Assessment."
+
+#: tutors/forms/import/import.php:104 tutors/forms/import/xml_file.php:106
+msgid "form loading"
+msgstr ""
+
+#: tutors/forms/import/index.php:38
+msgid ""
+"Here you can import forms which have been exported from the WebPA system."
+msgstr ""
+
+#: tutors/forms/import/index.php:40
+msgid "load form by 'cut and paste'"
+msgstr ""
+
+#: tutors/forms/import/index.php:42
+msgid ""
+"Please copy and paste the contents of the form file into the text area below "
+"and click the <i>load</i> button."
+msgstr ""
+
+#: tutors/forms/import/index.php:48 tutors/forms/import/index.php:63
+#, fuzzy
+msgid "load"
+msgstr "gepland:"
+
+#: tutors/forms/import/index.php:54
+#, fuzzy
+msgid "load form by XML file"
+msgstr "gepland:"
+
+#: tutors/forms/import/index.php:56
+msgid ""
+"Browse for the XML file on your computer and click the <i>load</i> button."
+msgstr ""
+
+#: tutors/forms/import/xml_file.php:57
+msgid "You already have this form in your forms list."
+msgstr ""
+
+#: tutors/forms/import/xml_file.php:57
+msgid ""
+"If you would like to make a copy of the form please use the <a href=\\\"../"
+"tutors/forms/clone/index.php\\\">'clone form'</a> function."
+msgstr ""
+
+#: tutors/forms/import/xml_file.php:80
+msgid ""
+"The form has been uploaded and can be found in your <a href=\\\"index.php\\"
+"\">'my forms'</a> list."
+msgstr ""
+
+#: tutors/forms/import/xml_file.php:89
+msgid "Unable to upload file."
+msgstr ""
+
+#: tutors/forms/index.php:48
+msgid "Please select from the following options:"
+msgstr ""
+
+#: tutors/forms/index.php:51
+msgid "Existing forms"
+msgstr ""
+
+#: tutors/forms/index.php:54
+msgid ""
+"These are the forms you have already created. To edit a form, click on <img "
+"src=\"../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit "
+"form\" title=\"edit\" /> in the list below."
+msgstr ""
+
+#: tutors/forms/index.php:63
+msgid "generic / example form"
+msgstr ""
+
+#: tutors/forms/index.php:75 tutors/forms/index.php:111
+#, fuzzy
+msgid "Form"
+msgstr "Uw team"
+
+#: tutors/forms/index.php:82 tutors/forms/index.php:116
+#, fuzzy
+msgid "edit form"
+msgstr "gepland:"
+
+#: tutors/forms/index.php:94
+#, fuzzy
+msgid "your forms"
+msgstr "gepland:"
+
+#: tutors/forms/index.php:99
+msgid ""
+"You do not have any assessment forms at the moment. Please <a href=\"create/"
+"\">create a new form</a>."
+msgstr ""
+
+#: tutors/forms/index.php:115
+#, fuzzy
+msgid "export form"
+msgstr "gepland:"
+
+#: tutors/forms/index.php:115
+#, fuzzy
+msgid "export"
+msgstr "Feedbackverslag"
+
+#: tutors/groups/clone/class_wizardstep_1.php:59
+msgid "You have not created any groups, so there are none to clone."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_1.php:66
+msgid ""
+"Firstly, you need to choose a collection of groups to clone. Please select "
+"which you want to clone:"
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_1.php:74
+#: tutors/groups/edit/edit_collection.php:177
+msgid "groups"
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_1.php:94
+msgid "You must select a collection of groups to clone."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_2.php:55
+#, fuzzy
+msgid "Name of Clone"
+msgstr "Mijn opdrachten."
+
+#: tutors/groups/clone/class_wizardstep_2.php:56
+msgid ""
+"To avoid confusion, the name of your cloned collection of groups should be "
+"unique, but you can use the same name if you wish."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_2.php:57
+#: tutors/groups/create/class_wizardstep_1.php:50
+msgid ""
+"The name should be describe what the groups are for. For example, if the "
+"students are doing coursework for module 05ABC123, then name the collection, "
+"<em>05ABC123 - Coursework Groups</em>."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_2.php:62
+#: tutors/groups/create/class_wizardstep_1.php:54
+#, fuzzy
+msgid "Name for this new collection"
+msgstr "Mijn opdrachten."
+
+#: tutors/groups/clone/class_wizardstep_2.php:74
+#: tutors/groups/create/class_wizardstep_1.php:67
+msgid "You must provide a name for your new collection of groups"
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_3.php:53
+msgid ""
+"There was an error when trying to clone these groups - please use the "
+"contact system to report the error!"
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_3.php:63
+#, fuzzy
+msgid "Unable to create your new cloned groups."
+msgstr "Doe Assessment."
+
+#: tutors/groups/clone/class_wizardstep_3.php:64
+msgid ""
+"To correct the problem, try clicking <em>back</em> and amend the details "
+"entered."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_3.php:67
+#, fuzzy
+msgid "Your new cloned groups have been created."
+msgstr "Mijn assessments"
+
+#: tutors/groups/clone/class_wizardstep_3.php:68
+#, php-format
+msgid ""
+"To re-allocate students to your new groups, you can use the <a href=\"../"
+"edit/edit_collection.php?c=%s\">group editor</a>."
+msgstr ""
+
+#: tutors/groups/clone/class_wizardstep_3.php:69
+msgid ""
+"Alternatively, you can return to <a href=\"../\">my groups</a>, or to the <a "
+"href=\"../../\">WebPA home page</a>."
+msgstr ""
+
+#: tutors/groups/clone/index.php:49
+msgid "Clone own groups"
+msgstr ""
+
+#: tutors/groups/clone/index.php:55
+msgid "clone groups"
+msgstr ""
+
+#: tutors/groups/clone/index.php:56
+msgid "clone own groups wizard"
+msgstr ""
+
+#: tutors/groups/clone/index.php:69
+msgid ""
+"This wizard takes you through the process of cloning an existing collection "
+"of associated groups. When it is complete, you will be able to edit the "
+"groups and reassign students."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_1.php:49
+msgid ""
+"Firstly, we need to give this new collection of groups a name. To avoid "
+"confusion, the name should be unique, but you can create collections using "
+"the same name if you wish."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:58
+#: tutors/groups/edit/edit_collection.php:217
+msgid "students"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:61
+msgid ""
+"<strong>Warning!</strong></p><p>There are no students associated with the "
+"module you have selected.</p><p>You can continue to create your groups if "
+"you wish but there are no students available, so your groups cannot be "
+"populated at this time.</p><p>To choose a different module, click <em>back</"
+"em> to view the list of modules available."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:63
+#, php-format
+msgid "The module contains <strong>%d %s</strong> in total."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:66
+msgid ""
+"Now you can set how the new groups will be created. To save time, the system "
+"can automatically create sequentially named groups for you. If you do not "
+"want to use sequential names, or if you just want to create all your groups "
+"yourself, select <em>0</em> in the <em>Number of groups to create</em> box "
+"below."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:68
+msgid "Auto-create groups"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:70
+msgid "Select how many groups you want to create."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:74
+msgid "Number of groups to create"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:84
+msgid ""
+"If you are auto-creating groups, decide how the groups will be named, e.g.  "
+"<em>Group X</em> or <em>Team X</em>."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:87
+msgid "Group names begin with"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:93
+msgid "Select the style of numbering to use for your new groups."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:96
+msgid "Numbering Style"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:100
+msgid "Alphabetic (Group A, Group B, ..)"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:101
+msgid "Numeric (Group 1, Group 2, ..)"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:102
+msgid "Hashed-Numeric (Group #1, Group #2, ..)"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:118
+msgid "You must choose how many groups to create"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:122
+msgid "You must provide a name for your new groups"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_2.php:125
+msgid "You must choose how to number your groups"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_3.php:58
+msgid ""
+"If you wish to amend any details, click <em>Back</em>. When you are ready to "
+"create your groups, click <em>Finish</em>."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_3.php:61
+msgid "This collection of groups will be called:"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_3.php:65
+msgid "available"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_3.php:74
+#, php-format
+msgid ""
+"The following groups will be created in the new <strong>%s</strong> "
+"collection:"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_3.php:97
+msgid "You have chosen not to create any groups at this time."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_4.php:75
+#, fuzzy
+msgid "Unable to create your new collection of groups."
+msgstr "Doe Assessment."
+
+#: tutors/groups/create/class_wizardstep_4.php:86
+msgid "An error occurred while trying to create your new collection of groups."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_4.php:91
+#, fuzzy
+msgid "Your new groups have been created."
+msgstr "Mijn assessments"
+
+#: tutors/groups/create/class_wizardstep_4.php:92
+#, php-format
+msgid ""
+"To allocate students to your new groups, you can use the <a href=\"../edit/"
+"edit_collection.php?c=%s\">group editor</a>."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_4.php:93
+msgid ""
+"Alternatively, you can return to <a href=\"../\">my groups</a>, or to the <a "
+"href=\"../../index.php\">WebPA home page</a>."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:59
+msgid "You are not associated with any modules."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:60
+msgid ""
+"You cannot create any groups without being associated with at least one "
+"module."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:65
+msgid ""
+"You have opted to populate your groups with students chosen from multiple "
+"modules. Usually, groups need only contain students from a single module, "
+"but by selecting multiple modules your groups can contain a mixture of "
+"students from different modules."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:66
+#: tutors/groups/create/class_wizardstep_x.php:69
+msgid ""
+"The modules below are those you are associated with, as either a lead or "
+"additional tutor."
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:67
+msgid ""
+"Select the modules to take students from by ticking the appropriate box:"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:70
+msgid "Please select the module you want to take students from:"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:73
+msgid "Your Modules"
+msgstr ""
+
+#: tutors/groups/create/class_wizardstep_x.php:102
+msgid "You must select at least one module to take students from"
+msgstr ""
+
+#: tutors/groups/create/index.php:25 tutors/groups/create/index.php:54
+msgid "create new groups wizard"
+msgstr ""
+
+#: tutors/groups/create/index.php:48
+#, fuzzy
+msgid "Create new groups"
+msgstr "Doe Assessment."
+
+#: tutors/groups/create/index.php:67
+msgid ""
+"This wizard takes you through the process of creating a new collection of "
+"associated groups. When it is complete, you will be able to edit the groups "
+"and assign students to them."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:56
+msgid "You must give this collection of groups a name."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:77
+#: tutors/groups/edit/edit_collection_groups.php:80
+#: tutors/groups/edit/edit_collection_groups.php:88
+#: tutors/groups/edit/edit_collection_members.php:79
+#: tutors/groups/edit/edit_collection_members.php:88
+#: tutors/groups/edit/edit_group.php:96 tutors/groups/edit/edit_group.php:97
+#: tutors/groups/edit/edit_group.php:105
+msgid "Editing:"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:77
+msgid "Editing Unknown Collection"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:107
+msgid "This collection will be deleted.\\n\\nClick OK to confirm."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:126
+msgid ""
+"On this page you can edit the details for this collection of groups, or "
+"examine the individual groups themselves."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:136
+#, fuzzy
+msgid "back to my groups"
+msgstr "terug naar de assessmentlijst"
+
+#: tutors/groups/edit/edit_collection.php:140
+#, fuzzy
+msgid "delete collection"
+msgstr "gepland:"
+
+#: tutors/groups/edit/edit_collection.php:151
+#: tutors/groups/edit/edit_collection_groups.php:125
+#: tutors/groups/edit/edit_collection_members.php:125
+msgid ""
+"The collection you selected could not be loaded for some reason - please go "
+"back and try again."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:158
+msgid ""
+"You can change the name of this collection of groups using the box below."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:164
+msgid "update name"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:181
+#, php-format
+msgid ""
+"You do not have any groups in this collection. To use this collection you "
+"need to <a href=\\\"edit_collection_groups.php?%s\">add groups</a>."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:184
+msgid "These are the groups contained in this collection."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:185
+msgid ""
+"To edit an individual group and its members click on <img src=\"../../../"
+"images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit group\" "
+"title=\"edit\" /> in the list below."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:186
+msgid "assign all students to groups"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:186
+msgid "add/remove groups"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:204
+msgid "Contains"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:218
+msgid "member"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:218
+msgid "members"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection.php:220
+#, php-format
+msgid "There are %d %s, containing %d %s (out of a possible %d %s)."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:54
+msgid "You must give your new group a name"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:81
+msgid "Groups:"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:102
+msgid ""
+"WARNING \\r\\nThe selected groups will be deleted, and all students returned "
+"to the unassigned list!"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:119
+#: tutors/groups/edit/edit_collection_members.php:119
+#: tutors/groups/edit/edit_group.php:158
+msgid "back to"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:129
+msgid "This collection has been locked and cannot be edited."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:131
+msgid ""
+"On this page you can choose which modules to associate with this collection."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:140
+msgid "New Group"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:142
+msgid ""
+"To add a new group to this collection, enter its name in the box below and "
+"click <em>add</em>."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:145
+#, fuzzy
+msgid "New Group Name"
+msgstr "Uw team"
+
+#: tutors/groups/edit/edit_collection_groups.php:147
+msgid "add"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:152
+msgid "Available Groups"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:154
+msgid "Below are all the groups contained in this collection."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:155
+msgid ""
+"To edit an individual group, click on its name in the list below. To remove "
+"one or more groups, tick the appropriate boxes and then click <em>delete</"
+"em>."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_groups.php:159
+msgid "Groups in this collection"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:80
+msgid "Members:"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:114
+msgid ""
+"On this page you can set the group membership for every student associated "
+"with this collection."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:133
+msgid "Available Students"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:135
+msgid ""
+"Below are all the students from the modules associated with this collection "
+"of groups."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:136
+msgid ""
+"Use the drop-down box next to each student to set which group they should "
+"belong to."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:137
+#: tutors/groups/edit/edit_group.php:194
+msgid ""
+"When you have made all your selections, click a <em>save changes</em> button."
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:145
+msgid "Student"
+msgstr ""
+
+#: tutors/groups/edit/edit_collection_members.php:146
+#, fuzzy
+msgid "Assigned Group"
+msgstr "Beoordelingscriteria"
+
+#: tutors/groups/edit/edit_collection_members.php:178
+msgid "No students available"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:173
+msgid ""
+"You can change this group's name using the box below. When you've made your "
+"changes, click a <em>save changes</em> button."
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:190
+#, fuzzy
+msgid "Group Members"
+msgstr "Uw team"
+
+#: tutors/groups/edit/edit_group.php:192
+msgid "Below are all the students from the modules associated with this group."
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:193
+msgid ""
+"To add a student to this group select <em>In</em>, and to remove one select "
+"<em>Out</em>."
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:215
+msgid ""
+"Students already in this group</th><th align=\"center\" width=\"50\">In</"
+"th><th align=\"center\" width=\"50\">Out</th></tr>"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:231
+msgid "This group has no members"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:242
+msgid ""
+"Students not yet assigned to a group</th><th align=\"center\" width="
+"\"50\">In</th><th align=\"center\" width=\"50\">Out</th></tr>"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:258
+msgid "All the available students have been assigned"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:269
+msgid ""
+"Students assigned to other groups in this collection</th><th align=\"center"
+"\" width=\"50\">In</th><th align=\"center\" width=\"50\">Out</th></tr>"
+msgstr ""
+
+#: tutors/groups/edit/edit_group.php:285
+msgid "There are no students allocated to any other groups"
+msgstr ""
+
+#: tutors/groups/edit/index.php:40
+msgid "edit groups"
 msgstr ""
