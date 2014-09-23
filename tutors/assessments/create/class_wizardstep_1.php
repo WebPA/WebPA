@@ -164,7 +164,7 @@ class WizardStep1 {
         </tr>
         <tr>
           <td><input type="radio" name="email" id="email_no" value="0" <?php echo( (!$email) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_no"><?php echo gettext('No, don\'t email all students.');?>'</label></td>
+          <td valign="top"><label class="small" for="email_no"><?php echo gettext('No, don\'t email all students.');?></label></td>
         </tr>
         </table>
       </div>

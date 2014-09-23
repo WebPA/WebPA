@@ -79,7 +79,7 @@ $UI->content_start();
 <div class="nav_button_bar">
   <table cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td><a href="#fakelink"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> "<?php echo gettext('back to assessments list');?></a> &lt;&lt;<?php echo gettext('disabled in preview');?>&gt;&gt;</td>
+    <td><a href="#fakelink"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessments list');?></a> &lt;&lt;<?php echo gettext('disabled in preview');?>&gt;&gt;</td>
   </tr>
   </table>
 </div>
@@ -118,7 +118,7 @@ if (!empty($intro_text)) {
 <p><?php echo gettext('Once you have successfully submitted your responses you cannot go back and change your marks.');?></p>
 
 <center>
-  <input type="button" name="save_button" value="<?php echo gettext('save marks');?>" onclick="'alert('<?php echo gettext('disabled in preview');?>'" />
+  <input type="button" name="save_button" value="<?php echo gettext('save marks');?>" onclick="alert('<?php echo gettext('disabled in preview');?>')" />
 </center>
 
 </div>

@@ -146,7 +146,7 @@ class WizardStep2 {
             </tr>
             <tr>
               <td><input type="radio" name="allow_text_input" id="allow_text_input_no" value="0" <?php echo((!$this->wizard->get_field('allow_student_input'))? 'checked="checked"' : ''); ?>></td>
-              <td><label class="small" for="allow_text_input_no"><b><?php echo gettext('No</b>, don\'t allow students to comment.');?>'</label></td>
+              <td><label class="small" for="allow_text_input_no"><b><?php echo gettext('No</b>, don\'t allow students to comment.');?></label></td>
             </tr>
           </table>
         </div>

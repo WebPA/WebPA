@@ -52,7 +52,7 @@ class WizardStep5 {
     require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 ?>
     <p><?php echo gettext('Your assessment is now ready for creation.');?></p>
-    <p><?php echo gettext('Please review the details below. When you\'re are satisfied, click <em>Finish</em> to create your peer assessment.');?>'</p>
+    <p><?php echo gettext('Please review the details below. When you\'re are satisfied, click <em>Finish</em> to create your peer assessment.');?></p>
 
     <h2><?php echo gettext('Assessment Details');?></h2>
     <div class="form_section">
