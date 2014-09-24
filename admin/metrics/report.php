@@ -367,12 +367,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($assessment);
           foreach ($field_names as $row) {
-            echo "\"{$row}\",";
+            echo "\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($assessment as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter ++;
@@ -392,12 +392,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($groups);
           foreach ($field_names as $row) {
-            echo "\"{$row}\",";
+            echo "\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($groups as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter ++;
@@ -416,12 +416,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($students);
           foreach ($field_names as $row) {
-            echo "\"{$row}\",";
+            echo "\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($students as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter++;
@@ -440,12 +440,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($feedback);
           foreach ($field_names as $row) {
-            echo"\"{$row}\",";
+            echo"\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($feedback as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter++;
@@ -464,12 +464,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($responses);
           foreach ($field_names as $row) {
-            echo"\"{$row}\",";
+            echo"\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($responses as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter++;
@@ -488,12 +488,12 @@ if ($format == 'csv') {
           echo "\n";
           $field_names = array_keys($runner);
           foreach ($field_names as $row) {
-            echo "\"{$row}\",";
+            echo "\"{$row}\"".APP__SEPARATION;
           }
           echo "\n";
         }
         foreach ($runner as $row) {
-          echo "\"{$row}\",";
+          echo "\"{$row}\"".APP__SEPARATION;
         }
         echo "\n";
         $icounter++;
@@ -509,7 +509,7 @@ if ($format == 'csv') {
       echo "\n";
       foreach ($rs_students as $student) {
         foreach ($student as $row) {
-          echo"\"{$row}\",";
+          echo"\"{$row}\"".APP__SEPARATION;
         }
       }
       echo"\n";
