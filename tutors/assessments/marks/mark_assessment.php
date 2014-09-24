@@ -214,7 +214,7 @@ if (!$assessment) {
 
   <h2><?php echo gettext('Algorithm Parameters');?></h2>
   <div class="form_section">
-    <p><?php echo gettext('Enter the parameters to use below. When you\'ve made your changes, click the <em>create mark sheet</em> button.');?>'</p>
+    <p><?php echo gettext('Enter the parameters to use below. When you\'ve made your changes, click the <em>create mark sheet</em> button.');?></p>
 
     <br />
 
