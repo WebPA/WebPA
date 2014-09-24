@@ -14,7 +14,7 @@
 ini_set('session.bug_compat_warn', 0);
 
 // Set the correct timezone for your server.
-date_default_timezone_set('Europe/London');
+date_default_timezone_set('Europe/Brussels');
 
 /*
  * Configuration
@@ -25,10 +25,19 @@ date_default_timezone_set('Europe/London');
 ////
 
 define('APP__WWW', '');
-define('DOC__ROOT', ''); //must include the trailing /
+define('DOC__ROOT', '/path/to/installation/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
+
+// Setting up gettext.
+$locale = "nl_BE";
+putenv("LANG=".$locale);
+setlocale(LC_ALL, $locale);
+$domain = "webpa";
+bindtextdomain($domain, DOC__ROOT."locale");
+bind_textdomain_codeset($domain, "UTF-8");
+textdomain($domain);
 
 // The month (1-12) in which the academic year is deemed to start (always on 1st of the month)
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
@@ -37,7 +46,7 @@ define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
 define('APP__DB_USERNAME', '');
 define('APP__DB_PASSWORD', '');
-define('APP__DB_DATABASE', '');
+define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
@@ -137,7 +146,7 @@ require_once(DOC__ROOT.'includes/classes/class_ui.php');
 define ('APP__HELP_LINK','http://www.webpaproject.com/');
 
 //define the terminology presented to the student as mark, rating or score
-define('APP__MARK_TEXT', 'Score(s)');
+define('APP__MARK_TEXT', gettext('Score(s)'));
 
 // Collection owner types
 define('APP__COLLECTION_USER', 'user');
@@ -170,14 +179,14 @@ define('APP__REPORT_DECIMALS', "%01.2f");
 
 // File upload error messages
 $FILE_ERRORS = array(
-  UPLOAD_ERR_OK => 'There is no error, the file uploaded with success.',
-  UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-  UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-  UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded.',
-  UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
-  UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
-  UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
-  UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload.'
+  UPLOAD_ERR_OK => gettext('There is no error, the file uploaded with success.'),
+  UPLOAD_ERR_INI_SIZE => gettext('The uploaded file exceeds the upload_max_filesize directive in php.ini.'),
+  UPLOAD_ERR_FORM_SIZE => gettext('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.'),
+  UPLOAD_ERR_PARTIAL => gettext('The uploaded file was only partially uploaded.'),
+  UPLOAD_ERR_NO_FILE => gettext('No file was uploaded.'),
+  UPLOAD_ERR_NO_TMP_DIR => gettext('Missing a temporary folder.'),
+  UPLOAD_ERR_CANT_WRITE => gettext('Failed to write file to disk.'),
+  UPLOAD_ERR_EXTENSION => gettext('A PHP extension stopped the file upload.')
   );
 
 // Old config compatibility
