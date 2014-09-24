@@ -84,7 +84,7 @@ $row = 0;
 $fields = array();
 $final_rows = array();
 if (($handle = fopen($filename, "r")) !== FALSE) {
-  while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+  while (($data = fgetcsv($handle, 2000, APP__SEPARATION)) !== FALSE) {
     $num = count($data);
 
     //if in the first row we should be getting the field names

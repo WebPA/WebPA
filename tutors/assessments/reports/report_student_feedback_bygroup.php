@@ -202,15 +202,15 @@ if ($type == 'download-csv') {
 
   if (($assessment) && ($groups_and_marks)) {
     foreach ($group_members as $group_id => $g_members) {
-      echo("\"".gettext('Group')."\",\"{$group_names[$group_id]}\"\n");
-      echo("\"".gettext('Overall group mark')."\",\"{$groups_and_marks[$group_id]}\"\n");
-      echo("\"".gettext('Name')."\",\"".gettext('feedback recipient')."\",\"".gettext('feedback / justification comments')."\"\n");
+      echo("\"".gettext('Group')."\"".APP__SEPARATION."\"{$group_names[$group_id]}\"\n");
+      echo("\"".gettext('Overall group mark')."\"".APP__SEPARATION."\"{$groups_and_marks[$group_id]}\"\n");
+      echo("\"".gettext('Name')."\"".APP__SEPARATION."\"".gettext('feedback recipient')."\"".APP__SEPARATION."\"".gettext('feedback / justification comments')."\"\n");
       $j = 0;
       foreach ($g_members as $i => $member_id) {
         //loop round the array with all the user data, so that we can out put it
         foreach($feedback as $j){
           if ($j['marker_id'] == $g_members[$i]) {
-            echo("\"{$j['marker']}\",\"{$j['marked']}\",\"{$j['feedback']}\"\n");
+            echo("\"{$j['marker']}\"".APP__SEPARATION."\"{$j['marked']}\"".APP__SEPARATION."\"{$j['feedback']}\"\n");
           }
         }
       }

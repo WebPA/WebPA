@@ -119,7 +119,7 @@ if ($type == 'download-csv') {
   echo(gettext('"Student Grades and Feedback (by student)"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
-  echo(gettext('"User Id","WebPA score","Intermediate Grade","Non-Submission Penalty","Final grade","Group","Comments"')."\n");
+  echo(gettext('"User Id"'.APP__SEPARATION.'"WebPA score"'.APP__SEPARATION.'"Intermediate Grade"'.APP__SEPARATION.'"Non-Submission Penalty"'.APP__SEPARATION.'"Final grade"'.APP__SEPARATION.'"Group"'.APP__SEPARATION.'"Comments"')."\n");
 
   foreach ($member_names as $i => $member) {
     $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -142,13 +142,13 @@ if ($type == 'download-csv') {
     } else {
       echo($member['username']);
     }
-    echo("\",\"$score\",\"$intermediate_grade\",\"$penalty_str\",\"$grade\",");
+    echo("\"".APP__SEPARATION."\"$score\"".APP__SEPARATION."\"$intermediate_grade\"".APP__SEPARATION."\"$penalty_str\"".APP__SEPARATION."\"$grade\"".APP__SEPARATION);
 
     //print member's group name
     foreach ($group_members as $group_id => $g_members) {
       foreach ($g_members as $k => $member_id) {
         if ($member['user_id'] == $g_members[$k]) {
-          echo("\"{$group_names[$group_id]}\",");
+          echo("\"{$group_names[$group_id]}\"".APP__SEPARATION);
         }
       }
     }

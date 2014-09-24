@@ -87,6 +87,7 @@ if ($_user->is_admin()) {
   $filecontenttype[3] = array('screen'=>gettext('<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>'), 'value'=>'2');
 }
 $filecontenttype[4] = array('screen'=>gettext('<strong>Module Data</strong><p>CSV File format = module_code, module_title</p>'), 'value'=>'3');
+
 $fileseparator = gettext('Select the type of file separator that has been used:');
 $separator = array(3);
 $separator[1] = array('screen'=> gettext('Comma separated'), 'value'=>',', 'status' => '');
