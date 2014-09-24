@@ -68,12 +68,12 @@ class FileUpload {
     $this->files_uploaded = null;
 
     if (!$files) {
-      $this->_errors[] = 'No file data given';
+      $this->_errors[] = gettext('No file data given');
       exit;
     }
 
     if (!$this->upload_path) {
-      $this->_errors[] = 'No upload path set';
+      $this->_errors[] = gettext('No upload path set');
       exit;
     }
 
@@ -91,22 +91,22 @@ class FileUpload {
 
         if ( ($this->max_file_size) && ($files['size'][$k]>$this->max_file_size) ) {
           $file_error = true;
-          $this->_errors[] = "Error uploading '{$files['name' ][$k]}' : File exceeded the maximum upload size: {$this->max_file_size} bytes";
+          $this->_errors[] = sprintf(gettext("Error uploading '%s' : File exceeded the maximum upload size: %d bytes"), $files['name' ][$k], $this->max_file_size);
         }
 
         if ( ($this->valid_extensions) && (!in_array($file_ext,$this->valid_extensions)) ) {
           $file_error = true;
-          $this->_errors[] = "Error uploading '{$files['name' ][$k]}' : You can only upload files with the extension(s) ". implode(', ',$this->valid_extensions);
+          $this->_errors[] = sprintf(gettext("Error uploading '%s' : You can only upload files with the extension(s)"), $files['name' ][$k]).' '.implode(', ',$this->valid_extensions);
         }
 
         if ( ($this->valid_mime_types) && (!in_array($files['type'][$k],$this->valid_mime_types)) ) {
           $file_error = true;
-          $this->_errors[] = "Error uploading '{$files['name'][$k]}' of type '{$files['type'][$k]}' : You can only upload files with the mime type(s) ". implode(', ',$this->valid_mime_types);
+          $this->_errors[] = sprintf(gettext("Error uploading '%s' of type '%s' : You can only upload files with the mime type(s) "), $files['name'][$k], $files['type'][$k]). implode(', ',$this->valid_mime_types);
         }
 
         if ( ($this->overwrite) && (file_exists("{$this->upload_path}{$files['name'][$k]}")) ) {
           $file_error = true;
-          $this->_errors[] = "Error uploading '{$files['name'][$k]}' : File already exists";
+          $this->_errors[] = sprintf(gettext("Error uploading '%s' : File already exists"), $files['name'][$k]);
         }
 
         if (!is_dir($this->upload_path)) {
@@ -115,7 +115,7 @@ class FileUpload {
 
         if (!$file_error) {
           if ( (!move_uploaded_file($files['tmp_name'][$k], "{$this->upload_path}{$files['name'][$k]}")) ) {
-            $this->_errors[] = "Error uploading '{$files['name'][$k]}' : Could not move the file from the upload directory";
+            $this->_errors[] = sprintf(gettext("Error uploading '%s' : Could not move the file from the upload directory"),$files['name'][$k]);
           } else {
             $this->files_uploaded[] = $files['name'][$k];
           }
@@ -123,7 +123,7 @@ class FileUpload {
           @unlink($files['tmp_name'][$k]);
           if ($this->chmod) {
             if (!chmod("{$this->upload_path}{$files['name'][$k]}",$this->chmod)) {
-              $this->_errors[] = "Error uploading '{$files['name'][$k]}' : Could not move the file from the upload directory";
+              $this->_errors[] = sprintf(gettext("Error uploading '%s' : Could not move the file from the upload directory"), $files['name'][$k]);
             }
           }
         }

@@ -25,9 +25,9 @@ class WizardStep4 {
   function WizardStep4(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep4()
 
   function head() {
@@ -63,7 +63,7 @@ class WizardStep4 {
     require_once(DOC__ROOT . 'includes/classes/class_form.php');
     require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 ?>
-    <h2>Assessment Type</h2>
+    <h2><?php echo gettext('Assessment Type');?></h2>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
@@ -71,12 +71,12 @@ class WizardStep4 {
           <input type="radio" name="assessment_type" value="1" id="both" <?php echo ((!$assessment_type)? 'checked="checked"' : '' );?>>
         </td>
         <td>
-          <label class="small" for="both">Self and peer assessment</label>
+          <label class="small" for="both"><?php echo gettext('Self and peer assessment');?></label>
         </td>
       </tr>
       </table>
       <br/><br/>
-      <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
+      <div style="float:right"><b><?php echo gettext('Advanced Options');?></b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="<?php echo gettext('view / hide advanced options');?>"></a>
       <br/><br/></div>
       <div id="advanced" style="display:none;" class="advanced_options">
       <table class="form" cellpadding="2" cellspacing="2">
@@ -85,7 +85,7 @@ class WizardStep4 {
           <input type="radio" name="assessment_type" value="0" id="peer" <?php echo (($assessment_type)? 'checked="checked"' : '' );?>/>
         </td>
         <td>
-          <label class="small" for="peer">Peer assessment only</label>
+          <label class="small" for="peer"><?php echo gettext('Peer assessment only');?></label>
         </td>
       </tr>
       </table>

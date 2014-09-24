@@ -24,8 +24,8 @@ class WizardStep1 {
 		$this->wizard =& $wizard;
 
 		$this->wizard->back_button = null;
-		$this->wizard->next_button = 'Finish';
-		$this->wizard->cancel_button = 'Cancel';
+		$this->wizard->next_button = gettext('Finish');
+		$this->wizard->cancel_button = gettext('Cancel');
 	}// /WizardStep1()
 
 
@@ -65,16 +65,16 @@ class WizardStep1 {
 
 		require_once('../../../../includes/functions/lib_form_functions.php');
 		?>
-		<p>Here you can edit the text and description of the criterion.</p>
+		<p><?php echo gettext('Here you can edit the text and description of the criterion.');?></p>
 
 		<div class="form_section">
 			<table cellpadding="2" cellspacing="2" width="100%">
 			<tr>
-				<th width="100"><label for="question_text">Criterion Text</label></th>
+				<th width="100"><label for="question_text"><?php echo gettext('Criterion Text');?></label></th>
 				<td><input type="text" name="question_text" id="question_text" maxlength="255" size="50" value="<?php echo( $this->wizard->get_field('question_text') ); ?>" style="width: 90%;" /></td>
 			</tr>
 			<tr>
-				<th valign="top" width="100"><label for="question_desc">Description</label><br /><span style="font-size: 0.8em; font-weight: normal;">(optional)</span></th>
+				<th valign="top" width="100"><label for="question_desc"><?php echo gettext('Description');?></label><br /><span style="font-size: 0.8em; font-weight: normal;"><?php echo gettext('(optional)');?></span></th>
 				<td><textarea name="question_desc" id="question_desc" cols="60" rows="3" style="width: 90%;"><?php echo( $this->wizard->get_field('question_desc') ); ?></textarea></td>
 			</tr>
 			</table>
@@ -87,7 +87,7 @@ class WizardStep1 {
 		$errors = null;
 
 		$this->wizard->set_field('question_text',fetch_POST('question_text'));
-		if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
+		if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = gettext('You must provide some text for your new criterion'); }
 
 		$this->wizard->set_field('question_desc',fetch_POST('question_desc'));
 

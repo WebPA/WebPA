@@ -66,23 +66,23 @@ if (!empty($post_search)) {
     $rs = $DB->fetch($sQuery);
   } else {
     //nothing has been entered that can be searched for
-    $sMessage = "<p>You have not entered any information for the search<br/>Please check and re-try.</p>";
+    $sMessage = "<p>".gettext('You have not entered any information for the search')."<br/>".gettext('Please check and re-try.')."</p>";
   }
 }
 
 //------------------------------------------------------------------------
 
 //set the page information
-$UI->page_title = APP__NAME . "  search for a user";
-$UI->menu_selected = 'view data';
-$UI->breadcrumbs = array ('home' => '../review/', 'search'=>null,);
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
+$UI->page_title = APP__NAME .' '.gettext("search for a user");
+$UI->menu_selected = gettext('view data');
+$UI->breadcrumbs = array ('home' => '../review/', gettext('search')=>null,);
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../images/buttons/button_student_user.png', '../review/student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
-  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+  $UI->set_page_bar_button(gettext('View Admin Data'), '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
+  $UI->set_page_bar_button(gettext('View Module Data'), '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', 'index.php');
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../images/buttons/button_search_user.png', 'index.php');
 
 $UI->help_link = '?q=node/237';
 $UI->head();
@@ -90,9 +90,9 @@ $UI->body();
 $UI->content_start();
 //build the content to be written to the screen
 
-$page_intro = '<p>Search the WebPA system for a user within the system</p>';
-$page_description = '<p>Enter the any combination of the information below for the individual that you would like to locate in the WebPA system. The person being searched for can be a student or staff member. When you are ready click the "Search Button".</p>';
-$rstitle = "Search results";
+$page_intro = '<p>'.gettext('Search the WebPA system for a user within the system.').'</p>';
+$page_description = '<p>'.gettext('Enter the any combination of the information below for the individual that you would like to locate in the WebPA system. The person being searched for can be a student or staff member. When you are ready click the "Search Button".').'</p>';
+$rstitle = gettext("Search results");
 ?>
 <?php echo $page_intro; ?>
 
@@ -126,7 +126,7 @@ if (empty($sMessage)) {
         if ($field_index=='user_id') {
           echo '<td class="icon" width="16">';
           echo "<a href='../edit/index.php?u=" . $field_name . "'>";
-          echo '<img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit user" /></a>';
+          echo '<img src="../../images/buttons/edit.gif" width="16" height="16" alt="'.gettext('Edit').' user" /></a>';
           echo '</td>';
         } else {
           echo '<td class="obj_info_text">'.$field_name.'</td>';
@@ -139,16 +139,16 @@ if (empty($sMessage)) {
     echo '</div>';
   } else {
     if (!empty($post_search)) {
-      echo "<div class=\"warning_box\">The search has not found any matching information.</div>";
+      echo "<div class=\"warning_box\">".gettext('The search has not found any matching information.')."</div>";
     }
     echo $page_description;
     echo "<form method=\"get\" name=\"search\" action=\"index.php\">" ;
     echo "<table class=\"option_list\" style=\"width: 500px;\">";
-    echo  "<tr><td><label for=\"firstname\">First name</label></td><td><input type=\"text\" id=\"firstname\" name=\"firstname\" ></td></tr>";
-    echo  "<tr><td><label for=\"lastname\">Last name</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
-    echo  "<tr><td><label for=\"username\">Username</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
-    echo  "<tr><td><label for=\"id_number\">ID number</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
-    echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"Search\" id=\"Search\"></td></tr>";
+    echo  "<tr><td><label for=\"firstname\">".gettext('First name')."</label></td><td><input type=\"text\" id=\"firstname\" name=\"firstname\" ></td></tr>";
+    echo  "<tr><td><label for=\"lastname\">".gettext('Last name')."</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
+    echo  "<tr><td><label for=\"username\">".gettext('Username')."</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
+    echo  "<tr><td><label for=\"id_number\">".gettext('ID number')."</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
+    echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"".gettext('Search')."\" id=\"Search\"></td></tr>";
     echo "</table>";
     echo "</form>";
   }
@@ -159,11 +159,11 @@ if (empty($sMessage)) {
   echo $page_description;
   echo "<form method=\"get\" name=\"search\" action=\"index.php\">" ;
   echo "<table class=\"option_list\" style=\"width: 500px;\">";
-  echo  "<tr><td><label for=\"lastname\">Last name</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
-  echo  "<tr><td><label for=\"name\">First name</label></td><td><input type=\"text\" id=\"name\" name=\"name\" ></td></tr>";
-  echo  "<tr><td><label for=\"username\">Username</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
-  echo  "<tr><td><label for=\"id_number\">ID number</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
-  echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"Search\" id=\"Search\"></td></tr>";
+  echo  "<tr><td><label for=\"lastname\">".gettext('Last name')."</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
+  echo  "<tr><td><label for=\"name\">".gettext('First name')."</label></td><td><input type=\"text\" id=\"name\" name=\"name\" ></td></tr>";
+  echo  "<tr><td><label for=\"username\">".gettext('Username')."</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
+  echo  "<tr><td><label for=\"id_number\">".gettext('ID number')."</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
+  echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"".gettext('Search')."\" id=\"Search\"></td></tr>";
   echo "</table>";
   echo "</form>";
 }

@@ -28,16 +28,16 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
 }
 
 //set the page information
-$UI->page_title = APP__NAME . ' Edit system users';
-$UI->menu_selected = 'view data';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
+$UI->page_title = APP__NAME .' '.gettext('Edit system users');
+$UI->menu_selected = gettext('view data');
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../images/buttons/button_student_user.png', '../review/student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
-  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+  $UI->set_page_bar_button(gettext('View Admin Data'), '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
+  $UI->set_page_bar_button(gettext('View Module Data'), '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array ('home' => '../','review data'=>'../review/','edit'=>null, );
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../images/buttons/button_search_user.png', '../search/index.php');
+$UI->breadcrumbs = array ('home' => '../',gettext('review data')=>'../review/',gettext('edit')=>null, );
 $UI->help_link = '?q=node/237';
 
 //build the content to be written to the screen
@@ -76,7 +76,7 @@ if (!$new_user) {
       $user_id = '';
       $edit_user = new User();
       $action = '';
-      $sScreenMsg = 'The username already exists; please use another.';
+      $sScreenMsg = gettext('The username already exists; please use another.');
     }
     $edit_user->admin = 1;
   }
@@ -86,7 +86,7 @@ if ($edit_user->is_admin() && ($type != APP__USER_TYPE_ADMIN)) {
   $user_id = '';
   $edit_user = new User();
   $action = '';
-  $sScreenMsg = 'Administrators cannot be enrolled in modules.';
+  $sScreenMsg = gettext('Administrators cannot be enrolled in modules.');
 }
 
 //----------------------------------------------------------------------
@@ -139,15 +139,15 @@ if ($action) {          //incase we want to do more than save changes in the fut
                   !empty($edit_user->password) && !empty($edit_user->username);
       if (!$complete) {
 
-        $sScreenMsg = "Unable to save user: please make sure the user has a username, first name, last name and password.";
+        $sScreenMsg = gettext("Unable to save user: please make sure the user has a username, first name, last name and password.");
 
       } else {
 
         //send notification to the screen that the save has occured.
         if ($new_user && !$user_found) {
-          $sScreenMsg = 'The user has been created';
+          $sScreenMsg = gettext('The user has been created');
         } else {
-          $sScreenMsg = 'The changes made for the user have been saved';
+          $sScreenMsg = gettext('The changes made for the user have been saved');
         }
 
         if ($canEdit) {
@@ -198,9 +198,9 @@ if ($action) {          //incase we want to do more than save changes in the fut
           if (!array_key_exists($_module_id, $user_modules)) {
             $update[$type][] = $_module_id;
           } else if ($user_modules[$_module_id]['user_type'] == $type) {
-            $sScreenMsg = 'User is already enrolled';
+            $sScreenMsg = gettext('User is already enrolled');
           } else {
-            $sScreenMsg = 'User currently has a different role in this module - change not saved';
+            $sScreenMsg = gettext('User currently has a different role in this module - change not saved');
           }
         }
         if (isset($update)) {
@@ -263,18 +263,18 @@ $UI->content_start();
 //-----------------------------------------------------------------------
 //build the page and fill in the spaces
 
-$page_intro = 'Here you are able to edit the details of a user within the system. There may be some elements of the information which do not appear' .
-    '   to have been completed and this will be dependant on the information stored in the system.';
+$page_intro = gettext('Here you are able to edit the details of a user within the system. There may be some elements of the information which do not appear') .'   '.
+    gettext('to have been completed and this will be dependant on the information stored in the system.');
 if (empty($user_id)) {
-  $page_intro .= ' Just enter the username for users already added to the system.';
+  $page_intro .= ' '.gettext('Just enter the username for users already added to the system.');
 }
 
 if (!in_array('LDAP', $LOGIN_AUTHENTICATORS)) {
-  $page_conditions = 'N.B. Users authenticated directly from the WebPA <strong>database</strong> must be given a password.';
+  $page_conditions = gettext('N.B. Users authenticated directly from the WebPA <strong>database</strong> must be given a password.');
 } else if (LDAP__AUTO_CREATE_USER) {
-  $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> will automatically be added to the database and updated each time they log in; the password stored is a random value.';
+  $page_conditions = gettext('N.B. Users authenticated via <strong>LDAP</strong> will automatically be added to the database and updated each time they log in; the password stored is a random value.');
 }else{
-  $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> must be added to the database before they are able to log in; a random password will be added automatically.';
+  $page_conditions = gettext('N.B. Users authenticated via <strong>LDAP</strong> must be added to the database before they are able to log in; a random password will be added automatically.');
 }
 
 echo '<p>' . $page_intro . '</p>';
@@ -303,9 +303,9 @@ if (!empty($sScreenMsg)) {
 
 <form action="index.php?u=<?php echo $user_id; ?>" method="post" name="edit_user">
 <table class="option_list" style="width: 100%;">
-<tr><td colspan=2><h2>User Details</h2></td></tr>
+<tr><td colspan=2><h2><?php echo gettext('User Details');?></h2></td></tr>
   <tr>
-    <td><label for="username">Username</label></td>
+    <td><label for="username"><?php echo gettext('Username');?></label></td>
     <td colspan="3">
 <?php
 $canEdit = ($_source_id == '') && (empty($user_id) || ($_user->is_admin()));
@@ -320,38 +320,38 @@ if (!$canEdit) {
     </td>
   </tr>
   <tr>
-    <td><label for="name">First name</label>
+    <td><label for="name"><?php echo gettext('First name');?></label>
     </td>
     <td>
       <input type="text" id="name" name="name" value="<?php echo $edit_user->forename; ?>" size="20"<?php echo $disabled; ?>>
     </td>
 
-    <td><label for="lastname">Last name</label>
+    <td><label for="lastname"<?php echo gettext('>Last name');?></label>
     </td>
     <td>
       <input type="text" id="lastname" name="lastname" value="<?php echo $edit_user->lastname; ?>" size="30"<?php echo $disabled; ?>>
     </td>
   </tr>
   <tr>
-    <td><label for="email">Email</label>
+    <td><label for="email"><?php echo gettext('Email');?></label>
     </td>
     <td colspan="4">
       <input type="text" name="email" id="email" value="<?php echo $edit_user->email; ?>" size="50"<?php echo $disabled; ?>>
     </td>
   </tr>
   <tr>
-    <td><label for="id_number">ID number</label></td>
+    <td><label for="id_number"><?php echo gettext('ID number');?></label></td>
     <td>
       <input type="text" name="id_number" id="id_number" value="<?php echo $edit_user->id_number; ?>"<?php echo $disabled; ?>>
     </td>
 
-    <td><label for="department_id">Department ID</label></td>
+    <td><label for="department_id"><?php echo gettext('Department ID');?></label></td>
     <td>
       <input type="text" name="department_id" id="department_id" value="<?php echo $edit_user->department_id; ?>"<?php echo $disabled; ?>>
     </td>
   </tr>
   <tr>
-    <td><label for="password">Password</label></td>
+    <td><label for="password"><?php echo gettext('Password');?></label></td>
     <td>
 <?php
 if (!empty($edit_user->password)) {
@@ -363,7 +363,7 @@ if (!empty($edit_user->password)) {
       <input id="password" name="password" type="password" value="<?php echo $show; ?>"<?php echo $disabled; ?>>
     </td>
     <td colspan="2">
-      <p style="font-size:xx-small;">N.B. If a password is present in the system then 6 characters are shown. For security reasons the password is not displayed in clear text.</p>
+      <p style="font-size:xx-small;"><?php echo gettext('N.B. If a password is present in the system then 6 characters are shown. For security reasons the password is not displayed in clear text.');?></p>
     </td>
   </tr>
 
@@ -371,7 +371,7 @@ if (!empty($edit_user->password)) {
 if (!empty($user_id) && !check_user($edit_user, APP__USER_TYPE_ADMIN)) {
 ?>
   <tr><td colspan="4"><hr/></td></tr>
-  <tr><td colspan="4"><h2>Module</h2></td></tr>
+  <tr><td colspan="4"><h2><?php echo gettext('Module');?></h2></td></tr>
   <tr>
     <td colspan="4">
 
@@ -385,7 +385,7 @@ if (!empty($user_id) && !check_user($edit_user, APP__USER_TYPE_ADMIN)) {
 
   echo "<table>\n";
   echo "<tr>\n";
-  echo "  <th>Title</th><th style=\"width: 5em; text-align: center;\">NA</th><th style=\"width: 5em; text-align: center;\">Tutor</th><th style=\"width: 5em; text-align: center;\">Student</th>\n";
+  echo "  <th>Title</th><th style=\"width: 5em; text-align: center;\">NA</th><th style=\"width: 5em; text-align: center;\">".gettext('Tutor')."</th><th style=\"width: 5em; text-align: center;\">".gettext('Student')."</th>\n";
   echo "</tr>\n";
 
   $modules = $CIS->get_module(NULL, 'name');
@@ -448,8 +448,8 @@ if (!empty($user_id) && !check_user($edit_user, APP__USER_TYPE_ADMIN)) {
       &nbsp;
     </td>
     <td colspan="3">
-      <input type="submit" value="Save Changes" name="save" id="save">&nbsp;&nbsp;&nbsp;
-      <input type="button" value="Cancel" onclick="location.href='<?php echo $cancel; ?>';">
+      <input type="submit" value="<?php echo gettext('Save Changes');?>" name="save" id="save">&nbsp;&nbsp;&nbsp;
+      <input type="button" value="<?php echo gettext('Cancel');?>" onclick="location.href='<?php echo $cancel; ?>';">
       <input type="hidden" name="t" value="<?php echo $type; ?>" />
     </td>
   </tr>

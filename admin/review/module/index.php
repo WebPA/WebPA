@@ -23,18 +23,18 @@ if (!check_user($_user, APP__USER_TYPE_ADMIN)){
 
 $table = "module";
 $type = "module";
-$rstitle = "Module Data";
+$rstitle = gettext("Module Data");
 
 //set the page information
-$UI->page_title = APP__NAME . " view module data";
-$UI->menu_selected = 'view data';
-$UI->breadcrumbs = array ('home' => '../../','review data'=>'../', ' module information'=>null);
+$UI->page_title = APP__NAME .' '.gettext("view module data");
+$UI->menu_selected = gettext('view data');
+$UI->breadcrumbs = array ('home' => '../../',gettext('review data')=>'../', gettext('module information')=>null);
 $UI->help_link = '?q=node/237';
-$UI->set_page_bar_button('View Student Data', '../../../../images/buttons/button_student_user.png', '../student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../../images/buttons/button_staff_user.png', '../staff/index.php');
-$UI->set_page_bar_button('View Admin Data', '../../../../images/buttons/button_admin_user.png', '../admin/index.php');
-$UI->set_page_bar_button('View Module Data', '../../../../images/buttons/button_view_modules.png', '../module/index.php');
-$UI->set_page_bar_button('Search for a user', '../../../../images/buttons/button_search_user.png', '../../search/index.php');
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../../images/buttons/button_student_user.png', '../student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../../images/buttons/button_staff_user.png', '../staff/index.php');
+$UI->set_page_bar_button(gettext('View Admin Data'), '../../../../images/buttons/button_admin_user.png', '../admin/index.php');
+$UI->set_page_bar_button(gettext('View Module Data'), '../../../../images/buttons/button_view_modules.png', '../module/index.php');
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../../images/buttons/button_search_user.png', '../../search/index.php');
 $UI->head();
 $UI->body();
 $UI->content_start();

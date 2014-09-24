@@ -23,8 +23,8 @@ class WizardStep1 {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
-    $this->wizard->next_button = 'Finish';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->next_button = gettext('Finish');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep1()
 
   function head() {
@@ -46,12 +46,12 @@ class WizardStep1 {
     global $CIS, $_user_id, $_module_id;
 
 ?>
-    <p>To create a new form you just need to give it a name. To avoid confusion, the name should be unique, but you can create forms using the same name if you wish.</p>
-    <p>Your form will be reusable with any number of assessments, so if you intend to use it again you should give the form a more generic name and not name it after a module in a particular academic year.</p>
-    <p>For example, <em>"Teamwork Assessment"</em> or <em>"ABC123 Group Coursework"</em>.</p>
+    <p><?php echo gettext('To create a new form you just need to give it a name. To avoid confusion, the name should be unique, but you can create forms using the same name if you wish.');?></p>
+    <p><?php echo gettext('Your form will be reusable with any number of assessments, so if you intend to use it again you should give the form a more generic name and not name it after a module in a particular academic year.');?></p>
+    <p><?php echo gettext('For example, <em>"Teamwork Assessment"</em> or <em>"ABC123 Group Coursework"</em>.');?></p>
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
-      <th><label for="form_name">Name for this new form</label></th>
+      <th><label for="form_name"><?php echo gettext('Name for this new form');?></label></th>
       <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40" value="<?php echo( $this->wizard->get_field('form_name') ); ?>" /></td>
     </tr>
     </table>
@@ -59,8 +59,8 @@ class WizardStep1 {
     <br />
     <br />
 
-    <label>What type scoring will your criteria use?</label>
-    <p>WebPA offers two different ways that your students can score each other.</p>
+    <label><?php echo gettext('What type scoring will your criteria use?');?></label>
+    <p><?php echo gettext('WebPA offers two different ways that your students can score each other.');?></p>
 <?php
     $form_type = $this->wizard->get_field('form_type', 'likert');
 ?>
@@ -68,15 +68,15 @@ class WizardStep1 {
     <tr>
       <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_likert" value="likert" <?php echo( ( ($form_type=='likert') ? 'checked="checked"' : '') ); ?> /></td>
       <td>
-        <label for="type_likert">Likert Scale <span style="font-weight: normal;">(default)</span></label>
-        <p>The standard WebPA scoring.  Students rate each other against a small likert scale, typically 1-5 or 1-10, by simply clicking the appropriate radio button.</p>
+        <label for="type_likert"><?php echo gettext('Likert Scale');?> <span style="font-weight: normal;">(default)</span></label>
+        <p><?php echo gettext('The standard WebPA scoring.  Students rate each other against a small likert scale, typically 1-5 or 1-10, by simply clicking the appropriate radio button.');?></p>
       </td>
     </tr>
     <tr>
       <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_split100" value="split100" <?php echo( ( ($form_type=='split100') ? 'checked="checked"' : '') ); ?> /></td>
       <td>
-        <label for="type_split100">Split 100</label>
-        <p>Students must split 100 marks between their teammates for each criterion, with each score being entered manually into the appropriate box.  The score for each criterion must total 100, so students using this method will be made more aware of the effects of their peer assessment scores, as giving more marks to one team mate means another must get less.</p>
+        <label for="type_split100"><?php echo gettext('Split 100');?></label>
+        <p><?php echo gettext('Students must split 100 marks between their teammates for each criterion, with each score being entered manually into the appropriate box.  The score for each criterion must total 100, so students using this method will be made more aware of the effects of their peer assessment scores, as giving more marks to one team mate means another must get less.');?></p>
       </td>
     </tr>
     </table>
@@ -88,10 +88,10 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('form_name',fetch_POST('form_name'));
-    if (is_empty($this->wizard->get_field('form_name'))) { $errors[] = 'You must provide a name for your new assessment form'; }
+    if (is_empty($this->wizard->get_field('form_name'))) { $errors[] = gettext('You must provide a name for your new assessment form'); }
 
     $this->wizard->set_field('form_modules',fetch_POST('form_modules'));
-    if (is_empty($this->wizard->get_field('form_modules'))) { $errors[] = 'You must select at least one module'; }
+    if (is_empty($this->wizard->get_field('form_modules'))) { $errors[] = gettext('You must select at least one module'); }
 
     $this->wizard->set_field('form_type',fetch_POST('form_type'));
 

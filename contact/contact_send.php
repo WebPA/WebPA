@@ -58,35 +58,33 @@ $contact_message = fetch_POST('contact_message');
 
 $app_www = APP__WWW;
 
-$email_body = <<<EndBody
-Contact Sent
+$email_body = 'Contact Sent'.'
 ----------------------------------------
-Application  : $contact_app_id ($app_www)
-Contact Type : $contact_type
-Date         : $contact_date
-----------------------------------------
-
-Contact Details
-----------------------------------------
-Fullname : $contact_fullname
-Username : $contact_username
-Email    : $contact_email
-Phone    : $contact_phone
+'.gettext('Application').'  : '.$contact_app_id ($app_www).'
+'.gettext('Contact Type').' : '.$contact_type.'
+'.gettext('Date').'         : '.$contact_date.'
 ----------------------------------------
 
-User Account Details
+'.gettext('Contact Details').'
 ----------------------------------------
-User ID  : $contact_user_id
-Fullname : $contact_user_fullname
-Username : $contact_user_username
-Email    : $contact_user_email
+'.gettext('Fullname').' : '.$contact_fullname.'
+'.gettext('Username').' : '.$contact_username.'
+'.gettext('Email').'    : '.$contact_email.'
+'.gettext('Phone').'    : '.$contact_phone.'
 ----------------------------------------
 
-Message:
+'.gettext('User Account Details').'
 ----------------------------------------
-$contact_message
+'.gettext('User ID').'  : '.$contact_user_id.'
+'.gettext('Fullname').' : '.$contact_user_fullname.'
+'.gettext('Username').' : '.$contact_user_username.'
+'.gettext('Email').'    : '.$contact_user_email.'
 ----------------------------------------
-EndBody;
+
+'.gettext('Message').':
+----------------------------------------
+'.$contact_message.'
+----------------------------------------';
 
 // Send the email
 $email = new Email();
@@ -98,10 +96,10 @@ $email->send();
 
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Message Sent';
-$UI->menu_selected = 'contact';
+$UI->page_title = APP__NAME .' '. gettext('Message Sent');
+$UI->menu_selected = gettext('contact');
 $UI->breadcrumbs = array  ('home'   => '/' ,
-              'contact' => null ,);
+    gettext('contact') => null ,);
 
 $UI->head();
 $UI->body();
@@ -110,9 +108,9 @@ $UI->content_start();
 ?>
 
   <div class="content_box">
-    <p>Your message has now been sent.</p>
-    <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
-    <p>Thanks for your time</p>
+    <p><?php echo gettext('Your message has now been sent.'); ?></p>
+    <p><?php echo gettext('We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.');?></p>
+    <p><?php echo gettext('Thanks for your time');?></p>
   </div>
 <?php
 

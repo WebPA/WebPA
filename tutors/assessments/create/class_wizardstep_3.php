@@ -24,9 +24,9 @@ class WizardStep3 {
   function WizardStep3(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep3()
 
   function head() {
@@ -62,15 +62,15 @@ class WizardStep3 {
     if (!$collections) {
       $this->button_next = '';
 ?>
-      <p>You haven't yet created any group collections.</p>
-      <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.</p>
+      <p><?php echo gettext('You haven\'t yet created any group collections.');?></p>
+      <p><?php echo gettext('You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.');?></p>
 <?php
     } else {
       $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
 ?>
-      <p>Please select the collection of groups you wish to use in this assessment from the list below.</p>
-      <p>The collection you select will be copied into your new assessment.  Subsequent changes to the collection of groups <strong>will not</strong> affect your assessment.</p>
-      <h2>Your collections</h2>
+      <p><?php echo gettext('Please select the collection of groups you wish to use in this assessment from the list below.');?></p>
+      <p><?php echo gettext('The collection you select will be copied into your new assessment.  Subsequent changes to the collection of groups <strong>will not</strong> affect your assessment.');?></p>
+      <h2><?php echo gettext('Your collections');?></h2>
       <div class="form_section">
         <table class="form" cellpadding="0" cellspacing="0">
 <?php
@@ -89,7 +89,7 @@ class WizardStep3 {
           echo('<tr>');
           echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked /></td>");
           echo("  <td><label class=\"small\" for=\"collection_{$collection->id}\">{$collection->name}</label>");
-          echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
+          echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>".gettext('Number of Groups')." : $group_count</div></div></td>");
           echo('</tr>');
         }
 ?>
@@ -103,7 +103,7 @@ class WizardStep3 {
     $errors = null;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
-    if (is_empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
+    if (is_empty($this->wizard->get_field('collection_id'))) { $errors[] = gettext('You must select a collection of groups to use in your new assessment'); }
 
     return $errors;
   }// /->process_form()

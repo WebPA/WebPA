@@ -28,7 +28,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
 
 //set the page information
 $UI->page_title = APP__NAME;
-$UI->menu_selected = 'upload data';
+$UI->menu_selected = gettext('upload data');
 $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
 
@@ -55,9 +55,9 @@ $UI->body();
 $UI->content_start();
 //build the content to be written to the screen
 
-$page_intro = 'You can upload the data the system requires from this page';
-$filename = 'Enter the file name to be used:';
-$filecontent = 'Select the type of information you are uploading:<br>';
+$page_intro = gettext('You can upload the data the system requires from this page');
+$filename = gettext('Enter the file name to be used:');
+$filecontent = gettext('Select the type of information you are uploading:').'<br>';
 $filecontenttype = array(4);
 //even though it appears second, the 'student data with groups' option has a filecontenttype.value of 4 (to prevent possible breakage)
 
@@ -66,10 +66,10 @@ $group_handler = new GroupHandler();
 $collections = $group_handler->get_module_collections($_module_id);
 
 $groupsAnnex = '<div style="display: none;" id="collectionNameDiv">
-  <label>Collection:';
+  <label>'.gettext('Collection:');
 if (count($collections) > 0) {
   $groupsAnnex .= '&nbsp;<select name="collectionlist">';
-  $groupsAnnex .= '<option value="">Create using name entered...</option>';
+  $groupsAnnex .= '<option value="">'.gettext('Create using name entered...').'</option>';
   foreach($collections as $collection) {
     $groupsAnnex .= "<option value=\"{$collection['collection_id']}\">{$collection['collection_name']}</option>";
   }
@@ -78,29 +78,29 @@ if (count($collections) > 0) {
 $groupsAnnex .= '&nbsp;<input type="text" name="collection"/></label></div>';
 
 if ($_user->is_admin()) {
-  $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'1');
-  $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password, module_code</p>', 'value'=>'4');
-  $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'2');
+  $filecontenttype[1] = array('screen'=>gettext('<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>'), 'value'=>'1');
+  $filecontenttype[2] = array('screen'=>gettext('<strong>Student Data with Groups</strong>').$groupsAnnex.gettext('<p>CSV File format = id_number, forename, lastname, email, username, group_name, password, module_code</p>'), 'value'=>'4');
+  $filecontenttype[3] = array('screen'=>gettext('<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>'), 'value'=>'2');
 } else {
-  $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'1');
-  $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password</p>', 'value'=>'4');
-  $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'2');
+  $filecontenttype[1] = array('screen'=>gettext('<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>'), 'value'=>'1');
+  $filecontenttype[2] = array('screen'=>gettext('<strong>Student Data with Groups</strong>').$groupsAnnex.gettext('<p>CSV File format = id_number, forename, lastname, email, username, group_name, password</p>'), 'value'=>'4');
+  $filecontenttype[3] = array('screen'=>gettext('<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>'), 'value'=>'2');
 }
-$filecontenttype[4] = array('screen'=>'<strong>Module Data</strong><p>CSV File format = module_code, module_title</p>', 'value'=>'3');
-$fileseparator = 'Select the type of file separator that has been used:';
+$filecontenttype[4] = array('screen'=>gettext('<strong>Module Data</strong><p>CSV File format = module_code, module_title</p>'), 'value'=>'3');
+$fileseparator = gettext('Select the type of file separator that has been used:');
 $separator = array(3);
-$separator[1] = array('screen'=> 'Comma separated', 'value'=>',', 'status' => '');
-$separator[2] = array('screen'=> 'Tab separated', 'value'=>'\t','status' => 'disabled');
-$separator[3] = array('screen'=> 'Semi-colon', 'value'=>';','status' => 'disabled');
+$separator[1] = array('screen'=> gettext('Comma separated'), 'value'=>',', 'status' => '');
+$separator[2] = array('screen'=> gettext('Tab separated'), 'value'=>'\t','status' => 'disabled');
+$separator[3] = array('screen'=> gettext('Semi-colon'), 'value'=>';','status' => 'disabled');
 
-$btn_name = 'Upload';
-$pasteinstruction ='Copy and paste the contents of the file you want to add to the system, ensuring that the information is comma separated and that each entry begins on a new line.';
+$btn_name = gettext('Upload');
+$pasteinstruction =gettext('Copy and paste the contents of the file you want to add to the system, ensuring that the information is comma separated and that each entry begins on a new line.');
 
 ?>
 <p><?php echo $page_intro; ?></p>
 <form id="fileLoad" enctype="multipart/form-data" action="simple.php" method="POST" onsubmit="return changeFormAction()">
 <div class="content_box">
-<h2>Upload data via a file</h2>
+<h2><?php echo gettext('Upload data via a file');?></h2>
 <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
   <table class="option_list" >
   <tr>
@@ -141,7 +141,7 @@ $pasteinstruction ='Copy and paste the contents of the file you want to add to t
 </div>
 </form>
 
-There are <a href="templates.php">templates</a> which you can follow for uploading the information to the WebPA system.
+<?php echo gettext('There are <a href="templates.php">templates</a> which you can follow for uploading the information to the WebPA system.');?>
 
 <?php
 

@@ -83,7 +83,7 @@ if ($assessment->load($assessment_id)) {
   } else {
     $do_reports = true;
     $do_all_reports = false;
-    $no_reports_reason = 'You have not recorded the group marks for this assessment so some reports are not available.<br />Please <a href="../marks/set_group_marks.php?'. $qs .'">enter the overall group marks</a> before viewing your reports.';
+    $no_reports_reason = sprintf(gettext('You have not recorded the group marks for this assessment so some reports are not available.<br />Please %s%s">enter the overall group marks</a> before viewing your reports.'),'<a href="../marks/set_group_marks.php?', $qs );
   }
 
   // check if there are student responses
@@ -92,14 +92,14 @@ if ($assessment->load($assessment_id)) {
   $responses = $result_handler->get_responses();
   if (!$responses) {
     $do_reports = false;
-    $no_reports_reason = 'There have been no student responses to this assessment. Please select another assessment, or <a href="../edit/edit_assessment.php?'. $qs .'">re-schedule this one</a>.';
+    $no_reports_reason = sprintf(gettext('There have been no student responses to this assessment. Please select another assessment, or %s%s">re-schedule this one</a>.'),'<a href="../edit/edit_assessment.php?',$qs);
   }
 
   // Get the marking parameters
   $marking_params = $assessment->get_marking_params($marking_date);
 } else {
   $do_reports = false;
-  $no_reports_reason = 'The assessment you selected could not be loaded for some reason. Please go back and try again.';
+  $no_reports_reason = gettext('The assessment you selected could not be loaded for some reason. Please go back and try again.');
 
   $assessment = null;
   $question_count = 0;
@@ -109,18 +109,18 @@ if ($assessment->load($assessment_id)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = ($assessment) ? "reports: {$assessment->name}" : 'reports';
+$page_title = ($assessment) ? gettext("reports").": {$assessment->name}" : gettext('reports');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->breadcrumbs = array (
   'home'          => '../../' ,
-  'my assessments'    => '../' ,
+    gettext('my assessments')    => '../' ,
   $page_title       => null ,
 );
 $UI->help_link = '?q=node/235';
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons//button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons//button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../../create/');
 
 $UI->head();
 ?>
@@ -140,15 +140,15 @@ div.report table td.downloads div { margin-bottom: 4px; }
 $UI->content_start();
 ?>
 
-<p>On this page you can select the different reports to view for this assessment.</p>
+<p><?php echo gettext('On this page you can select the different reports to view for this assessment.');?></p>
 
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to assessments list');?></a>
 </div>
 
-<p>Reports available for: <em><?php echo($assessment->name)?></em>.</p>
+<p><?php echo gettext('Reports available for:');?> <em><?php echo($assessment->name)?></em>.</p>
 
 <?php
 if ($marking_params) {
@@ -166,7 +166,7 @@ if ($marking_params) {
       if ($marking_params['grading']=='grade_af') {
         echo('A-F.');
       } else {
-        echo('Numeric (%).');
+        echo(gettext('Numeric (%).'));
       }
 ?>
     )
@@ -179,30 +179,30 @@ if ($marking_params) {
 if (!$do_reports) {
 ?>
   <div class="warning_box">
-    <p><strong>Unable to display reports</strong></p>
+    <p><strong><?php echo gettext('Unable to display reports');?></strong></p>
     <p><?php echo($no_reports_reason); ?></p>
   </div>
 <?php
 } else {
 ?>
-<h2>Choose a report</h2>
+<h2><?php echo gettext('Choose a report');?></h2>
 <div class="form_section">
-  <p>Please select a report to display or download from the list below.</p>
+  <p><?php echo gettext('Please select a report to display or download from the list below.');?></p>
 
   <div class="report">
     <table cellpadding="2" cellspacing="2" width="100%">
     <tr>
       <td valign="top">
-        <div class="title">Marks Awarded For Each Question</div>
-        <div class="info">A breakdown of the marks given by each student for every question in the assessment.</div>
+        <div class="title"><?php echo gettext('Marks Awarded For Each Question');?></div>
+        <div class="info"><?php echo gettext('A breakdown of the marks given by each student for every question in the assessment.');?></div>
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
-        <div>View Report:</div>
-        <a href="report_marks_awarded_byquestion_named.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <div><?php echo gettext('View Report:');?></div>
+        <a href="report_marks_awarded_byquestion_named.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
       </td>
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_marks_awarded_byquestion_named.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_marks_awarded_byquestion_named.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
       </td>
     </tr>
     </table>
@@ -212,16 +212,16 @@ if (!$do_reports) {
     <table cellpadding="2" cellspacing="2" width="100%">
     <tr>
       <td valign="top">
-        <div class="title">Marks Awarded For Each Question (anonymous)</div>
-        <div class="info">A breakdown of the marks given by each student for every question in the assessment.<br />Student names/numbers are <strong>NOT</strong> displayed.</div>
+        <div class="title"><?php echo gettext('Marks Awarded For Each Question (anonymous)');?></div>
+        <div class="info"><?php echo gettext('A breakdown of the marks given by each student for every question in the assessment.<br />Student names/numbers are <strong>NOT</strong> displayed.');?></div>
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
-        <div>View Report:</div>
-        <a  href="report_marks_awarded_byquestion_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <div><?php echo gettext('View Report:');?></div>
+        <a  href="report_marks_awarded_byquestion_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
       </td>
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_marks_awarded_byquestion_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_marks_awarded_byquestion_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
       </td>
     </tr>
     </table>
@@ -231,16 +231,16 @@ if (!$do_reports) {
     <table cellpadding="2" cellspacing="2" width="100%">
     <tr>
       <td valign="top">
-        <div class="title">Student Response Information</div>
-        <div class="info">Shows the date, time and location that each student took the assessment.</div>
+        <div class="title"><?php echo gettext('Student Response Information');?></div>
+        <div class="info"><?php echo gettext('Shows the date, time and location that each student took the assessment.');?></div>
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
-        <div>View Report</div>
-        <a href="report_student_response_info.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <div><?php echo gettext('View Report');?></div>
+        <a href="report_student_response_info.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
       </td>
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_student_response_info.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_student_response_info.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
       </td>
     </tr>
     </table>
@@ -250,7 +250,7 @@ if (!$do_reports) {
   if (!$do_all_reports) {
 ?>
     <div class="warning_box">
-      <p><strong>Unable to display the other reports</strong></p>
+      <p><strong><?php echo gettext('Unable to display the other reports');?></strong></p>
       <p><?php echo($no_reports_reason); ?></p>
     </div>
 <?php
@@ -261,34 +261,34 @@ if (!$do_reports) {
       <table cellpadding="2" cellspacing="2" width="100%">
       <tr>
         <td valign="top">
-          <div class="title">Student Grades</div>
-          <div class="info">A list of students (by lastname) and their final WebPA scores and grades.</div>
+          <div class="title"><?php echo gettext('Student Grades');?></div>
+          <div class="info"><?php echo gettext('A list of students (by lastname) and their final WebPA scores and grades.');?></div>
         </td>
         <td class="downloads"  nowrap="nowrap"  valign="top">
-          <div>View Report:</div>
-          <a href="report_student_grades.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <div><?php echo gettext('View Report:');?></div>
+          <a href="report_student_grades.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="<?php echo gettext('XML -  XML File');?>" /></a>
         </td>
         <?php
         if (APP__MOODLE_GRADEBOOK){
         ?>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades.php?t=download-moodle-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/moodle.gif" width="32" height="32" alt="Moodle - Moodle Gradebook Import XML" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades.php?t=download-moodle-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/moodle.gif" width="32" height="32" alt="<?php echo gettext('Moodle - Moodle Gradebook Import XML');?>" /></a>
         </td>
         <?php
         }
         ?>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="<?php echo gettext('RTF -  Rich Text File / MS Word');?>" /></a>
         </td>
       </tr>
       </table>
@@ -298,24 +298,24 @@ if (!$do_reports) {
       <table cellpadding="2" cellspacing="2" width="100%">
       <tr>
         <td valign="top">
-          <div class="title">Student Grades (by group)</div>
-          <div class="info">A list of students (by group) and their final WebPA scores and grades.</div>
+          <div class="title"><?php echo gettext('Student Grades (by group)');?></div>
+          <div class="info"><?php echo gettext('A list of students (by group) and their final WebPA scores and grades.');?></div>
         </td>
         <td class="downloads" nowrap="nowrap" valign="top">
-          <div>View Report:</div>
-          <a href="report_student_grades_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <div><?php echo gettext('View Report:');?></div>
+          <a href="report_student_grades_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="<?php echo gettext('XML -  XML File');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades_bygroup.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="<?php echo gettext('RTF -  Rich Text File / MS Word');?>" /></a>
         </td>
       </tr>
       </table>
@@ -328,16 +328,16 @@ if (!$do_reports) {
       <table cellpadding="2" cellspacing="2" width="100%">
       <tr>
         <td valign="top">
-          <div class="title">Student Feedback and Justification (by group)</div>
-          <div class="info">A list of students (by group) and their feedback about the assessment and justification of the WebPA scores and grades.</div>
+          <div class="title"><?php echo gettext('Student Feedback and Justification (by group)');?></div>
+          <div class="info"><?php echo gettext('A list of students (by group) and their feedback about the assessment and justification of the WebPA scores and grades.');?></div>
         </td>
         <td class="downloads" nowrap="nowrap" valign="top">
-          <div>View Report:</div>
-          <a href="report_student_feedback_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <div><?php echo gettext(' Report:');?></div>
+          <a href="report_student_feedback_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_feedback_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_feedback_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
         </td>
       </tr>
       </table>
@@ -346,12 +346,12 @@ if (!$do_reports) {
       <table cellpadding="2" cellspacing="2" width="100%">
       <tr>
         <td valign="top">
-          <div class="title">Student Grades and Feedback</div>
-          <div class="info">This report can be used to upload WebPA assessment marks into the grade book.  Comments are not currently supported for upload.  If you would like the comments emailed to your students please contact your WebPA administrator.</div>
+          <div class="title"><?php echo gettext('Student Grades and Feedback');?></div>
+          <div class="info"><?php echo gettext('This report can be used to upload WebPA assessment marks into the grade book.  Comments are not currently supported for upload.  If you would like the comments emailed to your students please contact your WebPA administrator.');?></div>
         </td>
         <td class="downloads" valign="top">
-          <div>Download:</div>
-          <a href="report_student_grades_comments.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <div><?php echo gettext('Download:');?></div>
+          <a href="report_student_grades_comments.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
         </td>
       </tr>
       </table>
@@ -368,16 +368,16 @@ if (!$do_reports) {
     <table cellpadding="2" cellspacing="2" width="100%">
     <tr>
       <td valign="top">
-        <div class="title">Responses per student</div>
-        <div class="info">This report was requested by UEA and provides the reponses given for each individual student per group.</div>
+        <div class="title"><?php echo gettext('Responses per student');?></div>
+        <div class="info"><?php echo gettext('This report was requested by UEA and provides the reponses given for each individual student per group.');?></div>
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
-        <div>View Report:</div>
-        <a href="report_uea.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <div><?php echo gettext('View Report:');?></div>
+        <a href="report_uea.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
       </td>
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_uea.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_uea.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
       </td>
       <!--
       <td class="downloads" valign="top">
@@ -386,8 +386,8 @@ if (!$do_reports) {
       </td>
       -->
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_uea.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_uea.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="<?php echo gettext('RTF -  Rich Text File / MS Word');?>" /></a>
       </td>
 
     </tr>
@@ -397,16 +397,16 @@ if (!$do_reports) {
     <table cellpadding="2" cellspacing="2" width="100%">
     <tr>
       <td valign="top">
-        <div class="title">Responses per student (anonymous)</div>
-        <div class="info">This report was requested by UEA and provides the reponses given for each individual student per group. The data on who gave the response has been anonymised</div>
+        <div class="title"><?php echo gettext('Responses per student (anonymous)');?></div>
+        <div class="info"><?php echo gettext('This report was requested by UEA and provides the reponses given for each individual student per group. The data on who gave the response has been anonymised');?></div>
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
-        <div>View Report:</div>
-        <a href="report_uea_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <div><?php echo gettext('View Report:');?></div>
+        <a href="report_uea_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="<?php echo gettext('Report - View the report');?>" /></a>
       </td>
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_uea_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_uea_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="<?php echo gettext('CSV - Excel Spreadsheet');?>" /></a>
       </td>
       <!--
       <td class="downloads" valign="top">
@@ -415,8 +415,8 @@ if (!$do_reports) {
       </td>
       -->
       <td class="downloads" valign="top">
-        <div>Download:</div>
-        <a href="report_uea_anonymous.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+        <div><?php echo gettext('Download:');?></div>
+        <a href="report_uea_anonymous.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="<?php echo gettext('RTF -  Rich Text File / MS Word');?>" /></a>
       </td>
 
     </tr>

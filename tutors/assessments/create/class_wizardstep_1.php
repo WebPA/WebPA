@@ -24,8 +24,8 @@ class WizardStep1 {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep1()
 
   function head() {
@@ -79,7 +79,7 @@ class WizardStep1 {
       render_options_range(1, 31, 1, date('j',$selected_datetime));
       echo('</select></td>');
 
-      $form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
+      $form_months = array( 1 => gettext('January'),gettext('February'),gettext('March'),gettext('April'),gettext('May'),gettext('June'),gettext('July'),gettext('August'),gettext('September'),gettext('October'),gettext('November'),gettext('December'));
 
       // Draw month box
       echo("<td><select name=\"{$field_name}_month\">");
@@ -112,59 +112,59 @@ class WizardStep1 {
     }
 
 ?>
-    <p>To create a new assessment you must first give it a name. To avoid confusion, the name should be unique, but you can create assessments using the same name if you wish.</p>
+    <p><?php echo gettext('To create a new assessment you must first give it a name. To avoid confusion, the name should be unique, but you can create assessments using the same name if you wish.');?></p>
 
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
-        <th><label for="assessment_name">Name for this new assessment</label></th>
+        <th><label for="assessment_name"><?php echo gettext('Name for this new assessment');?></label></th>
         <td><input type="text" name="assessment_name" id="assessment_name" maxlength="100" size="40" value="<?php echo( $this->wizard->get_field('assessment_name') ); ?>" /></td>
       </tr>
       </table>
     </div>
 
-    <p>Now choose a schedule for when, and for how long, this assessment will run.</p>
+    <p><?php echo gettext('Now choose a schedule for when, and for how long, this assessment will run.');?></p>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
-        <th><label>Opening date</label></th>
+        <th><label><?php echo gettext('Opening date');?></label></th>
         <td><?php render_datetime_boxes('open_date', $open_date); ?></td>
       </tr>
       <tr>
-        <th><label>Closing date</label></th>
+        <th><label><?php echo gettext('Closing date');?></label></th>
         <td><?php render_datetime_boxes('close_date', $close_date); ?></td>
       </tr>
       </table>
     </div>
 
-    <p>Now enter the text to use as the introduction to your assessment (optional).</p>
-    <p>This text will act as a pre-amble to your assessment, and is an opportunity to instruct students on how you want them to complete the assessment, and score each criteria.</p>
+    <p><?php echo gettext('Now enter the text to use as the introduction to your assessment (optional).');?></p>
+    <p><?php echo gettext('This text will act as a pre-amble to your assessment, and is an opportunity to instruct students on how you want them to complete the assessment, and score each criteria.');?></p>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2" width="100%">
       <tr>
-        <th valign="top" style="padding-top: 2px; vertical-align: top;"><label for="introduction">Introduction</label></th>
+        <th valign="top" style="padding-top: 2px; vertical-align: top;"><label for="introduction"><?php echo gettext('Introduction');?></label></th>
         <td width="100%"><textarea name="introduction" id="introduction" rows="6" cols="40" style="width: 90%;"><?php echo($this->wizard->get_field('introduction')); ?></textarea></td>
       </tr>
       </table>
     </div>
 
-    <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
+    <div style="float:right"><b><?php echo gettext('Advanced Options');?></b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="<?php echo gettext('view / hide advanced options');?>"></a>
     <br/><br/></div>
     <div id="advanced" style="display:none;" class="advanced_options">
 
-      <h2>notification emails</h2>
+      <h2><?php echo gettext('notification emails');?></h2>
 
-      <p><label>Do you want to email all students when this assessment is created?</label></p>
-      <p>This option will send an email to all of the students who are in the groups for this assessment as soon as you click the finish button at the end of the wizard.</p>
+      <p><label><?php echo gettext('Do you want to email all students when this assessment is created?');?></label></p>
+      <p><?php echo gettext('This option will send an email to all of the students who are in the groups for this assessment as soon as you click the finish button at the end of the wizard.');?></p>
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
           <td><input type="radio" name="email" id="email_yes" value="1" <?php echo( ($email) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_yes">Yes, email all students.</label></td>
+          <td valign="top"><label class="small" for="email_yes"><?php echo gettext('Yes, email all students.');?></label></td>
         </tr>
         <tr>
           <td><input type="radio" name="email" id="email_no" value="0" <?php echo( (!$email) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_no">No, don't email all students.</label></td>
+          <td valign="top"><label class="small" for="email_no"><?php echo gettext('No, don\'t email all students.');?></label></td>
         </tr>
         </table>
       </div>
@@ -172,17 +172,17 @@ class WizardStep1 {
 <?php
     if (APP__REMINDER_OPENING) {
 ?>
-      <p><label>Do you want an email reminder sent to all students 48 hours before the assessment is opened?</label></p>
-      <p>This option will send an email to all of the students who are in the groups for this assessment 48 hours (approx.) before the assessment opens.</p>
+      <p><label><?php echo gettext('Do you want an email reminder sent to all students 48 hours before the assessment is opened?');?></label></p>
+      <p><?php echo gettext('This option will send an email to all of the students who are in the groups for this assessment 48 hours (approx.) before the assessment opens.');?></p>
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
           <td><input type="radio" name="email_opening" id="email_opening_yes" value="1" <?php echo( ($email_opening) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_opening_yes">Yes, email all students.</label></td>
+          <td valign="top"><label class="small" for="email_opening_yes"><?php echo gettext('Yes, email all students.');?></label></td>
         </tr>
         <tr>
           <td><input type="radio" name="email_opening" id="email_opening_no" value="0" <?php echo( (!$email_opening) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_opening_no">No, don't email all students.</label></td>
+          <td valign="top"><label class="small" for="email_opening_no"><?php echo gettext('No, don\'t email all students.');?>'</label></td>
         </tr>
         </table>
       </div>
@@ -191,17 +191,17 @@ class WizardStep1 {
 
     if (APP__REMINDER_CLOSING) {
 ?>
-      <p><label>Do you want to email all students 48 hours before the assessment closes?</label></p>
-      <p>This option will send an email to all of the students who are in the groups for this assessment 48 hours (approx.) before the assessment closes.</p>
+      <p><label><?php echo gettext('Do you want to email all students 48 hours before the assessment closes?');?></label></p>
+      <p><?php echo gettext('This option will send an email to all of the students who are in the groups for this assessment 48 hours (approx.) before the assessment closes.');?></p>
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
           <td><input type="radio" name="email_closing" id="email_closing_yes" value="1" <?php echo( ($email_closing) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_closing_yes">Yes, email all students.</label></td>
+          <td valign="top"><label class="small" for="email_closing_yes"><?php echo gettext('Yes, email all students.');?></label></td>
         </tr>
         <tr>
           <td><input type="radio" name="email_closing" id="email_closing_no" value="0" <?php echo( (!$email_closing) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="email_closing_no">No, don't email all students.</label></td>
+          <td valign="top"><label class="small" for="email_closing_no"><?php echo gettext('No, don\'t email all students.');?>'</label></td>
         </tr>
         </table>
       </div>
@@ -220,7 +220,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('assessment_name', fetch_POST('assessment_name'));
-    if (is_empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
+    if (is_empty($this->wizard->get_field('assessment_name'))) { $errors[] = gettext('You must enter a name for your new assessment'); }
 
 
     // open_date
@@ -238,7 +238,7 @@ class WizardStep1 {
 
     $this->wizard->set_field('open_date',$open_date);
     $this->wizard->set_field('close_date',$close_date);
-    if ($open_date>=$close_date) { $errors[] = 'You must select a closing date/time that is after your opening date'; }
+    if ($open_date>=$close_date) { $errors[] = gettext('You must select a closing date/time that is after your opening date'); }
 
     $this->wizard->set_field('introduction', fetch_POST('introduction'));
 

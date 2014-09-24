@@ -222,7 +222,7 @@ class WebPAAlgorithm {
   * Calculate the WebPA and group scores for each student
   */
   function calculate() {
-    echo('<p>ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden.</p>');
+    echo('<p>'.gettext('ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden.').'</p>');
     exit;
   }// /->calculate()
 

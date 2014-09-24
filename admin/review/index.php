@@ -21,26 +21,26 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
 }
 
 $filecontenttype = array();
-$filecontenttype[] = array('link'=>'student','screen'=>'Student', 'def'=>'View the student data currently in the system',);
-$filecontenttype[] = array('link'=>'staff','screen'=>'Staff', 'def'=>'View the staff data currently in the system',);
+$filecontenttype[] = array('link'=>'student','screen'=>gettext('Student'), 'def'=>gettext('View the student data currently in the system'),);
+$filecontenttype[] = array('link'=>'staff','screen'=>gettext('Staff'), 'def'=>gettext('View the staff data currently in the system'),);
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $filecontenttype[] = array('link'=>'admin','screen'=>'Administrators', 'def'=>'View the administrator data currently in the system',);
-  $filecontenttype[] = array('link'=>'module','screen'=>'Module', 'def'=>'View the module information currently in the system',);
+  $filecontenttype[] = array('link'=>'admin','screen'=>gettext('Administrators'), 'def'=>gettext('View the administrator data currently in the system'),);
+  $filecontenttype[] = array('link'=>'module','screen'=>gettext('Module'), 'def'=>gettext('View the module information currently in the system'),);
 }
-$filecontenttype[] = array('link'=>'../search', 'screen'=>'Search', 'def'=>'Search for a student or staff user of the system',);
+$filecontenttype[] = array('link'=>'../search', 'screen'=>gettext('Search'), 'def'=>gettext('Search for a student or staff user of the system'),);
 
 //set the page information
-$UI->page_title = APP__NAME . " view data";
-$UI->menu_selected = 'view data';
+$UI->page_title = APP__NAME .' '.gettext("view data");
+$UI->menu_selected = gettext('view data');
 $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');
+$UI->set_page_bar_button(gettext('View Student Data'), '../../../images/buttons/button_student_user.png', 'student/index.php');
+$UI->set_page_bar_button(gettext('View Staff Data'), '../../../images/buttons/button_staff_user.png', 'staff/index.php');
 if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-  $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', 'admin/index.php');
-  $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', 'module/index.php');
+  $UI->set_page_bar_button(gettext('View Admin Data'), '../../../images/buttons/button_admin_user.png', 'admin/index.php');
+  $UI->set_page_bar_button(gettext('View Module Data'), '../../../images/buttons/button_view_modules.png', 'module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
+$UI->set_page_bar_button(gettext('Search for a user'), '../../../images/buttons/button_search_user.png', '../search/index.php');
 $UI->head();
 $UI->body();
 $UI->content_start();

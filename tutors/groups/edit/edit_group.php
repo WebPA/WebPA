@@ -93,16 +93,16 @@ if ($allow_edit) {
 // Begin Page
 
 $collection_name = ($collection) ? $collection->name : UNKNOWN__COLLECTION;
-$collection_title = ($collection) ? "Editing: {$collection->name}" : EDDITING__UNKNOWN_GROUP;
-$page_title = ($group) ? "Editing: {$group->name}" : EDDITING__GROUP;
+$collection_title = ($collection) ? gettext("Editing:")." {$collection->name}" : EDDITING__UNKNOWN_GROUP;
+$page_title = ($group) ? gettext("Editing:")." {$group->name}" : EDDITING__GROUP;
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my groups';
+$UI->menu_selected = gettext('my groups');
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home'            => '../../' ,
-  'my groups'         => '../' ,
-  "Editing: $collection_name" => "edit_collection.php?c={$collection->id}" ,
+    gettext('my groups')         => '../' ,
+    gettext("Editing:")." $collection_name" => "edit_collection.php?c={$collection->id}" ,
   $page_title         => null ,
 );
 
@@ -155,7 +155,7 @@ if ($collection->is_locked()) {
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo($collection_name); ?></a>
+  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to');?> <?php echo($collection_name); ?></a>
 </div>
 
 <?php
@@ -168,12 +168,12 @@ if (!$group) {
   <form action="edit_group.php?<?php echo($group_qs); ?>" method="post" name="group_form">
   <input type="hidden" name="command" value="none" />
 
-  <h2>Group Name</h2>
+  <h2><?php echo gettext('Group Name');?></h2>
   <div class="form_section form_line">
-    <p>You can change this group's name using the box below. When you've made your changes, click a <em>save changes</em> button.</p>
+    <p><?php echo gettext('You can change this group\'s name using the box below. When you\'ve made your changes, click a <em>save changes</em> button.');?></p>
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
-      <th><label for="group_name">Name</label></th>
+      <th><label for="group_name"><?php echo gettext('Name');?></label></th>
       <td>
 <?php
   if ($collection->is_locked()) {
@@ -187,11 +187,11 @@ if (!$group) {
     </table>
   </div>
 
-  <h2>Group Members</h2>
+  <h2><?php echo gettext('Group Members');?></h2>
   <div class="form_section">
-    <p>Below are all the students from the modules associated with this group.</p>
-    <p>To add a student to this group select <em>In</em>, and to remove one select <em>Out</em>.</p>
-    <p>When you have made all your selections, click a <em>save changes</em> button.</p>
+    <p><?php echo gettext('Below are all the students from the modules associated with this group.');?></p>
+    <p><?php echo gettext('To add a student to this group select <em>In</em>, and to remove one select <em>Out</em>.');?></p>
+    <p><?php echo gettext('When you have made all your selections, click a <em>save changes</em> button.');?></p>
 
 
 
@@ -212,7 +212,7 @@ if (!$group) {
 
   $group_students = $CIS->get_user($group_student_ids);
 
-  echo('<tr class="in_group"><th width="400">Students already in this group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+  echo('<tr class="in_group"><th width="400">'.gettext('Students already in this group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>'));
   if (is_array($group_students)) {
     foreach ($group_students as $i => $member) {
       echo('<tr class="in_group">');
@@ -228,7 +228,7 @@ if (!$group) {
       echo('</tr>');
     }
   } else {
-    echo('<tr class="in_group"><td colspan="3">This group has no members</td></tr>');
+    echo('<tr class="in_group"><td colspan="3">'.gettext('This group has no members').'</td></tr>');
   }
 
   // Show the students who aren't in ANY group in this collection
@@ -239,7 +239,7 @@ if (!$group) {
   }
   $unalloc_students = $CIS->get_user($unalloc_student_ids);
 
-  echo('<tr class="no_group"><th>Students not yet assigned to a group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+  echo('<tr class="no_group"><th>'.gettext('Students not yet assigned to a group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>'));
   if (is_array($unalloc_students)) {
     foreach ($unalloc_students as $i => $member) {
       echo('<tr class="no_group">');
@@ -255,7 +255,7 @@ if (!$group) {
       echo('</tr>');
     }
   } else {
-    echo('<tr class="no_group"><td colspan="3">All the available students have been assigned</td></tr>');
+    echo('<tr class="no_group"><td colspan="3">'.gettext('All the available students have been assigned').'</td></tr>');
   }
 
   // Show the students who are in OTHER groups in this collection
@@ -266,7 +266,7 @@ if (!$group) {
   }
   $collection_students = $CIS->get_user($collection_member_ids);
 
-  echo('<tr class="other_group"><th>Students assigned to other groups in this collection</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+  echo('<tr class="other_group"><th>'.gettext('Students assigned to other groups in this collection</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>'));
   if (is_array($collection_students)) {
     foreach ($collection_students as $i => $member) {
       echo('<tr class="other_group">');
@@ -282,7 +282,7 @@ if (!$group) {
       echo('</tr>');
     }
   } else {
-    echo('<tr class="other_group"><td colspan="3">There are no students allocated to any other groups</td></tr>');
+    echo('<tr class="other_group"><td colspan="3">'.gettext('There are no students allocated to any other groups').'</td></tr>');
   }
 ?>
       </table>

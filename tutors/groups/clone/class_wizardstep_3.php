@@ -50,7 +50,7 @@ HTMLEnd;
     $errors = null;
 
     if (!$collection) {
-      $errors[] = 'There was an error when trying to clone these groups - please use the contact system to report the error!';
+      $errors[] = gettext('There was an error when trying to clone these groups - please use the contact system to report the error!');
     } else {
       $collection->name = $this->wizard->get_field('collection_name');
       $collection->save();
@@ -58,15 +58,15 @@ HTMLEnd;
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to create your new cloned groups.</strong></p>');
-      echo('<p>To correct the problem, try clicking <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to create your new cloned groups.').'</strong></p>');
+      echo('<p>'.gettext('To correct the problem, try clicking <em>back</em> and amend the details entered.').'</p>');
     } else {// Else.. create the groups!
       ?>
-      <p><strong>Your new cloned groups have been created.</strong></p>
-      <p style="margin-top: 20px;">To re-allocate students to your new groups, you can use the <a href="../edit/edit_collection.php?c=<?php echo($collection->id); ?>">group editor</a>.</p>
-      <p style="margin-top: 20px;">Alternatively, you can return to <a href="../">my groups</a>, or to the <a href="../../">WebPA home page</a>.</p>
+      <p><strong><?php echo gettext('Your new cloned groups have been created.');?></strong></p>
+      <p style="margin-top: 20px;"><?php echo sprintf(gettext('To re-allocate students to your new groups, you can use the <a href="../edit/edit_collection.php?c=%s">group editor</a>.'), $collection->id);?></p>
+      <p style="margin-top: 20px;"><?php echo gettext('Alternatively, you can return to <a href="../">my groups</a>, or to the <a href="../../">WebPA home page</a>.');?></p>
       <?php
     }
   }// /->form()

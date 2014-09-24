@@ -23,7 +23,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 
  //set the page information
 $UI->page_title = APP__NAME;
-$UI->menu_selected = 'admin home';
+$UI->menu_selected = gettext('admin home');
 $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
 $UI->head();
@@ -32,33 +32,33 @@ $UI->content_start();
 
 //build the content to be written to the screen
 
-$page_intro = 'Welcome to the Administration Area for ' . APP__NAME . '. In this section you are able to manage the users of the system (both adding new and editing existing)';
+$page_intro = gettext('Welcome to the Administration Area for').' '. APP__NAME . '. '.gettext('In this section you are able to manage the users of the system (both adding new and editing existing)');
 if ($_user->is_admin()) {
-  $page_intro .= ' as well as generate basic reports on the usage of ' . APP__NAME . ' (the metrics)';
+  $page_intro .= ' '.sprintf(gettext('as well as generate basic reports on the usage of %s (the metrics)'), APP__NAME);
 }
-$page_intro .= '.<br/><br/>The admin area contains the following sections:';
+$page_intro .= '.<br/><br/>'.gettext('The admin area contains the following sections:');
 $menu = $UI->get_menu('Admin');
 if (isset($menu['upload data'])) {
   $upload = $menu['upload data'];
   if ($_user->is_admin()) {
-    $section_name = array('Upload Data', 'View Data', 'WebPA Metrics');
+    $section_name = array(gettext('Upload Data'), gettext('View Data'), gettext('WebPA Metrics'));
     $section_link = array($upload, 'review/', 'metrics/');
   } else {
-    $section_name = array('Upload Data', 'View Data');
+    $section_name = array(gettext('Upload Data'), gettext('View Data'));
     $section_link = array($upload, 'review/');
   }
 } else {
   if ($_user->is_admin()) {
-    $section_name = array('View Data', 'WebPA Metrics');
+    $section_name = array(gettext('View Data'), gettext('WebPA Metrics'));
     $section_link = array('review/', 'metrics/');
   } else {
-    $section_name = array('View Data');
+    $section_name = array(gettext('View Data'));
     $section_link = array('review/');
   }
 }
-$section_definition = array('This is where you can upload the data to the system.',
-              'This area allows you to view the uploaded data as well as search and edit user information.',
-              'This section allows you to generate reports on the usage of WebPA locally.');
+$section_definition = array(gettext('This is where you can upload the data to the system.'),
+    gettext('This area allows you to view the uploaded data as well as search and edit user information.'),
+    gettext('This section allows you to generate reports on the usage of WebPA locally.'));
 ?>
 <p><?php echo $page_intro; ?></p>
 

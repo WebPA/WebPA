@@ -75,23 +75,23 @@ if ($allow_edit) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$collection_name = ($collection) ? $collection->name : 'Unknown Collection';
-$collection_title = "Editing: $collection_name";
-$page_title = ($collection) ? "Members: {$collection->name}" : 'Members';
+$collection_name = ($collection) ? $collection->name : gettext('Unknown Collection');
+$collection_title = gettext("Editing:")." $collection_name";
+$page_title = ($collection) ? gettext("Members:")." {$collection->name}" : gettext('Members');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my groups';
+$UI->menu_selected = gettext('my groups');
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home' => '../../' ,
-  'my groups' => '../' ,
-  "Editing: $collection_title"  => "../edit/edit_collection.php?gs={$collection->id}" ,
+    gettext('my groups') => '../' ,
+    gettext("Editing:")." $collection_title"  => "../edit/edit_collection.php?gs={$collection->id}" ,
   $page_title           => null ,
 );
 
-$UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
-$UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
-$UI->set_page_bar_button('Clone Groups', '../../../../images/buttons/button_group_clone.gif', '../clone/');
+$UI->set_page_bar_button(gettext('List Groups'), '../../../../images/buttons/button_group_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Groups'), '../../../../images/buttons/button_group_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('Clone Groups'), '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
 $UI->head();
 ?>
@@ -108,21 +108,21 @@ $UI->head();
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('No changes have been saved. Please check the details in the form, and try again.'));
 ?>
 
-<p>On this page you can set the group membership for every student associated with this collection.</p>
+<p><?php echo gettext('On this page you can set the group membership for every student associated with this collection.');?></p>
 
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo($collection_name); ?></a>
+  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to');?> <?php echo($collection_name); ?></a>
 </div>
 
 <?php
 if (!$collection) {
   ?>
-  <p>The collection you selected could not be loaded for some reason - please go back and try again.</p>
+  <p><?php echo gettext('The collection you selected could not be loaded for some reason - please go back and try again.');?></p>
 <?php
 } else {
 ?>
@@ -130,11 +130,11 @@ if (!$collection) {
   <form action="edit_collection_members.php?<?php echo($collection_qs); ?>" method="post" name="collection_members_form">
   <input type="hidden" name="command" value="none" />
 
-  <h2>Available Students</h2>
+  <h2><?php echo gettext('Available Students');?></h2>
   <div class="form_section">
-    <p>Below are all the students from the modules associated with this collection of groups.</p>
-    <p>Use the drop-down box next to each student to set which group they should belong to.</p>
-    <p>When you have made all your selections, click a <em>save changes</em> button.</p>
+    <p><?php echo gettext('Below are all the students from the modules associated with this collection of groups.');?></p>
+    <p><?php echo gettext('Use the drop-down box next to each student to set which group they should belong to.');?></p>
+    <p><?php echo gettext('When you have made all your selections, click a <em>save changes</em> button.');?></p>
 
     <table cellpadding="0" cellspacing="0">
     <tr>
@@ -142,8 +142,8 @@ if (!$collection) {
 
       <table class="grid" cellpadding="2" cellspacing="1">
       <tr>
-        <th>Student</th>
-        <th>Assigned Group</th>
+        <th><?php echo gettext('Student');?></th>
+        <th><?php echo gettext('Assigned Group');?></th>
       </tr>
 <?php
     $groups = $collection->get_groups_array();
@@ -175,7 +175,7 @@ if (!$collection) {
         echo('</tr>');
       }
     } else {
-      echo('<tr><td colspan="2">No students available</td></tr>');
+      echo('<tr><td colspan="2">'.gettext('No students available').'</td></tr>');
     }
 ?>
       </table>
@@ -184,7 +184,7 @@ if (!$collection) {
       <td valign="top">
         <?php if ($allow_edit) { ?>
         <div class="button_bar">
-          <input type="button" name="savebutton1" id="savebutton1" value="save changes" onclick="do_command('save');" />
+          <input type="button" name="savebutton1" id="savebutton1" value="<?php echo gettext('save changes');?>" onclick="do_command('save');" />
         </div>
         <?php } ?>
       </td>
@@ -193,7 +193,7 @@ if (!$collection) {
       <td valign="bottom">
         <?php if ($allow_edit) { ?>
         <div class="button_bar">
-          <input type="button" name="savebutton2" id="savebutton2" value="save changes" onclick="do_command('save');" />
+          <input type="button" name="savebutton2" id="savebutton2" value="<?php echo gettext('save changes');?>" onclick="do_command('save');" />
         </div>
 <?php
   }

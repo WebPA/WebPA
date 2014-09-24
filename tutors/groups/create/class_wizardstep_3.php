@@ -22,9 +22,9 @@ class WizardStep3 {
   function WizardStep3(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Finish';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Finish');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep3()
 
   function head() {
@@ -54,24 +54,24 @@ HTMLEnd;
     }
     $students_plural = ($total_students==1) ? 'student' : 'students';
 ?>
-    <p>Please confirm the following settings are correct before proceeding.</p>
-    <p>If you wish to amend any details, click <em>Back</em>. When you are ready to create your groups, click <em>Finish</em>.</p>
+    <p><?php echo gettext('Please confirm the following settings are correct before proceeding.');?></p>
+    <p><?php echo gettext('If you wish to amend any details, click <em>Back</em>. When you are ready to create your groups, click <em>Finish</em>.');?></p>
 
-    <h2>Name</h2>
-    <div style="margin: 0px 0px 16px 25px;">This collection of groups will be called: <?php echo($this->wizard->get_field('collection_name')); ?></div>
+    <h2><?php echo gettext('Name');?></h2>
+    <div style="margin: 0px 0px 16px 25px;"><?php echo gettext('This collection of groups will be called:');?> <?php echo($this->wizard->get_field('collection_name')); ?></div>
 
-    <h2>Students</h2>
+    <h2><?php echo gettext('Students');?></h2>
     <div style="margin: 0px 0px 16px 25px;">
-    <p><?php  echo("$total_students $students_plural"); ?> available.</p>
+    <p><?php  echo("$total_students $students_plural"); ?> <?php echo gettext('available');?>.</p>
     </div>
 
-    <h2>Groups</h2>
+    <h2><?php echo gettext('Groups');?></h2>
 <?php
     $num_groups = (int) $this->wizard->get_field('num_groups');
     if ($num_groups>0) {
 ?>
       <div style="margin: 0px 0px 16px 25px;">
-        <p>The following groups will be created in the new <strong><?php echo($this->wizard->get_field('groupset_name')); ?></strong> collection:</p>
+        <p><?php echo sprintf(gettext('The following groups will be created in the new <strong>%s</strong> collection:'), $this->wizard->get_field('groupset_name'));?></p>
         <div style="margin-left: 25px;">
 <?php
       $num_groups = (int) $this->wizard->get_field('num_groups');
@@ -94,7 +94,7 @@ HTMLEnd;
 <?php
     } else {
 ?>
-      <div style="margin: 0px 0px 16px 25px;">You have chosen not to create any groups at this time.</div>
+      <div style="margin: 0px 0px 16px 25px;"><?php echo gettext('You have chosen not to create any groups at this time.');?></div>
 <?php
     }
   }// /->form()

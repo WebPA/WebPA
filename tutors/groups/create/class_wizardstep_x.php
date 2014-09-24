@@ -22,9 +22,9 @@ class WizardStep2 {
   function WizardStep2(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep2()
 
   function head() {
@@ -56,21 +56,21 @@ HTMLEnd;
 
     if (!$modules) {
       ?>
-      <p>You are not associated with any modules.</p>
-      <p>You cannot create any groups without being associated with at least one module.</p>
+      <p><?php echo gettext('You are not associated with any modules.');?></p>
+      <p><?php echo gettext('You cannot create any groups without being associated with at least one module.');?></p>
 <?php
       $this->wizard->next_button = null;
     } else {
       if ($module_select=='multiple') {
-        echo('<p>You have opted to populate your groups with students chosen from multiple modules. Usually, groups need only contain students from a single module, but by selecting multiple modules your groups can contain a mixture of students from different modules.</p>');
-        echo('<p>The modules below are those you are associated with, as either a lead or additional tutor.</p>');
-        echo('<p>Select the modules to take students from by ticking the appropriate box:</p>');
+        echo('<p>'.gettext('You have opted to populate your groups with students chosen from multiple modules. Usually, groups need only contain students from a single module, but by selecting multiple modules your groups can contain a mixture of students from different modules.').'</p>');
+        echo('<p>'.gettext('The modules below are those you are associated with, as either a lead or additional tutor.').'</p>');
+        echo('<p>'.gettext('Select the modules to take students from by ticking the appropriate box:').'</p>');
       } else {
-        echo('<p>The modules below are those you are associated with, as either a lead or additional tutor.</p>');
-        echo('<p>Please select the module you want to take students from:</p>');
+        echo('<p>'.gettext('The modules below are those you are associated with, as either a lead or additional tutor.').'</p>');
+        echo('<p>'.gettext('Please select the module you want to take students from:').'</p>');
       }
 ?>
-      <h2>Your Modules</h2>
+      <h2><?php echo gettext('Your Modules');?></h2>
       <div class="form_section">
         <table class="form" cellpadding="1" cellspacing="1">
 <?php
@@ -99,7 +99,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('module_id',fetch_POST('module_id'));
-    if (is_empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
+    if (is_empty($this->wizard->get_field('module_id'))) { $errors[] = gettext('You must select at least one module to take students from'); }
 
     return $errors;
   }// /->process_form()

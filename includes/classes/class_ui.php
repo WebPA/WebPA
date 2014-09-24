@@ -52,27 +52,27 @@ class UI {
 
       if ($this->_user->is_staff()) {
         // Staff menu
-        $this->set_menu('Tutors', array ('home'       => APP__WWW . '/tutors/index.php',
-                         'my forms'     => APP__WWW . '/tutors/forms/',
-                         'my groups'    => APP__WWW . '/tutors/groups/',
-                         'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
+        $this->set_menu(gettext('Tutors'), array ('home'       => APP__WWW . '/tutors/index.php',
+                         gettext('my forms')     => APP__WWW . '/tutors/forms/',
+                         gettext('my groups')    => APP__WWW . '/tutors/groups/',
+                         gettext('my assessments') => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
 
       } else if ($this->_user->is_student()) {
         // Student menu
-        $this->set_menu('Students', array ('home'     => APP__WWW . '/students/index.php' ,
-                           'my groups'    => APP__WWW . '/students/groups/' ,
-                           'my assessments' => APP__WWW . '/students/assessments/' ) );// /$this->set_menu()
+        $this->set_menu(gettext('Students'), array ('home'     => APP__WWW . '/students/index.php' ,
+                           gettext('my groups')    => APP__WWW . '/students/groups/' ,
+                           gettext('my assessments') => APP__WWW . '/students/assessments/' ) );// /$this->set_menu()
       }
 
       //Admin menu
       if ($this->_user->is_staff()) {
-        $menu = array('admin home'   => APP__WWW .'/admin/index.php',
-                      'upload data'  =>  APP__WWW . '/admin/load/index.php',
-                      'view data'    =>  APP__WWW . '/admin/review/index.php');
+        $menu = array(gettext('admin home')   => APP__WWW .'/admin/index.php',
+                      gettext('upload data')  =>  APP__WWW . '/admin/load/index.php',
+                      gettext('view data')    =>  APP__WWW . '/admin/review/index.php');
         if ($this->_user->is_admin()) {
           $menu['metrics'] = APP__WWW . '/admin/metrics/index.php';
         }
-        $this->set_menu('Admin', $menu);
+        $this->set_menu(gettext('Admin'), $menu);
       }
 
       // Check for module menu items
@@ -86,7 +86,7 @@ class UI {
 
     }
 
-    $this->set_menu('Support', array ('help'    =>  $helper_link, //this is a link set in each page / area to link to the approriate help
+    $this->set_menu(gettext('Support'), array ('help'    =>  $helper_link, //this is a link set in each page / area to link to the approriate help
                       'contact'   => APP__WWW . '/contact/') );// /$this->set_menu();
 
     if ( $this->_user ) {
@@ -96,7 +96,7 @@ class UI {
         $modules = $CIS->get_user_modules($_user->id, NULL, 'name');
       }
       if ((($_source_id == '') || $this->_user->is_admin()) && (count($modules) > 1)) {
-        $this->set_menu('  ', array ('change module'  => APP__WWW .'/module.php') );
+        $this->set_menu('  ', array (gettext('change module')  => APP__WWW .'/module.php') );
       }
     }
 
@@ -375,13 +375,13 @@ class UI {
   <div id="footer">
     <div style="margin-top: 50px">
       &copy; Loughborough University and University of Hull, 2005 -  <?php echo date('Y');?>&nbsp;&nbsp;&nbsp;
-      <span style="font-size: small;">Version: <?php
+      <span style="font-size: small;"><?php echo gettext('Version:');?> <?php
       echo APP__VERSION;
       if (count($INSTALLED_MODS) > 0) echo ' [' . implode(",", $INSTALLED_MODS) . ']'; ?></span>
 <?php
     if (isset($_user) && $_user->is_admin() && $_source_id) {
       echo "<br />\n";
-      echo '      <span style="font-size: small;">Source:&nbsp;';
+      echo '      <span style="font-size: small;">'.gettext('Source:').'&nbsp;';
       echo ($_source_id) ? $_source_id : '&lt;' . APP__NAME . '&gt;';
       echo "</span>\n";
     }
@@ -421,15 +421,15 @@ class UI {
       $this->menu();
 ?>
     <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
-      <p><strong>Technical Problem?</strong></p>
-      <p>If you have a problem, find a bug or discover a technical problem in the system, <a href="<?php echo APP__WWW ?>/contact/index.php?q=bug">contact us</a> to report it!</p>
+      <p><strong><?php echo gettext('Technical Problem?');?></strong></p>
+      <p><?php echo sprintf(gettext('If you have a problem, find a bug or discover a technical problem in the system, <a href="%s/contact/index.php?q=bug">contact us</a> to report it!'), APP__WWW);?></p>
     </div>
 <?php
     } else {
 ?>
     <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
-      <p><strong>Technical Problem?</strong></p>
-      <p>If you have a problem, find a bug or discover a technical problem in the system, please <a href="mailto:<?php echo $BRANDING['email.help']; ?>" title="(email: <?php echo $BRANDING['email.help']; ?>)">email us</a> to report it!</p>
+      <p><strong><?php echo gettext('Technical Problem?');?></strong></p>
+      <p><?php echo sprintf(gettext('If you have a problem, find a bug or discover a technical problem in the system, please <a href="mailto:%s" title="(email:%s)">email us</a> to report it!'), $BRANDING['email.help'], $BRANDING['email.help']);?></p>
     </div>
 <?php
     }

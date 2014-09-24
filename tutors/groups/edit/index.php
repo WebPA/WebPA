@@ -36,8 +36,8 @@ $UI->menu_selected = MY__GROUPS;
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home'      => '/' ,
-  'my groups'   => '/groups/' ,
-  'edit groups' => null ,
+    gettext('my groups')   => '/groups/' ,
+    gettext('edit groups') => null ,
 );
 
 $UI->set_page_bar_button(BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');

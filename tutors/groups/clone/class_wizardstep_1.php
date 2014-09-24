@@ -23,8 +23,8 @@ class WizardStep1 {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep1()
 
   function head() {
@@ -56,14 +56,14 @@ HTMLEnd;
 
     if ($collection_iterator->size()==0) {
 ?>
-      <p>You have not created any groups, so there are none to clone.</p>
+      <p><?php echo gettext('You have not created any groups, so there are none to clone.');?></p>
 
 <?php
       $this->wizard->next_button = null;
     } else {
 ?>
-      <h2>Your Groups</h2>
-      <p>Firstly, you need to choose a collection of groups to clone. Please select which you want to clone:</p>
+      <h2><?php echo gettext('Your Groups');?></h2>
+      <p><?php echo gettext('Firstly, you need to choose a collection of groups to clone. Please select which you want to clone:');?></p>
       <div class="form_section">
         <table class="form" cellpadding="1" cellspacing="1">
 <?php
@@ -71,7 +71,7 @@ HTMLEnd;
         $collection = $collection_iterator->current();
 
         $group_count = count($collection->get_groups_array());
-        $group_plural = ($group_count==1) ? 'group' : 'groups';
+        $group_plural = ($group_count==1) ? gettext('group') : gettext('groups');
 
         $checked_str = ($collection->id==$this->wizard->get_field('collection_id')) ? 'checked="checked"' : '' ;
         echo('<tr>');
@@ -91,7 +91,7 @@ HTMLEnd;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
     if (is_empty($this->wizard->get_field('collection_id'))) {
-      $errors[] = 'You must select a collection of groups to clone.';
+      $errors[] = gettext('You must select a collection of groups to clone.');
     }
 
     return $errors;
