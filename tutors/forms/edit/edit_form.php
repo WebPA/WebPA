@@ -166,7 +166,7 @@ if (!$form) {
 <?php
   if ($form->type=='likert') {
 ?>
-          <p style="font-size: 0.8em;"><?php echo gettext('Changing from <em>likert scale</em> to <em>split 100</em> will keep your criteria\'s text, but delete the scoring ranges and labels.');?>'</p>
+          <p style="font-size: 0.8em;"><?php echo gettext('Changing from <em>likert scale</em> to <em>split 100</em> will keep your criteria\'s text, but delete the scoring ranges and labels.');?></p>
 <?php
   } else {
 ?>

@@ -250,10 +250,10 @@ if ($type == 'download-csv') {
 
   if (($assessment) && ($groups_iterator->size()>0)) {
     foreach ($group_members as $group_id => $g_members) {
-      echo("\"".gettext("Group")."\",\"{$group_names[$group_id]}\"\n");
-      echo("\"".gettext("Overall group mark")."\",\"{$groups_and_marks[$group_id]}\"\n");
+      echo("\"".gettext("Group")."\"".APP__SEPARATION."\"{$group_names[$group_id]}\"\n");
+      echo("\"".gettext("Overall group mark")."\"".APP__SEPARATION."\"{$groups_and_marks[$group_id]}\"\n");
 
-      echo(gettext('"Name","Started","Finished","Time Taken","IP Address","Computer Name"')."\n");
+      echo(gettext('"Name"'.APP__SEPARATION.'"Started"'.APP__SEPARATION.'"Finished"'.APP__SEPARATION.'"Time Taken"'.APP__SEPARATION.'"IP Address"'.APP__SEPARATION.'"Computer Name"')."\n");
 
       foreach ($g_members as $i => $member_id) {
 
@@ -277,17 +277,17 @@ if ($type == 'download-csv') {
           $computer_name = '';
         }
         $individ = $CIS->get_user($member_id);
-        echo("\"{$individ['lastname']}, {$individ['forename']} (");
+        echo("\"{$individ['lastname']}".APP__SEPARATION." {$individ['forename']} (");
         if (!empty($individ['id_number'])) {
           echo($individ['id_number']);
         } else {
           echo($individ['username']);
         }
-        echo(')",');
-        echo("\"$started\",");
-        echo("\"$finished\",");
-        echo("\"$time_taken\",");
-        echo("\"$ip_address\",");
+        echo(')"'.APP__SEPARATION);
+        echo("\"$started\"".APP__SEPARATION);
+        echo("\"$finished\"".APP__SEPARATION);
+        echo("\"$time_taken\"".APP__SEPARATION);
+        echo("\"$ip_address\"".APP__SEPARATION);
         echo("\"$computer_name\"\n");
       }
     echo("\n\n");

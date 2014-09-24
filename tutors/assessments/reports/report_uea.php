@@ -301,16 +301,16 @@ if ($type == 'download-csv') {
         $scores_row = '';
         foreach ($markers as $marker) {
 
-          $markers_row .= ",\"{$marker}\"";
+          $markers_row .= APP__SEPARATION."\"{$marker}\"";
 
           $score = $score_array[$team][$team_member][$question][$marker];
-          $scores_row = $scores_row . "\"{$score}\",";
+          $scores_row = $scores_row . "\"{$score}\"".APP__SEPARATION;
         }
         if ($q_count == 0) {
           echo "\n";
           echo $markers_row;
         }
-        echo "\n\"{$question}\",";
+        echo "\n\"{$question}\"".APP__SEPARATION;
         echo $scores_row;
         $q_count++;
       }

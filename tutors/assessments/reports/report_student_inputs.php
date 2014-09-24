@@ -251,18 +251,18 @@ if ($type == 'download-csv') {
       echo("\n");
       echo("\"Q{$q_index} : {$question['text']['_data']} (".gettext("range:")." {$question['range']['_data']})\"\n");
 
-      echo("\"\",");
+      echo("\"\"".APP__SEPARATION);
 
       foreach ($g_members as $i => $member_id) {
         $individ = $CIS->get_user($member_id);
-        echo("\"{$individ['lastname']}, {$individ['forename']} (");
+        echo("\"{$individ['lastname']}".APP__SEPARATION." {$individ['forename']} (");
         if (!empty($individ['id_number'])) {
           echo($individ['id_number']);
         } else {
           echo($individ['username']);
         }
         echo(')"');
-        if ($i<$g_member_count) { echo(','); }
+        if ($i<$g_member_count) { echo(APP__SEPARATION); }
       }
 
       echo("\n");
@@ -270,13 +270,13 @@ if ($type == 'download-csv') {
       foreach ($g_members as $i => $member_id) {
         $individ = $CIS->get_user($member_id);
 
-        echo("\"{$individ['lastname']}, {$individ['forename']} (");
+        echo("\"{$individ['lastname']}".APP__SEPARATION." {$individ['forename']} (");
         if (!empty($individ['id_number'])) {
           echo($individ['id_number']);
         } else {
           echo($individ['username']);
         }
-        echo(')",');
+        echo(')"'.APP__SEPARATION);
 
         foreach ($g_members as $j => $target_member_id) {
           if ($assessment->assessment_type == '0') {
@@ -296,7 +296,7 @@ if ($type == 'download-csv') {
 
           echo("\"$score\"");
           if ($j<$g_member_count) {
-            echo(',');
+            echo(APP__SEPARATION);
           }
         }
         echo("\n");

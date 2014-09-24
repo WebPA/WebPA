@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-24 12:51+0100\n"
-"PO-Revision-Date: 2014-09-24 12:51+0100\n"
+"POT-Creation-Date: 2014-09-24 17:09+0100\n"
+"PO-Revision-Date: 2014-09-24 17:09+0100\n"
 "Last-Translator: Jeffrey De Fauw <Jeffrey.DeFauw@UGent.be>\n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -526,39 +526,39 @@ msgid ""
 "p>"
 msgstr ""
 
-#: admin/load/index.php:90
+#: admin/load/index.php:91
 msgid "Select the type of file separator that has been used:"
 msgstr ""
 
-#: admin/load/index.php:92
+#: admin/load/index.php:93
 msgid "Comma separated"
 msgstr ""
 
-#: admin/load/index.php:93
+#: admin/load/index.php:94
 msgid "Tab separated"
 msgstr ""
 
-#: admin/load/index.php:94
+#: admin/load/index.php:95
 msgid "Semi-colon"
 msgstr ""
 
-#: admin/load/index.php:96 admin/load/templates.php:27
+#: admin/load/index.php:97 admin/load/templates.php:27
 #, fuzzy
 msgid "Upload"
 msgstr "gepland:"
 
-#: admin/load/index.php:97
+#: admin/load/index.php:98
 msgid ""
 "Copy and paste the contents of the file you want to add to the system, "
 "ensuring that the information is comma separated and that each entry begins "
 "on a new line."
 msgstr ""
 
-#: admin/load/index.php:103
+#: admin/load/index.php:104
 msgid "Upload data via a file"
 msgstr ""
 
-#: admin/load/index.php:144
+#: admin/load/index.php:145
 msgid ""
 "There are <a href=\"templates.php\">templates</a> which you can follow for "
 "uploading the information to the WebPA system."
@@ -1418,41 +1418,41 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: includes/inc_global.php:149
+#: includes/inc_global.php:152
 msgid "Score(s)"
 msgstr ""
 
-#: includes/inc_global.php:182
+#: includes/inc_global.php:185
 msgid "There is no error, the file uploaded with success."
 msgstr ""
 
-#: includes/inc_global.php:183
+#: includes/inc_global.php:186
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
 
-#: includes/inc_global.php:184
+#: includes/inc_global.php:187
 msgid ""
 "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
 "the HTML form."
 msgstr ""
 
-#: includes/inc_global.php:185
+#: includes/inc_global.php:188
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/inc_global.php:186
+#: includes/inc_global.php:189
 msgid "No file was uploaded."
 msgstr ""
 
-#: includes/inc_global.php:187
+#: includes/inc_global.php:190
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/inc_global.php:188
+#: includes/inc_global.php:191
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/inc_global.php:189
+#: includes/inc_global.php:192
 msgid "A PHP extension stopped the file upload."
 msgstr ""
 
@@ -4179,9 +4179,7 @@ msgid "\"Student Grades (by student)\""
 msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:211
-msgid ""
-"\"name\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty\","
-"\"Final grade\""
+msgid "\"name\""
 msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:249
@@ -4313,10 +4311,10 @@ msgid "\"Student Grades (by group)\""
 msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:219
-msgid ""
-"\"Name\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty\","
-"\"Final Grade\""
-msgstr ""
+#: tutors/assessments/reports/report_student_response_info.php:256
+#, fuzzy
+msgid "\"Name\""
+msgstr "Uw team"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:273
 #: tutors/assessments/reports/report_student_grades_bygroup.php:313
@@ -4368,19 +4366,11 @@ msgid "\"Student Grades and Feedback (by student)\""
 msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_comments.php:122
-msgid ""
-"\"User Id\",\"WebPA score\",\"Intermediate Grade\",\"Non-Submission Penalty"
-"\",\"Final grade\",\"Group\",\"Comments\""
+msgid "\"User Id\""
 msgstr ""
 
 #: tutors/assessments/reports/report_student_response_info.php:248
 msgid "\"Student Response Information\""
-msgstr ""
-
-#: tutors/assessments/reports/report_student_response_info.php:256
-msgid ""
-"\"Name\",\"Started\",\"Finished\",\"Time Taken\",\"IP Address\",\"Computer "
-"Name\""
 msgstr ""
 
 #: tutors/assessments/reports/report_uea.php:177

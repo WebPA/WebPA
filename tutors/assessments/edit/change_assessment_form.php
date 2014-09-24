@@ -153,7 +153,7 @@ if (!$assessment) {
 ?>
     <div class="warning_box">
       <p><strong><?php echo gettext('Marks have been recorded for this assessment.');?></strong></p>
-      <p><?php echo gettext('You can still edit the assessment\'s name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.');?>'</p>
+      <p><?php echo gettext('You can still edit the assessment\'s name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.');?></p>
     </div>
     <?php
   } else {

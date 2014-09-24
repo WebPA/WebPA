@@ -452,7 +452,7 @@ if (!$assessment) {
         </tr>
         <tr>
           <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_no" value="0" <?php echo( (!$assessment->allow_assessment_feedback) ? 'checked="checked"' : '' ); ?> /></td>
-          <td valign="top"><label class="small" for="allow_assessment_feedback_no"><?php echo gettext('No, don\'t allow feedback / justification.');?>'</label></td>
+          <td valign="top"><label class="small" for="allow_assessment_feedback_no"><?php echo gettext('No, don\'t allow feedback / justification.');?></label></td>
         </tr>
         </table>
       </div>

@@ -213,10 +213,10 @@ if ($type == 'download-csv') {
   echo("\"{$assessment->name}\"\n\n");
 
   foreach( $group_members as $group_id => $g_members) {
-    echo("\"".gettext('Group')."\",\"{$group_names[$group_id]}\"\n");
-    echo("\"".gettext('Overall group mark')."\",\"{$groups_and_marks[$group_id]}\"\n");
+    echo("\"".gettext('Group')."\"".APP__SEPARATION."\"{$group_names[$group_id]}\"\n");
+    echo("\"".gettext('Overall group mark')."\"".APP__SEPARATION."\"{$groups_and_marks[$group_id]}\"\n");
 
-    echo(gettext('"Name","WebPA score","Intermediate Grade","Non-Submission Penalty","Final Grade"')."\n");
+    echo(gettext('"Name"'.APP__SEPARATION.'"WebPA score"'.APP__SEPARATION.'"Intermediate Grade"'.APP__SEPARATION.'"Non-Submission Penalty"'.APP__SEPARATION.'"Final Grade"')."\n");
 
     foreach ($g_members as $i => $member_id) {
 
@@ -235,16 +235,16 @@ if ($type == 'download-csv') {
 
       $individ = $CIS->get_user($member_id);
 
-      echo("\"{$individ['lastname']}, {$individ['forename']} (");
+      echo("\"{$individ['lastname']}".APP__SEPARATION." {$individ['forename']} (");
       if (!empty($individ['id_number'])) {
         echo($individ['id_number']);
       } else {
         echo($individ['username']);
       }
-      echo(')",');
-      echo("\"$score\",");
-      echo("\"$intermediate_grade\",");
-      echo("\"$penalty_str\",");
+      echo(')"'.APP__SEPARATION);
+      echo("\"$score\"".APP__SEPARATION);
+      echo("\"$intermediate_grade\"".APP__SEPARATION);
+      echo("\"$penalty_str\"".APP__SEPARATION);
       echo("\"$grade\"\n");
     }
     echo("\n\n");

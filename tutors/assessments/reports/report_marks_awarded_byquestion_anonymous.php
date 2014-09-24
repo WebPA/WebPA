@@ -272,7 +272,7 @@ if ($type == 'download-csv') {
         echo("\n");
         echo("\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n");
 
-        echo("\"\",");
+        echo("\"\"".APP__SEPARATION);
 
         foreach ($g_members as $i => $member_id) {
           $char = chr(65+$i);
@@ -280,14 +280,14 @@ if ($type == 'download-csv') {
 
           echo("\"{$members[$member_id]['lastname']}\"");
           if ($i<$g_member_count) {
-            echo(',');
+            echo(APP__SEPARATION);
           }
         }
 
         echo("\n");
 
         foreach ($g_members as $i => $member_id) {
-          echo("\"{$members[$member_id]['lastname']}\",");
+          echo("\"{$members[$member_id]['lastname']}\"".APP__SEPARATION);
 
           foreach ($g_members as $j => $target_member_id) {
             if ($assessment->assessment_type == '0') {
@@ -307,7 +307,7 @@ if ($type == 'download-csv') {
 
             echo("\"$score\"");
             if ($j<$g_member_count) {
-              echo(',');
+              echo(APP__SEPARATION);
             }
           }
           echo("\n");
