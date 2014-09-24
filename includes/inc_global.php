@@ -39,6 +39,9 @@ bindtextdomain($domain, DOC__ROOT."locale");
 bind_textdomain_codeset($domain, "UTF-8");
 textdomain($domain);
 
+// Add support for other separation in admin upload.
+define('APP__SEPARATION', ';');
+
 // The month (1-12) in which the academic year is deemed to start (always on 1st of the month)
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
