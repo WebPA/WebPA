@@ -62,7 +62,7 @@ class WizardStep3 {
     if (!$collections) {
       $this->button_next = '';
 ?>
-      <p><?php echo gettext('You haven\'t yet created any group collections.');?>'</p>
+      <p><?php echo gettext('You haven\'t yet created any group collections.');?></p>
       <p><?php echo gettext('You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.');?></p>
 <?php
     } else {
