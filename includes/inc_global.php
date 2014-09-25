@@ -15,6 +15,8 @@ ini_set('session.bug_compat_warn', 0);
 
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/Brussels');
+// Set up default locale for gettext (also used when user is not in a module).
+define('APP__DEFAULT_LOCALE', 'nl_BE');
 
 /*
  * Configuration
@@ -24,20 +26,11 @@ date_default_timezone_set('Europe/Brussels');
 // User configuration section
 ////
 
-define('APP__WWW', '');
-define('DOC__ROOT', '/path/to/installation/'); //must include the trailing /
+define('APP__WWW', 'http://localhost/WebPA-Source');
+define('DOC__ROOT', '/srv/http/WebPA-Source/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
-
-// Setting up gettext.
-$locale = "nl_BE";
-putenv("LANG=".$locale);
-setlocale(LC_ALL, $locale);
-$domain = "webpa";
-bindtextdomain($domain, DOC__ROOT."locale");
-bind_textdomain_codeset($domain, "UTF-8");
-textdomain($domain);
 
 // Add support for other separation in admin upload.
 define('APP__SEPARATION', ';');
@@ -47,8 +40,8 @@ define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
 define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', '');
-define('APP__DB_PASSWORD', '');
+define('APP__DB_USERNAME', 'webpa_user');
+define('APP__DB_PASSWORD', 'password');
 define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
@@ -258,18 +251,29 @@ if ($_user_id){
 
 }
 
-// Initialise UI Object
-
-$UI = new UI($_user);
-
 // If we found a module to load, load it!
 if ($_module_id){
 
-  $sql_module = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
-  $_module = $DB->fetch_row($sql_module);
-  $_module_code = $_module['module_code'];
-
+    $sql_module = 'SELECT module_id, module_code, module_title, module_lang FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
+    $_module = $DB->fetch_row($sql_module);
+    $_module_code = $_module['module_code'];
+    $_module_lang = $_module['module_lang'];
 }
+else {
+    $_module_lang = APP__DEFAULT_LOCALE;
+}
+
+//// Setting up gettext.
+putenv("LANG=".$_module_lang);
+setlocale(LC_ALL, $_module_lang);
+$domain = "webpa";
+bindtextdomain($domain, DOC__ROOT."locale");
+bind_textdomain_codeset($domain, "UTF-8");
+textdomain($domain);
+
+// Initialise UI Object (after setting up gettext).
+$UI = new UI($_user);
+
 
 function get_LDAP_user_type($data) {
 

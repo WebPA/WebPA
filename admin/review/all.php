@@ -16,7 +16,7 @@
 //build the string for the information to be collected from the database
 if ($type == 'module') {
   if (check_user($_user, APP__USER_TYPE_ADMIN)) {
-    $query = 'SELECT module_id, module_code, module_title FROM '. APP__DB_TABLE_PREFIX . "module WHERE source_id = '{$_source_id}'";
+    $query = 'SELECT module_id, module_code, module_title, module_lang FROM '. APP__DB_TABLE_PREFIX . "module WHERE source_id = '{$_source_id}'";
   }
 } else if ($type == APP__USER_TYPE_ADMIN) {
   if (check_user($_user, APP__USER_TYPE_ADMIN)) {

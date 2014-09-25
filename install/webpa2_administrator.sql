@@ -19,3 +19,7 @@ SET
 INSERT INTO pa2_module
 SET
   module_code = 'sample', module_title = 'Sample module';
+
+INSERT INTO pa2_user_module
+SET
+  user_id = 1, module_id = 1, user_type = 'T';

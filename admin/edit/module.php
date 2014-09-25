@@ -62,12 +62,13 @@ $edit_module->load_from_row($module_id);
 //get the posted information
 $action = fetch_POST('save');
 
-if ($action) {          //incase we want to do more than save changes in the future
+if ($action) {          //in case we want to do more than save changes in the future
   switch ($action) {
     case 'Save Changes':
     //put all the elements back into the structures
     $edit_module->module_code = fetch_POST('module_code');
     $edit_module->module_title = fetch_POST('module_title');
+    $edit_module->module_lang = fetch_POST('module_lang');
 
     //save all of the data
     $edit_module->set_dao_object($DB);
@@ -84,7 +85,6 @@ if ($action) {          //incase we want to do more than save changes in the fut
 
     //send notification to the screen that the save has occured.
     $sScreenMsg = gettext("The changes made for the module have been saved");
-
   }
 
 }
@@ -127,6 +127,22 @@ $page_intro = '<p>'.gettext('Here you are able to edit the details of a module w
       <input type="text" id="title" name="module_title" value="<?php echo $edit_module->module_title; ?>" size="40" maxlength="255">
     </td>
   </tr>
+    <tr>
+        <td><label for="language"><?php echo gettext('Language');?></label></td>
+        <td>
+            <select name="module_lang">
+                <?php
+                $locale_folders = scandir(DOC__ROOT.'locale/');
+
+                foreach($locale_folders as $locale_folder){
+                    if(strlen($locale_folder) > 3)
+                        echo sprintf('<option value="%s" %s>%s</option>', $locale_folder, ($locale_folder == $edit_module->module_lang) ? 'selected="selected"' : '', $locale_folder);
+                }
+                ?>
+            </select>
+        </td>
+
+    </tr>
   <tr><td colspan="2"><hr/></td></tr>
   <tr>
     <td colspan="2">

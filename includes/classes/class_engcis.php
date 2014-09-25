@@ -60,22 +60,22 @@ class EngCIS {
 
     // If there's more than one module to search for, get all the rows
     if (is_array($modules)) {
-      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
+      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm
                     WHERE (lcm.source_id = '{$_source_id}') AND $module_search
                     $order_by_clause");
     } else if (!empty($modules)) {  // else, just return one row
-      return $this->_DAO->fetch_row("SELECT lcm.module_id, lcm.module_title, lcm.module_code
+      return $this->_DAO->fetch_row("SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang
                       FROM " . APP__DB_TABLE_PREFIX . "module lcm
                       WHERE (lcm.source_id = '{$_source_id}') AND $module_search
                       LIMIT 1");
     } else if ($_user->is_admin()) {
-      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
+      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm
                     WHERE (lcm.source_id = '{$_source_id}')
                     $order_by_clause");
     } else {
-      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
+      return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang
                   FROM " . APP__DB_TABLE_PREFIX . "module lcm
                   INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcm.module_id = lcsm.module_id
                   WHERE (lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "') AND
@@ -90,7 +90,7 @@ class EngCIS {
    * @return array
    */
    function get_all_modules(){
-    return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title
+    return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_lang
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm");
    }
 
@@ -433,20 +433,20 @@ class EngCIS {
 
     if ($user_id) {
       $user_set = $this->_DAO->build_set($user_id, false);
-      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
+      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang, lcsm.user_type ' .
              'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
              'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
              "WHERE ((lcm.source_id = '{$source_id}') OR (u.source_id <> '')) AND (lcsm.user_id IN {$user_set}) " .
              "{$order_by_clause}";
     } else if ($username) {
       $user_set = $this->_DAO->build_set($username);
-      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
+      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang, lcsm.user_type ' .
              'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
              'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
              "WHERE (u.source_id = '{$source_id}') AND (u.username IN {$user_set}) " .
              "{$order_by_clause}";
     } else {
-      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, \'' . APP__USER_TYPE_ADMIN .'\' user_type ' .
+      $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcm.module_lang, \'' . APP__USER_TYPE_ADMIN .'\' user_type ' .
              'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm ' .
              "WHERE (lcm.source_id = '{$source_id}') " .
              "{$order_by_clause}";
