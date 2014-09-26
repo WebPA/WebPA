@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-24 17:09+0100\n"
-"PO-Revision-Date: 2014-09-24 17:09+0100\n"
+"POT-Creation-Date: 2014-09-26 12:01+0100\n"
+"PO-Revision-Date: 2014-09-26 12:01+0100\n"
 "Last-Translator: Jeffrey De Fauw <Jeffrey.DeFauw@UGent.be>\n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -85,9 +85,8 @@ msgid ""
 msgstr ""
 
 #: accounts/reset.php:116
-#, fuzzy
 msgid "You are about to reset your password.<br/>"
-msgstr "Wachtwoord vergeten?"
+msgstr ""
 
 #: accounts/reset.php:116
 msgid ""
@@ -106,9 +105,8 @@ msgid "Reset My Password"
 msgstr ""
 
 #: admin/delete/index.php:30 admin/review/all.php:103
-#, fuzzy
 msgid "Delete module"
-msgstr "gepland:"
+msgstr ""
 
 #: admin/delete/index.php:32
 msgid "Delete all system users with no module"
@@ -182,9 +180,8 @@ msgid "The module has been deleted."
 msgstr ""
 
 #: admin/delete/index.php:70
-#, fuzzy
 msgid "Users with no module have been deleted."
-msgstr "Mijn assessments"
+msgstr ""
 
 #: admin/delete/index.php:79
 msgid "You cannot delete yourself!"
@@ -199,9 +196,8 @@ msgid "The user has been deleted from the module."
 msgstr ""
 
 #: admin/edit/index.php:31
-#, fuzzy
 msgid "Edit system users"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: admin/edit/index.php:40 tutors/forms/edit/edit_form.php:234
 #: tutors/forms/index.php:82 tutors/forms/index.php:116
@@ -224,9 +220,8 @@ msgid ""
 msgstr ""
 
 #: admin/edit/index.php:148
-#, fuzzy
 msgid "The user has been created"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: admin/edit/index.php:150
 msgid "The changes made for the user have been saved"
@@ -277,9 +272,8 @@ msgid ""
 msgstr ""
 
 #: admin/edit/index.php:306
-#, fuzzy
 msgid "User Details"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: admin/edit/index.php:323 admin/search/index.php:147
 #: admin/search/index.php:163
@@ -318,9 +312,8 @@ msgid ""
 msgstr ""
 
 #: admin/edit/index.php:374 admin/review/index.php:28
-#, fuzzy
 msgid "Module"
-msgstr "gepland:"
+msgstr ""
 
 #: admin/edit/index.php:388
 msgid "Tutor"
@@ -331,7 +324,7 @@ msgstr ""
 msgid "Student"
 msgstr ""
 
-#: admin/edit/index.php:451 admin/edit/module.php:133
+#: admin/edit/index.php:451 admin/edit/module.php:149
 msgid "Save Changes"
 msgstr ""
 
@@ -378,7 +371,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: admin/edit/module.php:86
+#: admin/edit/module.php:87
 msgid "The changes made for the module have been saved"
 msgstr ""
 
@@ -401,6 +394,10 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_2.php:140
 #: tutors/assessments/edit/edit_assessment.php:446
 msgid "Title"
+msgstr ""
+
+#: admin/edit/module.php:131
+msgid "Language"
 msgstr ""
 
 #: admin/index.php:26 includes/classes/class_ui.php:69
@@ -431,9 +428,8 @@ msgid "Upload Data"
 msgstr ""
 
 #: admin/index.php:44 admin/index.php:47 admin/index.php:52 admin/index.php:55
-#, fuzzy
 msgid "View Data"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: admin/index.php:44 admin/index.php:52
 msgid "WebPA Metrics"
@@ -472,9 +468,8 @@ msgid "Select the type of information you are uploading:"
 msgstr ""
 
 #: admin/load/index.php:69
-#, fuzzy
 msgid "Collection:"
-msgstr "gepland:"
+msgstr ""
 
 #: admin/load/index.php:72
 msgid "Create using name entered..."
@@ -543,9 +538,8 @@ msgid "Semi-colon"
 msgstr ""
 
 #: admin/load/index.php:97 admin/load/templates.php:27
-#, fuzzy
 msgid "Upload"
-msgstr "gepland:"
+msgstr ""
 
 #: admin/load/index.php:98
 msgid ""
@@ -657,9 +651,8 @@ msgstr ""
 #: admin/metrics/index.php:73 admin/metrics/report.php:141
 #: admin/metrics/report.php:360 admin/metrics/report.php:530
 #: admin/metrics/report.php:691
-#, fuzzy
 msgid "Assessments run in WebPA"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: admin/metrics/index.php:74
 msgid ""
@@ -669,9 +662,8 @@ msgstr ""
 
 #: admin/metrics/index.php:77 admin/metrics/report.php:386
 #: admin/metrics/report.php:552 admin/metrics/report.php:716
-#, fuzzy
 msgid "Number of groups per assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: admin/metrics/index.php:78
 msgid ""
@@ -682,9 +674,8 @@ msgstr ""
 #: admin/metrics/index.php:81 admin/metrics/report.php:204
 #: admin/metrics/report.php:410 admin/metrics/report.php:574
 #: admin/metrics/report.php:739
-#, fuzzy
 msgid "Number of students per assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: admin/metrics/index.php:82
 msgid ""
@@ -705,9 +696,8 @@ msgid ""
 msgstr ""
 
 #: admin/metrics/index.php:89 admin/metrics/report.php:458
-#, fuzzy
 msgid "Number of respondents per assessment"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: admin/metrics/index.php:90
 msgid ""
@@ -791,9 +781,8 @@ msgstr ""
 
 #: admin/metrics/report.php:265 admin/metrics/report.php:620
 #: admin/metrics/report.php:788
-#, fuzzy
 msgid "Number of Respondents per assessment"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: admin/metrics/report.php:327 admin/metrics/report.php:506
 #: admin/metrics/report.php:666 admin/metrics/report.php:836
@@ -861,9 +850,8 @@ msgid "No records"
 msgstr ""
 
 #: admin/review/all.php:139
-#, fuzzy
 msgid "Create new module"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: admin/review/all.php:141
 msgid "Add new"
@@ -1067,19 +1055,16 @@ msgid "Contact Person"
 msgstr ""
 
 #: contact/index.php:88
-#, fuzzy
 msgid "Your Name"
-msgstr "Uw team"
+msgstr ""
 
 #: contact/index.php:92
-#, fuzzy
 msgid "Your Username"
-msgstr "Uw team"
+msgstr ""
 
 #: contact/index.php:96
-#, fuzzy
 msgid "Your Email"
-msgstr "Uw team"
+msgstr ""
 
 #: contact/index.php:100
 msgid "Your Phone Number"
@@ -1130,6 +1115,11 @@ msgstr ""
 msgid ""
 "ERROR: WebPAAlgorithm->calculate() is an abstract method and should be "
 "overridden."
+msgstr ""
+
+#: includes/classes/class_assessment.php:297
+#: tutors/assessments/edit/edit_assessment.php:173
+msgid "at"
 msgstr ""
 
 #: includes/classes/class_dao.php:103 includes/classes/class_dao.php:114
@@ -1294,7 +1284,7 @@ msgstr ""
 #: tutors/assessments/students_who_responded.php:59
 #: tutors/assessments/students_who_responded.php:62
 msgid "my assessments"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: includes/classes/class_ui.php:62
 #: tutors/groups/create/class_wizardstep_3.php:63
@@ -1310,9 +1300,8 @@ msgid "Support"
 msgstr ""
 
 #: includes/classes/class_ui.php:99 module.php:44
-#, fuzzy
 msgid "change module"
-msgstr "gepland:"
+msgstr ""
 
 #: includes/classes/class_ui.php:378
 msgid "Version:"
@@ -1418,41 +1407,41 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: includes/inc_global.php:152
+#: includes/inc_global.php:145
 msgid "Score(s)"
 msgstr ""
 
-#: includes/inc_global.php:185
+#: includes/inc_global.php:178
 msgid "There is no error, the file uploaded with success."
 msgstr ""
 
-#: includes/inc_global.php:186
+#: includes/inc_global.php:179
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
 
-#: includes/inc_global.php:187
+#: includes/inc_global.php:180
 msgid ""
 "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
 "the HTML form."
 msgstr ""
 
-#: includes/inc_global.php:188
+#: includes/inc_global.php:181
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/inc_global.php:189
+#: includes/inc_global.php:182
 msgid "No file was uploaded."
 msgstr ""
 
-#: includes/inc_global.php:190
+#: includes/inc_global.php:183
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/inc_global.php:191
+#: includes/inc_global.php:184
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/inc_global.php:192
+#: includes/inc_global.php:185
 msgid "A PHP extension stopped the file upload."
 msgstr ""
 
@@ -1541,7 +1530,7 @@ msgstr ""
 #: tutors/groups/edit/edit_collection_groups.php:113
 #: tutors/groups/edit/edit_collection_members.php:111
 msgid "The following errors were found:"
-msgstr "Volgende fouten werden gevonden:"
+msgstr ""
 
 #: lang/en/generic.php:43 tutors/assessments/edit/edit_assessment.php:247
 #: tutors/assessments/marks/mark_assessment.php:186
@@ -1550,13 +1539,10 @@ msgstr "Volgende fouten werden gevonden:"
 #: tutors/groups/edit/edit_collection.php:123
 #: tutors/groups/edit/edit_collection_groups.php:113
 #: tutors/groups/edit/edit_collection_members.php:111
-#, fuzzy
 msgid ""
 "No changes have been saved. Please check the details in the form, and try "
 "again."
 msgstr ""
-"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
-"te controleren en opnieuw te proberen."
 
 #: lang/en/tutors/tutors.php:18
 msgid ""
@@ -1688,8 +1674,6 @@ msgid ""
 "You attempted to access a restricted page.<br />It may be that your session "
 "has timed out so please re-enter your details."
 msgstr ""
-"U heeft geen toegang tot deze pagina.<br />Mogelijks is uw sessie "
-"automatisch beëindigd en moet u opnieuw inloggen."
 
 #: login.php:36
 msgid ""
@@ -1702,8 +1686,6 @@ msgid ""
 "Your username and password were rejected.<br />Please check your details and "
 "try again."
 msgstr ""
-"Uw gebruikersnaam en wachtwoord werden geweigerd.<br />Gelieve uw gegevens "
-"te controleren en opnieuw te proberen."
 
 #: login.php:46
 #, php-format
@@ -1721,7 +1703,7 @@ msgstr ""
 #: login.php:56
 #, php-format
 msgid "To start using %s you have to log in."
-msgstr "Om %s te gebruiken moet u inloggen."
+msgstr ""
 
 #: login.php:67
 msgid "login page"
@@ -1737,7 +1719,7 @@ msgstr ""
 
 #: login.php:123
 msgid "Forgotten your password?"
-msgstr "Wachtwoord vergeten?"
+msgstr ""
 
 #: login.php:124
 msgid ""
@@ -1746,14 +1728,12 @@ msgid ""
 msgstr ""
 
 #: module.php:43
-#, fuzzy
 msgid "Change Module"
-msgstr "gepland:"
+msgstr ""
 
 #: module.php:45
-#, fuzzy
 msgid "change source"
-msgstr "gepland:"
+msgstr ""
 
 #: module.php:53
 msgid "Use this page to change the currently selected module."
@@ -1793,7 +1773,7 @@ msgstr ""
 
 #: students/assessments/assessment_feedback.php:112
 msgid "Feedback Report"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: students/assessments/assessment_feedback.php:132
 #, php-format
@@ -1856,7 +1836,7 @@ msgstr ""
 
 #: students/assessments/index.php:124 students/index.php:127
 msgid "Open Assessments"
-msgstr "Open Assessments."
+msgstr ""
 
 #: students/assessments/index.php:125
 msgid "These assessments are now open for you to take and record your group"
@@ -1868,15 +1848,15 @@ msgstr ""
 #: tutors/assessments/inc_list_open.php:76
 #: tutors/assessments/inc_list_pending.php:75
 msgid "scheduled:"
-msgstr "gepland:"
+msgstr ""
 
 #: students/assessments/index.php:147 students/index.php:149
 msgid "Take Assessment"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: students/assessments/index.php:159 students/index.php:162
 msgid "Pending Assessments"
-msgstr "Open Assessments"
+msgstr ""
 
 #: students/assessments/index.php:160 students/index.php:163
 msgid "These assessments scheduled for some point in the future."
@@ -1884,7 +1864,7 @@ msgstr ""
 
 #: students/assessments/index.php:192
 msgid "Finished Assessments"
-msgstr "Vervolledigde Assessments."
+msgstr ""
 
 #: students/assessments/index.php:193
 msgid ""
@@ -1905,15 +1885,15 @@ msgstr ""
 #: tutors/assessments/inc_list_open.php:61
 #: tutors/assessments/inc_list_pending.php:62
 msgid "COMPLETED"
-msgstr "VERVOLLEDIGD"
+msgstr ""
 
 #: students/assessments/index.php:207
 msgid "DID NOT<br />SUBMIT"
-msgstr "NIET<br />INGEDIEND"
+msgstr ""
 
 #: students/assessments/take/already_submitted.php:42
 msgid "already submitted"
-msgstr "reeds ingediend"
+msgstr ""
 
 #: students/assessments/take/already_submitted.php:59
 #: students/assessments/take/already_submitted.php:70
@@ -1932,7 +1912,7 @@ msgstr "reeds ingediend"
 #: tutors/assessments/students_who_responded.php:89
 #: tutors/forms/edit/preview_form.php:82
 msgid "back to assessments list"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: students/assessments/take/already_submitted.php:62
 #, php-format
@@ -2003,12 +1983,12 @@ msgstr ""
 #: students/assessments/take/index.php:200
 #, php-format
 msgid "You didn't give a %s for '%s' in Q%d."
-msgstr "U gaf geen %s voor '%s' in Q%d."
+msgstr ""
 
 #: students/assessments/take/index.php:157
 #, php-format
 msgid "You didn't give a valid %s for '%s' in Q%d."
-msgstr "U gaf geen geldige %s voor '%s' in Q%d."
+msgstr ""
 
 #: students/assessments/take/index.php:162
 #, php-format
@@ -2034,8 +2014,6 @@ msgid ""
 "Your responses have not been saved. Please check the details in the form, "
 "and try again."
 msgstr ""
-"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
-"te controleren en opnieuw te proberen."
 
 #: students/assessments/take/index.php:352
 #: tutors/assessments/edit/change_assessment_collection.php:160
@@ -2056,9 +2034,8 @@ msgstr ""
 
 #: students/assessments/take/index.php:370
 #: tutors/forms/edit/preview_form.php:87
-#, fuzzy
 msgid "Taking This Assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: students/assessments/take/index.php:372
 #, php-format
@@ -2087,19 +2064,19 @@ msgstr ""
 
 #: students/assessments/take/index.php:378
 msgid "Your Team"
-msgstr "Uw team"
+msgstr ""
 
 #: students/assessments/take/index.php:388
 #: tutors/assessments/create/class_wizardstep_1.php:145
 #: tutors/assessments/edit/edit_assessment.php:329
 #: tutors/forms/edit/preview_form.php:102
 msgid "Introduction"
-msgstr "Inleiding"
+msgstr ""
 
 #: students/assessments/take/index.php:397 tutors/forms/edit/edit_form.php:187
 #: tutors/forms/edit/preview_form.php:111
 msgid "Assessment Criteria"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: students/assessments/take/index.php:403
 #, php-format
@@ -2193,8 +2170,6 @@ msgstr ""
 #: students/index.php:124
 msgid "Below is a list of the assessments in this module you can take now."
 msgstr ""
-"Hieronder is een lijst van de assessments in deze module die u nu kan "
-"starten."
 
 #: students/index.php:125
 msgid ""
@@ -2208,14 +2183,12 @@ msgstr ""
 
 #: tutors/assessments/clone/index.php:23
 #: tutors/assessments/create/index.php:49
-#, fuzzy
 msgid "Create a new assessment"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/assessments/clone/index.php:28
-#, fuzzy
 msgid "clone an assessment"
-msgstr "Open Assessments."
+msgstr ""
 
 #: tutors/assessments/clone/index.php:30
 #: tutors/assessments/create/index.php:56
@@ -2230,9 +2203,8 @@ msgstr "Open Assessments."
 #: tutors/assessments/reports/report_demo.php:186
 #: tutors/assessments/reports/students_who_responded.php:63
 #: tutors/assessments/students_who_responded.php:65
-#, fuzzy
 msgid "List Assessments"
-msgstr "Vervolledigde Assessments."
+msgstr ""
 
 #: tutors/assessments/clone/index.php:31
 #: tutors/assessments/create/index.php:57
@@ -2247,9 +2219,8 @@ msgstr "Vervolledigde Assessments."
 #: tutors/assessments/reports/report_demo.php:187
 #: tutors/assessments/reports/students_who_responded.php:64
 #: tutors/assessments/students_who_responded.php:66
-#, fuzzy
 msgid "Create Assessments"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/assessments/clone/index.php:37
 msgid "This function is not yet available"
@@ -2281,9 +2252,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_1.php:120
-#, fuzzy
 msgid "Name for this new assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_1.php:126
 msgid ""
@@ -2449,9 +2419,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_2.php:89
-#, fuzzy
 msgid "Your assessment forms"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_2.php:120
 msgid "Feedback / justification"
@@ -2539,23 +2508,20 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_4.php:66
 #: tutors/assessments/create/class_wizardstep_5.php:99
 #: tutors/assessments/edit/edit_assessment.php:524
-#, fuzzy
 msgid "Assessment Type"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_4.php:74
 #: tutors/assessments/create/class_wizardstep_5.php:102
 #: tutors/assessments/edit/edit_assessment.php:543
-#, fuzzy
 msgid "Self and peer assessment"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_4.php:88
 #: tutors/assessments/create/class_wizardstep_5.php:104
 #: tutors/assessments/edit/edit_assessment.php:551
-#, fuzzy
 msgid "Peer assessment only"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:28
 #: tutors/forms/clone/class_wizardstep_2.php:26
@@ -2583,9 +2549,8 @@ msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:57
 #: tutors/assessments/edit/edit_assessment.php:299
-#, fuzzy
 msgid "Assessment Details"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:61
 #: tutors/assessments/reports/report_student_grades.php:369
@@ -2608,9 +2573,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:87
-#, fuzzy
 msgid "Includes an introduction"
-msgstr "Inleiding"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:91
 msgid ""
@@ -2625,9 +2589,8 @@ msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:108
 #: tutors/assessments/edit/edit_assessment.php:387
-#, fuzzy
 msgid "Assessment Form"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:116
 msgid "ERROR : </strong>unable to load the selected form"
@@ -2674,9 +2637,8 @@ msgstr ""
 #: tutors/assessments/email/closing_reminder.php:31
 #: tutors/assessments/email/trigger_reminder.php:31
 #: tutors/assessments/reports/report_student_grades.php:351
-#, fuzzy
 msgid "Assessment Name:"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_6.php:103
 #: tutors/assessments/email/closing_reminder.php:32
@@ -2898,9 +2860,8 @@ msgstr ""
 
 #: tutors/assessments/edit/change_assessment_collection.php:102
 #: tutors/assessments/edit/change_assessment_collection.php:111
-#, fuzzy
 msgid "change collection"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/assessments/edit/change_assessment_collection.php:103
 #: tutors/assessments/edit/change_assessment_form.php:82
@@ -2911,19 +2872,15 @@ msgstr ""
 #: tutors/assessments/edit/change_assessment_collection.php:103
 #: tutors/assessments/edit/change_assessment_form.php:82
 #: tutors/assessments/edit/edit_assessment.php:196
-#, fuzzy
 msgid "manage assessment"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/edit/change_assessment_collection.php:145
 #: tutors/assessments/edit/change_assessment_form.php:124
-#, fuzzy
 msgid ""
 "No changes have been saved. Please check the details in the form and try "
 "again."
 msgstr ""
-"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
-"te controleren en opnieuw te proberen."
 
 #: tutors/assessments/edit/change_assessment_collection.php:149
 #: tutors/assessments/edit/change_assessment_form.php:128
@@ -2934,9 +2891,8 @@ msgstr ""
 #: tutors/assessments/edit/change_assessment_collection.php:167
 #: tutors/assessments/edit/change_assessment_form.php:136
 #: tutors/assessments/edit/change_assessment_form.php:146
-#, fuzzy
 msgid "back to the assessment"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/assessments/edit/change_assessment_collection.php:176
 #: tutors/assessments/edit/change_assessment_form.php:155
@@ -2980,9 +2936,8 @@ msgstr ""
 
 #: tutors/assessments/edit/change_assessment_form.php:81
 #: tutors/assessments/edit/change_assessment_form.php:90
-#, fuzzy
 msgid "change form"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/assessments/edit/change_assessment_form.php:165
 msgid "Current Form"
@@ -3040,10 +2995,6 @@ msgstr ""
 msgid "Close:"
 msgstr ""
 
-#: tutors/assessments/edit/edit_assessment.php:173
-msgid "at"
-msgstr ""
-
 #: tutors/assessments/edit/edit_assessment.php:226
 msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
 msgstr ""
@@ -3070,14 +3021,12 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:273
 #: tutors/assessments/marks/mark_assessment.php:211
 #: tutors/assessments/marks/set_group_marks.php:205
-#, fuzzy
 msgid "back to assessment list"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:279
-#, fuzzy
 msgid "delete assessment"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:292
 msgid "Student marks have been recorded for this assessment."
@@ -3099,9 +3048,8 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_3.php:60
 #: tutors/groups/edit/edit_collection.php:161
 #: tutors/groups/edit/edit_group.php:176
-#, fuzzy
 msgid "Name"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:311
 msgid "The schedule for when, and for how long, this assessment will run."
@@ -3163,9 +3111,8 @@ msgid "No, don't allow feedback / justification."
 msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:462
-#, fuzzy
 msgid "Assessment Groups"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:466
 msgid "You are using a copy of collection:"
@@ -3179,9 +3126,8 @@ msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:480
 #: tutors/groups/edit/edit_group.php:171
-#, fuzzy
 msgid "Group Name"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:481
 #: tutors/assessments/marks/set_group_marks.php:226
@@ -3234,16 +3180,14 @@ msgstr ""
 #: tutors/assessments/email/class_wizardstep_1.php:47
 #: tutors/assessments/email/class_wizardstep_2.php:46
 #: tutors/assessments/email/class_wizardstep_3.php:46
-#, fuzzy
 msgid "everyone taking this assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/assessments/email/class_wizardstep_1.php:48
 #: tutors/assessments/email/class_wizardstep_2.php:47
 #: tutors/assessments/email/class_wizardstep_3.php:47
-#, fuzzy
 msgid "selected groups taking this assessment"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/assessments/email/class_wizardstep_1.php:49
 msgid "students who HAVE responded"
@@ -3350,9 +3294,8 @@ msgid "You must enter the text of this email."
 msgstr ""
 
 #: tutors/assessments/email/class_wizardstep_3.php:27
-#, fuzzy
 msgid "Send Email"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/assessments/email/class_wizardstep_3.php:62
 #: tutors/groups/create/class_wizardstep_3.php:57
@@ -3478,9 +3421,9 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:22
-#, fuzzy, php-format
+#, php-format
 msgid "Closed assessments for %s"
-msgstr "Vervolledigde Assessments."
+msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:24
 msgid ""
@@ -3504,9 +3447,8 @@ msgstr ""
 #: tutors/assessments/inc_list_marked.php:92
 #: tutors/assessments/inc_list_open.php:80
 #: tutors/assessments/inc_list_pending.php:79
-#, fuzzy
 msgid "Edit assessment"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
@@ -3561,9 +3503,9 @@ msgid "View student inputs"
 msgstr ""
 
 #: tutors/assessments/inc_list_marked.php:24
-#, fuzzy, php-format
+#, php-format
 msgid "Marked assessments for %s"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/assessments/inc_list_marked.php:26
 msgid ""
@@ -3610,9 +3552,9 @@ msgid "View&nbsp;Reports"
 msgstr ""
 
 #: tutors/assessments/inc_list_open.php:21
-#, fuzzy, php-format
+#, php-format
 msgid "Open assessments for %s"
-msgstr "Vervolledigde Assessments."
+msgstr ""
 
 #: tutors/assessments/inc_list_open.php:23
 msgid "These assessments are now open and available for students to take."
@@ -3633,9 +3575,9 @@ msgid "Delete individual marks"
 msgstr ""
 
 #: tutors/assessments/inc_list_pending.php:22
-#, fuzzy, php-format
+#, php-format
 msgid "Pending assessments for %s"
-msgstr "Vervolledigde Assessments."
+msgstr ""
 
 #: tutors/assessments/inc_list_pending.php:24
 msgid ""
@@ -3683,9 +3625,8 @@ msgid "Academic year to display"
 msgstr ""
 
 #: tutors/assessments/index.php:151
-#, fuzzy
 msgid "change"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/assessments/marks/mark_assessment.php:73
 msgid "The PA Weighting must be a number between 1 - 100"
@@ -3968,9 +3909,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/reports/index.php:238
-#, fuzzy
 msgid "View Report"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: tutors/assessments/reports/index.php:253
 msgid "Unable to display the other reports"
@@ -4010,9 +3950,8 @@ msgid ""
 msgstr ""
 
 #: tutors/assessments/reports/index.php:335
-#, fuzzy
 msgid " Report:"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: tutors/assessments/reports/index.php:349
 msgid "Student Grades and Feedback"
@@ -4061,9 +4000,8 @@ msgid "report"
 msgstr ""
 
 #: tutors/assessments/reports/report_demo.php:210
-#, fuzzy
 msgid "back to reports list"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/assessments/reports/report_demo.php:218
 #: tutors/assessments/reports/report_student_grades.php:154
@@ -4137,9 +4075,8 @@ msgstr ""
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:157
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:207
-#, fuzzy
 msgid "feedback recipient"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:158
 msgid "feedback / justification<br/> comments"
@@ -4186,15 +4123,13 @@ msgstr ""
 #: tutors/assessments/reports/report_student_grades.php:287
 #: tutors/assessments/reports/report_student_grades_bygroup.php:266
 #: tutors/assessments/reports/report_student_grades_bygroup.php:315
-#, fuzzy
 msgid "assessment"
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:250
 #: tutors/assessments/reports/report_student_grades_bygroup.php:267
-#, fuzzy
 msgid "assessment_title"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:251
 #: tutors/assessments/reports/report_student_grades_bygroup.php:268
@@ -4221,9 +4156,8 @@ msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:270
 #: tutors/assessments/reports/report_student_grades_bygroup.php:296
-#, fuzzy
 msgid "forename"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_grades.php:271
 #: tutors/assessments/reports/report_student_grades_bygroup.php:297
@@ -4312,9 +4246,8 @@ msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:219
 #: tutors/assessments/reports/report_student_response_info.php:256
-#, fuzzy
 msgid "\"Name\""
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:273
 #: tutors/assessments/reports/report_student_grades_bygroup.php:313
@@ -4337,9 +4270,8 @@ msgid "group_members"
 msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:328
-#, fuzzy
 msgid "Assessment Title:"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:334
 msgid "Group name:"
@@ -4437,9 +4369,8 @@ msgstr ""
 
 #: tutors/forms/clone/class_wizardstep_2.php:65
 #: tutors/forms/clone/clone_example.php:79
-#, fuzzy
 msgid "Name for new form"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/forms/clone/class_wizardstep_2.php:79
 msgid "You must enter a name for your new assessment form."
@@ -4452,9 +4383,8 @@ msgstr ""
 
 #: tutors/forms/clone/class_wizardstep_3.php:66
 #: tutors/forms/create/class_wizardstep_2.php:79
-#, fuzzy
 msgid "Your new assessment form has been created."
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/forms/clone/class_wizardstep_3.php:67
 #, php-format
@@ -4483,9 +4413,8 @@ msgid " Copy %s form"
 msgstr ""
 
 #: tutors/forms/clone/clone_example.php:61
-#, fuzzy
 msgid "copy form"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/clone/clone_example.php:63 tutors/forms/clone/index.php:56
 #: tutors/forms/edit/add_question/index.php:88
@@ -4570,9 +4499,8 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/create/class_wizardstep_1.php:54
-#, fuzzy
 msgid "Name for this new form"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/forms/create/class_wizardstep_1.php:62
 msgid "What type scoring will your criteria use?"
@@ -4784,9 +4712,8 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/edit/add_question/index.php:38
-#, fuzzy
 msgid "add a new assessment criterion wizard"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/forms/edit/add_question/index.php:78
 msgid "Add a new criterion"
@@ -4846,9 +4773,8 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/edit/edit_form.php:131 tutors/forms/edit/edit_form.php:144
-#, fuzzy
 msgid "back to forms list"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/forms/edit/edit_form.php:134
 msgid ""
@@ -4866,9 +4792,8 @@ msgid "delete form"
 msgstr ""
 
 #: tutors/forms/edit/edit_form.php:151
-#, fuzzy
 msgid "Form Name"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/forms/edit/edit_form.php:153
 msgid ""
@@ -4948,9 +4873,8 @@ msgstr ""
 
 #: tutors/forms/edit/edit_question/class_wizardstep_1.php:94
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:96
-#, fuzzy
 msgid "Scores range from"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:61
 #, php-format
@@ -4968,9 +4892,8 @@ msgstr ""
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:70
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:72
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:66
-#, fuzzy
 msgid "Unable to create your new assessment criterion."
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:74
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:76
@@ -5043,9 +4966,8 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/edit/preview_form.php:94
-#, fuzzy
 msgid "Marking Your Team"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/forms/edit/preview_form.php:117
 msgid ""
@@ -5091,15 +5013,13 @@ msgstr ""
 
 #: tutors/forms/import/import.php:87 tutors/forms/import/index.php:21
 #: tutors/forms/import/index.php:26 tutors/forms/import/xml_file.php:91
-#, fuzzy
 msgid "load form"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/import/import.php:94 tutors/forms/import/index.php:29
 #: tutors/forms/import/xml_file.php:96 tutors/forms/index.php:39
-#, fuzzy
 msgid "Create a new Form"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/forms/import/import.php:104 tutors/forms/import/xml_file.php:106
 msgid "form loading"
@@ -5121,14 +5041,12 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/import/index.php:48 tutors/forms/import/index.php:63
-#, fuzzy
 msgid "load"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/import/index.php:54
-#, fuzzy
 msgid "load form by XML file"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/import/index.php:56
 msgid ""
@@ -5175,19 +5093,16 @@ msgid "generic / example form"
 msgstr ""
 
 #: tutors/forms/index.php:75 tutors/forms/index.php:111
-#, fuzzy
 msgid "Form"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/forms/index.php:82 tutors/forms/index.php:116
-#, fuzzy
 msgid "edit form"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/index.php:94
-#, fuzzy
 msgid "your forms"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/index.php:99
 msgid ""
@@ -5196,14 +5111,12 @@ msgid ""
 msgstr ""
 
 #: tutors/forms/index.php:115
-#, fuzzy
 msgid "export form"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/forms/index.php:115
-#, fuzzy
 msgid "export"
-msgstr "Feedbackverslag"
+msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_1.php:59
 msgid "You have not created any groups, so there are none to clone."
@@ -5225,9 +5138,8 @@ msgid "You must select a collection of groups to clone."
 msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_2.php:55
-#, fuzzy
 msgid "Name of Clone"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_2.php:56
 msgid ""
@@ -5245,9 +5157,8 @@ msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_2.php:62
 #: tutors/groups/create/class_wizardstep_1.php:54
-#, fuzzy
 msgid "Name for this new collection"
-msgstr "Mijn opdrachten."
+msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_2.php:74
 #: tutors/groups/create/class_wizardstep_1.php:67
@@ -5261,9 +5172,8 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_3.php:63
-#, fuzzy
 msgid "Unable to create your new cloned groups."
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_3.php:64
 msgid ""
@@ -5272,9 +5182,8 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_3.php:67
-#, fuzzy
 msgid "Your new cloned groups have been created."
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/groups/clone/class_wizardstep_3.php:68
 #, php-format
@@ -5423,18 +5332,16 @@ msgid "You have chosen not to create any groups at this time."
 msgstr ""
 
 #: tutors/groups/create/class_wizardstep_4.php:75
-#, fuzzy
 msgid "Unable to create your new collection of groups."
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/groups/create/class_wizardstep_4.php:86
 msgid "An error occurred while trying to create your new collection of groups."
 msgstr ""
 
 #: tutors/groups/create/class_wizardstep_4.php:91
-#, fuzzy
 msgid "Your new groups have been created."
-msgstr "Mijn assessments"
+msgstr ""
 
 #: tutors/groups/create/class_wizardstep_4.php:92
 #, php-format
@@ -5496,9 +5403,8 @@ msgid "create new groups wizard"
 msgstr ""
 
 #: tutors/groups/create/index.php:48
-#, fuzzy
 msgid "Create new groups"
-msgstr "Doe Assessment."
+msgstr ""
 
 #: tutors/groups/create/index.php:67
 msgid ""
@@ -5536,14 +5442,12 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/edit/edit_collection.php:136
-#, fuzzy
 msgid "back to my groups"
-msgstr "terug naar de assessmentlijst"
+msgstr ""
 
 #: tutors/groups/edit/edit_collection.php:140
-#, fuzzy
 msgid "delete collection"
-msgstr "gepland:"
+msgstr ""
 
 #: tutors/groups/edit/edit_collection.php:151
 #: tutors/groups/edit/edit_collection_groups.php:125
@@ -5645,9 +5549,8 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/edit/edit_collection_groups.php:145
-#, fuzzy
 msgid "New Group Name"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/groups/edit/edit_collection_groups.php:147
 msgid "add"
@@ -5705,9 +5608,8 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/edit/edit_collection_members.php:146
-#, fuzzy
 msgid "Assigned Group"
-msgstr "Beoordelingscriteria"
+msgstr ""
 
 #: tutors/groups/edit/edit_collection_members.php:178
 msgid "No students available"
@@ -5720,9 +5622,8 @@ msgid ""
 msgstr ""
 
 #: tutors/groups/edit/edit_group.php:190
-#, fuzzy
 msgid "Group Members"
-msgstr "Uw team"
+msgstr ""
 
 #: tutors/groups/edit/edit_group.php:192
 msgid "Below are all the students from the modules associated with this group."
