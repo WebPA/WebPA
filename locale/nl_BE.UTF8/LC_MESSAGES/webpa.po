@@ -1,26 +1,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-26 12:01+0100\n"
-"PO-Revision-Date: 2014-09-26 12:01+0100\n"
-"Last-Translator: Jeffrey De Fauw <Jeffrey.DeFauw@UGent.be>\n"
+"POT-Creation-Date: 2014-09-25 12:44+0100\n"
+"PO-Revision-Date: 2014-10-08 12:39+0000\n"
+"Last-Translator: Matthias Crauwels <matthias.crauwels@ugent.be>\n"
 "Language-Team: \n"
-"Language: nl_BE\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
-"X-Poedit-Basepath: /srv/http/WebPA-Source/\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.6.0-rc1\n"
+"X-Poedit-Basepath: /srv/http/WebPA-Source/\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-POOTLE-MTIME: 1412771988.000000\n"
 
 #: accounts/reset.php:33
 msgid "Username not set."
-msgstr ""
+msgstr "Geen username ingevoerd."
 
 #: accounts/reset.php:39
 msgid "Unable to reset the password for this account."
-msgstr ""
+msgstr "Het wachtwoord van deze gebruiker kon niet hersteld worden. "
 
 #: accounts/reset.php:46
 #, php-format
@@ -37,28 +38,28 @@ msgstr ""
 
 #: accounts/reset.php:54
 msgid "Password Reset"
-msgstr ""
+msgstr "Wachtwoord Herstellen"
 
 #: accounts/reset.php:55
 #, php-format
 msgid "An email has been sent to %s."
-msgstr ""
+msgstr "Een e-mail werd verstuurd naar %s."
 
 #: accounts/reset.php:71
 msgid "Your password has been reset."
-msgstr ""
+msgstr "Uw wachtwoord werd hersteld."
 
 #: accounts/reset.php:71
 msgid "Click here</a> to log in again."
-msgstr ""
+msgstr "Klik hier</a> om opnieuw in te loggen."
 
 #: accounts/reset.php:73
 msgid "The two passwords did not match."
-msgstr ""
+msgstr "De twee wachtwoorden komen niet overeen."
 
 #: accounts/reset.php:76
 msgid "There was an error resetting this password."
-msgstr ""
+msgstr "Er was een fout bij het resetten van dit wachtwoord."
 
 #: accounts/reset.php:85
 msgid ""
@@ -68,15 +69,15 @@ msgstr ""
 
 #: accounts/reset.php:93
 msgid "New Password"
-msgstr ""
+msgstr "Nieuw Wachtwoord"
 
 #: accounts/reset.php:97
 msgid "New Password (again)"
-msgstr ""
+msgstr "Nieuw Wachtwoord (herhalen)"
 
 #: accounts/reset.php:102
 msgid "Reset Password"
-msgstr ""
+msgstr "Herstel Wachtwoord"
 
 #: accounts/reset.php:110
 msgid ""
@@ -86,7 +87,7 @@ msgstr ""
 
 #: accounts/reset.php:116
 msgid "You are about to reset your password.<br/>"
-msgstr ""
+msgstr "U staat op het punt uw wachtwoord te herstellen.<br/>"
 
 #: accounts/reset.php:116
 msgid ""
@@ -98,23 +99,23 @@ msgstr ""
 #: admin/search/index.php:164 contact/contact_send.php:71
 #: contact/contact_send.php:80 login.php:109
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: accounts/reset.php:127
 msgid "Reset My Password"
-msgstr ""
+msgstr "Herstel Mijn Wachtwoord"
 
 #: admin/delete/index.php:30 admin/review/all.php:103
 msgid "Delete module"
-msgstr ""
+msgstr "Verwijder module"
 
 #: admin/delete/index.php:32
 msgid "Delete all system users with no module"
-msgstr ""
+msgstr "Verwijder alle systeemgebruikers zonder module"
 
 #: admin/delete/index.php:34
 msgid "Delete system user from module"
-msgstr ""
+msgstr "Verwijder systeemgebruiker van de module"
 
 #: admin/delete/index.php:36 admin/edit/index.php:32
 #: admin/review/admin/index.php:30 admin/review/index.php:33
@@ -123,7 +124,7 @@ msgstr ""
 #: admin/review/student/index.php:29 admin/search/index.php:77
 #: includes/classes/class_ui.php:71
 msgid "view data"
-msgstr ""
+msgstr "bekijk gegevens"
 
 #: admin/delete/index.php:37 admin/edit/index.php:33 admin/load/simple.php:281
 #: admin/review/admin/index.php:33 admin/review/index.php:37
@@ -131,7 +132,7 @@ msgstr ""
 #: admin/review/staff/index.php:32 admin/review/student/index.php:32
 #: admin/search/index.php:79
 msgid "View Student Data"
-msgstr ""
+msgstr "Bekijk Studentengegevens"
 
 #: admin/delete/index.php:38 admin/edit/index.php:34 admin/load/simple.php:282
 #: admin/review/admin/index.php:34 admin/review/index.php:38
@@ -139,7 +140,7 @@ msgstr ""
 #: admin/review/staff/index.php:33 admin/review/student/index.php:33
 #: admin/search/index.php:80
 msgid "View Staff Data"
-msgstr ""
+msgstr "Bekijk Personeelsgegevens"
 
 #: admin/delete/index.php:40 admin/edit/index.php:36 admin/load/simple.php:284
 #: admin/review/admin/index.php:35 admin/review/index.php:40
@@ -147,7 +148,7 @@ msgstr ""
 #: admin/review/staff/index.php:35 admin/review/student/index.php:35
 #: admin/search/index.php:82
 msgid "View Admin Data"
-msgstr ""
+msgstr "Bekijk Administratorgegevens"
 
 #: admin/delete/index.php:41 admin/edit/index.php:37 admin/load/simple.php:285
 #: admin/review/admin/index.php:36 admin/review/index.php:41
@@ -155,7 +156,7 @@ msgstr ""
 #: admin/review/staff/index.php:36 admin/review/student/index.php:36
 #: admin/search/index.php:83
 msgid "View Module Data"
-msgstr ""
+msgstr "Bekijk Modulegegevens"
 
 #: admin/delete/index.php:43 admin/edit/index.php:39 admin/load/simple.php:287
 #: admin/review/admin/index.php:37 admin/review/index.php:43
@@ -163,55 +164,55 @@ msgstr ""
 #: admin/review/staff/index.php:38 admin/review/student/index.php:38
 #: admin/search/index.php:85
 msgid "Search for a user"
-msgstr ""
+msgstr "Gebruiker opzoeken"
 
 #: admin/delete/index.php:44 admin/edit/index.php:40
 #: admin/review/admin/index.php:31 admin/review/log.php:29
 #: admin/review/module/index.php:31 admin/review/student/index.php:30
 msgid "review data"
-msgstr ""
+msgstr "herbekijk gegevens"
 
 #: admin/delete/index.php:59
 msgid "You cannot delete the currently selected module!"
-msgstr ""
+msgstr "U kan de huidig geselecteerde module niet verwijderen!"
 
 #: admin/delete/index.php:61
 msgid "The module has been deleted."
-msgstr ""
+msgstr "De module is verwijderd."
 
 #: admin/delete/index.php:70
 msgid "Users with no module have been deleted."
-msgstr ""
+msgstr "Gebruikers zonder module zijn verwijderd."
 
 #: admin/delete/index.php:79
 msgid "You cannot delete yourself!"
-msgstr ""
+msgstr "U kan uzelf niet verwijderen!"
 
 #: admin/delete/index.php:86
 msgid "The administrator has been deleted."
-msgstr ""
+msgstr "De administrator is verwijderd."
 
 #: admin/delete/index.php:89
 msgid "The user has been deleted from the module."
-msgstr ""
+msgstr "De gebruiker is verwijderd van de module."
 
 #: admin/edit/index.php:31
 msgid "Edit system users"
-msgstr ""
+msgstr "Bewerk systeem gebruikers"
 
 #: admin/edit/index.php:40 tutors/forms/edit/edit_form.php:234
 #: tutors/forms/index.php:82 tutors/forms/index.php:116
 #: tutors/groups/edit/edit_collection.php:207 tutors/groups/index.php:85
 msgid "edit"
-msgstr ""
+msgstr "bewerk"
 
 #: admin/edit/index.php:79
 msgid "The username already exists; please use another."
-msgstr ""
+msgstr "De gebruikersnaam bestaat al; gelieve een andere te kiezen."
 
 #: admin/edit/index.php:89
 msgid "Administrators cannot be enrolled in modules."
-msgstr ""
+msgstr "Administrators kunnen niet ingeschreven zijn in modules."
 
 #: admin/edit/index.php:142
 msgid ""
@@ -221,41 +222,49 @@ msgstr ""
 
 #: admin/edit/index.php:148
 msgid "The user has been created"
-msgstr ""
+msgstr "De gebruiker werd aangemaakt"
 
 #: admin/edit/index.php:150
 msgid "The changes made for the user have been saved"
-msgstr ""
+msgstr "De aanpassingen aan de gebruiker werden opgeslagen."
 
 #: admin/edit/index.php:201
 msgid "User is already enrolled"
-msgstr ""
+msgstr "Gebruiker is reeds ingeschreven"
 
 #: admin/edit/index.php:203
 msgid "User currently has a different role in this module - change not saved"
 msgstr ""
+"Gebruiker heeft een andere rol in deze module - aanpassing niet opgeslagen"
 
 #: admin/edit/index.php:266
 msgid ""
 "Here you are able to edit the details of a user within the system. There may "
 "be some elements of the information which do not appear"
 msgstr ""
+"Hier kan u de details van een gebruiker aanpassen. Er kunnen elementen zijn "
+"die niet weergegeven worden"
 
 #: admin/edit/index.php:267
 msgid ""
 "to have been completed and this will be dependant on the information stored "
 "in the system."
 msgstr ""
+"vervolledigd te zijn en dit is afhankelijk van de informatie in het systeem."
 
 #: admin/edit/index.php:269
 msgid "Just enter the username for users already added to the system."
 msgstr ""
+"Voor gebruikers die reeds in het systeem zijn toegevoegd hoeft u enkel de "
+"gebruikersnaam in te geven."
 
 #: admin/edit/index.php:273
 msgid ""
 "N.B. Users authenticated directly from the WebPA <strong>database</strong> "
 "must be given a password."
 msgstr ""
+"N.B. Gebruikers die rechtstreeks inloggen via de WebPA "
+"<strong>database</strong> moeten een wachtwoord gegeven worden."
 
 #: admin/edit/index.php:275
 msgid ""
@@ -263,6 +272,9 @@ msgid ""
 "added to the database and updated each time they log in; the password stored "
 "is a random value."
 msgstr ""
+"N.B. Gebruikers die inloggen via <strong>LDAP</strong> zullen automatisch "
+"toegevoegd worden aan de database en geüpdatet worden elke keer ze inloggen; "
+"het opgeslagen wachtwoord is een willekeurige waarde."
 
 #: admin/edit/index.php:277
 msgid ""
@@ -270,19 +282,22 @@ msgid ""
 "database before they are able to log in; a random password will be added "
 "automatically."
 msgstr ""
+"N.B. Gebruikers die inloggen via <strong>LDAP</strong> moeten toegevoegd "
+"worden aan de database vooraleer ze kunnen inloggen; een willekeurig "
+"wachtwoord zal automatisch toegevoegd worden."
 
 #: admin/edit/index.php:306
 msgid "User Details"
-msgstr ""
+msgstr "Gebruikersdetails"
 
 #: admin/edit/index.php:323 admin/search/index.php:147
 #: admin/search/index.php:163
 msgid "First name"
-msgstr ""
+msgstr "Voornaam"
 
 #: admin/edit/index.php:329
 msgid ">Last name"
-msgstr ""
+msgstr ">Achternaam"
 
 #: admin/edit/index.php:336 contact/contact_send.php:72
 #: contact/contact_send.php:81 tutors/assessments/inc_list_closed.php:86
@@ -290,43 +305,46 @@ msgstr ""
 #: tutors/assessments/inc_list_open.php:81
 #: tutors/assessments/inc_list_pending.php:80
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: admin/edit/index.php:343 admin/search/index.php:150
 #: admin/search/index.php:165
 msgid "ID number"
-msgstr ""
+msgstr "Identificatienummer"
 
 #: admin/edit/index.php:348
 msgid "Department ID"
-msgstr ""
+msgstr "Departementscode"
 
 #: admin/edit/index.php:354 login.php:113
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: admin/edit/index.php:366
 msgid ""
 "N.B. If a password is present in the system then 6 characters are shown. For "
 "security reasons the password is not displayed in clear text."
 msgstr ""
+"N.B. Als een wachtwoord aanwezig is in het systeem worden 6 karakters "
+"weergegeven. Voor veiligheidsredenen wordt het wachtwoord niet zichtbaar "
+"weergegeven."
 
 #: admin/edit/index.php:374 admin/review/index.php:28
 msgid "Module"
-msgstr ""
+msgstr "Module"
 
 #: admin/edit/index.php:388
 msgid "Tutor"
-msgstr ""
+msgstr "Titularis"
 
 #: admin/edit/index.php:388 admin/review/index.php:24
 #: tutors/groups/edit/edit_collection_members.php:145
 msgid "Student"
-msgstr ""
+msgstr "Student"
 
 #: admin/edit/index.php:451 admin/edit/module.php:149
 msgid "Save Changes"
-msgstr ""
+msgstr "Bewaar Aanpassingen"
 
 #: admin/edit/index.php:452
 #: tutors/assessments/create/class_wizardstep_1.php:28
@@ -369,11 +387,11 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_4.php:74
 #: tutors/groups/create/class_wizardstep_x.php:27
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: admin/edit/module.php:87
 msgid "The changes made for the module have been saved"
-msgstr ""
+msgstr "De aanpassingen aan de module werden opgeslagen"
 
 #: admin/edit/module.php:95
 msgid ""
@@ -381,165 +399,188 @@ msgid ""
 "may be some elements of the information which do not appear to have been "
 "completed and this will be dependant on the information stored in the system."
 msgstr ""
+"Hier kan u de details van een module aanpassen. Het is mogelijk dat sommige "
+"elementen niet vervolledigd lijken te zijn en dit is afhankelijk van de "
+"informatie in het systeem."
 
 #: admin/edit/module.php:115
 msgid "Module Details"
-msgstr ""
+msgstr "Details van de module"
 
 #: admin/edit/module.php:119
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: admin/edit/module.php:125
 #: tutors/assessments/create/class_wizardstep_2.php:140
 #: tutors/assessments/edit/edit_assessment.php:446
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: admin/edit/module.php:131
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: admin/index.php:26 includes/classes/class_ui.php:69
 msgid "admin home"
-msgstr ""
+msgstr "admin home"
 
 #: admin/index.php:35
 msgid "Welcome to the Administration Area for"
-msgstr ""
+msgstr "Welkom tot de administratie-omgeving voor"
 
 #: admin/index.php:35
 msgid ""
 "In this section you are able to manage the users of the system (both adding "
 "new and editing existing)"
 msgstr ""
+"In deze sectie kan u de gebruikers beheren (zowel nieuwe toevoegen als reeds "
+"bestaande aanpassen)"
 
 #: admin/index.php:37
 #, php-format
 msgid "as well as generate basic reports on the usage of %s (the metrics)"
 msgstr ""
+"zowel als basisverslagen genereren over het gebruik van %s (de statistieken)"
 
 #: admin/index.php:39
 msgid "The admin area contains the following sections:"
-msgstr ""
+msgstr "De administratie-omgeving bevat de volgende secties:"
 
 #: admin/index.php:44 admin/index.php:47
 msgid "Upload Data"
-msgstr ""
+msgstr "Gegevens Uploaden"
 
 #: admin/index.php:44 admin/index.php:47 admin/index.php:52 admin/index.php:55
 msgid "View Data"
-msgstr ""
+msgstr "Bekijk Gegevens"
 
 #: admin/index.php:44 admin/index.php:52
 msgid "WebPA Metrics"
-msgstr ""
+msgstr "WebPA Statistieken"
 
 #: admin/index.php:59
 msgid "This is where you can upload the data to the system."
-msgstr ""
+msgstr "Hier kan u de gegevens uploaden in het systeem. "
 
 #: admin/index.php:60
 msgid ""
 "This area allows you to view the uploaded data as well as search and edit "
 "user information."
 msgstr ""
+"Hier kan u de reeds geüploade gegevens bekijken en gebruikersinformatie "
+"opzoeken en aanpassen."
 
 #: admin/index.php:61
 msgid ""
 "This section allows you to generate reports on the usage of WebPA locally."
 msgstr ""
+"In deze sectie kan u verslagen genereren over het lokaal gebruik van WebPA."
 
 #: admin/load/index.php:31 admin/load/simple.php:278
 #: admin/load/templates.php:25 includes/classes/class_ui.php:70
 msgid "upload data"
-msgstr ""
+msgstr "Gegevens Uploaden"
 
 #: admin/load/index.php:58
 msgid "You can upload the data the system requires from this page"
-msgstr ""
+msgstr "Op deze pagina kan u de benodigde gegevens uploaden. "
 
 #: admin/load/index.php:59
 msgid "Enter the file name to be used:"
-msgstr ""
+msgstr "Voer de bestandsnaam in die gebruikt moet worden:"
 
 #: admin/load/index.php:60
 msgid "Select the type of information you are uploading:"
-msgstr ""
+msgstr "Selecteer het type van gegevens die gaat uploaden:"
 
 #: admin/load/index.php:69
 msgid "Collection:"
-msgstr ""
+msgstr "Collectie:"
 
 #: admin/load/index.php:72
 msgid "Create using name entered..."
-msgstr ""
+msgstr "Creëer met gegeven naam..."
 
 #: admin/load/index.php:81
 msgid ""
 "<strong>Student Data</strong><p>CSV File format = id_number, forename, "
 "lastname, email, username, password, department_id, module_code</p>"
 msgstr ""
+"<strong>Studentengegevens</strong><p>CSV bestandsformaat = id_number, "
+"forename, lastname, email, username, password, department_id, module_code</p>"
 
 #: admin/load/index.php:82 admin/load/index.php:86
 msgid "<strong>Student Data with Groups</strong>"
-msgstr ""
+msgstr "<strong>Studentengegevens met groepen</strong>"
 
 #: admin/load/index.php:82
 msgid ""
 "<p>CSV File format = id_number, forename, lastname, email, username, "
 "group_name, password, module_code</p>"
 msgstr ""
+"<p>CSV bestandsformaat = id_number, forename, lastname, email, username, "
+"group_name, password, module_code</p>"
 
 #: admin/load/index.php:83
 msgid ""
 "<strong>Staff Data</strong><p>CSV File format = id_number, forename, "
 "lastname, email, username, password, department_id, module_code</p>"
 msgstr ""
+"<strong>Personeelsgegevens</strong><p>CSV bestandsformaat = id_number, "
+"forename, lastname, email, username, password, department_id, module_code</p>"
 
 #: admin/load/index.php:85
 msgid ""
 "<strong>Student Data</strong><p>CSV File format = id_number, forename, "
 "lastname, email, username, password, department_id</p>"
 msgstr ""
+"<strong>Studentengegevens</strong><p>CSV bestandsformaat = id_number, "
+"forename, lastname, email, username, password, department_id</p>"
 
 #: admin/load/index.php:86
 msgid ""
 "<p>CSV File format = id_number, forename, lastname, email, username, "
 "group_name, password</p>"
 msgstr ""
+"<p>CSV bestandsformaat = id_number, forename, lastname, email, username, "
+"group_name, password</p>"
 
 #: admin/load/index.php:87
 msgid ""
 "<strong>Staff Data</strong><p>CSV File format = id_number, forename, "
 "lastname, email, username, password, department_id</p>"
 msgstr ""
+"<strong>Personeelsgegevens</strong><p>CSV bestandsformaat = id_number, "
+"forename, lastname, email, username, password, department_id</p>"
 
 #: admin/load/index.php:89
 msgid ""
 "<strong>Module Data</strong><p>CSV File format = module_code, module_title</"
 "p>"
 msgstr ""
+"<strong>Modulegegevens</strong><p>CSV bestandsformaat = module_code, "
+"module_title</p>"
 
 #: admin/load/index.php:91
 msgid "Select the type of file separator that has been used:"
-msgstr ""
+msgstr "Selecteer het type van file separator dat gebruikt werd:"
 
 #: admin/load/index.php:93
 msgid "Comma separated"
-msgstr ""
+msgstr "Komma"
 
 #: admin/load/index.php:94
 msgid "Tab separated"
-msgstr ""
+msgstr "Tab"
 
 #: admin/load/index.php:95
 msgid "Semi-colon"
-msgstr ""
+msgstr "Puntkomma"
 
 #: admin/load/index.php:97 admin/load/templates.php:27
 msgid "Upload"
-msgstr ""
+msgstr "Upload"
 
 #: admin/load/index.php:98
 msgid ""
@@ -550,34 +591,36 @@ msgstr ""
 
 #: admin/load/index.php:104
 msgid "Upload data via a file"
-msgstr ""
+msgstr "Upload gegevens met een bestand"
 
 #: admin/load/index.php:145
 msgid ""
 "There are <a href=\"templates.php\">templates</a> which you can follow for "
 "uploading the information to the WebPA system."
 msgstr ""
+"Er zijn <a href=\"templates.php\">templates</a> die u kan volgen voor het "
+"uploaden van gegevens in WebPA."
 
 #: admin/load/simple.php:63 admin/review/student/index.php:24
 msgid "Student Data"
-msgstr ""
+msgstr "Studentengegevens"
 
 #: admin/load/simple.php:64
 msgid "Staff Data"
-msgstr ""
+msgstr "Personeelsgegevens"
 
 #: admin/load/simple.php:65 admin/review/module/index.php:26
 msgid "Module Data"
-msgstr ""
+msgstr "Modulegegevens"
 
 #: admin/load/simple.php:66
 msgid "Student Data with Groups"
-msgstr ""
+msgstr "Studentengegevens met groepen"
 
 #: admin/load/simple.php:268
 #, php-format
 msgid "Successful upload of the %s information to the database."
-msgstr ""
+msgstr "Succesvolle upload van de %s gegevens in de database."
 
 #: admin/load/simple.php:272
 msgid ""
@@ -586,26 +629,33 @@ msgid ""
 "again</a>. Alternatively you may wish to download a template to put the "
 "information in."
 msgstr ""
+"De ingevoerde gegevens kunnen verwerkt worden.</div><div><p>We raden aan om "
+"de gegevens te controleren en dan <a href=\"../\">opnieuw te proberen</a>. "
+"Mogelijks wil u een template downloaden om de gegevens in te geven."
 
 #: admin/load/templates.php:24
 msgid "Upload templates"
-msgstr ""
+msgstr "Upload templates"
 
 #: admin/load/templates.php:41
 msgid ""
 "The following are the template files for the uploading of information to the "
 "WebPA database."
 msgstr ""
+"De volgende bestanden zijn templatebestanden voor het uploaden van gegevens "
+"in de WebPA database."
 
 #: admin/load/templates.php:42
 msgid ""
 "To download the files right mouse button click on the link and 'Save link "
 "as...'"
 msgstr ""
+"Om de bestanden te downloaden klikt u met de rechtermuisknop op de links en "
+"kiest u voor 'Sla bestand op als...'"
 
 #: admin/load/templates.php:46
 msgid "Staff or student data"
-msgstr ""
+msgstr "Personeels- of studentengegevens"
 
 #: admin/load/templates.php:46
 msgid ""
@@ -613,22 +663,30 @@ msgid ""
 "are the most important aspects of information. If not all of the columns are "
 "filled then please delete the column titles before uploading the file."
 msgstr ""
+"De gegevens van de gebruiker zijn essentieel. De eerste vijf kolommen van "
+"gegevens zijn de meest belangrijke gegevens. Als niet alle kolommen ingevuld "
+"zijn, gelieve dan de kolomtitels te verwijderen vooraleer het bestand te "
+"uploaden."
 
 #: admin/load/templates.php:51
 msgid "Module data"
-msgstr ""
+msgstr "Modulegegevens"
 
 #: admin/load/templates.php:51
 msgid ""
 "All elements of information for the module data is required. The module "
 "information can not be loaded unless fully complete."
 msgstr ""
+"Alle gegevens voor de module zijn verplicht. De modulegegevens kunnen niet "
+"geladen worden tenzij alles volledig is."
 
 #: admin/metrics/index.php:25
 msgid ""
 "This page allows you to build a report on commonly requested metrics about "
 "the WebPA systems usage."
 msgstr ""
+"Deze pagina laat u toe een verslag te genereren over algemene statistieken "
+"van het WebPA-systeem."
 
 #: admin/metrics/index.php:26
 msgid ""
@@ -638,21 +696,21 @@ msgstr ""
 
 #: admin/metrics/index.php:29
 msgid "metrics of use"
-msgstr ""
+msgstr "gebruikersstatistieken"
 
 #: admin/metrics/index.php:30 admin/metrics/report.php:128
 msgid "metrics"
-msgstr ""
+msgstr "statistieken"
 
 #: admin/metrics/index.php:58
 msgid "Academic year to report on"
-msgstr ""
+msgstr "Academisch jaar om te rapporteren"
 
 #: admin/metrics/index.php:73 admin/metrics/report.php:141
 #: admin/metrics/report.php:360 admin/metrics/report.php:530
 #: admin/metrics/report.php:691
 msgid "Assessments run in WebPA"
-msgstr ""
+msgstr "Assessments in WebPA"
 
 #: admin/metrics/index.php:74
 msgid ""
@@ -663,7 +721,7 @@ msgstr ""
 #: admin/metrics/index.php:77 admin/metrics/report.php:386
 #: admin/metrics/report.php:552 admin/metrics/report.php:716
 msgid "Number of groups per assessment"
-msgstr ""
+msgstr "Aantal groepen per opdracht"
 
 #: admin/metrics/index.php:78
 msgid ""
@@ -675,7 +733,7 @@ msgstr ""
 #: admin/metrics/report.php:410 admin/metrics/report.php:574
 #: admin/metrics/report.php:739
 msgid "Number of students per assessment"
-msgstr ""
+msgstr "Aantal studenten per opdracht"
 
 #: admin/metrics/index.php:82
 msgid ""
@@ -687,7 +745,7 @@ msgstr ""
 #: admin/metrics/report.php:434 admin/metrics/report.php:597
 #: admin/metrics/report.php:764
 msgid "Assessments where feedback has been used"
-msgstr ""
+msgstr "Assessments waar feedback werd gebruikt"
 
 #: admin/metrics/index.php:86
 msgid ""
@@ -697,7 +755,7 @@ msgstr ""
 
 #: admin/metrics/index.php:89 admin/metrics/report.php:458
 msgid "Number of respondents per assessment"
-msgstr ""
+msgstr "Aantal inzendingen per assessment"
 
 #: admin/metrics/index.php:90
 msgid ""
@@ -709,7 +767,7 @@ msgstr ""
 #: admin/metrics/report.php:482 admin/metrics/report.php:643
 #: admin/metrics/report.php:812
 msgid "Modules which have run an assessment"
-msgstr ""
+msgstr "Modules met assessments"
 
 #: admin/metrics/index.php:94
 msgid "Lists the modules which have run assessments in the academic year"
@@ -717,7 +775,7 @@ msgstr ""
 
 #: admin/metrics/index.php:98
 msgid "Number of students who have carried out an assessment this year"
-msgstr ""
+msgstr "Aantal studenten die dit jaar een assessment ingediend hebben"
 
 #: admin/metrics/index.php:99
 msgid ""
@@ -727,7 +785,7 @@ msgstr ""
 
 #: admin/metrics/index.php:102
 msgid "Select the format in which you want to see the data:"
-msgstr ""
+msgstr "Selecteer het formaat waarin u de gegevens wil bekijken:"
 
 #: admin/metrics/index.php:104 tutors/assessments/reports/index.php:201
 #: tutors/assessments/reports/index.php:220
@@ -738,7 +796,7 @@ msgstr ""
 #: tutors/assessments/reports/index.php:376
 #: tutors/assessments/reports/index.php:405
 msgid "Report - View the report"
-msgstr ""
+msgstr "Verslag - Bekijk het verslag"
 
 #: admin/metrics/index.php:105 tutors/assessments/reports/index.php:205
 #: tutors/assessments/reports/index.php:224
@@ -750,201 +808,201 @@ msgstr ""
 #: tutors/assessments/reports/index.php:380
 #: tutors/assessments/reports/index.php:409
 msgid "CSV - Excel Spreadsheet"
-msgstr ""
+msgstr "CSV - Excel Werkblad"
 
 #: admin/metrics/index.php:106 tutors/assessments/reports/index.php:291
 #: tutors/assessments/reports/index.php:318
 #: tutors/assessments/reports/index.php:390
 #: tutors/assessments/reports/index.php:419
 msgid "RTF -  Rich Text File / MS Word"
-msgstr ""
+msgstr "RTF - Word"
 
 #: admin/metrics/index.php:107 tutors/assessments/reports/index.php:277
 #: tutors/assessments/reports/index.php:314
 msgid "XML -  XML File"
-msgstr ""
+msgstr "XML - XML Bestand"
 
 #: admin/metrics/index.php:111
 msgid "Generate"
-msgstr ""
+msgstr "Genereren"
 
 #: admin/metrics/report.php:127
 msgid " general usage report"
-msgstr ""
+msgstr " algemeen gebruikersverslag"
 
 #: admin/metrics/report.php:167 admin/metrics/report.php:198
 #: admin/metrics/report.php:228 admin/metrics/report.php:259
 #: admin/metrics/report.php:290 admin/metrics/report.php:321
 #: admin/metrics/report.php:341
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #: admin/metrics/report.php:265 admin/metrics/report.php:620
 #: admin/metrics/report.php:788
 msgid "Number of Respondents per assessment"
-msgstr ""
+msgstr "Aantal inzendingen per assessment"
 
 #: admin/metrics/report.php:327 admin/metrics/report.php:506
 #: admin/metrics/report.php:666 admin/metrics/report.php:836
 msgid "Number of students who have carried out an assessment"
-msgstr ""
+msgstr "Aantal studenten die een assessment ingediend hebben"
 
 #: admin/metrics/report.php:355
 msgid "\"WebPA - Metrics report\""
-msgstr ""
+msgstr "\"WebPA - Statistiekenverslag\""
 
 #: admin/metrics/report.php:526
 msgid "WebPA - Metrics report"
-msgstr ""
+msgstr "WebPA - Statistiekenverslag"
 
 #: admin/review/admin/index.php:24
 msgid "Administrator Data"
-msgstr ""
+msgstr "Beheerdersgegevens"
 
 #: admin/review/admin/index.php:29
 msgid "view administrator data"
-msgstr ""
+msgstr "bekijk beheerdersgegevens"
 
 #: admin/review/admin/index.php:31
 msgid "administrator information"
-msgstr ""
+msgstr "beheerdersgegevens"
 
 #: admin/review/all.php:36
 msgid "You need to be logged into the system to see this information."
-msgstr ""
+msgstr "U moet ingelogd zijn om deze gegevens te bekijken."
 
 #: admin/review/all.php:72
 msgid "View activity log"
-msgstr ""
+msgstr "Bekijk activiteitslog"
 
 #: admin/review/all.php:81
 msgid "Edit user"
-msgstr ""
+msgstr "Bewerk gebruiker"
 
 #: admin/review/all.php:84
 msgid "Delete user; are you sure?"
-msgstr ""
+msgstr "Verwijder gebruiker; bent u zeker?"
 
 #: admin/review/all.php:85
 msgid "Delete user"
-msgstr ""
+msgstr "Verwijder gebruiker"
 
 #: admin/review/all.php:96
 msgid "Edit module"
-msgstr ""
+msgstr "Bewerk module"
 
 #: admin/review/all.php:102
 msgid "Delete module; are you sure?"
-msgstr ""
+msgstr "Verwijder module; bent u zeker?"
 
 #: admin/review/all.php:114
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: admin/review/all.php:116
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: admin/review/all.php:132 admin/review/log.php:91
 msgid "No records"
-msgstr ""
+msgstr "Geen gegevens"
 
 #: admin/review/all.php:139
 msgid "Create new module"
-msgstr ""
+msgstr "Maak een nieuwe module"
 
 #: admin/review/all.php:141
 msgid "Add new"
-msgstr ""
+msgstr "Nieuwe toevoegen"
 
 #: admin/review/index.php:24
 msgid "View the student data currently in the system"
-msgstr ""
+msgstr "Bekijk de studentengegevens momenteel in het systeem"
 
 #: admin/review/index.php:25
 msgid "Staff"
-msgstr ""
+msgstr "Personeel"
 
 #: admin/review/index.php:25
 msgid "View the staff data currently in the system"
-msgstr ""
+msgstr "Bekijk de personeelsgegevens momenteel in het systeem"
 
 #: admin/review/index.php:27
 msgid "Administrators"
-msgstr ""
+msgstr "Beheerders"
 
 #: admin/review/index.php:27
 msgid "View the administrator data currently in the system"
-msgstr ""
+msgstr "Bekijk de beheerdersgegevens momenteel in het systeem"
 
 #: admin/review/index.php:28
 msgid "View the module information currently in the system"
-msgstr ""
+msgstr "Bekijk de modulegegevens momenteel in het systeem"
 
 #: admin/review/index.php:30 admin/search/index.php:151
 #: admin/search/index.php:166
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: admin/review/index.php:30
 msgid "Search for a student or staff user of the system"
-msgstr ""
+msgstr "Zoeken naar een student of een personeelslid"
 
 #: admin/review/log.php:24
 msgid "Log Data"
-msgstr ""
+msgstr "Loggegevens"
 
 #: admin/review/log.php:27
 msgid "view log data"
-msgstr ""
+msgstr "bekijk loggegevens"
 
 #: admin/review/log.php:29
 msgid "log data"
-msgstr ""
+msgstr "loggegevens"
 
 #: admin/review/module/index.php:29
 msgid "view module data"
-msgstr ""
+msgstr "bekijk modulegegevens"
 
 #: admin/review/module/index.php:31
 msgid "module information"
-msgstr ""
+msgstr "modulegegevens"
 
 #: admin/review/staff/index.php:28
 msgid "view staff data"
-msgstr ""
+msgstr "bekijk personeelsgegevens"
 
 #: admin/review/staff/index.php:30
 msgid "staff information"
-msgstr ""
+msgstr "personeelsgegevens"
 
 #: admin/review/student/index.php:28
 msgid "view student data"
-msgstr ""
+msgstr "bekijk studentengegevens"
 
 #: admin/review/student/index.php:30
 msgid "student information"
-msgstr ""
+msgstr "studentengegevens"
 
 #: admin/search/index.php:69
 msgid "You have not entered any information for the search"
-msgstr ""
+msgstr "U heeft geen gegevens ingevoerd voor het zoeken"
 
 #: admin/search/index.php:69
 msgid "Please check and re-try."
-msgstr ""
+msgstr "Gelieve te controleren en opnieuw te proberen."
 
 #: admin/search/index.php:76
 msgid "search for a user"
-msgstr ""
+msgstr "zoek naar een gebruiker"
 
 #: admin/search/index.php:78
 msgid "search"
-msgstr ""
+msgstr "zoeken"
 
 #: admin/search/index.php:93
 msgid "Search the WebPA system for a user within the system."
-msgstr ""
+msgstr "Zoek binnen WebPA naar een gebruiker."
 
 #: admin/search/index.php:94
 msgid ""
@@ -956,71 +1014,71 @@ msgstr ""
 
 #: admin/search/index.php:95
 msgid "Search results"
-msgstr ""
+msgstr "Zoekresultaten"
 
 #: admin/search/index.php:129 tutors/assessments/inc_list_closed.php:85
 #: tutors/assessments/inc_list_marked.php:92
 #: tutors/assessments/inc_list_open.php:80
 #: tutors/assessments/inc_list_pending.php:79
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 #: admin/search/index.php:142
 msgid "The search has not found any matching information."
-msgstr ""
+msgstr "Er werd geen overeenkomende data gevonden bij het zoeken."
 
 #: admin/search/index.php:148 admin/search/index.php:162
 msgid "Last name"
-msgstr ""
+msgstr "Achternaam"
 
 #: contact/contact_send.php:63
 msgid "Application"
-msgstr ""
+msgstr "Toepassing"
 
 #: contact/contact_send.php:64
 msgid "Contact Type"
-msgstr ""
+msgstr "Contacttype"
 
 #: contact/contact_send.php:65
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: contact/contact_send.php:68
 msgid "Contact Details"
-msgstr ""
+msgstr "Contactdetails"
 
 #: contact/contact_send.php:70 contact/contact_send.php:79
 msgid "Fullname"
-msgstr ""
+msgstr "Volledige naam"
 
 #: contact/contact_send.php:73
 msgid "Phone"
-msgstr ""
+msgstr "Telefoonnummer"
 
 #: contact/contact_send.php:76
 msgid "User Account Details"
-msgstr ""
+msgstr "Gebruikersgegevens"
 
 #: contact/contact_send.php:78
 msgid "User ID"
-msgstr ""
+msgstr "Gebruikers ID"
 
 #: contact/contact_send.php:84
 msgid "Message"
-msgstr ""
+msgstr "Bericht"
 
 #: contact/contact_send.php:99
 msgid "Message Sent"
-msgstr ""
+msgstr "Bericht Verzonden"
 
 #: contact/contact_send.php:100 contact/contact_send.php:102
 #: contact/index.php:44 contact/index.php:47
 msgid "contact"
-msgstr ""
+msgstr "contact"
 
 #: contact/contact_send.php:111
 msgid "Your message has now been sent."
-msgstr ""
+msgstr "Uw bericht is nu verstuurd."
 
 #: contact/contact_send.php:112
 msgid ""
@@ -1030,11 +1088,11 @@ msgstr ""
 
 #: contact/contact_send.php:113
 msgid "Thanks for your time"
-msgstr ""
+msgstr "Bedankt voor uw tijd."
 
 #: contact/index.php:43
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: contact/index.php:67
 msgid ""
@@ -1052,109 +1110,109 @@ msgstr ""
 
 #: contact/index.php:78
 msgid "Contact Person"
-msgstr ""
+msgstr "Contactpersoon"
 
 #: contact/index.php:88
 msgid "Your Name"
-msgstr ""
+msgstr "Uw naam"
 
 #: contact/index.php:92
 msgid "Your Username"
-msgstr ""
+msgstr "Uw gebruikersnaam"
 
 #: contact/index.php:96
 msgid "Your Email"
-msgstr ""
+msgstr "Uw e-mailadres"
 
 #: contact/index.php:100
 msgid "Your Phone Number"
-msgstr ""
+msgstr "Uw Telefoonnummer"
 
 #: contact/index.php:105
 msgid "Type of Message"
-msgstr ""
+msgstr "Type bericht"
 
 #: contact/index.php:109
 msgid "Request for help!"
-msgstr ""
+msgstr "Verzoek voor hulp!"
 
 #: contact/index.php:110
 msgid "Information request"
-msgstr ""
+msgstr "Verzoek om informatie"
 
 #: contact/index.php:111
 msgid "Bug / Error report"
-msgstr ""
+msgstr "Foutenrapportering"
 
 #: contact/index.php:112
 msgid "Suggestion / Wish List"
-msgstr ""
+msgstr "Suggestie"
 
 #: contact/index.php:113
 msgid "Other type of message"
-msgstr ""
+msgstr "Ander"
 
 #: contact/index.php:121
 msgid "Message Text"
-msgstr ""
+msgstr "Berichttekst"
 
 #: contact/index.php:128
 msgid "reset form"
-msgstr ""
+msgstr "formulier herstellen"
 
 #: contact/index.php:130
 msgid "send message"
-msgstr ""
+msgstr "bericht versturen"
 
 #: cookie.php:31
 #, php-format
 msgid "Unable to connect to "
-msgstr ""
+msgstr "Kon niet verbinden met "
 
 #: includes/classes/abstract_webpa_algorithm.php:225
 msgid ""
 "ERROR: WebPAAlgorithm->calculate() is an abstract method and should be "
 "overridden."
 msgstr ""
-
-#: includes/classes/class_assessment.php:297
-#: tutors/assessments/edit/edit_assessment.php:173
-msgid "at"
-msgstr ""
+"FOUT: WebPAAlgorithm->calculate() is een abstracte methode en zou moeten "
+"overschreven worden."
 
 #: includes/classes/class_dao.php:103 includes/classes/class_dao.php:114
 msgid "Can't use database due to"
-msgstr ""
+msgstr "Kan database niet gebruiken wegens"
 
 #: includes/classes/class_dao.php:160
 msgid "Executing SQL"
-msgstr ""
+msgstr "SQL aan het uitvoeren"
 
 #: includes/classes/class_dao.php:541
 msgid "Querying database"
-msgstr ""
+msgstr "Database aan het queryen"
 
 #: includes/classes/class_dao.php:589 includes/classes/class_dao.php:591
 msgid "DATABASE ERROR"
-msgstr ""
+msgstr "DATABASEFOUT"
 
 #: includes/classes/class_file_upload.php:71
 msgid "No file data given"
-msgstr ""
+msgstr "Geen bestandsgegevens opgegeven"
 
 #: includes/classes/class_file_upload.php:76
 msgid "No upload path set"
-msgstr ""
+msgstr "Geen uploadlocatie ingesteld"
 
 #: includes/classes/class_file_upload.php:94
 #, php-format
 msgid "Error uploading '%s' : File exceeded the maximum upload size: %d bytes"
 msgstr ""
+"Fout bij uploaden '%s': Het bestand is groter dan de maximum toegelaten "
+"grootte: %d bytes"
 
 #: includes/classes/class_file_upload.php:99
 #, php-format
 msgid "Error uploading '%s' : You can only upload files with the extension(s)"
 msgstr ""
+"Fout bij uploaden '%s': U kan enkel bestanden uploaden met de extensie(s)"
 
 #: includes/classes/class_file_upload.php:104
 #, php-format
@@ -1162,11 +1220,13 @@ msgid ""
 "Error uploading '%s' of type '%s' : You can only upload files with the mime "
 "type(s) "
 msgstr ""
+"Fout bij uploaden '%s' van type '%s': U kan enkel bestanden uploaden met het/"
+"de mimetype(s) "
 
 #: includes/classes/class_file_upload.php:109
 #, php-format
 msgid "Error uploading '%s' : File already exists"
-msgstr ""
+msgstr "Fout bij uploaden '%s': Bestand bestaat al"
 
 #: includes/classes/class_file_upload.php:118
 #: includes/classes/class_file_upload.php:126
@@ -1174,38 +1234,41 @@ msgstr ""
 msgid ""
 "Error uploading '%s' : Could not move the file from the upload directory"
 msgstr ""
+"Fout bij uploaden '%s': Kon het bestand niet verplaatsen uit de uploadmap"
 
 #: includes/classes/class_form_renderer.php:203
 #, php-format
 msgid "You have %s %d marks</span> to divide between your teammates."
-msgstr ""
+msgstr "U hebt %s %d punten</span> te verdelen tussen uw teamgenoten."
 
 #: includes/classes/class_form_renderer.php:207
 #, php-format
 msgid ""
 "For a group of %d, you have %d marks</span> to divide between your teammates."
 msgstr ""
+"Voor een groep van %d heeft u %d punten</span> te verdelen tussen uw "
+"teamgenoten."
 
 #: includes/classes/class_form_renderer.php:211
 #, php-format
 msgid "For equal performance, every student should receive %d."
-msgstr ""
+msgstr "Voor gelijke prestaties zou elke student %d moeten krijgen."
 
 #: includes/classes/class_form_renderer.php:217
 #: tutors/assessments/reports/report_student_grades.php:334
 msgid "score"
-msgstr ""
+msgstr "score"
 
 #: includes/classes/class_form_renderer.php:248
 msgid "Total"
-msgstr ""
+msgstr "Totaal"
 
 #: includes/classes/class_form_renderer.php:276
 #: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:57
 #: tutors/forms/edit/edit_form.php:227
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:71
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 #: includes/classes/class_form_renderer.php:320
 #, php-format
@@ -1216,7 +1279,7 @@ msgstr ""
 
 #: includes/classes/class_ui.php:55
 msgid "Tutors"
-msgstr ""
+msgstr "Titularissen"
 
 #: includes/classes/class_ui.php:56 lang/en/generic.php:17
 #: tutors/forms/clone/clone_example.php:57
@@ -1232,7 +1295,7 @@ msgstr ""
 #: tutors/forms/index.php:30 tutors/forms/index.php:31
 #: tutors/forms/index.php:35
 msgid "my forms"
-msgstr ""
+msgstr "mijn formuleren"
 
 #: includes/classes/class_ui.php:57 includes/classes/class_ui.php:63
 #: lang/en/generic.php:18 students/groups/index.php:31
@@ -1248,7 +1311,7 @@ msgstr ""
 #: tutors/groups/edit/edit_group.php:100 tutors/groups/edit/edit_group.php:104
 #: tutors/groups/edit/index.php:39 tutors/groups/index.php:39
 msgid "my groups"
-msgstr ""
+msgstr "mijn groepen"
 
 #: includes/classes/class_ui.php:58 includes/classes/class_ui.php:64
 #: lang/en/generic.php:19 students/assessments/index.php:98
@@ -1284,36 +1347,36 @@ msgstr ""
 #: tutors/assessments/students_who_responded.php:59
 #: tutors/assessments/students_who_responded.php:62
 msgid "my assessments"
-msgstr ""
+msgstr "mijn assessments"
 
 #: includes/classes/class_ui.php:62
 #: tutors/groups/create/class_wizardstep_3.php:63
 msgid "Students"
-msgstr ""
+msgstr "Studenten"
 
 #: includes/classes/class_ui.php:75
 msgid "Admin"
-msgstr ""
+msgstr "Beheerder"
 
 #: includes/classes/class_ui.php:89
 msgid "Support"
-msgstr ""
+msgstr "Helpdesk"
 
 #: includes/classes/class_ui.php:99 module.php:44
 msgid "change module"
-msgstr ""
+msgstr "module wijzigen"
 
 #: includes/classes/class_ui.php:378
 msgid "Version:"
-msgstr ""
+msgstr "Versie:"
 
 #: includes/classes/class_ui.php:384
 msgid "Source:"
-msgstr ""
+msgstr "Bron:"
 
 #: includes/classes/class_ui.php:424 includes/classes/class_ui.php:431
 msgid "Technical Problem?"
-msgstr ""
+msgstr "Technisch Probleem?"
 
 #: includes/classes/class_ui.php:425
 #, php-format
@@ -1321,6 +1384,9 @@ msgid ""
 "If you have a problem, find a bug or discover a technical problem in the "
 "system, <a href=\"%s/contact/index.php?q=bug\">contact us</a> to report it!"
 msgstr ""
+"Wanneer je een probleem ervaart, een bug vindt of een technisch probleem "
+"ontdekt in het systeem, aarzel dan niet om ons <a href=\""
+"%s/contact/index.php?q=bug\">te contacteren</a>!"
 
 #: includes/classes/class_ui.php:432
 #, php-format
@@ -1329,121 +1395,128 @@ msgid ""
 "system, please <a href=\"mailto:%s\" title=\"(email:%s)\">email us</a> to "
 "report it!"
 msgstr ""
+"Wanneer je een probleem ervaart, een bug vindt of een technisch probleem "
+"ontdekt in het systeem, aarzel dan niet om ons <a href=\"mailto:%s\" title=\""
+"(email:%s)\">een email te sturen</a>! "
 
 #: includes/classes/class_wizard.php:206 includes/classes/class_wizard.php:209
 #, php-format
 msgid "You are on <strong>step %d</strong> of <strong>%d</strong> in the %s"
-msgstr ""
+msgstr "U  bent op <strong>stap %d</strong> van <strong>%d</strong> in de %s"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "January"
-msgstr ""
+msgstr "januari"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "February"
-msgstr ""
+msgstr "februari"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "March"
-msgstr ""
+msgstr "maart"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "April"
-msgstr ""
+msgstr "april"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "May"
-msgstr ""
+msgstr "mei"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "June"
-msgstr ""
+msgstr "juni"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "July"
-msgstr ""
+msgstr "juli"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "August"
-msgstr ""
+msgstr "augustus"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "September"
-msgstr ""
+msgstr "september"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "October"
-msgstr ""
+msgstr "oktober"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "November"
-msgstr ""
+msgstr "november"
 
 #: includes/functions/lib_form_functions.php:14
 #: tutors/assessments/create/class_wizardstep_1.php:82
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "December"
-msgstr ""
+msgstr "december"
 
 #: includes/inc_global.php:145
 msgid "Score(s)"
-msgstr ""
+msgstr "Score(s)"
 
 #: includes/inc_global.php:178
 msgid "There is no error, the file uploaded with success."
-msgstr ""
+msgstr "Er is geen fout, het bestand werd succesvol geüpload."
 
 #: includes/inc_global.php:179
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr ""
+"Het geüploade bestand is groter dan de parameter max_filesize_directive in "
+"php.ini."
 
 #: includes/inc_global.php:180
 msgid ""
 "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
 "the HTML form."
 msgstr ""
+"Het geüploade bestand is groter dan de MAX_FILE_SIZE parameter van het HTML-"
+"formulier."
 
 #: includes/inc_global.php:181
 msgid "The uploaded file was only partially uploaded."
-msgstr ""
+msgstr "Het geüploade bestand was slechts partieel geüpload."
 
 #: includes/inc_global.php:182
 msgid "No file was uploaded."
-msgstr ""
+msgstr "Er werd geen bestand geüpload."
 
 #: includes/inc_global.php:183
 msgid "Missing a temporary folder."
-msgstr ""
+msgstr "Een tijdelijke map ontbreekt."
 
 #: includes/inc_global.php:184
 msgid "Failed to write file to disk."
-msgstr ""
+msgstr "Fout bij schrijven van het bestand naar de schijf."
 
 #: includes/inc_global.php:185
 msgid "A PHP extension stopped the file upload."
-msgstr ""
+msgstr "Een PHP-extensie heeft het uploaden van het bestand gestopt."
 
 #: lang/en/generic.php:21 tutors/assessments/create/class_wizardstep_5.php:140
 #: tutors/groups/create/class_wizardstep_3.php:68
@@ -1451,61 +1524,61 @@ msgstr ""
 #: tutors/groups/edit/edit_collection.php:201
 #: tutors/groups/edit/edit_collection_groups.php:81
 msgid "Groups"
-msgstr ""
+msgstr "Groepen"
 
 #: lang/en/generic.php:22 tutors/assessments/create/class_wizardstep_3.php:92
 msgid "Number of Groups"
-msgstr ""
+msgstr "Aantal Groepen"
 
 #: lang/en/generic.php:23 tutors/groups/edit/edit_collection.php:207
 msgid "edit group"
-msgstr ""
+msgstr "bewerk groep"
 
 #: lang/en/generic.php:24
 msgid "delete group"
-msgstr ""
+msgstr "verwijder groep"
 
 #: lang/en/generic.php:26 tutors/forms/edit/edit_form.php:234
 msgid "edit question"
-msgstr ""
+msgstr "bewerk vraag"
 
 #: lang/en/generic.php:28
 msgid "Please Note"
-msgstr ""
+msgstr "Merk Op"
 
 #: lang/en/generic.php:30 tutors/groups/edit/edit_collection_groups.php:79
 #: tutors/groups/edit/edit_collection_members.php:78
 msgid "Unknown Collection"
-msgstr ""
+msgstr "Onbekende Collectie"
 
 #: lang/en/generic.php:31
 msgid "Editing: Unknown Group"
-msgstr ""
+msgstr "Aanpassen: Onbekende Groep"
 
 #: lang/en/generic.php:32
 msgid "Editing group"
-msgstr ""
+msgstr "Groep bewerken"
 
 #: lang/en/generic.php:35 tutors/groups/clone/index.php:59
 #: tutors/groups/create/index.php:57 tutors/groups/edit/edit_collection.php:88
 #: tutors/groups/edit/edit_collection_groups.php:92
 #: tutors/groups/edit/edit_collection_members.php:92
 msgid "List Groups"
-msgstr ""
+msgstr "Groepenlijst"
 
 #: lang/en/generic.php:36 tutors/groups/clone/index.php:60
 #: tutors/groups/create/index.php:58 tutors/groups/edit/edit_collection.php:89
 #: tutors/groups/edit/edit_collection_groups.php:93
 #: tutors/groups/edit/edit_collection_members.php:93
 msgid "Create Groups"
-msgstr ""
+msgstr "Maak Groepen Aan"
 
 #: lang/en/generic.php:37 tutors/groups/clone/index.php:61
 #: tutors/groups/create/index.php:59 tutors/groups/edit/edit_collection.php:90
 #: tutors/groups/edit/edit_collection_groups.php:94
 #: tutors/groups/edit/edit_collection_members.php:94
 msgid "Clone Groups"
-msgstr ""
+msgstr "Kloon Groepen"
 
 #: lang/en/generic.php:39
 #: tutors/assessments/edit/change_assessment_collection.php:241
@@ -1517,7 +1590,7 @@ msgstr ""
 #: tutors/groups/edit/edit_collection_members.php:187
 #: tutors/groups/edit/edit_collection_members.php:196
 msgid "save changes"
-msgstr ""
+msgstr "bewaar aanpassingen"
 
 #: lang/en/generic.php:42 students/assessments/take/index.php:340
 #: tutors/assessments/edit/change_assessment_collection.php:145
@@ -1530,7 +1603,7 @@ msgstr ""
 #: tutors/groups/edit/edit_collection_groups.php:113
 #: tutors/groups/edit/edit_collection_members.php:111
 msgid "The following errors were found:"
-msgstr ""
+msgstr "De volgende fouten werden gevonden:"
 
 #: lang/en/generic.php:43 tutors/assessments/edit/edit_assessment.php:247
 #: tutors/assessments/marks/mark_assessment.php:186
@@ -1543,6 +1616,8 @@ msgid ""
 "No changes have been saved. Please check the details in the form, and try "
 "again."
 msgstr ""
+"Uw antwoorden werden niet opgeslagen. Gelieve de details van het formulier "
+"te controleren en opnieuw te proberen."
 
 #: lang/en/tutors/tutors.php:18
 msgid ""
@@ -1554,7 +1629,7 @@ msgstr ""
 
 #: lang/en/tutors/tutors.php:19
 msgid "WebPA contains the following sections:"
-msgstr ""
+msgstr "WebPA bevat de volgende secties:"
 
 #: lang/en/tutors/tutors.php:20
 msgid ""
@@ -1576,7 +1651,7 @@ msgstr ""
 
 #: lang/en/tutors/tutors.php:23
 msgid "Getting Started"
-msgstr ""
+msgstr "Beginnen"
 
 #: lang/en/tutors/tutors.php:24
 msgid ""
@@ -1590,25 +1665,31 @@ msgid ""
 "Here you can edit your groups, and organise how students are allocated to "
 "the individual groups."
 msgstr ""
+"Hier kan u uw groepen aanpassen en organiseren hoe studenten geregistreerd "
+"zijn bij de individuele groepen."
 
 #: lang/en/tutors/tutors.php:28
 msgid "Existing Groups"
-msgstr ""
+msgstr "Bestaande Groepen"
 
 #: lang/en/tutors/tutors.php:29
 msgid ""
 "You have no groups. To add a collection use the <a href=\"create/\">create "
 "new groups wizard</a>."
 msgstr ""
+"U heeft geen groepen. Om een collectie toe te voegen gebruik de <a href=\""
+"create/\">maak nieuwe groepen wizard</a>."
 
 #: lang/en/tutors/tutors.php:30
 msgid ""
 "These are your groups. To view or edit a collection of groups, click on "
 msgstr ""
+"Dit zijn uw groepen. Om een collectie van groepen te bekijken of bewerken, "
+"klik op "
 
 #: lang/en/tutors/tutors.php:31
 msgid "in the list below."
-msgstr ""
+msgstr "in de onderstaande lijst."
 
 #: lang/en/tutors/tutors.php:33
 msgid ""
@@ -1626,23 +1707,27 @@ msgstr ""
 
 #: lang/en/tutors/tutors.php:37
 msgid "Group Collections"
-msgstr ""
+msgstr "Groepcollecties"
 
 #: lang/en/tutors/tutors.php:38
 msgid ""
 "You have no collections. To add a collection use the <a href=\"../create/"
 "\">create new groups wizard</a>."
 msgstr ""
+"U heeft geen groepscollecties. Om een collectie toe te voegen gebruik de <a "
+"href=\"../create/\">maak nieuwe groepen wizard</a>."
 
 #: lang/en/tutors/tutors.php:39
 msgid ""
 "These are your group collections. To view or edit a collection, click on its "
 "name in the list below:"
 msgstr ""
+"Dit zijn uw groepscollecties. Om een groepscollectie te bekijken of aan te "
+"passen, klik op zijn naam in onderstaande lijst:"
 
 #: lang/en/tutors/tutors.php:42
 msgid "You must give this group a name."
-msgstr ""
+msgstr "U moet deze groep een naam geven."
 
 #: lang/en/tutors/tutors.php:44
 msgid ""
@@ -1656,36 +1741,48 @@ msgid ""
 "<p>On this page you can change the name of this group, and add/remove "
 "students from it.</p>"
 msgstr ""
+"<p>Op deze pagina kan u de naam van deze groep aanpassen en er studenten aan/"
+"van toevoegen/verwijderen.</p>"
 
 #: lang/en/tutors/tutors.php:47
 msgid ""
 "<p>The group you selected could not be loaded for some reason - please go "
 "back and try again.</p>"
 msgstr ""
+"<p>De geselecteerde groep kon niet geladen worden - gelieve terug te gaan en "
+"opnieuw te proberen.</p>"
 
 #: login.php:26
 msgid ""
 "A connection to the authentication server could not be established.<br /"
 ">Please try again later."
 msgstr ""
+"Er kon geen verbinding gemaakt worden met de authenticatieserver.<br />"
+"Gelieve later opnieuw te proberen."
 
 #: login.php:31
 msgid ""
 "You attempted to access a restricted page.<br />It may be that your session "
 "has timed out so please re-enter your details."
 msgstr ""
+"U heeft geen toegang tot deze pagina.<br />Mogelijks is uw sessie verlopen "
+"en moet u opnieuw inloggen."
 
 #: login.php:36
 msgid ""
 "Your account has been disabled.<br />Please contact support if you do not "
 "think this should be the case."
 msgstr ""
+"Uw account is niet actief.<br />Gelieve de helpdesk te contacteren bij "
+"verdere problemen."
 
 #: login.php:41
 msgid ""
 "Your username and password were rejected.<br />Please check your details and "
 "try again."
 msgstr ""
+"Uw gebruikersnaam en wachtwoord werden geweigerd.<br />Gelieve uw gegevens "
+"te controleren en opnieuw te proberen."
 
 #: login.php:46
 #, php-format
@@ -1693,59 +1790,65 @@ msgid ""
 "Unable to connect to %s; please ensure that your browser is not blocking "
 "third-party cookies"
 msgstr ""
+"Onmogelijk verbinding te maken met %s; gelieve te controleren dat uw browser "
+"geen cookies blokkeert."
 
 #: login.php:51
 msgid ""
 "You have logged out.<br />If you wish to log back in, please re-enter your "
 "details."
 msgstr ""
+"U bent uitgelogd.<br />Gelieve uw gegevens in te geven als u opnieuw wenst "
+"in te loggen."
 
 #: login.php:56
 #, php-format
 msgid "To start using %s you have to log in."
-msgstr ""
+msgstr "Om %s te beginnen gebruiken moet u inloggen."
 
 #: login.php:67
 msgid "login page"
-msgstr ""
+msgstr "inlogpagina"
 
 #: login.php:103
 msgid "Please enter your details below"
-msgstr ""
+msgstr "Gelieve uw gegevens hieronder in te geven"
 
 #: login.php:119
 msgid "login"
-msgstr ""
+msgstr "login"
 
 #: login.php:123
 msgid "Forgotten your password?"
-msgstr ""
+msgstr "Wachtwoord vergeten?"
 
 #: login.php:124
 msgid ""
 "This site requires cookies - If you have trouble logging in, please check "
 "your cookie settings."
 msgstr ""
+"Deze webpagina vereist cookies - Als u problemen heeft met in te loggen, "
+"gelieve uw cookievoorkeuren te controleren."
 
 #: module.php:43
 msgid "Change Module"
-msgstr ""
+msgstr "Module Wijzigen"
 
 #: module.php:45
 msgid "change source"
-msgstr ""
+msgstr "bron wisselen"
 
 #: module.php:53
 msgid "Use this page to change the currently selected module."
-msgstr ""
+msgstr "Gebruik deze pagina om de huidig geselecteerde module te veranderen."
 
 #: module.php:81
 msgid "No modules"
-msgstr ""
+msgstr "Geen modules"
 
 #: module.php:91
 msgid "Select module"
-msgstr ""
+msgstr "Selecteer module"
 
 #: students/assessments/assessment_feedback.php:44
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:37
@@ -1757,7 +1860,7 @@ msgstr ""
 #: tutors/assessments/reports/report_uea.php:44
 #: tutors/assessments/reports/report_uea_anonymous.php:43
 msgid "Error: The requested assessment could not be loaded."
-msgstr ""
+msgstr "Fout: De gevraagde assessment kon niet geladen worden."
 
 #: students/assessments/assessment_feedback.php:68
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:59
@@ -1769,11 +1872,11 @@ msgstr ""
 #: tutors/assessments/reports/report_uea.php:61
 #: tutors/assessments/reports/report_uea_anonymous.php:60
 msgid "Error: The requested algorithm could not be loaded."
-msgstr ""
+msgstr "Fout: Het gevraagde algoritme kon niet geladen worden."
 
 #: students/assessments/assessment_feedback.php:112
 msgid "Feedback Report"
-msgstr ""
+msgstr "Feedbackverslag"
 
 #: students/assessments/assessment_feedback.php:132
 #, php-format
@@ -1782,14 +1885,17 @@ msgid ""
 "from the self and peer assessment %s only and does <b>not</b> take account "
 "of the overall group %s for the project."
 msgstr ""
+"Het volgende is gebaseerd op basis van uw relatieve bijdrage tot de groep, "
+"bepaald enkel met de zelf en peer assessment %s en houdt <b>geen</b> "
+"rekening met de totale groeps %s voor het project."
 
 #: students/assessments/assessment_feedback.php:140
 msgid "WebPA could not generate feedback for your assessment."
-msgstr ""
+msgstr "WebPA kon geen feedback genereren voor uw assessment."
 
 #: students/assessments/assessment_feedback.php:141
 msgid "There was a technical problem retrieving your information."
-msgstr ""
+msgstr "Er was een technisch probleem bij het opvragen van uw gegevens."
 
 #: students/assessments/assessment_feedback.php:212
 #, php-format
@@ -1797,50 +1903,56 @@ msgid ""
 "Your group has %s everyone equally, hence we are unable to provide feedback "
 "on your relative performance for different assessment criteria."
 msgstr ""
+"Uw groep heeft iedereen gelijk gescoord zodat we geen feedback kunnen geven "
+"over uw relatieve prestaties voor verschillende assessment criteria."
 
 #: students/assessments/assessment_feedback.php:236
 #: students/assessments/assessment_feedback.php:242
 msgid ""
 "Your strongest contribution within this project was rated by your group as:"
-msgstr ""
+msgstr "Uw sterkste bijdrage binnen dit project werd bepaald door uw groep als:"
 
 #: students/assessments/assessment_feedback.php:250
 #: students/assessments/assessment_feedback.php:303
 msgid "WebPA has been unable to generate any feedback"
-msgstr ""
+msgstr "WebPA heeft geen feedback kunnen genereren"
 
 #: students/assessments/assessment_feedback.php:274
 #: students/assessments/assessment_feedback.php:281
 #: students/assessments/assessment_feedback.php:296
 msgid "An area you may wish to develop is your contribution to:"
-msgstr ""
+msgstr "Een gebied waar u mogelijks wil aan werken is uw bijdrage tot:"
 
 #: students/assessments/assessment_feedback.php:312
 msgid "close"
-msgstr ""
+msgstr "sluiten"
 
 #: students/assessments/index.php:112
 msgid ""
 "This page lists all the assessments you are registered on in this module."
 msgstr ""
+"Deze pagina lijst alle assessments van deze module waarbij u geregistreerd "
+"bent."
 
 #: students/assessments/index.php:118
 msgid ""
 "You are not registered with any peer assessments in this module at the "
 "moment."
 msgstr ""
+"U bent momenteel niet geregistreerd bij een peer assessment in deze module."
 
 #: students/assessments/index.php:120
 msgid "You are registered on the following peer assessments in this module:"
-msgstr ""
+msgstr "U bent geregistreerd bij de volgende peer assessments in deze module:"
 
 #: students/assessments/index.php:124 students/index.php:127
 msgid "Open Assessments"
-msgstr ""
+msgstr "Openstaande Assessments"
 
 #: students/assessments/index.php:125
 msgid "These assessments are now open for you to take and record your group"
 msgstr ""
+"Deze assessments zijn nu open voor u om in te vullen en uw groep te evalueren"
 
 #: students/assessments/index.php:143 students/index.php:145
 #: students/index.php:181 tutors/assessments/inc_list_closed.php:81
@@ -1848,29 +1960,31 @@ msgstr ""
 #: tutors/assessments/inc_list_open.php:76
 #: tutors/assessments/inc_list_pending.php:75
 msgid "scheduled:"
-msgstr ""
+msgstr "gepland:"
 
 #: students/assessments/index.php:147 students/index.php:149
 msgid "Take Assessment"
-msgstr ""
+msgstr "Doe Assessment"
 
 #: students/assessments/index.php:159 students/index.php:162
 msgid "Pending Assessments"
-msgstr ""
+msgstr "Geplande Assessments"
 
 #: students/assessments/index.php:160 students/index.php:163
 msgid "These assessments scheduled for some point in the future."
-msgstr ""
+msgstr "Deze assessments zijn gepland voor een later moment."
 
 #: students/assessments/index.php:192
 msgid "Finished Assessments"
-msgstr ""
+msgstr "Afgewerkte Assessments"
 
 #: students/assessments/index.php:193
 msgid ""
 "These assessments you have already taken, or which have passed their "
 "deadline for completion."
 msgstr ""
+"Deze assessments hebt u reeds ingevuld of hebben een deadline die verstreken "
+"is."
 
 #: students/assessments/index.php:194
 msgid ""
@@ -1878,6 +1992,9 @@ msgid ""
 "Click <em>view feedback</em> (if available) for a particular assessment to "
 "see the feedback."
 msgstr ""
+"Sommige van uw assessments laten u mogelijks toe om feedback te zien over uw "
+"prestaties. Klik op <em>bekijk feedback</em> (indien beschikbaar) voor een "
+"bepaalde assessment om de feedback te bekijken."
 
 #: students/assessments/index.php:207
 #: tutors/assessments/inc_list_closed.php:66
@@ -1885,15 +2002,15 @@ msgstr ""
 #: tutors/assessments/inc_list_open.php:61
 #: tutors/assessments/inc_list_pending.php:62
 msgid "COMPLETED"
-msgstr ""
+msgstr "AFGEWERKT"
 
 #: students/assessments/index.php:207
 msgid "DID NOT<br />SUBMIT"
-msgstr ""
+msgstr "NIET<br />INGEDIEND"
 
 #: students/assessments/take/already_submitted.php:42
 msgid "already submitted"
-msgstr ""
+msgstr "reeds ingediend"
 
 #: students/assessments/take/already_submitted.php:59
 #: students/assessments/take/already_submitted.php:70
@@ -1912,7 +2029,7 @@ msgstr ""
 #: tutors/assessments/students_who_responded.php:89
 #: tutors/forms/edit/preview_form.php:82
 msgid "back to assessments list"
-msgstr ""
+msgstr "terug naar de assessmentlijst"
 
 #: students/assessments/take/already_submitted.php:62
 #, php-format
@@ -1920,6 +2037,8 @@ msgid ""
 "The assessment you selected could not be loaded for some reason - However, "
 "you have already submitted your %s for this assessment."
 msgstr ""
+"De geselecteerde assessment kon niet geladen worden - Echter, u heeft reeds "
+"uw %s ingediend voor deze assessment."
 
 #: students/assessments/take/already_submitted.php:63
 #: students/assessments/take/not_open.php:62
@@ -1928,11 +2047,14 @@ msgid ""
 "system to <a href=\"/students/support/contact/index.php?q=bug\">report the "
 "error"
 msgstr ""
+"Als het probleem met deze assessment te laden blijft, gelieve het "
+"contactsysteem te gebruiken om <a href=\""
+"/students/support/contact/index.php?q=bug\">de fout te rapporteren"
 
 #: students/assessments/take/already_submitted.php:75
 #, php-format
 msgid "You have already submitted your %s for this assessment:"
-msgstr ""
+msgstr "U heeft reeds uw %s ingediend voor deze assessment:"
 
 #: students/assessments/take/already_submitted.php:76
 #, php-format
@@ -1940,10 +2062,12 @@ msgid ""
 "If you have another assessment to take, please select it from your <a href="
 "\"%s\">assessments list"
 msgstr ""
+"Als u een andere assessment heeft om in te vullen, gelieve deze te "
+"selecteren van op uw <a href=\"%s\">assessmentlijst"
 
 #: students/assessments/take/finished.php:41
 msgid "finished:"
-msgstr ""
+msgstr "afgelopen:"
 
 #: students/assessments/take/finished.php:62
 #, php-format
@@ -1952,16 +2076,21 @@ msgid ""
 "for this assessment should have been saved so please check this from the <a "
 "href=\"../../\">my assessments</a> section."
 msgstr ""
+"De geselecteerde assessment kon niet geladen worden - Uw %s voor deze "
+"assessment zou opgeslagen moeten zijn dus gelieve dit te controleren via de <"
+"a href=\"../../\">mijn assessments</a> sectie."
 
 #: students/assessments/take/finished.php:63
 msgid ""
 "If the problem persists, please use the contact system to <a href=\"../../"
 "support/contact/index.php?q=bug\">report the error"
 msgstr ""
+"Als het probleem blijft, gelieve het contactsysteem te gebruiken om <a href="
+"\"../../support/contact/index.php?q=bug\">de fout te rapporteren"
 
 #: students/assessments/take/finished.php:75
 msgid "Thank you, your marks have now been saved."
-msgstr ""
+msgstr "Bedankt, uw scores werden opgeslagen."
 
 #: students/assessments/take/finished.php:76
 #, php-format
@@ -1969,26 +2098,31 @@ msgid ""
 "You can now check your <a href=\"../../\">assessments list</a> and take "
 "another assessment, or finish with WebPA and <a href=\"%s/logout.php\">logout"
 msgstr ""
+"U kan nu uw <a href=\"../../\">assessmentlijst</a> controleren en een nieuwe "
+"assessment invullen of afsluiten met WebPA en <a href=\"%s/logout.php\""
+">uitloggen"
 
 #: students/assessments/take/index.php:122
 msgid ""
 "You were too late in submitting your answers, the assessment is now closed."
 msgstr ""
+"U was te laat bij het indienen van uw antwoorden, de assessment is nu "
+"gesloten."
 
 #: students/assessments/take/index.php:133
 msgid "Unable to load question data!"
-msgstr ""
+msgstr "Kon de vraag niet laden!"
 
 #: students/assessments/take/index.php:153
 #: students/assessments/take/index.php:200
 #, php-format
 msgid "You didn't give a %s for '%s' in Q%d."
-msgstr ""
+msgstr "U gaf geen %s voor '%s' in Q%d."
 
 #: students/assessments/take/index.php:157
 #, php-format
 msgid "You didn't give a valid %s for '%s' in Q%d."
-msgstr ""
+msgstr "U gaf geen geldige %s voor '%s' in Q%d."
 
 #: students/assessments/take/index.php:162
 #, php-format
@@ -1996,11 +2130,13 @@ msgid ""
 "Your %s of %d for '%s' in Q%d is invalid.<br /> %s must be between 0 and "
 "%.2f."
 msgstr ""
+"Uw %s van %d voor '%s' in Q%d is ongeldig.<br /> %s moet tussen 0 en %.2f "
+"liggen."
 
 #: students/assessments/take/index.php:180
 #, php-format
 msgid "The total %s for Q%d should be %d. You have %s totalling %d."
-msgstr ""
+msgstr "De totale %s voor Q%d moet %d zijn. U heeft %s met in totaal %d."
 
 #: students/assessments/take/index.php:208
 #, php-format
@@ -2008,12 +2144,16 @@ msgid ""
 "The %s of %d given in Q%d for %s is not allowed. %s must be between %d and "
 "%d."
 msgstr ""
+"The %s van %d gegeven in Q%d voor %s is niet toegelaten. %s moet tussen %d "
+"en %d gelegen zijn."
 
 #: students/assessments/take/index.php:340
 msgid ""
 "Your responses have not been saved. Please check the details in the form, "
 "and try again."
 msgstr ""
+"Uw antwoorden werden niet opgeslagen. Gelieve de gegevens in het formulier "
+"na te gaan en opnieuw te proberen."
 
 #: students/assessments/take/index.php:352
 #: tutors/assessments/edit/change_assessment_collection.php:160
@@ -2025,17 +2165,21 @@ msgid ""
 "The assessment you selected could not be loaded for some reason - please go "
 "back and try again."
 msgstr ""
+"De geselecteerde assessment kon niet geladen worden - gelieve terug te gaan "
+"en opnieuw te proberen."
 
 #: students/assessments/take/index.php:353
 msgid ""
 "If the problem persists, please use the contact system to <a href=\"/"
 "students/support/contact/index.php?q=bug\">report the error"
 msgstr ""
+"Als het probleem blijft, gelieve het contactsysteem te gebruiken om <a href="
+"\"/students/support/contact/index.php?q=bug\">de fout te rapporteren"
 
 #: students/assessments/take/index.php:370
 #: tutors/forms/edit/preview_form.php:87
 msgid "Taking This Assessment"
-msgstr ""
+msgstr "De assessment uitvoeren"
 
 #: students/assessments/take/index.php:372
 #, php-format
@@ -2043,10 +2187,12 @@ msgid ""
 "Please complete the assessment below. For each question <em>you must give a "
 "%s to each group member"
 msgstr ""
+"Gelieve de assessment hieronder te vervolledigen. Voor elke vraag <em>moet u "
+"een %s geven aan elk groepslid"
 
 #: students/assessments/take/index.php:372
 msgid ", including yourself"
-msgstr ""
+msgstr ", uzelf inbegrepen"
 
 #: students/assessments/take/index.php:373
 #, php-format
@@ -2054,6 +2200,9 @@ msgid ""
 "To save your %s, you must click the <em>Save %s</em> button.  Once you have "
 "successfully submitted your responses you cannot go back and change your %s."
 msgstr ""
+"Om uw %s op te slaan, moet u klikken op de <em>Bewaar %s</em> knop. Zodra u "
+"uw antwoorden succesvol hebt ingediend kan u niet meer teruggaan en uw %s "
+"aanpassen."
 
 #: students/assessments/take/index.php:374
 #: tutors/forms/edit/preview_form.php:91
@@ -2061,22 +2210,24 @@ msgid ""
 "To leave this assessment without saving, click the <em>back to assessments "
 "list</em> link above, or choosing an option from the menu."
 msgstr ""
+"Om deze assessment te verlaten zonder op te slaan, klik op de <em>terug naar "
+"de assessmentlijst</em> link hierboven of kies een optie van het menu."
 
 #: students/assessments/take/index.php:378
 msgid "Your Team"
-msgstr ""
+msgstr "Uw Team"
 
 #: students/assessments/take/index.php:388
 #: tutors/assessments/create/class_wizardstep_1.php:145
 #: tutors/assessments/edit/edit_assessment.php:329
 #: tutors/forms/edit/preview_form.php:102
 msgid "Introduction"
-msgstr ""
+msgstr "Inleiding"
 
 #: students/assessments/take/index.php:397 tutors/forms/edit/edit_form.php:187
 #: tutors/forms/edit/preview_form.php:111
 msgid "Assessment Criteria"
-msgstr ""
+msgstr "Assessmentcriteria"
 
 #: students/assessments/take/index.php:403
 #, php-format
@@ -2084,6 +2235,8 @@ msgid ""
 "That concludes this peer assessment. To finish and submit your response "
 "click the <em>save %s</em> button below."
 msgstr ""
+"Dat concludeert deze peer assessment. Om te beëindigen en uw antwoorden in "
+"te dienen, klik op de <em>bewaar %s</em> knop hieronder."
 
 #: students/assessments/take/index.php:404
 #, php-format
@@ -2091,15 +2244,17 @@ msgid ""
 "Once you have successfully submitted your responses you cannot go back and "
 "change your %s."
 msgstr ""
+"Zodra u uw antwoorden succesvol hebt ingediend kan u niet meer teruggaan en "
+"uw %s aanpassen."
 
 #: students/assessments/take/index.php:407
 #, php-format
 msgid "save %s"
-msgstr ""
+msgstr "bewaar %s"
 
 #: students/assessments/take/not_open.php:41
 msgid "not open"
-msgstr ""
+msgstr "niet open"
 
 #: students/assessments/take/not_open.php:61
 #, php-format
@@ -2107,12 +2262,14 @@ msgid ""
 "The assessment you selected could not be loaded for some reason - However, "
 "in this case, the assessment is <em>not open and cannot accept student %s"
 msgstr ""
+"De geselecteerde assessment kon niet geladen worden - Echter, in dit geval, "
+"is de assessment <em>niet open en kan het geen studenten%s accepteren"
 
 #: students/assessments/take/not_open.php:74
 #, php-format
 msgid ""
 "This assessment is not open at the present time, so you cannot submit any %s."
-msgstr ""
+msgstr "Deze assessment is momenteel niet open, dus u kan geen %s indienen. "
 
 #: students/assessments/take/not_open.php:75
 #, php-format
@@ -2121,33 +2278,40 @@ msgid ""
 "have another assessment to take, please select it from your <a href=\"%s"
 "\">assessments list</a>"
 msgstr ""
+"Als u een deadline gemist heeft, contacteer uw professor. Anders, als u een "
+"andere assessment heeft om in te vullen, gelieve deze te selecteren in uw <a "
+"href=\"%s\">assessmentslijst</a>"
 
 #: students/groups/index.php:65
 msgid ""
 "Here you can view which groups you are a member of, and who the other "
 "members are."
 msgstr ""
+"Hier kan u de groepen zien waarvan u lid bent en wie de andere groepsleden "
+"zijn."
 
 #: students/groups/index.php:69 tutors/groups/clone/class_wizardstep_1.php:65
 msgid "Your Groups"
-msgstr ""
+msgstr "Uw Groepen"
 
 #: students/groups/index.php:74
 msgid "You are not listed as a member of any group."
-msgstr ""
+msgstr "U bent nog niet geregistreerd als een lid van een groep."
 
 #: students/groups/index.php:75
 msgid ""
 "Only groups that have been scheduled an assessment will appear in this list."
 msgstr ""
+"Enkel groepen die een assessment gepland hebben zullen verschijnen in deze "
+"lijst."
 
 #: students/groups/index.php:80
 msgid "You belong to the following groups."
-msgstr ""
+msgstr "U behoort tot de volgende groepen."
 
 #: students/index.php:96
 msgid "You will need to seek help from your tutor."
-msgstr ""
+msgstr "U zal hulp moeten zoeken bij uw titularis."
 
 #: students/index.php:113
 msgid ""
@@ -2159,36 +2323,41 @@ msgstr ""
 msgid ""
 "There are no assessments in this module available for you to take at the "
 "moment."
-msgstr ""
+msgstr "Er zijn momenteel geen assessments in deze module die u kan invullen."
 
 #: students/index.php:120
 msgid ""
 "To view all the assessments you are registered on, please check the <a href="
 "\"assessments/\">my assessments</a> section."
 msgstr ""
+"Om alle assessments waarbij u geregistreerd bent te bekijken, gelieve de <a "
+"href=\"assessments/\">mijn assessments</a> sectie te bekijken."
 
 #: students/index.php:124
 msgid "Below is a list of the assessments in this module you can take now."
 msgstr ""
+"Hieronder is een lijst van de assessments in de module die u nu kan invullen."
 
 #: students/index.php:125
 msgid ""
 "To view all the assessments you are registered on in this module, please "
 "check the <a href=\"assessments/\">my assessments</a> section."
 msgstr ""
+"Om alle assessments waarbij u geregistreerd bent in deze module te bekijken, "
+"gelieve de <a href=\"assessments/\">mijn assessments</a> sectie te bekijken."
 
 #: students/index.php:196
 msgid "Getting Help"
-msgstr ""
+msgstr "Hulp Verkrijgen"
 
 #: tutors/assessments/clone/index.php:23
 #: tutors/assessments/create/index.php:49
 msgid "Create a new assessment"
-msgstr ""
+msgstr "Maak een nieuwe assessment"
 
 #: tutors/assessments/clone/index.php:28
 msgid "clone an assessment"
-msgstr ""
+msgstr "kloon een assessment"
 
 #: tutors/assessments/clone/index.php:30
 #: tutors/assessments/create/index.php:56
@@ -2204,7 +2373,7 @@ msgstr ""
 #: tutors/assessments/reports/students_who_responded.php:63
 #: tutors/assessments/students_who_responded.php:65
 msgid "List Assessments"
-msgstr ""
+msgstr "Assessmentslijst"
 
 #: tutors/assessments/clone/index.php:31
 #: tutors/assessments/create/index.php:57
@@ -2220,11 +2389,11 @@ msgstr ""
 #: tutors/assessments/reports/students_who_responded.php:64
 #: tutors/assessments/students_who_responded.php:66
 msgid "Create Assessments"
-msgstr ""
+msgstr "Creëer Assessments"
 
 #: tutors/assessments/clone/index.php:37
 msgid "This function is not yet available"
-msgstr ""
+msgstr "Deze functie is nog niet beschikbaar"
 
 #: tutors/assessments/create/class_wizardstep_1.php:27
 #: tutors/assessments/create/class_wizardstep_2.php:28
@@ -2242,7 +2411,7 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_2.php:27
 #: tutors/groups/create/class_wizardstep_x.php:26
 msgid "Next &gt;"
-msgstr ""
+msgstr "Volgende &gt;"
 
 #: tutors/assessments/create/class_wizardstep_1.php:115
 msgid ""
@@ -2250,30 +2419,32 @@ msgid ""
 "confusion, the name should be unique, but you can create assessments using "
 "the same name if you wish."
 msgstr ""
+"Om een nieuwe assessment aan te maken, moet u eerst een naam ingeven. Om "
+"verwarring te vermijden kiest u best een unieke naam."
 
 #: tutors/assessments/create/class_wizardstep_1.php:120
 msgid "Name for this new assessment"
-msgstr ""
+msgstr "Naam voor deze nieuwe assessment"
 
 #: tutors/assessments/create/class_wizardstep_1.php:126
 msgid ""
 "Now choose a schedule for when, and for how long, this assessment will run."
-msgstr ""
+msgstr "Kies nu wanneer en voor hoe lang deze assessment beschikbaar moet zijn."
 
 #: tutors/assessments/create/class_wizardstep_1.php:130
 #: tutors/assessments/edit/edit_assessment.php:315
 msgid "Opening date"
-msgstr ""
+msgstr "Startdatum"
 
 #: tutors/assessments/create/class_wizardstep_1.php:134
 #: tutors/assessments/edit/edit_assessment.php:319
 msgid "Closing date"
-msgstr ""
+msgstr "Einddatum"
 
 #: tutors/assessments/create/class_wizardstep_1.php:140
 msgid ""
 "Now enter the text to use as the introduction to your assessment (optional)."
-msgstr ""
+msgstr "Voer nu de inleidingstekst voor uw assessment in (optioneel)."
 
 #: tutors/assessments/create/class_wizardstep_1.php:141
 msgid ""
@@ -2287,22 +2458,22 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_4.php:79
 #: tutors/assessments/marks/mark_assessment.php:258
 msgid "Advanced Options"
-msgstr ""
+msgstr "Geavanceerde Opties"
 
 #: tutors/assessments/create/class_wizardstep_1.php:151
 #: tutors/assessments/create/class_wizardstep_2.php:117
 #: tutors/assessments/create/class_wizardstep_4.php:79
 #: tutors/assessments/marks/mark_assessment.php:258
 msgid "view / hide advanced options"
-msgstr ""
+msgstr "toon / verberg geavanceerde opties"
 
 #: tutors/assessments/create/class_wizardstep_1.php:155
 msgid "notification emails"
-msgstr ""
+msgstr "notificatiemails"
 
 #: tutors/assessments/create/class_wizardstep_1.php:157
 msgid "Do you want to email all students when this assessment is created?"
-msgstr ""
+msgstr "Wilt u alle studenten e-mailen wanneer deze assessment gecreëerd is?"
 
 #: tutors/assessments/create/class_wizardstep_1.php:158
 msgid ""
@@ -2310,6 +2481,9 @@ msgid ""
 "for this assessment as soon as you click the finish button at the end of the "
 "wizard."
 msgstr ""
+"Deze optie zal een e-mail versturen naar alle studenten die in de groepen "
+"van deze assessment zitten zodra u op de voltooien-knop klikt op het einde "
+"van de wizard."
 
 #: tutors/assessments/create/class_wizardstep_1.php:163
 #: tutors/assessments/create/class_wizardstep_1.php:181
@@ -2317,7 +2491,7 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:354
 #: tutors/assessments/edit/edit_assessment.php:374
 msgid "Yes, email all students."
-msgstr ""
+msgstr "Ja, e-mail alle studenten."
 
 #: tutors/assessments/create/class_wizardstep_1.php:167
 #: tutors/assessments/create/class_wizardstep_1.php:185
@@ -2325,39 +2499,43 @@ msgstr ""
 #: tutors/assessments/edit/edit_assessment.php:358
 #: tutors/assessments/edit/edit_assessment.php:378
 msgid "No, don't email all students."
-msgstr ""
+msgstr "Nee, niet alle studenten e-mailen."
 
 #: tutors/assessments/create/class_wizardstep_1.php:175
 msgid ""
 "Do you want an email reminder sent to all students 48 hours before the "
 "assessment is opened?"
-msgstr ""
+msgstr "Wilt u alle studenten e-mailen 48 uur voor de assessment opent?"
 
 #: tutors/assessments/create/class_wizardstep_1.php:176
 msgid ""
 "This option will send an email to all of the students who are in the groups "
 "for this assessment 48 hours (approx.) before the assessment opens."
 msgstr ""
+"Deze optie zal een e-mail versturen naar alle studenten die in de groepen "
+"van deze assessment zitten ongeveer 48 uur vooraleer de assessment opent."
 
 #: tutors/assessments/create/class_wizardstep_1.php:194
 msgid ""
 "Do you want to email all students 48 hours before the assessment closes?"
-msgstr ""
+msgstr "Wilt u alle studenten e-mailen 48 uur voor de assessment sluit?"
 
 #: tutors/assessments/create/class_wizardstep_1.php:195
 msgid ""
 "This option will send an email to all of the students who are in the groups "
 "for this assessment 48 hours (approx.) before the assessment closes."
 msgstr ""
+"Deze optie zal een e-mail versturen naar alle studenten die in de groepen "
+"van deze assessment zitten ongeveer 48 uur vóór de assessment sluit."
 
 #: tutors/assessments/create/class_wizardstep_1.php:223
 msgid "You must enter a name for your new assessment"
-msgstr ""
+msgstr "U moet een naam ingeven voor uw nieuwe assessment"
 
 #: tutors/assessments/create/class_wizardstep_1.php:241
 #: tutors/assessments/edit/edit_assessment.php:123
 msgid "You must select a closing date/time that is after your opening date"
-msgstr ""
+msgstr "U moet een einddatum kiezen na uw startdatum."
 
 #: tutors/assessments/create/class_wizardstep_2.php:27
 #: tutors/assessments/create/class_wizardstep_3.php:27
@@ -2387,18 +2565,20 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_4.php:73
 #: tutors/groups/create/class_wizardstep_x.php:25
 msgid "&lt; Back"
-msgstr ""
+msgstr "&lt; Terug"
 
 #: tutors/assessments/create/class_wizardstep_2.php:80
 #: tutors/assessments/edit/change_assessment_form.php:204
 msgid "You haven't yet created any assessment forms."
-msgstr ""
+msgstr "U heeft nog geen assessmentformulieren aangemaakt."
 
 #: tutors/assessments/create/class_wizardstep_2.php:81
 msgid ""
 "You need to <a href=\"../../forms/create/\">create a new form</a> before you "
 "will be able to run any peer assessments."
 msgstr ""
+"U moet <a href=\"../../forms/create/\">een nieuw formulier aanmaken</a> "
+"vooraleer u een peer assessment kan aanmaken."
 
 #: tutors/assessments/create/class_wizardstep_2.php:85
 msgid ""
@@ -2417,18 +2597,21 @@ msgid ""
 "The form you select will be copied into your new assessment.  Subsequent "
 "changes to the form '''will not''' affect your assessment."
 msgstr ""
+"Het formulier dat u selecteert zal gekopieerd worden naar uw nieuwe "
+"assessment. Latere aanpassingen aan het formulier zullen uw assessment \"\""
+"niet\"\" beïnvloeden."
 
 #: tutors/assessments/create/class_wizardstep_2.php:89
 msgid "Your assessment forms"
-msgstr ""
+msgstr "Uw assessmentformulieren."
 
 #: tutors/assessments/create/class_wizardstep_2.php:120
 msgid "Feedback / justification"
-msgstr ""
+msgstr "Feedback / verantwoording"
 
 #: tutors/assessments/create/class_wizardstep_2.php:121
 msgid "Do you want students to be able to view feedback for this assesment?"
-msgstr ""
+msgstr "Wilt u dat studenten feedback kunnen bekijken voor deze assessment?"
 
 #: tutors/assessments/create/class_wizardstep_2.php:122
 msgid ""
@@ -2441,16 +2624,16 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_2.php:127
 #: tutors/assessments/edit/edit_assessment.php:433
 msgid "Yes, allow students to view feedback."
-msgstr ""
+msgstr "Ja, studenten mogen feedback zien."
 
 #: tutors/assessments/create/class_wizardstep_2.php:131
 #: tutors/assessments/edit/edit_assessment.php:437
 msgid "No, there is no feedback for this assessment."
-msgstr ""
+msgstr "Nee, er is geen feedback voor deze assessment."
 
 #: tutors/assessments/create/class_wizardstep_2.php:135
 msgid "Would you like students to enter feedback textually?"
-msgstr ""
+msgstr "Wilt u dat studenten tekstueel feedback kunnen ingeven?"
 
 #: tutors/assessments/create/class_wizardstep_2.php:136
 msgid ""
@@ -2462,20 +2645,21 @@ msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_2.php:145
 msgid "Yes</b>, allow students to comment."
-msgstr ""
+msgstr "Ja</b>, laat studenten toe commentaar in te geven."
 
 #: tutors/assessments/create/class_wizardstep_2.php:149
 msgid "No</b>, don't allow students to comment."
-msgstr ""
+msgstr "Nee</b>, laat studenten niet toe commentaar te geven."
 
 #: tutors/assessments/create/class_wizardstep_2.php:164
 msgid "You must select a form to use with your new assessment"
 msgstr ""
+"U moet een formulier selecteren om te gebruiken met uw nieuwe assessment"
 
 #: tutors/assessments/create/class_wizardstep_3.php:65
 #: tutors/assessments/edit/change_assessment_collection.php:211
 msgid "You haven't yet created any group collections."
-msgstr ""
+msgstr "U heeft nog geen groepscollecties aangemaakt."
 
 #: tutors/assessments/create/class_wizardstep_3.php:66
 #: tutors/assessments/edit/change_assessment_collection.php:212
@@ -2483,12 +2667,16 @@ msgid ""
 "You need to <a href=\"../../groups/create/\">create some groups</a> before "
 "you will be able to run any peer assessments."
 msgstr ""
+"U moet <a href=\"../../groups/create/\">groepen aanmaken</a> vooraleer u een "
+"peer assessment kan aanmaken."
 
 #: tutors/assessments/create/class_wizardstep_3.php:71
 msgid ""
 "Please select the collection of groups you wish to use in this assessment "
 "from the list below."
 msgstr ""
+"Gelieve de collectie van groepen die u wenst te gebruiken in dit "
+"assessmentformulier uit de lijst hieronder te selecteren."
 
 #: tutors/assessments/create/class_wizardstep_3.php:72
 msgid ""
@@ -2499,29 +2687,31 @@ msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_3.php:73
 msgid "Your collections"
-msgstr ""
+msgstr "Uw collecties"
 
 #: tutors/assessments/create/class_wizardstep_3.php:106
 msgid "You must select a collection of groups to use in your new assessment"
 msgstr ""
+"U moet een collectie van groepen selecteren om te gebruiken in uw nieuwe "
+"assessment"
 
 #: tutors/assessments/create/class_wizardstep_4.php:66
 #: tutors/assessments/create/class_wizardstep_5.php:99
 #: tutors/assessments/edit/edit_assessment.php:524
 msgid "Assessment Type"
-msgstr ""
+msgstr "Assessmentstype"
 
 #: tutors/assessments/create/class_wizardstep_4.php:74
 #: tutors/assessments/create/class_wizardstep_5.php:102
 #: tutors/assessments/edit/edit_assessment.php:543
 msgid "Self and peer assessment"
-msgstr ""
+msgstr "Zelf en peer assessment"
 
 #: tutors/assessments/create/class_wizardstep_4.php:88
 #: tutors/assessments/create/class_wizardstep_5.php:104
 #: tutors/assessments/edit/edit_assessment.php:551
 msgid "Peer assessment only"
-msgstr ""
+msgstr "Enkel peer assessments "
 
 #: tutors/assessments/create/class_wizardstep_5.php:28
 #: tutors/forms/clone/class_wizardstep_2.php:26
@@ -2535,11 +2725,11 @@ msgstr ""
 #: tutors/groups/clone/class_wizardstep_2.php:27
 #: tutors/groups/create/class_wizardstep_3.php:26
 msgid "Finish"
-msgstr ""
+msgstr "Voltooien"
 
 #: tutors/assessments/create/class_wizardstep_5.php:54
 msgid "Your assessment is now ready for creation."
-msgstr ""
+msgstr "Uw assessment is nu klaar om aan te maken."
 
 #: tutors/assessments/create/class_wizardstep_5.php:55
 msgid ""
@@ -2550,21 +2740,21 @@ msgstr ""
 #: tutors/assessments/create/class_wizardstep_5.php:57
 #: tutors/assessments/edit/edit_assessment.php:299
 msgid "Assessment Details"
-msgstr ""
+msgstr "Assessmentgegevens"
 
 #: tutors/assessments/create/class_wizardstep_5.php:61
 #: tutors/assessments/reports/report_student_grades.php:369
 #: tutors/assessments/reports/report_student_grades_bygroup.php:354
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
 #: tutors/assessments/create/class_wizardstep_5.php:65
 msgid "Opens at:"
-msgstr ""
+msgstr "Opent op:"
 
 #: tutors/assessments/create/class_wizardstep_5.php:69
 msgid "Closes at:"
-msgstr ""
+msgstr "Sluit op:"
 
 #: tutors/assessments/create/class_wizardstep_5.php:79
 msgid ""
@@ -2574,101 +2764,110 @@ msgstr ""
 
 #: tutors/assessments/create/class_wizardstep_5.php:87
 msgid "Includes an introduction"
-msgstr ""
+msgstr "Bevat een inleiding"
 
 #: tutors/assessments/create/class_wizardstep_5.php:91
 msgid ""
 "All students for the assessment will be emailed when you finish.</td></tr>"
 msgstr ""
+"Alle studenten van de assessment zullen gemaild worden bij het "
+"voltooien.</td></tr>"
 
 #: tutors/assessments/create/class_wizardstep_5.php:93
 msgid ""
 "All students for the assessment will <b>NOT</b> be emailed when you finish.</"
 "td></tr>"
 msgstr ""
+"Alle studenten van de assessment zullen <b>NIET</b> gemaild worden bij het "
+"voltooien.</td></tr>"
 
 #: tutors/assessments/create/class_wizardstep_5.php:108
 #: tutors/assessments/edit/edit_assessment.php:387
 msgid "Assessment Form"
-msgstr ""
+msgstr "Assessmentformulier"
 
 #: tutors/assessments/create/class_wizardstep_5.php:116
 msgid "ERROR : </strong>unable to load the selected form"
-msgstr ""
+msgstr "FOUT: </strong>het geselecteerde formulier kon niet geladen worden"
 
 #: tutors/assessments/create/class_wizardstep_5.php:119
 msgid "Form :"
-msgstr ""
+msgstr "Formulier:"
 
 #: tutors/assessments/create/class_wizardstep_5.php:124
 msgid "ERROR : </strong>this form contains no questions"
-msgstr ""
+msgstr "FOUT: </strong>dit formulier bevat geen vragen"
 
 #: tutors/assessments/create/class_wizardstep_5.php:149
 msgid "ERROR : </strong>unable to load the selected collection of groups"
 msgstr ""
+"FOUT: </strong>de geselecteerde collectie van groepen kon niet geladen worden"
 
 #: tutors/assessments/create/class_wizardstep_5.php:152
 #: tutors/groups/edit/edit_collection.php:156
 msgid "Collection"
-msgstr ""
+msgstr "Collectie"
 
 #: tutors/assessments/create/class_wizardstep_5.php:157
 msgid "ERROR : </strong>this collection does not contain any groups"
-msgstr ""
+msgstr "FOUT: </strong>deze collectie bevat geen groepen"
 
 #: tutors/assessments/create/class_wizardstep_6.php:88
 msgid ""
 "There was an error when trying to set the groups to be assessed - please use "
 "the contact system to report the error!"
 msgstr ""
+"Er was een fout bij het selecteren van de groepen - gelieve het "
+"contactsysteem te gebruiken om de fout te melden!"
 
 #: tutors/assessments/create/class_wizardstep_6.php:100
 msgid "Your Tutor has set a WebPA assessment"
-msgstr ""
+msgstr "Uw titularis heeft een WebPA-assessment opgezet"
 
 #: tutors/assessments/create/class_wizardstep_6.php:101
 msgid ""
 "Your tutor has set a WebPA assessment for your group. The details are as "
 "below;"
 msgstr ""
+"Uw titularis heeft een WebPA-assessment opgezet voor uw groep. De details "
+"zijn als volgt;"
 
 #: tutors/assessments/create/class_wizardstep_6.php:102
 #: tutors/assessments/email/closing_reminder.php:31
 #: tutors/assessments/email/trigger_reminder.php:31
 #: tutors/assessments/reports/report_student_grades.php:351
 msgid "Assessment Name:"
-msgstr ""
+msgstr "Assessmentnaam:"
 
 #: tutors/assessments/create/class_wizardstep_6.php:103
 #: tutors/assessments/email/closing_reminder.php:32
 #: tutors/assessments/email/trigger_reminder.php:32
 msgid "Open from:"
-msgstr ""
+msgstr "Open vanaf:"
 
 #: tutors/assessments/create/class_wizardstep_6.php:104
 #: tutors/assessments/email/closing_reminder.php:33
 #: tutors/assessments/email/trigger_reminder.php:33
 msgid "Closes on:"
-msgstr ""
+msgstr "Sluit op:"
 
 #: tutors/assessments/create/class_wizardstep_6.php:105
 #: tutors/assessments/edit/edit_assessment.php:114
 #: tutors/assessments/email/closing_reminder.php:34
 #: tutors/assessments/email/trigger_reminder.php:34
 msgid "To complete your assessment please go to:"
-msgstr ""
+msgstr "Om uw assessment te voltooien, gelieve te gaan naar:"
 
 #: tutors/assessments/create/class_wizardstep_6.php:107
 #: tutors/assessments/edit/edit_assessment.php:116
 #: tutors/assessments/email/closing_reminder.php:36
 #: tutors/assessments/email/trigger_reminder.php:36
 msgid "This is an automated email sent by the WebPA tool"
-msgstr ""
+msgstr "Dit is een geautomatiseerde e-mail van WebPA"
 
 #: tutors/assessments/create/class_wizardstep_6.php:121
 msgid "Unable to create your new assessment."
-msgstr ""
+msgstr "De nieuwe assessment kon niet aangemaakt worden."
 
 #: tutors/assessments/create/class_wizardstep_6.php:122
 #: tutors/forms/clone/class_wizardstep_3.php:62
@@ -2683,10 +2882,12 @@ msgstr ""
 msgid ""
 "To correct the problem, click <em>back</em> and amend the details entered."
 msgstr ""
+"Om het probleem te corrigeren, klik op <em>terug</em> en verbeter de "
+"gegevens."
 
 #: tutors/assessments/create/class_wizardstep_6.php:127
 msgid "Your new assessment has been created."
-msgstr ""
+msgstr "Uw nieuwe assessment is nu aangemaakt."
 
 #: tutors/assessments/create/class_wizardstep_6.php:128
 #, php-format
@@ -2694,6 +2895,8 @@ msgid ""
 "To view or amend the details of your new assessment, you can use the <a href="
 "\"../edit/edit_assessment.php?%s\">assessment editor"
 msgstr ""
+"Om uw nieuwe assessment te bekijken of details aan te passen kan u gebruik "
+"maken van de <a href=\"../edit/edit_assessment.php?%s\">assessmenteditor"
 
 #: tutors/assessments/create/class_wizardstep_6.php:129
 #, php-format
@@ -2712,18 +2915,20 @@ msgstr ""
 #: tutors/forms/clone/class_wizardstep_3.php:72
 #: tutors/forms/create/class_wizardstep_2.php:71
 msgid "An error occurred while trying to create your new assessment form."
-msgstr ""
+msgstr "Er was een fout bij het proberen aanmaken van uw assessmentformulier."
 
 #: tutors/assessments/create/class_wizardstep_6.php:135
 msgid ""
 "You may be able to correct the problem by clicking <em>back</em>, and then "
 "<em>next</em> again"
 msgstr ""
+"U kan mogelijks het probleem verhelpen door te klikken op <em>terug</em> en "
+"daarna terug op <em>volgende</em>."
 
 #: tutors/assessments/create/index.php:25
 #: tutors/assessments/create/index.php:54
 msgid "create a new assessment wizard"
-msgstr ""
+msgstr "maak een nieuwe assessment wizard"
 
 #: tutors/assessments/create/index.php:65
 msgid ""
@@ -2739,7 +2944,7 @@ msgstr ""
 #: tutors/assessments/students_who_responded.php:58
 #: tutors/assessments/students_who_responded.php:63
 msgid "students who responded"
-msgstr ""
+msgstr "studenten die geantwoord hebben"
 
 #: tutors/assessments/delete_marks.php:98
 #: tutors/assessments/reports/students_who_responded.php:81
@@ -2748,6 +2953,8 @@ msgid ""
 "This page shows all the students assigned this assessment and which have "
 "responded."
 msgstr ""
+"Deze pagina toont alle studenten die deze assessment zijn toegewezen en "
+"geantwoord hebben."
 
 #: tutors/assessments/delete_marks.php:103
 #: tutors/assessments/edit/edit_assessment.php:273
@@ -2765,7 +2972,7 @@ msgstr ""
 #: tutors/groups/edit/edit_collection_members.php:119
 #: tutors/groups/edit/edit_group.php:158
 msgid "back"
-msgstr ""
+msgstr "terug"
 
 #: tutors/assessments/delete_marks.php:106
 #: tutors/assessments/students_who_responded.php:92
@@ -2779,7 +2986,7 @@ msgstr ""
 #: tutors/assessments/students_who_responded.php:93
 msgid ""
 "To email an individual student, click on the email link next to their name."
-msgstr ""
+msgstr "Om een student te e-mailen, klik op de e-maillink naast hun naam."
 
 #: tutors/assessments/delete_marks.php:108
 #, php-format
@@ -2787,12 +2994,14 @@ msgid ""
 "To delete the entries provided by a student click on the %s alt=\"Delete "
 "submission\" /> image (if not greyed out)."
 msgstr ""
+"Om een student zijn antwoorden te verwijderen, klik op de %s alt=\"Delete "
+"submission\" /> afbeelding (indien niet grijs)."
 
 #: tutors/assessments/delete_marks.php:118
 #: tutors/assessments/reports/students_who_responded.php:100
 #: tutors/assessments/students_who_responded.php:103
 msgid "This group has no members."
-msgstr ""
+msgstr "Deze groep heeft geen leden."
 
 #: tutors/assessments/delete_marks.php:123
 #: tutors/assessments/reports/report_demo.php:217
@@ -2806,34 +3015,34 @@ msgstr ""
 #: tutors/assessments/reports/students_who_responded.php:105
 #: tutors/assessments/students_who_responded.php:108
 msgid "name"
-msgstr ""
+msgstr "naam"
 
 #: tutors/assessments/delete_marks.php:124
 #: tutors/assessments/reports/students_who_responded.php:107
 #: tutors/assessments/students_who_responded.php:110
 msgid "responded"
-msgstr ""
+msgstr "geantwoord"
 
 #: tutors/assessments/delete_marks.php:125
 msgid "delete submission"
-msgstr ""
+msgstr "verwijder indiening"
 
 #: tutors/assessments/delete_marks.php:131
 #: tutors/assessments/reports/students_who_responded.php:112
 #: tutors/assessments/students_who_responded.php:115
 msgid "Responded"
-msgstr ""
+msgstr "Geantwoord"
 
 #: tutors/assessments/delete_marks.php:133
 #: tutors/assessments/delete_marks.php:137
 msgid "Delete submission"
-msgstr ""
+msgstr "Verwijder indiening"
 
 #: tutors/assessments/delete_marks.php:135
 #: tutors/assessments/reports/students_who_responded.php:115
 #: tutors/assessments/students_who_responded.php:118
 msgid "Not Responded"
-msgstr ""
+msgstr "Niet Geantwoord"
 
 #: tutors/assessments/edit/change_assessment_collection.php:59
 #: tutors/assessments/edit/change_assessment_form.php:58
@@ -2841,10 +3050,13 @@ msgid ""
 "This assessment has been marked, and therefore the assessment form being "
 "used cannot be changed."
 msgstr ""
+"Deze assessment is gescoord en daarom kan het gebruikte assessmentformulier "
+"niet aangepast worden."
 
 #: tutors/assessments/edit/change_assessment_collection.php:64
 msgid "You must select a collection of associated groups to use."
 msgstr ""
+"U moet een collectie van geassocieerde groepen selecteren om te gebruiken."
 
 #: tutors/assessments/edit/change_assessment_collection.php:68
 msgid ""
@@ -2857,23 +3069,25 @@ msgid ""
 "There was an error when loading the new collection of groups - please use "
 "the contact system to report the error!"
 msgstr ""
+"Er was een fout bij het laden van de nieuwe collectie groepen - gelieve het "
+"contactsysteem te gebruiken om de fout te melden!"
 
 #: tutors/assessments/edit/change_assessment_collection.php:102
 #: tutors/assessments/edit/change_assessment_collection.php:111
 msgid "change collection"
-msgstr ""
+msgstr "verander collectie"
 
 #: tutors/assessments/edit/change_assessment_collection.php:103
 #: tutors/assessments/edit/change_assessment_form.php:82
 #: tutors/assessments/edit/edit_assessment.php:196
 msgid "manage:"
-msgstr ""
+msgstr "beheer:"
 
 #: tutors/assessments/edit/change_assessment_collection.php:103
 #: tutors/assessments/edit/change_assessment_form.php:82
 #: tutors/assessments/edit/edit_assessment.php:196
 msgid "manage assessment"
-msgstr ""
+msgstr "beheer assessment"
 
 #: tutors/assessments/edit/change_assessment_collection.php:145
 #: tutors/assessments/edit/change_assessment_form.php:124
@@ -2881,23 +3095,25 @@ msgid ""
 "No changes have been saved. Please check the details in the form and try "
 "again."
 msgstr ""
+"Uw aanpassingen werden niet opgeslagen. Gelieve de gegevens in het formulier "
+"na te gaan en opnieuw te proberen."
 
 #: tutors/assessments/edit/change_assessment_collection.php:149
 #: tutors/assessments/edit/change_assessment_form.php:128
 msgid "On this page you can change the assessment form being used."
-msgstr ""
+msgstr "Op deze pagina kan u het gebruikte assessmentformulier aanpassen."
 
 #: tutors/assessments/edit/change_assessment_collection.php:157
 #: tutors/assessments/edit/change_assessment_collection.php:167
 #: tutors/assessments/edit/change_assessment_form.php:136
 #: tutors/assessments/edit/change_assessment_form.php:146
 msgid "back to the assessment"
-msgstr ""
+msgstr "terug naar de assessment"
 
 #: tutors/assessments/edit/change_assessment_collection.php:176
 #: tutors/assessments/edit/change_assessment_form.php:155
 msgid "Marks have been recorded for this assessment."
-msgstr ""
+msgstr "Deze assessment is gescoord."
 
 #: tutors/assessments/edit/change_assessment_collection.php:177
 #: tutors/assessments/edit/change_assessment_form.php:156
@@ -2909,61 +3125,65 @@ msgstr ""
 
 #: tutors/assessments/edit/change_assessment_collection.php:186
 msgid "Current Collection"
-msgstr ""
+msgstr "Huidige Collectie"
 
 #: tutors/assessments/edit/change_assessment_collection.php:189
 msgid "You are currently using collection:"
-msgstr ""
+msgstr "U gebruikt momenteel volgende collectie:"
 
 #: tutors/assessments/edit/change_assessment_collection.php:195
 #: tutors/assessments/edit/change_assessment_collection.php:231
 msgid "Number of Groups :"
-msgstr ""
+msgstr "Aantal Groepen:"
 
 #: tutors/assessments/edit/change_assessment_collection.php:200
 msgid "Available Collections"
-msgstr ""
+msgstr "Beschikbare Collecties"
 
 #: tutors/assessments/edit/change_assessment_collection.php:217
 msgid ""
 "Please select the collection of groups you wish to use in this assessment "
 "from from the list below."
 msgstr ""
+"Gelieve de collectie van groepen die u wenst te gebruiken in dit "
+"assessmentformulier uit de lijst hieronder te selecteren."
 
 #: tutors/assessments/edit/change_assessment_form.php:61
 msgid "You must select an assessment form to use."
-msgstr ""
+msgstr "U moet een assessmentformulier selecteren om te gebruiken."
 
 #: tutors/assessments/edit/change_assessment_form.php:81
 #: tutors/assessments/edit/change_assessment_form.php:90
 msgid "change form"
-msgstr ""
+msgstr "verander formulier"
 
 #: tutors/assessments/edit/change_assessment_form.php:165
 msgid "Current Form"
-msgstr ""
+msgstr "Huidig Formulier"
 
 #: tutors/assessments/edit/change_assessment_form.php:168
 msgid "You are currently using form:"
-msgstr ""
+msgstr "U gebruikt momenteel formulier:"
 
 #: tutors/assessments/edit/change_assessment_form.php:173
 #: tutors/assessments/edit/edit_assessment.php:395
 msgid "This form has no questions."
-msgstr ""
+msgstr "Dit formulier heeft geen vragen."
 
 #: tutors/assessments/edit/change_assessment_form.php:177
 #: tutors/assessments/edit/edit_assessment.php:399
 msgid "Below are the questions that your students will use to mark each other."
 msgstr ""
+"Hieronder zijn de vragen die uw studenten zullen gebruiken om elkaar te "
+"beoordelen."
 
 #: tutors/assessments/edit/change_assessment_form.php:184
 msgid "scoring range:"
-msgstr ""
+msgstr "score-interval:"
 
 #: tutors/assessments/edit/change_assessment_form.php:192
 msgid "Available Forms"
-msgstr ""
+msgstr "Beschikbare Formulieren"
 
 #: tutors/assessments/edit/change_assessment_form.php:208
 msgid ""
@@ -2973,31 +3193,38 @@ msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:69
 msgid "You must give this assessment a name."
-msgstr ""
+msgstr "U moet deze assessment een naam geven."
 
 #: tutors/assessments/edit/edit_assessment.php:109
 msgid "Your Assessment has been re-opened"
-msgstr ""
+msgstr "Uw assessment is heropend"
 
 #: tutors/assessments/edit/edit_assessment.php:110
 msgid "Your tutor has re-opend your assessment."
-msgstr ""
+msgstr "Uw titularis heeft uw assessment heropend."
 
 #: tutors/assessments/edit/edit_assessment.php:111
 msgid "The new dates for the assessment are;"
-msgstr ""
+msgstr "The nieuwe data voor de assessment zijn;"
 
 #: tutors/assessments/edit/edit_assessment.php:112
 msgid "Open:"
-msgstr ""
+msgstr "Open:"
 
 #: tutors/assessments/edit/edit_assessment.php:113
 msgid "Close:"
-msgstr ""
+msgstr "Sluiten:"
+
+#: tutors/assessments/edit/edit_assessment.php:173
+msgid "at"
+msgstr "op"
 
 #: tutors/assessments/edit/edit_assessment.php:226
 msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
 msgstr ""
+"Deze assessment zal verwijderd worden.\\n"
+"\\n"
+" Klik op OK om te bevestigen."
 
 #: tutors/assessments/edit/edit_assessment.php:227
 #: tutors/forms/edit/edit_form.php:99 tutors/forms/edit/edit_form.php:256
@@ -3006,41 +3233,47 @@ msgstr ""
 #: tutors/groups/edit/edit_collection_groups.php:177
 #: tutors/groups/index.php:86
 msgid "delete"
-msgstr ""
+msgstr "verwijder"
 
 #: tutors/assessments/edit/edit_assessment.php:233
 msgid "preview"
-msgstr ""
+msgstr "voorbeeldweergave"
 
 #: tutors/assessments/edit/edit_assessment.php:251
 msgid ""
 "On this page you can change the name of this assessment, and change the "
 "collection of groups to assess, and the form to use."
 msgstr ""
+"Op deze pagina kan u de naam van de assessment, de collectie van groepen om "
+"te beoordelen en het formulier om te gebruiken aanpassen."
 
 #: tutors/assessments/edit/edit_assessment.php:273
 #: tutors/assessments/marks/mark_assessment.php:211
 #: tutors/assessments/marks/set_group_marks.php:205
 msgid "back to assessment list"
-msgstr ""
+msgstr "terug naar de assessmentlijst"
 
 #: tutors/assessments/edit/edit_assessment.php:279
 msgid "delete assessment"
-msgstr ""
+msgstr "verwijder assessment"
 
 #: tutors/assessments/edit/edit_assessment.php:292
 msgid "Student marks have been recorded for this assessment."
-msgstr ""
+msgstr "Studentenscores werden opgeslagen voor deze assessment."
 
 #: tutors/assessments/edit/edit_assessment.php:293
 msgid "Some parts of the assessment are now locked for editing."
 msgstr ""
+"Sommige onderdelen van de assessment zijn nu afgesloten voor aanpassingen."
 
 #: tutors/assessments/edit/edit_assessment.php:301
 msgid ""
 "You can change this assessment's name, schedule and details using the box "
 "below. When you've made your changes, click the <em>save changes</em> button."
 msgstr ""
+"U kan deze assessment zijn naam, planning en details aanpassingen met "
+"onderstaande velden. Wanneer u uw veranderingen hebt ingegeven, klikt u op "
+"de <em>bewaar veranderingen</em>-knop."
 
 #: tutors/assessments/edit/edit_assessment.php:305
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:207
@@ -3049,36 +3282,40 @@ msgstr ""
 #: tutors/groups/edit/edit_collection.php:161
 #: tutors/groups/edit/edit_group.php:176
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: tutors/assessments/edit/edit_assessment.php:311
 msgid "The schedule for when, and for how long, this assessment will run."
-msgstr ""
+msgstr "Wanneer en voor hoe lang deze assessment beschikbaar moet zijn."
 
 #: tutors/assessments/edit/edit_assessment.php:325
 msgid "The text to use as the introduction to your assessment (optional)."
-msgstr ""
+msgstr "The inleidingstekst voor uw assessment (optioneel)."
 
 #: tutors/assessments/edit/edit_assessment.php:340
 msgid "Email Notifications"
-msgstr ""
+msgstr "E-mailnotificaties"
 
 #: tutors/assessments/edit/edit_assessment.php:348
 msgid ""
 "Email a reminder to all students 48 hours before the assessment is opened"
 msgstr ""
+"E-mail een herinnering naar alle studenten 48 uur voor de assessment wordt "
+"geopend"
 
 #: tutors/assessments/edit/edit_assessment.php:368
 msgid "Email all students 48 hours before the assessment closes"
-msgstr ""
+msgstr "E-mail alle studenten 48 uur voor de assessment wordt gesloten"
 
 #: tutors/assessments/edit/edit_assessment.php:390
 msgid "You are using a copy of form:"
-msgstr ""
+msgstr "U gebruikt een kopie van formulier:"
 
 #: tutors/assessments/edit/edit_assessment.php:416
 msgid "Student marks have been recorded, so you can no longer change forms."
 msgstr ""
+"Studentenscores werden opgeslagen, dus u kan niet meer veranderen van "
+"formulier."
 
 #: tutors/assessments/edit/edit_assessment.php:421
 #, php-format
@@ -3090,78 +3327,86 @@ msgstr ""
 
 #: tutors/assessments/edit/edit_assessment.php:426
 msgid "Feedback / Justification"
-msgstr ""
+msgstr "Feedback / Verantwoording"
 
 #: tutors/assessments/edit/edit_assessment.php:428
 msgid ""
 "Allow the students to view feedback on their performance in this assessment?"
 msgstr ""
+"Laat de studenten toe om feedback te zien over hun prestaties in deze "
+"assessment?"
 
 #: tutors/assessments/edit/edit_assessment.php:442
 msgid ""
 "Allow the students to enter feedback / justification for this assessment?"
 msgstr ""
+"Laat de studenten toe om feedback / verantwoording in te geven voor deze "
+"assessment?"
 
 #: tutors/assessments/edit/edit_assessment.php:451
 msgid "Yes, allow students to give feedback / justification."
-msgstr ""
+msgstr "Ja, laat studenten toe om feedback / verantwoording te geven."
 
 #: tutors/assessments/edit/edit_assessment.php:455
 msgid "No, don't allow feedback / justification."
-msgstr ""
+msgstr "Nee, laat geen feedback / verantwoording toe."
 
 #: tutors/assessments/edit/edit_assessment.php:462
 msgid "Assessment Groups"
-msgstr ""
+msgstr "Assessmentgroepen"
 
 #: tutors/assessments/edit/edit_assessment.php:466
 msgid "You are using a copy of collection:"
-msgstr ""
+msgstr "U gebruikt een kopie van collectie:"
 
 #: tutors/assessments/edit/edit_assessment.php:474
 #: tutors/assessments/marks/set_group_marks.php:219
 #: tutors/groups/edit/edit_collection_groups.php:182
 msgid "This collection does not contain any groups"
-msgstr ""
+msgstr "Deze collectie bevat geen groepen"
 
 #: tutors/assessments/edit/edit_assessment.php:480
 #: tutors/groups/edit/edit_group.php:171
 msgid "Group Name"
-msgstr ""
+msgstr "Groepsnaam"
 
 #: tutors/assessments/edit/edit_assessment.php:481
 #: tutors/assessments/marks/set_group_marks.php:226
 #: tutors/groups/edit/edit_collection_members.php:80
 msgid "Members"
-msgstr ""
+msgstr "Leden"
 
 #: tutors/assessments/edit/edit_assessment.php:482
 msgid "Responses"
-msgstr ""
+msgstr "Antwoorden"
 
 #: tutors/assessments/edit/edit_assessment.php:504
 msgid "person remains"
-msgstr ""
+msgstr "persoon resterend"
 
 #: tutors/assessments/edit/edit_assessment.php:504
 msgid "people remain"
-msgstr ""
+msgstr "personen resterend"
 
 #: tutors/assessments/edit/edit_assessment.php:505
 msgid ""
 "Warning</strong></p><p>Not all of the people within this collection have "
 "been allocated a group."
 msgstr ""
+"Waarschuwing</strong></p><p>Niet alle personen binnen deze collectie zijn "
+"toegewezen aan groep."
 
 #: tutors/assessments/edit/edit_assessment.php:505
 #, php-format
 msgid "%d %s unallocated"
-msgstr ""
+msgstr "%d %s niet toegewezen"
 
 #: tutors/assessments/edit/edit_assessment.php:513
 msgid ""
 "Student marks have been recorded, so you can no longer change collections."
 msgstr ""
+"Studentenscores werden opgeslagen, dus u kan niet meer veranderen van "
+"collectie."
 
 #: tutors/assessments/edit/edit_assessment.php:518
 #, php-format
@@ -3176,75 +3421,83 @@ msgid ""
 "Student marks have been recorded, so you can no longer change then "
 "assessment type."
 msgstr ""
+"Studentenscores werden opgeslagen, dus u kan het assessmentstype niet meer "
+"aanpassen."
 
 #: tutors/assessments/email/class_wizardstep_1.php:47
 #: tutors/assessments/email/class_wizardstep_2.php:46
 #: tutors/assessments/email/class_wizardstep_3.php:46
 msgid "everyone taking this assessment"
-msgstr ""
+msgstr "iedereen die deze assessment meedoet"
 
 #: tutors/assessments/email/class_wizardstep_1.php:48
 #: tutors/assessments/email/class_wizardstep_2.php:47
 #: tutors/assessments/email/class_wizardstep_3.php:47
 msgid "selected groups taking this assessment"
-msgstr ""
+msgstr "geselecteerde groepen die deze assessment meedoen"
 
 #: tutors/assessments/email/class_wizardstep_1.php:49
 msgid "students who HAVE responded"
-msgstr ""
+msgstr "studenten die GEANTWOORD hebben"
 
 #: tutors/assessments/email/class_wizardstep_1.php:50
 msgid "students who HAVE NOT responded"
-msgstr ""
+msgstr "studenten die NIET GEANTWOORD hebben"
 
 #: tutors/assessments/email/class_wizardstep_1.php:52
 msgid ""
 "To begin, you need to select exactly which students should receive your "
 "email."
 msgstr ""
+"Om te beginnen moet u selecteren welke studenten uw e-mail zouden moeten "
+"ontvangen."
 
 #: tutors/assessments/email/class_wizardstep_1.php:54
 msgid "Send Email To"
-msgstr ""
+msgstr "Stuur E-mail Naar"
 
 #: tutors/assessments/email/class_wizardstep_1.php:67
 msgid "You must select who to send this email to."
-msgstr ""
+msgstr "U moet selecteren naar wie deze e-mail verstuurd moet worden."
 
 #: tutors/assessments/email/class_wizardstep_2.php:48
 #: tutors/assessments/email/class_wizardstep_3.php:48
 msgid "all the students who HAVE responded"
-msgstr ""
+msgstr "alle studenten die GEANTWOORD hebben"
 
 #: tutors/assessments/email/class_wizardstep_2.php:49
 #: tutors/assessments/email/class_wizardstep_3.php:49
 msgid "any students who HAVE NOT responded"
-msgstr ""
+msgstr "studenten die NIET GEANTWOORD hebben"
 
 #: tutors/assessments/email/class_wizardstep_2.php:64
 msgid "You have opted to send this email to"
-msgstr ""
+msgstr "U heeft ervoor gekozen om deze e-mail te versturen naar"
 
 #: tutors/assessments/email/class_wizardstep_2.php:70
 msgid "Select Groups To Email"
-msgstr ""
+msgstr "Selecteer Groepen Om Te E-mailen"
 
 #: tutors/assessments/email/class_wizardstep_2.php:72
 msgid ""
 "Tick all the groups you wish to include in this email. The number of "
 "students in each group is shown in brackets after the group name."
 msgstr ""
+"Vink alle groepen aan die in deze e-mail moeten worden inbegrepen. Het "
+"aantal studenten in elke groep wordt getoond in haakjes na elke groepsnaam."
 
 #: tutors/assessments/email/class_wizardstep_2.php:99
 #, php-format
 msgid "This email will be sent to all %d students"
-msgstr ""
+msgstr "Deze e-mail zal gestuurd worden naar alle %d studenten"
 
 #: tutors/assessments/email/class_wizardstep_2.php:108
 #, php-format
 msgid ""
 "This email will be sent to the %d students who have taken this assessment"
 msgstr ""
+"Deze e-mail zal worden verstuurd naar de %d studenten die deze assessment "
+"hebben ingediend"
 
 #: tutors/assessments/email/class_wizardstep_2.php:118
 #, php-format
@@ -3252,55 +3505,63 @@ msgid ""
 "This email will be sent to the %d students who have not yet taken this "
 "assessment"
 msgstr ""
+"Deze e-mail zal worden verstuurd naar de %d studenten die deze assessment "
+"nog niet hebben ingediend"
 
 #: tutors/assessments/email/class_wizardstep_2.php:127
 #: tutors/assessments/email/class_wizardstep_3.php:123
 msgid "There are no students matching your criteria."
-msgstr ""
+msgstr "Er zijn geen studenten die voldoen aan uw criteria."
 
 #: tutors/assessments/email/class_wizardstep_2.php:128
 msgid "You may have groups with no students in them."
-msgstr ""
+msgstr "U hebt mogelijks groepen zonder studenten."
 
 #: tutors/assessments/email/class_wizardstep_2.php:129
 #: tutors/assessments/email/class_wizardstep_3.php:124
 msgid "Please go back and choose a different set of students to contact."
 msgstr ""
+"Gelieve terug te gaan en een andere groep van studenten te selecteren om te "
+"contacteren."
 
 #: tutors/assessments/email/class_wizardstep_2.php:134
 msgid "Email Details"
-msgstr ""
+msgstr "E-mailgegevens"
 
 #: tutors/assessments/email/class_wizardstep_2.php:138
 msgid "Subject"
-msgstr ""
+msgstr "Onderwerp"
 
 #: tutors/assessments/email/class_wizardstep_2.php:142
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: tutors/assessments/email/class_wizardstep_2.php:183
 msgid ""
 "The group(s) you have selected contain no students. There must be at least "
 "one recepient for this email."
 msgstr ""
+"De groep(en) die u geselecteerd heeft bevat(ten) geen studenten. Er moet "
+"minstens één ontvanger zijn voor deze e-mail."
 
 #: tutors/assessments/email/class_wizardstep_2.php:189
 msgid "You must enter a subject for this email."
-msgstr ""
+msgstr "U moet een onderwerp ingeven voor deze e-mail."
 
 #: tutors/assessments/email/class_wizardstep_2.php:194
 msgid "You must enter the text of this email."
-msgstr ""
+msgstr "U moet de tekst van deze e-mail ingeven."
 
 #: tutors/assessments/email/class_wizardstep_3.php:27
 msgid "Send Email"
-msgstr ""
+msgstr "Verstuur E-mail"
 
 #: tutors/assessments/email/class_wizardstep_3.php:62
 #: tutors/groups/create/class_wizardstep_3.php:57
 msgid "Please confirm the following settings are correct before proceeding."
 msgstr ""
+"Gelieve te controleren dat de volgende instellingen correct zijn vooraleer "
+"verder te gaan."
 
 #: tutors/assessments/email/class_wizardstep_3.php:63
 msgid ""
@@ -3310,27 +3571,29 @@ msgstr ""
 
 #: tutors/assessments/email/class_wizardstep_3.php:65
 msgid "Recipients"
-msgstr ""
+msgstr "Ontvangers"
 
 #: tutors/assessments/email/class_wizardstep_3.php:67
 #, php-format
 msgid "You have opted to send this email to <em>%s</em>."
-msgstr ""
+msgstr "U heeft ervoor gekozen om deze e-mail te versturen naar <em>%s</em>."
 
 #: tutors/assessments/email/class_wizardstep_3.php:72
 #, php-format
 msgid "This email will be sent to all %d students."
-msgstr ""
+msgstr "Deze e-mail zal gestuurd worden naar alle %d studenten."
 
 #: tutors/assessments/email/class_wizardstep_3.php:81
 msgid "The groups you selected were:"
-msgstr ""
+msgstr "De geselecteerde groepen waren:"
 
 #: tutors/assessments/email/class_wizardstep_3.php:102
 #, php-format
 msgid ""
 "This email will be sent to the %d students who have taken this assessment."
 msgstr ""
+"Deze e-mail zal worden verstuurd naar de %d studenten die deze assessment "
+"hebben ingediend."
 
 #: tutors/assessments/email/class_wizardstep_3.php:112
 #, php-format
@@ -3338,38 +3601,42 @@ msgid ""
 "This email will be sent to the %d students who have not yet taken this "
 "assessment."
 msgstr ""
+"Deze e-mail zal worden verstuurd naar de %d studenten die deze assessment "
+"nog niet hebben ingediend."
 
 #: tutors/assessments/email/class_wizardstep_3.php:129
 msgid "Email Preview"
-msgstr ""
+msgstr "E-mail Voorbeeld"
 
 #: tutors/assessments/email/class_wizardstep_3.php:132
 msgid "Subject:"
-msgstr ""
+msgstr "Onderwerp:"
 
 #: tutors/assessments/email/class_wizardstep_4.php:106
 #: tutors/assessments/email/new_assessment.php:59
 msgid "Unable to build email list - no students to email."
-msgstr ""
+msgstr "Kon de e-maillijst niet genereren - geen studenten om te e-mailen."
 
 #: tutors/assessments/email/class_wizardstep_4.php:118
 #: tutors/assessments/email/new_assessment.php:72
 msgid "No list of students to email."
-msgstr ""
+msgstr "Geen studenten om te e-mailen."
 
 #: tutors/assessments/email/class_wizardstep_4.php:125
 msgid "Unable to send email."
-msgstr ""
+msgstr "Kan geen e-mail verzenden"
 
 #: tutors/assessments/email/class_wizardstep_4.php:126
 msgid ""
 "To try correcting the problem, click <em>back</em> and amend the details "
 "entered."
 msgstr ""
+"Probeer het probleem te corrigeren, klik op <em>terug</em> en verbeter de "
+"ingevoerde gegevens."
 
 #: tutors/assessments/email/class_wizardstep_4.php:129
 msgid "Your email has been sent."
-msgstr ""
+msgstr "Uw e-mail is verstuurd."
 
 #: tutors/assessments/email/class_wizardstep_4.php:130
 #, php-format
@@ -3377,28 +3644,32 @@ msgid ""
 "You can now return to <a href=\"%s\">your assessment list</a>, or to the <a "
 "href=\"/\">WebPA home page</a>."
 msgstr ""
+"U kan nu terugkeren naar <a href=\"%s\">uw assessmentlijst</a> of de <a href="
+"\"/\">WebPA homepagina</a>."
 
 #: tutors/assessments/email/closing_reminder.php:29
 msgid "Reminder: WebPA Assessment closing"
-msgstr ""
+msgstr "Herinnering: WebPA Assessment wordt gesloten"
 
 #: tutors/assessments/email/closing_reminder.php:30
 msgid ""
 "This is a reminder that the assessment your tutor set is due to close. The "
 "details are as below;"
 msgstr ""
+"Dit is een herinnering dat de assessment van uw titularis binnenkort wordt "
+"gesloten. De details zijn als volgt;"
 
 #: tutors/assessments/email/index.php:48
 msgid "email your students wizard"
-msgstr ""
+msgstr "e-mail uw studenten wizard"
 
 #: tutors/assessments/email/index.php:78
 msgid "email your students"
-msgstr ""
+msgstr "e-mail uw studenten"
 
 #: tutors/assessments/email/index.php:84
 msgid "email students"
-msgstr ""
+msgstr "e-mail studenten"
 
 #: tutors/assessments/email/index.php:100
 msgid ""
@@ -3409,21 +3680,25 @@ msgstr ""
 #: tutors/assessments/email/index.php:115
 msgid "The given assessment failed to load so this wizard cannot be started."
 msgstr ""
+"De gegeven assessment kon niet geladen worden dus deze wizard kan niet "
+"starten."
 
 #: tutors/assessments/email/trigger_reminder.php:29
 msgid "Reminder: WebPA Assessment opening"
-msgstr ""
+msgstr "Herinnering: WebPA Assessment wordt geopend"
 
 #: tutors/assessments/email/trigger_reminder.php:30
 msgid ""
 "This is a reminder that the assessment your tutor set is due to open. The "
 "details are as below;"
 msgstr ""
+"Dit is een herinnering dat de assessment van uw titularis binnenkort wordt "
+"geopend. De details zijn als volgt;"
 
 #: tutors/assessments/inc_list_closed.php:22
 #, php-format
 msgid "Closed assessments for %s"
-msgstr ""
+msgstr "Afgesloten assessments voor %s"
 
 #: tutors/assessments/inc_list_closed.php:24
 msgid ""
@@ -3434,42 +3709,42 @@ msgstr ""
 
 #: tutors/assessments/inc_list_closed.php:78
 msgid "Closed"
-msgstr ""
+msgstr "Afgesloten"
 
 #: tutors/assessments/inc_list_closed.php:82
 #: tutors/assessments/inc_list_marked.php:89
 #: tutors/assessments/inc_list_open.php:77
 #: tutors/assessments/inc_list_pending.php:76
 msgid "student responses:"
-msgstr ""
+msgstr "studentenantwoorden:"
 
 #: tutors/assessments/inc_list_closed.php:85
 #: tutors/assessments/inc_list_marked.php:92
 #: tutors/assessments/inc_list_open.php:80
 #: tutors/assessments/inc_list_pending.php:79
 msgid "Edit assessment"
-msgstr ""
+msgstr "Bewerk assessment"
 
 #: tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
 #: tutors/assessments/inc_list_open.php:81
 #: tutors/assessments/inc_list_pending.php:80
 msgid "Email students"
-msgstr ""
+msgstr "E-mail studenten"
 
 #: tutors/assessments/inc_list_closed.php:87
 #: tutors/assessments/inc_list_marked.php:94
 #: tutors/assessments/inc_list_open.php:82
 #: tutors/assessments/inc_list_pending.php:81
 msgid "Students responded"
-msgstr ""
+msgstr "Studenten die geantwoord hebben"
 
 #: tutors/assessments/inc_list_closed.php:87
 #: tutors/assessments/inc_list_marked.php:94
 #: tutors/assessments/inc_list_open.php:82
 #: tutors/assessments/inc_list_pending.php:81
 msgid "Check which students have responded"
-msgstr ""
+msgstr "Kijk welke studenten geantwoord hebben"
 
 #: tutors/assessments/inc_list_closed.php:88
 #: tutors/assessments/inc_list_marked.php:95
@@ -3477,25 +3752,25 @@ msgstr ""
 #: tutors/assessments/inc_list_pending.php:82
 #: tutors/assessments/marks/set_group_marks.php:210
 msgid "Group Marks"
-msgstr ""
+msgstr "Groepsscores"
 
 #: tutors/assessments/inc_list_closed.php:88
 #: tutors/assessments/inc_list_marked.php:95
 #: tutors/assessments/inc_list_open.php:83
 #: tutors/assessments/inc_list_pending.php:82
 msgid "Set group marks"
-msgstr ""
+msgstr "Geef groepsscores"
 
 #: tutors/assessments/inc_list_closed.php:89
 #: tutors/assessments/inc_list_marked.php:96
 #: tutors/assessments/inc_list_marked.php:116
 msgid "Mark Sheet"
-msgstr ""
+msgstr "Puntenblad"
 
 #: tutors/assessments/inc_list_closed.php:89
 #: tutors/assessments/inc_list_marked.php:96
 msgid "New mark sheet"
-msgstr ""
+msgstr "Nieuw puntenblad"
 
 #: tutors/assessments/inc_list_closed.php:90
 #: tutors/assessments/inc_list_open.php:85
@@ -3505,250 +3780,273 @@ msgstr ""
 #: tutors/assessments/inc_list_marked.php:24
 #, php-format
 msgid "Marked assessments for %s"
-msgstr ""
+msgstr "Gescoorde assessments voor %s"
 
 #: tutors/assessments/inc_list_marked.php:26
 msgid ""
 "These assessments are both closed and have been marked to produce student "
 "grades."
 msgstr ""
+"Deze assessments zijn allen gesloten en gescoord om de studentenscores "
+"verkrijgen."
 
 #: tutors/assessments/inc_list_marked.php:49
 #: tutors/assessments/inc_list_open.php:42
 #: tutors/assessments/inc_list_pending.php:43
 msgid "You do not have any assessments in this category."
-msgstr ""
+msgstr "U heeft geen assessments in deze categorie."
 
 #: tutors/assessments/inc_list_marked.php:50
 msgid "Please choose another category from the tabs above."
-msgstr ""
+msgstr "Gelieve een andere categorie te kiezen met de tabbladen hierboven."
 
 #: tutors/assessments/inc_list_marked.php:85
 msgid "Finished"
-msgstr ""
+msgstr "Voltooid"
 
 #: tutors/assessments/inc_list_marked.php:110
 msgid "Numeric (%)"
-msgstr ""
+msgstr "Numeriek (%)"
 
 #: tutors/assessments/inc_list_marked.php:117
 msgid "Algorithm:"
-msgstr ""
+msgstr "Algoritme:"
 
 #: tutors/assessments/inc_list_marked.php:118
 msgid "PA weighting:"
-msgstr ""
+msgstr "PA weging:"
 
 #: tutors/assessments/inc_list_marked.php:119
 msgid "Non-completion penalty:"
-msgstr ""
+msgstr "Niet-voltooid strafpunten:"
 
 #: tutors/assessments/inc_list_marked.php:124
 msgid "Grading:"
-msgstr ""
+msgstr "Scoring:"
 
 #: tutors/assessments/inc_list_marked.php:127
 msgid "View&nbsp;Reports"
-msgstr ""
+msgstr "Bekijk&nbsp;Verslagen"
 
 #: tutors/assessments/inc_list_open.php:21
 #, php-format
 msgid "Open assessments for %s"
-msgstr ""
+msgstr "Openstaande assessments voor %s"
 
 #: tutors/assessments/inc_list_open.php:23
 msgid "These assessments are now open and available for students to take."
 msgstr ""
+"Deze assessments zijn nu open en beschikbaar voor studenten om in te vullen."
 
 #: tutors/assessments/inc_list_open.php:43
 msgid ""
 "Please choose another category from the tabs above, or <a href=\"/tutors/"
 "assessments/create/\">create a new assessment"
 msgstr ""
+"Gelieve een andere categorie te kiezen met de tabbladen hierboven of <a href="
+"\"/tutors/assessments/create/\">maak een nieuwe assessment"
 
 #: tutors/assessments/inc_list_open.php:73
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: tutors/assessments/inc_list_open.php:84
 msgid "Delete individual marks"
-msgstr ""
+msgstr "Verwijder individuele punten"
 
 #: tutors/assessments/inc_list_pending.php:22
 #, php-format
 msgid "Pending assessments for %s"
-msgstr ""
+msgstr "Wachtende assessments voor %s"
 
 #: tutors/assessments/inc_list_pending.php:24
 msgid ""
 "These assessments are scheduled to open for students at some point in the "
 "future."
-msgstr ""
+msgstr "Deze assessments zijn gepland voor een later moment."
 
 #: tutors/assessments/inc_list_pending.php:44
 msgid ""
 "Please choose another category from the tabs above, or <a href=\"create/"
 "\">create a new assessment"
 msgstr ""
+"Gelieve een andere categorie te kiezen met de tabbladen hierboven of <a href="
+"\"create/\">maak een nieuwe assessment"
 
 #: tutors/assessments/inc_list_pending.php:72
 msgid "Pending"
-msgstr ""
+msgstr "Wachtend"
 
 #: tutors/assessments/index.php:47
 msgid "pending"
-msgstr ""
+msgstr "wachtend"
 
 #: tutors/assessments/index.php:48
 msgid "open"
-msgstr ""
+msgstr "open"
 
 #: tutors/assessments/index.php:49
 msgid "closed"
-msgstr ""
+msgstr "afgesloten"
 
 #: tutors/assessments/index.php:50
 msgid "marked"
-msgstr ""
+msgstr "gescoord"
 
 #: tutors/assessments/index.php:110
 msgid "Use the tabs below to manage your different categories of assessment."
 msgstr ""
+"Gebruik de tabbladen hieronder om de verschillende categorieën van "
+"assessment te beheren."
 
 #: tutors/assessments/index.php:111
 msgid ""
 "You can also <a class=\"button\" href=\"create/\">create a new assessment"
 msgstr ""
+"U kan ook <a class=\"button\" href=\"create/\">een nieuwe assessment aanmaken"
 
 #: tutors/assessments/index.php:136
 msgid "Academic year to display"
-msgstr ""
+msgstr "Academiejaar om weer te geven"
 
 #: tutors/assessments/index.php:151
 msgid "change"
-msgstr ""
+msgstr "wijzig"
 
 #: tutors/assessments/marks/mark_assessment.php:73
 msgid "The PA Weighting must be a number between 1 - 100"
-msgstr ""
+msgstr "De PA Weging moet een getal zijn tussen 1 - 100"
 
 #: tutors/assessments/marks/mark_assessment.php:79
 #, php-format
 msgid "The Non-completion Penalty must be a number between %d - %d"
-msgstr ""
+msgstr "De Niet-voltooid Strafpunten moet een getal zijn tussen %d - %d"
 
 #: tutors/assessments/marks/mark_assessment.php:137
 #: tutors/assessments/marks/mark_assessment.php:145
 #: tutors/assessments/marks/mark_assessment.php:359
 msgid "create mark sheet"
-msgstr ""
+msgstr "maak een nieuw puntenblad aan"
 
 #: tutors/assessments/marks/mark_assessment.php:190
 msgid ""
 "On this page you can setup the parameters for the WebPA scoring algorithm."
 msgstr ""
+"Op deze pagina kan u de parameters voor het WebPA scoringsalgoritme "
+"instellen."
 
 #: tutors/assessments/marks/mark_assessment.php:191
 msgid ""
 "You can repeat this process many times, creating several mark sheets for the "
 "same assessment but using different parameters."
 msgstr ""
+"U kan deze procedure meerdere keren herhalen en zo verschillende "
+"puntenbladen aanmaken voor dezelfde assessment maar met verschillende "
+"parameters."
 
 #: tutors/assessments/marks/mark_assessment.php:215
 msgid "Algorithm Parameters"
-msgstr ""
+msgstr "Algoritmeparameters"
 
 #: tutors/assessments/marks/mark_assessment.php:217
 msgid ""
 "Enter the parameters to use below. When you've made your changes, click the "
 "<em>create mark sheet</em> button."
 msgstr ""
+"Geef de parameters om te gebruiken hieronder in. Wanneer u uw aanpassingen "
+"heeft gemaakt, klik op de <em>maak puntenblad aan</em>-knop."
 
 #: tutors/assessments/marks/mark_assessment.php:221
 msgid "What percentage of the group's total mark should be peer-assessed?"
-msgstr ""
+msgstr "Welk percentage van de totale groepsscore moet peer-assessed zijn?"
 
 #: tutors/assessments/marks/mark_assessment.php:224
 msgid "PA Weighting"
-msgstr ""
+msgstr "PA Weging"
 
 #: tutors/assessments/marks/mark_assessment.php:239
 msgid ""
 "If a student has not submitted any marks for the assessment, how much should "
 "they be penalised?"
 msgstr ""
+"Hoeveel moet de student gepenaliseerd worden als hij/zij geen punten heeft "
+"ingediend voor de assessment?"
 
 #: tutors/assessments/marks/mark_assessment.php:242
 msgid "Penalty for non-completion"
-msgstr ""
+msgstr "Strafpunten voor niet-voltooidheid"
 
 #: tutors/assessments/marks/mark_assessment.php:253
 msgid "of their final grade."
-msgstr ""
+msgstr "van hun finale score."
 
 #: tutors/assessments/marks/mark_assessment.php:264
 msgid "What type of penalty do you want to apply?"
-msgstr ""
+msgstr "Welk type bestraffing wil u gebruiken? "
 
 #: tutors/assessments/marks/mark_assessment.php:267
 msgid "Penalty Type"
-msgstr ""
+msgstr "Bestraffingstype"
 
 #: tutors/assessments/marks/mark_assessment.php:270
 msgid "Percentage (%)"
-msgstr ""
+msgstr "Percentage (%)"
 
 #: tutors/assessments/marks/mark_assessment.php:271
 msgid "Percentage Points (pp)"
-msgstr ""
+msgstr "Percentagepunten (pp)"
 
 #: tutors/assessments/marks/mark_assessment.php:310
 msgid "How do you want student grades to be displayed?"
-msgstr ""
+msgstr "Hoe wilt u dat de studentenscores worden weergegeven?"
 
 #: tutors/assessments/marks/mark_assessment.php:311
 msgid ""
 "A-F Grades will be calculated using the levels defined by your WebPA "
 "administrator."
 msgstr ""
+"A-F Scores zullen worden berekend met de niveau's bepaald door uw WebPA-"
+"beheerder."
 
 #: tutors/assessments/marks/mark_assessment.php:314
 msgid "Grading Type"
-msgstr ""
+msgstr "Scoringstype"
 
 #: tutors/assessments/marks/mark_assessment.php:317
 msgid "Percentage Grades"
-msgstr ""
+msgstr "Percentagescores"
 
 #: tutors/assessments/marks/mark_assessment.php:318
 msgid "Alphabetic Grades (A-F)"
-msgstr ""
+msgstr "Alfabetische Scores (A-F)"
 
 #: tutors/assessments/marks/mark_assessment.php:326
 msgid "Which algorithm do you wish to use to generate the student's grades?"
-msgstr ""
+msgstr "Welk algoritme wil u gebruiken om de studentenscores te genereren?"
 
 #: tutors/assessments/marks/mark_assessment.php:330
 msgid "WebPA Algorithm (default)"
-msgstr ""
+msgstr "WebPA Algoritme (standaard)"
 
 #: tutors/assessments/marks/mark_assessment.php:331
 msgid "This is the usual, WebPA way of calculating grades."
-msgstr ""
+msgstr "Dit is de gewoonlijke, WebPA-wijze van scores te berekenen."
 
 #: tutors/assessments/marks/mark_assessment.php:332
 msgid ""
 "The marks awarded to each student are normalised based on the generosity of "
 "the student doing the marking."
 msgstr ""
+"De scores toegekend aan elke student zijn genormaliseerd op basis van de "
+"generositeit van de student die heeft gescoord."
 
 #: tutors/assessments/marks/mark_assessment.php:344
 msgid "PETS Algorithm"
-msgstr ""
+msgstr "PETS Algoritme"
 
 #: tutors/assessments/marks/mark_assessment.php:345
 msgid "The marks awarded to each student are not normalised."
-msgstr ""
+msgstr "De scores toegekend aan elke student zijn niet genormaliseerd."
 
 #: tutors/assessments/marks/mark_assessment.php:346
 msgid ""
@@ -3759,17 +4057,17 @@ msgstr ""
 
 #: tutors/assessments/marks/set_group_marks.php:92
 msgid "You must enter a score for each group."
-msgstr ""
+msgstr "U moet een score ingeven voor elke groep."
 
 #: tutors/assessments/marks/set_group_marks.php:94
 #, php-format
 msgid "You must enter a score for each group. %s is not a valid score."
-msgstr ""
+msgstr "U moet een score ingeven voor elke groep. %s is geen geldige score."
 
 #: tutors/assessments/marks/set_group_marks.php:131
 #: tutors/assessments/marks/set_group_marks.php:138
 msgid "set group marks"
-msgstr ""
+msgstr "geef groepsscores"
 
 #: tutors/assessments/marks/set_group_marks.php:183
 msgid ""
@@ -3780,18 +4078,18 @@ msgstr ""
 
 #: tutors/assessments/marks/set_group_marks.php:213
 msgid "This assessment is using collection:"
-msgstr ""
+msgstr "De assessment gebruikt collectie:"
 
 #: tutors/assessments/marks/set_group_marks.php:225
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:205
 #: tutors/assessments/reports/report_student_grades_bygroup.php:216
 #: tutors/assessments/reports/report_student_response_info.php:253
 msgid "Group"
-msgstr ""
+msgstr "Groep"
 
 #: tutors/assessments/marks/set_group_marks.php:227
 msgid "Group Mark"
-msgstr ""
+msgstr "Groepsscore"
 
 #: tutors/assessments/reports/index.php:86
 #, php-format
@@ -3807,16 +4105,20 @@ msgid ""
 "There have been no student responses to this assessment. Please select "
 "another assessment, or %s%s\">re-schedule this one</a>."
 msgstr ""
+"Er zijn studentenantwoorden op deze assessment. Gelieve een andere "
+"assessment te kiezen of %s%s\">deze opnieuw te plannen</a>."
 
 #: tutors/assessments/reports/index.php:102
 msgid ""
 "The assessment you selected could not be loaded for some reason. Please go "
 "back and try again."
 msgstr ""
+"De geselecteerde assessment kon niet geladen worden. Gelieve terug te gaan "
+"en opnieuw te proberen."
 
 #: tutors/assessments/reports/index.php:112
 msgid "reports"
-msgstr ""
+msgstr "verslagen"
 
 #: tutors/assessments/reports/index.php:143
 #: tutors/assessments/reports/report_demo.php:205
@@ -3824,40 +4126,46 @@ msgid ""
 "On this page you can select the different reports to view for this "
 "assessment."
 msgstr ""
+"Op deze pagina kan u de verschillende verslagen kiezen om te bekijken voor "
+"deze assessment."
 
 #: tutors/assessments/reports/index.php:151
 msgid "Reports available for:"
-msgstr ""
+msgstr "Verslagen beschikbaar voor:"
 
 #: tutors/assessments/reports/index.php:169
 #: tutors/assessments/reports/report_student_grades.php:140
 #: tutors/assessments/reports/report_student_grades_bygroup.php:131
 msgid "Numeric (%)."
-msgstr ""
+msgstr "Numeriek (%)."
 
 #: tutors/assessments/reports/index.php:182
 msgid "Unable to display reports"
-msgstr ""
+msgstr "Kan de verslagen niet weergeven"
 
 #: tutors/assessments/reports/index.php:188
 msgid "Choose a report"
-msgstr ""
+msgstr "Kies een verslag"
 
 #: tutors/assessments/reports/index.php:190
 msgid "Please select a report to display or download from the list below."
 msgstr ""
+"Gelieve een verslag uit de onderstaande lijst te kiezen om weer te geven of "
+"te downloaden."
 
 #: tutors/assessments/reports/index.php:196
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:120
 #: tutors/assessments/reports/report_student_inputs.php:132
 msgid "Marks Awarded For Each Question"
-msgstr ""
+msgstr "Scores Toegekend Voor Elke Vraag"
 
 #: tutors/assessments/reports/index.php:197
 msgid ""
 "A breakdown of the marks given by each student for every question in the "
 "assessment."
 msgstr ""
+"Een onderverdeling van de scores gegeven door elke student bij elke vraag in "
+"de assessment."
 
 #: tutors/assessments/reports/index.php:200
 #: tutors/assessments/reports/index.php:219
@@ -3866,7 +4174,7 @@ msgstr ""
 #: tutors/assessments/reports/index.php:375
 #: tutors/assessments/reports/index.php:404
 msgid "View Report:"
-msgstr ""
+msgstr "Bekijk Verslag:"
 
 #: tutors/assessments/reports/index.php:204
 #: tutors/assessments/reports/index.php:223
@@ -3885,12 +4193,12 @@ msgstr ""
 #: tutors/assessments/reports/index.php:408
 #: tutors/assessments/reports/index.php:418
 msgid "Download:"
-msgstr ""
+msgstr "Download:"
 
 #: tutors/assessments/reports/index.php:215
 #: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:171
 msgid "Marks Awarded For Each Question (anonymous)"
-msgstr ""
+msgstr "Scores Toegekend Voor Elke Vraag (anoniem)"
 
 #: tutors/assessments/reports/index.php:216
 msgid ""
@@ -3901,61 +4209,66 @@ msgstr ""
 #: tutors/assessments/reports/index.php:234
 #: tutors/assessments/reports/report_student_response_info.php:167
 msgid "Student Response Information"
-msgstr ""
+msgstr "Studentenantwoorden Gegevens"
 
 #: tutors/assessments/reports/index.php:235
 msgid ""
 "Shows the date, time and location that each student took the assessment."
 msgstr ""
+"Toont de locatie, datum en tijdstip waarop elke student de assessment heeft "
+"ingevuld."
 
 #: tutors/assessments/reports/index.php:238
 msgid "View Report"
-msgstr ""
+msgstr "Bekijk Verslag"
 
 #: tutors/assessments/reports/index.php:253
 msgid "Unable to display the other reports"
-msgstr ""
+msgstr "Kan de andere verslagen niet weergeven"
 
 #: tutors/assessments/reports/index.php:264
 #: tutors/assessments/reports/report_demo.php:213
 #: tutors/assessments/reports/report_student_grades.php:149
 msgid "Student Grades"
-msgstr ""
+msgstr "Studentenscores"
 
 #: tutors/assessments/reports/index.php:265
 msgid ""
 "A list of students (by lastname) and their final WebPA scores and grades."
 msgstr ""
+"Een lijst van studenten (volgens achternaam) en hun finale WebPA-scores."
 
 #: tutors/assessments/reports/index.php:284
 msgid "Moodle - Moodle Gradebook Import XML"
-msgstr ""
+msgstr "Moodle - Moodle Puntenboek Importeer XML"
 
 #: tutors/assessments/reports/index.php:301
 msgid "Student Grades (by group)"
-msgstr ""
+msgstr "Studentenscores (volgens groep)"
 
 #: tutors/assessments/reports/index.php:302
 msgid "A list of students (by group) and their final WebPA scores and grades."
-msgstr ""
+msgstr "Een lijst van studenten (volgens groep) en hun finale WebPA-scores."
 
 #: tutors/assessments/reports/index.php:331
 msgid "Student Feedback and Justification (by group)"
-msgstr ""
+msgstr "Studentenfeedback en Verantwoording (volgens groep)"
 
 #: tutors/assessments/reports/index.php:332
 msgid ""
 "A list of students (by group) and their feedback about the assessment and "
 "justification of the WebPA scores and grades."
 msgstr ""
+"Een lijst van studenten (volgens groep) en hun feedback over de assessment "
+"en verantwoording van de WebPA-scores."
 
 #: tutors/assessments/reports/index.php:335
 msgid " Report:"
-msgstr ""
+msgstr " Verslag:"
 
 #: tutors/assessments/reports/index.php:349
 msgid "Student Grades and Feedback"
-msgstr ""
+msgstr "Studentenscores en Feedback"
 
 #: tutors/assessments/reports/index.php:350
 msgid ""
@@ -3967,7 +4280,7 @@ msgstr ""
 
 #: tutors/assessments/reports/index.php:371
 msgid "Responses per student"
-msgstr ""
+msgstr "Antwoorden per student"
 
 #: tutors/assessments/reports/index.php:372
 msgid ""
@@ -3977,7 +4290,7 @@ msgstr ""
 
 #: tutors/assessments/reports/index.php:400
 msgid "Responses per student (anonymous)"
-msgstr ""
+msgstr "Antwoorden per student (anoniem)"
 
 #: tutors/assessments/reports/index.php:401
 msgid ""
@@ -3997,25 +4310,25 @@ msgstr ""
 #: tutors/assessments/reports/report_uea.php:152
 #: tutors/assessments/reports/report_uea_anonymous.php:152
 msgid "report"
-msgstr ""
+msgstr "verslag"
 
 #: tutors/assessments/reports/report_demo.php:210
 msgid "back to reports list"
-msgstr ""
+msgstr "terug naar de verslagenlijst"
 
 #: tutors/assessments/reports/report_demo.php:218
 #: tutors/assessments/reports/report_student_grades.php:154
 #: tutors/assessments/reports/report_student_grades_bygroup.php:151
 msgid "WebPA<br />score"
-msgstr ""
+msgstr "WebPA<br />score"
 
 #: tutors/assessments/reports/report_demo.php:219
 msgid "Grade"
-msgstr ""
+msgstr "Score"
 
 #: tutors/assessments/reports/report_demo.php:220
 msgid "Did not<br />submit"
-msgstr ""
+msgstr "Niet<br />ingediend"
 
 #: tutors/assessments/reports/report_demo.php:230
 #: tutors/assessments/reports/report_student_grades.php:170
@@ -4029,22 +4342,22 @@ msgstr ""
 #: tutors/assessments/reports/report_student_grades_bygroup.php:347
 #: tutors/assessments/reports/report_student_grades_comments.php:133
 msgid "no penalty"
-msgstr ""
+msgstr "geen strafpunten"
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:134
 #: tutors/assessments/reports/report_student_response_info.php:132
 msgid "Error: The assessment could not be loaded."
-msgstr ""
+msgstr "Fout: De assessment kon niet geladen worden."
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:227
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:190
 #: tutors/assessments/reports/report_student_inputs.php:202
 msgid "Score Received"
-msgstr ""
+msgstr "Ontvangen Score"
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_anonymous.php:259
 msgid "\"Marks Awarded For Each Question (anonymous)\""
-msgstr ""
+msgstr "\"Scores Toegekend Voor Elke Vraag (anoniem)\""
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:46
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:51
@@ -4055,51 +4368,51 @@ msgstr ""
 #: tutors/assessments/reports/report_uea.php:52
 #: tutors/assessments/reports/report_uea_anonymous.php:51
 msgid "Error: The requested marksheet could not be loaded."
-msgstr ""
+msgstr "Fout: Het gevraagde puntenblad kon niet geladen worden."
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:132
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:240
 #: tutors/assessments/reports/report_student_inputs.php:144
 #: tutors/assessments/reports/report_student_inputs.php:252
 msgid "range:"
-msgstr ""
+msgstr "interval:"
 
 #: tutors/assessments/reports/report_marks_awarded_byquestion_named.php:222
 #: tutors/assessments/reports/report_student_inputs.php:234
 msgid "\"Marks Awarded For Each Question\""
-msgstr ""
+msgstr "\"Scores Toegekend Voor Elke Vraag\""
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:144
 msgid "Student feedback and Justification (by Group)"
-msgstr ""
+msgstr "Studentenfeedback en Verantwoording (volgens groep)"
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:157
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:207
 msgid "feedback recipient"
-msgstr ""
+msgstr "feedbackontvanger"
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:158
 msgid "feedback / justification<br/> comments"
-msgstr ""
+msgstr "feedback / verantwoording<br/> commentaar"
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:201
 msgid "\"Student feedback and Justification (by Group)\""
-msgstr ""
+msgstr "\"Studentenfeedback en Verantwoording (volgens groep)\""
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:206
 #: tutors/assessments/reports/report_student_grades_bygroup.php:217
 #: tutors/assessments/reports/report_student_response_info.php:254
 msgid "Overall group mark"
-msgstr ""
+msgstr "Totale groepsscore"
 
 #: tutors/assessments/reports/report_student_feedback_bygroup.php:207
 msgid "feedback / justification comments"
-msgstr ""
+msgstr "feedback / verantwoording commentaar"
 
 #: tutors/assessments/reports/report_student_grades.php:155
 #: tutors/assessments/reports/report_student_grades_bygroup.php:152
 msgid "Intermediate<br />Grade"
-msgstr ""
+msgstr "Tussenscore<br />"
 
 #: tutors/assessments/reports/report_student_grades.php:156
 #: tutors/assessments/reports/report_student_grades_bygroup.php:153
@@ -4109,39 +4422,39 @@ msgstr ""
 #: tutors/assessments/reports/report_student_grades.php:157
 #: tutors/assessments/reports/report_student_grades_bygroup.php:154
 msgid "Final<br />Grade"
-msgstr ""
+msgstr "Finale<br />Score"
 
 #: tutors/assessments/reports/report_student_grades.php:208
 msgid "\"Student Grades (by student)\""
-msgstr ""
+msgstr "\"Studentenscores (volgens student)\""
 
 #: tutors/assessments/reports/report_student_grades.php:211
 msgid "\"name\""
-msgstr ""
+msgstr "\"naam\""
 
 #: tutors/assessments/reports/report_student_grades.php:249
 #: tutors/assessments/reports/report_student_grades.php:287
 #: tutors/assessments/reports/report_student_grades_bygroup.php:266
 #: tutors/assessments/reports/report_student_grades_bygroup.php:315
 msgid "assessment"
-msgstr ""
+msgstr "assessment"
 
 #: tutors/assessments/reports/report_student_grades.php:250
 #: tutors/assessments/reports/report_student_grades_bygroup.php:267
 msgid "assessment_title"
-msgstr ""
+msgstr "assessment_titel"
 
 #: tutors/assessments/reports/report_student_grades.php:251
 #: tutors/assessments/reports/report_student_grades_bygroup.php:268
 msgid "weighting"
-msgstr ""
+msgstr "weging"
 
 #: tutors/assessments/reports/report_student_grades.php:252
 #: tutors/assessments/reports/report_student_grades.php:282
 #: tutors/assessments/reports/report_student_grades_bygroup.php:269
 #: tutors/assessments/reports/report_student_grades_bygroup.php:308
 msgid "penalty"
-msgstr ""
+msgstr "strafpunten"
 
 #: tutors/assessments/reports/report_student_grades.php:268
 #: tutors/assessments/reports/report_student_grades.php:284
@@ -4152,163 +4465,163 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_2.php:58
 #: tutors/groups/edit/edit_collection.php:217
 msgid "student"
-msgstr ""
+msgstr "student"
 
 #: tutors/assessments/reports/report_student_grades.php:270
 #: tutors/assessments/reports/report_student_grades_bygroup.php:296
 msgid "forename"
-msgstr ""
+msgstr "voornaam"
 
 #: tutors/assessments/reports/report_student_grades.php:271
 #: tutors/assessments/reports/report_student_grades_bygroup.php:297
 msgid "lastname"
-msgstr ""
+msgstr "achternaam"
 
 #: tutors/assessments/reports/report_student_grades.php:273
 #: tutors/assessments/reports/report_student_grades.php:279
 #: tutors/assessments/reports/report_student_grades_bygroup.php:299
 #: tutors/assessments/reports/report_student_grades_bygroup.php:305
 msgid "institutional_student_number"
-msgstr ""
+msgstr "institutioneel_studentennummer"
 
 #: tutors/assessments/reports/report_student_grades.php:280
 #: tutors/assessments/reports/report_student_grades_bygroup.php:306
 msgid "webpa_score"
-msgstr ""
+msgstr "webpa_score"
 
 #: tutors/assessments/reports/report_student_grades.php:281
 #: tutors/assessments/reports/report_student_grades_bygroup.php:307
 msgid "intermediate_grade"
-msgstr ""
+msgstr "tussen_score"
 
 #: tutors/assessments/reports/report_student_grades.php:283
 #: tutors/assessments/reports/report_student_grades_bygroup.php:309
 msgid "final_grade"
-msgstr ""
+msgstr "finale_score"
 
 #: tutors/assessments/reports/report_student_grades.php:324
 #: tutors/assessments/reports/report_student_grades.php:335
 msgid "result"
-msgstr ""
+msgstr "resultaat"
 
 #: tutors/assessments/reports/report_student_grades.php:325
 msgid "state"
-msgstr ""
+msgstr "staat"
 
 #: tutors/assessments/reports/report_student_grades.php:326
 msgid "assignment"
-msgstr ""
+msgstr "taak"
 
 #: tutors/assessments/reports/report_student_grades.php:338
 msgid "results"
-msgstr ""
+msgstr "resultaten"
 
 #: tutors/assessments/reports/report_student_grades.php:351
 #: tutors/assessments/reports/report_student_grades_bygroup.php:329
 msgid "Weighting:"
-msgstr ""
+msgstr "Weging:"
 
 #: tutors/assessments/reports/report_student_grades.php:352
 #: tutors/assessments/reports/report_student_grades.php:378
 #: tutors/assessments/reports/report_student_grades_bygroup.php:330
 #: tutors/assessments/reports/report_student_grades_bygroup.php:363
 msgid "Penalty:"
-msgstr ""
+msgstr "Strafpunten:"
 
 #: tutors/assessments/reports/report_student_grades.php:370
 msgid "Student Number:"
-msgstr ""
+msgstr "Studentennummer:"
 
 #: tutors/assessments/reports/report_student_grades.php:376
 msgid "Webpa Score:"
-msgstr ""
+msgstr "WebPA-score:"
 
 #: tutors/assessments/reports/report_student_grades.php:377
 #: tutors/assessments/reports/report_student_grades_bygroup.php:362
 msgid "Intermediate grade:"
-msgstr ""
+msgstr "Tussenscore:"
 
 #: tutors/assessments/reports/report_student_grades.php:379
 msgid "Final Grade:"
-msgstr ""
+msgstr "Finale Score:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:140
 msgid "Student Grades (by Group)"
-msgstr ""
+msgstr "Studentenscores (volgens groep)"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:147
 msgid "Overall group mark:"
-msgstr ""
+msgstr "Totale groepsscore:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:212
 msgid "\"Student Grades (by group)\""
-msgstr ""
+msgstr "\"Studentenscores (volgens groep)\""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:219
 #: tutors/assessments/reports/report_student_response_info.php:256
 msgid "\"Name\""
-msgstr ""
+msgstr "\"Naam\""
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:273
 #: tutors/assessments/reports/report_student_grades_bygroup.php:313
 #: tutors/groups/clone/class_wizardstep_1.php:74
 #: tutors/groups/edit/edit_collection.php:177
 msgid "group"
-msgstr ""
+msgstr "groep"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:274
 msgid "group_name"
-msgstr ""
+msgstr "groep_naam"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:275
 msgid "group_mark"
-msgstr ""
+msgstr "groep_score"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:276
 #: tutors/assessments/reports/report_student_grades_bygroup.php:312
 msgid "group_members"
-msgstr ""
+msgstr "groep_leden"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:328
 msgid "Assessment Title:"
-msgstr ""
+msgstr "Assessmenttitel:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:334
 msgid "Group name:"
-msgstr ""
+msgstr "Groepsnaam:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:335
 msgid "Group mark:"
-msgstr ""
+msgstr "Groepsscore:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:355
 msgid "Institutional student number:"
-msgstr ""
+msgstr "Institutioneel studentennummer:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:361
 msgid "Webpa score:"
-msgstr ""
+msgstr "WebPA-score:"
 
 #: tutors/assessments/reports/report_student_grades_bygroup.php:364
 msgid "Final grade:"
-msgstr ""
+msgstr "Finale score:"
 
 #: tutors/assessments/reports/report_student_grades_comments.php:119
 msgid "\"Student Grades and Feedback (by student)\""
-msgstr ""
+msgstr "\"Studentenscores en Feedback (volgens student)\""
 
 #: tutors/assessments/reports/report_student_grades_comments.php:122
 msgid "\"User Id\""
-msgstr ""
+msgstr "\"Gebruikers-id\""
 
 #: tutors/assessments/reports/report_student_response_info.php:248
 msgid "\"Student Response Information\""
-msgstr ""
+msgstr "\"Studentenantwoorden Gegevens\""
 
 #: tutors/assessments/reports/report_uea.php:177
 #: tutors/assessments/reports/report_uea_anonymous.php:177
 msgid "Student Responses"
-msgstr ""
+msgstr "Studentenantwoorden"
 
 #: tutors/assessments/reports/report_uea.php:193
 #: tutors/assessments/reports/report_uea.php:250
@@ -4317,74 +4630,81 @@ msgstr ""
 #: tutors/assessments/reports/report_uea_anonymous.php:244
 #: tutors/assessments/reports/report_uea_anonymous.php:285
 msgid "Results for:"
-msgstr ""
+msgstr "Resultaten voor:"
 
 #: tutors/assessments/reports/students_who_responded.php:89
 msgid ""
 "The following list shows which students in each group have submitted there "
 "responses to the assessment."
 msgstr ""
+"De volgende lijst toont voor elke groep welke studenten hun antwoorden voor "
+"de assessment hebben ingediend."
 
 #: tutors/assessments/reports/students_who_responded.php:106
 #: tutors/assessments/students_who_responded.php:109
 msgid "email"
-msgstr ""
+msgstr "e-mail"
 
 #: tutors/forms/clone/class_wizardstep_1.php:68
 msgid "You have not created any forms yet, so you cannot select one to clone."
 msgstr ""
+"U kan geen formulieren klonen want u heeft nog geen formulieren aangemaakt."
 
 #: tutors/forms/clone/class_wizardstep_1.php:69
 msgid "Please <a href=\"../create/\">create a new form</a> instead."
-msgstr ""
+msgstr "Gelieve <a href=\"../create/\">een nieuw formulier aan te maken</a>."
 
 #: tutors/forms/clone/class_wizardstep_1.php:73
 msgid ""
 "To create a clone you must first select which assessment form you wish to "
 "copy. Please choose one from the list below."
 msgstr ""
+"Om een kloon aan te maken moet u eerst een assessmentformulier kiezen om te "
+"kopiëren. Gelieve één te kiezen uit de onderstaande lijst."
 
 #: tutors/forms/clone/class_wizardstep_1.php:75
 msgid "Choose a form to clone"
-msgstr ""
+msgstr "Kies een formulier om te klonen"
 
 #: tutors/forms/clone/class_wizardstep_1.php:103
 msgid "You must select which assessment form you wish to clone."
-msgstr ""
+msgstr "U moet selecteren welk assessmentformulier u wenst te klonen."
 
 #: tutors/forms/clone/class_wizardstep_2.php:54
 msgid ""
 "The select form could not be loaded, please click <em>Back</em> and try "
 "again."
 msgstr ""
+"Het geselecteerde formulier kon niet geladen worden, gelieve te klikken op "
+"<em>Terug</em> en opnieuw te proberen."
 
 #: tutors/forms/clone/class_wizardstep_2.php:58
 #: tutors/groups/clone/class_wizardstep_2.php:54
 msgid "You have chosen to clone:"
-msgstr ""
+msgstr "U heeft gekozen om te klonen:"
 
 #: tutors/forms/clone/class_wizardstep_2.php:60
 msgid "Now enter a name for your new form."
-msgstr ""
+msgstr "Geef nu een naam in voor uw nieuw formulier."
 
 #: tutors/forms/clone/class_wizardstep_2.php:65
 #: tutors/forms/clone/clone_example.php:79
 msgid "Name for new form"
-msgstr ""
+msgstr "Naam voor nieuw formulier"
 
 #: tutors/forms/clone/class_wizardstep_2.php:79
 msgid "You must enter a name for your new assessment form."
-msgstr ""
+msgstr "U moet een naam invoeren voor uw nieuw assessmentformulier."
 
 #: tutors/forms/clone/class_wizardstep_3.php:61
 #: tutors/forms/create/class_wizardstep_2.php:63
 msgid "Unable to create your new form."
-msgstr ""
+msgstr "Het formulier kon niet aangemaakt worden."
 
 #: tutors/forms/clone/class_wizardstep_3.php:66
 #: tutors/forms/create/class_wizardstep_2.php:79
 msgid "Your new assessment form has been created."
-msgstr ""
+msgstr "Uw nieuw assessmentformulier werd aangemaakt."
 
 #: tutors/forms/clone/class_wizardstep_3.php:67
 #, php-format
@@ -4392,12 +4712,17 @@ msgid ""
 "To add questions and marking information to your new form, you can use the "
 "<a href=\"../edit/edit_form.php?f=%s\">form editor</a>."
 msgstr ""
+"Om nieuwe vragen en scoringsinformatie toe te voegen aan uw nieuw formulier "
+"kan u gebruik maken van de <a href=\"../edit/edit_form.php?f=%s\""
+">formuliereditor</a>."
 
 #: tutors/forms/clone/class_wizardstep_3.php:68
 msgid ""
 "Alternatively, you can return to <a href=\"../\">my forms</a>, or to the <a "
 "href=\"../../../\">WebPA home page</a>."
 msgstr ""
+"U kan ook terugkeren naar <a href=\"../\">mijn formulieren</a> of naar de <a "
+"href=\"../../../\">WebPA homepagina</a>."
 
 #: tutors/forms/clone/class_wizardstep_3.php:73
 #: tutors/forms/create/class_wizardstep_2.php:72
@@ -4406,15 +4731,17 @@ msgid ""
 "You may be able to correct the problem by clicking <em>back</em>, and then "
 "<em>next</em> again."
 msgstr ""
+"U kan mogelijks het probleem verhelpen door te klikken op <em>terug</em> en "
+"daarna terug op <em>volgende</em>."
 
 #: tutors/forms/clone/clone_example.php:56
 #, php-format
 msgid " Copy %s form"
-msgstr ""
+msgstr " Kopieer %s formulier"
 
 #: tutors/forms/clone/clone_example.php:61
 msgid "copy form"
-msgstr ""
+msgstr "kopieer formulier"
 
 #: tutors/forms/clone/clone_example.php:63 tutors/forms/clone/index.php:56
 #: tutors/forms/edit/add_question/index.php:88
@@ -4423,14 +4750,14 @@ msgstr ""
 #: tutors/forms/import/import.php:93 tutors/forms/import/index.php:28
 #: tutors/forms/import/xml_file.php:95 tutors/forms/index.php:38
 msgid "List Forms"
-msgstr ""
+msgstr "Formulierenlijst"
 
 #: tutors/forms/clone/clone_example.php:64 tutors/forms/clone/index.php:57
 #: tutors/forms/edit/add_question/index.php:89
 #: tutors/forms/edit/edit_form.php:86
 #: tutors/forms/edit/edit_question/index.php:88
 msgid "Create Form"
-msgstr ""
+msgstr "Maak Formulier Aan"
 
 #: tutors/forms/clone/clone_example.php:65 tutors/forms/clone/index.php:58
 #: tutors/forms/edit/add_question/index.php:90
@@ -4439,7 +4766,7 @@ msgstr ""
 #: tutors/forms/import/import.php:95 tutors/forms/import/index.php:30
 #: tutors/forms/import/xml_file.php:97 tutors/forms/index.php:40
 msgid "Clone a Form"
-msgstr ""
+msgstr "Kloon een Formulier"
 
 #: tutors/forms/clone/clone_example.php:66 tutors/forms/clone/index.php:59
 #: tutors/forms/edit/add_question/index.php:91
@@ -4448,28 +4775,28 @@ msgstr ""
 #: tutors/forms/import/import.php:96 tutors/forms/import/index.php:31
 #: tutors/forms/import/xml_file.php:98 tutors/forms/index.php:41
 msgid "Import a Form"
-msgstr ""
+msgstr "Importeer een Formulier"
 
 #: tutors/forms/clone/clone_example.php:72
 #, php-format
 msgid "You have chosen to take a copy of the : <em>%s</em> form."
-msgstr ""
+msgstr "U heeft gekozen een kopie te nemen van het: <em>%s</em> formulier."
 
 #: tutors/forms/clone/clone_example.php:74
 msgid "Now enter a name for your copy of the form."
-msgstr ""
+msgstr "Geef nu een naam in voor uw kopie van het formulier."
 
 #: tutors/forms/clone/index.php:25
 msgid "clone an existing form wizard"
-msgstr ""
+msgstr "kloon een bestaand formulier wizard"
 
 #: tutors/forms/clone/index.php:47
 msgid "Clone an existing form"
-msgstr ""
+msgstr "Kloon een bestaand formulier"
 
 #: tutors/forms/clone/index.php:53
 msgid "clone a form wizard"
-msgstr ""
+msgstr "kloon een formulier wizard"
 
 #: tutors/forms/clone/index.php:67
 msgid ""
@@ -4484,6 +4811,8 @@ msgid ""
 "the name should be unique, but you can create forms using the same name if "
 "you wish."
 msgstr ""
+"Om een nieuw formulier aan te maken, moet u eerst een naam ingeven. Om "
+"verwarring te vermijden kiest u best een unieke naam."
 
 #: tutors/forms/create/class_wizardstep_1.php:50
 msgid ""
@@ -4497,24 +4826,28 @@ msgid ""
 "For example, <em>\"Teamwork Assessment\"</em> or <em>\"ABC123 Group "
 "Coursework\"</em>."
 msgstr ""
+"Bijvoorbeeld, <em>\"Groepswerk beoordeling\"</em> of <em>\"ABC123 "
+"Groepswerk\"</em>."
 
 #: tutors/forms/create/class_wizardstep_1.php:54
 msgid "Name for this new form"
-msgstr ""
+msgstr "Naam voor dit nieuw formulier"
 
 #: tutors/forms/create/class_wizardstep_1.php:62
 msgid "What type scoring will your criteria use?"
-msgstr ""
+msgstr "Welk type scoring zal uw criterium gebruiken?"
 
 #: tutors/forms/create/class_wizardstep_1.php:63
 msgid ""
 "WebPA offers two different ways that your students can score each other."
 msgstr ""
+"WebPA biedt twee verschillende manieren aan waarop uw studenten elkaar "
+"kunnen beoordelen."
 
 #: tutors/forms/create/class_wizardstep_1.php:71
 #: tutors/forms/edit/edit_form.php:163
 msgid "Likert Scale"
-msgstr ""
+msgstr "Likertschaal"
 
 #: tutors/forms/create/class_wizardstep_1.php:72
 msgid ""
@@ -4522,11 +4855,14 @@ msgid ""
 "scale, typically 1-5 or 1-10, by simply clicking the appropriate radio "
 "button."
 msgstr ""
+"De standaard WebPA-scoring. Studenten beoordelen elkaar met een kleine "
+"likertschaal, typisch 1-5 of 1-10, door simpelweg op het overeenkomstige "
+"bolletje te klikken."
 
 #: tutors/forms/create/class_wizardstep_1.php:78
 #: tutors/forms/edit/edit_form.php:164
 msgid "Split 100"
-msgstr ""
+msgstr "Split 100"
 
 #: tutors/forms/create/class_wizardstep_1.php:79
 msgid ""
@@ -4539,11 +4875,11 @@ msgstr ""
 
 #: tutors/forms/create/class_wizardstep_1.php:91
 msgid "You must provide a name for your new assessment form"
-msgstr ""
+msgstr "U moet een naam ingeven voor uw nieuw assessmentformulier"
 
 #: tutors/forms/create/class_wizardstep_1.php:94
 msgid "You must select at least one module"
-msgstr ""
+msgstr "U moet minstens één module selecteren"
 
 #: tutors/forms/create/class_wizardstep_2.php:80
 #, php-format
@@ -4557,6 +4893,8 @@ msgid ""
 "Alternatively, you can return to <a href=\"/tutors/forms/\">my forms</a>, or "
 "to the <a href=\"/\">WebPA home page</a>."
 msgstr ""
+"U kan ook terugkeren naar <a href=\"/tutors/forms/\">mijn formulieren</a> of "
+"naar de <a href=\"/\">WebPA homepagina</a>."
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:54
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:50
@@ -4590,7 +4928,7 @@ msgstr ""
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:82
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:73
 msgid "Criterion Text"
-msgstr ""
+msgstr "Criteriumtekst"
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:66
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:62
@@ -4599,7 +4937,7 @@ msgstr ""
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:86
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:77
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:66
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:62
@@ -4608,24 +4946,24 @@ msgstr ""
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:86
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:77
 msgid "(optional)"
-msgstr ""
+msgstr "(optioneel)"
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:72
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:68
 msgid "Now select the range of scores you will allow for this question."
-msgstr ""
+msgstr "Selecteer nu het score-interval dat u wil gebruiken voor deze vraag."
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:76
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:72
 msgid "Scores can range from"
-msgstr ""
+msgstr "Scores variëren vanaf"
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:82
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:78
 #: tutors/forms/edit/edit_question/class_wizardstep_1.php:100
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:102
 msgid "to"
-msgstr ""
+msgstr "tot"
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:91
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:87
@@ -4635,6 +4973,8 @@ msgid ""
 "<strong>Please Note</strong> - allowing 0 scores means students can receive "
 "no marks if they failed to contribute at all."
 msgstr ""
+"<strong>Merk Op</strong> - nulscores toelaten betekent dat het mogelijk is "
+"dat studenten geen punten krijgen als ze geen bijdrages geleverd hebben."
 
 #: tutors/forms/edit/add_question/class_wizardstep_1.php:99
 #: tutors/forms/edit/add_question/likert/class_wizardstep_1.php:95
@@ -4643,7 +4983,7 @@ msgstr ""
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:120
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:90
 msgid "You must provide some text for your new criterion"
-msgstr ""
+msgstr "U moet een tekst ingeven voor uw nieuw criterium"
 
 #: tutors/forms/edit/add_question/class_wizardstep_2.php:47
 #, php-format
@@ -4668,39 +5008,40 @@ msgstr ""
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:64
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:66
 msgid "Score descriptions"
-msgstr ""
+msgstr "Scorebeschrijvingen"
 
 #: tutors/forms/edit/add_question/class_wizardstep_2.php:60
 #: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:60
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:74
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:76
 msgid "Lowest"
-msgstr ""
+msgstr "Laagste"
 
 #: tutors/forms/edit/add_question/class_wizardstep_2.php:63
 #: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:63
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:77
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_2.php:79
 msgid "Highest"
-msgstr ""
+msgstr "Hoogste"
 
 #: tutors/forms/edit/add_question/class_wizardstep_3.php:67
 #: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:67
 #: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:57
 msgid "Unable to load the form that this question is to be added to."
 msgstr ""
+"Kon het formulier niet laden waaraan deze vraag toegevoegd zou moeten worden."
 
 #: tutors/forms/edit/add_question/class_wizardstep_3.php:77
 #: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:77
 #: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:67
 msgid "Unable to create your new criterion."
-msgstr ""
+msgstr "Het nieuwe criterium kon niet aangemaakt worden."
 
 #: tutors/forms/edit/add_question/class_wizardstep_3.php:84
 #: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:84
 #: tutors/forms/edit/add_question/split100/class_wizardstep_2.php:74
 msgid "Your new assessment criterion has been created."
-msgstr ""
+msgstr "Uw nieuw assessmentcriterium is aangemaakt."
 
 #: tutors/forms/edit/add_question/class_wizardstep_3.php:85
 #: tutors/forms/edit/add_question/likert/class_wizardstep_3.php:85
@@ -4710,23 +5051,25 @@ msgid ""
 "You can now return to <a href=\"../edit_form.php?f=%s\">editing your form</"
 "a>."
 msgstr ""
+"U kan nu terugkeren naar <a href=\"../edit_form.php?f=%s\">uw formulier "
+"bewerken</a>."
 
 #: tutors/forms/edit/add_question/index.php:38
 msgid "add a new assessment criterion wizard"
-msgstr ""
+msgstr "maak een nieuw assessmentcriterium aan wizard"
 
 #: tutors/forms/edit/add_question/index.php:78
 msgid "Add a new criterion"
-msgstr ""
+msgstr "Voeg een nieuw criterium toe"
 
 #: tutors/forms/edit/add_question/index.php:84
 #: tutors/forms/edit/edit_question/index.php:83
 msgid "edit:"
-msgstr ""
+msgstr "bewerk:"
 
 #: tutors/forms/edit/add_question/index.php:85
 msgid "add a new question"
-msgstr ""
+msgstr "voeg een nieuwe vraag toe"
 
 #: tutors/forms/edit/add_question/index.php:103
 msgid ""
@@ -4739,6 +5082,8 @@ msgstr ""
 msgid ""
 "The given assessment form failed to load so this wizard cannot be started."
 msgstr ""
+"Het gegeven assessmentformulier kon niet geladen worden dus deze wizard kan "
+"niet starten."
 
 #: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:47
 msgid ""
@@ -4755,45 +5100,52 @@ msgstr ""
 
 #: tutors/forms/edit/edit_form.php:49
 msgid "You must give this form a name."
-msgstr ""
+msgstr "U moet dit formulier een naam geven."
 
 #: tutors/forms/edit/edit_form.php:74
 msgid "Edit form"
-msgstr ""
+msgstr "Bewerk formulier"
 
 #: tutors/forms/edit/edit_form.php:98 tutors/forms/index.php:83
 #: tutors/forms/index.php:117
 msgid "This assessment form will be deleted.\\n\\nClick OK to confirm."
 msgstr ""
+"Dit assessmentformulier zal worden verwijderd.\\n"
+"\\n"
+" Klik op OK om te bevestigen."
 
 #: tutors/forms/edit/edit_form.php:123
 msgid ""
 "On this page you can change the name of this form, and add/remove assessment "
 "criteria."
 msgstr ""
+"Op deze pagina kan u de naam van het formulier aanpassen en "
+"assessmentcriteria toevoegen/verwijderen."
 
 #: tutors/forms/edit/edit_form.php:131 tutors/forms/edit/edit_form.php:144
 msgid "back to forms list"
-msgstr ""
+msgstr "terug naar formulierenlijst"
 
 #: tutors/forms/edit/edit_form.php:134
 msgid ""
 "The form you selected could not be loaded for some reason - please go back "
 "and try again."
 msgstr ""
+"Het geselecteerde formulier kon niet geladen worden - gelieve terug te gaan "
+"en opnieuw te proberen."
 
 #: tutors/forms/edit/edit_form.php:145
 msgid "preview form"
-msgstr ""
+msgstr "voorbeeldweergave formulier"
 
 #: tutors/forms/edit/edit_form.php:146 tutors/forms/index.php:83
 #: tutors/forms/index.php:117
 msgid "delete form"
-msgstr ""
+msgstr "verwijder formulier"
 
 #: tutors/forms/edit/edit_form.php:151
 msgid "Form Name"
-msgstr ""
+msgstr "Formuliernaam"
 
 #: tutors/forms/edit/edit_form.php:153
 msgid ""
@@ -4803,7 +5155,7 @@ msgstr ""
 
 #: tutors/forms/edit/edit_form.php:160
 msgid "Scoring Type"
-msgstr ""
+msgstr "Scoringstype"
 
 #: tutors/forms/edit/edit_form.php:169
 msgid ""
@@ -4824,12 +5176,17 @@ msgid ""
 "class=\"button\" href=\"../edit/add_question/index.php?%s\">add&nbsp;a&nbsp;"
 "new&nbsp;criterion</a> before the form can be used."
 msgstr ""
+"U heeft nog geen assessmentcriteria toegevoegd aan dit formulier. U moet <a "
+"class=\"button\" href=\"../edit/add_question/index.php?%s\">een nieuw "
+"criterium toevoegen</a> vooraleer het formulier kan worden gebruikt."
 
 #: tutors/forms/edit/edit_form.php:197
 msgid ""
 "The group will rate themselves and each other against the assessment "
 "criteria you specify."
 msgstr ""
+"De groep zal zichzelf en anderen beoordelen op basis van de "
+"assessmentcriteria die u bepaalt."
 
 #: tutors/forms/edit/edit_form.php:198
 msgid ""
@@ -4845,24 +5202,29 @@ msgid ""
 "add_question/index.php?<?php echo($form_qs); ?>\">add&nbsp;a&nbsp;new&nbsp;"
 "criterion</a>"
 msgstr ""
+"U kan een criterium aanpassen door te klikken op de <img src=\""
+"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit "
+"question\" title=\"edit\" />-knop, of u kan <a class=\"button\" href=\""
+"../edit/add_question/index.php?<?php echo($form_qs); ?>\""
+">een&nbsp;nieuw&nbsp;criterium&nbsp;toevoegen</a>"
 
 #: tutors/forms/edit/edit_form.php:222
 msgid "Scoring range:"
-msgstr ""
+msgstr "Score-interval:"
 
 #: tutors/forms/edit/edit_form.php:239
 msgid "move up"
-msgstr ""
+msgstr "omhoog verplaatsen"
 
 #: tutors/forms/edit/edit_form.php:249
 msgid "move down"
-msgstr ""
+msgstr "omlaag verplaatsen"
 
 #: tutors/forms/edit/edit_question/class_wizardstep_1.php:75
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:77
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_1.php:68
 msgid "Here you can edit the text and description of the criterion."
-msgstr ""
+msgstr "Hier kan u de tekst en de beschrijving van het criterium aanpassen."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_1.php:90
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:92
@@ -4870,11 +5232,13 @@ msgid ""
 "Here you can select the range of scores you will allow for this assessment "
 "criterion."
 msgstr ""
+"Hier kan u het score-interval selecteren dat u wil gebruiken voor dit "
+"assessmentcriterium."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_1.php:94
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_1.php:96
 msgid "Scores range from"
-msgstr ""
+msgstr "Scores variëren vanaf"
 
 #: tutors/forms/edit/edit_question/class_wizardstep_2.php:61
 #, php-format
@@ -4882,24 +5246,27 @@ msgid ""
 "Your new assessment criterion allows scores from %d to %d You can use the "
 "boxes below to provide a description what those scores should mean."
 msgstr ""
+"Uw nieuw assessmentcriterium laat scores toe van %d tot %d U kan "
+"onderstaande velden gebruiken om toelichting te geven bij de betekenis van "
+"die scores."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:60
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:62
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:56
 msgid "Unable to load the form that this question belongs to."
-msgstr ""
+msgstr "Kon het formulier niet laden waartoe deze vraag behoort."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:70
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:72
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:66
 msgid "Unable to create your new assessment criterion."
-msgstr ""
+msgstr "Het nieuwe criterium kon niet aangemaakt worden."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:74
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:76
 #: tutors/forms/edit/edit_question/split100/class_wizardstep_2.php:70
 msgid "Your changes to this criterion have been saved."
-msgstr ""
+msgstr "Uw aanpassingen aan dit criterium werden opgeslagen."
 
 #: tutors/forms/edit/edit_question/class_wizardstep_3.php:75
 #: tutors/forms/edit/edit_question/likert/class_wizardstep_3.php:77
@@ -4909,18 +5276,20 @@ msgid ""
 "You can now return to <a href=\"/tutors/forms/edit/edit_form.php?f=%s"
 "\">editing your form</a>."
 msgstr ""
+"U kan nu terugkeren naar <a href=\"/tutors/forms/edit/edit_form.php?f=%s\">"
+"uw formulier bewerken</a>."
 
 #: tutors/forms/edit/edit_question/index.php:37
 msgid "edit criterion wizard"
-msgstr ""
+msgstr "bewerk criterium wizard"
 
 #: tutors/forms/edit/edit_question/index.php:77
 msgid "Edit a criterion"
-msgstr ""
+msgstr "Bewerk een criterium"
 
 #: tutors/forms/edit/edit_question/index.php:84
 msgid "edit: criterion"
-msgstr ""
+msgstr "bewerk: criterium"
 
 #: tutors/forms/edit/edit_question/index.php:102
 msgid ""
@@ -4937,26 +5306,28 @@ msgstr ""
 
 #: tutors/forms/edit/preview_form.php:33
 msgid "<< Your introduction text will go in here >>"
-msgstr ""
+msgstr "<< Uw introductietekst verschijnt hier >>"
 
 #: tutors/forms/edit/preview_form.php:44
 msgid "Yourself"
-msgstr ""
+msgstr "Uzelf"
 
 #: tutors/forms/edit/preview_form.php:56
 msgid "Preview Form"
-msgstr ""
+msgstr "Voorbeeldweergave Formulier"
 
 #: tutors/forms/edit/preview_form.php:82
 #: tutors/forms/edit/preview_form.php:121
 msgid "disabled in preview"
-msgstr ""
+msgstr "uitgeschakeld in voorbeeldweergave"
 
 #: tutors/forms/edit/preview_form.php:89
 msgid ""
 "Please complete the assessment below. For each question <em>you must give a "
 "mark to each group member</em>, including yourself."
 msgstr ""
+"Gelieve de assessment hieronder te vervolledigen. Voor elke vraag <em>moet u "
+"een score geven aan elk groepslid</em>, uzelf inbegrepen."
 
 #: tutors/forms/edit/preview_form.php:90
 msgid ""
@@ -4964,30 +5335,37 @@ msgid ""
 "have successfully submitted your responses you cannot go back and change "
 "your marks."
 msgstr ""
+"Om uw scores op te slaan, moet u klikken op de <em>Bewaar Scores</em> knop. "
+"Zodra u uw antwoorden succesvol hebt ingediend kan u niet meer teruggaan en "
+"uw scores aanpassen."
 
 #: tutors/forms/edit/preview_form.php:94
 msgid "Marking Your Team"
-msgstr ""
+msgstr "Uw Team Beoordelen"
 
 #: tutors/forms/edit/preview_form.php:117
 msgid ""
 "That concludes this peer assessment. To finish and submit your response "
 "click the <em>save marks</em> button below."
 msgstr ""
+"Dat concludeert deze peer assessment. Om te beëindigen en uw antwoorden in "
+"te dienen, klik op de <em>bewaar scores</em> knop hieronder."
 
 #: tutors/forms/edit/preview_form.php:118
 msgid ""
 "Once you have successfully submitted your responses you cannot go back and "
 "change your marks."
 msgstr ""
+"Zodra u uw antwoorden succesvol hebt ingediend kan u niet meer teruggaan en "
+"uw scores aanpassen."
 
 #: tutors/forms/edit/preview_form.php:121
 msgid "save marks"
-msgstr ""
+msgstr "bewaar scores"
 
 #: tutors/forms/edit/preview_form.php:127
 msgid "close preview"
-msgstr ""
+msgstr "voorbeeldweergave sluiten"
 
 #: tutors/forms/import/import.php:46
 msgid ""
@@ -4995,31 +5373,39 @@ msgid ""
 "make a copy of the form please use the <a href=\\\"index.php\\\">'clone "
 "form'</a> function."
 msgstr ""
+"U heeft dit formulier reeds in uw formulierenlijst.</p><p>Als u een kopie "
+"wil maken van dit formulier, gelieve de <a href=\\\"index.php\\\">'kloon "
+"formulier'</a> functie te gebruiken."
 
 #: tutors/forms/import/import.php:75
+#, fuzzy
 msgid ""
 "The form has been uploaded and can be found in your <a href=\\\"../index.php"
 "\\\">'my forms'</a> list."
 msgstr ""
+"Het formulier werd geüpload en kan gevonden worden in uw <a href=\\\""
+"../index.php\\\">'mijn formulieren'</a> list"
 
 #: tutors/forms/import/import.php:79 tutors/forms/import/xml_file.php:83
 msgid "The import has failed due to the following reasons"
-msgstr ""
+msgstr "Het importeren is gefaald omwille van de volgende redenen"
 
 #: tutors/forms/import/import.php:84
 msgid ""
 "There was no form information to upload.<br> Please go back and try again</p>"
 msgstr ""
+"Er waren geen formulierengegevens om te uploaden.<br> Gelieve terug te gaan "
+"en opnieuw te proberen</p>"
 
 #: tutors/forms/import/import.php:87 tutors/forms/import/index.php:21
 #: tutors/forms/import/index.php:26 tutors/forms/import/xml_file.php:91
 msgid "load form"
-msgstr ""
+msgstr "formulier laden"
 
 #: tutors/forms/import/import.php:94 tutors/forms/import/index.php:29
 #: tutors/forms/import/xml_file.php:96 tutors/forms/index.php:39
 msgid "Create a new Form"
-msgstr ""
+msgstr "Nieuw Formulier Aanmaken"
 
 #: tutors/forms/import/import.php:104 tutors/forms/import/xml_file.php:106
 msgid "form loading"
@@ -5029,33 +5415,38 @@ msgstr ""
 msgid ""
 "Here you can import forms which have been exported from the WebPA system."
 msgstr ""
+"Hier kan u formulieren importeren die geëxporteerd zijn van het WebPA-"
+"systeem."
 
 #: tutors/forms/import/index.php:40
 msgid "load form by 'cut and paste'"
-msgstr ""
+msgstr "laad formulier met 'kopiëren en plakken'"
 
 #: tutors/forms/import/index.php:42
 msgid ""
 "Please copy and paste the contents of the form file into the text area below "
 "and click the <i>load</i> button."
 msgstr ""
+"Gelieve de inhoud van het formulierenbestand te kopiëren in het onderstaande "
+"tekstvak en op de <i>laad</i>-knop te klikken."
 
 #: tutors/forms/import/index.php:48 tutors/forms/import/index.php:63
 msgid "load"
-msgstr ""
+msgstr "laad"
 
 #: tutors/forms/import/index.php:54
 msgid "load form by XML file"
-msgstr ""
+msgstr "laad formulier met een XML-bestand"
 
 #: tutors/forms/import/index.php:56
 msgid ""
 "Browse for the XML file on your computer and click the <i>load</i> button."
 msgstr ""
+"Navigeer naar het XML-bestand op uw computer en klik op de <i>laad</i>-knop."
 
 #: tutors/forms/import/xml_file.php:57
 msgid "You already have this form in your forms list."
-msgstr ""
+msgstr "U heeft dit formulier reeds in uw formulierenlijst."
 
 #: tutors/forms/import/xml_file.php:57
 msgid ""
@@ -5071,15 +5462,15 @@ msgstr ""
 
 #: tutors/forms/import/xml_file.php:89
 msgid "Unable to upload file."
-msgstr ""
+msgstr "Bestand kon niet worden geüpload."
 
 #: tutors/forms/index.php:48
 msgid "Please select from the following options:"
-msgstr ""
+msgstr "Kies uit de volgende opties:"
 
 #: tutors/forms/index.php:51
 msgid "Existing forms"
-msgstr ""
+msgstr "Bestaande formulieren"
 
 #: tutors/forms/index.php:54
 msgid ""
@@ -5090,62 +5481,68 @@ msgstr ""
 
 #: tutors/forms/index.php:63
 msgid "generic / example form"
-msgstr ""
+msgstr "voorbeeldformulier"
 
 #: tutors/forms/index.php:75 tutors/forms/index.php:111
 msgid "Form"
-msgstr ""
+msgstr "Formulier"
 
 #: tutors/forms/index.php:82 tutors/forms/index.php:116
 msgid "edit form"
-msgstr ""
+msgstr "bewerk formulier"
 
 #: tutors/forms/index.php:94
 msgid "your forms"
-msgstr ""
+msgstr "uw formulieren"
 
 #: tutors/forms/index.php:99
 msgid ""
 "You do not have any assessment forms at the moment. Please <a href=\"create/"
 "\">create a new form</a>."
 msgstr ""
+"U heeft momenteel geen assessmentformulieren. Gelieve <a href=\"create/\">"
+"een nieuw formulier aan te maken</a>."
 
 #: tutors/forms/index.php:115
 msgid "export form"
-msgstr ""
+msgstr "formulier exporteren"
 
 #: tutors/forms/index.php:115
 msgid "export"
-msgstr ""
+msgstr "exporteren"
 
 #: tutors/groups/clone/class_wizardstep_1.php:59
 msgid "You have not created any groups, so there are none to clone."
-msgstr ""
+msgstr "U kan geen groepen klonen want u heeft nog geen groepen aangemaakt."
 
 #: tutors/groups/clone/class_wizardstep_1.php:66
 msgid ""
 "Firstly, you need to choose a collection of groups to clone. Please select "
 "which you want to clone:"
 msgstr ""
+"Eerst moet u een collectie van groepen kiezen om te klonen. Gelieve te "
+"selecteren welke u wil klonen:"
 
 #: tutors/groups/clone/class_wizardstep_1.php:74
 #: tutors/groups/edit/edit_collection.php:177
 msgid "groups"
-msgstr ""
+msgstr "groepen"
 
 #: tutors/groups/clone/class_wizardstep_1.php:94
 msgid "You must select a collection of groups to clone."
-msgstr ""
+msgstr "U moet een collectie van groepen selecteren om te klonen."
 
 #: tutors/groups/clone/class_wizardstep_2.php:55
 msgid "Name of Clone"
-msgstr ""
+msgstr "Naam van Kloon"
 
 #: tutors/groups/clone/class_wizardstep_2.php:56
 msgid ""
 "To avoid confusion, the name of your cloned collection of groups should be "
 "unique, but you can use the same name if you wish."
 msgstr ""
+"Om verwarring te vermijden gebruikt u best een unieke naam voor uw gekloonde "
+"collectie."
 
 #: tutors/groups/clone/class_wizardstep_2.php:57
 #: tutors/groups/create/class_wizardstep_1.php:50
@@ -5154,36 +5551,43 @@ msgid ""
 "students are doing coursework for module 05ABC123, then name the collection, "
 "<em>05ABC123 - Coursework Groups</em>."
 msgstr ""
+"Uw naam zou een goede beschrijving moeten zijn van de groepen. Bijvoorbeeld, "
+"als uw studenten groepswerk doen voor module 05ABC123, dan kan u de "
+"collectie de naam <em>05ABC123 - Groepswerk</em> geven."
 
 #: tutors/groups/clone/class_wizardstep_2.php:62
 #: tutors/groups/create/class_wizardstep_1.php:54
 msgid "Name for this new collection"
-msgstr ""
+msgstr "Naam voor deze nieuwe collectie"
 
 #: tutors/groups/clone/class_wizardstep_2.php:74
 #: tutors/groups/create/class_wizardstep_1.php:67
 msgid "You must provide a name for your new collection of groups"
-msgstr ""
+msgstr "U moet een naam ingeven voor uw nieuwe groepscollectie."
 
 #: tutors/groups/clone/class_wizardstep_3.php:53
 msgid ""
 "There was an error when trying to clone these groups - please use the "
 "contact system to report the error!"
 msgstr ""
+"Er was een fout bij het klonen van de groepen - gelieve het contactsysteem "
+"te gebruiken om de fout te melden!"
 
 #: tutors/groups/clone/class_wizardstep_3.php:63
 msgid "Unable to create your new cloned groups."
-msgstr ""
+msgstr "Uw gekloonde groepen konden niet aangemaakt worden."
 
 #: tutors/groups/clone/class_wizardstep_3.php:64
 msgid ""
 "To correct the problem, try clicking <em>back</em> and amend the details "
 "entered."
 msgstr ""
+"Om het probleem te corrigeren, klik op <em>terug</em> en verbeter de "
+"gegevens."
 
 #: tutors/groups/clone/class_wizardstep_3.php:67
 msgid "Your new cloned groups have been created."
-msgstr ""
+msgstr "Uw gekloonde groepen zijn aangemaakt."
 
 #: tutors/groups/clone/class_wizardstep_3.php:68
 #, php-format
@@ -5200,15 +5604,15 @@ msgstr ""
 
 #: tutors/groups/clone/index.php:49
 msgid "Clone own groups"
-msgstr ""
+msgstr "Kloon eigen groepen"
 
 #: tutors/groups/clone/index.php:55
 msgid "clone groups"
-msgstr ""
+msgstr "kloon groepen"
 
 #: tutors/groups/clone/index.php:56
 msgid "clone own groups wizard"
-msgstr ""
+msgstr "kloon eigen groepen wizard"
 
 #: tutors/groups/clone/index.php:69
 msgid ""
@@ -5223,11 +5627,13 @@ msgid ""
 "confusion, the name should be unique, but you can create collections using "
 "the same name if you wish."
 msgstr ""
+"Eerst moeten we deze nieuwe groepscollectie een naam geven. Om verwarring te "
+"vermijden gebruikt u best een unieke naam voor elke collectie."
 
 #: tutors/groups/create/class_wizardstep_2.php:58
 #: tutors/groups/edit/edit_collection.php:217
 msgid "students"
-msgstr ""
+msgstr "studenten"
 
 #: tutors/groups/create/class_wizardstep_2.php:61
 msgid ""
@@ -5241,7 +5647,7 @@ msgstr ""
 #: tutors/groups/create/class_wizardstep_2.php:63
 #, php-format
 msgid "The module contains <strong>%d %s</strong> in total."
-msgstr ""
+msgstr "Deze module bevat <strong>%d %s</strong> in totaal."
 
 #: tutors/groups/create/class_wizardstep_2.php:66
 msgid ""
@@ -5254,57 +5660,59 @@ msgstr ""
 
 #: tutors/groups/create/class_wizardstep_2.php:68
 msgid "Auto-create groups"
-msgstr ""
+msgstr "Automatisch aanmaken groepen"
 
 #: tutors/groups/create/class_wizardstep_2.php:70
 msgid "Select how many groups you want to create."
-msgstr ""
+msgstr "Selecteer hoeveel groepen u wil aanmaken."
 
 #: tutors/groups/create/class_wizardstep_2.php:74
 msgid "Number of groups to create"
-msgstr ""
+msgstr "Aantal groepen om aan te maken"
 
 #: tutors/groups/create/class_wizardstep_2.php:84
 msgid ""
 "If you are auto-creating groups, decide how the groups will be named, e.g.  "
 "<em>Group X</em> or <em>Team X</em>."
 msgstr ""
+"Als u automatisch groepen aanmaakt, bepaal hoe de groepen zullen worden "
+"genoemd. Bijvoorbeeld, <em>Groep X</em> of <em>Team X</em>."
 
 #: tutors/groups/create/class_wizardstep_2.php:87
 msgid "Group names begin with"
-msgstr ""
+msgstr "Groepsnamen beginnen met"
 
 #: tutors/groups/create/class_wizardstep_2.php:93
 msgid "Select the style of numbering to use for your new groups."
-msgstr ""
+msgstr "Selecteer hoe uw nieuwe groepen worden genummerd."
 
 #: tutors/groups/create/class_wizardstep_2.php:96
 msgid "Numbering Style"
-msgstr ""
+msgstr "Nummering"
 
 #: tutors/groups/create/class_wizardstep_2.php:100
 msgid "Alphabetic (Group A, Group B, ..)"
-msgstr ""
+msgstr "Alfabetisch (Groep A, Groep B, ...)"
 
 #: tutors/groups/create/class_wizardstep_2.php:101
 msgid "Numeric (Group 1, Group 2, ..)"
-msgstr ""
+msgstr "Numeriek (Groep 1, Groep 2, ...)"
 
 #: tutors/groups/create/class_wizardstep_2.php:102
 msgid "Hashed-Numeric (Group #1, Group #2, ..)"
-msgstr ""
+msgstr "Hekje-Numeriek (Groep #1, Groep #2, ...)"
 
 #: tutors/groups/create/class_wizardstep_2.php:118
 msgid "You must choose how many groups to create"
-msgstr ""
+msgstr "U moet kiezen hoeveel groepen er aangemaakt moeten worden"
 
 #: tutors/groups/create/class_wizardstep_2.php:122
 msgid "You must provide a name for your new groups"
-msgstr ""
+msgstr "U moet een naam ingeven voor uw nieuwe groepen"
 
 #: tutors/groups/create/class_wizardstep_2.php:125
 msgid "You must choose how to number your groups"
-msgstr ""
+msgstr "U moet kiezen hoe uw groepen genummerd moeten worden"
 
 #: tutors/groups/create/class_wizardstep_3.php:58
 msgid ""
@@ -5314,11 +5722,11 @@ msgstr ""
 
 #: tutors/groups/create/class_wizardstep_3.php:61
 msgid "This collection of groups will be called:"
-msgstr ""
+msgstr "Deze groepscollectie zal de naam krijgen:"
 
 #: tutors/groups/create/class_wizardstep_3.php:65
 msgid "available"
-msgstr ""
+msgstr "beschikbaar"
 
 #: tutors/groups/create/class_wizardstep_3.php:74
 #, php-format
@@ -5326,22 +5734,25 @@ msgid ""
 "The following groups will be created in the new <strong>%s</strong> "
 "collection:"
 msgstr ""
+"De volgende groepen zullen worden aangemaakt in de nieuwe <strong>%s</strong>"
+" collectie:"
 
 #: tutors/groups/create/class_wizardstep_3.php:97
 msgid "You have chosen not to create any groups at this time."
-msgstr ""
+msgstr "U heeft ervoor gekozen nu geen groepen aan te maken."
 
 #: tutors/groups/create/class_wizardstep_4.php:75
 msgid "Unable to create your new collection of groups."
-msgstr ""
+msgstr "Uw nieuwe groepscollectie kon niet aangemaakt worden."
 
 #: tutors/groups/create/class_wizardstep_4.php:86
 msgid "An error occurred while trying to create your new collection of groups."
 msgstr ""
+"Er was een fout bij het proberen aanmaken van uw nieuwe groepscollectie."
 
 #: tutors/groups/create/class_wizardstep_4.php:91
 msgid "Your new groups have been created."
-msgstr ""
+msgstr "Uw nieuwe groepen werden aangemaakt."
 
 #: tutors/groups/create/class_wizardstep_4.php:92
 #, php-format
@@ -5358,13 +5769,15 @@ msgstr ""
 
 #: tutors/groups/create/class_wizardstep_x.php:59
 msgid "You are not associated with any modules."
-msgstr ""
+msgstr "U bent niet geregistreerd bij een module."
 
 #: tutors/groups/create/class_wizardstep_x.php:60
 msgid ""
 "You cannot create any groups without being associated with at least one "
 "module."
 msgstr ""
+"U kan geen groepen aanmaken zonder geregistreerd te zijn bij tenminste één "
+"module."
 
 #: tutors/groups/create/class_wizardstep_x.php:65
 msgid ""
@@ -5373,6 +5786,10 @@ msgid ""
 "but by selecting multiple modules your groups can contain a mixture of "
 "students from different modules."
 msgstr ""
+"U heeft ervoor gekozen om uw groepen op te vullen met studenten uit meerdere "
+"modules. Gewoonlijk moeten groepen enkel studenten van één enkele module "
+"bevatten maar door meerdere modules te selecteren kunnen uw groepen een "
+"combinatie van studenten uit meerdere modules bevatten."
 
 #: tutors/groups/create/class_wizardstep_x.php:66
 #: tutors/groups/create/class_wizardstep_x.php:69
@@ -5380,31 +5797,35 @@ msgid ""
 "The modules below are those you are associated with, as either a lead or "
 "additional tutor."
 msgstr ""
+"De onderstaande modules zijn diegene waarin u geregistreerd bent als "
+"hoofdtitularis of aanvullende titularis."
 
 #: tutors/groups/create/class_wizardstep_x.php:67
 msgid ""
 "Select the modules to take students from by ticking the appropriate box:"
 msgstr ""
+"Selecteer de modules waaruit studenten zullen worden gekozen door de "
+"desbetreffende hokjes te markeren:"
 
 #: tutors/groups/create/class_wizardstep_x.php:70
 msgid "Please select the module you want to take students from:"
-msgstr ""
+msgstr "Gelieve de module te selecteren waaruit u studenten wil kiezen:"
 
 #: tutors/groups/create/class_wizardstep_x.php:73
 msgid "Your Modules"
-msgstr ""
+msgstr "Uw Modules"
 
 #: tutors/groups/create/class_wizardstep_x.php:102
 msgid "You must select at least one module to take students from"
-msgstr ""
+msgstr "U moet minstens één module selecteren om studenten uit te kiezen"
 
 #: tutors/groups/create/index.php:25 tutors/groups/create/index.php:54
 msgid "create new groups wizard"
-msgstr ""
+msgstr "nieuwe groepen aanmaken wizard"
 
 #: tutors/groups/create/index.php:48
 msgid "Create new groups"
-msgstr ""
+msgstr "Maak nieuwe groepen aan"
 
 #: tutors/groups/create/index.php:67
 msgid ""
@@ -5415,7 +5836,7 @@ msgstr ""
 
 #: tutors/groups/edit/edit_collection.php:56
 msgid "You must give this collection of groups a name."
-msgstr ""
+msgstr "U moet deze groepscollectie een naam geven."
 
 #: tutors/groups/edit/edit_collection.php:77
 #: tutors/groups/edit/edit_collection_groups.php:80
@@ -5425,15 +5846,18 @@ msgstr ""
 #: tutors/groups/edit/edit_group.php:96 tutors/groups/edit/edit_group.php:97
 #: tutors/groups/edit/edit_group.php:105
 msgid "Editing:"
-msgstr ""
+msgstr "Bewerken:"
 
 #: tutors/groups/edit/edit_collection.php:77
 msgid "Editing Unknown Collection"
-msgstr ""
+msgstr "Bewerken van Onbekende Collectie"
 
 #: tutors/groups/edit/edit_collection.php:107
 msgid "This collection will be deleted.\\n\\nClick OK to confirm."
 msgstr ""
+"Deze collectie zal verwijderd worden.\\n"
+"\\n"
+" Klik op OK om te bevestigen."
 
 #: tutors/groups/edit/edit_collection.php:126
 msgid ""
@@ -5443,11 +5867,11 @@ msgstr ""
 
 #: tutors/groups/edit/edit_collection.php:136
 msgid "back to my groups"
-msgstr ""
+msgstr "terug naar mijn groepen"
 
 #: tutors/groups/edit/edit_collection.php:140
 msgid "delete collection"
-msgstr ""
+msgstr "verwijder collectie"
 
 #: tutors/groups/edit/edit_collection.php:151
 #: tutors/groups/edit/edit_collection_groups.php:125
@@ -5456,26 +5880,32 @@ msgid ""
 "The collection you selected could not be loaded for some reason - please go "
 "back and try again."
 msgstr ""
+"De geselecteerde collectie kon niet geladen worden - gelieve terug te gaan "
+"en opnieuw te proberen."
 
 #: tutors/groups/edit/edit_collection.php:158
 msgid ""
 "You can change the name of this collection of groups using the box below."
 msgstr ""
+"U kan de naam van deze groepscollectie aanpassen met het onderstaande veld."
 
 #: tutors/groups/edit/edit_collection.php:164
 msgid "update name"
-msgstr ""
+msgstr "naam updaten"
 
 #: tutors/groups/edit/edit_collection.php:181
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "You do not have any groups in this collection. To use this collection you "
 "need to <a href=\\\"edit_collection_groups.php?%s\">add groups</a>."
 msgstr ""
+"U hebt nog een groepen in deze collectie. Om een groepscollectie te "
+"gebruiken moet u <a href=\\\"edit_collection_groups.php?%s\">groepen "
+"toevoegen</a>."
 
 #: tutors/groups/edit/edit_collection.php:184
 msgid "These are the groups contained in this collection."
-msgstr ""
+msgstr "Deze collectie bevat groepen."
 
 #: tutors/groups/edit/edit_collection.php:185
 msgid ""
@@ -5483,86 +5913,96 @@ msgid ""
 "images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit group\" "
 "title=\"edit\" /> in the list below."
 msgstr ""
+"Om een individuele groep en zijn leden te bewerken, klik op <img src=\""
+"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit "
+"group\" title=\"edit\" /> in onderstaande lijst."
 
 #: tutors/groups/edit/edit_collection.php:186
 msgid "assign all students to groups"
-msgstr ""
+msgstr "wijs alle studenten toe aan groepen"
 
 #: tutors/groups/edit/edit_collection.php:186
 msgid "add/remove groups"
-msgstr ""
+msgstr "maak/verwijder groepen"
 
 #: tutors/groups/edit/edit_collection.php:204
 msgid "Contains"
-msgstr ""
+msgstr "Bevat"
 
 #: tutors/groups/edit/edit_collection.php:218
 msgid "member"
-msgstr ""
+msgstr "lid"
 
 #: tutors/groups/edit/edit_collection.php:218
 msgid "members"
-msgstr ""
+msgstr "leden"
 
 #: tutors/groups/edit/edit_collection.php:220
 #, php-format
 msgid "There are %d %s, containing %d %s (out of a possible %d %s)."
-msgstr ""
+msgstr "Er zijn %d %s, die %d %s bevatten (uit een totaal van %d %s)."
 
 #: tutors/groups/edit/edit_collection_groups.php:54
 msgid "You must give your new group a name"
-msgstr ""
+msgstr "U moet uw nieuwe groep een naam geven"
 
 #: tutors/groups/edit/edit_collection_groups.php:81
 msgid "Groups:"
-msgstr ""
+msgstr "Groepen:"
 
 #: tutors/groups/edit/edit_collection_groups.php:102
 msgid ""
 "WARNING \\r\\nThe selected groups will be deleted, and all students returned "
 "to the unassigned list!"
 msgstr ""
+"WAARSCHUWING \\r\\n"
+" De geselecteerde groepen zullen verwijderd worden en alle studenten zullen "
+"terug in de niet-toegewezen lijst worden geplaatst."
 
 #: tutors/groups/edit/edit_collection_groups.php:119
 #: tutors/groups/edit/edit_collection_members.php:119
 #: tutors/groups/edit/edit_group.php:158
 msgid "back to"
-msgstr ""
+msgstr "terug naar"
 
 #: tutors/groups/edit/edit_collection_groups.php:129
 msgid "This collection has been locked and cannot be edited."
-msgstr ""
+msgstr "Deze collectie is afgesloten en kan niet bewerkt worden."
 
 #: tutors/groups/edit/edit_collection_groups.php:131
 msgid ""
 "On this page you can choose which modules to associate with this collection."
 msgstr ""
+"Op deze pagina kan u kiezen welke modules u wil associëren met deze "
+"collectie."
 
 #: tutors/groups/edit/edit_collection_groups.php:140
 msgid "New Group"
-msgstr ""
+msgstr "Nieuwe Groep"
 
 #: tutors/groups/edit/edit_collection_groups.php:142
 msgid ""
 "To add a new group to this collection, enter its name in the box below and "
 "click <em>add</em>."
 msgstr ""
+"Om een nieuwe groep toe te voegen aan deze collectie, voer zijn naam in in "
+"het onderstaande veld en klik op <em>voeg toe</em>."
 
 #: tutors/groups/edit/edit_collection_groups.php:145
 msgid "New Group Name"
-msgstr ""
+msgstr "Nieuwe Groepsnaam"
 
 #: tutors/groups/edit/edit_collection_groups.php:147
 msgid "add"
-msgstr ""
+msgstr "voeg toe"
 
 #: tutors/groups/edit/edit_collection_groups.php:152
 msgid "Available Groups"
-msgstr ""
+msgstr "Beschikbare Groepen"
 
 #: tutors/groups/edit/edit_collection_groups.php:154
 msgid "Below are all the groups contained in this collection."
-msgstr ""
+msgstr "Hieronder staan alle groepen bevat in deze collectie."
 
 #: tutors/groups/edit/edit_collection_groups.php:155
 msgid ""
@@ -5573,27 +6013,31 @@ msgstr ""
 
 #: tutors/groups/edit/edit_collection_groups.php:159
 msgid "Groups in this collection"
-msgstr ""
+msgstr "Groepen in deze collectie"
 
 #: tutors/groups/edit/edit_collection_members.php:80
 msgid "Members:"
-msgstr ""
+msgstr "Leden:"
 
 #: tutors/groups/edit/edit_collection_members.php:114
 msgid ""
 "On this page you can set the group membership for every student associated "
 "with this collection."
 msgstr ""
+"Op deze pagina kan u het groepslidmaatschap instellen voor elke student "
+"geassocieerd met deze collectie."
 
 #: tutors/groups/edit/edit_collection_members.php:133
 msgid "Available Students"
-msgstr ""
+msgstr "Beschikbare Studenten"
 
 #: tutors/groups/edit/edit_collection_members.php:135
 msgid ""
 "Below are all the students from the modules associated with this collection "
 "of groups."
 msgstr ""
+"Hieronder staan alle studenten van de modules geassocieerd met deze "
+"groepscollectie."
 
 #: tutors/groups/edit/edit_collection_members.php:136
 msgid ""
@@ -5609,11 +6053,11 @@ msgstr ""
 
 #: tutors/groups/edit/edit_collection_members.php:146
 msgid "Assigned Group"
-msgstr ""
+msgstr "Toegewezen Groep"
 
 #: tutors/groups/edit/edit_collection_members.php:178
 msgid "No students available"
-msgstr ""
+msgstr "Geen studenten beschikbaar"
 
 #: tutors/groups/edit/edit_group.php:173
 msgid ""
@@ -5623,11 +6067,12 @@ msgstr ""
 
 #: tutors/groups/edit/edit_group.php:190
 msgid "Group Members"
-msgstr ""
+msgstr "Groepsleden"
 
 #: tutors/groups/edit/edit_group.php:192
 msgid "Below are all the students from the modules associated with this group."
 msgstr ""
+"Hieronder staan alle studenten van de modules geassocieerd met deze groep."
 
 #: tutors/groups/edit/edit_group.php:193
 msgid ""
@@ -5640,31 +6085,37 @@ msgid ""
 "Students already in this group</th><th align=\"center\" width=\"50\">In</"
 "th><th align=\"center\" width=\"50\">Out</th></tr>"
 msgstr ""
+"Studenten reeds in de groep </th><th align=\"center\" width=\"50\">In</th><"
+"th align=\"center\" width=\"50\">Uit</th></tr>"
 
 #: tutors/groups/edit/edit_group.php:231
 msgid "This group has no members"
-msgstr ""
+msgstr "Deze groep heeft geen leden"
 
 #: tutors/groups/edit/edit_group.php:242
 msgid ""
 "Students not yet assigned to a group</th><th align=\"center\" width="
 "\"50\">In</th><th align=\"center\" width=\"50\">Out</th></tr>"
 msgstr ""
+"Studenten nog niet toegewezen aan een groep</th><th align=\"center\" width=\""
+"50\">In</th><th align=\"center\" width=\"50\">Uit</th></tr>"
 
 #: tutors/groups/edit/edit_group.php:258
 msgid "All the available students have been assigned"
-msgstr ""
+msgstr "Alle beschikbare studenten zijn toegewezen"
 
 #: tutors/groups/edit/edit_group.php:269
 msgid ""
 "Students assigned to other groups in this collection</th><th align=\"center"
 "\" width=\"50\">In</th><th align=\"center\" width=\"50\">Out</th></tr>"
 msgstr ""
+"Studenten toegewezen aan andere groepen in deze collectie</th><th align=\""
+"center\" width=\"50\">In</th><th align=\"center\" width=\"50\">Uit</th></tr>"
 
 #: tutors/groups/edit/edit_group.php:285
 msgid "There are no students allocated to any other groups"
-msgstr ""
+msgstr "Er zijn geen studenten geregistreerd bij andere groepen"
 
 #: tutors/groups/edit/index.php:40
 msgid "edit groups"
-msgstr ""
+msgstr "bewerk groepen"
