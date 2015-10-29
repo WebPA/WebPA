@@ -120,9 +120,6 @@ if (!$forms) {
           </div>
 <?php
   }
-?>
-        </div>
-<?php
 }
 ?>
     </div>

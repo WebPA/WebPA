@@ -396,6 +396,7 @@ class UI {
   * Start main page content
   */
   function content_start() {
+    echo('<div id="container">');
     echo('<div id="main">');
     $this->page_bar();
     echo('<div id="content">');
@@ -442,6 +443,8 @@ class UI {
       $this->footer();
     }
 ?>
+<div class="clear"></div>
+</div> <!-- id="container" -->
 </body>
 </html>
 <?php

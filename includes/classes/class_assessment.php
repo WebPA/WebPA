@@ -234,7 +234,7 @@ class Assessment {
    *
    */
   function get_group_marks() {
-    $groups_and_marks = null;
+    $groups_and_marks = array();
 
     $group_marks_xml = $this->_DAO->fetch_value("
        SELECT group_mark_xml

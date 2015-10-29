@@ -519,7 +519,7 @@ class DAO {
    * @param string $str
    * @return string
    */
-  function escape_str($str) { return mysql_escape_string(stripslashes($str)); }
+  function escape_str($str) { return mysql_real_escape_string(stripslashes($str)); }
 
 /*
 * ================================================================================
