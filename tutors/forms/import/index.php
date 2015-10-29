@@ -57,7 +57,7 @@ $UI->content_start();
   </p>
 
 
-  <form name="frmXml" enctype="multipart/form-data" action="../../../tmp/xml_file.php" method="POST">
+  <form name="frmXml" enctype="multipart/form-data" action="xml_file.php" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
     <input name="uploadedfile" type="file" /><br/>
     <input type="submit" name="btnLoad" value="load"/>

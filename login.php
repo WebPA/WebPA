@@ -53,14 +53,14 @@ switch ($msg) {
   // --------------------
   default :
         $message_class = 'info';
-        $message = 'To start using WebPA you have to log in.';
+        $message = 'To start using ' . APP__NAME . ' you have to log in.';
         break;
 }
 
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = 'WebPA Login';
+$UI->page_title = APP__NAME . ' Login';
 $UI->menu_selected = '';
 $UI->help_link = '?q=node/26';
 $UI->breadcrumbs = array  (

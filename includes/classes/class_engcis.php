@@ -366,7 +366,7 @@ class EngCIS {
     } else {  // else, just return one row
       $sql = "SELECT u.*, um.user_type
           FROM " . APP__DB_TABLE_PREFIX . "user u LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE (u.user_id IN {$user_set})
+          WHERE (u.user_id IN {$user_set}) AND (um.module_id = {$_module_id})
           LIMIT 1";
       return $this->_DAO->fetch_row($sql);
     }
@@ -522,7 +522,7 @@ class EngCIS {
       $years[] = dateToYear(strtotime($dates['first']));
       $years[] = dateToYear(strtotime($dates['last']));
     } else {
-      $years[] = dateToYear(mktime());
+      $years[] = dateToYear(time());
       $years[] = $years[0];
     }
 

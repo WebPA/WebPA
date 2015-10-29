@@ -125,7 +125,7 @@ class UI {
     if (!$expire_date) { $expire_date = mktime(0,0,1,date('m'),date('d'),date('Y')); }
 
     // If no modified date, modified today
-    if (!$modified_date) { $modified_date = mktime(); }
+    if (!$modified_date) { $modified_date = time(); }
 
     header('Expires: '. gmdate('D, d M Y H:i:s', $expire_date ) .' GMT');
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', $modified_date) .' GMT');
@@ -396,6 +396,7 @@ class UI {
   * Start main page content
   */
   function content_start() {
+    echo('<div id="container">');
     echo('<div id="main">');
     $this->page_bar();
     echo('<div id="content">');
@@ -442,6 +443,8 @@ class UI {
       $this->footer();
     }
 ?>
+<div class="clear"></div>
+</div> <!-- id="container" -->
 </body>
 </html>
 <?php

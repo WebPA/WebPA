@@ -234,7 +234,7 @@ class Assessment {
    *
    */
   function get_group_marks() {
-    $groups_and_marks = null;
+    $groups_and_marks = array();
 
     $group_marks_xml = $this->_DAO->fetch_value("
        SELECT group_mark_xml
@@ -277,7 +277,7 @@ class Assessment {
   * @return  string  ['pending','open','closed','finished']
   */
   function get_status() {
-    $now = mktime();
+    $now = time();
 
     $status = 'unknown';
     if ($this->open_date > $now) { $status = 'pending'; }

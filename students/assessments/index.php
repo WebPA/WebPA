@@ -75,7 +75,7 @@ if ($assessments) {
     if ( (is_array($assessments_with_response)) && (in_array($assessment['assessment_id'], $assessments_with_response)) ) {
       $finished_assessments[] = $assessment;
     } else {
-      $now = mktime();
+      $now = time();
       $open_date = strtotime($assessment['open_date']);
       $close_date = strtotime($assessment['close_date']);
 
@@ -197,7 +197,7 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
     $status = 'finished';
     $status_capitalized = ucfirst($status);
 
-    $now = mktime();
+    $now = time();
 
     $assessment_iterator = new SimpleObjectIterator($finished_assessments, 'Assessment', '$DB');
     for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {

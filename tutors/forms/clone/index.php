@@ -56,7 +56,7 @@ $UI->breadcrumbs = array  (
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
 $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
 $UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
-$UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', 'import/');
+$UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', '../import/');
 
 $UI->head();
 $wizard->head();

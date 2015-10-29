@@ -90,16 +90,22 @@ $UI->set_page_bar_button('Clone a Form', '../../../../../images/buttons/button_f
 $UI->set_page_bar_button('Import a Form', '../../../../../images/buttons/button_form_import.gif', '../../import/');
 
 $UI->head();
-$wizard->head();
-$UI->body('onload="body_onload()"');
+if ($form) {
+    $wizard->head();
+    $UI->body('onload="body_onload()"');
+} else {
+    $UI->body();
+}
 $UI->content_start();
 ?>
 
 <p>This wizard takes you through the process of editing an existing assessment criterion.</p>
 
 <?php
-$wizard->title();
-$wizard->draw_errors();
+if ($form) {
+    $wizard->title();
+    $wizard->draw_errors();
+}
 ?>
 
 <div class="content_box">

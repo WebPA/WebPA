@@ -11,9 +11,9 @@
  */
 
 //get the include file required
-require_once("../includes/inc_global.php");
-require_once('../includes/classes/class_xml_parser.php');
-require_once('../includes/functions/lib_xml_validate.php');
+require_once("../../../includes/inc_global.php");
+require_once('../../../includes/classes/class_xml_parser.php');
+require_once('../../../includes/functions/lib_xml_validate.php');
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -34,7 +34,7 @@ if ($errno == 0){
   $localfile = file_get_contents($source);
 
   //validate the XML
-  $isValid = Validate($localfile, '../tutors/forms/import/schema.xsd');
+  $isValid = Validate($localfile, 'schema.xsd');
 
   if ($isValid){
     //get the ID for the current User
@@ -67,7 +67,7 @@ if ($errno == 0){
                  'form_id' => $new_id,
                  'form_name' => $formname,
                  'form_type' => $formtype,
-                 'form_xml' => ''
+                 'form_xml' => $xml,
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
       $DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));
@@ -77,7 +77,7 @@ if ($errno == 0){
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module ({fields}) VALUES ({values})', $fields);
 
-      $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"../tutors/forms/index.php\">'my forms'</a> list.</p>";
+      $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"index.php\">'my forms'</a> list.</p>";
     }
   } else {
     $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
@@ -92,10 +92,10 @@ $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->breadcrumbs = array('home' => '/', 'my forms'  => null ,);
 
-$UI->set_page_bar_button('List Forms', '../../images/buttons/button_form_list.gif', '../tutors/forms/');
-$UI->set_page_bar_button('Create a new Form', '../../images/buttons/button_form_create.gif', '../tutors/forms/create/');
-$UI->set_page_bar_button('Clone a Form', '../../images/buttons/button_form_clone.gif', '../tutors/forms/clone/');
-$UI->set_page_bar_button('Import a Form', '../../images/buttons/button_form_import.gif', '../tutors/forms/import/');
+$UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
+$UI->set_page_bar_button('Create a new Form', '../../../../images/buttons/button_form_create.gif', '../create/');
+$UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
+$UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', '../import/');
 
 $UI->head();
 $UI->body();
