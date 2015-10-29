@@ -522,7 +522,7 @@ class EngCIS {
       $years[] = dateToYear(strtotime($dates['first']));
       $years[] = dateToYear(strtotime($dates['last']));
     } else {
-      $years[] = dateToYear(mktime());
+      $years[] = dateToYear(time());
       $years[] = $years[0];
     }
 

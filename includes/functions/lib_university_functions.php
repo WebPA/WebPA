@@ -22,7 +22,7 @@
 */
 function get_academic_year($date = null) {
   if (is_null($date)) {
-    $date = mktime();
+    $date = time();
   }
   $year = (int) date('Y',$date);
   $month = (int) date('n',$date);

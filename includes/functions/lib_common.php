@@ -117,7 +117,7 @@ function logEvent($description, $module_id = NULL, $object_id = NULL) {
 
   global $DB;
 
-  $now = date(MYSQL_DATETIME_FORMAT,mktime());
+  $now = date(MYSQL_DATETIME_FORMAT,time());
   if (!empty($module_id)) {
     $module_id = intval($module_id);
   }

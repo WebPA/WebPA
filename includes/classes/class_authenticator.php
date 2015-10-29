@@ -106,7 +106,7 @@ class Authenticator {
         $user_module = $DAO->fetch_row($sql_user_module);
 
         // Update last login date
-        $now = date(MYSQL_DATETIME_FORMAT,mktime());
+        $now = date(MYSQL_DATETIME_FORMAT,time());
         $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user_data['user_id']}'";
         $DAO->execute($sql_login_date);
 
