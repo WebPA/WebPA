@@ -166,8 +166,8 @@ function render_datetime_boxes($field_name = 'datetime' , $selected_datetime) {
 
   // Draw year box
   echo("<td><select name=\"{$field_name}_year\">");
-  $year = (date('Y',mktime())<date('Y',$selected_datetime)) ? date('Y',mktime()) : date('Y',$selected_datetime) ;
-  render_options_range($year, date('Y',mktime())+1, 1, date('Y', $selected_datetime));
+  $year = (date('Y',time())<date('Y',$selected_datetime)) ? date('Y',time()) : date('Y',$selected_datetime) ;
+  render_options_range($year, date('Y',time())+1, 1, date('Y', $selected_datetime));
   echo('</select></td>');
 
   echo('<th>'.gettext('at').'</th>');

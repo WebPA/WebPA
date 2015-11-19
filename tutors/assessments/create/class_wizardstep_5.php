@@ -46,7 +46,7 @@ class WizardStep5 {
     $DB =& $this->wizard->get_var('db');
     $config =& $this->wizard->get_var('config');
 
-    $now = mktime();
+    $now = time();
 
     require_once(DOC__ROOT . 'includes/classes/class_form.php');
     require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');

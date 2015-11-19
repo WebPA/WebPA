@@ -114,7 +114,7 @@ if ( ($command) && ($assessment) ) {
         $xml_array['parameters']['grading']['_attributes'] = array ( 'value'  => $grading );
         $xml_array['parameters']['algorithm']['_attributes'] = array ( 'value'  => $algorithm );
 
-        $mysql_now = date(MYSQL_DATETIME_FORMAT,mktime());
+        $mysql_now = date(MYSQL_DATETIME_FORMAT,time());
 
         $fields = array (
           'assessment_id'     => $assessment_id ,

@@ -74,7 +74,7 @@ if ($assessments) {
     if ( (is_array($assessments_with_response)) && (in_array($assessment['assessment_id'], $assessments_with_response)) ) {
       $finished_assessments[] = $assessment;
     } else {
-      $now = mktime();
+      $now = time();
       $open_date = strtotime($assessment['open_date']);
       $close_date = strtotime($assessment['close_date']);
 
