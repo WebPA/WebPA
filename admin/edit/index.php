@@ -326,7 +326,7 @@ if (!$canEdit) {
       <input type="text" id="name" name="name" value="<?php echo $edit_user->forename; ?>" size="20"<?php echo $disabled; ?>>
     </td>
 
-    <td><label for="lastname"<?php echo gettext('>Last name');?></label>
+    <td><label for="lastname"><?php echo gettext('Last name');?></label>
     </td>
     <td>
       <input type="text" id="lastname" name="lastname" value="<?php echo $edit_user->lastname; ?>" size="30"<?php echo $disabled; ?>>

@@ -296,8 +296,8 @@ msgid "First name"
 msgstr "Voornaam"
 
 #: admin/edit/index.php:329
-msgid ">Last name"
-msgstr ">Achternaam"
+msgid "Last name"
+msgstr "Achternaam"
 
 #: admin/edit/index.php:336 contact/contact_send.php:72
 #: contact/contact_send.php:81 tutors/assessments/inc_list_closed.php:86
