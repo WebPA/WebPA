@@ -192,6 +192,9 @@ class UI {
   <link href="<?php echo $BRANDING['css']; ?>" rel="stylesheet" type="text/css" />
 <?php
     }
+?>
+</head>
+<?php
   } // /->head()
 
 
