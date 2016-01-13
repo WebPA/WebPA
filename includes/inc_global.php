@@ -10,15 +10,14 @@
  *
  */
 
-require_once(dirname(__FILE__) . '/../../config.inc.php');
-
 // Turn off warning about possible session & globals compatibility problem
 ini_set('session.bug_compat_warn', 0);
 
 // Set the correct timezone for your server.
-date_default_timezone_set($_config['webpa']['timezone']);
+date_default_timezone_set('Europe/London');
+
 // Set up default locale for gettext (also used when user is not in a module).
-define('APP__DEFAULT_LOCALE', 'nl_BE.UTF8');
+define('APP__DEFAULT_LOCALE', 'en_US.UTF8');
 
 /*
  * Configuration
@@ -27,33 +26,34 @@ define('APP__DEFAULT_LOCALE', 'nl_BE.UTF8');
 ////
 // User configuration section
 ////
-define('APP__WWW', $_config['webpa']['www_dir']);
-define('DOC__ROOT', $_config['webpa']['doc_root']); //must include the trailing /
-define('CUSTOM_CSS', $_config['webpa']['custom_css']);  // Optional custom CSS file
-define('SESSION_NAME', $_config['webpa']['session_name']);
-ini_set('session.cookie_path', $_config['webpa']['session_path']);
+
+define('APP__WWW', '');
+define('DOC__ROOT', ''); //must include the trailing /
+define('CUSTOM_CSS', '');  // Optional custom CSS file
+define('SESSION_NAME', 'WEBPA');
+ini_set('session.cookie_path', '/');
 
 // The month (1-12) in which the academic year is deemed to start (always on 1st of the month)
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
-define('APP__DB_HOST', $_config['db']['host']); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', $_config['db']['login']);
-define('APP__DB_PASSWORD', $_config['db']['password']);
-define('APP__DB_DATABASE', $_config['db']['database']);
-define('APP__DB_TABLE_PREFIX', $_config['db']['table_prefix']);
+define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_USERNAME', '');
+define('APP__DB_PASSWORD', '');
+define('APP__DB_DATABASE', '');
+define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
-define('APP__EMAIL_HELP', $_config['webpa']['contact']);
-define('APP__EMAIL_NO_REPLY', $_config['webpa']['contact']);
+define('APP__EMAIL_HELP', 'someone@email.com');
+define('APP__EMAIL_NO_REPLY', 'no-reply@email.com');
 
 // logo
-define('APP__INST_LOGO', $_config['webpa']['logo']['url']);
-define('APP__INST_LOGO_ALT', $_config['webpa']['logo']['alt']);
+define('APP__INST_LOGO', APP__WWW.'/images/logo.png');
+define('APP__INST_LOGO_ALT','Your institution name');
 
 //the following lines are to accomodate the image size within the css file to prevent the image from over flowing the area provided
-define('APP__INST_HEIGHT', $_config['webpa']['logo']['height']); //image height in pixels
-define('APP__INST_WIDTH', $_config['webpa']['logo']['width']); //image width in pixels
+define('APP__INST_HEIGHT', '25'); //image height in pixels
+define('APP__INST_WIDTH', '102'); //image width in pixels
 
 //define whether the option to allow textual input is allowed
 /*NB. In the UK if requested any information about the student would need to be
@@ -75,25 +75,21 @@ ini_set('smtp_port','25');
 ini_set('sendmail_from','someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
-//$LOGIN_AUTHENTICATORS[] = 'DB';
-//$LOGIN_AUTHENTICATORS[] = 'LDAP';
-//$LOGIN_AUTHENTICATORS[] = 'SAML';
-$LOGIN_AUTHENTICATORS = $_config['webpa']['login_authenticators'];
+// $LOGIN_AUTHENTICATORS[] = 'DB';
+// $LOGIN_AUTHENTICATORS[] = 'LDAP';
+$LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings
-define('LDAP__HOST', $_config['ldap']['host']);
-define('LDAP__PORT', $_config['ldap']['port']);
-define('LDAP__USERNAME_EXT', $_config['ldap']['username_ext']);
-define('LDAP__BASE', $_config['ldap']['base']);
-define('LDAP__FILTER', $_config['ldap']['filter']);
-define('LDAP__BINDRDN', $_config['ldap']['bindrdn']);
-define('LDAP__PASSWD', $_config['ldap']['passwd']);
-$LDAP__INFO_REQUIRED = $_config['ldap']['info_required'];
-
+define('LDAP__HOST', "kdc.lboro.ac.uk");
+define('LDAP__PORT', 3268);
+define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
+define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
+define('LDAP__FILTER', 'name={username}*');
+$LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 // Name of attribute to use to check user type (via function below)
-define('LDAP__USER_TYPE_ATTRIBUTE', $_config['ldap']['user_type_attribute']);
-define('LDAP__DEBUG_LEVEL', 0);
-define('LDAP__AUTO_CREATE_USER', false);
+define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
+define('LDAP__DEBUG_LEVEL', 7);
+define('LDAP__AUTO_CREATE_USER', TRUE);
 
 // SAML settings
 define('SAML__SIMPLESAMLPATH', ''); // Path to the root of the simpleSAMLPHP install which contains the lib folder, must include training /
@@ -282,12 +278,14 @@ $UI = new UI($_user);
 
 function get_LDAP_user_type($data) {
 
-    //check in the string for staff
-    if(in_array('ugentEmployee', $data)) {
-      $user_type = APP__USER_TYPE_TUTOR;
-    } else {
-      $user_type = APP__USER_TYPE_STUDENT;
-    }
+  $description_str = $data[0];
+
+  //check in the string for staff
+  if(strripos ($description_str, 'staff') !== false) {
+    $user_type = APP__USER_TYPE_TUTOR;
+  } else {
+    $user_type = APP__USER_TYPE_STUDENT;
+  }
 
   return $user_type;
 
