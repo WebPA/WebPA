@@ -77,6 +77,7 @@ ini_set('sendmail_from','someone@email.com');
 //define the authentication to be used and in the order they are to be applied
 //$LOGIN_AUTHENTICATORS[] = 'DB';
 //$LOGIN_AUTHENTICATORS[] = 'LDAP';
+//$LOGIN_AUTHENTICATORS[] = 'SAML';
 $LOGIN_AUTHENTICATORS = $_config['webpa']['login_authenticators'];
 
 // LDAP settings
@@ -93,6 +94,11 @@ $LDAP__INFO_REQUIRED = $_config['ldap']['info_required'];
 define('LDAP__USER_TYPE_ATTRIBUTE', $_config['ldap']['user_type_attribute']);
 define('LDAP__DEBUG_LEVEL', 0);
 define('LDAP__AUTO_CREATE_USER', false);
+
+// SAML settings
+define('SAML__SIMPLESAMLPATH', ''); // Path to the root of the simpleSAMLPHP install which contains the lib folder, must include training /
+define('SAML__SP_NAME', 'webpa:simplesaml'); // EntityID within simpleSAMLPHP for this session
+define('SAML__USERNAME_ATTRIBUTE', 'username'); // Name of the attribute holding the username from the SAML assertion
 
 // define installed modules
 $INSTALLED_MODS = array();
