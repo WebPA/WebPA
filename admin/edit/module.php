@@ -135,7 +135,7 @@ $page_intro = '<p>'.gettext('Here you are able to edit the details of a module w
                 $locale_folders = scandir(DOC__ROOT.'locale/');
 
                 foreach($locale_folders as $locale_folder){
-                    if(strlen($locale_folder) > 3)
+                    if(is_dir(DOC__ROOT.'locale/' . $locale_folder) && strlen($locale_folder) > 3)
                         echo sprintf('<option value="%s" %s>%s</option>', $locale_folder, ($locale_folder == $edit_module->module_lang) ? 'selected="selected"' : '', $locale_folder);
                 }
                 ?>
