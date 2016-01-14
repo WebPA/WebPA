@@ -70,7 +70,7 @@ CREATE TABLE pa2_module (
   source_id varchar(255) NOT NULL DEFAULT '',
   module_code varchar(255) NOT NULL,
   module_title varchar(255) NOT NULL,
-  module_lang varchar(10) NOT NULL DEFAULT 'en_GB',
+  module_lang varchar(10) NOT NULL DEFAULT 'en_US.UTF8',
   PRIMARY KEY (module_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
