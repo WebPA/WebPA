@@ -175,6 +175,9 @@ $ordinal_scale = array (
 // When reporting grades as decimals, define the precision, etc using this constant
 define('APP__REPORT_DECIMALS', "%01.2f");
 
+// which separator is to be used in CSV export
+define('APP__SEPARATION', ',');
+
 // File upload error messages
 $FILE_ERRORS = array(
   UPLOAD_ERR_OK => 'There is no error, the file uploaded with success.',
