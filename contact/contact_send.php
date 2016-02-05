@@ -19,6 +19,7 @@ check_user($_user);
 $contact_app_id = APP__ID;
 
 $contact_person = fetch_POST('contact_person');
+$contact_to = $BRANDING['email.help'];
 if($contact_person < 1) {
   switch($contact_person) {
     case -1:
@@ -28,7 +29,7 @@ if($contact_person < 1) {
       if($_module_id) {
         $query = 'SELECT u.email FROM ' . APP__DB_TABLE_PREFIX . 'user u '
                     . ' JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id'
-                  . ' WHERE (um.module_id = '. mysql_real_escape_string($_module_id) . ' AND um.user_type = \'T\')';
+                  . ' WHERE (um.module_id = '. $DB->escape_str($_module_id) . ' AND um.user_type = \'T\')';
         $contact_to = $DB->fetch_col($query, 0);
       }
 
@@ -38,7 +39,7 @@ if($contact_person < 1) {
       break;
   }
 } else {
-  $query = 'SELECT u.email FROM ' . APP__DB_TABLE_PREFIX . 'user u WHERE (u.user_id = '. mysql_real_escape_string($contact_person) .')';
+  $query = 'SELECT u.email FROM ' . APP__DB_TABLE_PREFIX . 'user u WHERE (u.user_id = '. $DB->escape_str($contact_person) .')';
   $contact_to = $DB->fetch_value($query);
 }
 
@@ -60,7 +61,7 @@ $app_www = APP__WWW;
 
 $email_body = 'Contact Sent'.'
 ----------------------------------------
-'.gettext('Application').'  : '.$contact_app_id ($app_www).'
+'.gettext('Application').'  : '.$contact_app_id . ' (' . $app_www . ')'.'
 '.gettext('Contact Type').' : '.$contact_type.'
 '.gettext('Date').'         : '.$contact_date.'
 ----------------------------------------
