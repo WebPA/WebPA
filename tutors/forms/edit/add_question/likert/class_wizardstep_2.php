@@ -44,7 +44,7 @@ class WizardStep2 {
     $range_start = $this->wizard->get_field('question_range_start');
     $range_end = $this->wizard->get_field('question_range_end');
 ?>
-    <p><?php echo gettext('Your new assessment criterion allows scores from <?php echo("$range_start to $range_end"); ?>. You can use the boxes below to provide a description what those scores should mean.');?></p>
+    <p><?php echo sprintf(gettext('Your new assessment criterion allows scores from %s to %s. You can use the boxes below to provide a description what those scores should mean.'), $range_start, $range_end);?></p>
     <p><?php echo gettext('It\'s good practice to describe the meaning of at least the top and bottom scores, but you are free to provide as many, or as few, descriptions as you like. Leave a description blank and it will not be displayed on the form.');?></p>
 
     <p><strong><?php echo gettext('Score descriptions');?></strong></p>

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-05 15:56+0100\n"
-"PO-Revision-Date: 2016-02-05 10:00-0500\n"
+"POT-Creation-Date: 2016-02-05 16:15+0100\n"
+"PO-Revision-Date: 2016-02-05 10:17-0500\n"
 "Last-Translator: mcrauwel <matthias.crauwels@ugent.be>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -4235,8 +4235,9 @@ msgid "The given assessment form failed to load so this wizard cannot be started
 msgstr "The given assessment form failed to load so this wizard cannot be started."
 
 #: tutors/forms/edit/add_question/likert/class_wizardstep_2.php:47
-msgid "Your new assessment criterion allows scores from <?php echo(\"$range_start to $range_end\"); ?>. You can use the boxes below to provide a description what those scores should mean."
-msgstr "Your new assessment criterion allows scores from <?php echo(\"$range_start to $range_end\"); ?>. You can use the boxes below to provide a description what those scores should mean."
+#, php-format
+msgid "Your new assessment criterion allows scores from %s to %s. You can use the boxes below to provide a description what those scores should mean."
+msgstr "Your new assessment criterion allows scores from %s to %s. You can use the boxes below to provide a description what those scores should mean."
 
 #: tutors/forms/edit/add_question/split100/class_wizardstep_1.php:67
 msgid "You are using a Split 100 assessment form, so students will automatically be given 100 marks to distribute between all the team members."
