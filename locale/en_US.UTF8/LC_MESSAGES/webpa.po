@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-25 12:44+0100\n"
-"PO-Revision-Date: 2016-01-13 07:38-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-05 15:56+0100\n"
+"PO-Revision-Date: 2016-02-05 10:00-0500\n"
 "Last-Translator: mcrauwel <matthias.crauwels@ugent.be>\n"
 "Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: crowdin.com\n"
-"X-Poedit-Basepath: /srv/http/WebPA-Source\n"
-"X-POOTLE-MTIME: 1412771988.000000\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: webpa\n"
 "X-Crowdin-Language: en\n"
 "X-Crowdin-File: webpa.po\n"
@@ -89,8 +89,8 @@ msgid "In order to do so, a link will be sent to your student email account. Thi
 msgstr "In order to do so, a link will be sent to your student email account. This link will take you to a page that will enable you to reset your password."
 
 #: accounts/reset.php:121 admin/edit/index.php:308 admin/search/index.php:149
-#: admin/search/index.php:164 contact/contact_send.php:71
-#: contact/contact_send.php:80 login.php:109
+#: admin/search/index.php:164 contact/contact_send.php:72
+#: contact/contact_send.php:81 login.php:109
 msgid "Username"
 msgstr "Username"
 
@@ -265,8 +265,8 @@ msgstr "First name"
 msgid "Last name"
 msgstr "Last name"
 
-#: admin/edit/index.php:336 contact/contact_send.php:72
-#: contact/contact_send.php:81 tutors/assessments/inc_list_closed.php:86
+#: admin/edit/index.php:336 contact/contact_send.php:73
+#: contact/contact_send.php:82 tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
 #: tutors/assessments/inc_list_open.php:81
 #: tutors/assessments/inc_list_pending.php:80
@@ -887,60 +887,60 @@ msgstr "Edit"
 msgid "The search has not found any matching information."
 msgstr "The search has not found any matching information."
 
-#: contact/contact_send.php:63
+#: contact/contact_send.php:64
 msgid "Application"
 msgstr "Application"
 
-#: contact/contact_send.php:64
+#: contact/contact_send.php:65
 msgid "Contact Type"
 msgstr "Contact Type"
 
-#: contact/contact_send.php:65
+#: contact/contact_send.php:66
 msgid "Date"
 msgstr "Date"
 
-#: contact/contact_send.php:68
+#: contact/contact_send.php:69
 msgid "Contact Details"
 msgstr "Contact Details"
 
-#: contact/contact_send.php:70 contact/contact_send.php:79
+#: contact/contact_send.php:71 contact/contact_send.php:80
 msgid "Fullname"
 msgstr "Fullname"
 
-#: contact/contact_send.php:73
+#: contact/contact_send.php:74
 msgid "Phone"
 msgstr "Phone"
 
-#: contact/contact_send.php:76
+#: contact/contact_send.php:77
 msgid "User Account Details"
 msgstr "User Account Details"
 
-#: contact/contact_send.php:78
+#: contact/contact_send.php:79
 msgid "User ID"
 msgstr "User ID"
 
-#: contact/contact_send.php:84
+#: contact/contact_send.php:85
 msgid "Message"
 msgstr "Message"
 
-#: contact/contact_send.php:99
+#: contact/contact_send.php:100
 msgid "Message Sent"
 msgstr "Message Sent"
 
-#: contact/contact_send.php:100 contact/contact_send.php:102
+#: contact/contact_send.php:101 contact/contact_send.php:103
 #: contact/index.php:44 contact/index.php:47
 msgid "contact"
 msgstr "contact"
 
-#: contact/contact_send.php:111
+#: contact/contact_send.php:112
 msgid "Your message has now been sent."
 msgstr "Your message has now been sent."
 
-#: contact/contact_send.php:112
+#: contact/contact_send.php:113
 msgid "We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you."
 msgstr "We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you."
 
-#: contact/contact_send.php:113
+#: contact/contact_send.php:114
 msgid "Thanks for your time"
 msgstr "Thanks for your time"
 
@@ -1021,19 +1021,24 @@ msgstr "Unable to connect to "
 msgid "ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden."
 msgstr "ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden."
 
-#: includes/classes/class_dao.php:103 includes/classes/class_dao.php:114
+#: includes/classes/class_assessment.php:297
+#: tutors/assessments/edit/edit_assessment.php:173
+msgid "at"
+msgstr "at"
+
+#: includes/classes/class_dao.php:100 includes/classes/class_dao.php:107
 msgid "Can't use database due to"
 msgstr "Can't use database due to"
 
-#: includes/classes/class_dao.php:160
+#: includes/classes/class_dao.php:152
 msgid "Executing SQL"
 msgstr "Executing SQL"
 
-#: includes/classes/class_dao.php:541
+#: includes/classes/class_dao.php:538
 msgid "Querying database"
 msgstr "Querying database"
 
-#: includes/classes/class_dao.php:589 includes/classes/class_dao.php:591
+#: includes/classes/class_dao.php:586 includes/classes/class_dao.php:588
 msgid "DATABASE ERROR"
 msgstr "DATABASE ERROR"
 
@@ -1196,24 +1201,24 @@ msgstr "Support"
 msgid "change module"
 msgstr "change module"
 
-#: includes/classes/class_ui.php:378
+#: includes/classes/class_ui.php:381
 msgid "Version:"
 msgstr "Version:"
 
-#: includes/classes/class_ui.php:384
+#: includes/classes/class_ui.php:387
 msgid "Source:"
 msgstr "Source:"
 
-#: includes/classes/class_ui.php:424 includes/classes/class_ui.php:431
+#: includes/classes/class_ui.php:427 includes/classes/class_ui.php:434
 msgid "Technical Problem?"
 msgstr "Technical Problem?"
 
-#: includes/classes/class_ui.php:425
+#: includes/classes/class_ui.php:428
 #, php-format
 msgid "If you have a problem, find a bug or discover a technical problem in the system, <a href=\"%s/contact/index.php?q=bug\">contact us</a> to report it!"
 msgstr "If you have a problem, find a bug or discover a technical problem in the system, <a href=\"%s/contact/index.php?q=bug\">contact us</a> to report it!"
 
-#: includes/classes/class_ui.php:432
+#: includes/classes/class_ui.php:435
 #, php-format
 msgid "If you have a problem, find a bug or discover a technical problem in the system, please <a href=\"mailto:%s\" title=\"(email:%s)\">email us</a> to report it!"
 msgstr "If you have a problem, find a bug or discover a technical problem in the system, please <a href=\"mailto:%s\" title=\"(email:%s)\">email us</a> to report it!"
@@ -1294,42 +1299,6 @@ msgstr "November"
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "December"
 msgstr "December"
-
-#: includes/inc_global.php:145
-msgid "Score(s)"
-msgstr "Score(s)"
-
-#: includes/inc_global.php:178
-msgid "There is no error, the file uploaded with success."
-msgstr "There is no error, the file uploaded with success."
-
-#: includes/inc_global.php:179
-msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
-msgstr "The uploaded file exceeds the upload_max_filesize directive in php.ini."
-
-#: includes/inc_global.php:180
-msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
-msgstr "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
-
-#: includes/inc_global.php:181
-msgid "The uploaded file was only partially uploaded."
-msgstr "The uploaded file was only partially uploaded."
-
-#: includes/inc_global.php:182
-msgid "No file was uploaded."
-msgstr "No file was uploaded."
-
-#: includes/inc_global.php:183
-msgid "Missing a temporary folder."
-msgstr "Missing a temporary folder."
-
-#: includes/inc_global.php:184
-msgid "Failed to write file to disk."
-msgstr "Failed to write file to disk."
-
-#: includes/inc_global.php:185
-msgid "A PHP extension stopped the file upload."
-msgstr "A PHP extension stopped the file upload."
 
 #: lang/en/generic.php:21 tutors/assessments/create/class_wizardstep_5.php:140
 #: tutors/groups/create/class_wizardstep_3.php:68
@@ -1644,7 +1613,7 @@ msgstr "WebPA has been unable to generate any feedback"
 msgid "An area you may wish to develop is your contribution to:"
 msgstr "An area you may wish to develop is your contribution to:"
 
-#: students/assessments/assessment_feedback.php:312
+#: students/assessments/assessment_feedback.php:417
 msgid "close"
 msgstr "close"
 
@@ -2673,10 +2642,6 @@ msgstr "Open:"
 #: tutors/assessments/edit/edit_assessment.php:113
 msgid "Close:"
 msgstr "Close:"
-
-#: tutors/assessments/edit/edit_assessment.php:173
-msgid "at"
-msgstr "at"
 
 #: tutors/assessments/edit/edit_assessment.php:226
 msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
@@ -4345,8 +4310,9 @@ msgid "e.g. <em>\"Ability to communicate\"</em> or <em>\"Contribution to the ana
 msgstr "e.g. <em>\"Ability to communicate\"</em> or <em>\"Contribution to the analysis of the experimental data\"</em>."
 
 #: tutors/forms/edit/edit_form.php:199
-msgid "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?<?php echo($form_qs); ?>\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
-msgstr "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?<?php echo($form_qs); ?>\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
+#, php-format
+msgid "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?%s\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
+msgstr "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?%s\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
 
 #: tutors/forms/edit/edit_form.php:222
 msgid "Scoring range:"
@@ -4872,6 +4838,7 @@ msgid "update name"
 msgstr "update name"
 
 #: tutors/groups/edit/edit_collection.php:181
+#, php-format
 msgid "You do not have any groups in this collection. To use this collection you need to <a href=\\\"edit_collection_groups.php?%s\">add groups</a>."
 msgstr "You do not have any groups in this collection. To use this collection you need to <a href=\"edit_collection_groups.php?%s\">add groups</a>."
 

@@ -196,7 +196,7 @@ if (!$form) {
 ?>
       <p><?php echo gettext('The group will rate themselves and each other against the assessment criteria you specify.');?></p>
       <p><?php echo gettext('e.g. <em>"Ability to communicate"</em> or <em>"Contribution to the analysis of the experimental data"</em>.');?></p>
-      <p><?php echo gettext('You can edit a criterion by clicking on the <img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /> button, or you can <a class="button" href="../edit/add_question/index.php?<?php echo($form_qs); ?>">add&nbsp;a&nbsp;new&nbsp;criterion</a>');?></p>
+      <p><?php echo sprintf(gettext('You can edit a criterion by clicking on the <img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /> button, or you can <a class="button" href="../edit/add_question/index.php?%s">add&nbsp;a&nbsp;new&nbsp;criterion</a>'), $form_qs);?></p>
 
       <div class="obj_list">
 <?php

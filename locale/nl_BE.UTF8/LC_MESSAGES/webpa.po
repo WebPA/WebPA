@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webpa\n"
-"POT-Creation-Date: 2014-09-25 12:44+0100\n"
-"PO-Revision-Date: 2016-01-13 07:38-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-05 15:56+0100\n"
+"PO-Revision-Date: 2016-02-05 10:00-0500\n"
 "Last-Translator: mcrauwel <matthias.crauwels@ugent.be>\n"
 "Language-Team: Dutch, Belgium\n"
 "Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: crowdin.com\n"
-"X-Poedit-Basepath: /srv/http/WebPA-Source\n"
-"X-POOTLE-MTIME: 1412771988.000000\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: webpa\n"
 "X-Crowdin-Language: nl-BE\n"
 "X-Crowdin-File: webpa.po\n"
@@ -90,8 +90,8 @@ msgid "In order to do so, a link will be sent to your student email account. Thi
 msgstr "Om dit te doen, zal er een link verstuurd worden naar uw e-mailaccount als student. Via deze link zal u een nieuw wachtwoord kunnen instellen."
 
 #: accounts/reset.php:121 admin/edit/index.php:308 admin/search/index.php:149
-#: admin/search/index.php:164 contact/contact_send.php:71
-#: contact/contact_send.php:80 login.php:109
+#: admin/search/index.php:164 contact/contact_send.php:72
+#: contact/contact_send.php:81 login.php:109
 msgid "Username"
 msgstr "Gebruikersnaam"
 
@@ -266,8 +266,8 @@ msgstr "Voornaam"
 msgid "Last name"
 msgstr "Achternaam"
 
-#: admin/edit/index.php:336 contact/contact_send.php:72
-#: contact/contact_send.php:81 tutors/assessments/inc_list_closed.php:86
+#: admin/edit/index.php:336 contact/contact_send.php:73
+#: contact/contact_send.php:82 tutors/assessments/inc_list_closed.php:86
 #: tutors/assessments/inc_list_marked.php:93
 #: tutors/assessments/inc_list_open.php:81
 #: tutors/assessments/inc_list_pending.php:80
@@ -888,60 +888,60 @@ msgstr "Bewerk"
 msgid "The search has not found any matching information."
 msgstr "Er werd geen overeenkomende data gevonden bij het zoeken."
 
-#: contact/contact_send.php:63
+#: contact/contact_send.php:64
 msgid "Application"
 msgstr "Toepassing"
 
-#: contact/contact_send.php:64
+#: contact/contact_send.php:65
 msgid "Contact Type"
 msgstr "Contacttype"
 
-#: contact/contact_send.php:65
+#: contact/contact_send.php:66
 msgid "Date"
 msgstr "Datum"
 
-#: contact/contact_send.php:68
+#: contact/contact_send.php:69
 msgid "Contact Details"
 msgstr "Contactdetails"
 
-#: contact/contact_send.php:70 contact/contact_send.php:79
+#: contact/contact_send.php:71 contact/contact_send.php:80
 msgid "Fullname"
 msgstr "Volledige naam"
 
-#: contact/contact_send.php:73
+#: contact/contact_send.php:74
 msgid "Phone"
 msgstr "Telefoonnummer"
 
-#: contact/contact_send.php:76
+#: contact/contact_send.php:77
 msgid "User Account Details"
 msgstr "Gebruikersgegevens"
 
-#: contact/contact_send.php:78
+#: contact/contact_send.php:79
 msgid "User ID"
 msgstr "Gebruikers ID"
 
-#: contact/contact_send.php:84
+#: contact/contact_send.php:85
 msgid "Message"
 msgstr "Bericht"
 
-#: contact/contact_send.php:99
+#: contact/contact_send.php:100
 msgid "Message Sent"
 msgstr "Bericht Verzonden"
 
-#: contact/contact_send.php:100 contact/contact_send.php:102
+#: contact/contact_send.php:101 contact/contact_send.php:103
 #: contact/index.php:44 contact/index.php:47
 msgid "contact"
 msgstr "contacteer"
 
-#: contact/contact_send.php:111
+#: contact/contact_send.php:112
 msgid "Your message has now been sent."
 msgstr "Uw bericht is nu verstuurd."
 
-#: contact/contact_send.php:112
+#: contact/contact_send.php:113
 msgid "We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you."
 msgstr "We proberen zo snel mogelijk te antwoorden. Gelieve ons te verontschuldigen mocht dit langer duren dan verwacht."
 
-#: contact/contact_send.php:113
+#: contact/contact_send.php:114
 msgid "Thanks for your time"
 msgstr "Bedankt voor uw tijd."
 
@@ -1022,19 +1022,24 @@ msgstr "Kon niet verbinden met "
 msgid "ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden."
 msgstr "FOUT: WebPAAlgorithm->calculate() is een abstracte methode en zou moeten overschreven worden."
 
-#: includes/classes/class_dao.php:103 includes/classes/class_dao.php:114
+#: includes/classes/class_assessment.php:297
+#: tutors/assessments/edit/edit_assessment.php:173
+msgid "at"
+msgstr "op"
+
+#: includes/classes/class_dao.php:100 includes/classes/class_dao.php:107
 msgid "Can't use database due to"
 msgstr "Kan database niet gebruiken wegens"
 
-#: includes/classes/class_dao.php:160
+#: includes/classes/class_dao.php:152
 msgid "Executing SQL"
 msgstr "SQL aan het uitvoeren"
 
-#: includes/classes/class_dao.php:541
+#: includes/classes/class_dao.php:538
 msgid "Querying database"
 msgstr "Database aan het queryen"
 
-#: includes/classes/class_dao.php:589 includes/classes/class_dao.php:591
+#: includes/classes/class_dao.php:586 includes/classes/class_dao.php:588
 msgid "DATABASE ERROR"
 msgstr "DATABASEFOUT"
 
@@ -1197,24 +1202,24 @@ msgstr "Helpdesk"
 msgid "change module"
 msgstr "module wijzigen"
 
-#: includes/classes/class_ui.php:378
+#: includes/classes/class_ui.php:381
 msgid "Version:"
 msgstr "Versie:"
 
-#: includes/classes/class_ui.php:384
+#: includes/classes/class_ui.php:387
 msgid "Source:"
 msgstr "Bron:"
 
-#: includes/classes/class_ui.php:424 includes/classes/class_ui.php:431
+#: includes/classes/class_ui.php:427 includes/classes/class_ui.php:434
 msgid "Technical Problem?"
 msgstr "Technisch Probleem?"
 
-#: includes/classes/class_ui.php:425
+#: includes/classes/class_ui.php:428
 #, php-format
 msgid "If you have a problem, find a bug or discover a technical problem in the system, <a href=\"%s/contact/index.php?q=bug\">contact us</a> to report it!"
 msgstr "Wanneer je een probleem ervaart, een bug vindt of een technisch probleem ontdekt in het systeem, aarzel dan niet om <a href=\"%s/contact/index.php?q=bug\">ons te contacteren</a>!"
 
-#: includes/classes/class_ui.php:432
+#: includes/classes/class_ui.php:435
 #, php-format
 msgid "If you have a problem, find a bug or discover a technical problem in the system, please <a href=\"mailto:%s\" title=\"(email:%s)\">email us</a> to report it!"
 msgstr "Wanneer je een probleem ervaart, een bug vindt of een technisch probleem ontdekt in het systeem, aarzel dan niet om ons <a href=\"mailto:%s\" title=\"(email:%s)\">een email te sturen</a>! "
@@ -1295,42 +1300,6 @@ msgstr "november"
 #: tutors/assessments/edit/edit_assessment.php:160
 msgid "December"
 msgstr "december"
-
-#: includes/inc_global.php:145
-msgid "Score(s)"
-msgstr "Score(s)"
-
-#: includes/inc_global.php:178
-msgid "There is no error, the file uploaded with success."
-msgstr "Er is geen fout, het bestand werd succesvol geüpload."
-
-#: includes/inc_global.php:179
-msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
-msgstr "Het geüploade bestand is groter dan de parameter max_filesize_directive in php.ini."
-
-#: includes/inc_global.php:180
-msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
-msgstr "Het geüploade bestand is groter dan de MAX_FILE_SIZE parameter van het HTML-formulier."
-
-#: includes/inc_global.php:181
-msgid "The uploaded file was only partially uploaded."
-msgstr "Het geüploade bestand was slechts partieel geüpload."
-
-#: includes/inc_global.php:182
-msgid "No file was uploaded."
-msgstr "Er werd geen bestand geüpload."
-
-#: includes/inc_global.php:183
-msgid "Missing a temporary folder."
-msgstr "Een tijdelijke map ontbreekt."
-
-#: includes/inc_global.php:184
-msgid "Failed to write file to disk."
-msgstr "Fout bij schrijven van het bestand naar de schijf."
-
-#: includes/inc_global.php:185
-msgid "A PHP extension stopped the file upload."
-msgstr "Een PHP-extensie heeft het uploaden van het bestand gestopt."
 
 #: lang/en/generic.php:21 tutors/assessments/create/class_wizardstep_5.php:140
 #: tutors/groups/create/class_wizardstep_3.php:68
@@ -1645,7 +1614,7 @@ msgstr "WebPA heeft geen feedback kunnen genereren"
 msgid "An area you may wish to develop is your contribution to:"
 msgstr "Een gebied waar u mogelijks wil aan werken is uw bijdrage tot:"
 
-#: students/assessments/assessment_feedback.php:312
+#: students/assessments/assessment_feedback.php:417
 msgid "close"
 msgstr "sluiten"
 
@@ -2674,10 +2643,6 @@ msgstr "Open:"
 #: tutors/assessments/edit/edit_assessment.php:113
 msgid "Close:"
 msgstr "Sluiten:"
-
-#: tutors/assessments/edit/edit_assessment.php:173
-msgid "at"
-msgstr "op"
 
 #: tutors/assessments/edit/edit_assessment.php:226
 msgid "This assessment will be deleted.\\n\\nClick OK to confirm."
@@ -4346,8 +4311,9 @@ msgid "e.g. <em>\"Ability to communicate\"</em> or <em>\"Contribution to the ana
 msgstr "bijvoorbeeld <em>\"Communicatievaardigheden\"</em> of <em>\"Bijdrage tot de analyse van de experimentele gegevens\"</em>."
 
 #: tutors/forms/edit/edit_form.php:199
-msgid "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?<?php echo($form_qs); ?>\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
-msgstr "U kan een criterium aanpassen door te klikken op de <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" />-knop, of u kan <a class=\"button\" href=\"../edit/add_question/index.php?<?php echo($form_qs); ?>\">een nieuw criterium toevoegen</a>"
+#, php-format
+msgid "You can edit a criterion by clicking on the <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" /> button, or you can <a class=\"button\" href=\"../edit/add_question/index.php?%s\">add&nbsp;a&nbsp;new&nbsp;criterion</a>"
+msgstr "U kan een criterium aanpassen door te klikken op de <img src=\"../../../images/buttons/edit.gif\" width=\"16\" height=\"16\" alt=\"edit question\" title=\"edit\" />-knop, of u kan <a class=\"button\" href=\"../edit/add_question/index.php?%s\">een&nbsp;nieuw&nbsp;criterium&nbsp;toevoegen</a>"
 
 #: tutors/forms/edit/edit_form.php:222
 msgid "Scoring range:"
@@ -4873,6 +4839,7 @@ msgid "update name"
 msgstr "naam updaten"
 
 #: tutors/groups/edit/edit_collection.php:181
+#, php-format
 msgid "You do not have any groups in this collection. To use this collection you need to <a href=\\\"edit_collection_groups.php?%s\">add groups</a>."
 msgstr "U hebt nog een groepen in deze collectie. Om een groepscollectie te gebruiken moet u <a href=\"edit_collection_groups.php?%s\">groepen toevoegen</a>."
 
