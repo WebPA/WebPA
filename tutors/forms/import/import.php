@@ -63,7 +63,7 @@ if ($empty>0) {
                  'form_id' => $new_id,
                  'form_name' => $formname,
                  'form_type' => $formtype,
-                 'form_xml' => ''
+                 'form_xml' => $xml,
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
       $DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));

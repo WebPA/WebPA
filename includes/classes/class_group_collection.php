@@ -40,7 +40,7 @@ class GroupCollection {
   */
   function GroupCollection(&$DAO) {
     $this->_DAO =& $DAO;
-    $this->_created_on = mktime();
+    $this->_created_on = time();
     $this->_groups = null;
     $this->_group_objects = null;
     $this->_assessment_id = null;
@@ -201,7 +201,7 @@ class GroupCollection {
   * The locked_on datetime is IMMEDIATELY SAVED to the database (no other fields are saved)
   */
   function lock() {
-    $this->_locked_on = mktime();
+    $this->_locked_on = time();
     if ($this->id) {
       $_fields = array  (
                           'collection_locked_on'  => date(MYSQL_DATETIME_FORMAT,$this->_locked_on) ,
@@ -278,7 +278,11 @@ class GroupCollection {
       ORDER BY group_name ASC
     ");
     if (!$this->_groups) { $this->_groups = array(); }
+    uasort($this->_groups, array('GroupCollection', 'group_title_natural_sort'));
   }// /->refresh_groups()
+  private static function group_title_natural_sort($group_a, $group_b) {
+    return strnatcmp($group_a['group_name'], $group_b['group_name']);
+  }
 
 /*
 * ----------------------------------------
@@ -534,6 +538,15 @@ class GroupCollection {
 * Module-Manipulation Methods
 * --------------------------------------------------------------------------------
 */
+
+/**
+* Get the modules associated with this collection
+*
+* @return array  array ( module_id )
+*/
+function get_modules(){
+    return $this->_DAO->fetch_assoc("SELECT DISTINCT c.module_id FROM " . APP__DB_TABLE_PREFIX . "collection c");
+}
 
 /*
 * ================================================================================
