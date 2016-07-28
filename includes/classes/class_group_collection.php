@@ -539,6 +539,15 @@ class GroupCollection {
 * --------------------------------------------------------------------------------
 */
 
+/**
+* Get the modules associated with this collection
+*
+* @return array  array ( module_id )
+*/
+function get_modules(){
+    return $this->_DAO->fetch_assoc("SELECT DISTINCT c.module_id FROM " . APP__DB_TABLE_PREFIX . "collection c");
+}
+
 /*
 * ================================================================================
 * Private Methods
