@@ -85,15 +85,14 @@ class FormRenderer {
       $group_total = 100 - $remainder;
       $default_score = floor(100 / $participant_count);
 
-      ?>
-      <p>For each criterion you have <?php echo($group_total); ?> marks to split between your teammates.  If everyone contributed equally, then everyone should receive the same score, <?php echo($default_score); ?> marks.  However, you can take points away from teammates who performed poorly, and re-allocate them to those you thought performed better.</p>
 
-      <p>For each criterion, the total number of marks you allocate must equal <?php echo($group_total); ?>.</p>
-      <?php
+      echo '<p>' . sprintf(gettext('For each criterion you have %d marks to split between your teammates.  If everyone contributed equally, then everyone should receive the same score, %d marks. However, you can take points away from teammates who performed poorly, and re-allocate them to those you thought performed better.'), $group_total, $default_score) . '</p>';
+
+      echo '<p>' . sprintf(gettext('For each criterion, the total number of marks you allocate must equal %d.'), $group_total) . '</p>';
+
     } else {
-      ?>
-      <p>For each criterion you must rate your teammates using the scale provided.  High <?php echo APP__MARK_TEXT; ?> indicate better performance in the criteria.</p>
-      <?php
+      echo '<p>' . sprintf(gettext('For each criterion you must rate your teammates using the scale provided.  High %s indicate better performance in the criteria.'), APP__MARK_TEXT) . '</p>';
+
     }
   }// /->draw_description()
 
