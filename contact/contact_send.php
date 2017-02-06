@@ -11,6 +11,8 @@
 
 require_once("../includes/inc_global.php");
 require_once('../includes/classes/class_email.php');
+// RL: Added lib_form_functions file for email validation
+require_once('../includes/functions/lib_form_functions.php');
 
 check_user($_user);
 
@@ -35,6 +37,26 @@ $contact_type = fetch_POST('contact_type');
 $contact_message = fetch_POST('contact_message');
 
 $app_www = APP__WWW;
+
+// RL: Added validation check
+$errors = array();
+
+if($contact_fullname == ''){
+	$errors[] = 'Name is required';
+}
+
+if($contact_message == ''){
+	$errors[] = 'Message is required';
+}
+
+if($contact_email == ''){
+	$errors[] = 'Email is required';
+
+}elseif(!is_email($contact_email)){
+	$errors[] = 'Email is not valid';
+}
+
+if(empty($errors)){
 
 $email_body = <<<EndBody
 Contact Sent
@@ -74,6 +96,8 @@ $email->set_subject("$contact_app_id : $contact_type");
 $email->set_body($email_body);
 $email->send();
 
+}
+
 // Begin Page
 
 $UI->page_title = APP__NAME . ' Message Sent';
@@ -88,9 +112,21 @@ $UI->content_start();
 ?>
 
   <div class="content_box">
+    <?php // RL: Added code to show appropriate message depending on errors ?>
+  	<?php if(empty($errors)):?>
     <p>Your message has now been sent.</p>
     <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
     <p>Thanks for your time</p>
+    <?php else:?>
+    	<p>Please correct the following errors:</p>
+    	<ul>
+    	<?php foreach($errors as $error):?>
+    		<li><?php echo $error?></li>
+    	<?php endforeach;?>
+    	</ul>
+    	<br>
+    	<button onclick="javascript:window.history.back();">Fix Errors</button>
+    <?php endif?>
   </div>
 <?php
 

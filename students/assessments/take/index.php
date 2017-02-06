@@ -221,6 +221,8 @@ if (($command) && ($assessment)) {
                 $justification_fetch = fetch_POST($id);
 
                 if (!is_null($justification_fetch)) {
+                  // RL: Add strip_tags to prevent xss attacks.	
+                  $justification_fetch = strip_tags($justification_fetch);
                   $justification[] = array('assessment_id'    =>  $assessment->id,
                                    'group_id'       =>  $group->id,
                                    'user_id'        =>  $_user->id,

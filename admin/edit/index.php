@@ -21,6 +21,8 @@
 //get the include file required
 require_once('../../includes/inc_global.php');
 require_once('../../includes/functions/lib_string_functions.php');
+// RL: Added lib_form_functions file for email validation
+require_once('../../includes/functions/lib_form_functions.php');
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -137,10 +139,16 @@ if ($action) {          //incase we want to do more than save changes in the fut
 
       $complete = !empty($edit_user->forename) && !empty($edit_user->lastname) &&
                   !empty($edit_user->password) && !empty($edit_user->username);
+    	
+      // RL: Added email validation check
       if (!$complete) {
 
         $sScreenMsg = "Unable to save user: please make sure the user has a username, first name, last name and password.";
 
+      } elseif ($edit_user->email != '' && !is_email($edit_user->email)) { 
+      	
+      	$sScreenMsg = "Unable to save user: email address is not valid.";
+      
       } else {
 
         //send notification to the screen that the save has occured.
