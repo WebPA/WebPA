@@ -58,7 +58,7 @@ HTMLEnd;
     $students_plural = ($total_students==1) ? 'student' : 'students';
 
     if ($total_students==0) {
-      echo("<div class=\"warning_box\"><p><strong>Warning!</strong></p><p>There are no students associated with the $module_plural you have selected.</p><p>You can continue to create your groups if you wish but there are no students available, so your groups cannot be populated at this time.</p><p>To choose a different module, click <em>back</em> to view the list of modules available.</p></div>");
+      echo("<div class=\"warning_box\"><p><strong>Warning!</strong></p><p>There are no students associated with the module you have selected.</p><p>You can continue to create your groups if you wish but there are no students available, so your groups cannot be populated at this time.</p><p>To choose a different module, click <em>back</em> to view the list of modules available.</p></div>");
     } else {
       echo("<p>The module contains <strong>$total_students $students_plural</strong> in total.</p>");
     }
