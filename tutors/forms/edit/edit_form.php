@@ -235,6 +235,12 @@ if (!$form) {
 
             <td class="button" width="20">
 <?php
+      echo('<a href="question_action.php?' . $question_qs . '&a=clone"><img src="../../../images/buttons/clone.gif" width="16" height="16" alt="clone" title="clone" /></a>');
+?>
+            </td>
+
+            <td class="button" width="20">
+<?php
       if ($i>0) {
         echo('<a href="question_action.php?' . $question_qs . '&a=up"><img src="../../../images/buttons/arrow_green_up.gif" width="16" height="16" alt="move up" title="move up" /></a>');
       } else {

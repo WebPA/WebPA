@@ -54,6 +54,13 @@ if ($form->load($form_id)) {
         }
         break;
       // --------------------
+      case 'clone':
+        $question = $form->get_question($question_id);
+        if ($question) {
+          $form->add_question($question);
+        }
+        break;
+      // --------------------
       case 'delete':
         if ($question) {
           $form->remove_question($question_id);
