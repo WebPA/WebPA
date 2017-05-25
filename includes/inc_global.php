@@ -16,6 +16,9 @@ ini_set('session.bug_compat_warn', 0);
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
 
+// Set up default locale for gettext (also used when user is not in a module).
+define('APP__DEFAULT_LOCALE', 'en_US.UTF8');
+
 /*
  * Configuration
  */
@@ -72,8 +75,9 @@ ini_set('smtp_port','25');
 ini_set('sendmail_from','someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
-$LOGIN_AUTHENTICATORS[] = 'DB';
+// $LOGIN_AUTHENTICATORS[] = 'DB';
 // $LOGIN_AUTHENTICATORS[] = 'LDAP';
+$LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings
 define('LDAP__HOST', "kdc.lboro.ac.uk");
@@ -81,13 +85,16 @@ define('LDAP__PORT', 3268);
 define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
 define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
 define('LDAP__FILTER', 'name={username}*');
-define('LDAP__BINDRDN', '');
-define('LDAP__PASSWD', '');
 $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 // Name of attribute to use to check user type (via function below)
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
 define('LDAP__DEBUG_LEVEL', 7);
 define('LDAP__AUTO_CREATE_USER', TRUE);
+
+// SAML settings
+define('SAML__SIMPLESAMLPATH', ''); // Path to the root of the simpleSAMLPHP install which contains the lib folder, must include training /
+define('SAML__SP_NAME', 'webpa:simplesaml'); // EntityID within simpleSAMLPHP for this session
+define('SAML__USERNAME_ATTRIBUTE', 'username'); // Name of the attribute holding the username from the SAML assertion
 
 // define installed modules
 $INSTALLED_MODS = array();
@@ -168,6 +175,9 @@ $ordinal_scale = array (
 // When reporting grades as decimals, define the precision, etc using this constant
 define('APP__REPORT_DECIMALS', "%01.2f");
 
+// which separator is to be used in CSV export
+define('APP__SEPARATION', ',');
+
 // File upload error messages
 $FILE_ERRORS = array(
   UPLOAD_ERR_OK => 'There is no error, the file uploaded with success.',
@@ -246,29 +256,39 @@ if ($_user_id){
 
 }
 
-// Initialise UI Object
-
-$UI = new UI($_user);
 
 // If we found a module to load, load it!
 if ($_module_id){
-
-  $sql_module = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
+  $sql_module = 'SELECT module_id, module_code, module_title, module_lang FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
   $_module = $DB->fetch_row($sql_module);
   $_module_code = $_module['module_code'];
-
+  $_module_lang = $_module['module_lang'];
 }
+else {
+  $_module_lang = APP__DEFAULT_LOCALE;
+}
+
+//// Setting up gettext.
+putenv("LANG=".$_module_lang);
+setlocale(LC_ALL, $_module_lang);
+$domain = "webpa";
+bindtextdomain($domain, DOC__ROOT . 'locale');
+bind_textdomain_codeset($domain, "UTF-8");
+textdomain($domain);
+
+// Initialise UI Object (after setting up gettext).
+$UI = new UI($_user);
 
 function get_LDAP_user_type($data) {
 
-    $description_str = $data[0];
+  $description_str = $data[0];
 
-    //check in the string for staff
-    if(strripos ($description_str, 'staff') !== false) {
-      $user_type = APP__USER_TYPE_TUTOR;
-    } else {
-      $user_type = APP__USER_TYPE_STUDENT;
-    }
+  //check in the string for staff
+  if(strripos ($description_str, 'staff') !== false) {
+    $user_type = APP__USER_TYPE_TUTOR;
+  } else {
+    $user_type = APP__USER_TYPE_STUDENT;
+  }
 
   return $user_type;
 

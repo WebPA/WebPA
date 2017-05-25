@@ -19,9 +19,9 @@
  */
 ?>
 
-<h2>Closed assessments for <?php echo($academic_year); ?></h2>
+<h2><?php echo sprintf(gettext('Closed assessments for %s'),$academic_year); ?></h2>
 
-<p>These assessments were scheduled for some time in the past, and are now closed. No further student submissions can be made to closed assessments, but no marks have yet been generated.</p>
+<p><?php echo gettext('These assessments were scheduled for some time in the past, and are now closed. No further student submissions can be made to closed assessments, but no marks have yet been generated.');?></p>
 
 <hr />
 
@@ -63,29 +63,31 @@ if (!$assessments) {
 
     $num_responses = (array_key_exists($assessment->id, $responses)) ? $responses[$assessment->id] : 0 ;
     $num_members =  (array_key_exists($assessment->id, $members)) ? $members[$assessment->id] : 0 ;
-    $completed_msg = ($num_responses==$num_members) ? '- <strong>COMPLETED</strong>' : '';
+    $completed_msg = ($num_responses==$num_members) ? '- <strong>'.gettext('COMPLETED').'</strong>' : '';
 
     $edit_url = "edit/edit_assessment.php?a={$assessment->id}&{$qs}";
     $email_url = "email/index.php?a={$assessment->id}&{$qs}";
     $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
     $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}";
     $mark_url = "marks/mark_assessment.php?a={$assessment->id}&{$qs}";
+    $student_inputs_url = "reports/report_student_inputs.php?a={$assessment->id}&{$qs}";
 ?>
     <div class="obj">
       <table class="obj" cellpadding="2" cellspacing="2">
       <tr>
-        <td class="icon" width="24"><img src="../../images/icons/closed_icon.gif" alt="Closed" title="Closed" height="24" width="24" /></td>
+        <td class="icon" width="24"><img src="../../images/icons/closed_icon.gif" alt="<?php echo gettext('Closed');?>" title="<?php echo gettext('Closed');?>" height="24" width="24" /></td>
         <td class="obj_info">
           <div class="obj_name"><?php echo($assessment->name); ?></div>
-          <div class="obj_info_text">scheduled: <?php echo($assessment->get_date_string('open_date')); ?> &nbsp;-&nbsp; <?php echo($assessment->get_date_string('close_date')); ?></div>
-          <div class="obj_info_text">student responses: <?php echo("$num_responses / $num_members $completed_msg"); ?></div>
+          <div class="obj_info_text"><?php echo gettext('scheduled:');?> <?php echo($assessment->get_date_string('open_date')); ?> &nbsp;-&nbsp; <?php echo($assessment->get_date_string('close_date')); ?></div>
+          <div class="obj_info_text"><?php echo gettext('student responses:');?> <?php echo("$num_responses / $num_members $completed_msg"); ?></div>
         </td>
         <td class="buttons">
-          <a href="<?php echo($edit_url); ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
-          <a href="<?php echo($email_url); ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
-          <a href="<?php echo($responded_url); ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
-          <a href="<?php echo($groupmark_url); ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
-          <a href="<?php echo($mark_url); ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
+          <a href="<?php echo($edit_url); ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="<?php echo gettext('Edit');?>" title="<?php echo gettext('Edit assessment');?>" /></a>
+          <a href="<?php echo($email_url); ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="<?php echo gettext('Email');?>" title="<?php echo gettext('Email students');?>" /></a>
+          <a href="<?php echo($responded_url); ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="<?php echo gettext('Students responded');?>" title="<?php echo gettext('Check which students have responded');?>" /></a>
+          <a href="<?php echo($groupmark_url); ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="<?php echo gettext('Group Marks');?>" title="<?php echo gettext('Set group marks');?>" /></a>
+          <a href="<?php echo($mark_url); ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="<?php echo gettext('Mark Sheet');?>" title="<?php echo gettext('New mark sheet');?>" /></a>
+          <a href="<?php echo($student_inputs_url); ?>"><img src="../../images/icons/view_data.gif" width="16" height="16" alt="<?php echo gettext('View student inputs');?>" title="<?php echo gettext('View student inputs');?>" /></a>
         </td>
       </tr>
       </table>

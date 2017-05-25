@@ -37,7 +37,7 @@ $marking_date = (int) fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
   $assessment = null;
-  echo('Error: The requested assessment could not be loaded.');
+  echo(gettext('Error: The requested assessment could not be loaded.'));
   exit;
 } else {
 
@@ -46,7 +46,7 @@ if (!$assessment->load($assessment_id)) {
   $marking_params = $assessment->get_marking_params($marking_date);
 
   if (!$marking_params) {
-    echo('Error: The requested marksheet could not be loaded.');
+    echo(gettext('Error: The requested marksheet could not be loaded.'));
     exit;
   }
 
@@ -59,7 +59,7 @@ if (!$assessment->load($assessment_id)) {
   $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
   if (!$algorithm) {
-    echo('Error: The requested algorithm could not be loaded.');
+    echo(gettext('Error: The requested algorithm could not be loaded.'));
     exit;
   } else {
     $algorithm->set_grade_ordinals($ordinal_scale);
@@ -116,10 +116,10 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_student_grades_comments.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Student Grades and Feedback (by student)"'."\n\n");
+  echo(gettext('"Student Grades and Feedback (by student)"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
-  echo('"User Id","WebPA score","Intermediate Grade","Non-Submission Penalty","Final grade","Group","Comments"'."\n");
+  echo(gettext('"User Id"'.APP__SEPARATION.'"WebPA score"'.APP__SEPARATION.'"Intermediate Grade"'.APP__SEPARATION.'"Non-Submission Penalty"'.APP__SEPARATION.'"Final grade"'.APP__SEPARATION.'"Group"'.APP__SEPARATION.'"Comments"')."\n");
 
   foreach ($member_names as $i => $member) {
     $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -130,7 +130,7 @@ if ($type == 'download-csv') {
 
     // If this user was penalised
     if (array_key_exists($member['user_id'], $penalties)) {
-      $penalty_str = ($penalties[$member['user_id']]==0) ? 'no penalty' : $penalties[$member['user_id']] ;
+      $penalty_str = ($penalties[$member['user_id']]==0) ? gettext('no penalty') : $penalties[$member['user_id']] ;
     } else {
       $penalty_str = '';
     }
@@ -142,13 +142,13 @@ if ($type == 'download-csv') {
     } else {
       echo($member['username']);
     }
-    echo("\",\"$score\",\"$intermediate_grade\",\"$penalty_str\",\"$grade\",");
+    echo("\"".APP__SEPARATION."\"$score\"".APP__SEPARATION."\"$intermediate_grade\"".APP__SEPARATION."\"$penalty_str\"".APP__SEPARATION."\"$grade\"".APP__SEPARATION);
 
     //print member's group name
     foreach ($group_members as $group_id => $g_members) {
       foreach ($g_members as $k => $member_id) {
         if ($member['user_id'] == $g_members[$k]) {
-          echo("\"{$group_names[$group_id]}\",");
+          echo("\"{$group_names[$group_id]}\"".APP__SEPARATION);
         }
       }
     }

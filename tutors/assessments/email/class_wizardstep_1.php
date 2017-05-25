@@ -25,8 +25,8 @@ class WizardStep1 {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->next_button = gettext('Next &gt;');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep1()
 
   function head() {
@@ -44,14 +44,14 @@ class WizardStep1 {
   }// /->head()
 
   function form() {
-    $send_to = array  ('all'    => 'everyone taking this assessment' ,
-               'groups' => 'selected groups taking this assessment' ,
-               'have'   => 'students who HAVE responded' ,
-               'havenot'  => 'students who HAVE NOT responded' ,);
+    $send_to = array  ('all'    => gettext('everyone taking this assessment') ,
+               'groups' => gettext('selected groups taking this assessment') ,
+               'have'   => gettext('students who HAVE responded') ,
+               'havenot'  => gettext('students who HAVE NOT responded') ,);
 ?>
-    <p>To begin, you need to select exactly which students should receive your email.</p>
+    <p><?php echo gettext('To begin, you need to select exactly which students should receive your email.');?></p>
 
-    <h2>Send Email To</h2>
+    <h2><?php echo gettext('Send Email To');?></h2>
     <div class="form_section">
 <?php
       render_radio_boxes($send_to, 'send_to', $this->wizard->get_field('send_to'));
@@ -64,7 +64,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('send_to',fetch_POST('send_to'));
-    if (is_empty($this->wizard->get_field('send_to'))) { $errors[] = 'You must select who to send this email to.'; }
+    if (is_empty($this->wizard->get_field('send_to'))) { $errors[] = gettext('You must select who to send this email to.'); }
 
     return $errors;
   }// /->process_form()

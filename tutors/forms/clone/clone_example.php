@@ -53,30 +53,30 @@ if (!empty($new_form_name)) {
 
   // Begin Page
 
-  $UI->page_title = APP__NAME . ' Copy ' . $form->name .' form';
-  $UI->menu_selected = 'my forms';
+  $UI->page_title = APP__NAME . ' '.sprtinf(gettext(' Copy %s form'), $form->name);
+  $UI->menu_selected = gettext('my forms');
   $UI->help_link = '?q=node/244';
   $UI->breadcrumbs = array  ('home'           => '../../' ,
-               'my forms'       => '../' ,
-               'copy form'  => null ,);
+      gettext('my forms')       => '../' ,
+      gettext('copy form')  => null ,);
 
-  $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
-  $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
-  $UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
-  $UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', 'import/');
+  $UI->set_page_bar_button(gettext('List Forms'), '../../../../images/buttons/button_form_list.gif', '../');
+  $UI->set_page_bar_button(gettext('Create Form'), '../../../../images/buttons/button_form_create.gif', '../create/');
+  $UI->set_page_bar_button(gettext('Clone a Form'), '../../../../images/buttons/button_form_clone.gif', '../clone/');
+  $UI->set_page_bar_button(gettext('Import a Form'), '../../../../images/buttons/button_form_import.gif', 'import/');
 
   $UI->head();
   $UI->body('onload="body_onload()"');
   $UI->content_start();
 ?>
-    <p>You have chosen to take a copy of the : <em><?php echo($form->name); ?></em> form.</p>
+    <p><?php echo sprintf(gettext('You have chosen to take a copy of the : <em>%s</em> form.'), $form->name);?></p>
 
-      <p>Now enter a name for your copy of the form.</p>
+      <p><?php echo gettext('Now enter a name for your copy of the form.');?></p>
 <form action="clone_example.php" method="POST">
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
           <tr>
-            <th><label for="clone_form_name">Name for new form</label></th>
+            <th><label for="clone_form_name"><?php echo gettext('Name for new form');?></label></th>
             <td><input type="text" name="n" id="clone_form_name" size="50" maxlength="100" value="<?php echo($form->name); ?>" /></td>
           </tr>
         </table>

@@ -11,7 +11,7 @@
  */
 require_once('lib_array_functions.php');
 
-$form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
+$form_months = array( 1 => gettext('January'),gettext('February'),gettext('March'),gettext('April'),gettext('May'),gettext('June'),gettext('July'),gettext('August'),gettext('September'),gettext('October'),gettext('November'),gettext('December'));
 
 /**
  * Is the given email address in a valid format

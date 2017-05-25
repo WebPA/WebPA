@@ -18,6 +18,7 @@ class Module {
   public $module_code = NULL;
   public $module_title = NULL;
   public $module_id = NULL;
+    public $module_lang = APP__DEFAULT_LOCALE;
 
   public $DAO = NULL;
 
@@ -26,10 +27,11 @@ class Module {
   * @param string $code
   * @param string $title
   */
-  function Module($module_code = null, $module_title = null) {
+  function Module($module_code = null, $module_title = null, $module_lang = APP__DEFAULT_LOCALE) {
     $this->module_code = $module_code;
     $this->module_title = $module_title;
     $this->module_id = null;
+    $this->module_lang = $module_lang;
   }// /->Module()
 
 /*
@@ -50,6 +52,7 @@ class Module {
       $this->module_id = $module_info['module_id'];
       $this->module_code = $module_info['module_code'];
       $this->module_title = $module_info['module_title'];
+      $this->module_lang = $module_info['module_lang'];
     }
     return true;
   }// /->load_from_row()
@@ -61,6 +64,7 @@ class Module {
 
     $_fields = array ('module_code'        => $this->module_code ,
               'module_title'        => $this->module_title,
+            'module_lang'   => $this->module_lang,
                );
 
     //save the changes to the module
@@ -82,8 +86,9 @@ class Module {
    */
    function add_module(){
 
-    $_fields = array ('module_code'        => $this->module_code ,
-              'module_title'        => $this->module_title,
+    $_fields = array ('module_code'         => $this->module_code ,
+                      'module_title'        => $this->module_title,
+                      'module_lang'         => $this->module_lang,
                );
 
     //save the changes to the module
@@ -109,7 +114,7 @@ class Module {
      $this->module_code = null;
      $this->module_title = null;
      $this->module_id = null;
-
+     $this->module_lang = null;
    }
 
 /*

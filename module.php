@@ -40,9 +40,9 @@ if ($module_id) {
 }
 
 //set the page information
-$UI->page_title = 'Change Module';
-$UI->menu_selected = 'change module';
-$UI->breadcrumbs = array ('home' => './', 'change source' => null);
+$UI->page_title = gettext('Change Module');
+$UI->menu_selected = gettext('change module');
+$UI->breadcrumbs = array ('home' => './', gettext('change source') => null);
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -50,7 +50,7 @@ $UI->content_start();
 
 //build the content to be written to the screen
 
-$page_intro = 'Use this page to change the currently selected module.';
+$page_intro = gettext('Use this page to change the currently selected module.');
 
 ?>
 
@@ -78,7 +78,7 @@ $page_intro = 'Use this page to change the currently selected module.';
       }
     } else {
       echo('<tr>');
-      echo('  <td colspan="2">No modules</td>');
+      echo('  <td colspan="2">'.gettext('No modules').'</td>');
       echo('</tr>');
     }
 ?>
@@ -88,7 +88,7 @@ $page_intro = 'Use this page to change the currently selected module.';
   if (count($modules) > 0) {
 ?>
 <p>
-<input type="submit" value="Select module" />
+<input type="submit" value="<?php echo gettext('Select module');?>" />
 </p>
 <?php
   }

@@ -131,7 +131,7 @@ if ($assessment->load($assessment_id)) {
 
 } else {
   $assessment = null;
-  echo('Error: The assessment could not be loaded.');
+  echo(gettext('Error: The assessment could not be loaded.'));
   exit;
 }
 
@@ -143,7 +143,7 @@ if ($assessment->load($assessment_id)) {
 if ($type == 'view') {
   // Begin Page
 
-  $page_title = ($assessment) ? "{$assessment->name}" : 'report';
+  $page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
   $UI->page_title = APP__NAME . ' ' . $page_title;
   $UI->head();
@@ -168,7 +168,7 @@ if ($type == 'view') {
 
   <div class="content_box">
 
-  <h2 style="font-size: 150%;">Marks Awarded For Each Question (anonymous)</h2>
+  <h2 style="font-size: 150%;"><?php echo gettext('Marks Awarded For Each Question (anonymous)');?></h2>
 
 <?php
   if (($assessment) && ($groups_iterator->size()>0)) {
@@ -224,7 +224,7 @@ if ($type == 'view') {
         }
 ?>
           <tr class="q_total">
-            <th>Score Received</th>
+            <th><?php echo gettext('Score Received');?></th>
 <?php
         foreach ($g_members as $i => $member_id) {
           echo("<th>{$q_total[$member_id]}</th>");
@@ -256,7 +256,7 @@ if ($type == 'download-csv') {
   header("Content-Disposition: attachment; filename=\"webpa_marks_awarded_byquestion.csv\"");
   header('Content-Type: text/csv');
 
-  echo('"Marks Awarded For Each Question (anonymous)"'."\n\n");
+  echo(gettext('"Marks Awarded For Each Question (anonymous)"')."\n\n");
   echo("\"{$assessment->name}\"\n\n");
 
   if (($assessment) && ($groups_iterator->size()>0)) {
@@ -272,7 +272,7 @@ if ($type == 'download-csv') {
         echo("\n");
         echo("\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n");
 
-        echo("\"\",");
+        echo("\"\"".APP__SEPARATION);
 
         foreach ($g_members as $i => $member_id) {
           $char = chr(65+$i);
@@ -280,14 +280,14 @@ if ($type == 'download-csv') {
 
           echo("\"{$members[$member_id]['lastname']}\"");
           if ($i<$g_member_count) {
-            echo(',');
+            echo(APP__SEPARATION);
           }
         }
 
         echo("\n");
 
         foreach ($g_members as $i => $member_id) {
-          echo("\"{$members[$member_id]['lastname']}\",");
+          echo("\"{$members[$member_id]['lastname']}\"".APP__SEPARATION);
 
           foreach ($g_members as $j => $target_member_id) {
             if ($assessment->assessment_type == '0') {
@@ -307,7 +307,7 @@ if ($type == 'download-csv') {
 
             echo("\"$score\"");
             if ($j<$g_member_count) {
-              echo(',');
+              echo(APP__SEPARATION);
             }
           }
           echo("\n");

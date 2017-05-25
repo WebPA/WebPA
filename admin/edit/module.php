@@ -62,12 +62,13 @@ $edit_module->load_from_row($module_id);
 //get the posted information
 $action = fetch_POST('save');
 
-if ($action) {          //incase we want to do more than save changes in the future
+if ($action) {          //in case we want to do more than save changes in the future
   switch ($action) {
     case 'Save Changes':
     //put all the elements back into the structures
     $edit_module->module_code = fetch_POST('module_code');
     $edit_module->module_title = fetch_POST('module_title');
+    $edit_module->module_lang = fetch_POST('module_lang');
 
     //save all of the data
     $edit_module->set_dao_object($DB);
@@ -83,8 +84,7 @@ if ($action) {          //incase we want to do more than save changes in the fut
     $edit_module->load_from_row($module_id);
 
     //send notification to the screen that the save has occured.
-    $sScreenMsg = "The changes made for the module have been saved";
-
+    $sScreenMsg = gettext("The changes made for the module have been saved");
   }
 
 }
@@ -92,8 +92,7 @@ if ($action) {          //incase we want to do more than save changes in the fut
 //-----------------------------------------------------------------------
 //build the page and fill in the spaces
 
-$page_intro = '<p>Here you are able to edit the details of a module within the system. There may be some elements of the information which do not appear' .
-    '   to have been completed and this will be dependant on the information stored in the system.</p>';
+$page_intro = '<p>'.gettext('Here you are able to edit the details of a module within the system. There may be some elements of the information which do not appear to have been completed and this will be dependant on the information stored in the system.').'</p>';
 
 ?>
 <?php echo $page_intro; ?>
@@ -113,25 +112,41 @@ $page_intro = '<p>Here you are able to edit the details of a module within the s
 <table class="option_list" style="width: 100%;">
   <tr>
     <td>
-      <h2>Module Details</h2>
+      <h2><?php echo gettext('Module Details');?></h2>
     </td>
   </tr>
   <tr>
-    <td><label for="code">Code</label></td>
+    <td><label for="code"><?php echo gettext('Code');?></label></td>
     <td>
       <input type="text" id="code" name="module_code" value="<?php echo $edit_module->module_code; ?>" size="20" maxlength="255">
     </td>
   </tr>
   <tr>
-    <td><label for="title">Title</label></td>
+    <td><label for="title"><?php echo gettext('Title');?></label></td>
     <td>
       <input type="text" id="title" name="module_title" value="<?php echo $edit_module->module_title; ?>" size="40" maxlength="255">
     </td>
   </tr>
+    <tr>
+        <td><label for="language"><?php echo gettext('Language');?></label></td>
+        <td>
+            <select name="module_lang">
+                <?php
+                $locale_folders = scandir(DOC__ROOT.'locale/');
+
+                foreach($locale_folders as $locale_folder){
+                    if(is_dir(DOC__ROOT.'locale/' . $locale_folder) && strlen($locale_folder) > 3)
+                        echo sprintf('<option value="%s" %s>%s</option>', $locale_folder, ($locale_folder == $edit_module->module_lang) ? 'selected="selected"' : '', $locale_folder);
+                }
+                ?>
+            </select>
+        </td>
+
+    </tr>
   <tr><td colspan="2"><hr/></td></tr>
   <tr>
     <td colspan="2">
-      <input type="submit" value="Save Changes" name="save" id="save">
+      <input type="submit" value="<?php echo gettext('Save Changes');?>" name="save" id="save">
     </td>
   </tr>
 </table>

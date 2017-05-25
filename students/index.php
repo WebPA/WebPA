@@ -93,7 +93,7 @@ if ($assessments) {
 
 //------------------------------------------------
 //strings to be used in the page
-$getting_help = 'You will need to seek help from your tutor.';
+$getting_help = gettext('You will need to seek help from your tutor.');
 
 // --------------------------------------------------------------------------------
 // Begin Page
@@ -110,21 +110,21 @@ $UI->body();
 $UI->content_start();
 ?>
 
-<p>Welcome to WebPA, the easiest way for you to complete your peer assessment on the web.</p>
+<p><?php echo gettext('Welcome to WebPA, the easiest way for you to complete your peer assessment on the web.');?></p>
 
 <div class="content_box">
   <?php
   if (!$open_assessments) {
     ?>
-    <p>There are no assessments in this module available for you to take at the moment.</p>
-    <p>To view all the assessments you are registered on, please check the <a href="assessments/">my assessments</a> section.</p>
+    <p><?php echo gettext('There are no assessments in this module available for you to take at the moment.');?></p>
+    <p><?php echo gettext('To view all the assessments you are registered on, please check the <a href="assessments/">my assessments</a> section.');?></p>
     <?php
   } else {
     ?>
-    <p>Below is a list of the assessments in this module you can take now.</p>
-    <p>To view all the assessments you are registered on in this module, please check the <a href="assessments/">my assessments</a> section.</p>
+    <p><?php echo gettext('Below is a list of the assessments in this module you can take now.');?></p>
+    <p><?php echo gettext('To view all the assessments you are registered on in this module, please check the <a href="assessments/">my assessments</a> section.');?></p>
 
-    <h2>Open Assessments</h2>
+    <h2><?php echo gettext('Open Assessments');?></h2>
     <div class="form_section">
       <?php
       $status = 'open';
@@ -142,11 +142,11 @@ $UI->content_start();
         echo('  <td valign="top">');
         echo('    <div class="assessment_info">');
         echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-        echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
+        echo('      <div class="assessment_schedule">'.gettext('scheduled:').' '.$assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
         echo('    </div>');
         echo('  </td>');
         echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
-        echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
+        echo("    <a class=\"button\" href=\"$take_url\">".gettext('Take Assessment')."</a>");
         echo('  </td>');
         echo('</tr>');
         echo('</table>');
@@ -159,8 +159,8 @@ $UI->content_start();
 
   if ($pending_assessments) {
     ?>
-    <h2>Pending Assessments</h2>
-    <p>These assessments scheduled for some point in the future.</p>
+    <h2><?php echo gettext('Pending Assessments');?></h2>
+    <p><?php echo gettext('These assessments scheduled for some point in the future.');?></p>
     <div class="form_section form_line">
       <?php
       $status = 'pending';
@@ -178,7 +178,7 @@ $UI->content_start();
         echo('  <td valign="top">');
         echo('    <div class="assessment_info">');
         echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-        echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
+        echo('      <div class="assessment_schedule">'.gettext('scheduled:').' '.$assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
         echo('    </div>');
         echo('  </td>');
         echo('</tr>');
@@ -193,7 +193,7 @@ $UI->content_start();
 
 </div>
 
-<h2>Getting Help</h2>
+<h2><?php echo gettext('Getting Help'); ?></h2>
 <p><?php
   echo $getting_help;
 ?></p>

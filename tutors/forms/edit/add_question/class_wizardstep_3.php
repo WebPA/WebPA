@@ -64,7 +64,7 @@ class WizardStep3 {
 
     $errors = null;
     if (!$form) {
-      $errors[] = 'Unable to load the form that this question is to be added to.';
+      $errors[] = gettext('Unable to load the form that this question is to be added to.');
     } else {
       $form->add_question($new_question);
       $form->save();
@@ -72,17 +72,17 @@ class WizardStep3 {
 
     // If errors, show them
     if (is_array($errors)) {
-      $this->wizard->back_button = '&lt; Back';
-      $this->wizard->cancel_button = 'Cancel';
-      echo('<p><strong>Unable to create your new criterion.</strong></p>');
-      echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+      $this->wizard->back_button = gettext('&lt; Back');
+      $this->wizard->cancel_button = gettext('Cancel');
+      echo('<p><strong>'.gettext('Unable to create your new criterion.').'</strong></p>');
+      echo('<p>'.gettext('To correct the problem, click <em>back</em> and amend the details entered.').'</p>');
     } else {// Else.. create the form!
       ob_end_clean();
       header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}#questions");
       exit;
       ?>
-      <p><strong>Your new assessment criterion has been created.</strong></p>
-      <p style="margin-top: 20px;">You can now return to <a href="../edit_form.php?f=<?php echo($form->id); ?>">editing your form</a>.</p>
+      <p><strong><?php echo gettext('Your new assessment criterion has been created.');?></strong></p>
+      <p style="margin-top: 20px;"><?php echo sprintf(gettext('You can now return to <a href="../edit_form.php?f=%s">editing your form</a>.'), $form->id);?></p>
       <?php
     }
   }// /->form()

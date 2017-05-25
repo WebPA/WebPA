@@ -294,9 +294,9 @@ class Assessment {
    * @return string formated date
   */
   function get_date_string($date) {
-    $date_format = 'D, jS F, Y \a\t G:i';
-    if ($date == 'open_date') { return date($date_format,$this->open_date); }
-    if ($date == 'close_date') { return date($date_format,$this->close_date); }
+    $date_format = '%a, %e %B %Y '.gettext('at').' %H:%M';
+    if ($date == 'open_date') { return strftime($date_format,$this->open_date); }
+    if ($date == 'close_date') { return strftime($date_format,$this->close_date); }
   }// /->get_date_string()
 
   /**

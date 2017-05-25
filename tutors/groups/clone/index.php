@@ -46,19 +46,19 @@ $wiz_step = $wizard->get_step();
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Clone own groups';
-$UI->menu_selected = 'my groups';
+$UI->page_title = APP__NAME .' '.gettext('Clone own groups');
+$UI->menu_selected = gettext('my groups');
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home'                      => '../../' ,
-  'my groups'                 => '../' ,
-  'clone groups'              => '../clone/' ,
-  'clone own groups wizard'   => null ,
+    gettext('my groups')                 => '../' ,
+    gettext('clone groups')              => '../clone/' ,
+    gettext('clone own groups wizard')   => null ,
 );
 
-$UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
-$UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
-$UI->set_page_bar_button('Clone Groups', '../../../../images/buttons/button_group_clone.gif', '../clone/');
+$UI->set_page_bar_button(gettext('List Groups'), '../../../../images/buttons/button_group_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Groups'), '../../../../images/buttons/button_group_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('Clone Groups'), '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
 $UI->head();
 $wizard->head();
@@ -66,7 +66,7 @@ $UI->body('onload="body_onload()"');
 $UI->content_start();
 ?>
 
-<p>This wizard takes you through the process of cloning an existing collection of associated groups. When it is complete, you will be able to edit the groups and reassign students.</p>
+<p><?php echo gettext('This wizard takes you through the process of cloning an existing collection of associated groups. When it is complete, you will be able to edit the groups and reassign students.');?></p>
 
 <?php
 $wizard->title();

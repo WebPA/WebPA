@@ -175,16 +175,16 @@ if ($assessment->load($assessment_id)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = ($assessment) ? "{$assessment->name}" : 'report';
+$page_title = ($assessment) ? "{$assessment->name}" : gettext('report');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->breadcrumbs = array  ('home'       => '../../../' ,
-               'my assessments' => '../../' ,
+    gettext('my assessments') => '../../' ,
                $page_title    => null ,);
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 //$UI->set_page_bar_button('Clone Assessment', 'button_assessment_clone.gif', '../clone/');
 
 $UI->head();
@@ -202,22 +202,22 @@ $UI->content_start();
 ?>
 
 
-<p>On this page you can select the different reports to view for this assessment.</p>
+<p><?php echo gettext('On this page you can select the different reports to view for this assessment.');?></p>
 
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to reports list</a>
+  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="<?php echo gettext('back');?> -"> <?php echo gettext('back to reports list');?></a>
 </div>
 
-<h2 style="font-size: 150%;">Student Grades</h2>
+<h2 style="font-size: 150%;"><?php echo gettext('Student Grades');?></h2>
 
   <table class="grid" cellpadding="2" cellspacing="1">
   <tr>
-    <th>name</th>
-    <th align="center">WebPA<br />score</th>
-    <th align="center">Grade</th>
-    <th align="center">Did not<br />submit</th>
+    <th><?php echo gettext('name');?></th>
+    <th align="center"><?php echo gettext('WebPA<br />score');?></th>
+    <th align="center"><?php echo gettext('Grade');?></th>
+    <th align="center"><?php echo gettext('Did not<br />submit');?></th>
   </tr>
 <?php
 foreach($member_names as $i => $member) {
@@ -227,7 +227,7 @@ foreach($member_names as $i => $member) {
   $grade = sprintf('%01.2f', $grade);
 
   if ($marking_params['penalty']==0) {
-    $penalty_str = (array_key_exists($member['user_id'], $submissions)) ? '&nbsp;' : 'no penalty' ;
+    $penalty_str = (array_key_exists($member['user_id'], $submissions)) ? '&nbsp;' : gettext('no penalty') ;
   } else {
     $penalty_str = (array_key_exists($member['user_id'], $submissions)) ? '&nbsp;' : "-{$marking_params['penalty']}%";
   }

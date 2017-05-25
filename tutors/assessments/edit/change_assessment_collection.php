@@ -56,21 +56,21 @@ if (($command) && ($assessment)) {
   switch ($command) {
     case 'save':
       if ($assessment->is_locked()) {
-        $errors[] = 'This assessment has been marked, and therefore the assessment form being used cannot be changed.';
+        $errors[] = gettext('This assessment has been marked, and therefore the assessment form being used cannot be changed.');
       } else {
         // Change the collection of groups to assess
 
         if (!$new_collection_id) {
-          $errors[] = 'You must select a collection of associated groups to use.';
+          $errors[] = gettext('You must select a collection of associated groups to use.');
         } else {
           // If the new collection is the same as the old collection, do nothing
           if ($new_collection_id!=$collection->id) {
-            if (!$collection) { $errors[] = 'There was an error when trying to remove the original collection of groups - please use the contact system to report the error!'; }
+            if (!$collection) { $errors[] = gettext('There was an error when trying to remove the original collection of groups - please use the contact system to report the error!'); }
 
             // clone the collection
             $new_collection = $group_handler->clone_collection($new_collection_id);
 
-            if (!$new_collection) { $errors[] = 'There was an error when loading the new collection of groups - please use the contact system to report the error!'; }
+            if (!$new_collection) { $errors[] = gettext('There was an error when loading the new collection of groups - please use the contact system to report the error!'); }
 
             if (!$errors) {
               // Delete the old collection
@@ -99,19 +99,19 @@ if (($command) && ($assessment)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = 'change collection';
-$manage_text = ($assessment) ? "manage: {$assessment->name}" : 'manage assessment';
+$page_title = gettext('change collection');
+$manage_text = ($assessment) ? gettext("manage:")."{$assessment->name}" : gettext('manage assessment');
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
-$UI->menu_selected = 'my assessments';
+$UI->menu_selected = gettext('my assessments');
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = array  ('home'         => '/' ,
-               'my assessments'   => '/tutors/assessments/' ,
+    gettext('my assessments')   => '/tutors/assessments/' ,
                $manage_text     => $assessment_url ,
-               'change collection'  => null ,);
+    gettext('change collection')  => null ,);
 
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
-$UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
+$UI->set_page_bar_button(gettext('List Assessments'), '../../../../images/buttons/button_assessment_list.gif', '../');
+$UI->set_page_bar_button(gettext('Create Assessments'), '../../../../images/buttons/button_assessment_create.gif', '../create/');
 
 $UI->head();
 ?>
@@ -142,11 +142,11 @@ span.question_range { font-size: 0.8em; }
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form and try again.');
+$UI->draw_boxed_list($errors, 'error_box', gettext('The following errors were found:'), gettext('No changes have been saved. Please check the details in the form and try again.'));
 
 ?>
 
-<p>On this page you can change the assessment form being used.</p>
+<p><?php echo gettext('On this page you can change the assessment form being used.');?></p>
 
 <div class="content_box">
 
@@ -154,17 +154,17 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
 ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
+    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to the assessment');?></a>
   </div>
 
-  <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
+  <p><?php echo gettext('The assessment you selected could not be loaded for some reason - please go back and try again.');?></p>
 <?php
 } else {
 ?>
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
+      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> <?php echo gettext('back to the assessment');?></a></td>
     </tr>
     </table>
   </div>
@@ -173,8 +173,8 @@ if (!$assessment) {
   if ($assessment->is_locked()) {
 ?>
     <div class="warning_box">
-      <p><strong>Marks have been recorded for this assessment.</strong></p>
-      <p>You can still edit the assessment's name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.</p>
+      <p><strong><?php echo gettext('Marks have been recorded for this assessment.');?></strong></p>
+      <p><?php echo gettext('You can still edit the assessment\'s name, schedule information and introductory text, but you can no longer change which form, or collection of groups, is used in this assessment.');?></p>
     </div>
 <?php
   } else {
@@ -183,21 +183,21 @@ if (!$assessment) {
     <form action="change_assessment_collection.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
     <input type="hidden" name="command" value="none" />
 
-    <h2>Current Collection</h2>
+    <h2><?php echo gettext('Current Collection');?></h2>
     <div class="form_section form_line">
 <?php
-    echo("<p><label>You are currently using collection: </label><em>{$collection->name}</em></p>");
+    echo("<p><label>".gettext('You are currently using collection:')." </label><em>{$collection->name}</em></p>");
 
 //    $modules = (is_array($collection->get_modules())) ? implode(', ',$collection->get_modules()) : 'none' ;
     $group_count = count( $collection->get_groups_array() );
 
 //    echo("  <div style=\"margin-left: 50px; font-size: 84%;\"><div>Associated Modules : $modules</div><div>Number of Groups : $group_count</div></div>");
-    echo("  <div style=\"margin-left: 50px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div>");
+    echo("  <div style=\"margin-left: 50px; font-size: 84%;\"><div>".gettext('Number of Groups :')." $group_count</div></div>");
 ?>
     </div>
 
 
-    <h2>Available Collections</h2>
+    <h2><?php echo gettext('Available Collections');?></h2>
     <div class="form_section">
 <?php
     require_once(DOC__ROOT . 'includes/classes/class_simple_object_iterator.php');
@@ -208,13 +208,13 @@ if (!$assessment) {
 
     if (!$collections) {
 ?>
-        <p>You haven't yet created any group collections.</p>
-        <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.</p>
+        <p><?php echo gettext('You haven\'t yet created any group collections.');?></p>
+        <p><?php echo gettext('You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.');?></p>
 <?php
     } else {
       $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
 ?>
-        <p>Please select the collection of groups you wish to use in this assessment from from the list below.</p>
+        <p><?php echo gettext('Please select the collection of groups you wish to use in this assessment from from the list below.');?></p>
         <div class="form_section">
           <table class="form" cellpadding="0" cellspacing="0">
 <?php
@@ -228,7 +228,7 @@ if (!$assessment) {
         echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$new_collection->id}\" value=\"{$new_collection->id}\" /></td>");
         echo("  <td><label class=\"small\" for=\"collection_{$new_collection->id}\">{$new_collection->name}</label>");
 //        echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Associated Modules : $modules</div><div>Number of Groups : $group_count</div></div></td>");
-        echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
+        echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>".gettext('Number of Groups :')." $group_count</div></div></td>");
         echo('</tr>');
       }
 ?>
@@ -238,7 +238,7 @@ if (!$assessment) {
     }
 ?>
       <div style="text-align: right">
-        <input type="button" name="savebutton1" id="savebutton1" value="save changes" onclick="do_command('save');" />
+        <input type="button" name="savebutton1" id="savebutton1" value="<?php echo gettext('save changes');?>" onclick="do_command('save');" />
       </div>
     </div>
 

@@ -22,9 +22,9 @@ class WizardStep2 {
   function WizardStep2(&$wizard) {
     $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Finish';
-    $this->wizard->cancel_button = 'Cancel';
+    $this->wizard->back_button = gettext('&lt; Back');
+    $this->wizard->next_button = gettext('Finish');
+    $this->wizard->cancel_button = gettext('Cancel');
   }// /WizardStep2()
 
   function head() {
@@ -51,18 +51,18 @@ class WizardStep2 {
     if (!$form) {
       $this->wizard->next_button = null;
       ?>
-      <p>The select form could not be loaded, please click <em>Back</em> and try again.</p>
+      <p><?php echo gettext('The select form could not be loaded, please click <em>Back</em> and try again.');?></p>
       <?php
     } else {
       ?>
-      <p>You have chosen to clone: <em><?php echo($form->name); ?></em></p>
+      <p><?php echo gettext('You have chosen to clone:');?> <em><?php echo($form->name); ?></em></p>
 
-      <p>Now enter a name for your new form.</p>
+      <p><?php echo gettext('Now enter a name for your new form.');?></p>
 
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
           <tr>
-            <th><label for="clone_form_name">Name for new form</label></th>
+            <th><label for="clone_form_name"><?php echo gettext('Name for new form');?></label></th>
             <td><input type="text" name="clone_form_name" id="clone_form_name" size="50" maxlength="100" value="<?php echo($this->wizard->get_field('clone_form_name')); ?>" /></td>
           </tr>
         </table>
@@ -76,7 +76,7 @@ class WizardStep2 {
     $errors = null;
 
     $this->wizard->set_field('clone_form_name',fetch_POST('clone_form_name'));
-    if (is_empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
+    if (is_empty($this->wizard->get_field('clone_form_name'))) { $errors[] = gettext('You must enter a name for your new assessment form.'); }
 
     return $errors;
   }// /->process_form()
