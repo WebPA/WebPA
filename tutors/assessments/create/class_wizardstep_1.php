@@ -148,7 +148,7 @@ class WizardStep1 {
       </table>
     </div>
 
-    <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
+<!--     <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
     <br/><br/></div>
     <div id="advanced" style="display:none;" class="advanced_options">
 
@@ -167,7 +167,7 @@ class WizardStep1 {
           <td valign="top"><label class="small" for="email_no">No, don't email all students.</label></td>
         </tr>
         </table>
-      </div>
+      </div> -->
 
 <?php
     if (APP__REMINDER_OPENING) {
