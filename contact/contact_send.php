@@ -11,7 +11,6 @@
 
 require_once("../includes/inc_global.php");
 require_once('../includes/classes/class_email.php');
-// RL: Added lib_form_functions file for email validation
 require_once('../includes/functions/lib_form_functions.php');
 
 check_user($_user);
@@ -38,7 +37,6 @@ $contact_message = fetch_POST('contact_message');
 
 $app_www = APP__WWW;
 
-// RL: Added validation check
 $errors = array();
 
 if($contact_fullname == ''){
@@ -112,12 +110,11 @@ $UI->content_start();
 ?>
 
   <div class="content_box">
-    <?php // RL: Added code to show appropriate message depending on errors ?>
-  	<?php if(empty($errors)):?>
+    <?php if (empty($errors)) : ?>
     <p>Your message has now been sent.</p>
     <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
     <p>Thanks for your time</p>
-    <?php else:?>
+    <?php else : ?>
     	<p>Please correct the following errors:</p>
     	<ul>
     	<?php foreach($errors as $error):?>
@@ -126,7 +123,7 @@ $UI->content_start();
     	</ul>
     	<br>
     	<button onclick="javascript:window.history.back();">Fix Errors</button>
-    <?php endif?>
+    <?php endif; ?>
   </div>
 <?php
 
