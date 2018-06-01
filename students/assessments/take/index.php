@@ -222,6 +222,7 @@ if (($command) && ($assessment)) {
 
                 if (!is_null($justification_fetch)) {
                   $justification_fetch = strip_tags($justification_fetch);
+
                   $justification[] = array('assessment_id'    =>  $assessment->id,
                                    'group_id'       =>  $group->id,
                                    'user_id'        =>  $_user->id,
