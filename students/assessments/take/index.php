@@ -218,11 +218,9 @@ if (($command) && ($assessment)) {
             if ($assessment->allow_assessment_feedback) {
               //get the results and add them all to an array
               foreach ($people as $id => $name) {
-                $justification_fetch = fetch_POST($id);
+                $justification_fetch = strip_tags(fetch_POST($id));
 
                 if (!is_null($justification_fetch)) {
-                  $justification_fetch = strip_tags($justification_fetch);
-
                   $justification[] = array('assessment_id'    =>  $assessment->id,
                                    'group_id'       =>  $group->id,
                                    'user_id'        =>  $_user->id,
