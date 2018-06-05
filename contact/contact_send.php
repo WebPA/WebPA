@@ -117,9 +117,9 @@ $UI->content_start();
     <?php else : ?>
     	<p>Please correct the following errors:</p>
     	<ul>
-    	<?php foreach($errors as $error):?>
+    	<?php foreach ($errors as $error) : ?>
     		<li><?php echo $error?></li>
-    	<?php endforeach;?>
+    	<?php endforeach; ?>
     	</ul>
     	<br>
     	<button onclick="javascript:window.history.back();">Fix Errors</button>
