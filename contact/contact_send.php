@@ -39,22 +39,22 @@ $app_www = APP__WWW;
 
 $errors = array();
 
-if($contact_fullname == ''){
+if ($contact_fullname == '') {
 	$errors[] = 'Name is required';
 }
 
-if($contact_message == ''){
+if ($contact_message == '') {
 	$errors[] = 'Message is required';
 }
 
-if($contact_email == ''){
+if ($contact_email == '') {
 	$errors[] = 'Email is required';
 
-}elseif(!is_email($contact_email)){
+} elseif (!is_email($contact_email)) {
 	$errors[] = 'Email is not valid';
 }
 
-if(empty($errors)){
+if (empty($errors)) {
 
 $email_body = <<<EndBody
 Contact Sent
