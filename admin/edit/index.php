@@ -140,9 +140,9 @@ if ($action) {          //incase we want to do more than save changes in the fut
                   !empty($edit_user->password) && !empty($edit_user->username);
     	
       if (!$complete) {
-        $sScreenMsg = "Unable to save user: please make sure the user has a username, first name, last name and password.";
+        $sScreenMsg = 'Unable to save user: please make sure the user has a username, first name, last name and password.';
       } elseif ($edit_user->email != '' && !is_email($edit_user->email)) { 
-      	$sScreenMsg = "Unable to save user: email address is not valid.";
+      	$sScreenMsg = 'Unable to save user: email address is not valid.';
       } else {
         //send notification to the screen that the save has occured.
         if ($new_user && !$user_found) {
