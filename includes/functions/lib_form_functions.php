@@ -21,7 +21,7 @@ $form_months = array( 1 => 'January','February','March','April','May','June','Ju
  * @return bool 
  */
 function is_email($email_address) {
-	return (!preg_match('/^(a-zA-Z0-9_-])+([\.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-]+)+/',$email_address));
+	return filter_var($email_address, FILTER_VALIDATE_EMAIL) === false ? false : true;
 }// /is_email()
 
 /**
