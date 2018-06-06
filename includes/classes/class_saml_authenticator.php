@@ -24,7 +24,7 @@ class SAMLAuthenticator extends Authenticator {
 
     $this->_error = NULL;
 
-    $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND password = '" . md5($this->password). "'";
+    $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}'";
 
     return $this->initialise($sql);
 
