@@ -19,7 +19,7 @@ class Role {
   /**
    *  CONSTRUCTOR for the role
   */
-  function Role() {
+  function __construct() {
     $this->id = null;
     $this->name = '';
     $this->desc = '';

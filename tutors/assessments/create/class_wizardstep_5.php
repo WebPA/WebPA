@@ -21,7 +21,7 @@ class WizardStep5 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep5(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';

@@ -38,7 +38,7 @@ class GroupCollection {
   /**
   * CONSTRUCTOR for the Group collection function
   */
-  function GroupCollection(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
     $this->_created_on = time();
     $this->_groups = null;

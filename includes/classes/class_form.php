@@ -41,7 +41,7 @@ class Form {
   *
   * @param mixed $DAO
   */
-  function Form(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
   }// /->Form()
 

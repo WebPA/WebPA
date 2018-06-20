@@ -32,7 +32,7 @@ class User {
   * @param string $username
   * @param string $passsword
   */
-  function User($username = null, $password = null) {
+  function __construct($username = null, $password = null) {
     $this->username = $username;
     $this->source_id = '';
     $this->password = $password;

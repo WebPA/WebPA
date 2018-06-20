@@ -35,7 +35,7 @@ class NewAlgorithm extends WebPAAlgorithm {
   /*
   * CONSTRUCTOR
   */
-  function NewAlgorithm() {
+  function __construct() {
     WebPAAlgorithm::_init();
   }// /->NewAlgorithm()
 

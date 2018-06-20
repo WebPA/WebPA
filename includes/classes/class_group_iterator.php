@@ -29,7 +29,7 @@ class GroupIterator extends SimpleObjectIterator {
   * @param object $DAO
   * @param object $collection
   */
-  function GroupIterator($groups, &$DAO, &$collection) {
+  function __construct($groups, &$DAO, &$collection) {
     $this->_initialise($groups);
     $this->_DAO =& $DAO;
     $this->_collection =& $collection;

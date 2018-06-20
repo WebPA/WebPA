@@ -39,7 +39,7 @@ class ResultHandler {
   * CONSTRUCTOR for the result handler
   * @param mixed $DAO
   */
-  function ResultHandler(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
   }// /->ResultHandler()
 

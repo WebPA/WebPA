@@ -35,7 +35,7 @@ class Group {
   /**
   * CONSTRUCTOR for group
   */
-  function Group() {
+  function __construct() {
     $this->_collection = null;
     $this->_members = null;
   }// /->Group()

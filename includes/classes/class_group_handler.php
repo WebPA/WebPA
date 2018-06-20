@@ -24,7 +24,7 @@ class GroupHandler {
   /**
   * CONSTRUCTOR
   */
-  function GroupHandler() {
+  function __construct() {
     $this->_DAO = new DAO(APP__DB_HOST,APP__DB_USERNAME,APP__DB_PASSWORD,APP__DB_DATABASE);
   }// /->GroupHandler()
 

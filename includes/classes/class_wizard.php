@@ -44,7 +44,7 @@ class Wizard {
   * CONSTRUCTOR for the wizard class
   * @param string $name
   */
-  function Wizard($name) {
+  function __construct($name) {
     $this->name = $name;
     $this->_page_url = $_SERVER["PHP_SELF"];
 
