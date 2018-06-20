@@ -29,7 +29,7 @@ class SimpleFileIterator extends SimpleIterator /* implements abstract_SimpleIte
    *  CONSTRUCTOR for the simple file iterator
    * @param string $dir
   */
-  function SimpleFileIterator($dir) {
+  function __construct($dir) {
     $dir_list = array();
     if ($handle = opendir($dir)) {
       while ($filename = readdir($handle)) { if (preg_match('#^\.#',$filename)==0) $dir_list[] = $filename; }

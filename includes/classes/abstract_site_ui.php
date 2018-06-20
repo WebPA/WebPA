@@ -15,7 +15,7 @@ class Site_UI {
 /**
  * Constructor for the site user interface
  */
-  function Site_UI() { }// /CONSTRUCTOR ->Site_UI()
+  function __construct() { }// /CONSTRUCTOR ->Site_UI()
 
 /**
  * Function to dictate the header expire

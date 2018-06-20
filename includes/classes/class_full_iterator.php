@@ -26,7 +26,7 @@ class Full_Iterator /* implements abstract_FullIterator */ {
    *  CONSTRUCTOR for the class full interator
    * @param array $array
   */
-  function Full_Iterator(&$array) {
+  function __construct(&$array) {
     // sub-classes can override the creator, so all the work is done in _initialize()
     $this->_initialize($array);
   }// /->Full_Iterator()

@@ -32,7 +32,7 @@ class Authenticator {
   /**
    *  CONSTRUCTOR for the Authenticator class
    */
-  function Authenticator($username = NULL, $password = NULL) {
+  function __construct($username = NULL, $password = NULL) {
     $this->username = $username;
     $this->password = $password;
   }// /->Authenticator()

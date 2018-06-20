@@ -39,7 +39,7 @@ class UI {
   * CONSTRUCTOR for the UI
   * @param string $_user
   */
-  function UI( $_user = null) {
+  function __construct( $_user = null) {
 
     global $CIS, $INSTALLED_MODS, $_source_id;
 

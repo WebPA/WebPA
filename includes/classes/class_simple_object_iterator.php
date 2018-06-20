@@ -35,7 +35,7 @@ class SimpleObjectIterator {
   * @param string $class_name
   * @param string $constructor_args
   */
-  function SimpleObjectIterator(&$array, $class_name = '', $constructor_args = '') {
+  function __construct(&$array, $class_name = '', $constructor_args = '') {
     $this->_initialise($array);
     $this->class_name = $class_name;
     $this->class_constructor_args = $constructor_args;

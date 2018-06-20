@@ -37,7 +37,7 @@ class FormRenderer {
   /*
   * CONSTRUCTOR
   */
-  function FormRenderer() {
+  function __construct() {
   }// /->FormRenderer()
 
 /*

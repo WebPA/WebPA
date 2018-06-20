@@ -34,7 +34,7 @@ class WebPAAlgorithm {
   /**
   * CONSTRUCTOR
   */
-  function WebPAAlgorithm() {
+  function __construct() {
     $this->_init();
   }// /->WebPAAlgorithm()
 

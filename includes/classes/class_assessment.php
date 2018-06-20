@@ -47,7 +47,7 @@ class Assessment {
   *
   * @param string $DAO
   */
-  function Assessment(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
     $this->_locked = null;
   }// /->Assessment()

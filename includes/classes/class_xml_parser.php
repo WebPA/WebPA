@@ -60,7 +60,7 @@ class XMLParser {
   /**
   * CONSTRUCTOR for the XML parser
   */
-  function XMLParser() {
+  function __construct() {
     $this->_init();
   }// /XMLParser()
 

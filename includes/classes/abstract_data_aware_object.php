@@ -20,7 +20,7 @@ class DataAwareObject {
   * CONSTRUCTOR for the DataAwareObject
   * @param object $DAO
   */
-  function DataAwareObject(&$DAO) {
+  function __construct(&$DAO) {
     $this->DAO =& $DAO;
   }// /->DataAwareObject()
 

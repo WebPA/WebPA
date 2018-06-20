@@ -88,7 +88,7 @@ abstract class Algorithm {
    *
    * @return  Algorithm
    */
-  public function Algorithm() {
+  public function __construct() {
   }// /->Algorithm()
 
 
