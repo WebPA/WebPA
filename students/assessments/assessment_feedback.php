@@ -266,7 +266,7 @@ if ( (!$assessment) || (!$group_names) ) {
           $element = $form->get_question($returned_min[0]);
           $range = $element['range']['_data'];
           //split the string up
-          $split_range = split('-',$range);
+          $split_range = explode('-',$range);
           //calculate the median
           $median = round(($split_range[0]+$split_range[1])/2);
 
@@ -288,7 +288,7 @@ if ( (!$assessment) || (!$group_names) ) {
         $element = $form->get_question($returned_min[0]);
         $range = $element['range']['_data'];
         //split the string up
-        $split_range = split('-',$range);
+        $split_range = explode('-',$range);
         //calculate the median
         $median = round(($split_range[0]+$split_range[1])/2);
 
