@@ -26,7 +26,7 @@ class Module {
   * @param string $code
   * @param string $title
   */
-  function Module($module_code = null, $module_title = null) {
+  function __construct($module_code = null, $module_title = null) {
     $this->module_code = $module_code;
     $this->module_title = $module_title;
     $this->module_id = null;

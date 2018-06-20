@@ -33,7 +33,7 @@ class Email {
   /**
   * CONSTRUCTOR for the email class
   */
-  function Email() {
+  function __construct() {
     $this->_init();
   } // /->Email()
 
