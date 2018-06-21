@@ -96,27 +96,23 @@ class DAO {
       }
 
       if ($this->_debug) {
-        $this->_conn = $func($this->_host, $this->_user, $this->_password, $new_link);
-        $db_selected = mysqli_select_db($this->_database, $this->_conn);
+        $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
-        if (!$db_selected) {
+        if (!$this->_conn) {
           die ('Can\'t use database due to  : ' .mysqli_errno(). " -  " . mysqli_error());
           return false;
-        }else{
-          return true;
         }
+
+        return true;
       } else {
-        $this->_conn = $func($this->_host, $this->_user, $this->_password, $new_link);
+        $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
-        $db_selected = mysqli_select_db($this->_database, $this->_conn);
-
-        if (!$db_selected) {
+        if (!$this->_conn) {
           die ('Can\'t use database due to  : ' .mysqli_errno(). " -  " . mysqli_error());
           return false;
-        }else{
-          return true;
         }
 
+        return true;
       }
 
     }
