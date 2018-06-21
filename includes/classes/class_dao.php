@@ -546,12 +546,10 @@ class DAO {
       $this->_num_cols = mysqli_num_fields($this->_result_set);
 
       // Store column names as an array
-      $i=0;
       $this->_result_cols = array();
-      while ($i < $this->_num_cols) {
-        $field = @mysqli_fetch_field($this->_result_set,$i);
+
+      while ($field = @mysqli_fetch_field($this->_result_set)) {
         $this->_result_cols[] = $field->name;
-        $i++;
       }
 
       // Store the results as an array of row objects
