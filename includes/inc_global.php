@@ -10,9 +10,6 @@
  *
  */
 
-// Turn off warning about possible session & globals compatibility problem
-ini_set('session.bug_compat_warn', 0);
-
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
 
