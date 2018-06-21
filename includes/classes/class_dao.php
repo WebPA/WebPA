@@ -515,7 +515,7 @@ class DAO {
    * @param string $str
    * @return string
    */
-  function escape_str($str) { return mysqli_real_escape_string(stripslashes($str)); }
+  function escape_str($str) { return mysqli_real_escape_string($this->_conn, stripslashes($str)); }
 
 /*
 * ================================================================================
