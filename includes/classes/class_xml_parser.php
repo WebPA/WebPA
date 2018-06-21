@@ -135,7 +135,7 @@ class XMLParser {
       echo("<?xml version=\"1.0\" ?>\n");
     }
 
-    while(list($key, $value) = each($data)) {
+    foreach ($data as $key => $value) {
       $key = (string) $key;
       // If the array key is NOT attributes or data, then it might be more tags (if it is attributes/data, just ignore it)
       if ( ($key!='_attributes') && ($key!='_data') ) {
@@ -152,7 +152,7 @@ class XMLParser {
 
           // If the tag has attributes, show them
           if ( (in_array('_attributes', $sub_array)) && (!empty($value['_attributes'])) ) {
-            while(list($attr_name, $attr_value) = each($value['_attributes'])) {
+	    foreach ($value['_attributes'] as $attr_name => $attr_value) {
               echo(' '.$attr_name.'="'.htmlspecialchars($attr_value).'"');
             }
             reset($data[$key]["_attributes"]);
