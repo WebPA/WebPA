@@ -117,7 +117,7 @@ function array_sort_2D($array, $key) {
   }
   asort ($sort_values);
   reset ($sort_values);
-  foreach ($sort_values as $arr_key, $arr_val) {
+  foreach ($sort_values as $arr_key => $arr_val) {
          $sorted_arr[] = $array[$arr_key];
   }
   return $sorted_arr;
