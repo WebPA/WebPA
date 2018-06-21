@@ -48,7 +48,7 @@ class DAO {
                     // 'ARRAY_N': Numeric Array : $results[row][col]
                     // 'ARRAY_B': Assoc + Numeric Array : use $results[row]['field'] or $results[row][col]
 
-  private $_output_type_int = MYSQL_ASSOC;  // MYSQL_ASSOC, MYSQL_BOTH, MYSQL_NUM
+  private $_output_type_int = MYSQLI_ASSOC;  // MYSQLI_ASSOC, MYSQLI_BOTH, MYSQLI_NUM
 
   private $_insert_id = null;     // Last inserted id (on auto-increment columns)
 
