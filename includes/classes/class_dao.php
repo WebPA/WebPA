@@ -90,9 +90,9 @@ class DAO {
   function open($new_link = true) {
     if (is_null($this->_conn)) {
       if ($this->_persistent) {
-        $func = 'mysql_pconnect';
+        $func = 'mysqli_pconnect';
       } else {
-        $func = 'mysql_connect';
+        $func = 'mysqli_connect';
       }
 
       if ($this->_debug) {
