@@ -153,9 +153,9 @@ class DAO {
     $this->_last_sql = trim( $sql );  // Save query
 
     if ($this->_debug) {
-      $this->_result_set = mysqli_query($sql, $this->_conn) or $this->_throw_error('Executing SQL');
+      $this->_result_set = mysqli_query($this->_conn, $sql) or $this->_throw_error('Executing SQL');
     } else {
-      $this->_result_set = @mysqli_query($sql, $this->_conn);
+      $this->_result_set = @mysqli_query($this->_conn, $sql);
     }
 
     if ($this->_result_set) {
