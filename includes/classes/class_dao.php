@@ -487,19 +487,19 @@ class DAO {
   function set_output($output = 'ARRAY_A') {
     switch ($output) {
       case 'ARRAY_A'  :
-            $this->_output_type_int = MYSQL_ASSOC;
+            $this->_output_type_int = MYSQLI_ASSOC;
             $this->_output_type = $output;
             return true;
             break;
       // ----------------------------------------
       case 'ARRAY_B'  :
-            $this->_output_type_int = MYSQL_BOTH;
+            $this->_output_type_int = MYSQLI_BOTH;
             $this->_output_type = $output;
             return true;
             break;
       // ----------------------------------------
       case 'ARRAY_N'  :
-            $this->_output_type_int = MYSQL_NUM;
+            $this->_output_type_int = MYSQLI_NUM;
             $this->_output_type = $output;
             return true;
             break;
