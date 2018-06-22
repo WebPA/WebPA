@@ -26,3 +26,13 @@ Installation Guide
 		 - change the password to something more secure after logging in
 		 
 *  Delete the "install" folder when you're finished.
+
+## Database Migrations
+
+Webpa uses the [Phinx](https://phinx.org/) migrations tool to update the database scheme.  After installing or updating the application you should do the following to make sure that the database schema is up to date:
+
+1. rename `phinx.yml.defaults` to `phinx.yml`
+2. edit `phinx.yml` to set the database details for a database user with rights to alter the database.
+3. If [Composer](https://getcomposer.org) is not already installed on the server run `curl -s https://getcomposer.org/installer | php` (look at the composer website for instructions on installing composer on different machines if this doesn't work for you). 
+4. Run `php composer.phar install` to install Phinx.
+5. Run `vendor/bin/phinx migrate` to update the database.

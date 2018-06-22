@@ -132,7 +132,7 @@ CREATE TABLE pa2_user_module (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE pa2_user_reset_request (
-  id tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
   `hash` varchar(32) NOT NULL,
   user_id int(10) unsigned NOT NULL,
   PRIMARY KEY (id)
