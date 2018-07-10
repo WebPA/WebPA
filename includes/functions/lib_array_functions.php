@@ -189,40 +189,4 @@ function count_nonblank($arr) {
     return $element_count;
   }
 }
-
-/**
- * Multi sort a multi array
- *
- * @param array $array The array that is to be sorted
- * @param array $sort The sort order for the array to be sorted to
- *
- */
-function sort_multi_array(&$array, $sort = array()) {
-    $function = '';
-    
-    foreach (array_keys($sort) as $key) {
-      if (isset($sort[$key]['case']) && ($sort[$key]['case'] == TRUE)) {
-        $function .= 'if (strtolower($a["' . $sort[$key]['name'] . '"])<>strtolower($b["' . $sort[$key]['name'] . '"])) { return (strtolower($a["' . $sort[$key]['name'] . '"]) ';
-      } else {
-        $function .= 'if ($a["' . $sort[$key]['name'] . '"]<>$b["' . $sort[$key]['name'] . '"]) { return ($a["' . $sort[$key]['name'] . '"] ';
-      }
-      
-      if (isset($sort[$key]['sort']) && ($sort[$key]['sort'] == "DESC")) {
-        $function .= '<';
-      } else {
-        $function .= '>';
-      }
-
-      if (isset($sort[$key]['case']) && ($sort[$key]['case'] == TRUE)) {
-        $function .= ' strtolower($b["' . $sort[$key]['name'] . '"])) ? 1 : -1; } else';
-      } else {
-        $function .= ' $b["' . $sort[$key]['name'] . '"]) ? 1 : -1; } else';
-      }
-    }
-
-    $function .= ' { return 0; }';
-
-    usort($array, create_function('$a, $b', $function));
-}
-
 ?>
