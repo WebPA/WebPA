@@ -42,7 +42,7 @@ class DAO {
   private $_result_cols = null;   // Array of columns for the result set
 
   private $_last_sql = null;      // Last query run
-  private $_result = null;      // Query results, as array of row objects
+  private $_result = [];      // Query results, as array of row objects
 
   private $_output_type = 'ARRAY_A';  // 'ARRAY_A': Associative Array : $results[row]['field']
                     // 'ARRAY_N': Numeric Array : $results[row][col]
@@ -135,7 +135,7 @@ class DAO {
    * Clear results and reset result vars
    */
   function flush() {
-    $this->_result = null;
+    $this->_result = [];
     $this->_num_rows = null;
     $this->_num_affected = null;
     $this->_insert_id = null;
