@@ -99,7 +99,8 @@ class DAO {
         $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
         if (!$this->_conn) {
-          die ('Can\'t use database due to  : ' .mysqli_errno(). " -  " . mysqli_error());
+          die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
+
           return false;
         }
 
@@ -108,7 +109,8 @@ class DAO {
         $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
         if (!$this->_conn) {
-          die ('Can\'t use database due to  : ' .mysqli_errno(). " -  " . mysqli_error());
+          die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
+
           return false;
         }
 
