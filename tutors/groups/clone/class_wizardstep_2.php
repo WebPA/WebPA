@@ -47,7 +47,7 @@ HTMLEnd;
     $group_handler = $this->wizard->get_var('group_handler');
     $collection = $group_handler->get_collection($this->wizard->get_field('collection_id'));
 
-    if (is_empty($this->wizard->get_field('collection_name'))) {
+    if (empty($this->wizard->get_field('collection_name'))) {
       $this->wizard->set_field('collection_name', $collection->name);
     }
 ?>
@@ -71,7 +71,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('collection_name',fetch_POST('collection_name'));
-    if (is_empty($this->wizard->get_field('collection_name'))) { $errors[] = 'You must provide a name for your new collection of groups'; }
+    if (empty($this->wizard->get_field('collection_name'))) { $errors[] = 'You must provide a name for your new collection of groups'; }
 
     return $errors;
   }// /->process_form()

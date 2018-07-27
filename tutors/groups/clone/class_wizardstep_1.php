@@ -90,7 +90,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
-    if (is_empty($this->wizard->get_field('collection_id'))) {
+    if (empty($this->wizard->get_field('collection_id'))) {
       $errors[] = 'You must select a collection of groups to clone.';
     }
 

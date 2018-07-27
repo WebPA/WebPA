@@ -103,7 +103,7 @@ class WizardStep3 {
     $errors = null;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
-    if (is_empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
+    if (empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
 
     return $errors;
   }// /->process_form()

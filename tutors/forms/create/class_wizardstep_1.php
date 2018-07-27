@@ -88,10 +88,10 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('form_name',fetch_POST('form_name'));
-    if (is_empty($this->wizard->get_field('form_name'))) { $errors[] = 'You must provide a name for your new assessment form'; }
+    if (empty($this->wizard->get_field('form_name'))) { $errors[] = 'You must provide a name for your new assessment form'; }
 
     $this->wizard->set_field('form_modules',fetch_POST('form_modules'));
-    if (is_empty($this->wizard->get_field('form_modules'))) { $errors[] = 'You must select at least one module'; }
+    if (empty($this->wizard->get_field('form_modules'))) { $errors[] = 'You must select at least one module'; }
 
     $this->wizard->set_field('form_type',fetch_POST('form_type'));
 

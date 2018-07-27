@@ -85,18 +85,6 @@ function check_bits($bits = 0, $want_bits = 0, $must_have_all = false) {
 } // /check_bits()
 
 /**
- * Wrapper for empty()
- * Enables use of empty() on methods and variable-functions
- *
- * @param var $var
- *
- * @return bool
- */
-function is_empty(&$var) {
-  return empty($var);
-}// /is_empty()
-
-/**
  * Generate a UUID formatted Unique Identifier (ABCDEFGH-IJKL-MNOP-QRST-UVWXYZ123456)
  * NOTE - This does not use the UUID algorithm
  *

@@ -76,7 +76,7 @@ class WizardStep2 {
     $errors = null;
 
     $this->wizard->set_field('clone_form_name',fetch_POST('clone_form_name'));
-    if (is_empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
+    if (empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
 
     return $errors;
   }// /->process_form()

@@ -119,10 +119,10 @@ HTMLEnd;
 
     if ($this->wizard->get_field('num_groups')>0) {
       $this->wizard->set_field('group_name_stub', trim( fetch_POST('group_name_stub') ) );
-      if (is_empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
+      if (empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
 
       $this->wizard->set_field('group_numbering', fetch_POST('group_numbering'));
-      if (is_empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
+      if (empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
     }
 
     return $errors;

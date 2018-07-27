@@ -96,7 +96,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('question_text',fetch_POST('question_text'));
-    if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
+    if (empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
 
     $this->wizard->set_field('question_desc',fetch_POST('question_desc'));
 

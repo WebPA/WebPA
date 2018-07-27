@@ -63,7 +63,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('collection_name', fetch_POST('collection_name'));
-    if (is_empty($this->wizard->get_field('collection_name'))) {
+    if (empty($this->wizard->get_field('collection_name'))) {
       $errors[] = 'You must provide a name for your new collection of groups';
     }
 

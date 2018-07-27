@@ -185,12 +185,12 @@ class WizardStep2 {
     }
 
     $this->wizard->set_field('email_subject', fetch_POST('email_subject'));
-    if (is_empty($this->wizard->get_field('email_subject'))) {
+    if (empty($this->wizard->get_field('email_subject'))) {
       $errors[] = 'You must enter a subject for this email.';
     }
 
     $this->wizard->set_field('email_text', fetch_POST('email_text'));
-    if (is_empty($this->wizard->get_field('email_text'))) {
+    if (empty($this->wizard->get_field('email_text'))) {
       $errors[] = 'You must enter the text of this email.';
     }
 

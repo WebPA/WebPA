@@ -64,7 +64,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('send_to',fetch_POST('send_to'));
-    if (is_empty($this->wizard->get_field('send_to'))) { $errors[] = 'You must select who to send this email to.'; }
+    if (empty($this->wizard->get_field('send_to'))) { $errors[] = 'You must select who to send this email to.'; }
 
     return $errors;
   }// /->process_form()

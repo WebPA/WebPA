@@ -83,7 +83,7 @@ class WizardStep5 {
 <?php
     }
 
-    if (!is_empty($this->wizard->get_field('introduction'))) {
+    if (!empty($this->wizard->get_field('introduction'))) {
       echo('<tr><td colspan="2" style="font-weight: bold;">Includes an introduction</td></tr>');
     }
 

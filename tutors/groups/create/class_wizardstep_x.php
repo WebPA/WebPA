@@ -99,7 +99,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('module_id',fetch_POST('module_id'));
-    if (is_empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
+    if (empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
 
     return $errors;
   }// /->process_form()

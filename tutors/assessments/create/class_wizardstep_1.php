@@ -220,7 +220,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('assessment_name', fetch_POST('assessment_name'));
-    if (is_empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
+    if (empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
 
 
     // open_date

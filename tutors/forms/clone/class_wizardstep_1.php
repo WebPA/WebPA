@@ -100,7 +100,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('form_id',fetch_POST('form_id'));
-    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select which assessment form you wish to clone.'; }
+    if (empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select which assessment form you wish to clone.'; }
 
     return $errors;
   }// /->process_form()
