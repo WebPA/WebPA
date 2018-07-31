@@ -72,6 +72,8 @@ Documentation for WebPA can be found on the [WebPA project site](http://webpapro
 
 Please see our [changelog](https://github.com/WebPA/WebPA/blob/master/CHANGELOG.md) for a list of updates for this system.
 
+This project uses [semantic versioning](https://semver.org/) from version 3.0.0 onwards.
+
 ## Contributing
 
 We always welcome contributors to WebPA. If you can help with development, testing, or documentation, please submit a pull request to this repository.
