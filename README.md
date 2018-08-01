@@ -27,7 +27,7 @@ The easiest way to download WebPA is with the [composer package manager](https:/
 command:
 
 ```
-composer require webpa/webpa
+composer create-project webpa/webpa webpa
 ```
 
 Alternatively you can download the latest release from this repository's [release page](https://github.com/WebPA/WebPA/releases).
