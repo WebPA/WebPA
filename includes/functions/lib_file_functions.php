@@ -1,20 +1,19 @@
 <?php
 /**
- * 
  * Class UI - Site user interface
- *  
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * 
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
- 
+
 /**
  * Get a list of files/folders in the given directory
- * 
+ *
  * @param dir $dir
- * 
- * @return array 
+ *
+ * @return array
  */
 function dir_list($dir) {
   $dir_list = array();

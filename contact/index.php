@@ -1,14 +1,13 @@
 <?php
 /**
- * 
  * Contact Us
- * 
+ *
  * This is the form that the user fills in which is processed and emailed in the contact_send.php
- * 
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.9
- * 
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../includes/inc_global.php");
@@ -21,10 +20,10 @@ check_user($_user);
 $contact_type = fetch_GET('q');
 
 // Begin Page
- 
+
 $UI->page_title = APP__NAME . ' Contact';
 $UI->menu_selected = 'contact';
-$UI->help_link = '?q=node/379#intool';	
+$UI->help_link = '?q=node/379#intool';
 $UI->breadcrumbs = array	('home'		=> '../' ,
 							 'contact'	=> null ,);
 
@@ -47,13 +46,13 @@ $UI->content_start();
 
 ?>
 	<p>If you want to report a problem or bug with any part of the WebPA system, have a technical query, or just need to ask a specific question regarding WebPA, please complete the form below.</p>
-		
+
 	<div class="content_box">
 		<p>Please supply as much information with your message as possible (especially when sending a bug report!), this will allow us to respond to your message much faster!</p>
-	
+
 		<form action="contact_send.php" method="post" name="contact_form">
 		<input type="hidden" name="contact_app" value="<?php echo($_config['app_id']); ?>" />
-		
+
 		<div class="form_section">
 			<table class="form" cellpadding="2" cellspacing="2">
 			<tr>
@@ -83,7 +82,7 @@ $UI->content_start();
 													 'bug'		=> 'Bug / Error report' ,
 													 'wish'		=> 'Suggestion / Wish List' ,
 													 'misc'		=> 'Other type of message' ,);
-																			
+
 							render_options($contact_types, $contact_type);
 						?>
 					</select>
@@ -95,10 +94,10 @@ $UI->content_start();
 			</tr>
 			</table>
 		</div>
-		
+
 		<div class="button_bar">
 			<input type="reset" name="resetbutton" id="resetbutton" value="reset form" />
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<input type="button" name="sendbutton" id="sendbutton" value="send message" onclick="do_send()" />
 		</div>
 		</form>

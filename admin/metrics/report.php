@@ -1,17 +1,15 @@
 <?php
 /**
- *
  * General usage report
  *
  * This page will supply a general report that provides information
  * on the usage of WebPA over the istalled period as well as over the current
  * academic year.
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 24 Jul 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

@@ -1,14 +1,13 @@
 <?php
 /**
- *
  * Class : Module
  *
  * This is a lightweight module class and does not contain the database access stuff
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.1.0
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('class_group_handler.php');

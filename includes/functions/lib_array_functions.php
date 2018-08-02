@@ -1,18 +1,11 @@
 <?php
-
 /**
- *
  * Array Functions
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
- *
- * Updates
- *
- * 18-07-2007  : Error checking in array_extract_column()
+ * @link https://github.com/webpa/webpa
  */
 
 

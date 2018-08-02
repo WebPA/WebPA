@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * class Full_Iterator
  *
  * Fully featured, heavy-duty ArrayIterator - Use the simpler iterator for most things!
  * Not much error checking to keep the class light
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class Full_Iterator /* implements abstract_FullIterator */ {

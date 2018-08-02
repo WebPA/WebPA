@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * Login page
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.1
- *
- * + Added a link to /accounts/reset.php ('Forgotten your password?')
+ * Added a link to /accounts/reset.php ('Forgotten your password?')
  * made by Morgan Harris [morgan@snowproject.net] as of 15/10/09
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("includes/inc_global.php");

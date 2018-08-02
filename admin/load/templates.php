@@ -1,15 +1,13 @@
 <?php
 /**
- *
  * Short Description of the file
  *
  * Long Description of the file (if any)...
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 5 Aug 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../includes/inc_global.php");

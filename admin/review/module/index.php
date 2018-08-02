@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * View module information
  *
  * This page allows the user to see the module information that is held in the database
  * The page includes the generic code page to out put the data.
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.2
- * @since 21 May 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

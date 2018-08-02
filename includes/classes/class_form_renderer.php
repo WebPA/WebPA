@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class :  FormRenderer
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.1.0.0
- * @since 26/09/2005
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 function & rel4($struc, &$file) {

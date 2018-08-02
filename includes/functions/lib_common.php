@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Library of common functions
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
 

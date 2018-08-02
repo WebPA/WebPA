@@ -1,21 +1,15 @@
 <?php
 /**
- *
- *  Class : SimpleObjectIterator
+ * Class : SimpleObjectIterator
  *
  * Simple version of an Array Object Iterator
  * Objects being iterated MUST support ->load_from_row() method
  * Not much error checking to keep the class light
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * @since 24-06-2005
- *
- * Updates:
- * 24-06-05 : Fixed a bug when trying to iterate a non-array
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class SimpleObjectIterator {

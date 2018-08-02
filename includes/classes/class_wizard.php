@@ -1,16 +1,13 @@
 <?php
 /**
- *
  * Class :  Wizard
  *
  * Includes the form-functions library in case a page needs it
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 5-6-2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class Wizard {

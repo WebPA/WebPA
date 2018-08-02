@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Global configuration file for WebPA
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.4
- * @since 2006
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 // Set the correct timezone for your server.

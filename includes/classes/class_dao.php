@@ -1,29 +1,13 @@
 <?php
 /**
- *
  * Class : DAO
  *
  * This data access object is designed for MySQL only
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.5.0.0
- *
- * Updates:
- * 18-07-2007   : improved ->_throw_error() code
- * 13-07-2005 : added ->build_set() method - returns a string containing an SQL set
- * 12-07-2005 : added ->get_num_cols() method - returns the number of column names
- * 12-07-2005 : added ->get_cols() method - returns an array of column names
- * 16-06-2005 : fixed a bug when using NULL values in do_insert/do_update
- * 14-06-2005 : added $new_link parameter to ->open() method
- * 13-06-2005 : added ->do_insert_multi() method for adding multiple rows in one statement
- * 09-06-2005 : fixed potential insert-id bug
- * 15-10-2004 : new ->fetch_assoc() method - gets the query as an associative array
- *          of the form:  array ( row1.field1 => row1.field2, ... )
- * 31-09-2004 : Fixed multi-database usage (stops connection clashing)
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class DAO {

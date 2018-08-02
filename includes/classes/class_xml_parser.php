@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Class  : XMLParser
  *
  * Creates the following general array structure for each element
@@ -29,17 +28,10 @@
  * etc...
  * </code>
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * @since 02-11-2004
- *
- *
- * Updates:
- * 04-11-02 : Now handles all elements/attributes/data combinations properly (I hope)
- * 05-10-26 : Improved handling of <![CDATA[  ]]> sections
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class XMLParser {

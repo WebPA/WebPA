@@ -1,12 +1,11 @@
 <?php
 /**
- * 
- *  Datetime handling functions
- * 		
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * 
+ * Datetime handling functions
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 
 /*
@@ -16,7 +15,7 @@
  * If the time difference is negative (start date is after end date) then the result will be prefixed with '-'.
  *
  * @param  datetime  $start_date  The starting date
- * @param  datetime  $end_date  The end date 
+ * @param  datetime  $end_date  The end date
  *
  * @return  string  String representation of the time difference
  */
@@ -40,11 +39,11 @@ function time_diff($start_date, $end_date) {
 
 	// Calculate seconds difference
 	$seconds = $remainder;
-    
+
 	// Put leading zeros on minutes and seconds (if required)
 	if ($minutes<=9) { $minutes = '0' . $minutes; }
 	if ($seconds<=9) { $seconds = '0' . $seconds; }
-  
+
 	// Return difference
 	if ($hours>0) {
 		return "$hours:$minutes:$seconds";
