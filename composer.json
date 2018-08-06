@@ -24,6 +24,12 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "php": ">=7.0.0",
+        "ext-xml": "*",
+        "ext-session": "*",
+        "ext-mysqli": "*"
+    },
     "support": {
         "email": "andrew@noexceptions.io",
         "issues": "https://github.com/webpa/webpa/issues",
