@@ -1,17 +1,12 @@
 <?php
 /**
- *
  * Global configuration file for WebPA
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.4
- * @since 2006
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
-
-// Turn off warning about possible session & globals compatibility problem
-ini_set('session.bug_compat_warn', 0);
 
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
@@ -82,6 +77,8 @@ define('LDAP__PORT', 3268);
 define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
 define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
 define('LDAP__FILTER', 'name={username}*');
+define('LDAP__BINDRDN', '');
+define('LDAP__PASSWD', '');
 $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 // Name of attribute to use to check user type (via function below)
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
@@ -104,7 +101,7 @@ $INSTALLED_MODS = array();
 define('APP__NAME', 'WebPA OS');
 define('APP__TITLE', 'WebPA OS : Online Peer Assessment System');
 define('APP__ID', 'webpa');
-define('APP__VERSION', '2.0.0.10');
+define('APP__VERSION', '3.0.0');
 define('APP__DESCRIPTION','WebPA, an Open source, online peer assessment system.');
 define('APP__KEYWORDS','peer assessment, online, peer, assessment, tools, open source');
 

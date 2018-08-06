@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * INDEX - Student index
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../includes/inc_global.php");
@@ -74,7 +72,7 @@ if ($assessments) {
     if ( (is_array($assessments_with_response)) && (in_array($assessment['assessment_id'], $assessments_with_response)) ) {
       $finished_assessments[] = $assessment;
     } else {
-      $now = mktime();
+      $now = time();
       $open_date = strtotime($assessment['open_date']);
       $close_date = strtotime($assessment['close_date']);
 

@@ -1,14 +1,11 @@
 <?php
 /**
- *
  * Take an assessment
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");
@@ -117,7 +114,7 @@ if (($command) && ($assessment)) {
   switch ($command) {
     case 'save':
       // Check date/time of submission
-      $now = mktime();
+      $now = time();
       if ($now>$assessment->close_date) {
         $errors[] = 'You were too late in submitting your answers, the assessment is now closed.';
       } else {
@@ -226,7 +223,7 @@ if (($command) && ($assessment)) {
                                    'user_id'        =>  $_user->id,
                                    'marked_user_id'   =>  $id,
                                    'justification_text' =>  $justification_fetch,
-                                   'date_marked'      =>  date(MYSQL_DATETIME_FORMAT,mktime()),);
+                                   'date_marked'      =>  date(MYSQL_DATETIME_FORMAT,time()),);
                 }
               }
             }
@@ -239,7 +236,7 @@ if (($command) && ($assessment)) {
       // If there were no errors, save the changes
       if (!$errors) {
         // Save the results
-        $now = date(MYSQL_DATETIME_FORMAT,mktime());
+        $now = date(MYSQL_DATETIME_FORMAT,time());
 
         // Get IP and Computer name of the student saving the marks
         $ip_address = fetch_SERVER('REMOTE_ADDR','');
@@ -356,7 +353,7 @@ if (!$assessment) {
 ?>
   <form action="index.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
   <input type="hidden" name="command" value="none" />
-  <input type="hidden" name="date_opened" value="<?php echo(date(MYSQL_DATETIME_FORMAT,mktime())); ?>" />
+  <input type="hidden" name="date_opened" value="<?php echo(date(MYSQL_DATETIME_FORMAT,time())); ?>" />
 
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">

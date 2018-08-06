@@ -1,13 +1,11 @@
 <?php
 /**
- * 
  *  RTF Functions
  *
- * 			
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * 
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 // define constants for common RTF markup codes
 
@@ -30,7 +28,7 @@ Font Size		:		{\fs32  zzzzz zzzzz  }
 
 /**
  * Write headers for RTF MIME type and RTF download
- * 
+ *
  * @param string $filename	File to download this page as
  */
 function RTF_headers($filename = null) {
@@ -56,5 +54,5 @@ function RTF_start_page() {
 function RTF_end_page() {
 	echo('}');
 }// /RTF_end_page()
-	
+
 ?>

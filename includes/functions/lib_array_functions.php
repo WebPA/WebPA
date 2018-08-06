@@ -1,18 +1,11 @@
 <?php
-
 /**
- *
  * Array Functions
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
- *
- * Updates
- *
- * 18-07-2007  : Error checking in array_extract_column()
+ * @link https://github.com/webpa/webpa
  */
 
 
@@ -117,7 +110,7 @@ function array_sort_2D($array, $key) {
   }
   asort ($sort_values);
   reset ($sort_values);
-  while (list ($arr_key, $arr_val) = each ($sort_values)) {
+  foreach ($sort_values as $arr_key => $arr_val) {
          $sorted_arr[] = $array[$arr_key];
   }
   return $sorted_arr;
@@ -189,35 +182,4 @@ function count_nonblank($arr) {
     return $element_count;
   }
 }
-
-/**
- * Multi sort a multi array
- *
- * @param array $array The array that is to be sorted
- * @param array $sort The sort order for the array to be sorted to
- *
- */
-function sort_multi_array(&$array, $sort = array()) {
-    $function = '';
-    while (list($key) = each($sort)) {
-      if (isset($sort[$key]['case'])&&($sort[$key]['case'] == TRUE)) {
-        $function .= 'if (strtolower($a["' . $sort[$key]['name'] . '"])<>strtolower($b["' . $sort[$key]['name'] . '"])) { return (strtolower($a["' . $sort[$key]['name'] . '"]) ';
-      } else {
-        $function .= 'if ($a["' . $sort[$key]['name'] . '"]<>$b["' . $sort[$key]['name'] . '"]) { return ($a["' . $sort[$key]['name'] . '"] ';
-      }
-      if (isset($sort[$key]['sort'])&&($sort[$key]['sort'] == "DESC")) {
-        $function .= '<';
-      } else {
-        $function .= '>';
-      }
-      if (isset($sort[$key]['case'])&&($sort[$key]['case'] == TRUE)) {
-        $function .= ' strtolower($b["' . $sort[$key]['name'] . '"])) ? 1 : -1; } else';
-      } else {
-        $function .= ' $b["' . $sort[$key]['name'] . '"]) ? 1 : -1; } else';
-      }
-    }
-    $function .= ' { return 0; }';
-    usort($array, create_function('$a, $b', $function));
-  }
-
 ?>

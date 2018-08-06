@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep2  (Clone a form wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep2 {
@@ -19,7 +17,7 @@ class WizardStep2 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep2(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -76,7 +74,7 @@ class WizardStep2 {
     $errors = null;
 
     $this->wizard->set_field('clone_form_name',fetch_POST('clone_form_name'));
-    if (is_empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
+    if (empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
 
     return $errors;
   }// /->process_form()

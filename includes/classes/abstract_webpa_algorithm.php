@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Abstract Class :  WebPAAlgorithm
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.1.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WebPAAlgorithm {
@@ -34,7 +32,7 @@ class WebPAAlgorithm {
   /**
   * CONSTRUCTOR
   */
-  function WebPAAlgorithm() {
+  function __construct() {
     $this->_init();
   }// /->WebPAAlgorithm()
 

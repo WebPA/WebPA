@@ -1,13 +1,11 @@
 <?php
-
 /**
- *
  * Class : WizardStep5  (Create new assessment wizard)
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.1
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");
@@ -21,7 +19,7 @@ class WizardStep5 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep5(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -46,7 +44,7 @@ class WizardStep5 {
     $DB =& $this->wizard->get_var('db');
     $config =& $this->wizard->get_var('config');
 
-    $now = mktime();
+    $now = time();
 
     require_once(DOC__ROOT . 'includes/classes/class_form.php');
     require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
@@ -83,7 +81,7 @@ class WizardStep5 {
 <?php
     }
 
-    if (!is_empty($this->wizard->get_field('introduction'))) {
+    if (!empty($this->wizard->get_field('introduction'))) {
       echo('<tr><td colspan="2" style="font-weight: bold;">Includes an introduction</td></tr>');
     }
 

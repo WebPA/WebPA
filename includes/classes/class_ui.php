@@ -1,15 +1,11 @@
 <?php
 /**
- *
  * Class :  UI
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.2
- * @link http://
- * @since 24/05/2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 //include main global file so that the session can be used
@@ -39,7 +35,7 @@ class UI {
   * CONSTRUCTOR for the UI
   * @param string $_user
   */
-  function UI( $_user = null) {
+  function __construct( $_user = null) {
 
     global $CIS, $INSTALLED_MODS, $_source_id;
 
@@ -125,7 +121,7 @@ class UI {
     if (!$expire_date) { $expire_date = mktime(0,0,1,date('m'),date('d'),date('Y')); }
 
     // If no modified date, modified today
-    if (!$modified_date) { $modified_date = mktime(); }
+    if (!$modified_date) { $modified_date = time(); }
 
     header('Expires: '. gmdate('D, d M Y H:i:s', $expire_date ) .' GMT');
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', $modified_date) .' GMT');
@@ -396,6 +392,7 @@ class UI {
   * Start main page content
   */
   function content_start() {
+    echo('<div id="container">');
     echo('<div id="main">');
     $this->page_bar();
     echo('<div id="content">');
@@ -442,6 +439,8 @@ class UI {
       $this->footer();
     }
 ?>
+<div class="clear"></div>
+</div> <!-- id="container" -->
 </body>
 </html>
 <?php

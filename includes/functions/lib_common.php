@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Library of common functions
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
 
@@ -85,18 +83,6 @@ function check_bits($bits = 0, $want_bits = 0, $must_have_all = false) {
 } // /check_bits()
 
 /**
- * Wrapper for empty()
- * Enables use of empty() on methods and variable-functions
- *
- * @param var $var
- *
- * @return bool
- */
-function is_empty(&$var) {
-  return empty($var);
-}// /is_empty()
-
-/**
  * Generate a UUID formatted Unique Identifier (ABCDEFGH-IJKL-MNOP-QRST-UVWXYZ123456)
  * NOTE - This does not use the UUID algorithm
  *
@@ -117,7 +103,7 @@ function logEvent($description, $module_id = NULL, $object_id = NULL) {
 
   global $DB;
 
-  $now = date(MYSQL_DATETIME_FORMAT,mktime());
+  $now = date(MYSQL_DATETIME_FORMAT,time());
   if (!empty($module_id)) {
     $module_id = intval($module_id);
   }

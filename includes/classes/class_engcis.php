@@ -1,12 +1,11 @@
 <?php
 /**
- *
  * engCIS local version
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 function rel($struc, &$file) {
@@ -33,7 +32,7 @@ class EngCIS {
   /**
   * CONSTRUCTOR
   */
-  function EngCIS() {
+  function __construct() {
     $this->_DAO = new DAO(APP__DB_HOST,APP__DB_USERNAME,APP__DB_PASSWORD,APP__DB_DATABASE);
     $this->_DAO->set_debug(false);
   }// /->EngCIS()
@@ -522,7 +521,7 @@ class EngCIS {
       $years[] = dateToYear(strtotime($dates['first']));
       $years[] = dateToYear(strtotime($dates['last']));
     } else {
-      $years[] = dateToYear(mktime());
+      $years[] = dateToYear(time());
       $years[] = $years[0];
     }
 

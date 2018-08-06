@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * Generic retrieval code
  *
  * Retrieves information from the database on specific information
  * This page is included within other pages, to allow quick reuse
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.5
- * @since 23 Apr 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //build the string for the information to be collected from the database

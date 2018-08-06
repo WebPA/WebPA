@@ -1,19 +1,15 @@
 <?php
 /**
- * Abstract Class :  Algorithm
+ * Algorithm
  *
  * An abstract Algorithm that, as well as performing the appropriate grading calculations,
  * also organises assessment information into suitable formats for report production.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
-
-
-
 require_once(DOC__ROOT . 'includes/classes/class_form.php');
 require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 require_once(DOC__ROOT . 'includes/classes/class_result_handler.php');
@@ -88,7 +84,7 @@ abstract class Algorithm {
    *
    * @return  Algorithm
    */
-  public function Algorithm() {
+  public function __construct() {
   }// /->Algorithm()
 
 
@@ -597,34 +593,35 @@ abstract class Algorithm {
 
     // Process all the student responses
     // Set the correct values for the actual marks awarded, received, etc
+    if(!empty($this->_responses)){
+      foreach($this->_responses as $i => $response) {
 
-    foreach($this->_responses as $i => $response) {
+        $group_id = $response['group_id'];
+        $member_id = $response['user_id'];
+        $marked_user_id = $response['marked_user_id'];
+        $question_id = $response['question_id'];
+        $score = (float) $response['score'];
 
-      $group_id = $response['group_id'];
-      $member_id = $response['user_id'];
-      $marked_user_id = $response['marked_user_id'];
-      $question_id = $response['question_id'];
-      $score = (float) $response['score'];
+        // Record the fact this member submitted
+        if (!in_array($member_id, $this->_actual_submitters)) {
+          $this->_actual_submitters[] = $member_id;
+          $this->_actual_group_submitters[$group_id][] = $member_id;
+        }
 
-      // Record the fact this member submitted
-      if (!in_array($member_id, $this->_actual_submitters)) {
-        $this->_actual_submitters[] = $member_id;
-        $this->_actual_group_submitters[$group_id][] = $member_id;
+        // Re-factor the responses into more usable forms
+        $this->_actual_responses[$group_id][$question_id][$member_id][$marked_user_id] = $score;
+
+        // Keep a running total of the marks
+
+        $this->_actual_marks_awarded[$member_id][$marked_user_id] += $score;
+        $this->_actual_marks_received[$marked_user_id][$member_id] += $score;
+
+        $this->_actual_marks_awarded_by_member_question[$member_id][$question_id] += $score;
+        $this->_actual_marks_received_by_member_question[$marked_user_id][$question_id] += $score;
+
+        $this->_actual_total_marks_awarded[$member_id] += $score;
+        $this->_actual_total_marks_received[$marked_user_id] += $score;
       }
-
-      // Re-factor the responses into more usable forms
-      $this->_actual_responses[$group_id][$question_id][$member_id][$marked_user_id] = $score;
-
-      // Keep a running total of the marks
-
-      $this->_actual_marks_awarded[$member_id][$marked_user_id] += $score;
-      $this->_actual_marks_received[$marked_user_id][$member_id] += $score;
-
-      $this->_actual_marks_awarded_by_member_question[$member_id][$question_id] += $score;
-      $this->_actual_marks_received_by_member_question[$marked_user_id][$question_id] += $score;
-
-      $this->_actual_total_marks_awarded[$member_id] += $score;
-      $this->_actual_total_marks_received[$marked_user_id] += $score;
     }
 
 

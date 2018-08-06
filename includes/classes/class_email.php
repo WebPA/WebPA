@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * Class : Email
  *
  * Doesn't check for SMTP header injections
  * (see http://securephp.damonkohler.com/index.php/Email_Injection)
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * @since 14-09-2005
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 class Email {
@@ -33,7 +31,7 @@ class Email {
   /**
   * CONSTRUCTOR for the email class
   */
-  function Email() {
+  function __construct() {
     $this->_init();
   } // /->Email()
 

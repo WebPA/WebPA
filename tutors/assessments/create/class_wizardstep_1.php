@@ -1,14 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep1  (Create new assessment wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.3
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep1 {
@@ -20,7 +17,7 @@ class WizardStep1 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep1(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
@@ -55,7 +52,7 @@ class WizardStep1 {
 
 
   function form() {
-    $today = mktime();
+    $today = time();
 
     $open_date = $this->wizard->get_field('open_date');
     if (is_null($open_date)) { $open_date = mktime(9, 0, 0); }  // default start time, today @ 9am
@@ -88,7 +85,7 @@ class WizardStep1 {
 
       // Draw year box
       echo("<td><select name=\"{$field_name}_year\">");
-      render_options_range(date('Y',mktime()), date('Y',mktime())+1, 1, date('Y', $selected_datetime));
+      render_options_range(date('Y',time()), date('Y',time())+1, 1, date('Y', $selected_datetime));
       echo('</select></td>');
 
       echo('<th>at</th>');
@@ -220,7 +217,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('assessment_name', fetch_POST('assessment_name'));
-    if (is_empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
+    if (empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
 
 
     // open_date

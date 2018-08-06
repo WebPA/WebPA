@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Report: Individual Student Feedback
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../includes/inc_global.php");
@@ -266,7 +264,7 @@ if ( (!$assessment) || (!$group_names) ) {
           $element = $form->get_question($returned_min[0]);
           $range = $element['range']['_data'];
           //split the string up
-          $split_range = split('-',$range);
+          $split_range = explode('-',$range);
           //calculate the median
           $median = round(($split_range[0]+$split_range[1])/2);
 
@@ -288,7 +286,7 @@ if ( (!$assessment) || (!$group_names) ) {
         $element = $form->get_question($returned_min[0]);
         $range = $element['range']['_data'];
         //split the string up
-        $split_range = split('-',$range);
+        $split_range = explode('-',$range);
         //calculate the median
         $median = round(($split_range[0]+$split_range[1])/2);
 

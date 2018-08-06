@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep2  (Create new assessment wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.5
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");
@@ -21,7 +19,7 @@ class WizardStep2 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep2(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -161,7 +159,7 @@ class WizardStep2 {
     $errors = null;
 
     $this->wizard->set_field('form_id',fetch_POST('form_id'));
-    if (is_empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select a form to use with your new assessment'; }
+    if (empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select a form to use with your new assessment'; }
 
     $this->wizard->set_field('allow_feedback', fetch_POST('allow_feedback'));
     $this->wizard->set_field('feedback_name', fetch_POST('feedback_name'));

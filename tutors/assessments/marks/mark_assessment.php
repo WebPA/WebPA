@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * WIZARD : Create Mark Sheet For Assessment
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");
@@ -114,7 +112,7 @@ if ( ($command) && ($assessment) ) {
         $xml_array['parameters']['grading']['_attributes'] = array ( 'value'  => $grading );
         $xml_array['parameters']['algorithm']['_attributes'] = array ( 'value'  => $algorithm );
 
-        $mysql_now = date(MYSQL_DATETIME_FORMAT,mktime());
+        $mysql_now = date(MYSQL_DATETIME_FORMAT,time());
 
         $fields = array (
           'assessment_id'     => $assessment_id ,

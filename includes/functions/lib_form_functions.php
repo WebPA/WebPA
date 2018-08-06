@@ -1,13 +1,11 @@
 <?php
 /**
- * 
  * Class UI - Site user interface
  *
- * 			
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * 
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 require_once('lib_array_functions.php');
 
@@ -16,9 +14,9 @@ $form_months = array( 1 => 'January','February','March','April','May','June','Ju
 /**
  * Is the given email address in a valid format
  * Format: <alphanum _ - characters> @ <alphanum _ - characters> . <alphanum _ - characters>...
- * 
+ *
  * @param string $email_address
- * @return bool 
+ * @return bool
  */
 function is_email($email_address) {
 	return filter_var($email_address, FILTER_VALIDATE_EMAIL) === false ? false : true;
@@ -26,7 +24,7 @@ function is_email($email_address) {
 
 /**
  * Render an associative array as <option></option> tags
- * 
+ *
  * @param array $arr Associative array to render
  * @param string $selected Value that should be selected (have attribute: selected="selected")
  * @param datatype $switch_kv Use $v as the option value instead of $k
@@ -61,12 +59,12 @@ function render_options($arr, $selected = null, $switch_kv = false) {
  * @param datatype $end
  * @param int $increment
  * @param null $selected
- *  
+ *
  */
 
 function render_options_range($start, $end, $increment = 1, $selected = null) {
 	for ($i=$start; $i<=$end; $i += $increment) {
-		$selected_str = ($i==$selected) ? 'selected="selected"' : ''; 
+		$selected_str = ($i==$selected) ? 'selected="selected"' : '';
 		echo("<option value=\"$i\" $selected_str> $i </option>");
 	}
 }// /render_options_range()
@@ -97,7 +95,7 @@ function draw_input_grid(&$recs, $input_type, $input_name, $num_cols, $width, $c
 				$checked_str = '';
 				$label_str = '';
 			}
-			
+
 			echo("<td align=\"center\" width=\"22\"><input class=\"no_border\" type=\"$input_type\" name=\"$input_name\" id=\"{$input_name}_$i\" value=\"{$recs[$i]['input_value']}\" $checked_str /></td>");
 			echo("<td><label for=\"{$input_name}_$i\" class=\"small\" $label_str>{$recs[$i]['input_label']}</label></td>");
 		}
@@ -106,7 +104,7 @@ function draw_input_grid(&$recs, $input_type, $input_name, $num_cols, $width, $c
 
 /**
  * draws option tags using the given $recs array
- * 
+ *
  * @param datatype $recs
  * @param int $value_field
  * @param int $name_field
@@ -127,7 +125,7 @@ function draw_options(&$recs, $value_field=0, $name_field=1, $selected_index = n
 
 /**
  * render all the check boxes
- * 
+ *
  * @param array $arr
  * @param string $input_name
  * @param array $selected_arr
@@ -158,7 +156,7 @@ function render_checkboxes(&$arr, $input_name, $selected_arr, $switch_value_labe
 
 /**
  * write to screen the check box grid
- * 
+ *
  * @param array $arr
  * @param string $input_name
  * @param array $selected_arr
@@ -170,7 +168,7 @@ function render_checkbox_grid($arr, $input_name, $selected_arr, $switch_value_la
 	else { $selected_arr = (array) $selected_arr; }
 
 	$arr_to_use = ($switch_value_label) ? array_flip($arr) : $arr;
-	
+
 	$i = 0;
 	$count = count($arr);
 
@@ -187,11 +185,11 @@ function render_checkbox_grid($arr, $input_name, $selected_arr, $switch_value_la
 		}
 		$id = $input_name .'_'. str_replace(' ','_', $value);
 		$checked_str = (in_array($value,$selected_arr)) ? 'checked="checked"' : '';
-		
+
 		echo("<td><input type=\"checkbox\" name=\"{$input_name}[]\" id=\"$id\" value=\"$value\" $checked_str /></td>");
 		echo("<th><label for=\"$id\">$label</label></th>");
 		$i++;
-	}	
+	}
 	echo( str_repeat('<td>&nbsp;</td><td>&nbsp;</td>',$empty_cols) );
 	echo('</tr>');
 	?>
@@ -209,7 +207,7 @@ function render_checkbox_grid($arr, $input_name, $selected_arr, $switch_value_la
 */
 function render_radio_boxes($arr, $input_name, $selected_str, $switch_value_label = false) {
 	$arr_to_use = ($switch_value_label) ? array_flip($arr) : $arr;
-	
+
 	?>
 	<table class="radio_grid" cellpadding="0" cellspacing="0">
 	<?php

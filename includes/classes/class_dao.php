@@ -1,29 +1,13 @@
 <?php
 /**
- *
  * Class : DAO
  *
  * This data access object is designed for MySQL only
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.5.0.0
- *
- * Updates:
- * 18-07-2007   : improved ->_throw_error() code
- * 13-07-2005 : added ->build_set() method - returns a string containing an SQL set
- * 12-07-2005 : added ->get_num_cols() method - returns the number of column names
- * 12-07-2005 : added ->get_cols() method - returns an array of column names
- * 16-06-2005 : fixed a bug when using NULL values in do_insert/do_update
- * 14-06-2005 : added $new_link parameter to ->open() method
- * 13-06-2005 : added ->do_insert_multi() method for adding multiple rows in one statement
- * 09-06-2005 : fixed potential insert-id bug
- * 15-10-2004 : new ->fetch_assoc() method - gets the query as an associative array
- *          of the form:  array ( row1.field1 => row1.field2, ... )
- * 31-09-2004 : Fixed multi-database usage (stops connection clashing)
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class DAO {
@@ -42,13 +26,13 @@ class DAO {
   private $_result_cols = null;   // Array of columns for the result set
 
   private $_last_sql = null;      // Last query run
-  private $_result = null;      // Query results, as array of row objects
+  private $_result = [];      // Query results, as array of row objects
 
   private $_output_type = 'ARRAY_A';  // 'ARRAY_A': Associative Array : $results[row]['field']
                     // 'ARRAY_N': Numeric Array : $results[row][col]
                     // 'ARRAY_B': Assoc + Numeric Array : use $results[row]['field'] or $results[row][col]
 
-  private $_output_type_int = MYSQL_ASSOC;  // MYSQL_ASSOC, MYSQL_BOTH, MYSQL_NUM
+  private $_output_type_int = MYSQLI_ASSOC;  // MYSQLI_ASSOC, MYSQLI_BOTH, MYSQLI_NUM
 
   private $_insert_id = null;     // Last inserted id (on auto-increment columns)
 
@@ -68,7 +52,7 @@ class DAO {
     * @param string $database
     * @param boolean $persistent
   */
-  function DAO($host, $user, $password, $database, $persistent = false) {
+  function __construct($host, $user, $password, $database, $persistent = false) {
     $this->_host = $host;
     $this->_user = $user;
     $this->_password = $password;
@@ -90,33 +74,31 @@ class DAO {
   function open($new_link = true) {
     if (is_null($this->_conn)) {
       if ($this->_persistent) {
-        $func = 'mysql_pconnect';
+        $func = 'mysqli_pconnect';
       } else {
-        $func = 'mysql_connect';
+        $func = 'mysqli_connect';
       }
 
       if ($this->_debug) {
-        $this->_conn = $func($this->_host, $this->_user, $this->_password, $new_link);
-        $db_selected = mysql_select_db($this->_database, $this->_conn);
-        //$db_selected = mysql_select_db($this->_database);
-        if (!$db_selected) {
-          die ('Can\'t use database due to  : ' .mysql_errno(). " -  " . mysql_error());
+        $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
+
+        if (!$this->_conn) {
+          die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
+
           return false;
-        }else{
-          return true;
         }
+
+        return true;
       } else {
-        $this->_conn = $func($this->_host, $this->_user, $this->_password, $new_link);
+        $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
-        $db_selected = mysql_select_db($this->_database, $this->_conn);
+        if (!$this->_conn) {
+          die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
 
-        if (!$db_selected) {
-          die ('Can\'t use database due to  : ' .mysql_errno(). " -  " . mysql_error());
           return false;
-        }else{
-          return true;
         }
 
+        return true;
       }
 
     }
@@ -130,14 +112,14 @@ class DAO {
  */
   function close() {
     $this->flush();
-    return ( @mysql_close($this->_conn) );
+    return ( @mysqli_close($this->_conn) );
   } // /->close()
 
   /**
    * Clear results and reset result vars
    */
   function flush() {
-    $this->_result = null;
+    $this->_result = [];
     $this->_num_rows = null;
     $this->_num_affected = null;
     $this->_insert_id = null;
@@ -157,16 +139,16 @@ class DAO {
     $this->_last_sql = trim( $sql );  // Save query
 
     if ($this->_debug) {
-      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error('Executing SQL');
+      $this->_result_set = mysqli_query($this->_conn, $sql) or $this->_throw_error('Executing SQL');
     } else {
-      $this->_result_set = @mysql_query($sql, $this->_conn);
+      $this->_result_set = @mysqli_query($this->_conn, $sql);
     }
 
     if ($this->_result_set) {
-      $this->_num_affected = mysql_affected_rows($this->_conn);
+      $this->_num_affected = mysqli_affected_rows($this->_conn);
 
       if ( preg_match("/^\\s*(insert|replace) /i", $sql) ) {
-        $this->_insert_id = mysql_insert_id($this->_conn);
+        $this->_insert_id = mysqli_insert_id($this->_conn);
       }
 
       if ($this->_num_affected) {
@@ -454,7 +436,7 @@ class DAO {
 /**
  *  Get last mysql error
  */
-  function get_last_error() { mysql_error($this->_conn); }
+  function get_last_error() { mysqli_error($this->_conn); }
 
   /**
    * Get output mode
@@ -491,19 +473,19 @@ class DAO {
   function set_output($output = 'ARRAY_A') {
     switch ($output) {
       case 'ARRAY_A'  :
-            $this->_output_type_int = MYSQL_ASSOC;
+            $this->_output_type_int = MYSQLI_ASSOC;
             $this->_output_type = $output;
             return true;
             break;
       // ----------------------------------------
       case 'ARRAY_B'  :
-            $this->_output_type_int = MYSQL_BOTH;
+            $this->_output_type_int = MYSQLI_BOTH;
             $this->_output_type = $output;
             return true;
             break;
       // ----------------------------------------
       case 'ARRAY_N'  :
-            $this->_output_type_int = MYSQL_NUM;
+            $this->_output_type_int = MYSQLI_NUM;
             $this->_output_type = $output;
             return true;
             break;
@@ -519,7 +501,7 @@ class DAO {
    * @param string $str
    * @return string
    */
-  function escape_str($str) { return mysql_escape_string(stripslashes($str)); }
+  function escape_str($str) { return mysqli_real_escape_string($this->_conn, stripslashes($str)); }
 
 /*
 * ================================================================================
@@ -538,28 +520,26 @@ class DAO {
     $this->_last_sql = trim( $sql );  // Save query
 
     if ($this->_debug) {
-      $this->_result_set = mysql_query($sql, $this->_conn) or $this->_throw_error('Querying database');
+      $this->_result_set = mysqli_query($this->_conn, $sql) or $this->_throw_error('Querying database');
     } else {
-      $this->_result_set = @mysql_query($sql, $this->_conn);
+      $this->_result_set = @mysqli_query($this->_conn, $sql);
     }
 
     // If got a result set..
     if ($this->_result_set) {
 
       // number of columns returned
-      $this->_num_cols = mysql_num_fields($this->_result_set);
+      $this->_num_cols = mysqli_num_fields($this->_result_set);
 
       // Store column names as an array
-      $i=0;
       $this->_result_cols = array();
-      while ($i < $this->_num_cols) {
-        $field = @mysql_fetch_field($this->_result_set,$i);
+
+      while ($field = @mysqli_fetch_field($this->_result_set)) {
         $this->_result_cols[] = $field->name;
-        $i++;
       }
 
       // Store the results as an array of row objects
-      while ( $row = @mysql_fetch_array($this->_result_set,$this->_output_type_int) ) {
+      while ( $row = @mysqli_fetch_array($this->_result_set,$this->_output_type_int) ) {
         $this->_result[] = $row;
       }
 
@@ -567,7 +547,7 @@ class DAO {
       $this->_num_rows = count($this->_result);
 
       // Free the actual result set
-      @mysql_free_result($this->_result_set);
+      @mysqli_free_result($this->_result_set);
 
       // If there were results.. return true
       return ($this->_num_rows>=1);
@@ -586,7 +566,7 @@ class DAO {
    */
   function _throw_error($err_msg) {
     if ($this->_conn) {
-      die("<hr />DATABASE ERROR<hr />$err_msg :: ". mysql_error($this->_conn) .'<hr />'. $this->get_last_sql().'<hr />');
+      die("<hr />DATABASE ERROR<hr />$err_msg :: ". mysqli_error($this->_conn) .'<hr />'. $this->get_last_sql().'<hr />');
     } else {
       die("<hr />DATABASE ERROR<hr />$err_msg :: &lt;NO SERVER&gt;<hr />". $this->get_last_sql().'<hr />');
     }

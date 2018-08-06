@@ -1,14 +1,11 @@
 <?php
 /**
- *
  * This file will trigger a reminder email to be sent
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.2
- * @since 7 Nov 2007
- *
+ * @link https://github.com/webpa/webpa
  */
 
  //gather all include files needed.

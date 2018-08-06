@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep2  (Create new groups wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep2 {
@@ -19,7 +17,7 @@ class WizardStep2 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep2(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -99,7 +97,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('module_id',fetch_POST('module_id'));
-    if (is_empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
+    if (empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
 
     return $errors;
   }// /->process_form()

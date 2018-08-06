@@ -1,17 +1,15 @@
 <?php
 /**
- *
  * Delete marks
  *
  * This page allows the tutor to see the list of students that have submited
  * and then delete the submission that the student made. This ties into the
  * feature request no 1817881 on the relevant section at http://sourceforge.net/projects/webpa/
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.2
- * @since 14 Jan 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../includes/inc_global.php");

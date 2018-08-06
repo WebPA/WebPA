@@ -1,22 +1,11 @@
 <?php
 /**
- *
  * Report: Marks Awarded For Each Question (anonymous)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
- *
- *
- * foreach($g_members as $i => $member_id) {
-              $char = chr(65+$i);
-              $members[$member_id]['lastname'] = "Student $char";
-              echo("<th class=\"top_names\"> {$members[$member_id]['lastname']}</th>");
-            }
- *
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");

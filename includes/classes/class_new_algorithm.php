@@ -1,22 +1,18 @@
 <?php
-/*
-* ================================================================================
-* Class :  NewAlgorithm
-* ================================================================================
-*
-* Version   : 1.2.0.0
-*
-* ================================================================================
-* Notes:
-*
-* Responses are normalised by using the marks each member gave
-*
-* Fixed a bug where no one in a group submits anything, so the frac score totals 0
-* and causes the peer-moderated mark to equal 0.  It now checks for complete lack
-* of submissions and tweaks the final intermediate grade accordingly.
-*
-* ================================================================================
-*/
+/**
+ * NewAlgorithm
+ *
+ * Responses are normalised by using the marks each member gave
+ *
+ * Fixed a bug where no one in a group submits anything, so the frac score totals 0
+ * and causes the peer-moderated mark to equal 0.  It now checks for complete lack
+ * of submissions and tweaks the final intermediate grade accordingly.
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
+ */
 
 function rel8($struc, &$file) {
   return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
@@ -35,7 +31,7 @@ class NewAlgorithm extends WebPAAlgorithm {
   /*
   * CONSTRUCTOR
   */
-  function NewAlgorithm() {
+  function __construct() {
     WebPAAlgorithm::_init();
   }// /->NewAlgorithm()
 

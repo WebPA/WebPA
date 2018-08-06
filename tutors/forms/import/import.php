@@ -1,13 +1,12 @@
 <?php
+
 /**
- *
  * Area where the xml content is imported
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.3
- * @since 29 Oct 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('../../../includes/inc_global.php');
@@ -63,7 +62,7 @@ if ($empty>0) {
                  'form_id' => $new_id,
                  'form_name' => $formname,
                  'form_type' => $formtype,
-                 'form_xml' => ''
+                 'form_xml' => $xml,
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
       $DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));

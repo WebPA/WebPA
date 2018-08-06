@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep3  (Create new groups wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep3 {
@@ -19,7 +17,7 @@ class WizardStep3 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep3(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';

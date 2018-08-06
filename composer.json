@@ -1,0 +1,39 @@
+{
+    "name": "webpa/webpa",
+    "description": "WebPA is an online peer assessment system for higher education institutions. It is designs for teams of students doing groupwork. The system allows participating students to assess themselves and their peers to calculate a final grade for each student, which is a weighted result based on the collective peer feedback and the final mark for the group work by an instructor.",
+    "type": "project",
+    "homepage": "http://webpaproject.lboro.ac.uk",
+    "license": "GPL-3.0-only",
+    "keywords": [
+        "peer",
+        "review",
+        "marking",
+        "assessment",
+        "university",
+        "higher education",
+        "group",
+        "marking",
+        "mark"
+    ],
+    "readme": "README.md",
+    "authors": [
+        {
+            "name": "Andrew Millington",
+            "email": "andrew@noexceptions.io",
+            "homepage": "https://www.noexceptions.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ext-xml": "*",
+        "ext-session": "*",
+        "ext-mysqli": "*"
+    },
+    "support": {
+        "email": "andrew@noexceptions.io",
+        "issues": "https://github.com/webpa/webpa/issues",
+        "source": "https://github.com/webpa/webpa",
+        "docs": "http://webpaproject.lboro.ac.uk"
+    }
+}

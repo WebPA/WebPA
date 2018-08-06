@@ -1,15 +1,13 @@
 <?php
 /**
- *
  * Class : Authenticator
  *
  * Authenticates the given username and any password against the internal database
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.1
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class Authenticator {
@@ -32,7 +30,7 @@ class Authenticator {
   /**
    *  CONSTRUCTOR for the Authenticator class
    */
-  function Authenticator($username = NULL, $password = NULL) {
+  function __construct($username = NULL, $password = NULL) {
     $this->username = $username;
     $this->password = $password;
   }// /->Authenticator()
@@ -106,7 +104,7 @@ class Authenticator {
         $user_module = $DAO->fetch_row($sql_user_module);
 
         // Update last login date
-        $now = date(MYSQL_DATETIME_FORMAT,mktime());
+        $now = date(MYSQL_DATETIME_FORMAT,time());
         $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user_data['user_id']}'";
         $DAO->execute($sql_login_date);
 

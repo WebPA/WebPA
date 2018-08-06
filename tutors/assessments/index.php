@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * My assessments index - show options to create, edit or report.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../includes/inc_global.php");
@@ -89,8 +87,7 @@ $UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_ass
 $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', 'create/');
 
 $UI->head();
-if ($last_year > $start_year) {
-  $change_onclick = ' onclick="change_academic_year()"';
+$change_onclick = ' onclick="change_academic_year()"';
 ?>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -104,9 +101,6 @@ if ($last_year > $start_year) {
 //-->
 </script>
 <?php
-} else {
-  $change_onclick = '';
-}
 $UI->body();
 $UI->content_start();
 ?>

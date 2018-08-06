@@ -10,12 +10,10 @@
  *                (b) share the DAO object of the parent collection
  *                (c) access the GroupCollection-ID on demand
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * @since 11-08-2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('class_dao.php');
@@ -35,7 +33,7 @@ class Group {
   /**
   * CONSTRUCTOR for group
   */
-  function Group() {
+  function __construct() {
     $this->_collection = null;
     $this->_members = null;
   }// /->Group()

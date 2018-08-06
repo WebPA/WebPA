@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Upload of the XML file for the form
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 5 Nov 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required
@@ -34,7 +32,7 @@ if ($errno == 0){
   $localfile = file_get_contents($source);
 
   //validate the XML
-  $isValid = Validate($localfile, '../../../tutors/forms/import/schema.xsd');
+  $isValid = Validate($localfile, 'schema.xsd');
 
   if ($isValid){
     //get the ID for the current User
@@ -67,7 +65,7 @@ if ($errno == 0){
                  'form_id' => $new_id,
                  'form_name' => $formname,
                  'form_type' => $formtype,
-                 'form_xml' => $xml
+                 'form_xml' => $xml,
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
       //$DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));
@@ -77,17 +75,17 @@ if ($errno == 0){
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module ({fields}) VALUES ({values})', $fields);
 
-      $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"../../../tutors/forms/index.php\">'my forms'</a> list.</p>";
+      $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"index.php\">'my forms'</a> list.</p>";
     }
   } else {
     $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
   }
-
 } else if (isset($FILE_ERRORS[$errno])) {
   $action_notify = "<p>{$FILE_ERRORS[$errno]}</p>";
 } else {
   $action_notify = "<p>Unable to upload file.</p>";
 }
+
 $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->breadcrumbs = array('home' => '/', 'my forms'  => null ,);
@@ -109,5 +107,3 @@ $UI->content_start();
 <?php
 
 $UI->content_end();
-
-?>

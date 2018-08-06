@@ -47,7 +47,7 @@ class FileUpload {
   public $max_file_size = null;   // maximum size in bytes of the uploaded files
 
   // ======== CONSTRUCTOR / DESTRUCTOR ========
-  function FileUpload($upload_path = null) {
+  function __construct($upload_path = null) {
     if ($upload_path) { $this->upload_path = $upload_path; }
   } // / FileUpload()
 
@@ -80,7 +80,7 @@ class FileUpload {
     foreach ($files['name'] as $k => $v) {
       if ($files['size'][$k]) {
         // Clear any crap from the file name
-        $filename = ereg_replace('[^a-z0-9._]', '', $v);
+        $filename = preg_replace('/[^a-z0-9._]/', '', $v);
         $filename = str_replace(' ', '_', $filename);
         $filename = str_replace('%20', '_', $filename);
         $filename = strtolower($filename);

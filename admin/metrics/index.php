@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * landing page for the metrics section of the admin area
  *
  * From here after selecting the type of information that the user wants from
  * the metrics choices they will be shown their choices.
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 24 Jul 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

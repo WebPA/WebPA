@@ -1,17 +1,15 @@
 <?php
 /**
- *
  * Clone example form
  *
  * This page allows the user to clone the example form for their own use.
  * If the user was left to access the form, they or others using the system
  * could potentially change information that is used in live assessments.
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 17 Jan 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");

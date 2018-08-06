@@ -1,47 +1,15 @@
 <?php
 /**
- *
  * Simple.php is a re-write of the previously used file upload process.
  *
  * A file with the table elements correctly named at the top of a cvs file
  * can be uploaded to the database. The system checks and links the module information with the students
  * The database is then checked for duplicates and removes them.
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.3
- * @since 28 Jul 2008
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * + Added implementation for Student Data with Groups upload. This is marked with the
- * PHP comment "GROUP HANDLING".
- *
- * - Removed existing implementation of duplicate protection - this code was inefficient
- * (with large table sizes, the indexing process could take six or seven seconds) and
- * never deleted the index, meaning that dozens of indices are left on the `user` table.
- *
- * + Implemented new duplicate checking that consists simply of an "INSERT ON DUPLICATE
- * KEY UPDATE" SQL call.
- * !! This code relies on the existence of a unique key on (`id_number`,
- * `username`). The SQL call to create this key is currently commented out in the code -
- * in order to implement it either:
- *    a) uncomment the line following '//Uncomment this line to initialise duplicate
- *       checking', or
- *    b) enter the following at a mysql prompt:
- *       ALTER TABLE user ADD UNIQUE KEY(`id_number`,`username`);
- *
- * The second is probably easier and means one less database call with every page load.
- *
- * Morgan Harris [morgan@snowproject.net] as of 15/10/09
- *
- *** 19-Dec-10 (Stephen Vickers stephen.vickers@ed.ac.uk)
- *
- * Rewrite of import process to fit new database structure:
- *  - duplicates handled by constraints already in place on tables
- *  - option to select an existing collection or create a new one
- *  - automatically adds modules to collection
- *  - automatically adds groups to collection
- * Could probably be made more efficient in handling groups if done as a set rather than by record
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('../../includes/inc_global.php');
