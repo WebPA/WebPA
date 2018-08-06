@@ -19,6 +19,7 @@
 //get the include file required
 require_once('../../includes/inc_global.php');
 require_once('../../includes/functions/lib_string_functions.php');
+require_once('../../includes/functions/lib_form_functions.php');
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -135,12 +136,12 @@ if ($action) {          //incase we want to do more than save changes in the fut
 
       $complete = !empty($edit_user->forename) && !empty($edit_user->lastname) &&
                   !empty($edit_user->password) && !empty($edit_user->username);
+    	
       if (!$complete) {
-
-        $sScreenMsg = "Unable to save user: please make sure the user has a username, first name, last name and password.";
-
+        $sScreenMsg = 'Unable to save user: please make sure the user has a username, first name, last name and password.';
+      } elseif ($edit_user->email != '' && !is_email($edit_user->email)) { 
+      	$sScreenMsg = 'Unable to save user: email address is not valid.';
       } else {
-
         //send notification to the screen that the save has occured.
         if ($new_user && !$user_found) {
           $sScreenMsg = 'The user has been created';
@@ -149,8 +150,8 @@ if ($action) {          //incase we want to do more than save changes in the fut
         }
 
         if ($canEdit) {
-
           $edit_user->set_dao_object($DB);
+
           //save all of the data
           if ($new_user && !$user_found) {
             $user = $edit_user->add_user();

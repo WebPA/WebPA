@@ -9,7 +9,7 @@
  */
 
 //get the include file required
-require_once("../../../includes/inc_global.php");
+require_once('../../../includes/inc_global.php');
 require_once('../../../includes/classes/class_xml_parser.php');
 require_once('../../../includes/functions/lib_xml_validate.php');
 
@@ -68,7 +68,7 @@ if ($errno == 0){
                  'form_xml' => $xml,
                 );
       $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
-      $DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));
+      //$DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));
       $fields = array(
                  'form_id' => $new_id,
                  'module_id' => $_module_id
@@ -80,12 +80,12 @@ if ($errno == 0){
   } else {
     $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
   }
-
 } else if (isset($FILE_ERRORS[$errno])) {
   $action_notify = "<p>{$FILE_ERRORS[$errno]}</p>";
 } else {
   $action_notify = "<p>Unable to upload file.</p>";
 }
+
 $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->breadcrumbs = array('home' => '/', 'my forms'  => null ,);
@@ -107,5 +107,3 @@ $UI->content_start();
 <?php
 
 $UI->content_end();
-
-?>

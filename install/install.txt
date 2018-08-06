@@ -15,7 +15,7 @@ Installation Guide
         - APP__DB_TABLE_PREFIX: table prefix (default is "pa2_" which means that the new version can share the same database as the old version if required)
      - configure the LDAP settings if you wish to authenticate via LDAP.
      
-*  Run the following scripts to initialise the database (edit the files to change the names and password as reqired):
+*  Run the following scripts to initialise the database (edit the files to change the names and password as required):
      - install/webpa2_database.sql: create the database schema and user account;
      - install/webpa2_tables.sql: create the database tables;
      - install/webpa2_administrator.sql: create an administrator account and sample module.
