@@ -1,19 +1,17 @@
 <?php
 /**
- *
  * Check login credentials
  *
  * The file will also check the type of login that is taking place.
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.1
- *
- * + Given that the DBAuthenticator never returns an error message, changed the returned
+ * Given that the DBAuthenticator never returns an error message, changed the returned
  * message in case of incorrect username/password to 'invalid', as with an empty username
- * or password.
- * made by Morgan Harris [morgan@snowproject.net] as of 15/10/09
+ * or password, made by Morgan Harris [morgan@snowproject.net] as of 15/10/09
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("./includes/inc_global.php");

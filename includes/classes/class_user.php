@@ -1,14 +1,13 @@
 <?php
 /**
- *
- * Class : User
+ * User
  *
  * This is a lightweight user class and does not contain the database access stuff
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.1.0
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 class User {
@@ -32,7 +31,7 @@ class User {
   * @param string $username
   * @param string $passsword
   */
-  function User($username = null, $password = null) {
+  function __construct($username = null, $password = null) {
     $this->username = $username;
     $this->source_id = '';
     $this->password = $password;

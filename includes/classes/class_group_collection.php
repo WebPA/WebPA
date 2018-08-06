@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Class :  GroupCollection
  *
  * Applications using GroupCollection should call ->lock() once a group has been used
@@ -8,11 +7,10 @@
  *
  * Once locked, the GroupCollection will not allow SAVING or DELETING, or MEMBER editing
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.1.0
- * @since 11-10-2005
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('class_dao.php');
@@ -38,7 +36,7 @@ class GroupCollection {
   /**
   * CONSTRUCTOR for the Group collection function
   */
-  function GroupCollection(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
     $this->_created_on = time();
     $this->_groups = null;

@@ -1,15 +1,13 @@
 <?php
 /**
- * 
  * XML validation functions
- * 
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.2
- * @since 8 Jan 2008
- * 
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
- 
+
 function Validate($xml, $xsd){
  libxml_use_internal_errors(true);
 
@@ -18,11 +16,11 @@ function Validate($xml, $xsd){
  $objDom->loadXML($xml);
 
  if (!$objDom->schemaValidate($xsd)) {
- 
+
      $allErrors = libxml_get_errors();
   return false;
  } else {
     return true;
  }
-} 
+}
 ?>

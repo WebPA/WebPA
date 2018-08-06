@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep3    (Create new assessment wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once("../../../includes/inc_global.php");
@@ -21,7 +19,7 @@ class WizardStep3 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep3(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -103,7 +101,7 @@ class WizardStep3 {
     $errors = null;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
-    if (is_empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
+    if (empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
 
     return $errors;
   }// /->process_form()

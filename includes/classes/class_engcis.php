@@ -1,12 +1,11 @@
 <?php
 /**
- *
  * engCIS local version
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 function rel($struc, &$file) {
@@ -33,7 +32,7 @@ class EngCIS {
   /**
   * CONSTRUCTOR
   */
-  function EngCIS() {
+  function __construct() {
     $this->_DAO = new DAO(APP__DB_HOST,APP__DB_USERNAME,APP__DB_PASSWORD,APP__DB_DATABASE);
     $this->_DAO->set_debug(false);
   }// /->EngCIS()
@@ -366,7 +365,7 @@ class EngCIS {
     } else {  // else, just return one row
       $sql = "SELECT u.*, um.user_type
           FROM " . APP__DB_TABLE_PREFIX . "user u LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE (u.user_id IN {$user_set}) AND (um.module_id = {$_module_id})
+          WHERE (u.user_id IN {$user_set})
           LIMIT 1";
       return $this->_DAO->fetch_row($sql);
     }

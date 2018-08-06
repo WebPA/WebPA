@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Upload of the XML file for the form
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 5 Nov 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

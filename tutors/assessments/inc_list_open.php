@@ -1,20 +1,13 @@
 <?php
 /**
- *
  *  INC: List Open Assessments
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
  *
  * To be used from the assessments index page
  *
- * @param int $year e.g. 2005
- * @param mixed $academic_year e.g. 2005/06
- * @param string $tab eg pending
- * @param string $qs ="tab={$tab}&y={$year}";
- * @param string $page_url "/tutors/assessment/";
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 ?>
 

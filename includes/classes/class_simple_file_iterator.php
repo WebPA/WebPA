@@ -1,17 +1,14 @@
 <?php
 /**
- *
  * class SimpleFileIterator
  *
  * Returns a SimpleIterator containing a file list of the given directory
  * Not much error checking to keep the class light
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('class_simple_iterator.php');
@@ -29,7 +26,7 @@ class SimpleFileIterator extends SimpleIterator /* implements abstract_SimpleIte
    *  CONSTRUCTOR for the simple file iterator
    * @param string $dir
   */
-  function SimpleFileIterator($dir) {
+  function __construct($dir) {
     $dir_list = array();
     if ($handle = opendir($dir)) {
       while ($filename = readdir($handle)) { if (preg_match('#^\.#',$filename)==0) $dir_list[] = $filename; }

@@ -1,13 +1,13 @@
 <?php
 /**
- * Class :  WebPAAlgorithm
+ * WebPAAlgorithm
  *
  * A class implementing the Web-PA algorithm for calculating student grades.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0
+ * @link https://github.com/webpa/webpa
  */
 
 

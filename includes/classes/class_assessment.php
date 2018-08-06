@@ -2,10 +2,10 @@
 /**
  * Abstract Class :  WebPAAlgorithm
  *
- * @copyright 2005 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.3
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
@@ -47,7 +47,7 @@ class Assessment {
   *
   * @param string $DAO
   */
-  function Assessment(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
     $this->_locked = null;
   }// /->Assessment()

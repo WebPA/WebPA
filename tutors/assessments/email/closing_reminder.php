@@ -1,14 +1,11 @@
 <?php
 /**
- *
  * This file will trigger a reminder email to be sent for a closing assessment
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 25 Jan 2008
- *
+ * @link https://github.com/webpa/webpa
  */
 
 //gather all include files needed.

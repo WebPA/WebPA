@@ -1,14 +1,11 @@
 <?php
-
 /**
- *
  * Class : WizardStep2  (Email students wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep2 {
@@ -20,7 +17,7 @@ class WizardStep2 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep2(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -185,12 +182,12 @@ class WizardStep2 {
     }
 
     $this->wizard->set_field('email_subject', fetch_POST('email_subject'));
-    if (is_empty($this->wizard->get_field('email_subject'))) {
+    if (empty($this->wizard->get_field('email_subject'))) {
       $errors[] = 'You must enter a subject for this email.';
     }
 
     $this->wizard->set_field('email_text', fetch_POST('email_text'));
-    if (is_empty($this->wizard->get_field('email_text'))) {
+    if (empty($this->wizard->get_field('email_text'))) {
       $errors[] = 'You must enter the text of this email.';
     }
 

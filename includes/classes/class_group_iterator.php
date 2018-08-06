@@ -1,18 +1,14 @@
 <?php
 /**
- *
- * Class : GroupIterator
+ * GroupIterator
  *
  * Group Object version of the SimpleObjectIterator
  * Not much error checking to keep the class light
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- * @since 14-06-2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once('class_simple_object_iterator.php');
@@ -29,7 +25,7 @@ class GroupIterator extends SimpleObjectIterator {
   * @param object $DAO
   * @param object $collection
   */
-  function GroupIterator($groups, &$DAO, &$collection) {
+  function __construct($groups, &$DAO, &$collection) {
     $this->_initialise($groups);
     $this->_DAO =& $DAO;
     $this->_collection =& $collection;

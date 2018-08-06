@@ -1,17 +1,15 @@
 <?php
 /**
- *
  * Generic text
  *
  * This file is where the generic text that is used through out the sytem is entered.
  *
  * @author Nicola Wilkinson
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.1
- * @since 10 Aug 2007
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
+ * @link https://github.com/webpa/webpa
  */
 
 define ('MY__FORMS', 'my forms');

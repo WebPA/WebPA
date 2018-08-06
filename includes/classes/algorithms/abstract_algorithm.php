@@ -1,19 +1,15 @@
 <?php
 /**
- * Abstract Class :  Algorithm
+ * Algorithm
  *
  * An abstract Algorithm that, as well as performing the appropriate grading calculations,
  * also organises assessment information into suitable formats for report production.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
-
-
-
 require_once(DOC__ROOT . 'includes/classes/class_form.php');
 require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 require_once(DOC__ROOT . 'includes/classes/class_result_handler.php');
@@ -88,7 +84,7 @@ abstract class Algorithm {
    *
    * @return  Algorithm
    */
-  public function Algorithm() {
+  public function __construct() {
   }// /->Algorithm()
 
 

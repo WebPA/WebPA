@@ -1,21 +1,19 @@
 <?php
 /**
- *
  * Upload information index page
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.7
- * @since 28 Mar 2007
- *
- *
- * + Added fourth category for uploading CSV data, Student Data with Groups.
+ * Added fourth category for uploading CSV data, Student Data with Groups.
  * This format allows admins to upload student data, create a collection, create and
  * assign groups to that collection, and assign the students to those groups in one click.
  *
  * The new page now uses some DHTML JavaScript to automatically show and hide the new
  * "Owner" and "Collection Name" text boxes - this can be safely disabled if necessary.
  * Morgan Harris [morgan@snowproject.net] as of 15/10/09
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

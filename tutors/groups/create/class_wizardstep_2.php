@@ -1,14 +1,12 @@
 <?php
 
 /**
- *
  * Class : WizardStep2  (Create new groups wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep2 {
@@ -20,7 +18,7 @@ class WizardStep2 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep2(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = '&lt; Back';
@@ -119,10 +117,10 @@ HTMLEnd;
 
     if ($this->wizard->get_field('num_groups')>0) {
       $this->wizard->set_field('group_name_stub', trim( fetch_POST('group_name_stub') ) );
-      if (is_empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
+      if (empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
 
       $this->wizard->set_field('group_numbering', fetch_POST('group_numbering'));
-      if (is_empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
+      if (empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
     }
 
     return $errors;

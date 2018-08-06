@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * This area provide the edit location for the modules held in the database
  *
  * Dependant on the information held in the WebPA system the administrator
@@ -10,12 +9,10 @@
  * On saving the edit the information is processed via the class_user.php for the majority
  * of the information and then the module information is processed.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 0.0.0.5
- * @since 30 June 2008
- *
+ * @link https://github.com/webpa/webpa
  */
 
 //get the include file required

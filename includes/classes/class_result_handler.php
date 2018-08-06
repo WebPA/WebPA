@@ -1,13 +1,11 @@
 <?php
 /**
+ * ResultHandler
  *
- * Class :  ResultHandler
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.1
- * @since 11/10/2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 function rel3($struc, $file) {
@@ -39,7 +37,7 @@ class ResultHandler {
   * CONSTRUCTOR for the result handler
   * @param mixed $DAO
   */
-  function ResultHandler(&$DAO) {
+  function __construct(&$DAO) {
     $this->_DAO =& $DAO;
   }// /->ResultHandler()
 

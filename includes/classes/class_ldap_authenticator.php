@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Class : Authenticate
  *
  * Authenticates the given username and password against the LDAP server
@@ -8,11 +7,10 @@
  * 'connfailed' : A connection to the authentication server could not be established
  *  'invalid'   : The login details were invalid
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 require_once(DOC__ROOT.'includes/functions/lib_string_functions.php');

@@ -1,16 +1,14 @@
 <?php
 /**
- *
  * class Full_Iterator
  *
  * Fully featured, heavy-duty ArrayIterator - Use the simpler iterator for most things!
  * Not much error checking to keep the class light
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class Full_Iterator /* implements abstract_FullIterator */ {
@@ -26,7 +24,7 @@ class Full_Iterator /* implements abstract_FullIterator */ {
    *  CONSTRUCTOR for the class full interator
    * @param array $array
   */
-  function Full_Iterator(&$array) {
+  function __construct(&$array) {
     // sub-classes can override the creator, so all the work is done in _initialize()
     $this->_initialize($array);
   }// /->Full_Iterator()

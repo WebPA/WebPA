@@ -1,15 +1,11 @@
 <?php
 /**
- *
  * Class :  UI
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.2
- * @link http://
- * @since 24/05/2005
- *
+ * @link https://github.com/webpa/webpa
  */
 
 //include main global file so that the session can be used
@@ -39,7 +35,7 @@ class UI {
   * CONSTRUCTOR for the UI
   * @param string $_user
   */
-  function UI( $_user = null) {
+  function __construct( $_user = null) {
 
     global $CIS, $INSTALLED_MODS, $_source_id;
 

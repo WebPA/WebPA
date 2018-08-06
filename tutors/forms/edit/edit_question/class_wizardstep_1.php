@@ -1,14 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep1  (edit criterion wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep1 {
@@ -20,7 +17,7 @@ class WizardStep1 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep1(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
@@ -114,7 +111,7 @@ class WizardStep1 {
     $errors = null;
 
     $this->wizard->set_field('question_text',fetch_POST('question_text'));
-    if (is_empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
+    if (empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
 
     $this->wizard->set_field('question_desc',fetch_POST('question_desc'));
 

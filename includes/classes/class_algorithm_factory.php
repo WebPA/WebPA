@@ -4,10 +4,10 @@
  *
  * Use this class to select which algorithms to load.
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2008 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0
+ * @link https://github.com/webpa/webpa
  */
 
 require_once(DOC__ROOT.'includes/classes/algorithms/abstract_algorithm.php');

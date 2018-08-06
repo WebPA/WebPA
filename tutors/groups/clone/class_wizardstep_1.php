@@ -1,13 +1,11 @@
 <?php
 /**
- *
  * Class : WizardStep1  (Create new groups wizard)
  *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
  *
- * @copyright 2007 Loughborough University
- * @license http://www.gnu.org/licenses/gpl.txt
- * @version 1.0.0.0
- *
+ * @link https://github.com/webpa/webpa
  */
 
 class WizardStep1 {
@@ -19,7 +17,7 @@ class WizardStep1 {
   /*
   * CONSTRUCTOR
   */
-  function WizardStep1(&$wizard) {
+  function __construct(&$wizard) {
     $this->wizard =& $wizard;
 
     $this->wizard->back_button = null;
@@ -90,7 +88,7 @@ HTMLEnd;
     $errors = null;
 
     $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
-    if (is_empty($this->wizard->get_field('collection_id'))) {
+    if (empty($this->wizard->get_field('collection_id'))) {
       $errors[] = 'You must select a collection of groups to clone.';
     }
 
