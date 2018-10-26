@@ -66,24 +66,24 @@ if (($command) && ($assessment)) {
         $errors[] = 'You must give this assessment a name.';
       }
 
-      // open_date
+      // Create an open date time object
       $time_parts = explode(':', fetch_POST('open_date_time') );
       $time_h = $time_parts[0];
       $time_m = $time_parts[1];
-      $open_date = mktime( $time_h, $time_m, 0, fetch_POST('open_date_month'), fetch_POST('open_date_day'), fetch_POST('open_date_year') );
+      $openDate = new DateTimeImmutable('@', mktime( $time_h, $time_m, 0, fetch_POST('open_date_month'), fetch_POST('open_date_day'), fetch_POST('open_date_year')));
 
-      // close_date
+      // Create a close date time object
       $time_parts = explode(':', fetch_POST('close_date_time') );
       $time_h = $time_parts[0];
       $time_m = $time_parts[1];
-      $close_date = mktime( $time_h, $time_m, 0, fetch_POST('close_date_month'), fetch_POST('close_date_day'), fetch_POST('close_date_year') );
+      $closeDate = new DateTimeImmutable('@', mktime( $time_h, $time_m, 0, fetch_POST('close_date_month'), fetch_POST('close_date_day'), fetch_POST('close_date_year')));
 
       //check the dates to trigger emails if needed.
-      if ($assessment->open_date == $open_date) {
-        $assessment->open_date = $open_date;
+      if ($assessment->open_date == $openDate->getTimestamp()) {
+        $assessment->open_date = $openDate->getTimestamp();
       } else {
         //we know the assessment has been re-opened, so email those that have not completed
-        $assessment->open_date = $open_date;
+        $assessment->open_date = $openDate->getTimestamp();
 
         $result_handler = new ResultHandler($DB);
         $result_handler->set_assessment($assessment);
@@ -106,8 +106,8 @@ if (($command) && ($assessment)) {
           $email->set_subject("Your Assessment has been re-opened");
           $email->set_body("Your tutor has re-opend your assessment. \n" .
               "The new dates for the assessment are;\n" .
-              "Open: " . $open_date . "\n" .
-              "Close: " . $close_date . "\n" .
+              "Open: " . $openDate->format('H:i, d M y') . "\n" .
+              "Close: " . $closeDate->format('H:i, d M y') . "\n" .
               "To complete your assessment please go to: " . APP__WWW . "\n" .
               "---------------------------------------------------------\n" .
               "This is an automated email sent by the WebPA tool");
@@ -116,8 +116,9 @@ if (($command) && ($assessment)) {
 
       }
 
-      $assessment->close_date = $close_date;
-      if ($open_date>=$close_date) { $errors[] = 'You must select a closing date/time that is after your opening date'; }
+      $assessment->close_date = $closeDate->getTimestamp();
+
+      if ($openDate >= $closeDate) { $errors[] = 'You must select a closing date/time that is after your opening date'; }
 
       $assessment->introduction = fetch_POST('introduction');
 
@@ -440,7 +441,7 @@ if (!$assessment) {
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
-          <td><label>Title &nbsp;</label></td>
+          <td><label for="feedback_title">Title &nbsp;</label></td>
           <td><input type="text" name="feedback_title" value="<?php echo $assessment->feedback_name; ?>" size="40" maxlength="40"/></td>
         </tr>
         <tr>
