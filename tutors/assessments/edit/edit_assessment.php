@@ -69,7 +69,7 @@ if ($command && $assessment) {
             // Create an open date time object
             list($time_h, $time_m) = explode(':', fetch_POST('open_date_time'));
 
-            $openDate = new DateTimeImmutable('@', mktime(
+            $openDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
                 $time_m,
                 0,
@@ -81,7 +81,7 @@ if ($command && $assessment) {
             // Create a close date time object
             list($time_h, $time_m) = explode(':', fetch_POST('close_date_time'));
 
-            $closeDate = new DateTimeImmutable('@', mktime(
+            $closeDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
                 $time_m,
                 0,
