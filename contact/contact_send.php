@@ -31,8 +31,8 @@ $contact_email = fetch_POST('contact_email');
 $contact_phone = fetch_POST('contact_phone');
 
 $contact_date = date('d-M-Y H:i');
-$contact_type = fetch_POST('contact_type');
-$contact_message = fetch_POST('contact_message');
+$subject = fetch_POST('subject');
+$description = fetch_POST('description');
 
 $app_www = APP__WWW;
 
@@ -42,8 +42,8 @@ if ($contact_fullname == '') {
 	$errors[] = 'Name is required';
 }
 
-if ($contact_message == '') {
-	$errors[] = 'Message is required';
+if ($description == '') {
+	$errors[] = 'Description is required';
 }
 
 if ($contact_email == '') {
@@ -59,7 +59,7 @@ $email_body = <<<EndBody
 Contact Sent
 ----------------------------------------
 Application  : $contact_app_id ($app_www)
-Contact Type : $contact_type
+Subject      : $subject
 Date         : $contact_date
 ----------------------------------------
 
@@ -79,9 +79,9 @@ Username : $contact_user_username
 Email    : $contact_user_email
 ----------------------------------------
 
-Message:
+Description:
 ----------------------------------------
-$contact_message
+$description
 ----------------------------------------
 EndBody;
 
@@ -89,7 +89,7 @@ EndBody;
 $email = new Email();
 $email->set_to($contact_to);
 $email->set_from($contact_email);
-$email->set_subject("$contact_app_id : $contact_type");
+$email->set_subject("$contact_app_id : $subject");
 $email->set_body($email_body);
 $email->send();
 
