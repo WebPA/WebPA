@@ -17,7 +17,7 @@ check_user($_user);
 
 // Begin Page
 
-$UI->page_title = APP__NAME . ' Contact';
+$UI->page_title = APP__NAME . ' Contact Support';
 $UI->menu_selected = 'contact';
 $UI->help_link = '?q=node/379#intool';
 $UI->breadcrumbs = array	('home'		=> '../' ,
