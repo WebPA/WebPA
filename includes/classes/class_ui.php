@@ -415,21 +415,15 @@ class UI {
 <?php
     if ($render_menu) {
       $this->menu();
-?>
-    <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
-      <p><strong>Technical Problem?</strong></p>
-      <p>If you have a problem, find a bug or discover a technical problem in the system, <a href="<?php echo APP__WWW ?>/contact/index.php?q=bug">contact us</a> to report it!</p>
-    </div>
-<?php
-    } else {
-?>
-    <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
-      <p><strong>Technical Problem?</strong></p>
-      <p>If you have a problem, find a bug or discover a technical problem in the system, please <a href="mailto:<?php echo $BRANDING['email.help']; ?>" title="(email: <?php echo $BRANDING['email.help']; ?>)">email us</a> to report it!</p>
-    </div>
-<?php
     }
 ?>
+    <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
+      <p><strong>Report a Bug</strong></p>
+        <p>
+            If you have found a bug in WebPA, please report it by creating an issue in WebPA's
+            <a href="https://github.com/webpa/webpa/issues">GitHub issue tracker</a>
+        </p>
+    </div>
 </div>
 <?php
     if ($render_header) {
