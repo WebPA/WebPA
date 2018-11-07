@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix a bug where a unix timestamps were used in the email notifying users that an assessment had been reopened (PR #32)
+- Fix a bug where accessing undefined array index in the class_dao fetch_value() function caused a warning to be issued (PR #37)
 
 ## [3.0.0] - 2018-08-06
 
