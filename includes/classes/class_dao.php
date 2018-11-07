@@ -209,25 +209,29 @@ class DAO {
   } // /->fetch_col()
 
   /**
-  * Get a single value from the result set
-    * column/row indexes are 0-based
-  * An empty string ('') or no value, will return null
-  * @param string $sql
-  * @param integer $x
-  * @param integer $y
-  * @return integer
-  */
+   * Get a single value from the result set. Column/row indexes are 0-based. An empty string ('') or no value, will
+   * return null
+   *
+   * @param string  $sql
+   * @param integer $x
+   * @param integer $y
+   *
+   * @return integer
+   */
   function fetch_value($sql = null, $x = 0, $y = 0) {
-    // If there is an SQL query, get its results instead..
-    if ( $sql ) { $this->_process_query($sql);  }
+    // If there is an SQL query, get its results instead
+    if ($sql) {
+      $this->_process_query($sql);
+    }
 
     // Extract value using x,y vals
-    if ( $this->_result[$y] ) {
+    if (!empty($this->_result) && isset($this->_result[$y])) {
       $values = array_values($this->_result[$y]);
     }
+
     // If there is a value return it, else return null
-    return ( isset($values[$x]) && $values[$x]!=='') ? $values[$x] : null;
-  } // /->fetch_value()
+    return isset($values[$x]) && $values[$x] !== '' ? $values[$x] : null;
+  }
 
   /**
   * Get an associative array ( field1-value => field2-value ) from the result set
