@@ -26,15 +26,15 @@ require_once("../includes/classes/class_user.php");
 
 $action = fetch_POST('action');
 
-$DB->open();
-
 switch($action) {
   case "init":
     //phase 2
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
     isset($_POST['username']) or die("Username not set.");
 
+    $DB->open();
     $username = $DB->escape_str($_POST['username']);
+    $DB->close();
 
     $hash = md5(rand());
     $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '$username' AND source_id = '' AND " .
@@ -142,8 +142,6 @@ HTML;
 HTML;
     break;
 }
-
-$DB->close();
 
 $UI->page_title = "Password Reset";
 $UI->menu_selected = '';
