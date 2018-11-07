@@ -349,24 +349,31 @@ class EngCIS {
   *           or an array of assoc-arrays, containting many users' info
   */
   function get_user($user_id, $ordering = 'name') {
-
     global $_module_id;
 
     $user_set = $this->_DAO->build_set($user_id, false);
 
-    // If there's more than one user to search for, get all the rows
     if (is_array($user_id)) {
       $order_by_clause = $this->_order_by_clause('user', $ordering);
+
       $sql = "SELECT u.*, um.user_type
-          FROM " . APP__DB_TABLE_PREFIX . "user u LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE (u.user_id IN {$user_set}) AND (um.module_id = {$_module_id})
-          $order_by_clause";
+              FROM " . APP__DB_TABLE_PREFIX . "user u 
+              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um 
+              ON u.user_id = um.user_id
+              WHERE (u.user_id IN {$user_set}) 
+              AND (um.module_id = {$_module_id})
+              $order_by_clause";
+
       return $this->_DAO->fetch($sql);
-    } else {  // else, just return one row
+    } else {
       $sql = "SELECT u.*, um.user_type
-          FROM " . APP__DB_TABLE_PREFIX . "user u LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE (u.user_id IN {$user_set})
-          LIMIT 1";
+              FROM " . APP__DB_TABLE_PREFIX . "user u 
+              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um 
+              ON u.user_id = um.user_id
+              WHERE (u.user_id IN {$user_set}) 
+              AND (um.module_id = {$_module_id} OR u.admin = 1)
+              LIMIT 1";
+
       return $this->_DAO->fetch_row($sql);
     }
   }// /->get_user()
