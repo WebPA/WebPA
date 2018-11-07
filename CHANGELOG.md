@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0.1] - 2008-07-19
 
 [Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.1...HEAD
-[3.0.1]: https://github.com/WebPA/WebPA/compare/3.0.0...3.0.1
-[3.0.0]: https://github.com/WebPA/WebPA/compare/v2.0.0.11...3.0.0
+[3.0.1]: https://github.com/WebPA/WebPA/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/WebPA/WebPA/compare/v2.0.0.11...v3.0.0
 [2.0.0.11]: https://github.com/WebPA/WebPA/compare/v1.1.0.1...v2.0.0.11
 [1.1.0.1]: https://github.com/WebPA/WebPA/releases/tag/v1.1.0.1
