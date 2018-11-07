@@ -34,7 +34,6 @@ switch($action) {
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
     isset($_POST['username']) or die("Username not set.");
 
-    //$DB->open();
     $username = $DB->escape_str($_POST['username']);
 
     $hash = md5(rand());
