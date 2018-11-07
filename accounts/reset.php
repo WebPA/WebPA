@@ -31,8 +31,13 @@ switch($action) {
     //phase 2
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
     isset($_POST['username']) or die("Username not set.");
+
+    $DB->open();
+    $username = $DB->escape_str($_POST['username']);
+    $DB->close();
+
     $hash = md5(rand());
-    $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$_POST['username']}' AND source_id = '' AND " .
+    $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '$username' AND source_id = '' AND " .
            '(email IS NOT NULL) AND (email != \'\')';
     $uid = $DB->fetch_value($sql);
     if (!$uid) {
