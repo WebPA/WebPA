@@ -87,23 +87,24 @@ class XMLParser {
     $this->_init();
   }// /->clear()
 
-  /*
-  * Parse the given XML document into a PHP array
-  *
-  * @param string $xml_data XML document to parse
-  *
-  * @return array PHP array representing XML structure
-  */
+  /**
+   * Parse the given XML document into a PHP array.
+   *
+   * @param string $xml_data XML document to parse
+   *
+   * @return array PHP array representing XML structure
+   */
   function parse($xml_data){
-    $this->_parser =& xml_parser_create('');
+    $this->_parser = xml_parser_create('');
+
     xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
     xml_set_object($this->_parser, $this);
     xml_set_element_handler($this->_parser, '_tag_open','_tag_close');
     xml_set_character_data_handler($this->_parser, '_tag_data');
 
     $this->xml_data = $xml_data;
-    $this->xml_array = array();
-    $this->_stack = array();
+    $this->xml_array = [];
+    $this->_stack = [];
     $this->_parent =& $this->xml_array;
 
     $this->data = '';
@@ -111,8 +112,8 @@ class XMLParser {
     $this->_cdata_tags = (array) $this->_cdata_tags;
 
 
-    return xml_parse($this->_parser, $this->xml_data, true) ? $this->xml_array : NULL;
-  }// /->parse()
+    return xml_parse($this->_parser, $this->xml_data, true) ? $this->xml_array : null;
+  }
 
   /**
   * Generate an xml document from the given array
