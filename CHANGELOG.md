@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix a bug where a unix timestamps were used in the email notifying users that an assessment had been reopened (PR #32)
 - Fix a bug where the resource from the create_xml_parser() object was being assigned by reference, causing a strict notice to be issued by PHP (PR #39)
 - Fix a bug where accessing undefined array index in the class_dao fetch_value() function caused a warning to be issued (PR #37)
+- Fix a bug where tutors who are also students can only see a student menu when logged into WebPA (PR #41)
 
 ### Security
 - Prevent SQL injection attack for the login and password reset page (PR #40)
