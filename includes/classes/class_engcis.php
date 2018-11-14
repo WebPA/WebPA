@@ -531,25 +531,24 @@ class EngCIS
         }
     }// /->_order_by_clause()
 
-    function get_user_academic_years($user_id = NULL)
+    function get_user_academic_years($user_id = null)
     {
-
         global $_source_id, $_module_id;
 
         if (!empty($user_id)) {
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}' AND m.module_id = '{$_module_id}' " .
-                'GROUP BY a.assessment_id';
+                "WHERE m.source_id = '{$_source_id}' AND m.module_id = '{$_module_id}'";
         } else {
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}' " .
-                'GROUP BY a.assessment_id';
+                "WHERE m.source_id = '{$_source_id}'";
         }
+
         $dates = $this->_DAO->fetch_row($sql);
+
         if (!empty($dates)) {
             $years[] = dateToYear(strtotime($dates['first']));
             $years[] = dateToYear(strtotime($dates['last']));
@@ -559,8 +558,7 @@ class EngCIS
         }
 
         return $years;
-
-    }// /get_first_academic_year()
+    }
 
 }// /class: EngCIS
 
