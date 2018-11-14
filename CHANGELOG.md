@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Fixed a bug where only one year value can be displayed in the assessments and metrics academic year drop down (PR #42)
+
 ## [3.0.1] - 2018-11-07
 
 ### Fixed
