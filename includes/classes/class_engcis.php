@@ -540,14 +540,14 @@ class EngCIS
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}' AND m.module_id = '{$_module_id}' " .
-                'GROUP BY a.assessment_id';
+                "WHERE m.source_id = '{$_source_id}' AND m.module_id = '{$_module_id}' ";
+               
         } else {
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}' " .
-                'GROUP BY a.assessment_id';
+                "WHERE m.source_id = '{$_source_id}' ";
+              
         }
         $dates = $this->_DAO->fetch_row($sql);
         if (!empty($dates)) {
