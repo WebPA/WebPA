@@ -8,9 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
-require_once('../includes/classes/class_email.php');
-require_once('../includes/functions/lib_form_functions.php');
+require_once '../includes/inc_global.php';
+require_once '../includes/classes/class_email.php';
+require_once '../includes/functions/lib_form_functions.php';
 
 check_user($_user);
 
@@ -31,35 +31,33 @@ $contact_email = fetch_POST('contact_email');
 $contact_phone = fetch_POST('contact_phone');
 
 $contact_date = date('d-M-Y H:i');
-$contact_type = fetch_POST('contact_type');
-$contact_message = fetch_POST('contact_message');
+$subject = fetch_POST('subject');
+$description = fetch_POST('description');
 
 $app_www = APP__WWW;
 
 $errors = array();
 
-if ($contact_fullname == '') {
-	$errors[] = 'Name is required';
+if ($contact_fullname === '') {
+    $errors[] = 'Name is required';
 }
 
-if ($contact_message == '') {
-	$errors[] = 'Message is required';
+if ($description === '') {
+    $errors[] = 'Description is required';
 }
 
-if ($contact_email == '') {
-	$errors[] = 'Email is required';
-
+if ($contact_email === '') {
+    $errors[] = 'Email is required';
 } elseif (!is_email($contact_email)) {
-	$errors[] = 'Email is not valid';
+    $errors[] = 'Email is not valid';
 }
 
 if (empty($errors)) {
-
 $email_body = <<<EndBody
 Contact Sent
 ----------------------------------------
 Application  : $contact_app_id ($app_www)
-Contact Type : $contact_type
+Subject      : $subject
 Date         : $contact_date
 ----------------------------------------
 
@@ -79,9 +77,9 @@ Username : $contact_user_username
 Email    : $contact_user_email
 ----------------------------------------
 
-Message:
+Description:
 ----------------------------------------
-$contact_message
+$description
 ----------------------------------------
 EndBody;
 
@@ -89,10 +87,9 @@ EndBody;
 $email = new Email();
 $email->set_to($contact_to);
 $email->set_from($contact_email);
-$email->set_subject("$contact_app_id : $contact_type");
+$email->set_subject("$contact_app_id : $subject");
 $email->set_body($email_body);
 $email->send();
-
 }
 
 // Begin Page
@@ -111,17 +108,20 @@ $UI->content_start();
   <div class="content_box">
     <?php if (empty($errors)) : ?>
     <p>Your message has now been sent.</p>
-    <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
+    <p>
+        We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for
+        any delay in getting back to you.
+    </p>
     <p>Thanks for your time</p>
     <?php else : ?>
-    	<p>Please correct the following errors:</p>
-    	<ul>
-    	<?php foreach ($errors as $error) : ?>
-    		<li><?php echo $error?></li>
-    	<?php endforeach; ?>
-    	</ul>
-    	<br>
-    	<button onclick="javascript:window.history.back();">Fix Errors</button>
+        <p>Please correct the following errors:</p>
+        <ul>
+        <?php foreach ($errors as $error) : ?>
+            <li><?php echo $error?></li>
+        <?php endforeach; ?>
+        </ul>
+        <br>
+        <button onclick="javascript:window.history.back();">Fix Errors</button>
     <?php endif; ?>
   </div>
 <?php
