@@ -110,8 +110,9 @@ class DAO
     } // /->open()
 
     /**
-     * Close database connection
-     * @return object
+     * Close database connection.
+     *
+     * @return bool
      */
     function close()
     {
