@@ -8,6 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
+// Add composer's autoloader
+require __DIR__ . '/../../vendor/autoload.php';
+
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
 
@@ -19,8 +22,8 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
-define('APP__WWW', '');
-define('DOC__ROOT', ''); //must include the trailing /
+define('APP__WWW', 'http://env.test');
+define('DOC__ROOT', '/var/www/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -29,10 +32,10 @@ ini_set('session.cookie_path', '/');
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
-define('APP__DB_HOST', 'localhost'); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', '');
-define('APP__DB_PASSWORD', '');
-define('APP__DB_DATABASE', '');
+define('APP__DB_HOST', 'db'); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_USERNAME', 'root');
+define('APP__DB_PASSWORD', 'uUiK:8#P([>N{-!U7{DQ>y8^vsJ');
+define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info

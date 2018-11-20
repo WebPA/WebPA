@@ -34,5 +34,8 @@
         "issues": "https://github.com/webpa/webpa/issues",
         "source": "https://github.com/webpa/webpa",
         "docs": "http://webpaproject.lboro.ac.uk"
+    },
+    "autoload": {
+        "psr-4": {"WebPA\\": "src/"}
     }
 }
