@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.0.2] - 2018-11-20
+
+### Fixed
+- Fixed a bug where the database connection was not being properly closed down, meaning subsequent database calls would always fail, even if the `$DB->open()` function was called as the old, closed connection would not be replaced or reinstantiated (PR #43)
+
 ### Fixed
 - Fixed a bug where only one year value can be displayed in the assessments and metrics academic year drop down (PR #42)
 
@@ -29,7 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/WebPA/WebPA/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/WebPA/WebPA/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/WebPA/WebPA/compare/v2.0.0.11...v3.0.0
 [2.0.0.11]: https://github.com/WebPA/WebPA/compare/v1.1.0.1...v2.0.0.11
