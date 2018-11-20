@@ -116,8 +116,11 @@ class DAO
     function close()
     {
         $this->flush();
-        return (@mysqli_close($this->_conn));
-    } // /->close()
+        $isClosed = @mysqli_close($this->_conn);
+        $this->_conn = null;
+
+        return $isClosed;
+    }
 
     /**
      * Clear results and reset result vars
