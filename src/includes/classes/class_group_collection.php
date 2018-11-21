@@ -13,7 +13,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('class_dao.php');
 require_once('class_group.php');
 
 class GroupCollection {

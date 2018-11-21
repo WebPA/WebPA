@@ -8,8 +8,14 @@
  * @link https://github.com/webpa/webpa
  */
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Add composer's autoloader
 require __DIR__ . '/../../vendor/autoload.php';
+
+// TODO: Remove FQDN
+use WebPA\includes\classes\DAO;
 
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
@@ -130,7 +136,6 @@ define('APP__REMINDER_CLOSING', FALSE);
 
 // Includes
 require_once(DOC__ROOT.'includes/functions/lib_common.php');
-require_once(DOC__ROOT.'includes/classes/class_dao.php');
 require_once(DOC__ROOT.'includes/classes/class_user.php');
 require_once(DOC__ROOT.'includes/classes/class_module.php');
 require_once(DOC__ROOT.'includes/classes/class_engcis.php');

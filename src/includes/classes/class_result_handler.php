@@ -17,7 +17,6 @@ function relativetome3($structure, $filetoget){
 }
 
 relativetome3(__FILE__, 'inc_global.php');
-require_once(DOC__ROOT.'includes/classes/class_dao.php');
 require_once(DOC__ROOT.'includes/classes/class_assessment.php');
 require_once(DOC__ROOT.'includes/classes/class_form.php');
 require_once(DOC__ROOT.'includes/classes/class_group_handler.php');

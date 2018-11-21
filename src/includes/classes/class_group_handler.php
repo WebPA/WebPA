@@ -8,7 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('class_dao.php');
+// TODO: will eventually have the same namespace so can remove the FQDN
+use WebPA\includes\classes\DAO;
+
 require_once('class_group_collection.php');
 require_once('class_group.php');
 

@@ -17,7 +17,6 @@ function relativetome4($structure, $filetoget){
 }
 
 relativetome1(__FILE__, 'inc_global.php');
-require_once(DOC__ROOT.'includes/classes/class_dao.php');
 
 class FormRenderer {
   // Public Vars

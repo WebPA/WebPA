@@ -20,7 +20,9 @@ function relativetome($structure, $filetoget)
 
 relativetome(__FILE__, 'inc_global.php');
 
-require_once(DOC__ROOT . 'includes/classes/class_dao.php');
+// TODO: Remove FQDN
+use WebPA\includes\classes\DAO;
+
 require_once(DOC__ROOT . 'includes/functions/lib_array_functions.php');
 require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 

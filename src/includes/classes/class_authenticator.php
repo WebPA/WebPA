@@ -10,6 +10,9 @@
  * @link https://github.com/webpa/webpa
  */
 
+// TODO: remove FQDN when class is in namespace
+use WebPA\includes\classes\DAO;
+
 class Authenticator {
 
 // Public variables

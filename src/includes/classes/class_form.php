@@ -18,7 +18,6 @@ function relativetome1($structure, $filetoget){
 
 relativetome1(__FILE__, 'inc_global.php');
 
-require_once(DOC__ROOT . 'includes/classes/class_dao.php');
 require_once(DOC__ROOT.'includes/classes/class_xml_parser.php');
 
 class Form {
