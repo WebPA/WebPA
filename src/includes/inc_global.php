@@ -137,7 +137,6 @@ define('APP__REMINDER_CLOSING', FALSE);
 
 // Includes
 require_once(DOC__ROOT.'includes/functions/lib_common.php');
-require_once(DOC__ROOT.'includes/classes/class_module.php');
 require_once(DOC__ROOT.'includes/classes/class_engcis.php');
 require_once(DOC__ROOT.'includes/classes/class_ui.php');
 

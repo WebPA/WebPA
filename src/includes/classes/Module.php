@@ -12,6 +12,8 @@
 
 require_once('class_group_handler.php');
 
+namespace WebPA\includes\classes;
+
 class Module {
   // Public Vars
   public $module_code = NULL;

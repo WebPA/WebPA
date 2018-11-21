@@ -18,6 +18,8 @@
 //get the include file required
 require_once("../../includes/inc_global.php");
 
+use WebPA\includes\classes\Module;
+
 if (!check_user($_user, APP__USER_TYPE_ADMIN)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
