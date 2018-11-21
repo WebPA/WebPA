@@ -13,7 +13,6 @@
  */
 
 require_once('../../includes/inc_global.php');
-require_once('../../includes/classes/class_group_handler.php');
 require_once('../../includes/functions/lib_string_functions.php');
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {

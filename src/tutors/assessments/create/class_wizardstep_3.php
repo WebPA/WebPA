@@ -10,6 +10,8 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\classes\GroupHandler;
+
 class WizardStep3 {
 
   // Public
@@ -48,7 +50,6 @@ class WizardStep3 {
     $config =& $this->wizard->get_var('config');
     $user =& $this->wizard->get_var('user');
 
-    require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
     require_once(DOC__ROOT . 'includes/classes/class_simple_object_iterator.php');
 
     global $group_handler;

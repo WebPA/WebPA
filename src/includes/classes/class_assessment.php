@@ -10,6 +10,8 @@
 
 require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
 
+use WebPA\includes\classes\GroupHandler;
+
 class Assessment {
 
   // Public Vars

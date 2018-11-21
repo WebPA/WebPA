@@ -11,7 +11,6 @@
 require_once("../../../includes/inc_global.php");
 require_once(DOC__ROOT .'/includes/functions/lib_form_functions.php');
 require_once(DOC__ROOT . 'includes/classes/class_assessment.php');
-require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
 require_once(DOC__ROOT . 'includes/classes/class_result_handler.php');
 require_once(DOC__ROOT . 'includes/classes/class_email.php');
 require_once(DOC__ROOT . 'includes/classes/class_wizard.php');

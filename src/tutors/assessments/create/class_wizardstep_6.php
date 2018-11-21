@@ -10,6 +10,8 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\classes\GroupHandler;
+
 class WizardStep6 {
 
   // Public
@@ -50,7 +52,6 @@ class WizardStep6 {
 
     require_once(DOC__ROOT . 'includes/classes/class_assessment.php');
     require_once(DOC__ROOT .'/includes/classes/class_form.php');
-    require_once(DOC__ROOT . 'includes/classes/class_group_handler.php');
     require_once(DOC__ROOT . '/tutors/assessments/email/new_assessment.php');
 
     $errors = null;

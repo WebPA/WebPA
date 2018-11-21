@@ -10,8 +10,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('class_group_handler.php');
-
 namespace WebPA\includes\classes;
 
 class Module {
