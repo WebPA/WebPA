@@ -22,7 +22,8 @@ This table has the CREATE definition:
 */
 
 require_once("../includes/inc_global.php");
-require_once("../includes/classes/class_user.php");
+
+use WebPA\includes\classes\User;
 
 $action = fetch_POST('action');
 

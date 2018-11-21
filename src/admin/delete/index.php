@@ -12,6 +12,8 @@
  require_once("../../includes/inc_global.php");
  require_once('../../includes/classes/class_assessment.php');
 
+ use WebPA\includes\classes\User;
+
  if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;

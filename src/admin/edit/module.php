@@ -6,7 +6,7 @@
  * who is the person able to access the system through a number of routes may
  * or may not be shown all of the information.
  *
- * On saving the edit the information is processed via the class_user.php for the majority
+ * On saving the edit the information is processed via the User class for the majority
  * of the information and then the module information is processed.
  *
  * @copyright Loughborough University

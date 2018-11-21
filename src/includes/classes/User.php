@@ -10,6 +10,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 class User {
   // Public Vars
   public $username = null;
