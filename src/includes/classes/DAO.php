@@ -112,13 +112,17 @@ class DAO
     } // /->open()
 
     /**
-     * Close database connection
-     * @return object
+     * Close database connection.
+     *
+     * @return bool
      */
     function close()
     {
         $this->flush();
-        return (@mysqli_close($this->_conn));
+        $isClosed = @mysqli_close($this->_conn);
+        $this->_conn = null;
+
+        return $isClosed;
     }
 
     /**
