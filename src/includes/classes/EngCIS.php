@@ -8,20 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-function rel($struc, &$file)
-{
-    return file_exists(($file = (dirname($struc) . '/' . $file)));
-}
+namespace WebPA\includes\classes;
 
-function relativetome($structure, $filetoget)
-{
-    return rel($structure, $filetoget) ? require_once($filetoget) : null;
-}
-
-relativetome(__FILE__, 'inc_global.php');
-
-// TODO: Remove FQDN
-use WebPA\includes\classes\DAO;
+include_once __DIR__ . '/../inc_global.php';
 
 require_once(DOC__ROOT . 'includes/functions/lib_array_functions.php');
 require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');

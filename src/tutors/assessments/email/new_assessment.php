@@ -13,8 +13,8 @@
 
 require_once("../../../includes/inc_global.php");
 require_once('../../../includes/classes/class_email.php');
-require_once('../../../includes/classes/class_engcis.php');
 
+use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;
 
 /***************************************************************

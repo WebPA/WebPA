@@ -15,6 +15,7 @@ ini_set('display_errors', 1);
 require __DIR__ . '/../../vendor/autoload.php';
 
 // TODO: Remove FQDN
+use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\User;
 
@@ -137,7 +138,6 @@ define('APP__REMINDER_CLOSING', FALSE);
 
 // Includes
 require_once(DOC__ROOT.'includes/functions/lib_common.php');
-require_once(DOC__ROOT.'includes/classes/class_engcis.php');
 require_once(DOC__ROOT.'includes/classes/class_ui.php');
 
 //set in individual pages to link to the most appropriate help sections.

@@ -119,7 +119,7 @@ class DAO
     {
         $this->flush();
         return (@mysqli_close($this->_conn));
-    } // /->close()
+    }
 
     /**
      * Clear results and reset result vars
