@@ -10,7 +10,7 @@
 
 namespace WebPA\includes\classes;
 
-include_once __DIR__ '/../inc_global.php';
+include_once __DIR__ . '/../inc_global.php';
 
 class UI {
   // Public Vars
