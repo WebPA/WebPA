@@ -11,8 +11,8 @@
 require_once("../../includes/inc_global.php");
 require_once("../../includes/classes/class_assessment.php");
 require_once("../../includes/classes/class_form.php");
-require_once(DOC__ROOT . 'includes/classes/class_algorithm_factory.php');
 
+use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\GroupHandler;
 
 if (!check_user($_user, APP__USER_TYPE_STUDENT)){
