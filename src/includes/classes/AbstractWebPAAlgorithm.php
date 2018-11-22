@@ -1,6 +1,8 @@
 <?php
 /**
- * Abstract Class :  WebPAAlgorithm
+ * Abstract WebPA Algorithm.
+ *
+ * Note that this is not actually an abstract class and will need to be modified in future versions.
  *
  * @copyright Loughborough University
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
@@ -8,7 +10,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-class WebPAAlgorithm {
+namespace WebPA\includes\classes;
+
+class AbstractWebPAAlgorithm {
   // Public Vars
   public $_groups = null;
   public $_group_members = null;
@@ -34,7 +38,7 @@ class WebPAAlgorithm {
   */
   function __construct() {
     $this->_init();
-  }// /->WebPAAlgorithm()
+  }
 
 /**
 * ================================================================================

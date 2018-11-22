@@ -14,18 +14,11 @@
  * @link https://github.com/webpa/webpa
  */
 
-function rel8($struc, &$file) {
-  return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
-}
+include_once __DIR__ '/../inc_global.php';
 
-function relativetome8($structure, $filetoget){
-  return rel8($structure,$filetoget) ? require_once($filetoget) : null;
-}
+use WebPA\includes\classes\AbstractWebPAAlgorithm;
 
-relativetome8(__FILE__, 'inc_global.php');
-require_once(DOC__ROOT .'/includes/classes/abstract_webpa_algorithm.php');
-
-class NewAlgorithm extends WebPAAlgorithm {
+class NewAlgorithm extends AbstractWebPAAlgorithm {
   // Public Vars
 
   /*

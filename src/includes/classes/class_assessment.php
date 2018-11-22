@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract Class :  WebPAAlgorithm
+ * Assessment.
  *
  * @copyright Loughborough University
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
