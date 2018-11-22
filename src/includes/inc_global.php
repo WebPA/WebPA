@@ -17,6 +17,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 // TODO: Remove FQDN
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
+use WebPA\includes\classes\UI;
 use WebPA\includes\classes\User;
 
 // Set the correct timezone for your server.
@@ -138,7 +139,6 @@ define('APP__REMINDER_CLOSING', FALSE);
 
 // Includes
 require_once(DOC__ROOT.'includes/functions/lib_common.php');
-require_once(DOC__ROOT.'includes/classes/class_ui.php');
 
 //set in individual pages to link to the most appropriate help sections.
 //this is not an option that can be changed in the configuration

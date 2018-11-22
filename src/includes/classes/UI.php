@@ -8,16 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-//include main global file so that the session can be used
-function rel7($struc, &$file) {
-  return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
-}
+namespace WebPA\includes\classes;
 
-function relativetome7($structure, $filetoget){
-  return rel7($structure,$filetoget) ? require_once($filetoget) : null;
-}
-
-relativetome7(__FILE__, 'inc_global.php');
+include_once __DIR__ '/../inc_global.php';
 
 class UI {
   // Public Vars
