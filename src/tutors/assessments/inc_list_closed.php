@@ -9,6 +9,8 @@
  *
  * @link https://github.com/webpa/webpa
  */
+
+use WebPA\includes\classes\Assessment;
 ?>
 
 <h2>Closed assessments for <?php echo($academic_year); ?></h2>

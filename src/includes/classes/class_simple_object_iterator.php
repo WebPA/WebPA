@@ -12,6 +12,10 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Assessment;
+
+require_once __DIR__ . '/Assessment.php';
+
 class SimpleObjectIterator {
   // Public Vars
   public $array;
@@ -33,7 +37,7 @@ class SimpleObjectIterator {
     $this->_initialise($array);
     $this->class_name = $class_name;
     $this->class_constructor_args = $constructor_args;
-  }// /->SimpleObjectIterator()
+  }
 
 /*
 * --------------------------------------------------------------------------------
@@ -47,7 +51,8 @@ class SimpleObjectIterator {
   */
   function &current() {
     $temp = null;
-    eval("\$temp = new {$this->class_name}({$this->class_constructor_args});");   // eval allows us to include arguments for the constructor
+    $temp = new Assessment($this->class_constructor_args);
+    //eval("\$temp = new {$this->class_name}({$this->class_constructor_args});");   // eval allows us to include arguments for the constructor
     $temp->load_from_row($this->_value);
     return $temp;
   }// /->current()

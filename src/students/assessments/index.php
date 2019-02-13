@@ -11,7 +11,6 @@
 require_once("../../includes/inc_global.php");
 require_once("../../includes/classes/class_simple_object_iterator.php");
 require_once("../../includes/functions/lib_university_functions.php");
-require_once("../../includes/classes/class_assessment.php");
 
 use WebPA\includes\classes\GroupHandler;
 

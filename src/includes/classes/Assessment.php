@@ -8,9 +8,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
+namespace WebPA\includes\classes;
 
-use WebPA\includes\classes\GroupHandler;
+require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
 
 class Assessment {
 
@@ -206,7 +206,7 @@ class Assessment {
     $clone_assessment->load($this->id);   // Creates an EXACT clone of this assessment
     $clone_assessment->create();
     return $clone_assessment;
-  }// /->get_clone()
+  }
 
 /*
 * --------------------------------------------------------------------------------
