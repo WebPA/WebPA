@@ -199,7 +199,7 @@ class DAO
         if ($sql) {
             $this->_process_query($sql);
         }
-        return (isset($this->_result)) ? $this->_result[$y] : null;
+        return isset($this->_result[$y]) ? $this->_result[$y] : null;
     } // /->fetch_row()
 
     /**
