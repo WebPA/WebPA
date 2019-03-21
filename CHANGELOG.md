@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [3.0.3] - 2019-03-21
+
+### Fixed
 - Fix undefined offset notice in the class_dao.php file (PR #48)
 - Fix respondent list for assessments not showing (PR #48)
 - Fix login issue where activity timestamp was not being stored in the database (PR #48)
