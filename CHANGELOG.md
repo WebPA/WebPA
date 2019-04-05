@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Fixed issue where students logging in directly to WebPA would encounter a database error (PR #53)
+
 ## [3.0.3] - 2019-03-21
 
 ### Fixed
