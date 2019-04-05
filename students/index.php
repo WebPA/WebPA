@@ -56,6 +56,7 @@ $assessment_clause = $DB->build_set($assessment_ids);
 
 $assessments_with_response = $DB->fetch_col('SELECT DISTINCT um.assessment_id ' .
                                             'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+                                            'LEFT JOIN pa2_assessment a ON a.assessment_id = um.assessment_id ' .
                                             "WHERE (a.module_id = {$_module_id}) AND " .
                                                   "(um.assessment_id IN {$assessment_clause}) AND " .
                                                   "(um.user_id = {$_user->id}) " .
