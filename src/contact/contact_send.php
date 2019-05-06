@@ -9,8 +9,9 @@
  */
 
 require_once("../includes/inc_global.php");
-require_once('../includes/classes/class_email.php');
 require_once('../includes/functions/lib_form_functions.php');
+
+use WebPA\includes\classes\Email;
 
 check_user($_user);
 

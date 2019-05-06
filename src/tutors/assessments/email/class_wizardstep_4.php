@@ -8,6 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Email;
 use WebPA\includes\classes\GroupHandler;
 
 class WizardStep4 {

@@ -11,6 +11,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 class Email {
   // Public Vars
 
