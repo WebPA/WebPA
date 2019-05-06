@@ -10,7 +10,6 @@
  */
 
  require_once("../../../includes/inc_global.php");
- require_once(DOC__ROOT. '/includes/classes/class_form.php');
 
  if (!check_user($_user, APP__USER_TYPE_TUTOR)){
    header('Location:'. APP__WWW .'/logout.php?msg=denied');

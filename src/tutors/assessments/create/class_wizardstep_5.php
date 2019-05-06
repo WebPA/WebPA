@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
 
 class WizardStep5 {
@@ -48,7 +49,6 @@ class WizardStep5 {
 
     $now = time();
 
-    require_once(DOC__ROOT . 'includes/classes/class_form.php');
 ?>
     <p>Your assessment is now ready for creation.</p>
     <p>Please review the details below. When you're are satisfied, click <em>Finish</em> to create your peer assessment.</p>

@@ -57,7 +57,6 @@ class WizardStep4 {
 
     $assessment_type = $this->wizard->get_field('assessment_type',1);
 
-    require_once(DOC__ROOT . 'includes/classes/class_form.php');
 ?>
     <h2>Assessment Type</h2>
     <div class="form_section">

@@ -9,7 +9,6 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/classes/class_form.php');
 require_once(DOC__ROOT . 'includes/classes/class_result_handler.php');
 require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
 require_once(DOC__ROOT . 'includes/classes/class_new_algorithm.php');

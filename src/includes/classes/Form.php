@@ -12,6 +12,8 @@ include_once __DIR__ . '/../inc_global.php';
 
 require_once(DOC__ROOT.'includes/classes/class_xml_parser.php');
 
+namespace WebPA\includes\classes;
+
 class Form {
   // Public Vars
   public $id = null;
@@ -149,7 +151,7 @@ class Form {
   * @return mixed returns the clone of the form
   */
   function & get_clone() {
-    $clone_form = new Form($this->_DAO);
+    $clone_form = new self($this->_DAO);
     $clone_form->create();  // Changes the form's ID so it is officially a new form
     $temp_id = $clone_form->id;
     $clone_form->load_from_xml($this->get_xml()); // Creates an EXACT clone of the existing form

@@ -9,7 +9,6 @@
  */
 
 require_once("../../includes/inc_global.php");
-require_once("../../includes/classes/class_form.php");
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;

@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Form;
+
 class WizardStep3 {
 
   // Public
