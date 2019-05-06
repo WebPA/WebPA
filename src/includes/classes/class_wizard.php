@@ -10,6 +10,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 class Wizard {
   // Public Vars
   public $back_button = '&lt; Back';
