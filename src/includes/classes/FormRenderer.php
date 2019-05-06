@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 function & rel4($struc, &$file) {
   return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
 }
