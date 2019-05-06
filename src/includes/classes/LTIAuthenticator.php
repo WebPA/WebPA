@@ -10,7 +10,9 @@
  * @link https://github.com/webpa/webpa
  */
 
-class DBAuthenticator extends Authenticator {
+namespace WebPA\includes\classes;
+
+class LTIAuthenticator extends Authenticator {
 
 /*
 ================================================================================
