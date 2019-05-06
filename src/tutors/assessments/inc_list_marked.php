@@ -19,6 +19,9 @@
  * @param string $page_url "/tutors/assessment/";
  *
  */
+
+use WebPA\includes\classes\ResultHandler;
+
 ?>
 
 <h2>Marked assessments for <?php echo($academic_year); ?></h2>

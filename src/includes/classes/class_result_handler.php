@@ -18,7 +18,7 @@ function relativetome3($structure, $filetoget){
 
 relativetome3(__FILE__, 'inc_global.php');
 
-use WebPA\includes\classes\GroupHandler;
+namespace WebPA\includes\classes;
 
 class ResultHandler {
   // Public Vars

@@ -9,6 +9,9 @@
  *
  * @link https://github.com/webpa/webpa
  */
+
+use WebPA\includes\classes\ResultHandler;
+
 ?>
 
 <h2>Pending assessments for <?php echo($academic_year); ?></h2>

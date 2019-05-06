@@ -10,6 +10,7 @@
 
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\ResultHandler;
 
 class WizardStep4 {
 

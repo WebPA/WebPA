@@ -10,7 +10,8 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\classes\Assessment;
+use WebPA\includes\classes\ResultHandler;
+
 ?>
 
 <h2>Closed assessments for <?php echo($academic_year); ?></h2>
@@ -52,6 +53,7 @@ if (!$assessments) {
 
   // loop through and display all the assessments
   $assessment_iterator = new SimpleObjectIterator($assessments,'Assessment','$DB');
+
   for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
     $assessment =& $assessment_iterator->current();
 

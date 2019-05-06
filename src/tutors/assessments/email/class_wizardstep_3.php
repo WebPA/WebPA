@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\ResultHandler;
 
 class WizardStep3 {
 
