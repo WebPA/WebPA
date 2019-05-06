@@ -12,9 +12,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\classes\Assessment;
-
-require_once __DIR__ . '/Assessment.php';
+namespace WebPA\includes\classes;
 
 class SimpleObjectIterator {
   // Public Vars

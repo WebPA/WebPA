@@ -21,6 +21,7 @@
  */
 
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\classes\SimpleObjectIterator;
 
 ?>
 

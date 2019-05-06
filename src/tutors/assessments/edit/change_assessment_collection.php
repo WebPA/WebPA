@@ -13,6 +13,7 @@ require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\SimpleObjectIterator;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -197,7 +198,6 @@ if (!$assessment) {
     <h2>Available Collections</h2>
     <div class="form_section">
 <?php
-    require_once(DOC__ROOT . 'includes/classes/class_simple_object_iterator.php');
 
     global $group_handler;
     $group_handler = new GroupHandler();

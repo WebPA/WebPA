@@ -11,6 +11,7 @@
 require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\SimpleObjectIterator;
 
 class WizardStep3 {
 
@@ -49,8 +50,6 @@ class WizardStep3 {
     $DB =& $this->wizard->get_var('db');
     $config =& $this->wizard->get_var('config');
     $user =& $this->wizard->get_var('user');
-
-    require_once(DOC__ROOT . 'includes/classes/class_simple_object_iterator.php');
 
     global $group_handler;
     $group_handler = new GroupHandler();

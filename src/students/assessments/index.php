@@ -9,10 +9,10 @@
  */
 
 require_once("../../includes/inc_global.php");
-require_once("../../includes/classes/class_simple_object_iterator.php");
 require_once("../../includes/functions/lib_university_functions.php");
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\SimpleObjectIterator;
 
 if (!check_user($_user, APP__USER_TYPE_STUDENT)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');

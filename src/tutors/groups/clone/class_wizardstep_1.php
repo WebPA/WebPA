@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\SimpleObjectIterator;
+
 class WizardStep1 {
 
   // Public
@@ -45,8 +47,6 @@ HTMLEnd;
     $config = $this->wizard->get_var('config');
     $module = $this->wizard->get_var('module');
     $group_handler = $this->wizard->get_var('group_handler');
-
-    require_once("../../../includes/classes/class_simple_object_iterator.php");
 
     $collections = $group_handler->get_module_collections($module, $config['app_id']);
 
