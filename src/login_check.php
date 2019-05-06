@@ -29,7 +29,6 @@ $password = substr($password,0,255);
 $DB->open();
 $username = $DB->escape_str($username);
 $password = $DB->escape_str($password);
-//$DB->close();
 
 $msg ='';
 

@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.0.3] - 2019-03-21
+
+### Fixed
+- Fix undefined offset notice in the class_dao.php file (PR #48)
+- Fix respondent list for assessments not showing (PR #48)
+- Fix login issue where activity timestamp was not being stored in the database (PR #48)
+- Fix issue preventing users from creating assessments via the assessment wizard (PR #48)
+
 ## [3.0.2] - 2018-11-20
 
 ### Fixed
@@ -34,7 +42,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.2...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.3...HEAD
+[3.0.3]: https://github.com/WebPA/WebPA/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/WebPA/WebPA/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/WebPA/WebPA/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/WebPA/WebPA/compare/v2.0.0.11...v3.0.0

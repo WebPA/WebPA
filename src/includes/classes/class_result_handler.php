@@ -139,7 +139,7 @@ class ResultHandler {
           INNER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON um.assessment_id = a.assessment_id
         WHERE um.assessment_id = '{$this->_assessment->id}'
           AND a.collection_id = '{$this->_collection->id}'
-          AND um,group_id = '$group_id'
+          AND um.group_id = '$group_id'
       ");
     } else {
       return null;

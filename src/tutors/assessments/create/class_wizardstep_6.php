@@ -75,7 +75,6 @@ class WizardStep6 {
     $form = new Form($DB);
     $form->load($this->wizard->get_field('form_id'));
     $assessment->set_form_xml( $form->get_xml() );
-    $assessment->save();
 
     // Set the collection of groups to assess
     $group_handler = new GroupHandler();
