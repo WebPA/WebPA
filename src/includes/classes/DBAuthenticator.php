@@ -10,6 +10,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 class DBAuthenticator extends Authenticator {
 
 /*
@@ -41,5 +43,3 @@ class DBAuthenticator extends Authenticator {
 */
 
 }// /class DBAuthenticator
-
-?>

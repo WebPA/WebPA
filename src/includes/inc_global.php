@@ -31,8 +31,8 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
-define('APP__WWW', 'http://env.test');
-define('DOC__ROOT', '/var/www/src/'); //must include the trailing /
+define('APP__WWW', 'http://env.test:8080');
+define('DOC__ROOT', '/var/www/html/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -43,7 +43,7 @@ define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 //Database information
 define('APP__DB_HOST', 'db'); // If on a non-standard port, use this format:  <server>:<port>
 define('APP__DB_USERNAME', 'root');
-define('APP__DB_PASSWORD', 'uUiK:8#P([>N{-!U7{DQ>y8^vsJ');
+define('APP__DB_PASSWORD', 'rootpass');
 define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
@@ -79,8 +79,8 @@ ini_set('smtp_port','25');
 ini_set('sendmail_from','someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
-// $LOGIN_AUTHENTICATORS[] = 'DB';
-// $LOGIN_AUTHENTICATORS[] = 'LDAP';
+$LOGIN_AUTHENTICATORS[] = 'DB';
+$LOGIN_AUTHENTICATORS[] = 'LDAP';
 $LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings

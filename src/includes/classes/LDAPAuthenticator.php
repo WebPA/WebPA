@@ -15,6 +15,8 @@
 
 require_once(DOC__ROOT.'includes/functions/lib_string_functions.php');
 
+namespace WebPA\includes\classes;
+
 class LDAPAuthenticator extends Authenticator {
 
 /*

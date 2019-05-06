@@ -14,6 +14,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA;
+
 require_once("./includes/inc_global.php");
 
 // --------------------------------------------------------------------------------
@@ -42,12 +44,11 @@ if ( ($username) && ($password) ) {
   $authenticated = FALSE;
 
   // Authenticate...
-  require_once(DOC__ROOT . 'includes/classes/class_authenticator.php');
   for ($i = 0; $i < count($LOGIN_AUTHENTICATORS); $i++) {
-    $classname = $LOGIN_AUTHENTICATORS[$i];
-    require_once(DOC__ROOT . 'includes/classes/class_' . strtolower($classname) . '_authenticator.php');
-    $classname .= "Authenticator";
+    $classname = 'WebPA\includes\classes\\' . $LOGIN_AUTHENTICATORS[$i] . 'Authenticator';
+
     $_auth = new $classname($username, $password);
+
     if ($_auth->authenticate()) {
       $authenticated = TRUE;
       break;

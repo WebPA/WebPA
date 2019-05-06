@@ -4,10 +4,9 @@
  * Class : SAMLAuthenticator
  *
  * Authenticates the given username and password against SAML
- *
- *
- *
  */
+
+namespace WebPA\includes\classes;
 
 class SAMLAuthenticator extends Authenticator {
 

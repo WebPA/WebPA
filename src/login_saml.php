@@ -20,6 +20,10 @@
  *
  */
 
+namespace WebPA;
+
+use WebPA\includes\classes\Authenticator;
+
 // --------------------------------------------------------------------------------
 // Process Get/Post
 
@@ -60,8 +64,6 @@ if ( $valid_saml_session )
 {
 
     $authenticated = FALSE;
-    
-    require_once(DOC__ROOT . 'includes/classes/class_authenticator.php');
 
     for ($i = 0; $i < count($LOGIN_AUTHENTICATORS); $i++) {
         $classname = $LOGIN_AUTHENTICATORS[$i];
