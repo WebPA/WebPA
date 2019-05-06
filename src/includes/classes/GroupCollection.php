@@ -358,7 +358,6 @@ class GroupCollection {
   function & get_groups_iterator() {
     if (!$this->_groups) { $this->refresh_groups(); }
 
-    require_once('class_simple_iterator.php');
     foreach($this->_groups as $i => $group_row) {
       $this->get_group_object($group_row['group_id']);
     }
