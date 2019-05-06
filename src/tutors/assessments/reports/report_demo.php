@@ -9,10 +9,10 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\NewAlgorithm;
+use WebPA\includes\classes\XMLParser;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');

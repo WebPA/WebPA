@@ -10,8 +10,9 @@
  */
 
 require_once('../../../includes/inc_global.php');
-require_once('../../../includes/classes/class_xml_parser.php');
 require_once('../../../includes/functions/lib_xml_validate.php');
+
+use WebPA\includes\classes\XMLParser;
 
 //get the posted data
 $xml =  stripslashes($_GET['txtXml']);

@@ -10,8 +10,6 @@
 
 namespace WebPA\includes\classes;
 
-require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
-
 class Assessment {
 
   // Public Vars

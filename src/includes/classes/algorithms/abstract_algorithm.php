@@ -11,8 +11,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once(DOC__ROOT . 'includes/classes/class_xml_parser.php');
-
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 

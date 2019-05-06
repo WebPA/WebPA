@@ -14,6 +14,7 @@ use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\classes\XMLParser;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');

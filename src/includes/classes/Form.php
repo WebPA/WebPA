@@ -10,8 +10,6 @@
 
 include_once __DIR__ . '/../inc_global.php';
 
-require_once(DOC__ROOT.'includes/classes/class_xml_parser.php');
-
 namespace WebPA\includes\classes;
 
 class Form {

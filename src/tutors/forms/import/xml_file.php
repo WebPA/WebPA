@@ -10,8 +10,9 @@
 
 //get the include file required
 require_once('../../../includes/inc_global.php');
-require_once('../../../includes/classes/class_xml_parser.php');
 require_once('../../../includes/functions/lib_xml_validate.php');
+
+use WebPA\includes\classes\XMLParser;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');

@@ -22,6 +22,7 @@
 
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\classes\XMLParser;
 
 ?>
 
