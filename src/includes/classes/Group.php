@@ -18,6 +18,8 @@
 
 require_once('class_group_collection.php');
 
+namespace WebPA\includes\classes;
+
 class Group {
   // Public Vars
   public $id = null;

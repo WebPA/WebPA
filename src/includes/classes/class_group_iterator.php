@@ -12,7 +12,8 @@
  */
 
 require_once('class_simple_object_iterator.php');
-require_once('class_group.php');
+
+namespace WebPA\includes\classes;
 
 class GroupIterator extends SimpleObjectIterator {
   // Private Vars

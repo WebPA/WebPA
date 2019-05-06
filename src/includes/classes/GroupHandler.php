@@ -10,9 +10,6 @@
 
 namespace WebPA\includes\classes;
 
-require_once('class_group_collection.php');
-require_once('class_group.php');
-
 class GroupHandler {
   // Public Vars
   public $_DAO = null;  // [pmn] due to a poor iterator implementation, this is currently public

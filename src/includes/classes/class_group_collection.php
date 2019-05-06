@@ -13,7 +13,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('class_group.php');
+namespace WebPA\includes\classes;
 
 class GroupCollection {
   // Public Vars
