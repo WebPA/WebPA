@@ -16,7 +16,7 @@
 
 include_once __DIR__ '/../inc_global.php';
 
-use WebPA\includes\classes\AbstractWebPAAlgorithm;
+namespace WebPA\includes\classes;
 
 class NewAlgorithm extends AbstractWebPAAlgorithm {
   // Public Vars
