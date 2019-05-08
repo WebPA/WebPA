@@ -12,6 +12,7 @@ require_once("../../../includes/inc_global.php");
 require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\ArrayFunctions;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -159,7 +160,7 @@ if (!$collection) {
 
     if (is_array($module_students)) {
       foreach($module_students as $i => $member) {
-        $assigned_group = array_searchvalue($member['user_id'], $collection_member_rows, 'user_id', 'group_id');
+        $assigned_group = ArrayFunctions::array_searchvalue($member['user_id'], $collection_member_rows, 'user_id', 'group_id');
         echo('<tr>');
         echo("<td>{$member['lastname']}, {$member['forename']} (");
         if (!empty($member['id_number'])) {

@@ -17,6 +17,7 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\NewAlgorithm;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\classes\XMLParser;
+use WebPA\includes\functions\ArrayFunctions;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -118,7 +119,7 @@ if ($assessment->load($assessment_id)) {
 
   $members_raw = $CIS->get_user($member_ids);
 
-  $members = array_get_assoc($members_raw,'user_id');
+  $members = ArrayFunctions::array_get_assoc($members_raw,'user_id');
 
   // Get Student Response Information
   $response_info = $DB->fetch_assoc("SELECT user_id, ip_address, comp_name, date_responded, date_opened

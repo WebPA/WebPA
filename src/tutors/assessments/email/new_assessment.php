@@ -16,6 +16,7 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\ArrayFunctions;
 
 /***************************************************************
 * Function mail_assessment_notification
@@ -48,7 +49,7 @@ function mail_assessment_notification ($collectionId, $subjectLn,$body_content, 
 
   if (is_array($users_to_email)) {
     $users_arr = $CISa->get_user($users_to_email);
-    $bcc_list = array_extract_column($users_arr, 'email');
+    $bcc_list = ArrayFunctions::array_extract_column($users_arr, 'email');
 
     //get the current userID
     $this_user = $CISa->get_user($_user_id);

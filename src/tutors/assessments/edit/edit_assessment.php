@@ -16,6 +16,7 @@ use WebPA\includes\classes\Email;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\functions\ArrayFunctions;
 
 if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -108,7 +109,7 @@ if ($command && $assessment) {
                 $users_to_email = array_diff($all_users, $responded_users);
 
                 //set the email details
-                $bcc_list = array_extract_column($users_to_email, 'email');
+                $bcc_list = ArrayFunctions::array_extract_column($users_to_email, 'email');
                 $bcc_list[] = $_user->email;
 
                 if (is_array($bcc_list)) {

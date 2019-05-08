@@ -7,7 +7,6 @@
  *
  * @link https://github.com/webpa/webpa
  */
-require_once('lib_array_functions.php');
 
 $form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
 

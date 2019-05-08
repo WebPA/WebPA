@@ -11,6 +11,7 @@
 require_once("../includes/inc_global.php");
 require_once('../includes/functions/lib_university_functions.php');
 
+use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 
@@ -28,7 +29,7 @@ $group_handler = new GroupHandler();
 
 $collections = $group_handler->get_member_collections($_user->id, APP__ID, 'assessment');
 
-$collection_ids = array_extract_column($collections, 'collection_id');
+$collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
 $collection_clause = $DB->build_set($collection_ids);
 
 // Get a list of assessments that match the user's collections (for this year)
@@ -51,7 +52,7 @@ $assessments = $DB->fetch('SELECT a.* FROM ' . APP__DB_TABLE_PREFIX . 'assessmen
 
 // Get a list of those assessments that the user has already taken
 
-$assessment_ids = array_extract_column($assessments, 'assessment_id');
+$assessment_ids = ArrayFunctions::array_extract_column($assessments, 'assessment_id');
 $assessment_clause = $DB->build_set($assessment_ids);
 
 $assessments_with_response = $DB->fetch_col('SELECT DISTINCT um.assessment_id ' .

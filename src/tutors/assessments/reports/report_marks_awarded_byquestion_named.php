@@ -9,7 +9,6 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/functions/lib_array_functions.php');
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;

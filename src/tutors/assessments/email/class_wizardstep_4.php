@@ -11,6 +11,7 @@
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\functions\ArrayFunctions;
 
 class WizardStep4 {
 
@@ -101,7 +102,7 @@ class WizardStep4 {
 
     if (is_array($users_to_email)) {
       $users_arr = $CIS->get_user($users_to_email);
-      $bcc_list = array_extract_column($users_arr, 'email');
+      $bcc_list = ArrayFunctions::array_extract_column($users_arr, 'email');
       $bcc_list[] = $user->email;
     } else {
       $errors[] = 'Unable to build email list - no students to email.';

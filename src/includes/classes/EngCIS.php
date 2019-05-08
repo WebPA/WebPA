@@ -10,9 +10,10 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\ArrayFunctions;
+
 include_once __DIR__ . '/../inc_global.php';
 
-require_once(DOC__ROOT . 'includes/functions/lib_array_functions.php');
 require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 
 class EngCIS
@@ -275,7 +276,7 @@ class EngCIS
         if (!$staff_modules) {
             return false;
         } else {
-            $arr_module_id = array_extract_column($staff_modules, 'module_id');
+            $arr_module_id = ArrayFunctions::array_extract_column($staff_modules, 'module_id');
             $diff = array_diff($module_id, $arr_module_id);
 
             // If the array is empty, then the staff member has those modules
