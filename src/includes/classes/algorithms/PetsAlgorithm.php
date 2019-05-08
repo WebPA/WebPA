@@ -10,7 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\classes\algorithms\Algorithm;
+namespace WebPA\includes\classes\algorithms;
 
 // @todo : There appear to be grading problems with the PETS algorithm in peer-only mode.
 // Until we have conducted a full investigation and nailed down what's happening

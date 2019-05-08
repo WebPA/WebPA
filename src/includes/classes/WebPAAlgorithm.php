@@ -12,7 +12,7 @@
 
 namespace WebPA\includes\classes;
 
-class AbstractWebPAAlgorithm {
+class WebPAAlgorithm {
   // Public Vars
   public $_groups = null;
   public $_group_members = null;

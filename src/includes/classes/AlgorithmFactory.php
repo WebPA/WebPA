@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\classes\algorithms\WebPAAlgorithm;
+
 class AlgorithmFactory {
 
 /*
@@ -41,8 +43,8 @@ class AlgorithmFactory {
         break;
       case 'webpa':
       default:
-        require_once(DOC__ROOT.'includes/classes/algorithms/class_webpa_algorithm.php');
         $algorithm = new WebPAAlgorithm();
+
         break;
     }
 

@@ -10,7 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\classes\algorithms\Algorithm;
+namespace WebPA\includes\classes\algorithms;
 
 class WebPAAlgorithm extends Algorithm {
 
