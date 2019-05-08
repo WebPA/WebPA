@@ -10,11 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-
-
-require_once(DOC__ROOT.'includes/classes/algorithms/abstract_algorithm.php');
-
-
+use WebPA\includes\classes\algorithms\Algorithm;
 
 class WebPAAlgorithm extends Algorithm {
 

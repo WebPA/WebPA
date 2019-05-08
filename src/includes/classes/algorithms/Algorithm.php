@@ -11,6 +11,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes\algorithms;
+
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 
