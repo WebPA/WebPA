@@ -1,18 +1,20 @@
 <?php
+/**
+ * Library of common functions
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
+ */
 
 namespace WebPA\includes\functions;
 
+define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
+
 class Common
 {
-     /**
-     * Library of common functions
-     *
-     * @copyright Loughborough University
-     * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
-     *
-     * @link https://github.com/webpa/webpa
-     */
-    define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
+
 
     /**
      * fetch var from a cookie (or return default if unset)
@@ -22,7 +24,7 @@ class Common
      *
      * @return mixed
      */
-    function fetch_COOKIE($key, $default_value = '') {
+    public static function fetch_COOKIE($key, $default_value = '') {
       return (isset($_COOKIE[$key])) ? $_COOKIE[$key] : $default_value;
     }
 
@@ -34,7 +36,7 @@ class Common
      *
      * @return mixed
      */
-    function fetch_GET($key, $default_value = '') {
+    public static function fetch_GET($key, $default_value = '') {
       return (isset($_GET[$key])) ? $_GET[$key] : $default_value;
     }
 
@@ -46,7 +48,7 @@ class Common
      *
      * @return mixed
      */
-    function fetch_POST($key, $default_value = '') {
+    public static function fetch_POST($key, $default_value = '') {
       return (isset($_POST[$key])) ? $_POST[$key] : $default_value;
     }
 
@@ -58,7 +60,7 @@ class Common
      *
      * @return mixed
      */
-    function fetch_SERVER($key, $default_value = '') {
+    public static function fetch_SERVER($key, $default_value = '') {
       return (isset($_SERVER[$key])) ? $_SERVER[$key] : $default_value;
     }
 
@@ -70,7 +72,7 @@ class Common
      *
      * @return mixed
      */
-    function fetch_SESSION($key, $default_value = '') {
+    public static function fetch_SESSION($key, $default_value = '') {
       return (isset($_SESSION[$key])) ? $_SESSION[$key] : $default_value;
     }
 
@@ -83,7 +85,7 @@ class Common
      *
      * @return bool
      */
-    function check_bits($bits = 0, $want_bits = 0, $must_have_all = false) {
+    public static function check_bits($bits = 0, $want_bits = 0, $must_have_all = false) {
         return ($must_have_all) ? (($bits & $want_bits) == $want_bits) : (($bits & $want_bits) > 0);
     } // /check_bits()
 
@@ -93,7 +95,7 @@ class Common
      *
      * @return UUID
      */
-    function uuid_create() {
+    public static function uuid_create() {
       // Get random 32-char 'UUID'
       $uuid_32 = strtoupper( md5( uniqid( rand(), true) ) );
 
@@ -104,7 +106,7 @@ class Common
     /**
      * Add an entry to the tracking table
      */
-    function logEvent($description, $module_id = NULL, $object_id = NULL) {
+    public static function logEvent($description, $module_id = NULL, $object_id = NULL) {
 
       global $DB;
 
@@ -129,7 +131,7 @@ class Common
     * @param string $_user
     * @param string $user_type
     */
-    function check_user($_user, $user_type = NULL) {
+    public static function check_user($_user, $user_type = NULL) {
 
       // Is the user valid?
       if ($_user) {

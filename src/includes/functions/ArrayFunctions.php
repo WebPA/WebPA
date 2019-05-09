@@ -22,7 +22,7 @@ class ArrayFunctions
      *
      * @return ?? description
      */
-    function array_searchvalue($needle, $haystack, $search_index, $return_index = 0) {
+    public static function array_searchvalue($needle, $haystack, $search_index, $return_index = 0) {
       $arr_count = count($haystack);
       for ($i=0; $i<$arr_count; ++$i) {
         if ($haystack[$i][$search_index]==$needle) {
@@ -41,7 +41,7 @@ class ArrayFunctions
      *
      * @return array 1D array of items matching
      */
-    function array_extract_column(&$array, $column) {
+    public static function array_extract_column(&$array, $column) {
       $extracted_columns = null;
       if (is_array($array)) {
         foreach($array as $i => $row) {
@@ -67,7 +67,7 @@ class ArrayFunctions
      * @return array assoc array: array (key=>org_row, key=>org)
      * _row, ...
      */
-    function array_get_assoc($array, $key_index) {
+    public static function array_get_assoc($array, $key_index) {
       $assoc_array = null;
 
       if ( (is_array($array)) ) {
