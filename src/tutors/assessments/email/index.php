@@ -13,18 +13,19 @@ require_once(DOC__ROOT .'/includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Wizard;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
 // --------------------------------------------------------------------------------
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
-$tab = fetch_GET('tab');
-$year = fetch_GET('y', date('Y'));
+$tab = Common::fetch_GET('tab');
+$year = Common::fetch_GET('y', date('Y'));
 
 $list_url = "../index.php?tab={$tab}&y={$year}";
 

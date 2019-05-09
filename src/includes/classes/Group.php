@@ -18,6 +18,8 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\Common;
+
 class Group {
   // Public Vars
   public $id = null;
@@ -55,7 +57,7 @@ class Group {
   function create() {
     // generate a new project_id
     while (true) {
-      $new_id = uuid_create();
+      $new_id = Common::uuid_create();
       if ($this->_DAO->fetch_value("SELECT COUNT(group_id) FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE group_id = '$new_id' ") == 0) { break; }
     }
     $this->id = $new_id;

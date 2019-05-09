@@ -12,8 +12,9 @@ require_once("../../../includes/inc_global.php");
 require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -21,9 +22,9 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$collection_id = fetch_GET('c');
+$collection_id = Common::fetch_GET('c');
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $collection_url = "edit_collection.php?c={$collection_id}";
 
@@ -48,7 +49,7 @@ $errors = null;
 if ($allow_edit) {
   switch ($command) {
     case 'add':
-      $new_name = fetch_POST('new_group_name');
+      $new_name = Common::fetch_POST('new_group_name');
       if (empty($new_name)) { $errors[] = 'You must give your new group a name'; }
 
       if (!$errors) {
@@ -58,7 +59,7 @@ if ($allow_edit) {
       break;
     // --------------------
     case 'delete':
-      $groups_to_delete = fetch_POST('group');
+      $groups_to_delete = Common::fetch_POST('group');
       if (is_array($groups_to_delete)) {
         foreach($groups_to_delete as $i => $group_id) {
           $group =& $collection->get_group_object($group_id);

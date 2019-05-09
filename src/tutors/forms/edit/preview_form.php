@@ -13,8 +13,9 @@ require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\FormRenderer;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -22,9 +23,9 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$form_id = fetch_GET('f');
+$form_id = Common::fetch_GET('f');
 
-$intro_text = fetch_GET('i', null);
+$intro_text = Common::fetch_GET('i', null);
 if ($intro_text) {
   $intro_text = base64_decode($intro_text);
 } else {

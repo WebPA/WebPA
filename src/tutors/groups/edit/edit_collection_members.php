@@ -13,8 +13,9 @@ require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\ArrayFunctions;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -22,9 +23,9 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$collection_id = fetch_GET('c');
+$collection_id = Common::fetch_GET('c');
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $collection_qs = "c={$collection_id}";
 $collection_url = "edit_collection.php?$collection_qs";

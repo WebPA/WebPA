@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep1 {
 
   // Public
@@ -216,36 +218,34 @@ class WizardStep1 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('assessment_name', fetch_POST('assessment_name'));
+    $this->wizard->set_field('assessment_name', Common::fetch_POST('assessment_name'));
     if (empty($this->wizard->get_field('assessment_name'))) { $errors[] = 'You must enter a name for your new assessment'; }
 
 
     // open_date
-    $time_parts = explode(':', fetch_POST('open_date_time') );
+    $time_parts = explode(':', Common::fetch_POST('open_date_time') );
     $time_h = $time_parts[0];
     $time_m = $time_parts[1];
-    $open_date = mktime( $time_h, $time_m, 0, fetch_POST('open_date_month'), fetch_POST('open_date_day'), fetch_POST('open_date_year') );
+    $open_date = mktime( $time_h, $time_m, 0, Common::fetch_POST('open_date_month'), Common::fetch_POST('open_date_day'), Common::fetch_POST('open_date_year') );
 
     // close_date
-    $time_parts = explode(':', fetch_POST('close_date_time') );
+    $time_parts = explode(':', Common::fetch_POST('close_date_time') );
     $time_h = $time_parts[0];
     $time_m = $time_parts[1];
-    $close_date = mktime( $time_h, $time_m, 0, fetch_POST('close_date_month'), fetch_POST('close_date_day'), fetch_POST('close_date_year') );
+    $close_date = mktime( $time_h, $time_m, 0, Common::fetch_POST('close_date_month'), Common::fetch_POST('close_date_day'), Common::fetch_POST('close_date_year') );
 
 
     $this->wizard->set_field('open_date',$open_date);
     $this->wizard->set_field('close_date',$close_date);
     if ($open_date>=$close_date) { $errors[] = 'You must select a closing date/time that is after your opening date'; }
 
-    $this->wizard->set_field('introduction', fetch_POST('introduction'));
+    $this->wizard->set_field('introduction', Common::fetch_POST('introduction'));
 
-    $this->wizard->set_field('email', fetch_POST('email'));
-    $this->wizard->set_field('email_opening',fetch_POST('email_opening'));
-    $this->wizard->set_field('email_closing', fetch_POST('email_closing'));
+    $this->wizard->set_field('email', Common::fetch_POST('email'));
+    $this->wizard->set_field('email_opening',Common::fetch_POST('email_opening'));
+    $this->wizard->set_field('email_closing', Common::fetch_POST('email_closing'));
 
     return $errors;
   }// /->process_form()
 
 }// /class: WizardStep1
-
-?>

@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep2 {
 
   // Public
@@ -96,7 +98,7 @@ HTMLEnd;
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('module_id',fetch_POST('module_id'));
+    $this->wizard->set_field('module_id',Common::fetch_POST('module_id'));
     if (empty($this->wizard->get_field('module_id'))) { $errors[] = 'You must select at least one module to take students from'; }
 
     return $errors;

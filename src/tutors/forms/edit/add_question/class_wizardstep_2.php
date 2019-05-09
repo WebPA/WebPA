@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep2 {
 
   // Public
@@ -78,7 +80,7 @@ class WizardStep2 {
     $range_end = $this->wizard->get_field('question_range_end');
 
     for($i=$range_start; $i<=$range_end; $i++) {
-      $scorelabel = trim( fetch_POST("scorelabel{$i}") );
+      $scorelabel = trim( Common::fetch_POST("scorelabel{$i}") );
       if (!empty($scorelabel)) { $this->wizard->set_field("scorelabel{$i}",$scorelabel); }
     }
 

@@ -11,6 +11,7 @@
 namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\ArrayFunctions;
+use WebPA\includes\functions\Common;
 
 include_once __DIR__ . '/../inc_global.php';
 
@@ -421,7 +422,7 @@ class EngCIS
         } else if (is_null($source_id)) {
             $source_id = '';
         }
-        $_module_id = fetch_SESSION('_module_id', null);
+        $_module_id = Common::fetch_SESSION('_module_id', null);
 
         $sql = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u LEFT OUTER JOIN ' .
             '  (SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$_module_id}) um " .

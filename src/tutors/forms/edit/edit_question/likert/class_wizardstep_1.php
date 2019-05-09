@@ -7,6 +7,9 @@
  *
  * @link https://github.com/webpa/webpa
  */
+
+use WebPA\includes\functions\Common;
+
 class WizardStep1 {
 
 	// Public
@@ -113,13 +116,13 @@ class WizardStep1 {
 	function process_form() {
 		$errors = null;
 
-		$this->wizard->set_field('question_text',fetch_POST('question_text'));
+		$this->wizard->set_field('question_text',Common::fetch_POST('question_text'));
 		if (empty($this->wizard->get_field('question_text'))) { $errors[] = 'You must provide some text for your new criterion'; }
 
-		$this->wizard->set_field('question_desc',fetch_POST('question_desc'));
+		$this->wizard->set_field('question_desc',Common::fetch_POST('question_desc'));
 
-		$this->wizard->set_field('question_range_start',fetch_POST('question_range_start'));
-		$this->wizard->set_field('question_range_end',fetch_POST('question_range_end'));
+		$this->wizard->set_field('question_range_start',Common::fetch_POST('question_range_start'));
+		$this->wizard->set_field('question_range_end',Common::fetch_POST('question_range_end'));
 
 		return $errors;
 	}// /->process_form()

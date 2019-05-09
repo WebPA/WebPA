@@ -11,8 +11,9 @@
 //get the include file required
 require_once("../../includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -20,7 +21,7 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
 $filecontenttype = array();
 $filecontenttype[] = array('link'=>'student','screen'=>'Student', 'def'=>'View the student data currently in the system',);
 $filecontenttype[] = array('link'=>'staff','screen'=>'Staff', 'def'=>'View the staff data currently in the system',);
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $filecontenttype[] = array('link'=>'admin','screen'=>'Administrators', 'def'=>'View the administrator data currently in the system',);
   $filecontenttype[] = array('link'=>'module','screen'=>'Module', 'def'=>'View the module information currently in the system',);
 }
@@ -33,7 +34,7 @@ $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', 'admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', 'module/index.php');
 }

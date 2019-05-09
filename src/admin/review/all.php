@@ -11,20 +11,22 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 //build the string for the information to be collected from the database
 if ($type == 'module') {
-  if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+  if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     $query = 'SELECT module_id, module_code, module_title FROM '. APP__DB_TABLE_PREFIX . "module WHERE source_id = '{$_source_id}'";
   }
 } else if ($type == APP__USER_TYPE_ADMIN) {
-  if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+  if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     $query = 'SELECT u.user_id, u.source_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, u.date_last_login AS `last login` FROM ' .
              APP__DB_TABLE_PREFIX . 'user u ' .
              "WHERE (u.admin = 1) " .
              'ORDER BY u.lastname, u.forename, u.source_id, u.username';
   }
-} else if (check_user($_user, APP__USER_TYPE_TUTOR)) {
-  $_module_id = fetch_SESSION('_module_id', null);
+} else if (Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+  $_module_id = Common::fetch_SESSION('_module_id', null);
   $query = 'SELECT u.user_id, u.source_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, u.date_last_login AS `last login` FROM ' .
            APP__DB_TABLE_PREFIX . 'user u INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id ' .
            "WHERE (um.module_id = {$_module_id}) AND (um.user_type = '{$type}') " .  // AND (source_id = '{$_source_id}')";

@@ -13,8 +13,9 @@ require_once("../../includes/inc_global.php");
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_STUDENT)){
+if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -22,7 +23,7 @@ if (!check_user($_user, APP__USER_TYPE_STUDENT)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
 $range = 0.1;   // Multiplied by average score to give AVG range
 

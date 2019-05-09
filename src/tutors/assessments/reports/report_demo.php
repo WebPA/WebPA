@@ -13,8 +13,9 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\NewAlgorithm;
 use WebPA\includes\classes\XMLParser;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -22,16 +23,16 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
-$type = fetch_GET('t', 'view');
+$type = Common::fetch_GET('t', 'view');
 
-$tab = fetch_GET('tab');
-$year = fetch_GET('y', date('Y'));
+$tab = Common::fetch_GET('tab');
+$year = Common::fetch_GET('y', date('Y'));
 
-$marking_date = fetch_GET('md');
+$marking_date = Common::fetch_GET('md');
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $qs = "a={$assessment_id}&md={$md}&tab={$tab}&y={$year}";
 

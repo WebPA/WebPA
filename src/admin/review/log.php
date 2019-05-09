@@ -14,8 +14,9 @@
 require_once("../../includes/inc_global.php");
 
 use WebPA\includes\classes\User;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -30,7 +31,7 @@ $UI->breadcrumbs = array ('home' => '../','review data'=>'./','log data'=>null);
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', 'admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', 'module/index.php');
 }
@@ -46,7 +47,7 @@ $UI->content_start();
 <?php
 
 //get the passed user ID passed as u
-$user_id = fetch_GET('u', '');
+$user_id = Common::fetch_GET('u', '');
 $user_info = $CIS->get_user($user_id);
 $user = new User();
 $user->load_from_row($user_info);

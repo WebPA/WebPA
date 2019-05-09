@@ -10,6 +10,8 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 class WizardStep2 {
 
   // Public
@@ -158,14 +160,14 @@ class WizardStep2 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('form_id',fetch_POST('form_id'));
+    $this->wizard->set_field('form_id',Common::fetch_POST('form_id'));
     if (empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select a form to use with your new assessment'; }
 
-    $this->wizard->set_field('allow_feedback', fetch_POST('allow_feedback'));
-    $this->wizard->set_field('feedback_name', fetch_POST('feedback_name'));
+    $this->wizard->set_field('allow_feedback', Common::fetch_POST('allow_feedback'));
+    $this->wizard->set_field('feedback_name', Common::fetch_POST('feedback_name'));
 
     if(APP__ALLOW_TEXT_INPUT){
-      $this->wizard->set_field('allow_student_input', fetch_POST('allow_text_input'));
+      $this->wizard->set_field('allow_student_input', Common::fetch_POST('allow_text_input'));
     }
 
     return $errors;

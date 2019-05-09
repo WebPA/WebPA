@@ -9,6 +9,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep2 {
 
   // Public
@@ -112,14 +114,14 @@ HTMLEnd;
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('num_groups', fetch_POST('num_groups',null));
+    $this->wizard->set_field('num_groups', Common::fetch_POST('num_groups',null));
     if (is_null($this->wizard->get_field('num_groups'))) { $errors[] = 'You must choose how many groups to create'; }
 
     if ($this->wizard->get_field('num_groups')>0) {
-      $this->wizard->set_field('group_name_stub', trim( fetch_POST('group_name_stub') ) );
+      $this->wizard->set_field('group_name_stub', trim( Common::fetch_POST('group_name_stub') ) );
       if (empty($this->wizard->get_field('group_name_stub'))) { $errors[] = 'You must provide a name for your new groups'; }
 
-      $this->wizard->set_field('group_numbering', fetch_POST('group_numbering'));
+      $this->wizard->set_field('group_numbering', Common::fetch_POST('group_numbering'));
       if (empty($this->wizard->get_field('group_numbering'))) { $errors[] = 'You must choose how to number your groups'; }
     }
 

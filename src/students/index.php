@@ -14,8 +14,9 @@ require_once('../includes/functions/lib_university_functions.php');
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_STUDENT)){
+if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }

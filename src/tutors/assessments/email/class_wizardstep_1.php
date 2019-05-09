@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep1 {
 
   // Public
@@ -59,7 +61,7 @@ class WizardStep1 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('send_to',fetch_POST('send_to'));
+    $this->wizard->set_field('send_to',Common::fetch_POST('send_to'));
     if (empty($this->wizard->get_field('send_to'))) { $errors[] = 'You must select who to send this email to.'; }
 
     return $errors;

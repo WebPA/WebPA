@@ -13,11 +13,13 @@
 require_once("../includes/inc_global.php");
 require_once('../includes/functions/lib_form_functions.php');
 
-check_user($_user);
+use WebPA\includes\functions\Common;
+
+Common::check_user($_user);
 
 // Process GET/POST
 
-$contact_type = fetch_GET('q');
+$contact_type = Common::fetch_GET('q');
 
 // Begin Page
 

@@ -16,8 +16,9 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\classes\FormRenderer;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_STUDENT)){
+if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -25,9 +26,9 @@ if (!check_user($_user, APP__USER_TYPE_STUDENT)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $list_url = "../index.php";
 
@@ -145,7 +146,7 @@ if (($command) && ($assessment)) {
               // Loop through every person
               foreach ($people as $id => $name) {
                 $q_id = "q_{$q}_{$id}";
-                $score = fetch_POST($q_id, null);
+                $score = Common::fetch_POST($q_id, null);
 
                 if (($score!=0) && (empty($score))) {
                   $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
@@ -192,7 +193,7 @@ if (($command) && ($assessment)) {
               // Loop through every person
               foreach ($people as $id => $name) {
                 $q_id = "q_{$q}_{$id}";
-                $score = fetch_POST($q_id, null);
+                $score = Common::fetch_POST($q_id, null);
 
                 if (is_null($score)) {
                   $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
@@ -216,7 +217,7 @@ if (($command) && ($assessment)) {
             if ($assessment->allow_assessment_feedback) {
               //get the results and add them all to an array
               foreach ($people as $id => $name) {
-                $justification_fetch = strip_tags(fetch_POST($id));
+                $justification_fetch = strip_tags(Common::fetch_POST($id));
 
                 if (!is_null($justification_fetch)) {
                   $justification[] = array('assessment_id'    =>  $assessment->id,
@@ -240,9 +241,9 @@ if (($command) && ($assessment)) {
         $now = date(MYSQL_DATETIME_FORMAT,time());
 
         // Get IP and Computer name of the student saving the marks
-        $ip_address = fetch_SERVER('REMOTE_ADDR','');
-        $computer_name = fetch_SERVER('REMOTE_HOST','');
-        $date_opened = fetch_POST('date_opened');
+        $ip_address = Common::fetch_SERVER('REMOTE_ADDR','');
+        $computer_name = Common::fetch_SERVER('REMOTE_HOST','');
+        $date_opened = Common::fetch_POST('date_opened');
 
         // Save stats
         $response = array (
@@ -274,13 +275,13 @@ if (($command) && ($assessment)) {
         //along with the saved marks we want to save the justification section
         $DB->do_insert_multi("INSERT INTO " . APP__DB_TABLE_PREFIX . "user_justification ({fields}) VALUES {values}", $justification);
 
-        logEvent('Assessment submission successful', $_module_id, $assessment->id);
+        Common::logEvent('Assessment submission successful', $_module_id, $assessment->id);
 
         header("Location: ". APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
         exit;
 
       } else {
-        logEvent('Assessment submission failed', $_module_id, $assessment->id);
+        Common::logEvent('Assessment submission failed', $_module_id, $assessment->id);
       }
 
       break;
@@ -407,7 +408,7 @@ if (!$assessment) {
 
   </form>
 <?php
-  logEvent('Assessment started', $_module_id, $assessment->id);
+  Common::logEvent('Assessment started', $_module_id, $assessment->id);
 }
 ?>
 </div>

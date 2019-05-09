@@ -16,12 +16,14 @@
 require_once("../../includes/inc_global.php");
 require_once("../../includes/functions/lib_university_functions.php");
 
-if (!check_user($_user, APP__USER_TYPE_ADMIN)){
+use WebPA\includes\functions\Common;
+
+if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
-$year = (int) fetch_POST('academic_year', fetch_SESSION('year', get_academic_year()));
+$year = (int) Common::fetch_POST('academic_year', Common::fetch_SESSION('year', get_academic_year()));
 $_SESSION['year'] = $year;
 
 $academic_year = strval($year);
@@ -41,16 +43,16 @@ $this_year = strval($year) . $this_year;
 $format = fetch_post('format');
 
 //get the reports that are to be generated
-$assessments_run = fetch_POST('assessments_run');
-$assessment_groups = fetch_POST('assessment_groups');
-$assessment_students = fetch_POST('assessment_students');
+$assessments_run = Common::fetch_POST('assessments_run');
+$assessment_groups = Common::fetch_POST('assessment_groups');
+$assessment_students = Common::fetch_POST('assessment_students');
 
 // $assessment_modules = fetch_POST('assessment_modules');
-$assessment_feedback = fetch_POST('assessment_feedback');
-$assessment_respondents = fetch_POST('assessment_respondents');
+$assessment_feedback = Common::fetch_POST('assessment_feedback');
+$assessment_respondents = Common::fetch_POST('assessment_respondents');
 
-$assessment_modules = fetch_POST('assessment_modules');
-$assessment_students_thisyear = fetch_POST('assessment_students_thisyear');
+$assessment_modules = Common::fetch_POST('assessment_modules');
+$assessment_students_thisyear = Common::fetch_POST('assessment_students_thisyear');
 // $assessment_tutor_departments = fetch_POST('assessment_tutor_departments');
 
 $this_accademic_year = get_academic_year() . '-';

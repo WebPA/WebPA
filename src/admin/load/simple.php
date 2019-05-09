@@ -16,8 +16,9 @@ require_once('../../includes/inc_global.php');
 require_once('../../includes/functions/lib_string_functions.php');
 
 use WebPA\includes\classes\GroupCollection;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
  header('Location:'. APP__WWW .'/logout.php?msg=denied');
  exit;
 }
@@ -121,7 +122,7 @@ if ($flg_match) {
       }
     }
 
-    $_module_id = fetch_SESSION('_module_id', null);
+    $_module_id = Common::fetch_SESSION('_module_id', null);
 
     if ($uploadtype == '4') {
 
@@ -249,7 +250,7 @@ $UI->breadcrumbs = array ('home' => null);
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }

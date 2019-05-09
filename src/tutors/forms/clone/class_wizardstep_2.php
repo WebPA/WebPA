@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\classes\Form;
+use WebPA\includes\functions\Common;
 
 class WizardStep2 {
 
@@ -75,7 +76,7 @@ class WizardStep2 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('clone_form_name',fetch_POST('clone_form_name'));
+    $this->wizard->set_field('clone_form_name',Common::fetch_POST('clone_form_name'));
     if (empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
 
     return $errors;

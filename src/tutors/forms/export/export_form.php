@@ -11,14 +11,16 @@
 
  require_once("../../../includes/inc_global.php");
 
- if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+ use WebPA\includes\functions\Common;
+
+ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
    header('Location:'. APP__WWW .'/logout.php?msg=denied');
    exit;
  }
 
  //get the form ID from the URL so that we can access the form from the database.
- $form_id = fetch_GET('f');
- $command = fetch_POST('command');
+ $form_id = Common::fetch_GET('f');
+ $command = Common::fetch_POST('command');
 
  $form = $DB->fetch_row("SELECT f.* FROM " . APP__DB_TABLE_PREFIX . "form f WHERE f.form_id = '$form_id' LIMIT 1");
 

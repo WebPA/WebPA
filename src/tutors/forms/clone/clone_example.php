@@ -15,16 +15,17 @@
 require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\Form;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
 //get the form ID
-$formid = fetch_GET('f', fetch_POST('form_id'));
-$new_form_name = fetch_POST('n');
-$form_id = fetch_POST('f');
+$formid = Common::fetch_GET('f', Common::fetch_POST('form_id'));
+$new_form_name = Common::fetch_POST('n');
+$form_id = Common::fetch_POST('f');
 
 if (empty($form_id)) {
   $form_id = $formid;
@@ -42,7 +43,7 @@ if (!empty($new_form_name)) {
   //we are going to clone the form and then pass the user to the view area
   $clone = $form->get_clone();
   $clone->name = $new_form_name;
-  $clone->owner_id = fetch_SESSION('_user_id', null);
+  $clone->owner_id = Common::fetch_SESSION('_user_id', null);
   $clone->save();
 
   header( "Location: ../edit/edit_form.php?f={$clone->id}" ) ;

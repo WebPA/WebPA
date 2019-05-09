@@ -12,6 +12,7 @@ require_once("../includes/inc_global.php");
 require_once('../includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Email;
+use WebPA\includes\functions\Common;
 
 check_user($_user);
 
@@ -26,14 +27,14 @@ $contact_user_username = $_user->username;
 $contact_user_fullname = "{$_user->forename} {$_user->lastname}";
 $contact_user_email = $_user->email;
 
-$contact_username = fetch_POST('contact_username');
-$contact_fullname = fetch_POST('contact_name');
-$contact_email = fetch_POST('contact_email');
-$contact_phone = fetch_POST('contact_phone');
+$contact_username = Common::fetch_POST('contact_username');
+$contact_fullname = Common::fetch_POST('contact_name');
+$contact_email = Common::fetch_POST('contact_email');
+$contact_phone = Common::fetch_POST('contact_phone');
 
 $contact_date = date('d-M-Y H:i');
-$contact_type = fetch_POST('contact_type');
-$contact_message = fetch_POST('contact_message');
+$contact_type = Common::fetch_POST('contact_type');
+$contact_message = Common::fetch_POST('contact_message');
 
 $app_www = APP__WWW;
 

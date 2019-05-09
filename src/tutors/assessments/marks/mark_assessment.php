@@ -15,8 +15,9 @@ use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\classes\XMLParser;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -24,12 +25,12 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
-$tab = fetch_GET('tab');
-$year = fetch_GET('y', date('Y'));
+$tab = Common::fetch_GET('tab');
+$year = Common::fetch_GET('y', date('Y'));
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $list_url = "../index.php?tab={$tab}&y={$year}";
 $done_list_url = "../index.php?tab=marked&y={$year}";
@@ -66,19 +67,19 @@ if ( ($command) && ($assessment) ) {
   switch ($command) {
     case 'save':
       // Create Mark Sheet
-      $weighting = fetch_POST('pa_weighting', null);
+      $weighting = Common::fetch_POST('pa_weighting', null);
       $weighting = (is_numeric($weighting)) ? (int) $weighting : null;
       if ( (is_null($weighting)) || ($weighting<=0) || ($weighting>100) ) {
         $errors[] = 'The PA Weighting must be a number between 1 - 100';
       }
 
-      $penalty = fetch_POST('pa_penalty', null);
+      $penalty = Common::fetch_POST('pa_penalty', null);
       $penalty = (is_numeric($penalty)) ? (int) $penalty : null;
       if ( (is_null($penalty)) || ($penalty<$min_penalty) || ($penalty>$max_penalty) ) {
         $errors[] = "The Non-completion Penalty must be a number between $min_penalty - $max_penalty";
       }
 
-      $penalty_type = fetch_POST('pa_penalty_type', null);
+      $penalty_type = Common::fetch_POST('pa_penalty_type', null);
       if ($penalty_type!='pp') {
         $penalty_type = '%';
       }
@@ -89,13 +90,13 @@ if ( ($command) && ($assessment) ) {
        * It changes the final grades in subtle ways.
        * Until we have a way of clearly showing the effects to end users, tolerances are not used in the algorithms.
        */
-      //$tolerance = (int) fetch_POST('pa_tolerance', null);
+      //$tolerance = (int) Common::fetch_POST('pa_tolerance', null);
       //$tolerance = (is_numeric($tolerance)) ? (int) $tolerance : null;
 
-      $grading = fetch_POST('pa_grading', null);
+      $grading = Common::fetch_POST('pa_grading', null);
       $grading = ($grading=='grade_af') ? $grading : 'numeric';
 
-      $algorithm = fetch_POST('pa_algorithm', null);
+      $algorithm = Common::fetch_POST('pa_algorithm', null);
       $valid_algs = array ('pets', 'webpa');
       if (!in_array($algorithm, $valid_algs)) {
         $algorithm = 'webpa';

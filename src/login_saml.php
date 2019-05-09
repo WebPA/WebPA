@@ -23,6 +23,7 @@
 namespace WebPA;
 
 use WebPA\includes\classes\Authenticator;
+use WebPA\includes\functions\Common;
 
 // --------------------------------------------------------------------------------
 // Process Get/Post
@@ -106,8 +107,8 @@ if ( $valid_saml_session )
         $_SESSION['_module_id'] = $_auth->module_id;
         $_SESSION['_user_context_id'] = $_auth->module_code;
     
-        logEvent('Login');
-        logEvent('Enter module', $_auth->module_id);
+        Common::logEvent('Login');
+        Common::logEvent('Enter module', $_auth->module_id);
     
         header('Location: ' . APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
         exit;

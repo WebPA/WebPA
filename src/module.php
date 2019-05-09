@@ -10,12 +10,14 @@
 
 require_once("includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 if (($_source_id != '') && !$_user->is_admin()) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
-$module_id = fetch_POST('module_id');
+$module_id = Common::fetch_POST('module_id');
 
 if ($module_id) {
 
@@ -29,8 +31,8 @@ if ($module_id) {
   $_SESSION['_module_id'] = $module_id;
   $_SESSION['_user_context_id'] = $module['module_code'];
 
-  logEvent('Leave module', $_module_id);
-  logEvent('Enter module', $module_id);
+  Common::logEvent('Leave module', $_module_id);
+  Common::logEvent('Enter module', $module_id);
 
   header('Location: ' . APP__WWW . "/");
   exit;

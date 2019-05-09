@@ -12,6 +12,7 @@ require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\functions\Common;
 
 class WizardStep3 {
 
@@ -100,7 +101,7 @@ class WizardStep3 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
+    $this->wizard->set_field('collection_id',Common::fetch_POST('collection_id'));
     if (empty($this->wizard->get_field('collection_id'))) { $errors[] = 'You must select a collection of groups to use in your new assessment'; }
 
     return $errors;

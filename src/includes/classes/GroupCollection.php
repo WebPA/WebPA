@@ -15,6 +15,8 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\Common;
+
 class GroupCollection {
   // Public Vars
   public $id = null;
@@ -60,7 +62,7 @@ class GroupCollection {
   */
   function create() {
     while (true) {
-      $new_id = uuid_create();
+      $new_id = Common::uuid_create();
       if ($this->_DAO->fetch_value("SELECT COUNT(collection_id) AS num_id FROM " . APP__DB_TABLE_PREFIX . "collection WHERE collection_id = '$new_id' ") == 0) { break; }
     }
     $this->id = $new_id;

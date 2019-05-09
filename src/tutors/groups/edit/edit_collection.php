@@ -12,8 +12,9 @@
 require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -21,9 +22,9 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$collection_id = fetch_GET('c');
+$collection_id = Common::fetch_GET('c');
 
-$command = fetch_POST('command', fetch_GET('command'));
+$command = Common::fetch_POST('command', Common::fetch_GET('command'));
 
 $list_url = "../../../tutors/groups/";
 
@@ -50,7 +51,7 @@ $errors = null;
 if ( ($command) && ($collection) && ($allow_edit) ) {
   switch ($command) {
     case 'save':
-      $collection->name = fetch_POST('collection_name');
+      $collection->name = Common::fetch_POST('collection_name');
       if (empty($collection->name)) {
         $errors[] = 'You must give this collection of groups a name.';
       }

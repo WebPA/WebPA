@@ -22,8 +22,9 @@ require_once('../../includes/functions/lib_string_functions.php');
 require_once('../../includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\User;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -33,7 +34,7 @@ $UI->page_title = APP__NAME . ' Edit system users';
 $UI->menu_selected = 'view data';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
@@ -45,13 +46,13 @@ $UI->help_link = '?q=node/237';
 
 //get the posted information
 
-$action = fetch_POST('save');
+$action = Common::fetch_POST('save');
 
 //get the passed user ID passed as u
-$user_id = fetch_POST('u', fetch_GET('u'));
-$username = fetch_POST('username');
+$user_id = Common::fetch_POST('u', Common::fetch_GET('u'));
+$username = Common::fetch_POST('username');
 $new_user = empty($user_id);
-$type = fetch_POST('t', fetch_GET('t', ''));
+$type = Common::fetch_POST('t', Common::fetch_GET('t', ''));
 $user_found = FALSE;
 
 $sScreenMsg = '';
@@ -98,28 +99,28 @@ $canEdit = ($_source_id == '') && (($new_user || $_user->is_admin()) && !$user_f
 if ($canEdit) {
 
   //put all the elements back into the structures
-  $value = fetch_POST('name');
+  $value = Common::fetch_POST('name');
   if (!empty($value)) {
     $edit_user->forename = $value;
   }
-  $value = fetch_POST('lastname');
+  $value = Common::fetch_POST('lastname');
   if (!empty($value)) {
     $edit_user->lastname = $value;
   }
-  $value = fetch_POST('id_number');
+  $value = Common::fetch_POST('id_number');
   if (!empty($value)) {
     $edit_user->id_number = $value;
   }
-  $value = fetch_POST('department_id');
+  $value = Common::fetch_POST('department_id');
   if (!empty($value)) {
     $edit_user->department_id = $value;
   }
-  $value = fetch_POST('email');
+  $value = Common::fetch_POST('email');
   if (!empty($value)) {
     $edit_user->email = $value;
   }
   //check to see if the password needs to be saved
-  $password = fetch_POST('password', '');
+  $password = Common::fetch_POST('password', '');
   if ((($password != '!!!!!!') && !empty($password)) || empty($user_id)) {
     if (($password == '!!!!!!') || empty($password)) {
       $password = str_random();
@@ -127,8 +128,8 @@ if ($canEdit) {
     $edit_user->update_password(md5($password));
   }
 
-  if ((($new_user && !$user_found) || $_user->is_admin()) && fetch_POST('username')) {
-    $edit_user->update_username(fetch_POST('username'));
+  if ((($new_user && !$user_found) || $_user->is_admin()) && Common::fetch_POST('username')) {
+    $edit_user->update_username(Common::fetch_POST('username'));
   }
 }
 
@@ -369,7 +370,7 @@ if (!empty($edit_user->password)) {
   </tr>
 
 <?php
-if (!empty($user_id) && !check_user($edit_user, APP__USER_TYPE_ADMIN)) {
+if (!empty($user_id) && !Common::check_user($edit_user, APP__USER_TYPE_ADMIN)) {
 ?>
   <tr><td colspan="4"><hr/></td></tr>
   <tr><td colspan="4"><h2>Module</h2></td></tr>

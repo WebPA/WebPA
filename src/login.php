@@ -13,10 +13,12 @@
 
 require_once("includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$msg = fetch_GET('msg', null);
+$msg = Common::fetch_GET('msg', null);
 
 switch ($msg) {
   case 'connfailed' :

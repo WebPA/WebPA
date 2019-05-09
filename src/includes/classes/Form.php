@@ -12,6 +12,8 @@ include_once __DIR__ . '/../inc_global.php';
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\Common;
+
 class Form {
   // Public Vars
   public $id = null;
@@ -51,7 +53,7 @@ class Form {
   function create() {
     // generate a new form_id
     while (true) {
-      $new_id = uuid_create();
+      $new_id = Common::uuid_create();
       if ($this->_DAO->fetch_value("SELECT COUNT(form_id) FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_id = '$new_id'") == 0) { break; }
     }
     $this->id = $new_id;
@@ -62,7 +64,7 @@ class Form {
   */
   function delete() {
 
-    $_module_id = fetch_SESSION('_module_id', null);
+    $_module_id = Common::fetch_SESSION('_module_id', null);
 
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form_module WHERE (form_id = '{$this->id}') AND (module_id = {$_module_id})");
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_id = '{$this->id}'");

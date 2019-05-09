@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep1 {
 
   // Public
@@ -85,13 +87,13 @@ class WizardStep1 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('form_name',fetch_POST('form_name'));
+    $this->wizard->set_field('form_name',Common::fetch_POST('form_name'));
     if (empty($this->wizard->get_field('form_name'))) { $errors[] = 'You must provide a name for your new assessment form'; }
 
-    $this->wizard->set_field('form_modules',fetch_POST('form_modules'));
+    $this->wizard->set_field('form_modules',Common::fetch_POST('form_modules'));
     if (empty($this->wizard->get_field('form_modules'))) { $errors[] = 'You must select at least one module'; }
 
-    $this->wizard->set_field('form_type',fetch_POST('form_type'));
+    $this->wizard->set_field('form_type',Common::fetch_POST('form_type'));
 
     return $errors;
   }// /->process_form()

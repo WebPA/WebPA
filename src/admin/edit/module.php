@@ -19,8 +19,9 @@
 require_once("../../includes/inc_global.php");
 
 use WebPA\includes\classes\Module;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_ADMIN)){
+if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -42,9 +43,9 @@ $UI->content_start();
 //build the content to be written to the screen
 
 //get the passed module ID passed as m
-$module = intval(fetch_GET('m'));
+$module = intval(Common::fetch_GET('m'));
 
-$action = fetch_POST('command');
+$action = Common::fetch_POST('command');
 
 $sScreenMsg = '';
 
@@ -59,14 +60,14 @@ $edit_module->load_from_row($module_id);
 //process form
 
 //get the posted information
-$action = fetch_POST('save');
+$action = Common::fetch_POST('save');
 
 if ($action) {          //incase we want to do more than save changes in the future
   switch ($action) {
     case 'Save Changes':
     //put all the elements back into the structures
-    $edit_module->module_code = fetch_POST('module_code');
-    $edit_module->module_title = fetch_POST('module_title');
+    $edit_module->module_code = Common::fetch_POST('module_code');
+    $edit_module->module_title = Common::fetch_POST('module_title');
 
     //save all of the data
     $edit_module->set_dao_object($DB);

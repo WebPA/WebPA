@@ -13,16 +13,17 @@
 
  use WebPA\includes\classes\Module;
  use WebPA\includes\classes\User;
+ use WebPA\includes\functions\Common;
 
- if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
 //get the passed user ID passed as u
-$user = fetch_GET('u');
+$user = Common::fetch_GET('u');
 //get the passed module ID passed as m
-$module = fetch_GET('m');
+$module = Common::fetch_GET('m');
 
 //set the page information
 if (!$user) {
@@ -35,7 +36,7 @@ if (!$user) {
 $UI->menu_selected = 'view data';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
@@ -81,7 +82,7 @@ $page_intro = '';
     $delete_user = new User();
     $delete_user->set_dao_object($DB);
     $delete_user->load_from_row($user_row);
-    if (check_user($_user, APP__USER_TYPE_ADMIN) && $delete_user->is_admin()) {
+    if (Common::check_user($_user, APP__USER_TYPE_ADMIN) && $delete_user->is_admin()) {
       $sScreenMsg = "<p>The administrator has been deleted.</p>";
       $delete_user->delete();
     } else {

@@ -13,8 +13,9 @@ require_once('../../../includes/inc_global.php');
 require_once('../../../includes/functions/lib_xml_validate.php');
 
 use WebPA\includes\classes\XMLParser;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -56,7 +57,7 @@ if ($errno == 0){
       $action_notify = "<p>You already have this form in your forms list.</p><p>If you would like to make a copy of the form please use the <a href=\"../tutors/forms/clone/index.php\">'clone form'</a> function.</p>";
     } else {
       //need to replace the ID number before replacing in the system.
-      $new_id = uuid_create();
+      $new_id = Common::uuid_create();
       $parsed['form']['formid']['_data'] = $new_id;
       //re build the XML
       $xml = $parser->generate_xml($parsed);

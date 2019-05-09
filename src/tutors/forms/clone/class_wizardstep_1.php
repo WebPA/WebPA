@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep1 {
 
   // Public
@@ -97,7 +99,7 @@ class WizardStep1 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('form_id',fetch_POST('form_id'));
+    $this->wizard->set_field('form_id',Common::fetch_POST('form_id'));
     if (empty($this->wizard->get_field('form_id'))) { $errors[] = 'You must select which assessment form you wish to clone.'; }
 
     return $errors;

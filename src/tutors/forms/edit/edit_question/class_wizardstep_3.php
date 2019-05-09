@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\functions\Common;
+
 class WizardStep3 {
 
   // Public
@@ -49,7 +51,7 @@ class WizardStep3 {
     $new_question['range']['_data'] = "{$range_start}-{$range_end}";
 
     for($i=$range_start; $i<=$range_end; $i++) {
-      $scorelabel = trim( fetch_POST("scorelabel{$i}") );
+      $scorelabel = trim( Common::fetch_POST("scorelabel{$i}") );
       if (!empty($scorelabel)) { $new_question["scorelabel{$i}"]['_data'] = $scorelabel; }
     }
 

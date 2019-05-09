@@ -13,6 +13,7 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\Common;
 
 class WizardStep6 {
 
@@ -93,7 +94,7 @@ class WizardStep6 {
     //process the emails if the option is set.
     $send_email = $this->wizard->get_field('email');
     if($send_email == '1'){
-      $_user_id = fetch_SESSION('_user_id', null);
+      $_user_id = Common::fetch_SESSION('_user_id', null);
       $subjectLn = 'Your Tutor has set a WebPA assessment';
       $body = "Your tutor has set a WebPA assessment for your group. The details are as below;" .
           "\n Assessment Name:  " . $this->wizard->get_field('assessment_name') .

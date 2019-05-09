@@ -19,6 +19,7 @@ use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\UI;
 use WebPA\includes\classes\User;
+use WebPA\includes\functions\Common;
 
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
@@ -137,9 +138,6 @@ define('APP__MOODLE_GRADEBOOK', FALSE); // If the grade book xml for moodle can 
 define('APP__REMINDER_OPENING', FALSE);
 define('APP__REMINDER_CLOSING', FALSE);
 
-// Includes
-require_once(DOC__ROOT.'includes/functions/lib_common.php');
-
 //set in individual pages to link to the most appropriate help sections.
 //this is not an option that can be changed in the configuration
 define ('APP__HELP_LINK','http://www.webpaproject.com/');
@@ -225,19 +223,19 @@ $CIS = new EngCIS();
 $_user = null;
 
 // Get info from the session
-$_user_id = fetch_SESSION('_user_id', NULL);
-$_user_source_id = fetch_SESSION('_user_source_id', NULL);
-$_user_context_id = fetch_SESSION('_user_context_id', NULL);
-$_source_id = fetch_SESSION('_source_id', '');
-$_module_id = fetch_SESSION('_module_id', NULL);
-$BRANDING['logo'] = fetch_SESSION('branding_logo', APP__INST_LOGO);
-$BRANDING['logo.width'] = fetch_SESSION('branding_logo.width', APP__INST_WIDTH);
-$BRANDING['logo.height'] = fetch_SESSION('branding_logo.height', APP__INST_HEIGHT);
+$_user_id = Common::fetch_SESSION('_user_id', NULL);
+$_user_source_id = Common::fetch_SESSION('_user_source_id', NULL);
+$_user_context_id = Common::fetch_SESSION('_user_context_id', NULL);
+$_source_id = Common::fetch_SESSION('_source_id', '');
+$_module_id = Common::fetch_SESSION('_module_id', NULL);
+$BRANDING['logo'] = Common::fetch_SESSION('branding_logo', APP__INST_LOGO);
+$BRANDING['logo.width'] = Common::fetch_SESSION('branding_logo.width', APP__INST_WIDTH);
+$BRANDING['logo.height'] = Common::fetch_SESSION('branding_logo.height', APP__INST_HEIGHT);
 $BRANDING['logo.margin'] = $BRANDING['logo.height'] + 10;
-$BRANDING['name'] = fetch_SESSION('branding_name', APP__INST_LOGO_ALT);
-$BRANDING['css'] = fetch_SESSION('branding_css', CUSTOM_CSS);
-$BRANDING['email.help'] = fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
-$BRANDING['email.noreply'] = fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
+$BRANDING['name'] = Common::fetch_SESSION('branding_name', APP__INST_LOGO_ALT);
+$BRANDING['css'] = Common::fetch_SESSION('branding_css', CUSTOM_CSS);
+$BRANDING['email.help'] = Common::fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
+$BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
 
 // If we found a user to load, load 'em!
 if ($_user_id){

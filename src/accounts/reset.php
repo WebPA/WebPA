@@ -24,8 +24,9 @@ This table has the CREATE definition:
 require_once("../includes/inc_global.php");
 
 use WebPA\includes\classes\User;
+use WebPA\includes\functions\Common;
 
-$action = fetch_POST('action');
+$action = Common::fetch_POST('action');
 
 switch($action) {
   case "init":

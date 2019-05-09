@@ -13,18 +13,19 @@ require_once("../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
 // --------------------------------------------------------------------------------
 
-$year = fetch_GET('y');
-$tab = fetch_GET('tab','pending');
+$year = Common::fetch_GET('y');
+$tab = Common::fetch_GET('tab','pending');
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
 $list_url = "../assessments/index.php?tab={$tab}&y={$year}";
 

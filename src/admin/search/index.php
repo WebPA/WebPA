@@ -14,7 +14,9 @@
 //get the include file required
 require_once("../../includes/inc_global.php");
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+use WebPA\includes\functions\Common;
+
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -22,11 +24,11 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 //-------------------------------------------------------------------------
 //process the form
 
-$post_firstname = fetch_GET('firstname');
-$post_lastname = fetch_GET('lastname');
-$post_username = fetch_GET('username');
-$post_id_number = fetch_GET('id_number');
-$post_search = fetch_GET('search');
+$post_firstname = Common::fetch_GET('firstname');
+$post_lastname = Common::fetch_GET('lastname');
+$post_username = Common::fetch_GET('username');
+$post_id_number = Common::fetch_GET('id_number');
+$post_search = Common::fetch_GET('search');
 
 $where = '';
 $order = '';
@@ -51,7 +53,7 @@ if (!empty($post_search)) {
     $order .= ', u.id_number';
   }
   if (!empty($where)) {
-    if (!check_user($_user, APP__USER_TYPE_ADMIN)) {
+    if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
       $where .= ' AND (u.admin = 0)';
     }
     $order = substr($order, 2);
@@ -76,7 +78,7 @@ $UI->menu_selected = 'view data';
 $UI->breadcrumbs = array ('home' => '../review/', 'search'=>null,);
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
-if (check_user($_user, APP__USER_TYPE_ADMIN)) {
+if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
   $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }

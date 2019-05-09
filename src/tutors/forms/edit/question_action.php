@@ -11,8 +11,9 @@
 require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\Form;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -20,10 +21,10 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$form_id = fetch_GET('f');
-$question_id = fetch_GET('q');
+$form_id = Common::fetch_GET('f');
+$question_id = Common::fetch_GET('q');
 
-$action = strtolower( fetch_GET('a') );
+$action = strtolower( Common::fetch_GET('a') );
 
 // --------------------------------------------------------------------------------
 

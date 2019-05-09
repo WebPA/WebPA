@@ -17,8 +17,9 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\ArrayFunctions;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
     exit;
 }
@@ -26,12 +27,12 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)) {
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$assessment_id = fetch_GET('a');
+$assessment_id = Common::fetch_GET('a');
 
-$tab = fetch_GET('tab');
-$year = fetch_GET('y', date('Y'));
+$tab = Common::fetch_GET('tab');
+$year = Common::fetch_GET('y', date('Y'));
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $list_url = "../index.php?tab={$tab}&y={$year}";
 
@@ -63,33 +64,33 @@ if ($command && $assessment) {
     switch ($command) {
         case 'save':
             // Change of name
-            $assessment->name = fetch_POST('assessment_name');
+            $assessment->name = Common::fetch_POST('assessment_name');
             if (empty($assessment->name)) {
                 $errors[] = 'You must give this assessment a name.';
             }
 
             // Create an open date time object
-            list($time_h, $time_m) = explode(':', fetch_POST('open_date_time'));
+            list($time_h, $time_m) = explode(':', Common::fetch_POST('open_date_time'));
 
             $openDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
                 $time_m,
                 0,
-                fetch_POST('open_date_month'),
-                fetch_POST('open_date_day'),
-                fetch_POST('open_date_year')
+                Common::fetch_POST('open_date_month'),
+                Common::fetch_POST('open_date_day'),
+                Common::fetch_POST('open_date_year')
             ));
 
             // Create a close date time object
-            list($time_h, $time_m) = explode(':', fetch_POST('close_date_time'));
+            list($time_h, $time_m) = explode(':', Common::fetch_POST('close_date_time'));
 
             $closeDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
                 $time_m,
                 0,
-                fetch_POST('close_date_month'),
-                fetch_POST('close_date_day'),
-                fetch_POST('close_date_year')
+                Common::fetch_POST('close_date_month'),
+                Common::fetch_POST('close_date_day'),
+                Common::fetch_POST('close_date_year')
             ));
 
           //check the dates to trigger emails if needed.
@@ -136,14 +137,14 @@ if ($command && $assessment) {
                 $errors[] = 'You must select a closing date/time that is after your opening date';
             }
 
-            $assessment->introduction = fetch_POST('introduction');
+            $assessment->introduction = Common::fetch_POST('introduction');
 
-            $assessment->assessment_type = fetch_POST('assessment_type');
-            $assessment->allow_feedback = fetch_POST('allow_feedback');
-            $assessment->allow_assessment_feedback = fetch_POST('allow_assessment_feedback');
-            $assessment->feedback_name = fetch_POST('feedback_title');
-            $assessment->email_opening = fetch_POST('email_opening');
-            $assessment->email_closing = fetch_POST('email_closing');
+            $assessment->assessment_type = Common::fetch_POST('assessment_type');
+            $assessment->allow_feedback = Common::fetch_POST('allow_feedback');
+            $assessment->allow_assessment_feedback = Common::fetch_POST('allow_assessment_feedback');
+            $assessment->feedback_name = Common::fetch_POST('feedback_title');
+            $assessment->email_opening = Common::fetch_POST('email_opening');
+            $assessment->email_closing = Common::fetch_POST('email_closing');
 
           // If there were no errors, save the changes
             if (!$errors) {

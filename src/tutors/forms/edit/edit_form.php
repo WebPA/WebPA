@@ -11,8 +11,9 @@
 require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\Form;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -20,9 +21,9 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$form_id = fetch_GET('f');
+$form_id = Common::fetch_GET('f');
 
-$command = fetch_POST('command', fetch_GET('command'));
+$command = Common::fetch_POST('command', Common::fetch_GET('command'));
 
 // --------------------------------------------------------------------------------
 
@@ -44,10 +45,10 @@ if ( ($command) && ($form) ) {
   switch ($command) {
     case 'save':
       // Change of name
-      $form->name = fetch_POST('form_name');
+      $form->name = Common::fetch_POST('form_name');
           if (empty($form->name)) { $errors[] = 'You must give this form a name.'; }
 
-          $form->type = fetch_POST('form_type');
+          $form->type = Common::fetch_POST('form_type');
 
       // If there were no errors, save the changes
       if (!$errors) {

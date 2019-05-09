@@ -10,6 +10,8 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 class WizardStep4 {
 
   // Public
@@ -93,7 +95,7 @@ class WizardStep4 {
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('assessment_type',fetch_POST('assessment_type'));
+    $this->wizard->set_field('assessment_type',Common::fetch_POST('assessment_type'));
 
 
     return $errors;

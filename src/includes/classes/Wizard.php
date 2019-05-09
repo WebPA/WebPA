@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\Common;
+
 class Wizard {
   // Public Vars
   public $back_button = '&lt; Back';
@@ -47,7 +49,7 @@ class Wizard {
     $this->name = $name;
     $this->_page_url = $_SERVER["PHP_SELF"];
 
-    $this->_fields = unserialize( base64_decode( fetch_POST('wiz_stored_fields',null) ) );
+    $this->_fields = unserialize( base64_decode( Common::fetch_POST('wiz_stored_fields',null) ) );
     if (!is_array($this->_fields)) { $this->_fields = array(); }
   }// /->Wizard()
 
@@ -140,7 +142,7 @@ HTMLEnd;
     $do_last = false;
     $do_next = true;
 
-    $wiz_command = fetch_POST('wiz_command');
+    $wiz_command = Common::fetch_POST('wiz_command');
 
     switch ($wiz_command) {
       case 'back' :

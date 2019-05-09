@@ -10,8 +10,10 @@
 
 require_once("includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 if (isset($_SESSION['_user_id'])) {
-  logEvent('Logout');
+  Common::logEvent('Logout');
 }
 
 $old_session = $_SESSION;
@@ -35,7 +37,7 @@ if (isset($old_session['logout_url'])) {
       $params["secure"], $params["httponly"]);
   }
 } else {
-  $msg = (fetch_GET('msg',null)) ? fetch_GET('msg',null) : 'logout' ;
+  $msg = (Common::fetch_GET('msg',null)) ? Common::fetch_GET('msg',null) : 'logout' ;
   $url = "login.php?msg=$msg";
   session_start();
   if (isset($old_session['branding_logo'])) {

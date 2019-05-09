@@ -12,7 +12,9 @@ require_once("../../includes/inc_global.php");
 require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+use WebPA\includes\functions\Common;
+
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -23,7 +25,7 @@ $years = $CIS->get_user_academic_years($_user_id);
 
 $start_year = $years[0];
 $last_year = $years[1];
-$year = (int) fetch_GET('y', fetch_SESSION('year', get_academic_year()));
+$year = (int) Common::fetch_GET('y', Common::fetch_SESSION('year', get_academic_year()));
 $_SESSION['year'] = $year;
 
 $academic_year = strval($year);
@@ -45,7 +47,7 @@ $tabs = array ('pending'  => "?tab=pending&y={$year}" ,
          'marked'   => "?tab=marked&y={$year}" ,
 );
 
-$tab = fetch_GET('tab','pending');
+$tab = Common::fetch_GET('tab','pending');
 
 switch($tab) {
   case 'pending':

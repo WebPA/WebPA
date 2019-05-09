@@ -10,6 +10,7 @@
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
+use WebPA\includes\functions\Common;
 
 class WizardStep2 {
 
@@ -176,7 +177,7 @@ class WizardStep2 {
         } // /for
 
         $email_groups = implode('|',array_values($_POST['email_group']));
-        $this->wizard->set_field('email_groups',fetch_POST('email_groups'));
+        $this->wizard->set_field('email_groups',Common::fetch_POST('email_groups'));
       }
       $this->wizard->set_field('email_groups', $email_groups);
       if ( ($num_students===0) ) {
@@ -184,12 +185,12 @@ class WizardStep2 {
       }
     }
 
-    $this->wizard->set_field('email_subject', fetch_POST('email_subject'));
+    $this->wizard->set_field('email_subject', Common::fetch_POST('email_subject'));
     if (empty($this->wizard->get_field('email_subject'))) {
       $errors[] = 'You must enter a subject for this email.';
     }
 
-    $this->wizard->set_field('email_text', fetch_POST('email_text'));
+    $this->wizard->set_field('email_text', Common::fetch_POST('email_text'));
     if (empty($this->wizard->get_field('email_text'))) {
       $errors[] = 'You must enter the text of this email.';
     }

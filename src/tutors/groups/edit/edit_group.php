@@ -14,8 +14,9 @@ require_once("../../../lang/en/generic.php");
 require_once("../../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\functions\Common;
 
-if (!check_user($_user, APP__USER_TYPE_TUTOR)){
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -23,10 +24,10 @@ if (!check_user($_user, APP__USER_TYPE_TUTOR)){
 // --------------------------------------------------------------------------------
 // Process GET/POST
 
-$collection_id = fetch_GET('c');
-$group_id = fetch_GET('g');
+$collection_id = Common::fetch_GET('c');
+$group_id = Common::fetch_GET('g');
 
-$command = fetch_POST('command');
+$command = Common::fetch_POST('command');
 
 $collection_url = "edit_collection.php?c={$collection_id}";
 
@@ -58,7 +59,7 @@ if ($allow_edit) {
   switch ($command) {
     case 'save':
       // Change of name
-      $group->name = fetch_POST('group_name');
+      $group->name = Common::fetch_POST('group_name');
       if (empty($group->name)) { $errors[] = GROUPS__EDIT_SAVE_ERR; }
 
       // Delete all the members with the 'member' role

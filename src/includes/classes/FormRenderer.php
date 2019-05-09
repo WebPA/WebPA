@@ -10,6 +10,8 @@
 
 namespace WebPA\includes\classes;
 
+use WebPA\includes\functions\Common;
+
 function & rel4($struc, &$file) {
   return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
 }
@@ -222,7 +224,7 @@ class FormRenderer {
         foreach($this->_participants as $id => $name) {
           $class = ($id==$this->participant_id) ? 'class="this_participant"' : '';
 
-          $score = fetch_POST("q_{$q}_{$id}");
+          $score = Common::fetch_POST("q_{$q}_{$id}");
 
           $initial_total += $score;
 
@@ -324,7 +326,7 @@ class FormRenderer {
             //out put the boxes
             foreach($this->_participants as $id => $name) {
               echo("<tr><td class=\"participant\" width=\"200\" valign=\"middle\">$name</th>\n");
-              echo("<td><textarea name=\"$id\" rows=\"4\" cols=\"75\">". fetch_POST($id) ."</textarea></td></tr>");
+              echo("<td><textarea name=\"$id\" rows=\"4\" cols=\"75\">". Common::fetch_POST($id) ."</textarea></td></tr>");
             }
           }
 ?>

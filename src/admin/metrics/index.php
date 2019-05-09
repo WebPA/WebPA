@@ -15,7 +15,9 @@
 require_once("../../includes/inc_global.php");
 require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 
-if (!check_user($_user, APP__USER_TYPE_ADMIN)) {
+use WebPA\includes\functions\Common;
+
+if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
@@ -38,7 +40,7 @@ $UI->head();
 <?php
 $years = $CIS->get_user_academic_years();
 $todays_year = get_academic_year();
-$year = (int) fetch_SESSION('year', $todays_year);
+$year = (int) Common::fetch_SESSION('year', $todays_year);
 
 $UI->body();
 $UI->content_start();

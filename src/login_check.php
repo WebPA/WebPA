@@ -18,11 +18,13 @@ namespace WebPA;
 
 require_once("./includes/inc_global.php");
 
+use WebPA\includes\functions\Common;
+
 // --------------------------------------------------------------------------------
 // Process Get/Post
 
-$username = (string) fetch_POST('username');
-$password = (string) fetch_POST('password');
+$username = (string) Common::fetch_POST('username');
+$password = (string) Common::fetch_POST('password');
 
 // Sanitize the username/password data
 $username = substr($username,0,255);
@@ -85,8 +87,8 @@ if ( ($username) && ($password) ) {
     $_SESSION['_module_id'] = $_auth->module_id;
     $_SESSION['_user_context_id'] = $_auth->module_code;
 
-    logEvent('Login');
-    logEvent('Enter module', $_auth->module_id);
+    Common::logEvent('Login');
+    Common::logEvent('Enter module', $_auth->module_id);
 
     header('Location: ' . APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
     exit;

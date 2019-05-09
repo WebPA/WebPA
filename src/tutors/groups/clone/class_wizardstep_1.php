@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\functions\Common;
 
 class WizardStep1 {
 
@@ -87,7 +88,7 @@ HTMLEnd;
   function process_form() {
     $errors = null;
 
-    $this->wizard->set_field('collection_id',fetch_POST('collection_id'));
+    $this->wizard->set_field('collection_id',Common::fetch_POST('collection_id'));
     if (empty($this->wizard->get_field('collection_id'))) {
       $errors[] = 'You must select a collection of groups to clone.';
     }
