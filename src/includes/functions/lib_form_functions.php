@@ -12,8 +12,6 @@ namespace WebPA\includes\functions;
 
 class Form
 {
-    $form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
-
     /**
      * Is the given email address in a valid format
      * Format: <alphanum _ - characters> @ <alphanum _ - characters> . <alphanum _ - characters>...
