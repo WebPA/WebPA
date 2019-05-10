@@ -14,20 +14,6 @@ define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for 
 
 class Common
 {
-
-
-    /**
-     * fetch var from a cookie (or return default if unset)
-     *
-     * @param string $key
-     * @param mixed $default_value
-     *
-     * @return mixed
-     */
-    public static function fetch_COOKIE($key, $default_value = '') {
-      return (isset($_COOKIE[$key])) ? $_COOKIE[$key] : $default_value;
-    }
-
     /**
      * fetch var from querystring (or return default if unset)
      *
@@ -75,19 +61,6 @@ class Common
     public static function fetch_SESSION($key, $default_value = '') {
       return (isset($_SESSION[$key])) ? $_SESSION[$key] : $default_value;
     }
-
-    /**
-     * Check if the given bits are set (any bits or all bits)
-     *
-     * @param int $bit
-     * @param int $want_bits
-     * @param bool $must_have_all
-     *
-     * @return bool
-     */
-    public static function check_bits($bits = 0, $want_bits = 0, $must_have_all = false) {
-        return ($must_have_all) ? (($bits & $want_bits) == $want_bits) : (($bits & $want_bits) > 0);
-    } // /check_bits()
 
     /**
      * Generate a UUID formatted Unique Identifier (ABCDEFGH-IJKL-MNOP-QRST-UVWXYZ123456)
