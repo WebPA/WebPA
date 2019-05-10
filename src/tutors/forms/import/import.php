@@ -10,10 +10,10 @@
  */
 
 require_once('../../../includes/inc_global.php');
-require_once('../../../includes/functions/lib_xml_validate.php');
 
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\XML;
 
 //get the posted data
 $xml =  stripslashes($_GET['txtXml']);
@@ -25,7 +25,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
 //check that we have something to validate
 $empty = strlen(trim($xml));
 if ($empty>0) {
-  $isValid = Validate($xml, 'schema.xsd');
+  $isValid = XML::validate($xml, 'schema.xsd');
   if ($isValid) {
     //get the ID for the current User
     $staff_id = $_user->id;

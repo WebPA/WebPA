@@ -10,10 +10,10 @@
 
 //get the include file required
 require_once('../../../includes/inc_global.php');
-require_once('../../../includes/functions/lib_xml_validate.php');
 
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\XML;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -34,7 +34,7 @@ if ($errno == 0){
   $localfile = file_get_contents($source);
 
   //validate the XML
-  $isValid = Validate($localfile, 'schema.xsd');
+  $isValid = XML::validate($localfile, 'schema.xsd');
 
   if ($isValid){
     //get the ID for the current User
