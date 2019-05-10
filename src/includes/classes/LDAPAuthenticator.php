@@ -13,9 +13,10 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once(DOC__ROOT.'includes/functions/lib_string_functions.php');
 
 namespace WebPA\includes\classes;
+
+use WebPA\includes\functions\StringFunctions;
 
 class LDAPAuthenticator extends Authenticator {
 
@@ -114,7 +115,7 @@ class LDAPAuthenticator extends Authenticator {
     $DAO = $this->get_DAO();
     if (LDAP__AUTO_CREATE_USER) {
 
-      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . ", username = '{$this->username}', password = '" . md5(str_random()) . "', source_id = ''";
+      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . ", username = '{$this->username}', password = '" . md5(StringFunctions::str_random()) . "', source_id = ''";
       $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ', $els);
       $DAO->execute($sql);
       $id = $DAO->get_insert_id();

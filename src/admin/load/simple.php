@@ -13,10 +13,10 @@
  */
 
 require_once('../../includes/inc_global.php');
-require_once('../../includes/functions/lib_string_functions.php');
 
 use WebPA\includes\classes\GroupCollection;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\StringFunctions;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
  header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -118,7 +118,7 @@ if ($flg_match) {
       if (!empty($final_rows[$counter]['password'])) {
         $final_rows[$counter]['password'] = md5($final_rows[$counter]['password']);
       } else {
-        $final_rows[$counter]['password'] = md5(str_random());
+        $final_rows[$counter]['password'] = md5(StringFunctions::str_random());
       }
     }
 

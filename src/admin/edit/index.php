@@ -18,11 +18,11 @@
 
 //get the include file required
 require_once('../../includes/inc_global.php');
-require_once('../../includes/functions/lib_string_functions.php');
 
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
+use WebPA\includes\functions\StringFunctions;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -123,7 +123,7 @@ if ($canEdit) {
   $password = Common::fetch_POST('password', '');
   if ((($password != '!!!!!!') && !empty($password)) || empty($user_id)) {
     if (($password == '!!!!!!') || empty($password)) {
-      $password = str_random();
+      $password = StringFunctions::str_random();
     }
     $edit_user->update_password(md5($password));
   }
