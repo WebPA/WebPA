@@ -12,7 +12,7 @@ namespace WebPA\includes\functions;
 
 class XML
 {
-     function validate($xml, $xsd){
+     public static function validate($xml, $xsd){
          libxml_use_internal_errors(true);
 
          $objDom = new DOMDocument('1.0', 'utf-8');
