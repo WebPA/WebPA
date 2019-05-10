@@ -14,16 +14,16 @@
 
 //get the include file required
 require_once("../../includes/inc_global.php");
-require_once("../../includes/functions/lib_university_functions.php");
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\AcademicYear;
 
 if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
-$year = (int) Common::fetch_POST('academic_year', Common::fetch_SESSION('year', get_academic_year()));
+$year = (int) Common::fetch_POST('academic_year', Common::fetch_SESSION('year', AcademicYear::get_academic_year()));
 $_SESSION['year'] = $year;
 
 $academic_year = strval($year);
@@ -55,7 +55,7 @@ $assessment_modules = Common::fetch_POST('assessment_modules');
 $assessment_students_thisyear = Common::fetch_POST('assessment_students_thisyear');
 // $assessment_tutor_departments = fetch_POST('assessment_tutor_departments');
 
-$this_accademic_year = get_academic_year() . '-';
+$this_accademic_year = AcademicYear::get_academic_year() . '-';
 if (APP__ACADEMIC_YEAR_START_MONTH <= 10) {
   $this_accademic_year .= '0';
 }

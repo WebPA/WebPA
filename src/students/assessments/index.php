@@ -9,10 +9,10 @@
  */
 
 require_once("../../includes/inc_global.php");
-require_once("../../includes/functions/lib_university_functions.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 
@@ -35,7 +35,7 @@ $collection_clause = $DB->build_set($collection_ids);
 
 // Get a list of assessments that match the user's collections (for this year)
 
-$academic_year = get_academic_year();
+$academic_year = AcademicYear::get_academic_year();
 
 $start_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year - 1);
 $end_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year + 1);

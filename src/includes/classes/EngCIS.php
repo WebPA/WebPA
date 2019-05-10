@@ -12,10 +12,9 @@ namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\AcademicYear;
 
 include_once __DIR__ . '/../inc_global.php';
-
-require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 
 class EngCIS
 {
@@ -543,10 +542,10 @@ class EngCIS
         $dates = $this->_DAO->fetch_row($sql);
 
         if (!empty($dates)) {
-            $years[] = dateToYear(strtotime($dates['first']));
-            $years[] = dateToYear(strtotime($dates['last']));
+            $years[] = AcademicYear::dateToYear(strtotime($dates['first']));
+            $years[] = AcademicYear::dateToYear(strtotime($dates['last']));
         } else {
-            $years[] = dateToYear(time());
+            $years[] = AcademicYear::dateToYear(time());
             $years[] = $years[0];
         }
 

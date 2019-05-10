@@ -9,9 +9,9 @@
  */
 
 require_once("../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/functions/lib_university_functions.php');
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\AcademicYear;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -24,7 +24,7 @@ $years = $CIS->get_user_academic_years($_user_id);
 
 $start_year = $years[0];
 $last_year = $years[1];
-$year = (int) Common::fetch_GET('y', Common::fetch_SESSION('year', get_academic_year()));
+$year = (int) Common::fetch_GET('y', Common::fetch_SESSION('year', AcademicYear::get_academic_year()));
 $_SESSION['year'] = $year;
 
 $academic_year = strval($year);
