@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 class WizardStep1 {
 
@@ -52,7 +53,7 @@ class WizardStep1 {
     <h2>Send Email To</h2>
     <div class="form_section">
 <?php
-      render_radio_boxes($send_to, 'send_to', $this->wizard->get_field('send_to'));
+      Form::render_radio_boxes($send_to, 'send_to', $this->wizard->get_field('send_to'));
 ?>
     </div>
 <?php

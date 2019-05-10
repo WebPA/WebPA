@@ -10,6 +10,7 @@
  */
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 class WizardStep1 {
 
@@ -44,7 +45,6 @@ class WizardStep1 {
 
   function form() {
     $config = $this->wizard->get_var('config');
-    require_once('../../../../includes/functions/lib_form_functions.php');
     if (!$this->wizard->get_field('question_range_start')) {
       $this->wizard->set_field('question_range_start',1);
     }
@@ -77,13 +77,13 @@ class WizardStep1 {
         <th><label for="question_range_start">Scores can range from</label></th>
         <td>
           <select name="question_range_start" id="question_range_start">
-            <?php render_options_range(0,1,1,(int) $this->wizard->get_field('question_range_start')); ?>
+            <?php Form::render_options_range(0,1,1,(int) $this->wizard->get_field('question_range_start')); ?>
           </select>
         </td>
         <td><label>to</label></td>
         <td>
           <select name="question_range_end" id="question_range_end">
-            <?php render_options_range(3,10,1,(int) $this->wizard->get_field('question_range_end')); ?>
+            <?php Form::render_options_range(3,10,1,(int) $this->wizard->get_field('question_range_end')); ?>
           </select>
         </td>
       </tr>

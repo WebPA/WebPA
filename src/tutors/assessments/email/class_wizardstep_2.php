@@ -11,6 +11,7 @@
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 class WizardStep2 {
 
@@ -88,7 +89,7 @@ class WizardStep2 {
           }
         }
 
-        render_checkbox_grid($groups_cbox_array, 'email_group', (array) $email_groups, false, 2);
+        Form::render_checkbox_grid($groups_cbox_array, 'email_group', (array) $email_groups, false, 2);
 ?>
         </div>
 <?php

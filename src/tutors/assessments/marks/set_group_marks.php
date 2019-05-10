@@ -8,7 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 require_once("../../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;

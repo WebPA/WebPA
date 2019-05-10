@@ -11,9 +11,9 @@
  */
 
 require_once("../includes/inc_global.php");
-require_once('../includes/functions/lib_form_functions.php');
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 Common::check_user($_user);
 
@@ -85,7 +85,7 @@ $UI->content_start();
 													 'wish'		=> 'Suggestion / Wish List' ,
 													 'misc'		=> 'Other type of message' ,);
 
-							render_options($contact_types, $contact_type);
+							Form::render_options($contact_types, $contact_type);
 						?>
 					</select>
 				</td>

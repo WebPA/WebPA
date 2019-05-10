@@ -19,10 +19,10 @@
 //get the include file required
 require_once('../../includes/inc_global.php');
 require_once('../../includes/functions/lib_string_functions.php');
-require_once('../../includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -142,7 +142,7 @@ if ($action) {          //incase we want to do more than save changes in the fut
     	
       if (!$complete) {
         $sScreenMsg = 'Unable to save user: please make sure the user has a username, first name, last name and password.';
-      } elseif ($edit_user->email != '' && !is_email($edit_user->email)) { 
+      } elseif ($edit_user->email != '' && !Form::is_email($edit_user->email)) {
       	$sScreenMsg = 'Unable to save user: email address is not valid.';
       } else {
         //send notification to the screen that the save has occured.

@@ -10,6 +10,7 @@
  */
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 class WizardStep2 {
 
@@ -51,8 +52,6 @@ HTMLEnd;
     $CIS = $this->wizard->get_var('CIS');
     $config = $this->wizard->get_var('config');
 
-    require_once("../../../includes/functions/lib_form_functions.php");
-
     $total_students = $CIS->get_module_students_count($_module_id);
 
     $students_plural = ($total_students==1) ? 'student' : 'students';
@@ -74,7 +73,7 @@ HTMLEnd;
         <th><label for="num_groups">Number of groups to create</label></th>
         <td>
           <select name="num_groups" id="num_groups">
-          <?php render_options_range(0,100,1,(int) $this->wizard->get_field('num_groups')); ?>
+          <?php Form::render_options_range(0,100,1,(int) $this->wizard->get_field('num_groups')); ?>
           </select>
         </td>
       </tr>
@@ -101,7 +100,7 @@ HTMLEnd;
                'numeric'    => 'Numeric (Group 1, Group 2, ..)' ,
                'hashed'   => 'Hashed-Numeric (Group #1, Group #2, ..)' ,
               );
-    render_options($options, $this->wizard->get_field('group_numbering'));
+    Form::render_options($options, $this->wizard->get_field('group_numbering'));
 ?>
           </select>
         </td>

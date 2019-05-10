@@ -9,7 +9,6 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once("../../../includes/functions/lib_form_functions.php");
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;

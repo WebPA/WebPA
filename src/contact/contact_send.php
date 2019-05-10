@@ -9,10 +9,10 @@
  */
 
 require_once("../includes/inc_global.php");
-require_once('../includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\Email;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 check_user($_user);
 
@@ -51,7 +51,7 @@ if ($contact_message == '') {
 if ($contact_email == '') {
 	$errors[] = 'Email is required';
 
-} elseif (!is_email($contact_email)) {
+} elseif (!Form::is_email($contact_email)) {
 	$errors[] = 'Email is not valid';
 }
 

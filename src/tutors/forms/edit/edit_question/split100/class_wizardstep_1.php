@@ -63,7 +63,6 @@ class WizardStep1 {
 			$this->wizard->set_field('set_original_data',true);
 		}
 
-		require_once('../../../../includes/functions/lib_form_functions.php');
 		?>
 		<p>Here you can edit the text and description of the criterion.</p>
 

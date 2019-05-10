@@ -9,11 +9,11 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once(DOC__ROOT . 'includes/functions/lib_form_functions.php');
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -171,7 +171,7 @@ if (!$collection) {
         }
         echo(')</td>');
         echo("<td><select name=\"student_{$member['user_id']}\">");
-        render_options($options, $assigned_group);
+        Form::render_options($options, $assigned_group);
         echo('</select></td>');
         echo('</tr>');
       }

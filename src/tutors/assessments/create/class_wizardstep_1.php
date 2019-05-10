@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Form;
 
 class WizardStep1 {
 
@@ -75,19 +76,19 @@ class WizardStep1 {
 
       // Draw day box
       echo("<td><select name=\"{$field_name}_day\">");
-      render_options_range(1, 31, 1, date('j',$selected_datetime));
+      Form::render_options_range(1, 31, 1, date('j',$selected_datetime));
       echo('</select></td>');
 
       $form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
 
       // Draw month box
       echo("<td><select name=\"{$field_name}_month\">");
-      render_options($form_months, date('n', $selected_datetime));
+      Form::render_options($form_months, date('n', $selected_datetime));
       echo('</select></td>');
 
       // Draw year box
       echo("<td><select name=\"{$field_name}_year\">");
-      render_options_range(date('Y',time()), date('Y',time())+1, 1, date('Y', $selected_datetime));
+      Form::render_options_range(date('Y',time()), date('Y',time())+1, 1, date('Y', $selected_datetime));
       echo('</select></td>');
 
       echo('<th>at</th>');

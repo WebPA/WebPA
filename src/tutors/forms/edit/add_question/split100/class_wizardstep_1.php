@@ -43,7 +43,6 @@ class WizardStep1 {
 
   function form() {
     $config = $this->wizard->get_var('config');
-    require_once('../../../../includes/functions/lib_form_functions.php');
     if (!$this->wizard->get_field('question_range_start')) { $this->wizard->set_field('question_range_start',1); }
     if (!$this->wizard->get_field('question_range_end')) { $this->wizard->set_field('question_range_end',5); }
 ?>
