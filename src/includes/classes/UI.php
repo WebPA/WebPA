@@ -67,7 +67,7 @@ class UI {
       // Check for module menu items
       foreach ($INSTALLED_MODS as $mod) {
         $mod = strtolower($mod);
-        $menu_file = DOC__ROOT . "mod/$mod/menu.php";
+        $menu_file = Config::DOC__ROOT . "mod/$mod/menu.php";
         if (file_exists($menu_file)) {
           require_once($menu_file);
         }

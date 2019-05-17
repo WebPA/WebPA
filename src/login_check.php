@@ -17,13 +17,13 @@
 namespace WebPA;
 
 use WebPA\includes\Common;
-use WebPA\includes\functions\Common;
+use WebPA\includes\functions\Common as CommonFunctions;
 
 // --------------------------------------------------------------------------------
 // Process Get/Post
 
-$username = (string) Common::fetch_POST('username');
-$password = (string) Common::fetch_POST('password');
+$username = (string) CommonFunctions::fetch_POST('username');
+$password = (string) CommonFunctions::fetch_POST('password');
 
 // Sanitize the username/password data
 $username = substr($username,0,255);
@@ -86,10 +86,10 @@ if ( ($username) && ($password) ) {
     $_SESSION['_module_id'] = $_auth->module_id;
     $_SESSION['_user_context_id'] = $_auth->module_code;
 
-    Common::logEvent('Login');
-    Common::logEvent('Enter module', $_auth->module_id);
+    CommonFunctions::logEvent('Login');
+    CommonFunctions::logEvent('Enter module', $_auth->module_id);
 
-    header('Location: ' . Common::APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
+    header('Location: ' . Config::APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
     exit;
 
   }
@@ -100,7 +100,7 @@ if ( ($username) && ($password) ) {
 
 }
 
-header('Location: ' . Common::APP__WWW . "/login.php?msg={$msg}");
+header('Location: ' . Config::APP__WWW . "/login.php?msg={$msg}");
 exit;
 
 ?>

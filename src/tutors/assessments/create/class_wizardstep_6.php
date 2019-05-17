@@ -52,7 +52,7 @@ class WizardStep6 {
     $config =& $this->wizard->get_var('config');
     $user =& $this->wizard->get_var('user');
 
-    require_once(DOC__ROOT . '/tutors/assessments/email/new_assessment.php');
+    require_once(Config::DOC__ROOT . '/tutors/assessments/email/new_assessment.php');
 
     $errors = null;
 
