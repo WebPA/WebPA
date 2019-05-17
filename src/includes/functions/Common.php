@@ -10,6 +10,8 @@
 
 namespace WebPA\includes\functions;
 
+use WebPA\includes\Config;
+
 define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
 
 class Common
@@ -141,9 +143,9 @@ class Common
 
       // If they tried to access the main index page, assume they haven't logged in and go to the login page directly
       if ($_SERVER['PHP_SELF']=='/index.php') {
-        header('Location: '. APP__WWW .'/login.php');
+        header('Location: '. Config::APP__WWW .'/login.php');
       } else {  // log them out and give the DENIED message
-        header('Location:'. APP__WWW .'/logout.php?msg=denied');
+        header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
       }
       exit;
     }

@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('includes/inc_global.php');
+use WebPA\includes\Config;
 
 $mod = '';
 if (isset($_SERVER['PATH_INFO']) && (strlen($_SERVER['PATH_INFO']) > 0)) {
@@ -21,18 +21,18 @@ if ($mod && in_array($mod, $INSTALLED_MODS)) {
   if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
     include_once("mod/{$mod}/index.php");
   } else {
-    header('Location: ' . APP__WWW . "/mod/{$mod}/");
+    header('Location: ' . Config::APP__WWW . "/mod/{$mod}/");
   }
 } else if ($_user) {
   if ($_user->is_admin()) {
-    header('Location: ' . APP__WWW . '/admin/');
+    header('Location: ' . Config::APP__WWW . '/admin/');
   } else if ($_user->is_tutor()) {
-    header('Location: ' . APP__WWW . '/tutors/');
+    header('Location: ' . Config::APP__WWW . '/tutors/');
   } else {
-    header('Location: ' . APP__WWW . '/students/');
+    header('Location: ' . Config::APP__WWW . '/students/');
   }
 } else {
-  header('Location: ' . APP__WWW . '/login.php');
+  header('Location: ' . Config::APP__WWW . '/login.php');
 }
 
 exit;

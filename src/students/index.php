@@ -8,8 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
-
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
@@ -17,7 +15,7 @@ use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 

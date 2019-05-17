@@ -21,8 +21,7 @@ This script relies on the existence of the `user_reset_request` table in MySQL.
 This table has the CREATE definition:
 */
 
-require_once("../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 
@@ -48,7 +47,7 @@ switch($action) {
     }
     //inserts the user/hash pair into the database
     $sql = "INSERT INTO " . APP__DB_TABLE_PREFIX . "user_reset_request SET hash = '$hash', user_id = $uid";
-    $appname = APP__NAME; $appwww = APP__WWW;
+    $appname = APP__NAME; $appwww = Config::APP__WWW;
     $DB->execute($sql);
     $email = <<<TXT
 You have requested for your password to be reset on {$appname}. Please click or copy and paste the following link into your browser to continue the password reset process.
@@ -76,7 +75,7 @@ TXT;
         $user->update_password(md5($_POST['newpass']));
         $user->save_user();
         $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE user_id = $uid");
-        $content = 'Your password has been reset. <a href="'.APP__WWW.'/login.php">Click here</a> to log in again.';
+        $content = 'Your password has been reset. <a href="'. Config::APP__WWW.'/login.php">Click here</a> to log in again.';
       } else {
         $content = "The two passwords did not match.";
       }

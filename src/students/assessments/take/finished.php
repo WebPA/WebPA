@@ -8,13 +8,12 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
@@ -72,7 +71,7 @@ if (!$assessment) {
   </div>
 
   <p>Thank you, your marks have now been saved.</p>
-  <p>You can now check your <a href="../../">assessments list</a> and take another assessment, or finish with WebPA and <a href="<?php echo APP__WWW;?>/logout.php">logout</a>.</p>
+  <p>You can now check your <a href="../../">assessments list</a> and take another assessment, or finish with WebPA and <a href="<?php echo Config::APP__WWW;?>/logout.php">logout</a>.</p>
 <?php
 }
 ?>

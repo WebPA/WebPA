@@ -11,13 +11,11 @@
  * @link https://github.com/webpa/webpa
  */
 
-//get the include file required
-require_once("../../../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 

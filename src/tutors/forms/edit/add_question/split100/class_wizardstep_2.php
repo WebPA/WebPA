@@ -9,6 +9,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\Config;
+
 class WizardStep2 {
 
   // Public
@@ -66,7 +68,7 @@ class WizardStep2 {
       echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
     } else {// Else.. create the form!
       ob_end_clean();
-      header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}#questions");
+      header('Location: '. Config::APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}#questions");
       exit;
       ?>
       <p><strong>Your new assessment criterion has been created.</strong></p>

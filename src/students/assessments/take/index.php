@@ -8,8 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\FormRenderer;
@@ -18,7 +17,7 @@ use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
@@ -39,7 +38,7 @@ if ($assessment->load($assessment_id)) {
 
   // Check if the assessment is open
   if ($assessment->get_status()!='open') {
-    header('Location: '. APP__WWW ."/students/assessments/take/not_open.php?{$assessment_qs}");
+    header('Location: '. Config::APP__WWW ."/students/assessments/take/not_open.php?{$assessment_qs}");
     exit;
   }
 
@@ -48,7 +47,7 @@ if ($assessment->load($assessment_id)) {
   $result_handler->set_assessment($assessment);
 
   if ($result_handler->user_has_responded($_user->id, $assessment->id)) {
-    header('Location: '. APP__WWW ."/students/assessments/take/already_submitted.php?{$assessment_qs}");
+    header('Location: '. Config::APP__WWW ."/students/assessments/take/already_submitted.php?{$assessment_qs}");
     exit;
   }
 
@@ -276,7 +275,7 @@ if (($command) && ($assessment)) {
 
         Common::logEvent('Assessment submission successful', $_module_id, $assessment->id);
 
-        header("Location: ". APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
+        header("Location: ". Config::APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
         exit;
 
       } else {

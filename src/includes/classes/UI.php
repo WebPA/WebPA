@@ -10,7 +10,7 @@
 
 namespace WebPA\includes\classes;
 
-include_once __DIR__ . '/../inc_global.php';
+use WebPA\includes\Config;
 
 class UI {
   // Public Vars
@@ -41,25 +41,25 @@ class UI {
 
       if ($this->_user->is_staff()) {
         // Staff menu
-        $this->set_menu('Tutors', array ('home'       => APP__WWW . '/tutors/index.php',
-                         'my forms'     => APP__WWW . '/tutors/forms/',
-                         'my groups'    => APP__WWW . '/tutors/groups/',
-                         'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
+        $this->set_menu('Tutors', array ('home'       => Config::APP__WWW . '/tutors/index.php',
+                         'my forms'     => Config::APP__WWW . '/tutors/forms/',
+                         'my groups'    => Config::APP__WWW . '/tutors/groups/',
+                         'my assessments' => Config::APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
 
       } else if ($this->_user->is_student()) {
         // Student menu
-        $this->set_menu('Students', array ('home'     => APP__WWW . '/students/index.php' ,
-                           'my groups'    => APP__WWW . '/students/groups/' ,
-                           'my assessments' => APP__WWW . '/students/assessments/' ) );// /$this->set_menu()
+        $this->set_menu('Students', array ('home'     => Config::APP__WWW . '/students/index.php' ,
+                           'my groups'    => Config::APP__WWW . '/students/groups/' ,
+                           'my assessments' => Config::APP__WWW . '/students/assessments/' ) );// /$this->set_menu()
       }
 
       //Admin menu
       if ($this->_user->is_staff()) {
-        $menu = array('admin home'   => APP__WWW .'/admin/index.php',
-                      'upload data'  =>  APP__WWW . '/admin/load/index.php',
-                      'view data'    =>  APP__WWW . '/admin/review/index.php');
+        $menu = array('admin home'   => Config::APP__WWW .'/admin/index.php',
+                      'upload data'  =>  Config::APP__WWW . '/admin/load/index.php',
+                      'view data'    =>  Config::APP__WWW . '/admin/review/index.php');
         if ($this->_user->is_admin()) {
-          $menu['metrics'] = APP__WWW . '/admin/metrics/index.php';
+          $menu['metrics'] = Config::APP__WWW . '/admin/metrics/index.php';
         }
         $this->set_menu('Admin', $menu);
       }
@@ -76,7 +76,7 @@ class UI {
     }
 
     $this->set_menu('Support', array ('help'    =>  $helper_link, //this is a link set in each page / area to link to the approriate help
-                      'contact'   => APP__WWW . '/contact/') );// /$this->set_menu();
+                      'contact'   => Config::APP__WWW . '/contact/') );// /$this->set_menu();
 
     if ( $this->_user ) {
       if ($_user->is_admin()) {
@@ -85,7 +85,7 @@ class UI {
         $modules = $CIS->get_user_modules($_user->id, NULL, 'name');
       }
       if ((($_source_id == '') || $this->_user->is_admin()) && (count($modules) > 1)) {
-        $this->set_menu('  ', array ('change module'  => APP__WWW .'/module.php') );
+        $this->set_menu('  ', array ('change module'  => Config::APP__WWW .'/module.php') );
       }
     }
 
@@ -94,7 +94,7 @@ class UI {
       unset($this->_menu[' ']);
     }
     if (!array_key_exists('logout', $menu) && !isset($_SESSION['logout_url'])) {
-      $menu['logout'] = APP__WWW . '/logout.php';
+      $menu['logout'] = Config::APP__WWW . '/logout.php';
     }
     $this->set_menu(' ', $menu);// /$this->set_menu();
 
@@ -143,8 +143,8 @@ class UI {
   <meta http-equiv="content-language" content="EN" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title><?php echo(APP__NAME ) ?></title>
-  <link href="<?php echo(APP__WWW) ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="<?php echo(APP__WWW) ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css" />
+  <link href="<?php echo(Config::APP__WWW) ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="<?php echo(Config::APP__WWW) ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css" />
   <style type="text/css">
 <?php
   if (!isset($_SESSION['_no_header'])) {
@@ -209,7 +209,7 @@ class UI {
     <div id="app_bar">
       <table cellpadding="0" cellspacing="0" width="100%">
       <tr>
-        <td width="175"><div id="title_logo"><a href=""><img src="<?php echo APP__WWW; ?>/images/tool/appbar_webpa_logo.png" alt="<?php echo APP__NAME; ?>" /></a></div></td>
+        <td width="175"><div id="title_logo"><a href=""><img src="<?php echo Config::APP__WWW; ?>/images/tool/appbar_webpa_logo.png" alt="<?php echo APP__NAME; ?>" /></a></div></td>
 <?php
       if (isset($_module)) {
         echo "<td>{$_module['module_title']} [{$_module['module_code']}]</td>";
@@ -376,7 +376,7 @@ class UI {
     }
 ?>
     </div>
-    <iframe src="<?php echo APP__WWW; ?>/keep_alive.php" height="1" width="1" style="display: none;">keep alive</iframe>
+    <iframe src="<?php echo Config::APP__WWW; ?>/keep_alive.php" height="1" width="1" style="display: none;">keep alive</iframe>
   </div>
 <?php
   }// /->footer()
@@ -411,7 +411,7 @@ class UI {
 ?>
     <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
       <p><strong>Technical Problem?</strong></p>
-      <p>If you have a problem, find a bug or discover a technical problem in the system, <a href="<?php echo APP__WWW ?>/contact/index.php?q=bug">contact us</a> to report it!</p>
+      <p>If you have a problem, find a bug or discover a technical problem in the system, <a href="<?php echo Config::APP__WWW ?>/contact/index.php?q=bug">contact us</a> to report it!</p>
     </div>
 <?php
     } else {

@@ -8,8 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\Email;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
@@ -36,7 +35,7 @@ $contact_date = date('d-M-Y H:i');
 $contact_type = Common::fetch_POST('contact_type');
 $contact_message = Common::fetch_POST('contact_message');
 
-$app_www = APP__WWW;
+$app_www = Config::APP__WWW;
 
 $errors = array();
 

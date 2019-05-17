@@ -9,8 +9,9 @@
  */
 
  //gather all include files needed.
- require_once("../../../includes/inc_global.php");
  require_once('new_assessment.php');
+
+ use WebPA\includes\Config;
 
  //get a list of the assessment that will be run in two days from now
  $allDue = $DB->fetch("SELECT * FROM " . APP__DB_TABLE_PREFIX . "assessment a
@@ -28,7 +29,7 @@
      "\n Assessment Name:  " . $assessment['assessment_name'] .
      "\n Open from:  " . $assessment['open_date'] .
      "\n Closes on:  " . $assessment['close_date'] .
-     "\n To complete your assessment please go to: " . APP__WWW .
+     "\n To complete your assessment please go to: " . Config::APP__WWW .
      "\n \n -------------------------------------------------------------------------------" .
      "\n This is an automated email sent by the WebPA tool \n\n";
 

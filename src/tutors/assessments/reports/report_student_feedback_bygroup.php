@@ -8,15 +8,14 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 

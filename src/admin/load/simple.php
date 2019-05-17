@@ -12,14 +12,13 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('../../includes/inc_global.php');
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\GroupCollection;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\StringFunctions;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
- header('Location:'. APP__WWW .'/logout.php?msg=denied');
+ header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
  exit;
 }
 

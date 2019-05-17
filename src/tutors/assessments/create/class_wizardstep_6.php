@@ -8,8 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
-
+use WebPA\includes\Config;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
@@ -100,7 +99,7 @@ class WizardStep6 {
           "\n Assessment Name:  " . $this->wizard->get_field('assessment_name') .
           "\n Open from:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date')) .
           "\n Closes on:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date')) .
-          "\n To complete your assessment please go to: " . APP__WWW .
+          "\n To complete your assessment please go to: " . Config::APP__WWW .
           "\n \n -------------------------------------------------------------------------------" .
           "\n This is an automated email sent by the WebPA tool \n\n";
       $returned = mail_assessment_notification ($coll_id, $subjectLn,$body, $_user_id);
