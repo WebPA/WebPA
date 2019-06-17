@@ -17,7 +17,7 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
-use WebPA\includes\functions\Form;
+use WebPA\includes\functions\Form as FormFunctions;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -170,7 +170,7 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 
   // Draw day box
     echo("<td><select name=\"{$fieldName}_day\">");
-    Form::render_options_range(1, 31, 1, date('j', $selectedDatetime));
+    FormFunctions::render_options_range(1, 31, 1, date('j', $selectedDatetime));
     echo('</select></td>');
 
     $formMonths = [
@@ -190,13 +190,13 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 
   // Draw month box
     echo("<td><select name=\"{$fieldName}_month\">");
-    Form::render_options($formMonths, date('n', $selectedDatetime));
+    FormFunctions::render_options($formMonths, date('n', $selectedDatetime));
     echo('</select></td>');
 
   // Draw year box
     echo("<td><select name=\"{$fieldName}_year\">");
     $year = (date('Y') < date('Y', $selectedDatetime)) ? date('Y') : date('Y', $selectedDatetime) ;
-    Form::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
+    FormFunctions::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
     echo('</select></td>');
 
     echo('<th>at</th>');
