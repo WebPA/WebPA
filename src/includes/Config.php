@@ -33,6 +33,7 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
+define('DOC__ROOT', '/var/www/html/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -269,9 +270,6 @@ if ($_module_id){
 class Config {
 
     const APP__WWW = 'http://env.test:8080';
-
-    // This must include the trailing forward slash of the file path
-    const DOC__ROOT = '/var/www/html/src/';
 
     public static function get_LDAP_user_type($data) {
 

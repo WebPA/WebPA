@@ -65,7 +65,7 @@ if ( $valid_saml_session )
 
     for ($i = 0; $i < count($LOGIN_AUTHENTICATORS); $i++) {
         $classname = $LOGIN_AUTHENTICATORS[$i];
-        require_once(Config::DOC__ROOT . 'includes/classes/class_' . strtolower($classname) . '_authenticator.php');
+        require_once(DOC__ROOT . 'includes/classes/class_' . strtolower($classname) . '_authenticator.php');
         $classname .= "Authenticator";
         $_auth = new $classname($saml_attributes[SAML__USERNAME_ATTRIBUTE][0]);
         if ($_auth->authenticate()) {

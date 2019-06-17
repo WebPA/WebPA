@@ -12,7 +12,6 @@
 
 namespace WebPA\includes\classes;
 
-use WebPA\includes\Config;
 use WebPA\includes\classes\algorithms\WebPAAlgorithm;
 
 class AlgorithmFactory {
@@ -39,7 +38,7 @@ class AlgorithmFactory {
 		// Until we have conducted a full investigation and nailed down what's happening
 		// this algorithm is disabled.
 		//
-		//require_once(Config::DOC__ROOT.'includes/classes/algorithms/class_pets_algorithm.php');
+		//require_once(DOC__ROOT.'includes/classes/algorithms/class_pets_algorithm.php');
 		//$algorithm = new PETSAlgorithm();
         break;
       case 'webpa':
