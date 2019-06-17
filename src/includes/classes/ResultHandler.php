@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\classes;
+
 function rel3($struc, $file) {
   return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
 }
@@ -17,8 +19,6 @@ function relativetome3($structure, $filetoget){
 }
 
 relativetome3(__FILE__, 'inc_global.php');
-
-namespace WebPA\includes\classes;
 
 class ResultHandler {
   // Public Vars

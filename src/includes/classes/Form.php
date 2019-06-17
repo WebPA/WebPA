@@ -8,11 +8,11 @@
  * @link https://github.com/webpa/webpa
  */
 
-include_once __DIR__ . '/../inc_global.php';
-
 namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\Common;
+
+include_once __DIR__ . '/../inc_global.php';
 
 class Form {
   // Public Vars
