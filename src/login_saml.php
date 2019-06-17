@@ -22,11 +22,14 @@
 
 namespace WebPA;
 
-use WebPA\includes\Config;
+use WebPA\includes\classes\Authenticator;
 use WebPA\includes\functions\Common;
 
 // --------------------------------------------------------------------------------
 // Process Get/Post
+
+require_once("./includes/inc_global.php");
+
 
 $simplesaml_autoload = SAML__SIMPLESAMLPATH . "/lib/_autoload.php";
 
@@ -107,7 +110,7 @@ if ( $valid_saml_session )
         Common::logEvent('Login');
         Common::logEvent('Enter module', $_auth->module_id);
     
-        header('Location: ' . Config::APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
+        header('Location: ' . APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
         exit;
     }
 
@@ -118,7 +121,7 @@ if ( $valid_saml_session )
 
 }
 
-header('Location: ' . Config::APP__WWW . "/login.php?msg={$msg}");
+header('Location: ' . APP__WWW . "/login.php?msg={$msg}");
 exit;
 
 ?>

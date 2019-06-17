@@ -8,7 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
 use WebPA\includes\classes\Form;
 
 class WizardStep2 {
@@ -73,7 +72,7 @@ class WizardStep2 {
 <?php
       } else {
         ob_end_clean();
-        header('Location: '. Config::APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}");
+        header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}");
         exit;
 ?>
         <p><strong>Your new assessment form has been created.</strong></p>

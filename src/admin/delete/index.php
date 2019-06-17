@@ -8,13 +8,15 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
-use WebPA\includes\classes\Module;
-use WebPA\includes\classes\User;
-use WebPA\includes\functions\Common;
+ //get the include file required
+ require_once("../../includes/inc_global.php");
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
+ use WebPA\includes\classes\Module;
+ use WebPA\includes\classes\User;
+ use WebPA\includes\functions\Common;
+
+ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 

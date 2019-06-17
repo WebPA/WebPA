@@ -8,7 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
+require_once '../../../includes/inc_global.php';
+
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\Form;
@@ -16,10 +17,10 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
-use WebPA\includes\functions\Form as FormFunctions;
+use WebPA\includes\functions\Form;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
-    header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
     exit;
 }
 
@@ -122,7 +123,7 @@ if ($command && $assessment) {
                     "The new dates for the assessment are;\n" .
                     'Open: ' . $openDate->format('H:i, d M y') . "\n" .
                     'Close: ' . $closeDate->format('H:i, d M y') . "\n" .
-                    'To complete your assessment please go to: ' . Config::APP__WWW . "\n" .
+                    'To complete your assessment please go to: ' . APP__WWW . "\n" .
                     "---------------------------------------------------------\n" .
                     'This is an automated email sent by WebPA');
 
@@ -169,7 +170,7 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 
   // Draw day box
     echo("<td><select name=\"{$fieldName}_day\">");
-    FormFunctions::render_options_range(1, 31, 1, date('j', $selectedDatetime));
+    Form::render_options_range(1, 31, 1, date('j', $selectedDatetime));
     echo('</select></td>');
 
     $formMonths = [
@@ -189,13 +190,13 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 
   // Draw month box
     echo("<td><select name=\"{$fieldName}_month\">");
-    FormFunctions::render_options($formMonths, date('n', $selectedDatetime));
+    Form::render_options($formMonths, date('n', $selectedDatetime));
     echo('</select></td>');
 
   // Draw year box
     echo("<td><select name=\"{$fieldName}_year\">");
     $year = (date('Y') < date('Y', $selectedDatetime)) ? date('Y') : date('Y', $selectedDatetime) ;
-    FormFunctions::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
+    Form::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
     echo('</select></td>');
 
     echo('<th>at</th>');

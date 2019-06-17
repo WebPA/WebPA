@@ -4,7 +4,7 @@ WebPA 2.0.0.10
 Installation Guide
 ------------------
 
-*  Edit the includes/Config.php file in the includes directory to configure the application; in particular:
+*  Edit the includes/inc_global.php file in the includes directory to configure the application; in particular:
      - APP__WWW: URL to the instance of WebPA (without a closing "/");
      - DOC__ROOT: directory path to the WebPA files (with a closing "/" or "\\");
      - database settings:

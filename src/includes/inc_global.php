@@ -14,8 +14,7 @@ ini_set('display_errors', 1);
 // Add composer's autoloader
 require __DIR__ . '/../../vendor/autoload.php';
 
-namespace WebPA\includes;
-
+// TODO: Remove FQDN
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\UI;
@@ -33,6 +32,7 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
+define('APP__WWW', 'http://env.test:8080');
 define('DOC__ROOT', '/var/www/html/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
@@ -53,7 +53,6 @@ define('APP__EMAIL_HELP', 'someone@email.com');
 define('APP__EMAIL_NO_REPLY', 'no-reply@email.com');
 
 // logo
-// TODO: Tidy up this as APP__WWW has been moved inside the config class
 define('APP__INST_LOGO', APP__WWW.'/images/logo.png');
 define('APP__INST_LOGO_ALT','Your institution name');
 
@@ -189,7 +188,6 @@ $FILE_ERRORS = array(
 
 // Old config compatibility
 $_config['app_id'] = APP__ID;
-// TODO: Tidy up this as APP__WWW has been moved inside the config class
 $_config['app_www'] = APP__WWW;
 
 // Initialisation
@@ -267,22 +265,19 @@ if ($_module_id){
 
 }
 
-class Config {
+function get_LDAP_user_type($data) {
 
-    const APP__WWW = 'http://env.test:8080';
+    $description_str = $data[0];
 
-    public static function get_LDAP_user_type($data) {
-
-        $description_str = $data[0];
-
-        //check in the string for staff
-        if(strripos ($description_str, 'staff') !== false) {
-            $user_type = APP__USER_TYPE_TUTOR;
-        } else {
-            $user_type = APP__USER_TYPE_STUDENT;
-        }
-
-        return $user_type;
+    //check in the string for staff
+    if(strripos ($description_str, 'staff') !== false) {
+      $user_type = APP__USER_TYPE_TUTOR;
+    } else {
+      $user_type = APP__USER_TYPE_STUDENT;
     }
+
+  return $user_type;
+
 }
 
+?>

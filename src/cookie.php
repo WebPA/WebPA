@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
+require_once('includes/inc_global.php');
 
 $url = '';
 if (isset($_GET['url'])) {
@@ -20,7 +20,7 @@ if ($_user) {
   if (isset($_GET['id'])) {
     $id = $_GET['id'];
   }
-  header('Location: ' . Config::APP__WWW . '/index.php?id=' . $id);
+  header('Location: ' . APP__WWW . '/index.php?id=' . $id);
 } else if ($url) {
   if (strpos($url, '?') === FALSE) {
     $url .= '?';
@@ -29,7 +29,7 @@ if ($_user) {
   }
   header('Location: ' . $url . 'lti_errormsg=' . urlencode('Unable to connect to ' . APP__NAME . '; please ensure that your browser is not blocking third-party cookies'));
 } else {
-  header('Location: ' . Config::APP__WWW . '/login.php?msg=cookies');
+  header('Location: ' . APP__WWW . '/login.php?msg=cookies');
 }
 
 exit;

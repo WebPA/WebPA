@@ -8,11 +8,12 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
+require_once("includes/inc_global.php");
+
 use WebPA\includes\functions\Common;
 
 if (($_source_id != '') && !$_user->is_admin()) {
-  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
@@ -33,7 +34,7 @@ if ($module_id) {
   Common::logEvent('Leave module', $_module_id);
   Common::logEvent('Enter module', $module_id);
 
-  header('Location: ' . Config::APP__WWW . "/");
+  header('Location: ' . APP__WWW . "/");
   exit;
 
 }

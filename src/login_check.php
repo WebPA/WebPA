@@ -16,7 +16,8 @@
 
 namespace WebPA;
 
-use WebPA\includes\Common;
+require_once("./includes/inc_global.php");
+
 use WebPA\includes\functions\Common;
 
 // --------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ if ( ($username) && ($password) ) {
     Common::logEvent('Login');
     Common::logEvent('Enter module', $_auth->module_id);
 
-    header('Location: ' . Common::APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
+    header('Location: ' . APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
     exit;
 
   }
@@ -100,7 +101,7 @@ if ( ($username) && ($password) ) {
 
 }
 
-header('Location: ' . Common::APP__WWW . "/login.php?msg={$msg}");
+header('Location: ' . APP__WWW . "/login.php?msg={$msg}");
 exit;
 
 ?>

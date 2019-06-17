@@ -8,7 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
-use WebPA\includes\Config;
+require_once("../../../includes/inc_global.php");
+
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
@@ -16,7 +17,7 @@ use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. Config::APP__WWW .'/logout.php?msg=denied');
+  header('Location:'. APP__WWW .'/logout.php?msg=denied');
   exit;
 }
 
