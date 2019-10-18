@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- When viewing assessments in a module, if no assessment has been created the dropdown will display the years 1969/70. This has now been fixed to display the current academic year instead (PR #58)
+
 ## [3.0.3] - 2019-03-21
 
 ### Fixed
