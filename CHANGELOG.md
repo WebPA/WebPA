@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.0.5] - 2019-11-08
+
 ### Fixed
 - When using the LDAP integration, users logging in had their firstname, surname, and email address set to a blank value. This was due to code being added to the system that was specific to one insitution, rather than a generalised implementation. It has been fixed by reverting the LDAP authenticator to the same one as in version 2 (PR #59)
 
@@ -50,7 +52,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.4...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.5...HEAD
+[3.0.5]: https://github.com/WebPA/WebPA/compare/v3.0.4...v3.0.5
 [3.0.4]: https://github.com/WebPA/WebPA/compare/v3.0.3...v3.0.4
 [3.0.3]: https://github.com/WebPA/WebPA/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/WebPA/WebPA/compare/v3.0.1...v3.0.2
