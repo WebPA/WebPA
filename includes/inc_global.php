@@ -77,8 +77,6 @@ define('LDAP__PORT', 3268);
 define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
 define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
 define('LDAP__FILTER', 'name={username}*');
-define('LDAP__BINDRDN', '');
-define('LDAP__PASSWD', '');
 $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 // Name of attribute to use to check user type (via function below)
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
