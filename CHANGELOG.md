@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- When using the LDAP integration, users logging in had their firstname, surname, and email address set to a blank value. This was due to code being added to the system that was specific to one insitution, rather than a generalised implementation. It has been fixed by reverting the LDAP authenticator to the same one as in version 2 (PR #59)
+
 ## [3.0.4] - 2019-10-18
 
 ### Fixed
