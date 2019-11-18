@@ -6,18 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [3.0.5] - 2019-11-08
+## [3.0.6] - 2019-11-18
+### Fixed
+- Fixed a PHP syntax issue in the class_engcis.php file where a missing closing bracket was causing a fatal error to be thrown. (PR #60) 
 
+## [3.0.5] - 2019-11-08
 ### Fixed
 - When using the LDAP integration, users logging in had their firstname, surname, and email address set to a blank value. This was due to code being added to the system that was specific to one insitution, rather than a generalised implementation. It has been fixed by reverting the LDAP authenticator to the same one as in version 2 (PR #59)
 
 ## [3.0.4] - 2019-10-18
-
 ### Fixed
 - When viewing assessments in a module, if no assessment has been created the dropdown will display the years 1969/70. This has now been fixed to display the current academic year instead (PR #58)
 
 ## [3.0.3] - 2019-03-21
-
 ### Fixed
 - Fix undefined offset notice in the class_dao.php file (PR #48)
 - Fix respondent list for assessments not showing (PR #48)
@@ -25,15 +26,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix issue preventing users from creating assessments via the assessment wizard (PR #48)
 
 ## [3.0.2] - 2018-11-20
-
 ### Fixed
 - Fixed a bug where the database connection was not being properly closed down, meaning subsequent database calls would always fail, even if the `$DB->open()` function was called as the old, closed connection would not be replaced or reinstantiated (PR #43)
-
-### Fixed
 - Fixed a bug where only one year value can be displayed in the assessments and metrics academic year drop down (PR #42)
 
 ## [3.0.1] - 2018-11-07
-
 ### Fixed
 - Fix a bug where a unix timestamps were used in the email notifying users that an assessment had been reopened (PR #32)
 - Fix a bug where the resource from the create_xml_parser() object was being assigned by reference, causing a strict notice to be issued by PHP (PR #39)
@@ -44,7 +41,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Prevent SQL injection attack for the login and password reset page (PR #40)
 
 ## [3.0.0] - 2018-08-06
-
 ### Added
 - Support for PHP 7.x
 
@@ -52,7 +48,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.5...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.6...HEAD
+[3.0.6]: https://github.com/WebPA/WebPA/compare/v3.0.5...v3.0.6
 [3.0.5]: https://github.com/WebPA/WebPA/compare/v3.0.4...v3.0.5
 [3.0.4]: https://github.com/WebPA/WebPA/compare/v3.0.3...v3.0.4
 [3.0.3]: https://github.com/WebPA/WebPA/compare/v3.0.2...v3.0.3

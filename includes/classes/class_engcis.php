@@ -550,7 +550,7 @@ class EngCIS
         $dates = $this->_DAO->fetch_row($sql);
 
         // Ensure that the first record contains some dates as we could return a null record
-        if (!empty($dates[0][0]) {
+        if (!empty($dates[0][0])) {
             $years[] = dateToYear(strtotime($dates['first']));
             $years[] = dateToYear(strtotime($dates['last']));
         } else {
