@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [3.0.7] - 2019-12-12
+## [3.0.7] - 2020-01-20
 ### Fixed
 - Remove a blank line at the top of a PHP class that was causing a fatal error
+- Fixed the display academic drop down which was not displaying past years (PR #62)
 
 ## [3.0.6] - 2019-11-18
 ### Fixed
@@ -53,6 +54,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.1.0.1] - 2008-07-19
 
 [Unreleased]: https://github.com/WebPA/WebPA/compare/v3.0.7...HEAD
+
 [3.0.7]: https://github.com/WebPA/WebPA/compare/v3.0.6...v3.0.7
 [3.0.6]: https://github.com/WebPA/WebPA/compare/v3.0.5...v3.0.6
 [3.0.5]: https://github.com/WebPA/WebPA/compare/v3.0.4...v3.0.5
