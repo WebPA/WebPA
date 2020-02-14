@@ -10,6 +10,8 @@
 
 namespace WebPA\includes\functions;
 
+use DOMDocument;
+
 class XML
 {
      public static function validate($xml, $xsd){
