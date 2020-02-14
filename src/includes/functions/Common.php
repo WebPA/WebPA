@@ -99,8 +99,8 @@ class Common
     }
 
     /**
-    * Check if the user is logged in and is a user of the given type
-    * If not, it logs the user out
+    * Check if the user is logged in and is a user of the given type. If not, it logs the user out.
+    *
     * @param string $_user
     * @param string $user_type
     */
@@ -146,6 +146,49 @@ class Common
         header('Location:'. APP__WWW .'/logout.php?msg=denied');
       }
       exit;
+    }
+
+    /**
+     * This function is a legacy function which appears to determine if a file is located in a particular directory.
+     *
+     */
+    public static function & rel1($struc, &$file) {
+      return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
+    }
+
+    /**
+     * This function is a legacy function.
+     */
+    public static function relativetome1($structure, $filetoget) {
+      return self::rel($structure,$filetoget) ? require_once($filetoget) : null;
+    }
+
+    /**
+     * This function is a legacy function.
+     */
+    public static function & rel4($struc, &$file) {
+      return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
+    }
+
+    /**
+     * This function is a legacy function.
+     */
+    public static function relativetome4($structure, $filetoget) {
+      return rel4($structure,$filetoget) ? require_once($filetoget) : null;
+    }
+
+    /**
+     * This function is a legacy function. 
+     */
+    public static function rel($struc, &$file) {
+      return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
+    }
+
+    /**
+     * This function is a legacy function.
+     */
+    public static function relativetome($structure, $filetoget){
+      return rel($structure,$filetoget) ? require_once($filetoget) : null;
     }
 }
 

@@ -12,15 +12,7 @@ namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\Common;
 
-function & rel4($struc, &$file) {
-  return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
-}
-
-function relativetome4($structure, $filetoget){
-  return rel4($structure,$filetoget) ? require_once($filetoget) : null;
-}
-
-relativetome1(__FILE__, 'inc_global.php');
+Common::relativetome1(__FILE__, 'inc_global.php');
 
 class FormRenderer {
   // Public Vars
