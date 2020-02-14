@@ -264,7 +264,7 @@ class Form {
   */
   function _load_xml(&$xml_data) {
     if (!is_object($this->_xml_parser)) { $this->_xml_parser = new XMLParser(); }
-    $xml_array =& $this->_xml_parser->parse($xml_data);
+    $xml_array = $this->_xml_parser->parse($xml_data);
 
     // Load form properties
     $this->id = $xml_array['form']['formid']['_data'];
