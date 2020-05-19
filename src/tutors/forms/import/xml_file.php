@@ -36,7 +36,7 @@ if ($errno == 0){
   //validate the XML
   $isValid = XML::validate($localfile, 'schema.xsd');
 
-  if ($isValid){
+  if ($isValid === true){
     //get the ID for the current User
     $staff_id = $_user->id;
 
@@ -80,7 +80,7 @@ if ($errno == 0){
       $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"index.php\">'my forms'</a> list.</p>";
     }
   } else {
-    $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
+    $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>" . print_r($isValid, true) . "</p>";
   }
 } else if (isset($FILE_ERRORS[$errno])) {
   $action_notify = "<p>{$FILE_ERRORS[$errno]}</p>";
