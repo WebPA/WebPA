@@ -67,9 +67,9 @@ ini_set('smtp_port','25');
 ini_set('sendmail_from','someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
-// $LOGIN_AUTHENTICATORS[] = 'DB';
+$LOGIN_AUTHENTICATORS[] = 'DB';
 // $LOGIN_AUTHENTICATORS[] = 'LDAP';
-$LOGIN_AUTHENTICATORS[] = 'SAML';
+//$LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings
 define('LDAP__HOST', "kdc.lboro.ac.uk");
