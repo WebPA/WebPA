@@ -10,11 +10,12 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once("../../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
+use WebPA\lang\en\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -71,19 +72,19 @@ span.locked { font-size: 82%; }
 $UI->content_start();
 ?>
 
-<p><?php echo GROUPS__EDIT__DESC; ?></p>
+<p><?php echo Tutors::GROUPS__EDIT__DESC; ?></p>
 
 <div class="content_box">
 
-<h2><?php echo GROUPS__EDIT_TITLE; ?></h2>
+<h2><?php echo Tutors::GROUPS__EDIT_TITLE; ?></h2>
 <div class="form_section">
 <?php
 if (!$collections) {
-  echo('<p>'. NO_COLLECTIONS .'</p>');
+  echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
 } else {
   $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
 
-  echo '<p>' . GROUPS__EDIT_INST . '</p>';
+  echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
 
   $any_locks = false;
   for($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next() ) {

@@ -10,11 +10,11 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once("../../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
+use WebPA\lang\en\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -60,7 +60,7 @@ if ($allow_edit) {
     case 'save':
       // Change of name
       $group->name = Common::fetch_POST('group_name');
-      if (empty($group->name)) { $errors[] = GROUPS__EDIT_SAVE_ERR; }
+      if (empty($group->name)) { $errors[] = Tutors::GROUPS__EDIT_SAVE_ERR; }
 
       // Delete all the members with the 'member' role
       $group->purge_members('member');
@@ -68,7 +68,7 @@ if ($allow_edit) {
       // Add the members who should be IN the group
       foreach ($_POST as $k => $v) {
         $s = strpos($k,'student_');
-        if ( ($s !== false) && ((int)$v==1) ) {
+        if ( ($s !== false) && ((int) $v == 1) ) {
           $s_id = str_replace('student_', '', $k);
           $group->add_member($s_id, 'member');
         }
@@ -130,7 +130,7 @@ tr.no_group th { font-weight: bold; }
 
 -->
 </style>
-<script language="JavaScript" type="text/javascript">
+<script>
 <!--
 
   function do_command(com) {
@@ -146,9 +146,9 @@ $UI->content_start();
 $UI->draw_boxed_list($errors, 'error_box', Generic::FOLLOWING__FOUND, Generic::NO_CHANGES);
 
 if ($collection->is_locked()) {
-  echo(COLLECTION__LOCKED);
+  echo(Tutors::COLLECTION__LOCKED);
 } else {
-  echo(GROUPS__EDIT_INST);
+  echo(Tutors::GROUPS__EDIT_INST);
 }
 ?>
 
@@ -160,7 +160,7 @@ if ($collection->is_locked()) {
 
 <?php
 if (!$group) {
-  echo GROUP__SELECTED;
+  echo Tutors::GROUP__SELECTED;
 } else {
   $group_qs = "{$collection_qs}&g={$group->id}";
 ?>

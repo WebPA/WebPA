@@ -9,10 +9,10 @@
  */
 
 require_once("../includes/inc_global.php");
-require_once(DOC__ROOT . "lang/en/tutors/tutors.php");
 
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
+use WebPA\lang\en\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -35,8 +35,8 @@ $UI->content_start();
 ?>
 
 <?php
-echo '<p>' . WELCOME . '</p>';
-echo '<p>' . SECTIONS__INTRO . '</p>';
+echo '<p>' . Tutors::WELCOME . '</p>';
+echo '<p>' . Tutors::SECTIONS__INTRO . '</p>';
 ?>
 
 <table class="option_list" style="width: 500px;">
@@ -45,7 +45,7 @@ echo '<p>' . SECTIONS__INTRO . '</p>';
   <td>
     <div class="option_list">
       <div class="option_list_title"><a class="hidden" href="forms/"><?php echo Generic::MY__FORMS; ?></a></div>
-      <p><?php echo OPT__FORMS__DESC; ?></p>
+      <p><?php echo Tutors::OPT__FORMS__DESC; ?></p>
     </div>
   </td>
 </tr>
@@ -54,7 +54,7 @@ echo '<p>' . SECTIONS__INTRO . '</p>';
   <td>
     <div class="option_list">
       <div class="option_list_title"><a class="hidden" href="groups/"><?php echo Generic::MY__GROUPS; ?></a></div>
-      <p><?php echo OPT__GROUPS__DESC; ?></p>
+      <p><?php echo Tutors::OPT__GROUPS__DESC; ?></p>
     </div>
   </td>
 </tr>
@@ -63,14 +63,14 @@ echo '<p>' . SECTIONS__INTRO . '</p>';
   <td>
     <div class="option_list">
       <div class="option_list_title"><a class="hidden" href="assessments/"><?php echo Generic::MY__ASSESSMENTS; ?></a></div>
-      <p><?php echo OPT__ASSESSMENTS__DESC ?></p>
+      <p><?php echo Tutors::OPT__ASSESSMENTS__DESC ?></p>
     </div>
   </td>
 </tr>
 </table>
 
-<h2><?php echo GETTING__STARTED__TITLE ; ?></h2>
-<p><?php echo GETTING__STARTED__DESC ; ?></p>
+<h2><?php echo Tutors::GETTING__STARTED__TITLE ; ?></h2>
+<p><?php echo Tutors::GETTING__STARTED__DESC ; ?></p>
 
 
 <?php

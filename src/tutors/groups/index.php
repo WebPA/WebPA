@@ -9,12 +9,12 @@
  */
 
 require_once("../../includes/inc_global.php");
-require_once("../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\functions\Common;
 use WebPa\lang\en\Generic;
+use WebPA\lang\en\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -45,22 +45,22 @@ $UI->head();
 $UI->content_start();
 ?>
 
-<p><?php echo GROUPS__WELCOME; ?></p>
+<p><?php echo Tutors::GROUPS__WELCOME; ?></p>
 
 <div class="content_box">
 
-<h2><?php echo GROUPS__TITLE; ?></h2>
+<h2><?php echo Tutors::GROUPS__TITLE; ?></h2>
 <div class="form_section">
 <?php
 if (!$collections) {
-  echo('<p>'.NO__GROUPS__DESC.'</p>');
+  echo('<p>' . Tutors::NO__GROUPS__DESC . '</p>');
 } else {
   $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
 ?>
-    <p><?php echo GROUPS__INSTRUCT__1; ?><img src="../../images/buttons/edit.gif" width="16" height="16" alt="<?php echo Generic::EDIT_QUESTION; ?>" title="edit" /> <?php echo GROUPS__INSTRUCT__2; ?></p>
+    <p><?php echo Tutors::GROUPS__INSTRUCT__1; ?><img src="../../images/buttons/edit.gif" width="16" height="16" alt="<?php echo Generic::EDIT_QUESTION; ?>" title="edit" /> <?php echo Tutors::GROUPS__INSTRUCT__2; ?></p>
     <div class="info_box">
       <p><?php echo Generic::PLEASE__NOTE; ?></p>
-      <p><?php echo GROUPS__NOTE; ?></p>
+      <p><?php echo Tutors::GROUPS__NOTE; ?></p>
     </div>
     <div class="obj_list">
 <?php
