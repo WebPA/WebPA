@@ -23,7 +23,7 @@ class XML
 
          if (!$objDom->schemaValidate($xsd)) {
 
-             $allErrors = libxml_get_errors();
+    	     libxml_get_errors();
              return false;
          } else {
             return true;
