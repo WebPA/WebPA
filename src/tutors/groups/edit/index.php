@@ -10,11 +10,11 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once("../../../lang/en/generic.php");
 require_once("../../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\lang\en\Generic;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -30,8 +30,8 @@ $collections = $group_handler->get_user_collections($_user->id, $_config['app_id
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME. ' ' . EDIT__GROUP;
-$UI->menu_selected = MY__GROUPS;
+$UI->page_title = APP__NAME. ' ' . Generic::EDIT__GROUP;;
+$UI->menu_selected = Generic::MY__GROUPS;
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = array  (
   'home'      => '/' ,
@@ -39,9 +39,9 @@ $UI->breadcrumbs = array  (
   'edit groups' => null ,
 );
 
-$UI->set_page_bar_button(BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');
-$UI->set_page_bar_button(BTN__CREATE_GROUPS, '../../../../images/buttons/button_group_create.gif', '../create/');
-$UI->set_page_bar_button(BTN__CLONE_GROUPS, '../../../../images/buttons/button_group_clone.gif', '../clone/');
+$UI->set_page_bar_button(Generic::BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');
+$UI->set_page_bar_button(Generic::BTN__CREATE_GROUPS, '../../../../images/buttons/button_group_create.gif', '../create/');
+$UI->set_page_bar_button(Generic::BTN__CLONE_GROUPS, '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
 $UI->head();
 ?>
@@ -94,7 +94,7 @@ if (!$collections) {
 
     echo('<div class="collection">');
     echo("  <div><a href=\"edit_collection.php?c={$collection->id}\">{$collection->name}</a></div>");
-    echo("  <div class=\"collection_info\"><div><strong>".ASSOCIATED__MODULES.":</strong> $modules</div><div><strong>".NO__GROUPS." :</strong> $group_count</div></div>");
+    echo("  <div class=\"collection_info\"><div><strong>" . ASSOCIATED__MODULES . ":</strong> $modules</div><div><strong>" . Generic::NO__GROUPS . " :</strong> $group_count</div></div>");
     echo('</div>');
   }
 }
@@ -105,5 +105,3 @@ if (!$collections) {
 <?php
 
 $UI->content_end();
-
-?>

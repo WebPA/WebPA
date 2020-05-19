@@ -10,11 +10,11 @@
  */
 
 require_once("../../../includes/inc_global.php");
-require_once("../../../lang/en/generic.php");
 require_once("../../../lang/en/tutors/tutors.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
+use WebPA\lang\en\Generic;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -92,9 +92,9 @@ if ($allow_edit) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$collection_name = ($collection) ? $collection->name : UNKNOWN__COLLECTION;
-$collection_title = ($collection) ? "Editing: {$collection->name}" : EDDITING__UNKNOWN_GROUP;
-$page_title = ($group) ? "Editing: {$group->name}" : EDDITING__GROUP;
+$collection_name = ($collection) ? $collection->name : Generic::UNKNOWN__COLLECTION;
+$collection_title = ($collection) ? "Editing: {$collection->name}" : Generic::EDDITING__UNKNOWN_GROUP;
+$page_title = ($group) ? "Editing: {$group->name}" : Generic::EDDITING__GROUP;
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
@@ -106,9 +106,9 @@ $UI->breadcrumbs = array  (
   $page_title         => null ,
 );
 
-$UI->set_page_bar_button(BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');
-$UI->set_page_bar_button(BTN__CREATE_GROUPS, '../../../../images/buttons/button_group_create.gif', '../create/');
-$UI->set_page_bar_button(BTN__CLONE_GROUPS, '../../../../images/buttons/button_group_clone.gif', '../clone/');
+$UI->set_page_bar_button(Generic::BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');
+$UI->set_page_bar_button(Generic::BTN__CREATE_GROUPS, '../../../../images/buttons/button_group_create.gif', '../create/');
+$UI->set_page_bar_button(Generic::BTN__CLONE_GROUPS, '../../../../images/buttons/button_group_clone.gif', '../clone/');
 
 $UI->head();
 ?>
@@ -143,7 +143,7 @@ tr.no_group th { font-weight: bold; }
 <?php
 $UI->content_start();
 
-$UI->draw_boxed_list($errors, 'error_box', FOLLOWING__FOUND, NO_CHANGES);
+$UI->draw_boxed_list($errors, 'error_box', Generic::FOLLOWING__FOUND, Generic::NO_CHANGES);
 
 if ($collection->is_locked()) {
   echo(COLLECTION__LOCKED);
@@ -293,7 +293,7 @@ if (!$group) {
   if ($allow_edit) {
 ?>
         <div class="button_bar">
-          <input type="button" name="savebutton1" id="savebutton1" value="<?php echo BTN__SAVE_CHANGES; ?>" onclick="do_command('save');" />
+          <input type="button" name="savebutton1" id="savebutton1" value="<?php echo Generic::BTN__SAVE_CHANGES; ?>" onclick="do_command('save');" />
         </div>
 <?php
   }
@@ -306,7 +306,7 @@ if (!$group) {
   if ($allow_edit) {
 ?>
         <div class="button_bar">
-          <input type="button" name="savebutton2" id="savebutton2" value="<?php echo BTN__SAVE_CHANGES; ?>" onclick="do_command('save');" />
+          <input type="button" name="savebutton2" id="savebutton2" value="<?php echo Generic::BTN__SAVE_CHANGES; ?>" onclick="do_command('save');" />
         </div>
 <?php
   }
@@ -326,4 +326,3 @@ if (!$group) {
 
 $UI->content_end();
 
-?>

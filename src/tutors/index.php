@@ -9,10 +9,10 @@
  */
 
 require_once("../includes/inc_global.php");
-require_once(DOC__ROOT . "lang/en/generic.php");
 require_once(DOC__ROOT . "lang/en/tutors/tutors.php");
 
 use WebPA\includes\functions\Common;
+use WebPA\lang\en\Generic;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -41,28 +41,28 @@ echo '<p>' . SECTIONS__INTRO . '</p>';
 
 <table class="option_list" style="width: 500px;">
 <tr>
-  <td><a href="forms/"><img src="../images/icons/form.gif" width="32" height="32" alt="<?php echo MY__FORMS; ?>" /></a></td>
+  <td><a href="forms/"><img src="../images/icons/form.gif" width="32" height="32" alt="<?php echo Generic::MY__FORMS; ?>" /></a></td>
   <td>
     <div class="option_list">
-      <div class="option_list_title"><a class="hidden" href="forms/"><?php echo MY__FORMS; ?></a></div>
+      <div class="option_list_title"><a class="hidden" href="forms/"><?php echo Generic::MY__FORMS; ?></a></div>
       <p><?php echo OPT__FORMS__DESC; ?></p>
     </div>
   </td>
 </tr>
 <tr>
-  <td><a href="groups/"><img src="../images/icons/groups.gif" width="32" height="32" alt="<?php echo MY__GROUPS; ?>" /></a></td>
+  <td><a href="groups/"><img src="../images/icons/groups.gif" width="32" height="32" alt="<?php echo Generic::MY__GROUPS; ?>" /></a></td>
   <td>
     <div class="option_list">
-      <div class="option_list_title"><a class="hidden" href="groups/"><?php echo MY__GROUPS; ?></a></div>
+      <div class="option_list_title"><a class="hidden" href="groups/"><?php echo Generic::MY__GROUPS; ?></a></div>
       <p><?php echo OPT__GROUPS__DESC; ?></p>
     </div>
   </td>
 </tr>
 <tr>
-  <td><a href="assessments/"><img src="../images/icons/assessments.gif" width="32" height="32" alt="<?php echo MY__ASSESSMENTS; ?>" /></a></td>
+  <td><a href="assessments/"><img src="../images/icons/assessments.gif" width="32" height="32" alt="<?php echo Generic::MY__ASSESSMENTS; ?>" /></a></td>
   <td>
     <div class="option_list">
-      <div class="option_list_title"><a class="hidden" href="assessments/"><?php echo MY__ASSESSMENTS; ?></a></div>
+      <div class="option_list_title"><a class="hidden" href="assessments/"><?php echo Generic::MY__ASSESSMENTS; ?></a></div>
       <p><?php echo OPT__ASSESSMENTS__DESC ?></p>
     </div>
   </td>
@@ -76,5 +76,3 @@ echo '<p>' . SECTIONS__INTRO . '</p>';
 <?php
 
 $UI->content_end();
-
-?>
