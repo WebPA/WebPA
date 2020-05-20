@@ -10,16 +10,6 @@
 
 namespace WebPA\includes\classes;
 
-function rel3($struc, $file) {
-  return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
-}
-
-function relativetome3($structure, $filetoget){
-  return rel3($structure,$filetoget) ? require_once($filetoget) : null;
-}
-
-relativetome3(__FILE__, 'inc_global.php');
-
 class ResultHandler {
   // Public Vars
 
