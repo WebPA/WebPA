@@ -155,19 +155,5 @@ class Common
     public static function & rel1($struc, &$file) {
       return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
     }
-
-    /**
-     * This function is a legacy function. 
-     */
-    public static function rel($struc, &$file) {
-      return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
-    }
-
-    /**
-     * This function is a legacy function.
-     */
-    public static function relativetome($structure, $filetoget){
-      return rel($structure,$filetoget) ? require_once($filetoget) : null;
-    }
 }
 
