@@ -8,10 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
 // Add composer's autoloader
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -83,7 +79,6 @@ ini_set('sendmail_from','someone@email.com');
 //define the authentication to be used and in the order they are to be applied
 $LOGIN_AUTHENTICATORS[] = 'DB';
 $LOGIN_AUTHENTICATORS[] = 'LDAP';
-$LOGIN_AUTHENTICATORS[] = 'SAML';
 
 // LDAP settings
 define('LDAP__HOST', "kdc.lboro.ac.uk");
@@ -98,11 +93,6 @@ $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
 define('LDAP__DEBUG_LEVEL', 7);
 define('LDAP__AUTO_CREATE_USER', TRUE);
-
-// SAML settings
-define('SAML__SIMPLESAMLPATH', ''); // Path to the root of the simpleSAMLPHP install which contains the lib folder, must include training /
-define('SAML__SP_NAME', 'webpa:simplesaml'); // EntityID within simpleSAMLPHP for this session
-define('SAML__USERNAME_ATTRIBUTE', 'username'); // Name of the attribute holding the username from the SAML assertion
 
 // define installed modules
 $INSTALLED_MODS = array();
@@ -134,8 +124,8 @@ define('APP__MOODLE_GRADEBOOK', FALSE); // If the grade book xml for moodle can 
 
 //Automatic emailing options.
 //this is dependant on cron jobs being set for the following files;
-//  /tutors/assessments/email/trigger_reminder.php
-//  /tutors/assessments/email/closing_reminber.php
+//  /tutors/assessments/email/TriggerReminder.php
+//  /tutors/assessments/email/ClosingReminber.php
 define('APP__REMINDER_OPENING', FALSE);
 define('APP__REMINDER_CLOSING', FALSE);
 
@@ -195,20 +185,6 @@ $_config['app_www'] = APP__WWW;
 
 session_name(SESSION_NAME);
 session_start();
-
-// Magic quotes workaround
-//set_magic_quotes_runtime(0);
-
-if (get_magic_quotes_gpc()) {
-  function stripslashes_deep($value) {
-    return is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
-  }
-//NW added in request as well
-  $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
-  $_GET = array_map('stripslashes_deep', $_GET);
-  $_POST = array_map('stripslashes_deep', $_POST);
-  $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
-}
 
 // Initialise DB object
 
