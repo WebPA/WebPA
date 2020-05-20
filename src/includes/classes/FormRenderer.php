@@ -12,8 +12,6 @@ namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\Common;
 
-Common::relativetome1(__FILE__, 'inc_global.php');
-
 class FormRenderer {
   // Public Vars
   public $participant_name = '';

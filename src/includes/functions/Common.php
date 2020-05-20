@@ -159,13 +159,6 @@ class Common
     /**
      * This function is a legacy function.
      */
-    public static function relativetome1($structure, $filetoget) {
-      return self::rel($structure,$filetoget) ? require_once($filetoget) : null;
-    }
-
-    /**
-     * This function is a legacy function.
-     */
     public static function & rel4($struc, &$file) {
       return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
     }
