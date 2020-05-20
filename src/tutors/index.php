@@ -12,7 +12,7 @@ require_once("../includes/inc_global.php");
 
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
-use WebPA\lang\en\Tutors;
+use WebPA\lang\en\tutors\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   header('Location:'. APP__WWW .'/logout.php?msg=denied');

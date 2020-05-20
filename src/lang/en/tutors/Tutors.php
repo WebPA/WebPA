@@ -12,7 +12,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-namespace WebPA\lang\en;
+namespace WebPA\lang\en\tutors;
 
 class Tutors
 {
