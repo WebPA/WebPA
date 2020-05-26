@@ -75,7 +75,7 @@ if (!$collections) {
     <p>Only groups that have been scheduled an assessment will appear in this list.</p>
 <?php
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
+  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
 ?>
     <p>You belong to the following groups.</p>
 <?php

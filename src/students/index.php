@@ -130,7 +130,7 @@ $UI->content_start();
       $status = 'open';
       $status_capitalized = ucfirst($status);
 
-      $assessment_iterator = new SimpleObjectIterator($open_assessments,'Assessment','$DB');
+      $assessment_iterator = new SimpleObjectIterator($open_assessments,'Assessment', $DB);
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
         $assessment =& $assessment_iterator->current();
         $take_url = "assessments/take/index.php?a={$assessment->id}";
@@ -166,7 +166,8 @@ $UI->content_start();
       $status = 'pending';
       $status_capitalized = ucfirst($status);
 
-      $assessment_iterator = new SimpleObjectIterator($pending_assessments,'Assessment','$DB');
+      $assessment_iterator = new SimpleObjectIterator($pending_assessments,'Assessment', $DB);
+
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
         $assessment =& $assessment_iterator->current();
         $take_url = "/assessments/take/index.php?a={$assessment->id}";

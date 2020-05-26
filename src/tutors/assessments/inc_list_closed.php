@@ -53,7 +53,7 @@ if (!$assessments) {
   $members = $result_handler->get_members_count_for_user($_user->id, $year);
 
   // loop through and display all the assessments
-  $assessment_iterator = new SimpleObjectIterator($assessments,'Assessment','$DB');
+  $assessment_iterator = new SimpleObjectIterator($assessments,'Assessment', $DB);
 
   for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
     $assessment =& $assessment_iterator->current();

@@ -48,10 +48,19 @@ class SimpleObjectIterator {
   * @return integer
   */
   function &current() {
-    $temp = null;
-    $temp = new Assessment($this->class_constructor_args);
-    //eval("\$temp = new {$this->class_name}({$this->class_constructor_args});");   // eval allows us to include arguments for the constructor
+    switch ($this->class_name) {
+      case 'GroupCollection':
+        $temp = new GroupCollection($this->class_constructor_args);
+        break;
+      case 'Assessment':
+        $temp = new Assessment($this->class_constructor_args);
+        break;
+      default:
+        $temp = null;
+    }
+
     $temp->load_from_row($this->_value);
+
     return $temp;
   }// /->current()
 

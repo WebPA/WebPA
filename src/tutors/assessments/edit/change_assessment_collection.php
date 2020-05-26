@@ -209,7 +209,7 @@ if (!$assessment) {
         <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.</p>
 <?php
     } else {
-      $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
+      $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
 ?>
         <p>Please select the collection of groups you wish to use in this assessment from from the list below.</p>
         <div class="form_section">

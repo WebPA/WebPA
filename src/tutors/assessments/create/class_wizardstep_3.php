@@ -65,7 +65,7 @@ class WizardStep3 {
       <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer assessments.</p>
 <?php
     } else {
-      $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
+      $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
 ?>
       <p>Please select the collection of groups you wish to use in this assessment from the list below.</p>
       <p>The collection you select will be copied into your new assessment.  Subsequent changes to the collection of groups <strong>will not</strong> affect your assessment.</p>

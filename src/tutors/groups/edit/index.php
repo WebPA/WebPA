@@ -15,7 +15,6 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
-use WebPA\lang\en\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -82,7 +81,7 @@ $UI->content_start();
 if (!$collections) {
   echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', "\$GLOBALS['group_handler']->_DAO");
+  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
 
   echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
 

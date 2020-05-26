@@ -127,7 +127,7 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
     $status = 'open';
     $status_capitalized = ucfirst($status);
 
-    $assessment_iterator = new SimpleObjectIterator($open_assessments,'Assessment','$DB');
+    $assessment_iterator = new SimpleObjectIterator($open_assessments,'Assessment', $DB);
     for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
       $assessment =& $assessment_iterator->current();
       $take_url = "take/index.php?a={$assessment->id}";
@@ -162,7 +162,7 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
     $status = 'pending';
     $status_capitalized = ucfirst($status);
 
-    $assessment_iterator = new SimpleObjectIterator($pending_assessments,'Assessment','$DB');
+    $assessment_iterator = new SimpleObjectIterator($pending_assessments,'Assessment', $DB);
     for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
       $assessment =& $assessment_iterator->current();
       $take_url = "take/index.php?a={$assessment->id}";
@@ -198,7 +198,7 @@ if ( (!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)
 
     $now = time();
 
-    $assessment_iterator = new SimpleObjectIterator($finished_assessments, 'Assessment', '$DB');
+    $assessment_iterator = new SimpleObjectIterator($finished_assessments, 'Assessment', $DB);
     for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
       $assessment =& $assessment_iterator->current();
       $take_url = "take/index.php?a={$assessment->id}";
