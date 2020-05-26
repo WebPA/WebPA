@@ -370,20 +370,20 @@ class EngCIS
             $order_by_clause = $this->_order_by_clause('user', $ordering);
 
             $sql = "SELECT u.*, um.user_type
-              FROM " . APP__DB_TABLE_PREFIX . "user u 
-              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um 
+              FROM " . APP__DB_TABLE_PREFIX . "user u
+              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
               ON u.user_id = um.user_id
-              WHERE (u.user_id IN {$user_set}) 
+              WHERE (u.user_id IN {$user_set})
               AND (um.module_id = {$_module_id})
               $order_by_clause";
 
             return $this->_DAO->fetch($sql);
         } else {
             $sql = "SELECT u.*, um.user_type
-              FROM " . APP__DB_TABLE_PREFIX . "user u 
-              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um 
+              FROM " . APP__DB_TABLE_PREFIX . "user u
+              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
               ON u.user_id = um.user_id
-              WHERE (u.user_id IN {$user_set}) 
+              WHERE (u.user_id IN {$user_set})
               AND (um.module_id = {$_module_id} OR u.admin = 1)
               LIMIT 1";
 
@@ -541,7 +541,8 @@ class EngCIS
 
         $dates = $this->_DAO->fetch_row($sql);
 
-        if (!empty($dates)) {
+        // Ensure that the first record contains some dates as we could return a null record
+        if (!empty($dates['first'])) {
             $years[] = AcademicYear::dateToYear(strtotime($dates['first']));
             $years[] = AcademicYear::dateToYear(strtotime($dates['last']));
         } else {

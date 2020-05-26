@@ -109,7 +109,7 @@ $INSTALLED_MODS = array();
 define('APP__NAME', 'WebPA OS');
 define('APP__TITLE', 'WebPA OS : Online Peer Assessment System');
 define('APP__ID', 'webpa');
-define('APP__VERSION', '3.0.3');
+define('APP__VERSION', '3.0.7');
 define('APP__DESCRIPTION','WebPA, an Open source, online peer assessment system.');
 define('APP__KEYWORDS','peer assessment, online, peer, assessment, tools, open source');
 
