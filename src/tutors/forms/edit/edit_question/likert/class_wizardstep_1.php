@@ -46,8 +46,7 @@ class WizardStep1 {
 
 
 	function form() {
-		$config = $this->wizard->get_var('config');
-		$form =& $this->wizard->get_var('form');
+		$form = $this->wizard->get_var('form');
 
 		$question = $form->get_question($this->wizard->get_var('question_id'));
 

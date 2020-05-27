@@ -41,7 +41,7 @@ class WizardStep2 {
 
 
 	function form() {
-		$form =& $this->wizard->get_var('form');
+		$form = $this->wizard->get_var('form');
 
 		$range_start = $this->wizard->get_field('question_range_start');
 		$range_end = $this->wizard->get_field('question_range_end');
