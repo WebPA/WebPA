@@ -127,7 +127,7 @@ class Form {
          "ON DUPLICATE KEY UPDATE form_name = '" . $this->_DAO->escape_str($this->name) . "', form_type = '" . $this->_DAO->escape_str($this->type) . "'");
       $this->_DAO->execute('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET form_xml = '{$form_xml}' WHERE form_id = '{$this->id}'");
 
-      if (count($this->modules) > 0) {
+      if ($this->modules !== null && count($this->modules) > 0) {
         $values = array();
         foreach($this->modules as $module_id) {
           $values[] = "('{$this->id}', {$module_id})";
