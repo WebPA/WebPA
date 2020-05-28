@@ -7,6 +7,9 @@
  *
  * @link https://github.com/webpa/webpa
  */
+
+use WebPA\includes\functions\Common;
+
 class WizardStep3 {
 
 	// Public
@@ -41,7 +44,7 @@ class WizardStep3 {
 
 
 	function form() {
-		$form =& $this->wizard->get_var('form');
+		$form = $this->wizard->get_var('form');
 
 		$range_start = $this->wizard->get_field('question_range_start');
 		$range_end = $this->wizard->get_field('question_range_end');
@@ -50,12 +53,14 @@ class WizardStep3 {
 		$new_question['desc']['_data'] = $this->wizard->get_field('question_desc');
 		$new_question['range']['_data'] = "{$range_start}-{$range_end}";
 
-		for($i=$range_start; $i<=$range_end; $i++) {
-			$scorelabel = trim( fetch_POST("scorelabel{$i}") );
+		for ($i=$range_start; $i<=$range_end; $i++) {
+			$scorelabel = trim( Common::fetch_POST("scorelabel{$i}") );
+
 			if (!empty($scorelabel)) { $new_question["scorelabel{$i}"]['_data'] = $scorelabel; }
 		}
 
 		$errors = null;
+
 		if (!$form) {
 			$errors[] = 'Unable to load the form that this question belongs to.';
 		} else {
