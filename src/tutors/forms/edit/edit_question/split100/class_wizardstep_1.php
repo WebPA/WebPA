@@ -50,15 +50,16 @@ class WizardStep1 {
 
 		$question = $form->get_question($this->wizard->get_var('question_id'));
 
-		if ( (!$this->wizard->get_field('set_original_data')) && (is_array($question)) ) {
-			$range_bits = explode('-',$question['range']['_data']);
-			$range_start = $range_bits[0];
-			$range_end = $range_bits[1];
-
-			if (!$this->wizard->get_field('question_text')) { $this->wizard->set_field('question_text', $question['text']['_data']); }
+		if (!$this->wizard->get_field('set_original_data') && is_array($question)) {
+			if (!$this->wizard->get_field('question_text')) {
+			    $this->wizard->set_field('question_text', $question['text']['_data']);
+			}
 
 			$question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
-			if (!$this->wizard->get_field('question_desc')) { $this->wizard->set_field('question_desc', $question_desc); }
+
+			if (!$this->wizard->get_field('question_desc')) {
+			    $this->wizard->set_field('question_desc', $question_desc);
+			}
 
 			$this->wizard->set_field('set_original_data',true);
 		}
