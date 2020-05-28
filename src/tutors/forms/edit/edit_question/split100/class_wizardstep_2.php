@@ -41,15 +41,13 @@ class WizardStep2 {
 
 
 	function form() {
-		$form =& $this->wizard->get_var('form');
-
-		$range_start = $this->wizard->get_field('question_range_start');
-		$range_end = $this->wizard->get_field('question_range_end');
+		$form = $this->wizard->get_var('form');
 
 		$new_question['text']['_data'] = $this->wizard->get_field('question_text');
 		$new_question['desc']['_data'] = $this->wizard->get_field('question_desc');
 
 		$errors = null;
+
 		if (!$form) {
 			$errors[] = 'Unable to load the form that this question belongs to.';
 		} else {
@@ -67,13 +65,6 @@ class WizardStep2 {
 			?>
 			<p><strong>Your changes to this criterion have been saved.</strong></p>
 			<p style="margin-top: 20px;">You can now return to <a href="/tutors/forms/edit/edit_form.php?f=<?php echo($form->id); ?>">editing your form</a>.</p>
-			<script language="JavaScript" type="text/javascript">
-			<!--
-				function body_onload() {
-					window.location.href='../<?php echo("edit_form.php?f={$form->id}"); ?>';
-				}
-			//-->
-			</script>
 			<?php
 		}
 	}// /->form()
@@ -86,6 +77,3 @@ class WizardStep2 {
 
 
 }// /class: WizardStep2
-
-
-?>
