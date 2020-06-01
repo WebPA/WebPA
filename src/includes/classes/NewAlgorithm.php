@@ -14,8 +14,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-include_once __DIR__ '/../inc_global.php';
-
 namespace WebPA\includes\classes;
 
 class NewAlgorithm extends WebPAAlgorithm {

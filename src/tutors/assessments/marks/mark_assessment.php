@@ -43,7 +43,7 @@ if ($assessment->load($assessment_id)) {
   $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
   $group_handler = new GroupHandler();
-  $collection =& $group_handler->get_collection($assessment->get_collection_id());
+  $collection = $group_handler->get_collection($assessment->get_collection_id());
 
   $result_handler = new ResultHandler($DB);
   $result_handler->set_assessment($assessment);

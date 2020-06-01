@@ -42,7 +42,7 @@ if ($assessment->load($assessment_id)) {
   $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
   $group_handler = new GroupHandler();
-  $collection =& $group_handler->get_collection($assessment->get_collection_id());
+  $collection = $group_handler->get_collection($assessment->get_collection_id());
 
   $group_marks_xml = $DB->fetch_value("SELECT group_mark_xml
                     FROM " . APP__DB_TABLE_PREFIX . "assessment_group_marks

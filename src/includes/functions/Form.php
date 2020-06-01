@@ -19,7 +19,7 @@ class Form
      * @param string $email_address
      * @return bool
      */
-    function is_email($email_address) {
+    public static function is_email($email_address) {
         return filter_var($email_address, FILTER_VALIDATE_EMAIL) === false ? false : true;
     }// /is_email()
 
