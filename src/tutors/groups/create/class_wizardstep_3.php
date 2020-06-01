@@ -8,6 +8,8 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\GroupHandler;
+
 class WizardStep3 {
 
   // Public
@@ -73,7 +75,14 @@ HTMLEnd;
         <div style="margin-left: 25px;">
 <?php
       $num_groups = (int) $this->wizard->get_field('num_groups');
-      $group_names = GroupHandler::generate_group_names(  $num_groups, $this->wizard->get_field('group_name_stub'), $this->wizard->get_field('group_numbering') );
+
+      $groupHandler = new GroupHandler();
+
+      $group_names = $groupHandler->generate_group_names(
+              $num_groups,
+              $this->wizard->get_field('group_name_stub'),
+              $this->wizard->get_field('group_numbering')
+      );
 
       if ($num_groups<=5) {
         foreach($group_names as $group_name) {
