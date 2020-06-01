@@ -27,7 +27,7 @@ class SimpleIterator {
   * CONSTRUCTOR for the simple iterator class
   * @param array $array
   */
-  function __construct(&$array) {
+  function __construct(&$array = []) {
     // sub-classes can override the creator, so all the work is done in _initialise()
     $this->_initialise($array);
   }// /->SimpleIterator()
@@ -91,10 +91,10 @@ class SimpleIterator {
  * Function to initalise
  * @param array $array
  */
-  function _initialise(&$array) {
+  function _initialise(&$array = []) {
     $this->array =& $array;
     $this->count = count($array);
-    if ($this->count==0) { $this->array = array(); }
+
     $this->reset();
   }// /->_intialise()
 

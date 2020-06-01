@@ -405,9 +405,15 @@ class GroupCollection
         foreach ($this->_groups as $i => $group_row) {
             $this->get_group_object($group_row['group_id']);
         }
-        $iterator = new SimpleIterator($this->_group_objects);
+
+        if ($this->_group_objects !== null) {
+           $iterator = new SimpleIterator($this->_group_objects);
+        } else {
+            $iterator = new SimpleIterator();
+        }
+
         return $iterator;
-    }// /->get_groups_iterator()
+    }
 
     /*
     * --------------------------------------------------------------------------------
