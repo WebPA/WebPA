@@ -57,8 +57,8 @@ class WizardStep2 {
   function form() {
     global $_module_id;
 
-    $DB =& $this->wizard->get_var('db');
-    $user =& $this->wizard->get_var('user');
+    $DB = $this->wizard->get_var('db');
+    $user = $this->wizard->get_var('user');
 
     $allow_feedback = $this->wizard->get_field('allow_feedback', 0);
 
