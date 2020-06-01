@@ -103,16 +103,21 @@ class WizardStep2 {
 
           // --------------------
           case 'have':
-            $result_handler = new ResultHandler($this->wizard->get_var('db'));
+            $resultHandlerDb = $this->wizard->get_var('db');
+
+            $result_handler = new ResultHandler($resultHandlerDb);
             $result_handler->set_assessment($assessment);
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_targets = $num_responses;
             echo("<p>This email will be sent to the $num_responses students who have taken this assessment.</p>");
+
             break;
 
           // --------------------
           case 'havenot':
-            $result_handler = new ResultHandler($this->wizard->get_var('db'));
+            $resultHandlerDb = $this->wizard->get_var('db');
+
+            $result_handler = new ResultHandler($resultHandlerDb);
             $result_handler->set_assessment($assessment);
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_no_responses = $collection_member_count - $num_responses;
@@ -163,10 +168,10 @@ class WizardStep2 {
       // Find which groups were selected
       if ((array_key_exists('email_group',$_POST)) && (is_array($_POST['email_group']))) {
         // Find how many students those groups contain
-        $assessment =& $this->wizard->get_var('assessment');
+        $assessment = $this->wizard->get_var('assessment');
 
         $group_handler = new GroupHandler();
-        $collection =& $group_handler->get_collection($assessment->get_collection_id());
+        $collection = $group_handler->get_collection($assessment->get_collection_id());
 
         $group_member_counts = $collection->get_member_count_by_group();
 
