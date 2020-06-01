@@ -53,12 +53,9 @@ class WizardStep6
 
     function form()
     {
-
         global $_module;
 
-        $DB =& $this->wizard->get_var('db');
-        $config =& $this->wizard->get_var('config');
-        $user =& $this->wizard->get_var('user');
+        $DB = $this->wizard->get_var('db');
 
         $errors = null;
 

@@ -54,12 +54,8 @@ class WizardStep4 {
   }// /->head()
 
   function form() {
-    $DB =& $this->wizard->get_var('db');
-    $config =& $this->wizard->get_var('config');
-
     $assessment_type = $this->wizard->get_field('assessment_type',1);
-
-?>
+    ?>
     <h2>Assessment Type</h2>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">

@@ -44,12 +44,8 @@ class WizardStep5 {
   }// /->head()
 
   function form() {
-    $DB =& $this->wizard->get_var('db');
-    $config =& $this->wizard->get_var('config');
-
     $now = time();
-
-?>
+    ?>
     <p>Your assessment is now ready for creation.</p>
     <p>Please review the details below. When you're are satisfied, click <em>Finish</em> to create your peer assessment.</p>
 
@@ -107,7 +103,10 @@ class WizardStep5 {
     <h2>Assessment Form</h2>
     <div class="form_section">
 <?php
+    $DB = $this->wizard->get_var('db');
+
     $form = new Form($DB);
+
     if (!$form->load($this->wizard->get_field('form_id'))) {
       $form = null;
       $this->wizard->next_button = null;

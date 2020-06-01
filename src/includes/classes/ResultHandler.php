@@ -50,8 +50,8 @@ class ResultHandler {
 
     $this->_collection_id = $this->_assessment->get_collection_id();
     $this->_group_handler = new GroupHandler();
-    $this->_collection =& $this->_group_handler->get_collection($this->_collection_id);
-  }// /->set_assessment()
+    $this->_collection = $this->_group_handler->get_collection($this->_collection_id);
+  }
 
   /**
   * Return the Assessment object being used

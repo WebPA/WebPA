@@ -103,12 +103,14 @@ class Form {
   * Load the Form from xml
   *
   * @param string $xml xml fragment to load
+   *
   * @return boolean did load succeed
   */
-  function load_from_xml(&$xml) {
+  function load_from_xml($xml) {
     $this->_load_xml($xml);
+
     return true;
-  }// /->load_from_xml()
+  }
 
   /**
   * Save this Form
