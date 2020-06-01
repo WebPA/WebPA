@@ -77,7 +77,9 @@ class WizardStep4 {
             break;
       // --------------------
       case 'have':
-            $result_handler = new ResultHandler($this->wizard->get_var('db'));
+            $resultHandlerDb = $this->wizard->get_var('db');
+
+            $result_handler = new ResultHandler($resultHandlerDb);
             $result_handler->set_assessment($assessment);
             $users_to_email = (array) $result_handler->get_responded_users();
             break;

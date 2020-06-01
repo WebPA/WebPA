@@ -95,7 +95,8 @@ class WizardStep3 {
 
       // --------------------
       case 'have':
-        $result_handler = new ResultHandler($this->wizard->get_var('db'));
+        $resultHandlerDb = $this->wizard->get_var('db');
+        $result_handler = new ResultHandler($resultHandlerDb);
         $result_handler->set_assessment($assessment);
         $num_responses = $result_handler->get_responses_count_for_assessment();
         $num_targets = $num_responses;

@@ -54,12 +54,13 @@ if ($assessment->load($assessment_id)) {
 
   // Get the form to be displayed
   $form = new Form($DB);
-  $form_xml =& $assessment->get_form_xml();
+
+  $form_xml = $assessment->get_form_xml();
   $form->load_from_xml($form_xml);
 
   // Get the collection being used
   $group_handler = new GroupHandler();
-  $collection =& $group_handler->get_collection($assessment->get_collection_id());
+  $collection = $group_handler->get_collection($assessment->get_collection_id());
 
   if ($collection) {
     // Get the group this user belongs to
