@@ -46,20 +46,17 @@ class WizardStep4 {
   }// /->head()
 
   function form() {
-    $config =& $this->wizard->get_var('config');
-    $DB =& $this->wizard->get_var('db');
-    $user =& $this->wizard->get_var('user');
-    $CIS =& $this->wizard->get_var('cis');
+    $user = $this->wizard->get_var('user');
+    $CIS = $this->wizard->get_var('cis');
 
     $send_email_to = $this->wizard->get_field('send_to');
 
-    $assessment =& $this->wizard->get_var('assessment');
+    $assessment = $this->wizard->get_var('assessment');
 
     $group_handler = new GroupHandler();
-    $collection =& $group_handler->get_collection($assessment->get_collection_id());
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
     $errors = null;
-
 
     // get lists of users to email
     $users_to_email = null;
@@ -137,8 +134,5 @@ class WizardStep4 {
   function process_form() {
     $this->wizard->_fields = array(); // kill the wizard's stored fields
     return null;
-  }// /->process_form()
-
-}// /class: WizardStep4
-
-?>
+  }
+}

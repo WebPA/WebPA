@@ -50,10 +50,10 @@ class WizardStep3 {
 
     $send_email_to = $this->wizard->get_field('send_to');
 
-    $assessment =& $this->wizard->get_var('assessment');
+    $assessment = $this->wizard->get_var('assessment');
 
     $group_handler = new GroupHandler();
-    $collection =& $group_handler->get_collection($assessment->get_collection_id());
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
     $collection_member_count = $collection->get_member_count();
     $num_targets = 0;
