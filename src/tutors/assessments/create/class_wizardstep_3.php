@@ -45,14 +45,9 @@ class WizardStep3 {
   }// /->head()
 
   function form() {
-
     global $_module;
-
-    $DB =& $this->wizard->get_var('db');
-    $config =& $this->wizard->get_var('config');
-    $user =& $this->wizard->get_var('user');
-
     global $group_handler;
+
     $group_handler = new GroupHandler();
     $collections = $group_handler->get_module_collections($_module['module_id']);
 
