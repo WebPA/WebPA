@@ -24,12 +24,17 @@ class WizardStep6
     // Public
     public $wizard = null;
     public $step = 6;
+    private $module;
 
     /*
     * CONSTRUCTOR
     */
-    function __construct(&$wizard)
+    public function __construct(&$wizard)
     {
+        global $_module;
+
+        $this->module = $_module;
+
         $this->wizard =& $wizard;
 
         $this->wizard->back_button = null;
@@ -53,8 +58,6 @@ class WizardStep6
 
     function form()
     {
-        global $_module;
-
         $DB = $this->wizard->get_var('db');
 
         $errors = null;
@@ -62,7 +65,7 @@ class WizardStep6
         // Create the assessment object
         $assessment = new Assessment($DB);
         $assessment->create();
-        $assessment->module_id = $_module['module_id'];
+        $assessment->module_id = $this->module['module_id'];
         $assessment->name = $this->wizard->get_field('assessment_name');
         $assessment->open_date = $this->wizard->get_field('open_date');
         $assessment->close_date = $this->wizard->get_field('close_date');
