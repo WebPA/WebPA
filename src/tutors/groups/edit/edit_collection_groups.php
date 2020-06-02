@@ -29,7 +29,6 @@ $collection_url = "edit_collection.php?c={$collection_id}";
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collection = $group_handler->get_collection($collection_id);
 

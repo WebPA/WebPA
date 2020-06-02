@@ -30,7 +30,6 @@ $list_url = "../../../tutors/groups/";
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collection = $group_handler->get_collection($collection_id);
 

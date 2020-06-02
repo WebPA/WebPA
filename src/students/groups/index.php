@@ -21,7 +21,6 @@ if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collections = $group_handler->get_member_collections($_user->id, APP__ID, 'user');
 

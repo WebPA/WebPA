@@ -23,7 +23,6 @@ if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 
 // Get a list of collections that the user is a member of

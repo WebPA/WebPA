@@ -18,17 +18,25 @@ include_once __DIR__ . '/../inc_global.php';
 
 class EngCIS
 {
-    // Public Vars
-
-    // Private Vars
     private $_DAO = null;
     private $_ordering_types = null;
+    private $user;
+    private $sourceId;
+    private $moduleId;
 
     /**
      * CONSTRUCTOR
      */
     function __construct()
     {
+        global $_user;
+        global $_source_id;
+        global $_module_id;
+
+        $this->user = $_user;
+        $this->sourceId = $_source_id;
+        $this->moduleId = $_module_id;
+
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
         $this->_DAO->set_debug(false);
     }// /->EngCIS()
@@ -49,8 +57,6 @@ class EngCIS
      */
     function get_module($modules = null, $ordering = 'id')
     {
-        global $_user, $_source_id;
-
         $module_search = $this->_DAO->build_filter('module_id', (array)$modules);
         $order_by_clause = $this->_order_by_clause('module', $ordering);
 
@@ -58,24 +64,24 @@ class EngCIS
         if (is_array($modules)) {
             return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$_source_id}') AND $module_search
+                    WHERE (lcm.source_id = '{$this->sourceId}') AND $module_search
                     $order_by_clause");
         } else if (!empty($modules)) {  // else, just return one row
             return $this->_DAO->fetch_row("SELECT lcm.module_id, lcm.module_title, lcm.module_code
                       FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                      WHERE (lcm.source_id = '{$_source_id}') AND $module_search
+                      WHERE (lcm.source_id = '{$this->sourceId}') AND $module_search
                       LIMIT 1");
-        } else if ($_user->is_admin()) {
+        } else if ($this->user->is_admin()) {
             return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$_source_id}')
+                    WHERE (lcm.source_id = '{$this->sourceId}')
                     $order_by_clause");
         } else {
             return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
                   FROM " . APP__DB_TABLE_PREFIX . "module lcm
                   INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcm.module_id = lcsm.module_id
                   WHERE (lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "') AND
-                        (user_id = $_user->id) AND (lcm.source_id = '{$_source_id}')
+                        (user_id = $this->user->id) AND (lcm.source_id = '{$this->sourceId}')
                   $order_by_clause");
         }
     }// /->get_module()
@@ -362,8 +368,6 @@ class EngCIS
      */
     function get_user($user_id, $ordering = 'name')
     {
-        global $_module_id;
-
         $user_set = $this->_DAO->build_set($user_id, false);
 
         if (is_array($user_id)) {
@@ -374,7 +378,7 @@ class EngCIS
               LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
               ON u.user_id = um.user_id
               WHERE (u.user_id IN {$user_set})
-              AND (um.module_id = {$_module_id})
+              AND (um.module_id = {$this->moduleId})
               $order_by_clause";
 
             return $this->_DAO->fetch($sql);
@@ -384,7 +388,7 @@ class EngCIS
               LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
               ON u.user_id = um.user_id
               WHERE (u.user_id IN {$user_set})
-              AND (um.module_id = {$_module_id} OR u.admin = 1)
+              AND (um.module_id = {$this->moduleId} OR u.admin = 1)
               LIMIT 1";
 
             return $this->_DAO->fetch_row($sql);
@@ -421,10 +425,10 @@ class EngCIS
         } else if (is_null($source_id)) {
             $source_id = '';
         }
-        $_module_id = Common::fetch_SESSION('_module_id', null);
+        $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
         $sql = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u LEFT OUTER JOIN ' .
-            '  (SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$_module_id}) um " .
+            '  (SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$this->moduleId}) um " .
             '  ON u.user_id = um.user_id ' .
             "WHERE username = '{$username}' AND source_id = '{$source_id}'";
 
@@ -525,18 +529,16 @@ class EngCIS
 
     function get_user_academic_years($user_id = null)
     {
-        global $_source_id, $_module_id;
-
         if (!empty($user_id)) {
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}' AND m.module_id = '{$_module_id}'";
+                "WHERE m.source_id = '{$this->sourceId}' AND m.module_id = '{$this->moduleId}'";
         } else {
             $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$_source_id}'";
+                "WHERE m.source_id = '{$this->sourceId}'";
         }
 
         $dates = $this->_DAO->fetch_row($sql);

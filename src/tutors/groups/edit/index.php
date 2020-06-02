@@ -23,7 +23,6 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collections = $group_handler->get_user_collections($_user->id, $_config['app_id']);
 

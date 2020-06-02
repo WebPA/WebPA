@@ -199,7 +199,6 @@ if (!$assessment) {
     <div class="form_section">
 <?php
 
-    global $group_handler;
     $group_handler = new GroupHandler();
     $collections = $group_handler->get_user_collections($_user->id, $_config['app_id']);
 
