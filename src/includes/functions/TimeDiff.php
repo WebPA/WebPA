@@ -23,7 +23,7 @@ class TimeDiff
      *
      * @return  string  String representation of the time difference
      */
-    function calculate($start_date, $end_date) {
+    public static function calculate($start_date, $end_date) {
         if ($end_date>$start_date) {	// If the start after the end, the result will be a minus
             $prefix = '';
             $remainder = $end_date - $start_date;

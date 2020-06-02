@@ -72,7 +72,7 @@ if ($assessment->load($assessment_id)) {
   $group_names = null;
 
   $group_handler = new GroupHandler();
-  $collection =& $group_handler->get_collection($assessment->get_collection_id());
+  $collection = $group_handler->get_collection($assessment->get_collection_id());
   $groups_iterator = $collection->get_groups_iterator();
   if ($groups_iterator->size()>0) {
     for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
@@ -86,7 +86,7 @@ if ($assessment->load($assessment_id)) {
   // ----------------------------------------
   // Get the questions used in this assessment
   $form = new Form($DB);
-  $form_xml =& $assessment->get_form_xml();
+  $form_xml = $assessment->get_form_xml();
   $form->load_from_xml($form_xml);
   $question_count = (int) $form->get_question_count();
 
