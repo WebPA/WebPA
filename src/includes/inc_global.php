@@ -11,7 +11,6 @@
 // Add composer's autoloader
 require __DIR__ . '/../../vendor/autoload.php';
 
-// TODO: Remove FQDN
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\UI;
