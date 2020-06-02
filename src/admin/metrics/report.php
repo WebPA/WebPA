@@ -40,7 +40,7 @@ $next_year = strval($year + 1) . $this_year;
 $this_year = strval($year) . $this_year;
 
 //get the format to be used
-$format = fetch_post('format');
+$format = Common::fetch_post('format');
 
 //get the reports that are to be generated
 $assessments_run = Common::fetch_POST('assessments_run');
