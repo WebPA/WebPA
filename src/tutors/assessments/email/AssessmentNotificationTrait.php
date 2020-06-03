@@ -19,6 +19,7 @@ use WebPA\includes\classes\Email;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\ArrayFunctions;
+use WebPA\includes\functions\Common;
 
 trait AssessmentNotificationTrait
 {
@@ -47,7 +48,10 @@ trait AssessmentNotificationTrait
         // create bcc list of recipients
         $bcc_list = null;
 
-        $CISa = new EngCIS();
+        $sourceId = Common::fetch_SESSION('_source_id', '');
+        $moduleId = Common::fetch_SESSION('_module_id', NULL);
+
+        $CISa = new EngCIS($sourceId, $moduleId);
 
         if (is_array($users_to_email)) {
             $users_arr = $CISa->get_user($users_to_email);

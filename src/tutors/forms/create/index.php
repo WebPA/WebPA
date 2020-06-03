@@ -32,6 +32,7 @@ $wizard->show_steps(1); // Hide the last step from the user
 $wizard->set_var('db',$DB);
 $wizard->set_var('config',$_config);
 $wizard->set_var('user',$_user);
+$wizard->set_var('moduleId', $_module_id);
 
 $wizard->prepare();
 

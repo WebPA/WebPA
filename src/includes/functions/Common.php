@@ -10,6 +10,8 @@
 
 namespace WebPA\includes\functions;
 
+use WebPA\includes\classes\DAO;
+
 define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
 
 class Common
@@ -79,22 +81,21 @@ class Common
     /**
      * Add an entry to the tracking table
      */
-    public static function logEvent($description, $module_id = NULL, $object_id = NULL) {
+    public static function logEvent(DAO $db, $description, $module_id = NULL, $object_id = NULL) {
+      $now = date(MYSQL_DATETIME_FORMAT);
 
-      global $DB;
-
-      $now = date(MYSQL_DATETIME_FORMAT,time());
       if (!empty($module_id)) {
-        $module_id = intval($module_id);
+        $module_id = (int) $module_id;
       }
 
-      $fields = array ('user_id' => intval($_SESSION['_user_id']),
+      $fields = array ('user_id' => (int) $_SESSION['_user_id'],
                'datetime'    => $now,
                'ip_address'  => $_SERVER['REMOTE_ADDR'],
                'description' => $description,
                'module_id'   => $module_id,
                'object_id'   => $object_id);
-      return $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_tracking ({fields}) VALUES ({values})', $fields);
+
+      return $db->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_tracking ({fields}) VALUES ({values})', $fields);
 
     }
 

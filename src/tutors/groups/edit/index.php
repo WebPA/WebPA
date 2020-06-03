@@ -23,7 +23,6 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collections = $group_handler->get_user_collections($_user->id, $_config['app_id']);
 
@@ -81,7 +80,7 @@ $UI->content_start();
 if (!$collections) {
   echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
+  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
 
   echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
 

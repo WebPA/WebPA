@@ -22,6 +22,18 @@ use WebPA\includes\functions\StringFunctions;
 class LDAPAuthenticator extends Authenticator
 {
 
+    private $ldapRequiredFields;
+
+    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
+    {
+        parent::__construct($cis, $username, $password);
+    }
+
+    public function setRequiredInfo(array $ldapRequiredFields)
+    {
+        $this->ldapRequiredFields = $ldapRequiredFields;
+    }
+
     /**
      * Authenticate users against the LDAP server.
      *
@@ -29,8 +41,6 @@ class LDAPAuthenticator extends Authenticator
      */
     function authenticate()
     {
-        global $LDAP__INFO_REQUIRED;
-
         $this->_authenticated = false;
         $this->_error = null;
 
@@ -70,7 +80,7 @@ class LDAPAuthenticator extends Authenticator
 
         $filter = str_replace('{username}', $this->username, LDAP__FILTER);
 
-        $info_req = $LDAP__INFO_REQUIRED;
+        $info_req = $this->ldapRequiredFields;
         $info_req[] = LDAP__USER_TYPE_ATTRIBUTE;
         $result = ldap_search($ldapconn, LDAP__BASE, $filter, $info_req);
 
@@ -87,14 +97,14 @@ class LDAPAuthenticator extends Authenticator
 
         ldap_unbind($ldapconn);
 
-        if ($info['count']==0) {
+        if ($info['count'] == 0) {
             return false;
         }
 
         $_fields = [
             'forename' => $info[0]['givenname'][0],
-            'lastname'  => $info[0]['sn'][0],
-            'email'     => $info[0]['mail'][0],
+            'lastname' => $info[0]['sn'][0],
+            'email' => $info[0]['mail'][0],
             'user_type' => get_LDAP_user_type($info[0][LDAP__USER_TYPE_ATTRIBUTE]),
         ];
 
@@ -104,24 +114,24 @@ class LDAPAuthenticator extends Authenticator
             $els[] = "$key = '$val'";
         }
 
-    $DAO = $this->get_DAO();
-    if (LDAP__AUTO_CREATE_USER) {
+        $DAO = $this->get_DAO();
+        if (LDAP__AUTO_CREATE_USER) {
 
-      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . ", username = '{$this->username}', password = '" . md5(StringFunctions::str_random()) . "', source_id = ''";
-      $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ', $els);
-      $DAO->execute($sql);
-      $id = $DAO->get_insert_id();
-      if (!$id) {
-        $sql = 'SELECT user_id FROM '.APP__DB_TABLE_PREFIX."user WHERE username = '{$this->username}' AND source_id = ''";
-        $id = $DAO->fetch_value($sql);
-      }
-      $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE user_id = $id";
+            $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . ", username = '{$this->username}', password = '" . md5(StringFunctions::str_random()) . "', source_id = ''";
+            $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ', $els);
+            $DAO->execute($sql);
+            $id = $DAO->get_insert_id();
+            if (!$id) {
+                $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND source_id = ''";
+                $id = $DAO->fetch_value($sql);
+            }
+            $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE user_id = $id";
 
-    } else {
+        } else {
 
-      $sql = 'UPDATE ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . " WHERE username = '{$this->username}' AND source_id = ''";
-      $DAO->execute($sql);
-      $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND source_id = ''";
+            $sql = 'UPDATE ' . APP__DB_TABLE_PREFIX . 'user SET ' . implode(', ', $els) . " WHERE username = '{$this->username}' AND source_id = ''";
+            $DAO->execute($sql);
+            $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND source_id = ''";
 
             $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND source_id = ''";
         }

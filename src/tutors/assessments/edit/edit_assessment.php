@@ -107,7 +107,7 @@ if ($command && $assessment) {
                 $member_arr = (array) $collection->get_members();
                 $all_users = array_keys($member_arr);
 
-                $users_to_email = array_diff($all_users, $responded_users);
+                $users_to_email = array_diff($all_users, $responded_users ?? []);
 
                 //set the email details
                 $bcc_list = ArrayFunctions::array_extract_column($users_to_email, 'email');

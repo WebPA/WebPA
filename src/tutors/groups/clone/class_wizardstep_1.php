@@ -13,15 +13,14 @@ use WebPA\includes\functions\Common;
 
 class WizardStep1 {
 
-  // Public
-  public $wizard = null;
+  public $wizard;
   public $step = 1;
 
   /*
   * CONSTRUCTOR
   */
-  function __construct(&$wizard) {
-    $this->wizard =& $wizard;
+  public function __construct($wizard) {
+    $this->wizard = $wizard;
 
     $this->wizard->back_button = null;
     $this->wizard->next_button = 'Next &gt;';
@@ -51,7 +50,7 @@ HTMLEnd;
 
     $collections = $group_handler->get_module_collections($module, $config['app_id']);
 
-    $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
+    $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $group_handler->_DAO);
 
     if ($collection_iterator->size()==0) {
 ?>

@@ -13,6 +13,7 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 use WebPA\tutors\assessments\email\AssessmentNotificationTrait;
 
@@ -24,18 +25,21 @@ class WizardStep6
     // Public
     public $wizard = null;
     public $step = 6;
+    private $module;
 
     /*
     * CONSTRUCTOR
     */
-    function __construct(&$wizard)
+    public function __construct(Wizard $wizard)
     {
-        $this->wizard =& $wizard;
+        $this->wizard = $wizard;
+
+        $this->module = $wizard->get_var('module');
 
         $this->wizard->back_button = null;
         $this->wizard->next_button = null;
         $this->wizard->cancel_button = null;
-    }// /WizardStep5()
+    }
 
     function head()
     {
@@ -53,8 +57,6 @@ class WizardStep6
 
     function form()
     {
-        global $_module;
-
         $DB = $this->wizard->get_var('db');
 
         $errors = null;
@@ -62,7 +64,7 @@ class WizardStep6
         // Create the assessment object
         $assessment = new Assessment($DB);
         $assessment->create();
-        $assessment->module_id = $_module['module_id'];
+        $assessment->module_id = $this->module['module_id'];
         $assessment->name = $this->wizard->get_field('assessment_name');
         $assessment->open_date = $this->wizard->get_field('open_date');
         $assessment->close_date = $this->wizard->get_field('close_date');

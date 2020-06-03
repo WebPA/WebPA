@@ -190,10 +190,6 @@ session_start();
 $DB = new DAO( APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
 $DB->set_debug(FALSE);
 
-// Initialise The EngCIS Handler object
-
-$CIS = new EngCIS();
-
 // Initialise User Object
 
 $_user = null;
@@ -213,6 +209,8 @@ $BRANDING['css'] = Common::fetch_SESSION('branding_css', CUSTOM_CSS);
 $BRANDING['email.help'] = Common::fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
 $BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
 
+$CIS = new EngCIS($_source_id, $_module_id);
+
 // If we found a user to load, load 'em!
 if ($_user_id){
 
@@ -225,21 +223,21 @@ if ($_user_id){
 
   // save session data
   $_SESSION['_user_id'] = $_user->id;
-
 }
 
-// Initialise UI Object
-
-$UI = new UI($_user);
+if (!is_null($_user)) {
+    $CIS->setUser($_user);
+}
 
 // If we found a module to load, load it!
 if ($_module_id){
-
   $sql_module = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
   $_module = $DB->fetch_row($sql_module);
   $_module_code = $_module['module_code'];
 
 }
+
+$UI = new UI($INSTALLED_MODS, $_source_id, $BRANDING, $CIS, $_module, $_user);
 
 function get_LDAP_user_type($data) {
 

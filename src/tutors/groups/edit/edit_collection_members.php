@@ -32,7 +32,6 @@ $collection_url = "edit_collection.php?$collection_qs";
 
 // --------------------------------------------------------------------------------
 
-global $group_handler;
 $group_handler = new GroupHandler();
 $collection = $group_handler->get_collection($collection_id);
 
