@@ -14,15 +14,14 @@ namespace WebPA\includes\classes;
 
 class DBAuthenticator extends Authenticator {
 
-/*
-================================================================================
-  PUBLIC
-================================================================================
-*/
+    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
+    {
+        parent::__construct($cis, $username, $password);
+    }
 
-  /*
-  Authenticate the user against the internal database
-  */
+    /*
+    Authenticate the user against the internal database
+    */
   function authenticate() {
 
     $this->_error = NULL;

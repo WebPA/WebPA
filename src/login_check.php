@@ -49,7 +49,7 @@ if ( ($username) && ($password) ) {
   for ($i = 0; $i < count($LOGIN_AUTHENTICATORS); $i++) {
     $classname = 'WebPA\includes\classes\\' . $LOGIN_AUTHENTICATORS[$i] . 'Authenticator';
 
-    $_auth = new $classname($username, $password);
+    $_auth = new $classname($CIS, $username, $password);
 
     if ($_auth->authenticate()) {
       $authenticated = TRUE;

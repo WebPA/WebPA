@@ -34,11 +34,9 @@ class Authenticator
     /**
      *  CONSTRUCTOR for the Authenticator class
      */
-    public function __construct($username = NULL, $password = NULL)
+    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
     {
-        global $CIS;
-
-        $this->cis = $CIS;
+        $this->cis = $cis;
 
         $this->username = $username;
         $this->password = $password;

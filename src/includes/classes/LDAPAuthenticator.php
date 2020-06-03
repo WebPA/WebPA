@@ -24,9 +24,9 @@ class LDAPAuthenticator extends Authenticator
 
     private $ldapRequiredFields;
 
-    public function __construct($username = NULL, $password = NULL)
+    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
     {
-        parent::__construct($username, $password);
+        parent::__construct($cis, $username, $password);
 
         global $LDAP__INFO_REQUIRED;
 
