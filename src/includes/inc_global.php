@@ -227,18 +227,15 @@ if ($_user_id){
 
 $CIS->setUser($_user);
 
-// Initialise UI Object
-
-$UI = new UI($_user);
-
 // If we found a module to load, load it!
 if ($_module_id){
-
   $sql_module = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
   $_module = $DB->fetch_row($sql_module);
   $_module_code = $_module['module_code'];
 
 }
+
+$UI = new UI($INSTALLED_MODS, $_source_id, $BRANDING, $CIS, $_module, $_user);
 
 function get_LDAP_user_type($data) {
 

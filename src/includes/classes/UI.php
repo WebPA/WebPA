@@ -19,9 +19,9 @@ class UI
     public $breadcrumbs = null;
     public $help_link = '';
 
-    private $_user = null;
-    private $_menu = null;
-    private $_page_bar_buttons = null;
+    private $user;
+    private $_menu;
+    private $_page_bar_buttons;
     private $cis;
     private $installedMods;
     private $sourceId;
@@ -30,37 +30,29 @@ class UI
 
     /**
      * CONSTRUCTOR for the UI
-     * @param string $_user
      */
-    function __construct($_user = null)
+    function __construct($installedMods, $sourceId, $branding, $cis, $module, $user)
     {
-        global $INSTALLED_MODS;
-        global $_source_id;
-        global $CIS;
-        global $BRANDING;
-        global $_module;
-
-        $this->cis = $CIS;
-        $this->installedMods = $INSTALLED_MODS;
-        $this->sourceId = $_source_id;
-        $this->branding = $BRANDING;
-        $this->module = $_module;
-
-        $this->_user =& $_user;
+        $this->cis = $cis;
+        $this->installedMods = $installedMods;
+        $this->sourceId = $sourceId;
+        $this->branding = $branding;
+        $this->module = $module;
+        $this->user = $user;
 
         $helper_link = APP__HELP_LINK;
 
         // Initialise the menu - sets either staff or student menu items
-        if ($this->_user) {
+        if ($this->user) {
 
-            if ($this->_user->is_staff()) {
+            if ($this->user->is_staff()) {
                 // Staff menu
                 $this->set_menu('Tutors', array('home' => APP__WWW . '/tutors/index.php',
                     'my forms' => APP__WWW . '/tutors/forms/',
                     'my groups' => APP__WWW . '/tutors/groups/',
                     'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
 
-            } else if ($this->_user->is_student()) {
+            } else if ($this->user->is_student()) {
                 // Student menu
                 $this->set_menu('Students', array('home' => APP__WWW . '/students/index.php',
                     'my groups' => APP__WWW . '/students/groups/',
@@ -68,11 +60,11 @@ class UI
             }
 
             //Admin menu
-            if ($this->_user->is_staff()) {
+            if ($this->user->is_staff()) {
                 $menu = array('admin home' => APP__WWW . '/admin/index.php',
                     'upload data' => APP__WWW . '/admin/load/index.php',
                     'view data' => APP__WWW . '/admin/review/index.php');
-                if ($this->_user->is_admin()) {
+                if ($this->user->is_admin()) {
                     $menu['metrics'] = APP__WWW . '/admin/metrics/index.php';
                 }
                 $this->set_menu('Admin', $menu);
@@ -92,13 +84,13 @@ class UI
         $this->set_menu('Support', array('help' => $helper_link, //this is a link set in each page / area to link to the approriate help
             'contact' => APP__WWW . '/contact/'));// /$this->set_menu();
 
-        if ($this->_user) {
-            if ($_user->is_admin()) {
+        if ($this->user) {
+            if ($user->is_admin()) {
                 $modules = $this->cis->get_user_modules(NULL, NULL, 'name');
             } else {
-                $modules = $this->cis->get_user_modules($_user->id, NULL, 'name');
+                $modules = $this->cis->get_user_modules($user->id, NULL, 'name');
             }
-            if ((($this->sourceId == '') || $this->_user->is_admin()) && (count($modules) > 1)) {
+            if ((($this->sourceId == '') || $this->user->is_admin()) && (count($modules) > 1)) {
                 $this->set_menu('  ', array('change module' => APP__WWW . '/module.php'));
             }
         }
@@ -262,8 +254,8 @@ class UI
                 </div>
                 <div id="module_bar">
                     <?php
-                    if ($this->_user) {
-                        echo("<td>User: {$this->_user->forename} {$this->_user->lastname}</td>");
+                    if ($this->user) {
+                        echo("<td>User: {$this->user->forename} {$this->user->lastname}</td>");
                     } else {
                         echo('<td>&nbsp;</td>');
                     }
@@ -396,7 +388,6 @@ class UI
      */
     function footer()
     {
-        global $_user;
         ?>
         <div id="footer">
             <div style="margin-top: 50px">
@@ -405,7 +396,7 @@ class UI
                     echo APP__VERSION;
                     if (count($this->installedMods) > 0) echo ' [' . implode(",", $this->installedMods) . ']'; ?></span>
                 <?php
-                if (isset($_user) && $_user->is_admin() && $this->sourceId) {
+                if (isset($this->user) && $this->user->is_admin() && $this->sourceId) {
                     echo "<br />\n";
                     echo '      <span style="font-size: small;">Source:&nbsp;';
                     echo ($this->sourceId) ? $this->sourceId : '&lt;' . APP__NAME . '&gt;';
