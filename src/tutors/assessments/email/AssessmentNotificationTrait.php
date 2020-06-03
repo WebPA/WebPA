@@ -19,6 +19,7 @@ use WebPA\includes\classes\Email;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\ArrayFunctions;
+use WebPA\includes\functions\Common;
 
 trait AssessmentNotificationTrait
 {
