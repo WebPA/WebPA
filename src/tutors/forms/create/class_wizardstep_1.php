@@ -25,7 +25,7 @@ class WizardStep1
     {
         $this->wizard = $wizard;
 
-        $this->moduleId = $wizard->get_var('moduleId');
+        $this->moduleId = $this->wizard->get_var('moduleId');
 
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Finish';
