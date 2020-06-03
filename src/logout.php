@@ -13,7 +13,7 @@ require_once("includes/inc_global.php");
 use WebPA\includes\functions\Common;
 
 if (isset($_SESSION['_user_id'])) {
-  Common::logEvent('Logout');
+  Common::logEvent($DB, 'Logout');
 }
 
 $old_session = $_SESSION;

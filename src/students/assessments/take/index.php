@@ -275,13 +275,13 @@ if (($command) && ($assessment)) {
         //along with the saved marks we want to save the justification section
         $DB->do_insert_multi("INSERT INTO " . APP__DB_TABLE_PREFIX . "user_justification ({fields}) VALUES {values}", $justification);
 
-        Common::logEvent('Assessment submission successful', $_module_id, $assessment->id);
+        Common::logEvent($DB, 'Assessment submission successful', $_module_id, $assessment->id);
 
         header("Location: ". APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
         exit;
 
       } else {
-        Common::logEvent('Assessment submission failed', $_module_id, $assessment->id);
+        Common::logEvent($DB, 'Assessment submission failed', $_module_id, $assessment->id);
       }
 
       break;
@@ -408,7 +408,7 @@ if (!$assessment) {
 
   </form>
 <?php
-  Common::logEvent('Assessment started', $_module_id, $assessment->id);
+  Common::logEvent($DB, 'Assessment started', $_module_id, $assessment->id);
 }
 ?>
 </div>

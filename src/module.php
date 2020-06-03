@@ -31,8 +31,8 @@ if ($module_id) {
   $_SESSION['_module_id'] = $module_id;
   $_SESSION['_user_context_id'] = $module['module_code'];
 
-  Common::logEvent('Leave module', $_module_id);
-  Common::logEvent('Enter module', $module_id);
+  Common::logEvent($DB, 'Leave module', $_module_id);
+  Common::logEvent($DB, 'Enter module', $module_id);
 
   header('Location: ' . APP__WWW . "/");
   exit;
