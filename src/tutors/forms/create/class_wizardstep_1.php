@@ -8,11 +8,12 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep1
 {
-    public $wizard = null;
+    public $wizard;
     public $step = 1;
 
     private $moduleId;
@@ -20,13 +21,11 @@ class WizardStep1
     /*
     * CONSTRUCTOR
     */
-    function __construct(&$wizard)
+    public function __construct(Wizard $wizard)
     {
-        global $_module_id;
+        $this->wizard = $wizard;
 
-        $this->moduleId = $_module_id;
-
-        $this->wizard =& $wizard;
+        $this->moduleId = $wizard->get_var('moduleId');
 
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Finish';

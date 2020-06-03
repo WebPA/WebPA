@@ -9,18 +9,18 @@
  */
 
 use WebPA\includes\classes\Form;
+use WebPA\includes\classes\Wizard;
 
 class WizardStep2 {
 
-  // Public
-  public $wizard = null;
+  public $wizard;
   public $step = 2;
 
   /*
   * CONSTRUCTOR
   */
-  function __construct(&$wizard) {
-    $this->wizard =& $wizard;
+  public function __construct(Wizard $wizard) {
+    $this->wizard = $wizard;
 
     $this->wizard->back_button = null;
     $this->wizard->next_button = null;
