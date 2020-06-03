@@ -28,8 +28,8 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
-define('APP__WWW', '');
-define('DOC__ROOT', ''); //must include the trailing /
+define('APP__WWW', 'http://localhost');
+define('DOC__ROOT', '/var/www/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -38,10 +38,10 @@ ini_set('session.cookie_path', '/');
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
-define('APP__DB_HOST', ''); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', '');
-define('APP__DB_PASSWORD', '');
-define('APP__DB_DATABASE', '');
+define('APP__DB_HOST', 'webpa-db'); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_USERNAME', 'root');
+define('APP__DB_PASSWORD', 'rootpass');
+define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
@@ -190,10 +190,6 @@ session_start();
 $DB = new DAO( APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
 $DB->set_debug(FALSE);
 
-// Initialise The EngCIS Handler object
-
-$CIS = new EngCIS();
-
 // Initialise User Object
 
 $_user = null;
@@ -212,6 +208,8 @@ $BRANDING['name'] = Common::fetch_SESSION('branding_name', APP__INST_LOGO_ALT);
 $BRANDING['css'] = Common::fetch_SESSION('branding_css', CUSTOM_CSS);
 $BRANDING['email.help'] = Common::fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
 $BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
+
+$CIS = new EngCIS();
 
 // If we found a user to load, load 'em!
 if ($_user_id){
