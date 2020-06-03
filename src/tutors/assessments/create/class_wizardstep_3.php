@@ -25,18 +25,16 @@ class WizardStep3
     /*
     * CONSTRUCTOR
     */
-    public function __construct(&$wizard)
+    public function __construct($wizard)
     {
-        global $_module;
+        $this->wizard = $wizard;
 
-        $this->module = $_module;
-
-        $this->wizard =& $wizard;
+        $this->module = $this->wizard->get_var('module');
 
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep3()
+    }
 
     function head()
     {
@@ -67,7 +65,7 @@ class WizardStep3
                 assessments.</p>
             <?php
         } else {
-            $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
+            $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $this->wizard->get_var('db'));
             ?>
             <p>Please select the collection of groups you wish to use in this assessment from the list below.</p>
             <p>The collection you select will be copied into your new assessment. Subsequent changes to the collection

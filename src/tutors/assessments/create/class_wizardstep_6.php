@@ -29,18 +29,16 @@ class WizardStep6
     /*
     * CONSTRUCTOR
     */
-    public function __construct(&$wizard)
+    public function __construct($wizard)
     {
-        global $_module;
+        $this->wizard = $wizard;
 
-        $this->module = $_module;
-
-        $this->wizard =& $wizard;
+        $this->module = $wizard->get_var('module');
 
         $this->wizard->back_button = null;
         $this->wizard->next_button = null;
         $this->wizard->cancel_button = null;
-    }// /WizardStep5()
+    }
 
     function head()
     {

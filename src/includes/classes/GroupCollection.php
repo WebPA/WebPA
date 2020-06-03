@@ -38,14 +38,11 @@ class GroupCollection
     /**
      * CONSTRUCTOR for the Group collection function
      */
-    function __construct(&$DAO)
+    function __construct($DAO)
     {
-        $this->_DAO =& $DAO;
+        $this->_DAO = $DAO;
         $this->_created_on = time();
-        $this->_groups = null;
-        $this->_group_objects = null;
-        $this->_assessment_id = null;
-    }// /->GroupCollection()
+    }
 
     /*
     * ================================================================================

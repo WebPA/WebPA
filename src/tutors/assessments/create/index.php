@@ -34,6 +34,8 @@ $wizard->add_step(6,'class_wizardstep_6.php');
 $wizard->set_var('db',$DB);
 $wizard->set_var('config',$_config);
 $wizard->set_var('user',$_user);
+$wizard->set_var('module', $_module);
+$wizard->set_var('moduleId', $_module_id);
 
 $wizard->prepare();
 
