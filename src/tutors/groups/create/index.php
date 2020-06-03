@@ -33,6 +33,7 @@ $wizard->set_var('CIS',$CIS);
 $wizard->set_var('db', $DB);
 $wizard->set_var('config',$_config);
 $wizard->set_var('user',$_user);
+$wizard->set_var('moduleId', $_module_id);
 
 $wizard->prepare();
 

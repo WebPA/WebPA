@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep2
@@ -23,7 +24,7 @@ class WizardStep2
     /*
     * CONSTRUCTOR
     */
-    function __construct($wizard)
+    function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
 

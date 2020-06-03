@@ -8,19 +8,19 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep1 {
 
-  // Public
-  public $wizard = null;
+  public $wizard;
   public $step = 1;
 
   /*
   * CONSTRUCTOR
   */
-  function __construct(&$wizard) {
-    $this->wizard =& $wizard;
+  function __construct(Wizard $wizard) {
+    $this->wizard = $wizard;
 
     $this->wizard->back_button = null;
     $this->wizard->next_button = 'Next &gt;';

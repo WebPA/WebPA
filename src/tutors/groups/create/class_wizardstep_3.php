@@ -9,6 +9,7 @@
  */
 
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\Wizard;
 
 class WizardStep3
 {
@@ -21,13 +22,11 @@ class WizardStep3
     /*
     * CONSTRUCTOR
     */
-    public function __construct(&$wizard)
+    public function __construct(Wizard $wizard)
     {
-        global $_module_id;
+        $this->wizard = $wizard;
 
-        $this->moduleId = $_module_id;
-
-        $this->wizard =& $wizard;
+        $this->moduleId = $wizard->get_var('moduleId');
 
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Finish';

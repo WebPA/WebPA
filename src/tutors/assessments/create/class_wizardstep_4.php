@@ -10,19 +10,19 @@
 
 require_once("../../../includes/inc_global.php");
 
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep4 {
 
-  // Public
-  public $wizard = null;
+  public $wizard;
   public $step = 4;
 
   /*
   * CONSTRUCTOR
   */
-  function __construct(&$wizard) {
-    $this->wizard =& $wizard;
+  function __construct(Wizard $wizard) {
+    $this->wizard = $wizard;
 
     $this->wizard->back_button = '&lt; Back';
     $this->wizard->next_button = 'Next &gt;';

@@ -9,6 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
@@ -22,13 +23,11 @@ class WizardStep2
     /*
     * CONSTRUCTOR
     */
-    function __construct(&$wizard)
+    function __construct(Wizard $wizard)
     {
-        global $_module_id;
+        $this->wizard = $wizard;
 
-        $this->moduleId = $_module_id;
-
-        $this->wizard =& $wizard;
+        $this->moduleId = $wizard->get_var('moduleId');
 
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Next &gt;';

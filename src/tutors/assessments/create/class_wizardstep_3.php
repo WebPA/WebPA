@@ -12,6 +12,7 @@ require_once("../../../includes/inc_global.php");
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep3
@@ -25,7 +26,7 @@ class WizardStep3
     /*
     * CONSTRUCTOR
     */
-    public function __construct($wizard)
+    public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
 

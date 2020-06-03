@@ -13,6 +13,7 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
+use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 use WebPA\tutors\assessments\email\AssessmentNotificationTrait;
 
@@ -29,7 +30,7 @@ class WizardStep6
     /*
     * CONSTRUCTOR
     */
-    public function __construct($wizard)
+    public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
 
