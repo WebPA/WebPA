@@ -18,8 +18,8 @@ include_once __DIR__ . '/../inc_global.php';
 
 class EngCIS
 {
-    private $_DAO = null;
-    private $_ordering_types = null;
+    private $_DAO;
+    private $_ordering_types;
     private $user;
     private $sourceId;
     private $moduleId;
@@ -27,19 +27,19 @@ class EngCIS
     /**
      * CONSTRUCTOR
      */
-    function __construct()
+    public function __construct($sourceId, $moduleId)
     {
-        global $_user;
-        global $_source_id;
-        global $_module_id;
-
-        $this->user = $_user;
-        $this->sourceId = $_source_id;
-        $this->moduleId = $_module_id;
+        $this->sourceId = $sourceId;
+        $this->moduleId = $moduleId;
 
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
         $this->_DAO->set_debug(false);
-    }// /->EngCIS()
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
 
     /*
     * --------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ trait AssessmentNotificationTrait
         // create bcc list of recipients
         $bcc_list = null;
 
-        $CISa = new EngCIS();
+        $CISa = new EngCIS($_source_id, $_module_id);
 
         if (is_array($users_to_email)) {
             $users_arr = $CISa->get_user($users_to_email);

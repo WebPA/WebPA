@@ -209,7 +209,7 @@ $BRANDING['css'] = Common::fetch_SESSION('branding_css', CUSTOM_CSS);
 $BRANDING['email.help'] = Common::fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
 $BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
 
-$CIS = new EngCIS();
+$CIS = new EngCIS($_source_id, $_module_id);
 
 // If we found a user to load, load 'em!
 if ($_user_id){
@@ -223,8 +223,9 @@ if ($_user_id){
 
   // save session data
   $_SESSION['_user_id'] = $_user->id;
-
 }
+
+$CIS->setUser($_user);
 
 // Initialise UI Object
 
