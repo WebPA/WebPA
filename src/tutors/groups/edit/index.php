@@ -80,7 +80,7 @@ $UI->content_start();
 if (!$collections) {
   echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
+  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
 
   echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
 

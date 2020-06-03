@@ -241,11 +241,12 @@ HTMLEnd;
 /**
  * function to get the variable by name
  * @param string $var_name
- * @return array
+ *
+ * @return mixed|null
  */
   function get_var($var_name) {
     return (array_key_exists($var_name,$this->_vars)) ? $this->_vars["$var_name"] :  null ;
-  }// /->get_var()
+  }
 
 /**
  * Function to get the step

@@ -55,7 +55,7 @@ $UI->content_start();
 if (!$collections) {
   echo('<p>' . Tutors::NO__GROUPS__DESC . '</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $GLOBALS['group_handler']->_DAO);
+  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
 ?>
     <p><?php echo Tutors::GROUPS__INSTRUCT__1; ?><img src="../../images/buttons/edit.gif" width="16" height="16" alt="<?php echo Generic::EDIT_QUESTION; ?>" title="edit" /> <?php echo Tutors::GROUPS__INSTRUCT__2; ?></p>
     <div class="info_box">
