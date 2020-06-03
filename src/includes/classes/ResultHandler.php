@@ -26,7 +26,7 @@ class ResultHandler
     */
     function __construct(DAO $DAO)
     {
-        $this->moduleId = Common::fetch_SESSION('module_id', null);
+        $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
         $this->_DAO = $DAO;
     }
