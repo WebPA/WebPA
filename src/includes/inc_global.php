@@ -225,7 +225,9 @@ if ($_user_id){
   $_SESSION['_user_id'] = $_user->id;
 }
 
-$CIS->setUser($_user);
+if (!is_null($_user)) {
+    $CIS->setUser($_user);
+}
 
 // If we found a module to load, load it!
 if ($_module_id){
