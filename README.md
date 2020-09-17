@@ -7,11 +7,11 @@ student with an individual grade. The individual grade reflects the students con
 
 ## Requirements
 
-The following versions of PHP are supported:
+The following versions of PHP are supported for the latest version of WebPA:
 
-* PHP 7.0
-* PHP 7.1
 * PHP 7.2
+* PHP 7.3
+* PHP 7.4
 
 Your PHP instance must also have the following extensions enabled:
 
@@ -62,7 +62,7 @@ Delete the _install_ folder when you're finished.
 
 ## LTI Extension
 
-The standard installation of WebPA does not include [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability) (Learning Tools Interoperability) support which allows it to integrate seamlessly with most popular Virtual Learning Environments. This can be added via an extension created by Stephen P Vickers. Please visit [Stephen's site](http://www.spvsoftwareproducts.com/php/webpa-lti/) for instructions on how to obtain and install this on extension. 
+The standard installation of WebPA does not include [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability) (Learning Tools Interoperability) support which allows it to integrate seamlessly with most popular Virtual Learning Environments. This can be added via an extension created by Stephen P Vickers. Please visit [Stephen's site](http://www.spvsoftwareproducts.com/php/webpa-lti/) for instructions on how to obtain and install this extension. 
 
 ## Documentation
 
