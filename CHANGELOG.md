@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Fixed
-- Remove LTIAuthenticator class as it is a duplicate of DBAuthenticator as should not be used (PR #71)
+- Remove LTIAuthenticator class as it is a duplicate of DBAuthenticator as should not be used (PR #77)
 
 ## [3.1.0] - 2020-09-16
 ### Changed
