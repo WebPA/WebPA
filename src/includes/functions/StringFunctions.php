@@ -8,11 +8,11 @@
  * @link https://github.com/webpa/webpa
  */
 
+namespace WebPA\includes\functions;
+
 DEFINE('STR_ALPHA_CHARS','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
 DEFINE('STR_ALPHANUM_CHARS','0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
 DEFINE('STR_UUID_CHARS','0123456789ABCDEF-');
-
-namespace WebPA\includes\functions;
 
 class StringFunctions
 {
