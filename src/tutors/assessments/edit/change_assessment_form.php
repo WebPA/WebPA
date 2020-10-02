@@ -200,7 +200,6 @@ if (!$assessment) {
       $forms = $DB->fetch($sql);
 
       if (!$forms) {
-        $this->button_next = '';
 ?>
         <p>You haven't yet created any assessment forms.</p>
 <?php
