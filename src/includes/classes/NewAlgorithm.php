@@ -17,11 +17,9 @@
 namespace WebPA\includes\classes;
 
 class NewAlgorithm extends WebPAAlgorithm {
-  // Public Vars
 
-  /*
-  * CONSTRUCTOR
-  */
+  private $group_member_awarded;
+    
   function __construct() {
     WebPAAlgorithm::_init();
   }// /->NewAlgorithm()
@@ -91,7 +89,7 @@ class NewAlgorithm extends WebPAAlgorithm {
            */
 
           $this->_group_member_total_awarded["$group_id"]["$member_id"] = 0;  // Initialise member-total
-          $this->_group_member_awarded["$group_id"]["$member_id"] = array();
+          $this->group_member_awarded["$group_id"]["$member_id"] = array();
 
           if (!array_key_exists($group_id, $this->_group_member_responses)) {
 
@@ -104,10 +102,10 @@ class NewAlgorithm extends WebPAAlgorithm {
               foreach($this->_group_member_responses["$group_id"]["$member_id"]["$question_id"] as $marked_user_id => $score) {
                 // Add the given score to the total
                 $this->_group_member_total_awarded["$group_id"]["$member_id"] += $score;
-                if (!array_key_exists($marked_user_id, $this->_group_member_awarded["$group_id"]["$member_id"])) {
-                  $this->_group_member_awarded["$group_id"]["$member_id"]["$marked_user_id"] = null;
+                if (!array_key_exists($marked_user_id, $this->group_member_awarded["$group_id"]["$member_id"])) {
+                  $this->group_member_awarded["$group_id"]["$member_id"]["$marked_user_id"] = null;
                 } else {
-                  $this->_group_member_awarded["$group_id"]["$member_id"]["$marked_user_id"] += $score;
+                  $this->group_member_awarded["$group_id"]["$member_id"]["$marked_user_id"] += $score;
                 }
               }// /foreach(member-response)
 

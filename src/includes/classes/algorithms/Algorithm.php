@@ -19,21 +19,23 @@ use WebPA\includes\classes\ResultHandler;
 abstract class Algorithm {
 
   // Private Vars
-  protected $_assessment = null;
+  protected $_assessment;
   protected $_grade_ordinals = array();
-  protected $_params = null;
+  protected $_params;
 
   protected $_peeronly = false;
 
-  protected $_group_grades = null;
-  protected $_group_members = null;
-  protected $_group_names = null;
+  protected $_group_grades;
+  protected $_group_members;
+  protected $_group_names;
 
-  protected $_form_type = null;
-  protected $_questions = null;
-  protected $_question_info = null;
+  protected $_form_type;
+  protected $_questions;
+  protected $_question_info;
 
-  protected $_responses = null;
+  protected $_responses;
+
+  protected $_ordinal_scale;
 
   // These properties are used for checking what's actually happened in the assessment
   // Sub-classes should not use these for their calculations
@@ -173,19 +175,9 @@ abstract class Algorithm {
     return $this->_actual_marks_received;
   }// /->get_marks_received()
 
-
-
-  public function get_marks_received_by_marker_question() {
-    return $this->_actual_marks_received_by_marker_question;
-  }// /->get_marks_received_by_marker_question()
-
-
-
   public function get_total_marks_awarded() {
     return $this->_actual_total_marks_awarded;
   }// /->get_total_marks_awarded()
-
-
 
   public function get_total_marks_received() {
     return $this->_actual_total_marks_received;

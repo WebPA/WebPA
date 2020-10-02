@@ -112,13 +112,14 @@ class SimpleObjectIterator {
   function _initialise(&$array) {
     $this->array =& $array;
     $this->count = count($array);
-    if ($this->count==0) { $this->array = array(); }
+
+    if ($this->count==0) {
+        $this->array = array();
+    }
+
     $this->reset();
 
     $this->class_name = '';
-    $this->constructor_args = '';
-  }// /->_intialise()
-
-}// /class: SimpleObjectIterator
-
-?>
+    $this->class_constructor_args = '';
+  }
+}

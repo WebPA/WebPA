@@ -67,20 +67,6 @@ class ResultHandler
         return $this->_assessment;
     }// /->get_assessment()
 
-    /*
-    * --------------------------------------------------------------------------------
-    * Methods
-    * --------------------------------------------------------------------------------
-    */
-
-    /**
-     * Load the assessment results (if any)
-     */
-    function load_results()
-    {
-        $this->_results = $this->get_responses();
-    }// /->load_results()
-
     /**
      * Fetch all responses for this assessment
      * @return array array of the responses for the given assessment

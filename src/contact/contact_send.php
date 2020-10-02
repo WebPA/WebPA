@@ -14,7 +14,7 @@ use WebPA\includes\classes\Email;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
-check_user($_user);
+Common::check_user($_user);
 
 // Process GET/POST
 
