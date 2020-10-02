@@ -173,14 +173,6 @@ abstract class Algorithm {
     return $this->_actual_marks_received;
   }// /->get_marks_received()
 
-
-
-  public function get_marks_received_by_marker_question() {
-    return $this->_actual_marks_received_by_marker_question;
-  }// /->get_marks_received_by_marker_question()
-
-
-
   public function get_total_marks_awarded() {
     return $this->_actual_total_marks_awarded;
   }// /->get_total_marks_awarded()
