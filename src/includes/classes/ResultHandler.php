@@ -19,6 +19,7 @@ class ResultHandler
     private $_collection;
     private $_collection_id;
     private $moduleId;
+    private $results;
 
     /*
     * CONSTRUCTOR for the result handler
@@ -78,7 +79,7 @@ class ResultHandler
      */
     function load_results()
     {
-        $this->_results = $this->get_responses();
+        $this->results = $this->get_responses();
     }// /->load_results()
 
     /**
