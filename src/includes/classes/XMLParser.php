@@ -41,16 +41,18 @@ class XMLParser
 
     // Public Vars
     public $xml_data = '';
-    public $xml_array = null;
+    public $xml_array;
 
     // Private Vars
-    private $_parser = null;            // reference to the XML parser object
+    private $_parser;            // reference to the XML parser object
 
-    private $_parent = null;            // used by ->parse()
-    private $_stack = null;             // used by ->parse()
-    private $_last_opened_tag = null;   // used by ->parse()
+    private $_parent;            // used by ->parse()
+    private $_stack;             // used by ->parse()
+    private $_last_opened_tag;   // used by ->parse()
 
     private $_cdata_tags = array();     // tags which should be handled as CDATA
+
+    private $data;
 
     /**
      * CONSTRUCTOR for the XML parser
