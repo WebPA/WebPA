@@ -19,7 +19,6 @@ class ResultHandler
     private $_collection;
     private $_collection_id;
     private $moduleId;
-    private $results;
 
     /*
     * CONSTRUCTOR for the result handler
@@ -67,20 +66,6 @@ class ResultHandler
     {
         return $this->_assessment;
     }// /->get_assessment()
-
-    /*
-    * --------------------------------------------------------------------------------
-    * Methods
-    * --------------------------------------------------------------------------------
-    */
-
-    /**
-     * Load the assessment results (if any)
-     */
-    function load_results()
-    {
-        $this->results = $this->get_responses();
-    }// /->load_results()
 
     /**
      * Fetch all responses for this assessment
