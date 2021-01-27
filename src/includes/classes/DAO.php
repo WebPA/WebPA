@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\DriverManager;
+
 class DAO
 {
     // Public Vars
@@ -48,21 +50,29 @@ class DAO
 
     /**
      * CONSTRUCTOR
+     *
      * Set database connection strings
+     *
      * @param string $host
      * @param string $user
      * @param string $password
      * @param string $database
      * @param boolean $persistent
+     *
+     * @return void
      */
     function __construct($host, $user, $password, $database, $persistent = false)
     {
-        $this->_host = $host;
-        $this->_user = $user;
-        $this->_password = $password;
-        $this->_database = $database;
-        $this->_persistent = $persistent;
-    } // /DAO()
+        $connectionParams = [
+            'dbname' => $database,
+            'user' => $user,
+            'password' => $password,
+            'host' => $host,
+            'driver' => 'mysqli'
+        ];
+
+        $this->_conn = DriverManager::getConnection($connectionParams);
+    }
 
     /*
     * ================================================================================
@@ -502,11 +512,9 @@ class DAO
         return $this->_output_type;
     }
 
-    function getConnection()
+    public function getConnection()
     {
-
         return $this->_conn;
-
     }
 
     /*
@@ -660,7 +668,4 @@ class DAO
         }
 
     }// /->_prepare_field_value()
-
-} // /class: DAO
-
-?>
+}

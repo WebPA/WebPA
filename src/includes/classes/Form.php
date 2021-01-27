@@ -10,6 +10,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 include_once __DIR__ . '/../inc_global.php';
@@ -77,12 +78,18 @@ class Form {
   * Load the Form from the database
   *
   * @param string $id  id of Group to load
+   *
   * @return boolean did load succeed
   */
   function load($id) {
-    $row = $this->_DAO->fetch_row("SELECT * FROM " . APP__DB_TABLE_PREFIX . "form f WHERE f.form_id = '$id'");
-    return ($row) ? $this->load_from_row($row) : false;
-  }// /->load()
+    $dbConn = $this->_DAO->getConnection();
+
+    $query = "SELECT * FROM {APP__DB_TABLE_PREFIX}form  WHERE form_id = ?";
+
+    $form = $dbConn->fetchAssociative($query, [$id], ParameterType::INTEGER);
+
+    return $form ? $this->load_from_row($form) : false;
+  }
 
   /**
   * Load the Form from an array row
