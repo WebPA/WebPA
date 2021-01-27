@@ -189,20 +189,18 @@ class DAO
     } // /->fetch()
 
     /**
-     * Get a single row (of the given query or cache)
-     * Row indexes are 0-based
-     * @param string $sql
-     * @param integer $y
+     * Get a single row of the given query
+     *
+     * @param string $sqlQuery
+     *
      * @return object
      */
-    function fetch_row($sql = null, $y = 0)
+    function fetch_row($sqlQuery)
     {
-        // If there is an SQL query, get its results instead..
-        if ($sql) {
-            $this->_process_query($sql);
-        }
-        return isset($this->_result[$y]) ? $this->_result[$y] : null;
-    } // /->fetch_row()
+        $this->_process_query($sqlQuery);
+
+        return isset($this->_result[0]) ? $this->_result[0] : null;
+    }
 
     /**
      * Get a single column as a numeric array
