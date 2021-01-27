@@ -10,6 +10,7 @@
 
 require_once("includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 if (($_source_id != '') && !$_user->is_admin()) {
@@ -26,17 +27,21 @@ if ($module_id) {
   $DB->execute($sql_last_module);
 
   // Update session
-  $sql_module = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$module_id}";
-  $module = $DB->fetch_row($sql_module);
+  $dbConn = $DB->getConnection();
+
+  $query = "SELECT module_code FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+
+  $moduleCode = $dbConn->fetchOne($query, [$module_id], [ParameterType::INTEGER]);
+
   $_SESSION['_module_id'] = $module_id;
-  $_SESSION['_user_context_id'] = $module['module_code'];
+  $_SESSION['_user_context_id'] = $moduleCode;
 
   Common::logEvent($DB, 'Leave module', $_module_id);
   Common::logEvent($DB, 'Enter module', $module_id);
 
   header('Location: ' . APP__WWW . "/");
-  exit;
 
+  exit;
 }
 
 //set the page information

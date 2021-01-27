@@ -86,7 +86,7 @@ class Form {
 
     $query = "SELECT * FROM {APP__DB_TABLE_PREFIX}form  WHERE form_id = ?";
 
-    $form = $dbConn->fetchAssociative($query, [$id], ParameterType::INTEGER);
+    $form = $dbConn->fetchAssociative($query, [$id], [ParameterType::INTEGER]);
 
     return $form ? $this->load_from_row($form) : false;
   }
