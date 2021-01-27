@@ -23,6 +23,7 @@ This table has the CREATE definition:
 
 require_once("../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 
@@ -70,8 +71,14 @@ TXT;
     if ($rslt) {
       if ($_POST['newpass']==$_POST['confirmpass']) {
         $user = new User();
-        $user_row = $DB->fetch_row("SELECT * FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = $uid");
-        $user->load_from_row($user_row);
+
+        $dbConn = $DB->getConnection();
+
+        $userQuery = "SELECT * FROM {APP__DB_TABLE_PREFIX}user WHERE user_id = ?";
+
+        $userRow = $dbConn->fetchAssociative($userQuery, [$uid], [ParameterType::INTEGER]);
+
+        $user->load_from_row($userRow);
         $user->set_dao_object($DB);
         $user->update_password(md5($_POST['newpass']));
         $user->save_user();

@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class Authenticator
 {
 
@@ -48,10 +50,14 @@ class Authenticator
     ================================================================================
     */
 
-    /*
-    Initialise the user details
-    */
-    function initialise($sql)
+    /**
+     * Initialise the user details.
+     *
+     * @param $user
+     *
+     * @return bool
+     */
+    function initialise($user)
     {
         $this->user_type = NULL;
         $this->_authenticated = FALSE;
@@ -59,24 +65,30 @@ class Authenticator
 
         $is_admin = FALSE;
         $DAO = $this->get_DAO();
-        $user_data = $DAO->fetch_row($sql);
-        if (!is_null($user_data)) {
-            $is_admin = $user_data['admin'] == 1;
-            $source_id = $user_data['source_id'];
+        $dbConn = $DAO->getConnection();
 
-            $this->module_id = $user_data['last_module_id'];
+        if (!is_null($user)) {
+            $is_admin = $user['admin'] == 1;
+            $source_id = $user['source_id'];
+
+            $this->module_id = $user['last_module_id'];
+
             if (!empty($this->module_id)) {
                 if (!$is_admin) {
-                    $sql_user_module = 'SELECT module_id, user_type FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$user_data['last_module_id']} AND user_id = {$user_data['user_id']}";
-                    $user_module = $DAO->fetch_row($sql_user_module);
-                    if (is_null($user_module)) {
+                    $userModuleQuery = "SELECT module_id, user_type FROM {APP__DB_TABLE_PREFIX}user_module WHERE module_id = ? AND user_id = ?";
+
+                    $userModule = $dbConn->fetchAssociative($userModuleQuery, [$user['last_module_id'], $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
+
+                    if (is_null($userModule)) {
                         $this->module_id = NULL;
                     }
                 } else {
-                    $sql_admin_module = 'SELECT source_id FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$user_data['last_module_id']}";
-                    $admin_module = $DAO->fetch_row($sql_admin_module);
-                    if (!is_null($admin_module)) {
-                        $source_id = $admin_module['source_id'];
+                    $adminModuleQuery = "SELECT source_id FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+
+                    $adminModule = $dbConn->fetchAssociative($adminModuleQuery, [$user['last_module_id']], [ParameterType::INTEGER]);
+
+                    if (!is_null($adminModule)) {
+                        $source_id = $adminModule['source_id'];
                     }
                 }
             }
@@ -84,7 +96,7 @@ class Authenticator
                 if ($is_admin) {
                     $modules = $this->cis->get_user_modules(NULL, NULL, NULL, $source_id);
                 } else {
-                    $modules = $this->cis->get_user_modules($user_data['user_id']);
+                    $modules = $this->cis->get_user_modules($user['user_id']);
                 }
                 if (count($modules) > 0) {
                     $ids = array_keys($modules);
@@ -93,36 +105,37 @@ class Authenticator
             }
 
             if (!empty($this->module_id)) {
+                $moduleQuery = "SELECT module_code FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
 
-                $sql_module = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$this->module_id}"; // AND source_id = '{$source_id}'";
-                $module = $DAO->fetch_row($sql_module);
-                if (is_null($module)) {
-                    $this->module_id = NULL;
+                $moduleCode = $dbConn->fetchOne($moduleQuery, [$this->module_id], ParameterType::INTEGER);
+
+                if (is_null($moduleCode)) {
+                    $this->module_id = null;
                 } else {
-                    $this->module_code = $module['module_code'];
+                    $this->module_code = $moduleCode;
                 }
             }
 
             if (!is_null($this->module_id)) {
+                $userTypeQuery = "SELECT user_type FROM {APP__DB_TABLE_PREFIX}user_module WHERE module_id = ? AND user_id = ?";
 
-                $sql_user_module = 'SELECT user_type FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$this->module_id} AND user_id = {$user_data['user_id']}";
-                $user_module = $DAO->fetch_row($sql_user_module);
+                $userType = $dbConn->fetchOne($userTypeQuery, [$this->module_id, $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
                 // Update last login date
                 $now = date(MYSQL_DATETIME_FORMAT, time());
-                $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user_data['user_id']}'";
+                $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user['user_id']}'";
                 $DAO->execute($sql_login_date);
 
                 //with the database row data returned get all the information and add it to the class holders
-                $this->user_id = $user_data['user_id'];
+                $this->user_id = $user['user_id'];
                 $this->source_id = $source_id;
                 if (!$is_admin) {
-                    $this->user_type = $user_module['user_type'];
+                    $this->user_type = $userType;
                 } else {
                     $this->user_type = APP__USER_TYPE_ADMIN;
                 }
 
-                $this->_disabled = ($user_data['disabled'] == 1);
+                $this->_disabled = ($user['disabled'] == 1);
                 $this->_authenticated = !$this->_disabled;
 
             }

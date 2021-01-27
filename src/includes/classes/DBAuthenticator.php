@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class DBAuthenticator extends Authenticator {
 
     public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
@@ -29,11 +31,16 @@ class DBAuthenticator extends Authenticator {
     //match the username and password to the values in the database.
     $password = md5($this->password);
 
-    $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE (username = '{$this->username}') AND (password = '$password') AND (source_id = '')";
+    $DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
 
-    return $this->initialise($sql);
+    $dbConn = $DAO->getConnection();
 
-  }// /->authenticate()
+    $query = "SELECT * FROM {APP__DB_TABLE_PREFIX}user WHERE username = ? AND password = ? AND source_id = ''";
+
+    $user = $dbConn->fetchAssociative($query, [$this->username, $password], [ParameterType::STRING, ParameterType::STRING]);
+
+    return $this->initialise($user);
+  }
 
 /*
 ================================================================================

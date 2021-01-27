@@ -11,6 +11,7 @@
 // Add composer's autoloader
 require __DIR__ . '/../../vendor/autoload.php';
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\UI;
@@ -231,10 +232,13 @@ if (!is_null($_user)) {
 
 // If we found a module to load, load it!
 if ($_module_id){
-  $sql_module = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$_SESSION['_module_id']}";
-  $_module = $DB->fetch_row($sql_module);
-  $_module_code = $_module['module_code'];
+  $dbConn = $DB->getConnection();
 
+  $query = "SELECT module_id, module_code, module_title FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+
+  $_module = $dbConn->fetchAssociative($query, [$_SESSION[$_module_id]], [ParameterType::INTEGER]);
+
+  $_module_code = $_module['module_code'];
 }
 
 $UI = new UI($INSTALLED_MODS, $_source_id, $BRANDING, $CIS, $_module, $_user);
