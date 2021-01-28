@@ -11,7 +11,8 @@
 
  require_once("../../../includes/inc_global.php");
 
- use WebPA\includes\functions\Common;
+use Doctrine\DBAL\ParameterType;
+use WebPA\includes\functions\Common;
 
  if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
    header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -22,7 +23,11 @@
  $form_id = Common::fetch_GET('f');
  $command = Common::fetch_POST('command');
 
- $form = $DB->fetch_row("SELECT f.* FROM " . APP__DB_TABLE_PREFIX . "form f WHERE f.form_id = '$form_id' LIMIT 1");
+ $dbConn = $DB->getConnection();
+
+ $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_id = ? LIMIT 1';
+
+ $form = $dbConn->fetchAssociative($query, [$form_id], [ParameterType::STRING]);
 
  header("Content-Disposition: attachment; filename=\"{$form['form_name']}.xml\"");
  header('Content-Type: application/xml');

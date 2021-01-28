@@ -199,20 +199,6 @@ class DAO
     } // /->fetch()
 
     /**
-     * Get a single row of the given query
-     *
-     * @param string $sqlQuery
-     *
-     * @return object
-     */
-    function fetch_row($sqlQuery)
-    {
-        $this->_process_query($sqlQuery);
-
-        return isset($this->_result[0]) ? $this->_result[0] : null;
-    }
-
-    /**
      * Get a single column as a numeric array
      * column indexes are 0-based
      * @param string $sql
