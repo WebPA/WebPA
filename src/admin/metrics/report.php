@@ -63,62 +63,97 @@ $this_accademic_year .= APP__ACADEMIC_YEAR_START_MONTH . '-01 00:00:00';
 
 // formulate all the sql for the reports
 //assessments which have been run
-$run_assessments_SQL = 'SELECT a.assessment_name, m.module_code, m.module_title, a.open_date, a.close_date ' .
+$dbConn = $DB->getConnection();
+
+$runAssessmentsStmt = $dbConn->prepare(
+    'SELECT a.assessment_name, m.module_code, m.module_title, a.open_date, a.close_date ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
-   'ORDER BY a.close_date, a.open_date, a.assessment_name, a.assessment_id';
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
+   'ORDER BY a.close_date, a.open_date, a.assessment_name, a.assessment_id'
+);
+
+$runAssessmentsStmt->bindValue(1, $_source_id);
+$runAssessmentsStmt->bindValue(2, $this_year);
+$runAssessmentsStmt->bindValue(3, $next_year);
 
 //number of groups per assessment
-$run_groups_per_assessment_SQL = 'SELECT a.assessment_name, m.module_code, m.module_title, COUNT(g.group_id) as group_count ' .
+$runGroupsPerAssessmentStmt = $dbConn->prepare('SELECT a.assessment_name, m.module_code, m.module_title, COUNT(g.group_id) as group_count ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group g ON a.collection_id = g.collection_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
    'GROUP BY a.assessment_name, m.module_code, m.module_title ' .
-   'ORDER BY a.assessment_name';
+   'ORDER BY a.assessment_name');
+
+$runGroupsPerAssessmentStmt->bindValue(1, $_source_id);
+$runGroupsPerAssessmentStmt->bindValue(2, $this_year);
+$runGroupsPerAssessmentStmt->bindValue(3, $next_year);
 
 //number of students per assessment
-$run_students_per_assessment_SQL = 'SELECT a.assessment_name, m.module_code, m.module_title, COUNT(ugm.user_id) as student_count ' .
+$runStudentsPerAssessmentStmt = $dbConn->prepare('SELECT a.assessment_name, m.module_code, m.module_title, COUNT(ugm.user_id) as student_count ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group g ON a.collection_id = g.collection_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ON g.group_id = ugm.group_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
    'GROUP BY a.assessment_name, m.module_code, m.module_title ' .
-   'ORDER BY a.assessment_name, m.module_code';
+   'ORDER BY a.assessment_name, m.module_code');
+
+$runStudentsPerAssessmentStmt->bindValue(1, $_source_id);
+$runStudentsPerAssessmentStmt->bindValue(2, $this_year);
+$runStudentsPerAssessmentStmt->bindValue(3, $next_year);
 
 //assessments where feedback has been used
-$run_feedback_SQL = 'SELECT a.assessment_name, m.module_code, m.module_title ' .
+$runFeedbackStmt = $dbConn->prepare('SELECT a.assessment_name, m.module_code, m.module_title ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
    'AND a.allow_feedback = 1 ' .
-   'ORDER BY a.assessment_name, a.assessment_id';
+   'ORDER BY a.assessment_name, a.assessment_id');
+
+$runFeedbackStmt->bindValue(1, $_source_id);
+$runFeedbackStmt->bindValue(2, $this_year);
+$runFeedbackStmt->bindValue(3, $next_year);
+
 
 //number of respondents per assessment
-$run_respondents = 'SELECT a.assessment_name, m.module_code, m.module_title, COUNT(DISTINCT um.user_id) as response_count ' .
+$runRespondentsStmt = $dbConn->prepare('SELECT a.assessment_name, m.module_code, m.module_title, COUNT(DISTINCT um.user_id) as response_count ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_mark um ON a.assessment_id=um.assessment_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
    'GROUP BY a.assessment_name, m.module_code, m.module_title ' .
-   'ORDER BY a.assessment_name, m.module_code';
+   'ORDER BY a.assessment_name, m.module_code');
+
+$runRespondentsStmt->bindValue(1, $_source_id);
+$runRespondentsStmt->bindValue(2, $this_year);
+$runRespondentsStmt->bindValue(3, $next_year);
 
 //who has run an assessment in the current academic year
-$run_modules_per_assessments_SQL = 'SELECT DISTINCT m.module_code, m.module_title ' .
+$runModulesPerAssessmentsStmt = $dbConn->prepare('SELECT DISTINCT m.module_code, m.module_title ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}' " .
-   'ORDER BY a.assessment_name, m.module_code';
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
+   'ORDER BY a.assessment_name, m.module_code');
+
+$runModulesPerAssessmentsStmt->bindValue($_source_id);
+$runModulesPerAssessmentsStmt->bindValue($this_year);
+$runModulesPerAssessmentsStmt->bindValue($next_year);
 
 //number of students who has carried out an assessment this year
-$run_students_assessed_SQL = 'SELECT COUNT(DISTINCT ugm.user_id) as \'Total unique students assessed\' ' .
+$runStudentsAssessedStmt = $dbConn->prepare('SELECT COUNT(DISTINCT ugm.user_id) as \'Total unique students assessed\' ' .
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ON a.collection_id = ug.collection_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ON ug.group_id = ugm.group_id ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-   "WHERE m.source_id = '{$_source_id}' AND a.open_date >= '{$this_year}' AND a.open_date < '{$next_year}'";
+   'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ?');
+
+$runStudentsAssessedStmt->bindValue($_source_id);
+$runStudentsAssessedStmt->bindValue($this_year);
+$runStudentsAssessedStmt->bindValue($next_year);
+
+
 
 //-------------------------------------------------------
 //view on screen
@@ -135,8 +170,10 @@ if($format == 'html') {
   echo "<div class=\"content_box\">";
 
   if (!empty($assessments_run)) {
+    // This returns a Result object... what can we do with it?
+    $runAssessmentsStmt->execute();
 
-    $rs_assessments = $DB->fetch($run_assessments_SQL);
+    $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
 
     echo "<h2>Assessments run in WebPA ({$academic_year})</h2>";
 
@@ -169,7 +206,10 @@ if($format == 'html') {
   }
 
   if(!empty($assessment_groups)){
-    $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
+    $runGroupsPerAssessmentStmt->execute();
+
+    $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+
     echo "<h2>Number of groups per assessment ({$academic_year})</h2>";
 
     if ($rs_groups) {
@@ -200,7 +240,10 @@ if($format == 'html') {
   }
 
   if(!empty($assessment_students)){
-    $rs_students = $DB->fetch($run_students_per_assessment_SQL);
+    $runStudentsPerAssessmentStmt->execute();
+
+    $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+
     echo "<h2>Number of students per assessment ({$academic_year})</h2>";
 
     if ($rs_students) {
@@ -229,7 +272,10 @@ if($format == 'html') {
     }
   }
   if(!empty($assessment_feedback)){
-    $rs_feedback = $DB->fetch($run_feedback_SQL);
+    $runFeedbackStmt->execute();
+
+    $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+
     echo "<h2>Assessments where feedback has been used ({$academic_year})</h2>";
 
     if ($rs_feedback) {
@@ -261,7 +307,10 @@ if($format == 'html') {
   }
 
   if(!empty($assessment_respondents)){
-    $rs_respondents = $DB->fetch($run_respondents);
+    $runRespondentsStmt->execute();
+
+    $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+
     echo "<h2>Number of Respondents per assessment ({$academic_year})</h2>";
 
     if ($rs_respondents) {
@@ -292,7 +341,10 @@ if($format == 'html') {
   }
 
   if(!empty($assessment_modules)){
-    $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
+    $runModulesPerAssessmentsStmt->execute();
+
+    $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+
     echo "<h2>Modules which have run an assessment ({$academic_year})</h2>";
 
     if ($rs_runners) {
@@ -323,7 +375,10 @@ if($format == 'html') {
   }
 
   if(!empty($assessment_students_thisyear)){
-    $rs_students = $DB->fetch($run_students_assessed_SQL);
+    $runStudentsAssessedStmt->execute();
+
+    $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+
     echo "<h2>Number of students who have carried out an assessment ({$academic_year})</h2>";
 
     if ($rs_students) {
@@ -356,7 +411,10 @@ if ($format == 'csv') {
 
 
   if (!empty($assessments_run)){
-    $rs_assessments = $DB->fetch($run_assessments_SQL);
+    $runAssessmentsStmt->execute();
+
+    $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+
     echo "\n\"Assessments run in WebPA ({$academic_year})\"\n";
     if ($rs_assessments) {
       $icounter = 0;
@@ -382,7 +440,10 @@ if ($format == 'csv') {
   }
 
   if (!empty($assessment_groups)) {
-    $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
+    $runGroupsPerAssessmentStmt->execute();
+
+    $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+
     echo "\n\"Number of groups per assessment ({$academic_year})\"\n";
     if ($rs_groups) {
       $icounter = 0;
@@ -406,7 +467,10 @@ if ($format == 'csv') {
   }
 
   if (!empty($assessment_students)) {
-    $rs_students = $DB->fetch($run_students_per_assessment_SQL);
+    $runStudentsPerAssessmentStmt->execute();
+
+    $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+
     echo "\n\"Number of students per assessment ({$academic_year})\"\n";
     if ($rs_students) {
       $icounter = 0;
@@ -430,7 +494,10 @@ if ($format == 'csv') {
   }
 
   if (!empty($assessment_feedback)) {
-    $rs_feedback = $DB->fetch($run_feedback_SQL);
+    $runFeedbackStmt->execute;
+
+    $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+
     echo "\n\"Assessments where feedback has been used ({$academic_year})\"\n";
     if ($rs_feedback) {
       $icounter = 0;
@@ -454,8 +521,12 @@ if ($format == 'csv') {
   }
 
   if (!empty($assessment_respondents)) {
-    $rs_respondents = $DB->fetch($run_respondents);
+    $runRespondentsStmt->execute();
+
+    $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+
     echo "\n\"Number of respondents per assessment ({$academic_year})\"\n";
+
     if ($rs_respondents) {
       $icounter=0;
       //loop round the initial array
@@ -478,8 +549,12 @@ if ($format == 'csv') {
   }
 
   if (!empty($assessment_modules)) {
-    $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
+    $runModulesPerAssessmentsStmt->execute();
+
+    $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+
     echo "\n\"Modules which have run an assessment ({$academic_year})\"\n";
+
     if ($rs_runners) {
       $icounter = 0;
       //loop round the initial array
@@ -502,7 +577,9 @@ if ($format == 'csv') {
   }
 
   if(!empty($assessment_students_thisyear)){
-    $rs_students = $DB->fetch($run_students_assessed_SQL);
+    $runStudentsAssessedStmt->execute();
+
+    $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
     echo "\n\"Number of students who have carried out an assessment ({$academic_year})\"\n";
     if ($rs_students) {
       //loop round the initial array
@@ -526,7 +603,10 @@ if ($format == 'rtf'){
   echo('WebPA - Metrics report'."\n\n");
 
   if (!empty($assessments_run)){
-    $rs_assessments = $DB->fetch($run_assessments_SQL);
+    $runAssessmentsStmt->execute();
+
+    $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+
     echo "\nAssessments run in WebPA ({$academic_year})\n\n";
     $icounter = 0;
     //loop round the initial array
@@ -548,8 +628,12 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_groups)){
-    $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
+    $runGroupsPerAssessmentStmt->execute();
+
+    $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+
     echo "\nNumber of groups per assessment ({$academic_year})\n\n";
+
     if ($rs_groups) {
       $icounter = 0;
       //loop round the initial array
@@ -570,7 +654,10 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_students)){
-    $rs_students = $DB->fetch($run_students_per_assessment_SQL);
+    $runStudentsPerAssessmentStmt->execute();
+
+    $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+
     echo "\nNumber of students per assessment ({$academic_year})\n\n";
     if ($rs_students) {
       $icounter = 0;
@@ -593,7 +680,10 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_feedback)){
-    $rs_feedback = $DB->fetch($run_feedback_SQL);
+    $runFeedbackStmt->execute;
+
+    $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+
     echo "\nAssessments where feedback has been used ({$academic_year})\n\n";
     if ($rs_feedback) {
       $icounter = 0;
@@ -616,8 +706,12 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_respondents)){
-    $rs_respondents = $DB->fetch($run_respondents);
+    $runRespondentsStmt->execute();
+
+    $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+
     echo "\nNumber of Respondents per assessment ({$academic_year})\n\n";
+
     if ($rs_respondents) {
       $icounter=0;
       //loop round the initial array
@@ -639,8 +733,12 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_modules)){
-    $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
+    $runModulesPerAssessmentsStmt->execute();
+
+    $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+
     echo "\nModules which have run an assessment ({$academic_year})\n\n";
+
     if ($rs_runners) {
       $icounter = 0;
       //loop round the initial array
@@ -662,7 +760,10 @@ if ($format == 'rtf'){
   }
 
   if(!empty($assessment_students_thisyear)){
-    $rs_students = $DB->fetch($run_students_assessed_SQL);
+    $runStudentsAssessedStmt->execute();
+
+    $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+
     echo "\nNumber of students who have carried out an assessment ({$academic_year})\n\n";
     if ($rs_students) {
       //loop round the initial array
@@ -686,7 +787,10 @@ if ($format == 'xml'){
   echo"<metrics_report>";
 
   if (!empty($assessments_run)){
-    $rs_assessments = $DB->fetch($run_assessments_SQL);
+    $runAssessmentsStmt->execute();
+
+    $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Assessments run in WebPA ({$academic_year})</description>";
     if ($rs_assessments) {
@@ -711,7 +815,10 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_groups)){
-    $rs_groups = $DB->fetch($run_groups_per_assessment_SQL);
+    $runGroupsPerAssessmentStmt->execute();
+
+    $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Number of groups per assessment ({$academic_year})</description>";
     if ($rs_groups) {
@@ -734,7 +841,10 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_students)){
-    $rs_students = $DB->fetch($run_students_per_assessment_SQL);
+    $runStudentsPerAssessmentStmt->execute();
+
+    $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Number of students per assessment ({$academic_year})</description>";
 
@@ -759,7 +869,10 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_feedback)){
-    $rs_feedback = $DB->fetch($run_feedback_SQL);
+    $runFeedbackStmt->execute;
+
+    $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Assessments where feedback has been used ({$academic_year})</description>";
     if ($rs_feedback) {
@@ -783,9 +896,14 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_respondents)){
-    $rs_respondents = $DB->fetch($run_respondents);
+    $runRespondentsStmt->execute();
+
+    $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+
     echo "<metrics>";
+
     echo "<description>Number of Respondents per assessment ({$academic_year})</description>";
+
     if ($rs_respondents) {
       //loop round the initial array
       foreach($rs_respondents as $responses){
@@ -807,9 +925,13 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_modules)){
-    $rs_runners = $DB->fetch($run_modules_per_assessments_SQL);
+    $runModulesPerAssessmentsStmt->execute();
+
+    $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Modules which have run an assessment ({$academic_year})</description>";
+
     if ($rs_runners) {
       //loop round the initial array
       foreach($rs_runners as $runner){
@@ -831,7 +953,10 @@ if ($format == 'xml'){
   }
 
   if(!empty($assessment_students_thisyear)){
-    $rs_students = $DB->fetch($run_students_assessed_SQL);
+    $runStudentsAssessedStmt->execute();
+
+    $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+
     echo "<metrics>";
     echo "<description>Number of students who have carried out an assessment ({$academic_year})</description>";
     if ($rs_students) {

@@ -30,40 +30,78 @@ $post_username = Common::fetch_GET('username');
 $post_id_number = Common::fetch_GET('id_number');
 $post_search = Common::fetch_GET('search');
 
-$where = '';
-$order = '';
+$whereClauseSet = false;
 $sMessage = '';
+
+$dbConn = $DB->getConnection();
+
+// set up the query builder
+$queryBuilder = $dbConn->createQueryBuilder();
+
+// write the base query
+$queryBuilder->select(
+        'u.user_id',
+        'u.username AS id',
+        'u.lastname',
+        'u.forename',
+        'u.email',
+        'u.id_number AS id_number',
+        'u.date_last_login AS last_login',
+        'CASE u.admin WHEN 0 THEN COUNT(um.module_id) ELSE NULL END as modules')
+        ->from(APP__DB_TABLE_PREFIX . 'user u')
+        ->leftJoin('u', APP__DB_TABLE_PREFIX . 'user_module', 'um', 'u.user_id = um.user_id')
+        ->where('u.source_id = :source_id')
+        ->setParameter(':source_id', $_source_id);
 
 if (!empty($post_search)) {
   //build the search string dependant on the data entered
   if (!empty($post_lastname)) {
-    $where .= " AND (u.lastname LIKE '{$post_lastname}%')";
-    $order .= ', u.lastname';
+      $queryBuilder->andWhere($queryBuilder->expr()->like('u.lastname', ':last_name'));
+      $queryBuilder->addOrderBy('u.lastname');
+      $queryBuilder->setParameter(':last_name', $post_lastname . '%');
+
+      $whereClauseSet = true;
   }
+
   if (!empty($post_firstname)) {
-    $where .= " AND (u.forename LIKE '{$post_firstname}%')";
-    $order .= ', u.forename';
+      $queryBuilder->andWhere($queryBuilder->expr()->like('u.forename', ':forename'));
+      $queryBuilder->addOrderBy('u.forename');
+      $queryBuilder->setParameter(':forename', $post_firstname . '%');
+
+      $whereClauseSet = true;
   }
+
   if (!empty($post_username)) {
-    $where .= " AND (u.username LIKE '{$post_username}%')";
-    $order .= ', u.username';
+      $queryBuilder->andWhere($queryBuilder->expr()->like('u.username', ':username'));
+      $queryBuilder->addOrderBy('u.username');
+      $queryBuilder->setParameter(':username', $post_username . '%');
+
+      $whereClauseSet = true;
   }
+
   if (!empty($post_id_number)) {
-    $where .= " AND (u.id_number LIKE '{$post_id_number}%')";
-    $order .= ', u.id_number';
+      $queryBuilder->andWhere($queryBuilder->expr()->like('u.id_number', ':id_number'));
+      $queryBuilder->addOrderBy('u.id_number');
+      $queryBuilder->setParameter(':id_number', $post_id_number . '%');
+
+      $whereClauseSet = true;
   }
-  if (!empty($where)) {
+
+  if ($whereClauseSet === true) {
     if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
-      $where .= ' AND (u.admin = 0)';
+        $queryBuilder->andWhere('u.admin = 0');
     }
-    $order = substr($order, 2);
-    $sQuery = 'SELECT u.user_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, ' .
-       'u.date_last_login AS `last login`, CASE u.admin WHEN 0 THEN COUNT(um.module_id) ELSE NULL END AS modules ' .
-       'FROM ' . APP__DB_TABLE_PREFIX . 'user u LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id ' .
-       "WHERE (u.source_id = '{$_source_id}'){$where} " .
-       'GROUP BY u.user_id, u.username, u.lastname, u.forename, u.email, u.id_number, u.date_last_login ' .
-       "ORDER BY {$order}";
-    $rs = $DB->fetch($sQuery);
+
+    // add the groupBy clause
+    $queryBuilder->groupBy('u.user_id');
+    $queryBuilder->addGroupBy('u.username');
+    $queryBuilder->addGroupBy('u.lastname');
+    $queryBuilder->addGroupBy('u.forename');
+    $queryBuilder->addGroupBy('u.email');
+    $queryBuilder->addGroupBy('u.id_number');
+    $queryBuilder->addGroupBy('u.date_last_login');
+
+    $rs = $queryBuilder->execute()->fetchAllAssociative();
   } else {
     //nothing has been entered that can be searched for
     $sMessage = "<p>You have not entered any information for the search<br/>Please check and re-try.</p>";

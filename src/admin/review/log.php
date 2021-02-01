@@ -13,6 +13,7 @@
 //get the include file required
 require_once("../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 
@@ -59,11 +60,19 @@ if ($_user->is_admin()) {
 }
 
 $query .= 'FROM ' . APP__DB_TABLE_PREFIX . 'user_tracking ' .
-          "WHERE user_id = {$user_id} AND ((module_id = {$_module_id}) OR (module_id IS NULL)) " .
+          "WHERE user_id = ? AND ((module_id = ?) OR (module_id IS NULL)) " .
           'ORDER BY datetime DESC, description';
 
-//run the query
-$rs = $DB->fetch($query);
+$dbConn = $DB->getConnection();
+
+$stmt = $dbConn->prepare($query);
+
+$stmt->bindValue($user_id, ParameterType::INTEGER);
+$stmt->bindValue($_module_id, ParameterType::INTEGER);
+
+$stmt->execute();
+
+$rs = $stmt->fetchAllAssociative();
 
 echo "<h2>{$rstitle} for {$user->forename} {$user->lastname} ({$user->username})</h2>";
 
