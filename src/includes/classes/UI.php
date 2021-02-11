@@ -90,6 +90,7 @@ class UI
             } else {
                 $modules = $this->cis->get_user_modules($user->id, NULL, 'name');
             }
+
             if ((($this->sourceId == '') || $this->user->is_admin()) && (count($modules) > 1)) {
                 $this->set_menu('  ', array('change module' => APP__WWW . '/module.php'));
             }

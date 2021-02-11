@@ -10,6 +10,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
@@ -317,15 +318,17 @@ class EngCIS
 
             return $this->_DAO->fetch($sql);
         } else {
-            $query = "SELECT u.* um.user_type FROM {APP__DB_TABLE_PREFIX}user u "
-                   . "LEFT OUTER JOIN {APP__DB_TABLE_PREFIX}user_module um "
-                   . "ON u.user_id = um.user_id "
-                   . "WHERE u.user_id IN ? "
-                   . "AND um.module_id = ? "
-                   . "OR u.admin = 1 "
-                   . "LIMIT 1";
+            $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+                   . 'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um '
+                   . 'ON u.user_id = um.user_id '
+                   . 'WHERE u.user_id = ? '
+                   . 'AND um.module_id = ? '
+                   . 'OR u.admin = 1 '
+                   . 'LIMIT 1';
 
-            return $this->dbConn->fetchAllAssociative($query, [$user_id, $this->moduleId], $this->dbConn::PARAM_INT_ARRAY, ParameterType::INTEGER);
+            $parameterType = is_array($user_id) ? $this->dbConn::PARAM_INT_ARRAY : ParameterType::INTEGER;
+
+            return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [$parameterType, ParameterType::INTEGER]);
         }
     }// /->get_user()
 
@@ -411,6 +414,7 @@ class EngCIS
                 'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm ' .
                 "WHERE (lcm.source_id = '{$source_id}') " .
                 "{$order_by_clause}";
+            die($sql);
         }
 
         return $this->_DAO->fetch_assoc($sql);

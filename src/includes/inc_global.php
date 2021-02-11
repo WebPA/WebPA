@@ -236,7 +236,7 @@ if ($_module_id){
 
   $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-  $_module = $dbConn->fetchAssociative($query, [$_SESSION[$_module_id]], [ParameterType::INTEGER]);
+  $_module = $dbConn->fetchAssociative($query, [$_SESSION['_module_id']], [ParameterType::INTEGER]);
 
   $_module_code = $_module['module_code'];
 }
