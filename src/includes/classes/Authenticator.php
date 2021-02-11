@@ -83,7 +83,7 @@ class Authenticator
                         $this->module_id = NULL;
                     }
                 } else {
-                    $adminModuleQuery = "SELECT source_id FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+                    $adminModuleQuery = 'SELECT source_id FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
                     $adminModule = $dbConn->fetchAssociative($adminModuleQuery, [$user['last_module_id']], [ParameterType::INTEGER]);
 
@@ -105,9 +105,9 @@ class Authenticator
             }
 
             if (!empty($this->module_id)) {
-                $moduleQuery = "SELECT module_code FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+                $moduleQuery = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-                $moduleCode = $dbConn->fetchOne($moduleQuery, [$this->module_id], ParameterType::INTEGER);
+                $moduleCode = $dbConn->fetchOne($moduleQuery, [$this->module_id], [ParameterType::INTEGER]);
 
                 if (is_null($moduleCode)) {
                     $this->module_id = null;
@@ -117,7 +117,7 @@ class Authenticator
             }
 
             if (!is_null($this->module_id)) {
-                $userTypeQuery = "SELECT user_type FROM {APP__DB_TABLE_PREFIX}user_module WHERE module_id = ? AND user_id = ?";
+                $userTypeQuery = 'SELECT user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
 
                 $userType = $dbConn->fetchOne($userTypeQuery, [$this->module_id, $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 

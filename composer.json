@@ -28,7 +28,8 @@
         "ext-xml": "*",
         "ext-session": "*",
         "ext-mysqli": "*",
-        "doctrine/dbal": "^3.0"
+        "doctrine/dbal": "^3.0",
+        "vlucas/phpdotenv": "^5.3"
     },
     "support": {
         "email": "andrew@noexceptions.io",

@@ -39,10 +39,10 @@ ini_set('session.cookie_path', '/');
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
-define('APP__DB_HOST', ''); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', '');
-define('APP__DB_PASSWORD', '');
-define('APP__DB_DATABASE', '');
+define('APP__DB_HOST', 'webpa-db'); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_USERNAME', 'root');
+define('APP__DB_PASSWORD', 'rootpass');
+define('APP__DB_DATABASE', 'webpa');
 define('APP__DB_TABLE_PREFIX', 'pa2_');
 
 // Contact info
@@ -234,7 +234,7 @@ if (!is_null($_user)) {
 if ($_module_id){
   $dbConn = $DB->getConnection();
 
-  $query = "SELECT module_id, module_code, module_title FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+  $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
   $_module = $dbConn->fetchAssociative($query, [$_SESSION[$_module_id]], [ParameterType::INTEGER]);
 

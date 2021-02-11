@@ -35,7 +35,7 @@ class DBAuthenticator extends Authenticator {
 
     $dbConn = $DAO->getConnection();
 
-    $query = "SELECT * FROM {APP__DB_TABLE_PREFIX}user WHERE username = ? AND password = ? AND source_id = ''";
+    $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE username = ? AND password = ? AND source_id = ""';
 
     $user = $dbConn->fetchAssociative($query, [$this->username, $password], [ParameterType::STRING, ParameterType::STRING]);
 

@@ -26,14 +26,6 @@ use WebPA\includes\functions\Common;
 $username = (string) Common::fetch_POST('username');
 $password = (string) Common::fetch_POST('password');
 
-// Sanitize the username/password data
-$username = substr($username,0,255);
-$password = substr($password,0,255);
-
-$DB->open();
-$username = $DB->escape_str($username);
-$password = $DB->escape_str($password);
-
 $msg ='';
 
 // --------------------------------------------------------------------------------

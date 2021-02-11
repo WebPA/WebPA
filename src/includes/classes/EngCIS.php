@@ -24,6 +24,7 @@ class EngCIS
     private $user;
     private $sourceId;
     private $moduleId;
+    private $dbConn;
 
     /**
      * CONSTRUCTOR
@@ -35,6 +36,8 @@ class EngCIS
 
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
         $this->_DAO->set_debug(false);
+
+        $this->dbConn = $this->_DAO->getConnection();
     }
 
     public function setUser(User $user)
@@ -58,21 +61,30 @@ class EngCIS
      */
     function get_module($modules = null, $ordering = 'id')
     {
-        $module_search = $this->_DAO->build_filter('module_id', (array)$modules);
-        $order_by_clause = $this->_order_by_clause('module', $ordering);
-
         // If there's more than one module to search for, get all the rows
         if (is_array($modules)) {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$this->sourceId}') AND $module_search
-                    $order_by_clause");
+            // get all modules
+            $queryBuilder = $this->dbConn->createQueryBuilder();
+
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->where('lcm.source_id = :source_id')
+                ->andWhere('module_id IN :modules')
+                ->setParameter(':source_id', $this->sourceId)
+                ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
+
+            if ($ordering === 'name') {
+                $queryBuilder->orderBy('lcm.module_id');
+            } else {
+                $queryBuilder->orderBy('lcm.module_title');
+            }
+
+            return $queryBuilder->execute()->fetchAllAssociative();
         } else if (!empty($modules)) {  // else, just return one row
-            $dbConn = $this->_DAO->getConnection();
+            $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id IN ? LIMIT 1';
 
-            $moduleQuery = "SELECT module_id, module_title, module_code FROM {APP__DB_TABLE_PREFIX}module WHERE source_id = ? AND module_id IN ? LIMIT 1";
-
-            return $dbConn->fetchAssociative($moduleQuery, [$this->sourceId, $modules], [ParameterType::STRING, $dbConn::PARAM_INT_ARRAY])
+            return $this->dbConn->fetchAssociative($moduleQuery, [$this->sourceId, $modules], [ParameterType::STRING, $dbConn::PARAM_INT_ARRAY]);
         } else if ($this->user->is_admin()) {
             return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
                     FROM " . APP__DB_TABLE_PREFIX . "module lcm
@@ -95,8 +107,7 @@ class EngCIS
      */
     function get_all_modules()
     {
-        return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm");
+        return $this->dbConn->fetchAllAssociative('SELECT lcm.module_id, lcm.module_title FROM ' . APP__DB_TABLE_PREFIX . 'module lcm');
     }
 
     /**
@@ -306,8 +317,6 @@ class EngCIS
 
             return $this->_DAO->fetch($sql);
         } else {
-            $dbConn = $this->_DAO->getConnection();
-
             $query = "SELECT u.* um.user_type FROM {APP__DB_TABLE_PREFIX}user u "
                    . "LEFT OUTER JOIN {APP__DB_TABLE_PREFIX}user_module um "
                    . "ON u.user_id = um.user_id "
@@ -316,7 +325,7 @@ class EngCIS
                    . "OR u.admin = 1 "
                    . "LIMIT 1";
 
-            return $dbConn->fetchAllAssociative($query, [$user_id, $this->moduleId], $dbConn::PARAM_INT_ARRAY, ParameterType::INTEGER)
+            return $this->dbConn->fetchAllAssociative($query, [$user_id, $this->moduleId], $this->dbConn::PARAM_INT_ARRAY, ParameterType::INTEGER);
         }
     }// /->get_user()
 
@@ -329,11 +338,9 @@ class EngCIS
      */
     function get_user_for_email($email)
     {
-        $dbConn = $this->_DAO->getConnection();
-
         $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE email = ? LIMIT 1';
 
-        return $dbConn->fetchAssociative($query, [$email], [ParameterType::STRING]);
+        return $this->dbConn->fetchAssociative($query, [$email], [ParameterType::STRING]);
     }
 
     /**
@@ -353,8 +360,6 @@ class EngCIS
         }
         $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
-        $dbConn = $this->_DAO->getConnection();
-
         $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
                . 'LEFT OUTER JOIN ( '
                . 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? '
@@ -363,7 +368,7 @@ class EngCIS
                . 'WHERE username = ? '
                . 'AND source_id = ?';
 
-        return $dbConn->fetchAssociative($query, [$this->moduleId, $username, $source_id], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+        return $this->dbConn->fetchAssociative($query, [$this->moduleId, $username, $source_id], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
     }
 
     /**
@@ -459,22 +464,20 @@ class EngCIS
 
     function get_user_academic_years($user_id = null)
     {
-        $dbConn = $this->_DAO->getConnection();
-
         if (!empty($user_id)) {
             $query = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
                 'WHERE m.source_id = ? AND m.module_id = ?';
 
-            $dates = $dbConn->fetchAssociative($query, [$this->sourceId, $this->moduleId], [ParameterType::STRING, ParameterType::INTEGER]);
+            $dates = $this->dbConn->fetchAssociative($query, [$this->sourceId, $this->moduleId], [ParameterType::STRING, ParameterType::INTEGER]);
         } else {
             $query = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
                 'WHERE m.source_id = ?';
 
-            $dates = $dbConn->fetchAssociative($query, [$this->sourceId], [ParameterType::STRING]);
+            $dates = $this->dbConn->fetchAssociative($query, [$this->sourceId], [ParameterType::STRING]);
         }
 
         // Ensure that the first record contains some dates as we could return a null record
