@@ -74,7 +74,7 @@ TXT;
 
         $dbConn = $DB->getConnection();
 
-        $userQuery = "SELECT * FROM {APP__DB_TABLE_PREFIX}user WHERE user_id = ?";
+        $userQuery = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?';
 
         $userRow = $dbConn->fetchAssociative($userQuery, [$uid], [ParameterType::INTEGER]);
 

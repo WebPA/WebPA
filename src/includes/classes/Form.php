@@ -84,7 +84,7 @@ class Form {
   function load($id) {
     $dbConn = $this->_DAO->getConnection();
 
-    $query = "SELECT * FROM {APP__DB_TABLE_PREFIX}form  WHERE form_id = ?";
+    $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'form  WHERE form_id = ?';
 
     $form = $dbConn->fetchAssociative($query, [$id], [ParameterType::INTEGER]);
 

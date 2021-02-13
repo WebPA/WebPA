@@ -29,7 +29,7 @@ if ($module_id) {
   // Update session
   $dbConn = $DB->getConnection();
 
-  $query = "SELECT module_code FROM {APP__DB_TABLE_PREFIX}module WHERE module_id = ?";
+  $query = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
   $moduleCode = $dbConn->fetchOne($query, [$module_id], [ParameterType::INTEGER]);
 

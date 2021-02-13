@@ -75,7 +75,7 @@ class Authenticator
 
             if (!empty($this->module_id)) {
                 if (!$is_admin) {
-                    $userModuleQuery = "SELECT module_id, user_type FROM {APP__DB_TABLE_PREFIX}user_module WHERE module_id = ? AND user_id = ?";
+                    $userModuleQuery = 'SELECT module_id, user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
 
                     $userModule = $dbConn->fetchAssociative($userModuleQuery, [$user['last_module_id'], $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
