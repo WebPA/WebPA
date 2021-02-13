@@ -82,21 +82,22 @@ class Common
      * Add an entry to the tracking table
      */
     public static function logEvent(DAO $db, $description, $module_id = NULL, $object_id = NULL) {
-      $now = date(MYSQL_DATETIME_FORMAT);
+        $dbConn = $db->getConnection();
 
-      if (!empty($module_id)) {
-        $module_id = (int) $module_id;
-      }
+        $now = date(MYSQL_DATETIME_FORMAT);
 
-      $fields = array ('user_id' => (int) $_SESSION['_user_id'],
-               'datetime'    => $now,
-               'ip_address'  => $_SERVER['REMOTE_ADDR'],
-               'description' => $description,
-               'module_id'   => $module_id,
-               'object_id'   => $object_id);
+        if (!empty($module_id)) {
+            $module_id = (int) $module_id;
+        }
 
-      return $db->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_tracking ({fields}) VALUES ({values})', $fields);
-
+        $dbConn->insert(APP__DB_TABLE_PREFIX . 'user_tracking', [
+            'user_id' => (int) $_SESSION['_user_id'],
+            'datetime' => $now,
+            'ip_address' => $_SERVER['REMOTE_ADDR'],
+            'description' => $description,
+            'module_id' => $module_id,
+            'object_id' => $object_id,
+        ]);
     }
 
     /**
