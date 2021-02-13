@@ -15,6 +15,7 @@ use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
+use function Doctrine\DBAL\Query\QueryBuilder;
 
 include_once __DIR__ . '/../inc_global.php';
 
@@ -386,6 +387,8 @@ class EngCIS
      */
     function get_user_modules($user_id, $username = NULL, $ordering = 'id', $source_id = NULL)
     {
+        $dbConn = $this->_DAO->getConnection();
+        $queryBuilder = $dbConn->createQueryBuilder();
 
         if (is_null($source_id) && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
@@ -393,33 +396,52 @@ class EngCIS
             $source_id = '';
         }
 
-        $order_by_clause = $this->_order_by_clause('module', $ordering);
+        $queryBuilder->orderBy($ordering === 'name' ? 'lcm.module_title' : 'lcm.module_id');
 
         if ($user_id) {
             $user_set = $this->_DAO->build_set($user_id, false);
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
-                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
-                "WHERE ((lcm.source_id = '{$source_id}') OR (u.source_id <> '')) AND (lcsm.user_id IN {$user_set}) " .
-                "{$order_by_clause}";
+
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->innerJoin('lcm', 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->innerJoin('lcsm', 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->where(
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->or(
+                            $queryBuilder->expr()->eq('lcm.source_id', '?'),
+                            $queryBuilder->expr()->neq('u.source_id', '')
+                        ),
+                        $queryBuilder->expr()->in('lcsm.user_id', '?')
+                    )
+                );
+
+            $queryBuilder->setParameter(0, $source_id, ParameterType::STRING);
+            $queryBuilder->setParameter(1, $user_set, $dbConn::PARAM_INT_ARRAY);
         } else if ($username) {
             $user_set = $this->_DAO->build_set($username);
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
-                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
-                "WHERE (u.source_id = '{$source_id}') AND (u.username IN {$user_set}) " .
-                "{$order_by_clause}";
+
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->innerJoin('lcsm', 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->where('u.source_id = ?')
+                ->andWhere('u.username IN (?)');
+
+            $queryBuilder->setParameter(0, $source_id);
+            $queryBuilder->setParameter(1, $user_set, $dbConn::PARAM_INT_ARRAY);
         } else {
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, \'' . APP__USER_TYPE_ADMIN . '\' user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm ' .
-                "WHERE (lcm.source_id = '{$source_id}') " .
-                "{$order_by_clause}";
-            die($sql);
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', '"' . APP__USER_TYPE_ADMIN . '" as user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->where('lcm.source_id = ?');
+
+            $queryBuilder->setParameter(0, $source_id);
         }
 
-        return $this->_DAO->fetch_assoc($sql);
-
-    }// /->get_user_modules
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /*
     * ================================================================================
