@@ -184,21 +184,6 @@ class DAO
     }// /->execute()
 
     /**
-     * Get results of the given query
-     * @param string $sql
-     * @return object
-     */
-    function fetch($sql = null)
-    {
-        // If there is an SQL query, get its results instead..
-        if ($sql) {
-            $this->_process_query($sql);
-        }
-
-        return $this->_result;
-    } // /->fetch()
-
-    /**
      * Get a single column as a numeric array
      * column indexes are 0-based
      * @param string $sql
