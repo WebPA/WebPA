@@ -63,24 +63,24 @@ class EngCIS
      */
     function get_module($modules = null, $ordering = 'id')
     {
+        $queryBuilder = $this->dbConn->createQueryBuilder();
+
+        if ($ordering === 'name') {
+            $queryBuilder->orderBy('lcm.module_id');
+        } else {
+            $queryBuilder->orderBy('lcm.module_title');
+        }
+
         // If there's more than one module to search for, get all the rows
         if (is_array($modules)) {
             // get all modules
-            $queryBuilder = $this->dbConn->createQueryBuilder();
-
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
-                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
                 ->where('lcm.source_id = :source_id')
                 ->andWhere('module_id IN :modules')
                 ->setParameter(':source_id', $this->sourceId)
                 ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
-
-            if ($ordering === 'name') {
-                $queryBuilder->orderBy('lcm.module_id');
-            } else {
-                $queryBuilder->orderBy('lcm.module_title');
-            }
 
             return $queryBuilder->execute()->fetchAllAssociative();
         } else if (!empty($modules)) {  // else, just return one row
@@ -88,19 +88,28 @@ class EngCIS
 
             return $this->dbConn->fetchAssociative($moduleQuery, [$this->sourceId, $modules], [ParameterType::STRING, $dbConn::PARAM_INT_ARRAY]);
         } else if ($this->user->is_admin()) {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$this->sourceId}')
-                    $order_by_clause");
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->where('lcm.source_id = ?')
+                ->setParameter(0, $this->sourceId, ParameterType::STRING);
+
+            return $queryBuilder->execute()->fetchAllAssociative();
         } else {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                  FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcm.module_id = lcsm.module_id
-                  WHERE (lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "') AND
-                        (user_id = $this->user->id) AND (lcm.source_id = '{$this->sourceId}')
-                  $order_by_clause");
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->where('lcsm.user_type = ?')
+                ->andWhere('user_id = ?')
+                ->andWhere('lcm.source_id = ?')
+                ->setParameter(0, APP__USER_TYPE_TUTOR, ParameterType::STRING)
+                ->setParameter(1, $this->user->id, ParameterType::INTEGER)
+                ->setParameter(2, $this->sourceId, ParameterType::STRING);
+
+            return $queryBuilder->execute()->fetchAllAssociative();
         }
-    }// /->get_module()
+    }
 
     /**
      * Get all the module info as an array
