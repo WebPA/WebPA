@@ -10,6 +10,7 @@
 
 require_once('../../includes/inc_global.php');
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
@@ -17,11 +18,25 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   exit;
 }
 
-$generic_form = $DB->fetch('SELECT f.* FROM ' . APP__DB_TABLE_PREFIX . 'form f LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX .
-   'form_module fm ON f.form_id = fm.form_id WHERE fm.form_id IS NULL ORDER BY form_name ASC');
+$genericFormQuery =
+    'SELECT f.* ' .
+    'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+    'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+    'ON f.form_id = fm.form_id ' .
+    'WHERE fm.form_id IS NULL ' .
+    'ORDER BY form_name ASC';
 
-$forms = $DB->fetch('SELECT f.* FROM ' . APP__DB_TABLE_PREFIX . 'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-   "form_module fm ON f.form_id = fm.form_id WHERE fm.module_id = {$_module_id} ORDER BY form_name ASC");
+$generic_form = $DB->getConnection()->fetchAllAssociative($genericFormQuery);
+
+$formsQuery =
+    'SELECT f.* ' .
+    'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+    'ON f.form_id = fm.form_id ' .
+    'WHERE fm.module_id = ? ' .
+    'ORDER BY form_name ASC';
+
+$forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [$_module_id], [ParameterType::INTEGER]);
 
 // --------------------------------------------------------------------------------
 // Begin Page

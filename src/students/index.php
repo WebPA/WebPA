@@ -10,6 +10,7 @@
 
 require_once("../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
@@ -30,7 +31,6 @@ $group_handler = new GroupHandler();
 $collections = $group_handler->get_member_collections($_user->id, APP__ID, 'assessment');
 
 $collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
-$collection_clause = $DB->build_set($collection_ids);
 
 // Get a list of assessments that match the user's collections (for this year)
 
@@ -42,13 +42,16 @@ $end_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year + 
 $sql_start_date = date(MYSQL_DATETIME_FORMAT, $start_date);
 $sql_end_date = date(MYSQL_DATETIME_FORMAT, $end_date);
 
-$assessments = $DB->fetch('SELECT a.* FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
-                          "WHERE (a.module_id = {$_module_id}) AND " .
-                                "(a.collection_id IN $collection_clause) AND " .
-                                "(a.open_date >= '{$sql_start_date}') AND " .
-                                "(a.open_date < '{$sql_end_date}') " .
-                          'ORDER BY a.open_date, a.close_date, a.assessment_name');
+$assessmentsQuery =
+    'SELECT a.* FROM ' .
+    APP__DB_TABLE_PREFIX . 'assessment a ' .
+    'WHERE a.module_id = ? ' .
+    'AND a.collection_id IN ($collection_ids) ' .
+    'AND a.open_date >= ? ' .
+    'AND a.open_date < ? ' .
+    'ORDER BY a.open_date, a.close_date, a.assessment_name';
 
+$assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$collection_ids, $sql_start_date, $sql_end_date], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::STRING, ParameterType::STRING]);
 
 // Get a list of those assessments that the user has already taken
 

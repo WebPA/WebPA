@@ -10,6 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 
@@ -28,15 +29,34 @@ use WebPA\includes\classes\SimpleObjectIterator;
 
 // get the assessment that are closed (but not marked)
 $now = date(MYSQL_DATETIME_FORMAT);
-$assessments = $DB->fetch("SELECT a.*
-              FROM " . APP__DB_TABLE_PREFIX . "assessment a
-                LEFT JOIN " . APP__DB_TABLE_PREFIX . "assessment_marking am ON a.assessment_id = am.assessment_id
-              WHERE a.module_id = {$_module['module_id']}
-                AND a.open_date >= '{$this_year}'
-                AND a.open_date < '{$next_year}'
-                AND a.close_date < '{$now}'
-                AND am.assessment_id IS NULL
-              ORDER BY a.open_date, a.close_date, a.assessment_name");
+
+$assessmentsQuery =
+    'SELECT a.* ' .
+    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+    'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'assessment_marking am ' .
+    'ON a.assessment_id = am.assessment_id ' .
+    'WHERE a.module_id = ? ' .
+    'AND a.open_date >= ? ' .
+    'AND a.open_date < ? ' .
+    'AND a.close_date < ? ' .
+    'AND am.assessment_id IS NULL ' .
+    'ORDER BY a.open_date, a.close_date, a.assessment_name';
+
+$assessments = $DB->getConnection()->fetchAllAssociative(
+        $assessmentsQuery,
+        [
+            $_module['module_id'],
+            $this_year,
+            $next_year,
+            $now,
+        ],
+        [
+            ParameterType::INTEGER,
+            ParameterType::STRING,
+            ParameterType::STRING,
+            ParameterType::STRING,
+        ]
+);
 
 if (!$assessments) {
 ?>

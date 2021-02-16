@@ -12,6 +12,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\functions\Common;
@@ -193,11 +194,17 @@ if (!$assessment) {
     <h2>Available Forms</h2>
     <div class="form_section">
 <?php
-      $sql = 'SELECT f.* FROM ' . APP__DB_TABLE_PREFIX .
-         'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-         'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-         "user_module um ON fm.module_id = um.module_id WHERE um.user_id = {$_user->id} ORDER BY f.form_name ASC";
-      $forms = $DB->fetch($sql);
+      $formsQuery =
+          'SELECT f.* ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+          'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+          'ON f.form_id = fm.form_id ' .
+          'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+          'ON fm.module_id = um.module_id ' .
+          'WHERE um.user_id = ? ' .
+          'ORDER BY f.form_name ASC';
+
+      $forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [$_user->id], [ParameterType::INTEGER]);
 
       if (!$forms) {
 ?>

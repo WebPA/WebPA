@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\XMLParser;
@@ -86,9 +87,12 @@ if (!$assessment->load($assessment_id)) {
 
   //------------------------------------------------------------
   //get the feedback / Justification
-  $sql = "SELECT * FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE assessment_id='{$assessment->id}';";
+  $feedbackQuery =
+      'SELECT * ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
+      'WHERE assessment_id = ?';
 
-  $fetch_comments = $DB->fetch($sql);
+  $fetch_comments = $DB->getConnection()->fetchAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
 
   $feedback = null;
 

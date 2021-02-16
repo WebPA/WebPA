@@ -11,6 +11,7 @@
 //get the include file required
 require_once('../../../includes/inc_global.php');
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\XML;
@@ -50,7 +51,13 @@ if ($errno == 0){
     $formtype =  $parsed['form']['formtype']['_data'];
 
     //check that the form doesn't already exist for the user or for another
-    $results = $DB->fetch("SELECT * FROM " . APP__DB_TABLE_PREFIX . "form f WHERE form_id ='{$form_id}' AND form_name = '{$formname}'");
+    $resultsQuery =
+        'SELECT * ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+        'WHERE form_id = ? ' .
+        'AND form_name = ?';
+
+    $results = $DB->getConnection()->fetchAssociative($resultsQuery, [$form_id, $formname], [ParameterType::STRING, ParameterType::STRING]);
 
     if ($results){
       //we need to prompt that they are the same - or send to clone form

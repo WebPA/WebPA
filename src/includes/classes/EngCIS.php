@@ -129,15 +129,26 @@ class EngCIS
      */
     function get_module_staff($module_id, $ordering)
     {
-        $order_by_clause = $this->_order_by_clause('staff', $ordering);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
-        return $this->_DAO->fetch("SELECT lcs.*
-                  FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcs.user_id = lcsm.user_id
-                  WHERE lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "'
-                    AND module_id = $module_id
-                  $order_by_clause");
-    }// /->get_module_staff()
+        if ($ordering === 'id') {
+            $queryBuilder->orderBy('lcs.user_id');
+        } else {
+            $queryBuilder->orderBy('lcs.lastname');
+            $queryBuilder->addOrderBy('lcs.forename');
+        }
+
+        $queryBuilder
+            ->select('lcs.*')
+            ->from(APP__DB_TABLE_PREFIX . 'user lcs')
+            ->innerJoin('lcs', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcs.user_id = lcsm.user_id')
+            ->where('lcsm.user_type = ?')
+            ->andWhere('module_id = ?')
+            ->setParameter(0, APP__USER_TYPE_TUTOR, ParameterType::STRING)
+            ->setParameter(1, $module_id, ParameterType::INTEGER);
+
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /**
      * Get array of students for one or more modules
@@ -147,16 +158,26 @@ class EngCIS
      */
     function get_module_students($module, $ordering = 'name')
     {
-        $order_by_clause = $this->_order_by_clause('student', $ordering);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
-        $sql = "SELECT DISTINCT lcs.*, lcs.id_number AS student_id
-                  FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcs.user_id = lcsm.user_id AND lcsm.module_id = $module
-                  WHERE lcsm.user_type = '" . APP__USER_TYPE_STUDENT . "'
-                  $order_by_clause
-                  ";
-        return $this->_DAO->fetch($sql);
-    }// /->get_module_students()
+        if ($ordering === 'id') {
+            $queryBuilder->orderBy('lcs.user_id');
+        } else {
+            $queryBuilder->orderBy('lcs.lastname');
+            $queryBuilder->addOrderBy('lcs.forename');
+        }
+
+        $queryBuilder
+            ->select('lcs.*', 'lcs.id_number as student_id')
+            ->distinct()
+            ->from(APP__DB_TABLE_PREFIX . 'user', 'lcs')
+            ->innerJoin('lcs', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcs.user_id = lcsm.user_id AND lcsm.module_id = ?')
+            ->where('lcsm.user_type = ?')
+            ->setParameter(0, $module, ParameterType::INTEGER)
+            ->setParameters(1, APP__USER_TYPE_STUDENT, ParameterType::STRING);
+
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /**
      * Get total number of students on one or more modules
@@ -313,20 +334,26 @@ class EngCIS
      */
     function get_user($user_id, $ordering = 'name')
     {
-        $user_set = $this->_DAO->build_set($user_id, false);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
         if (is_array($user_id)) {
-            $order_by_clause = $this->_order_by_clause('user', $ordering);
+            if ($ordering === 'id') {
+                $queryBuilder->orderBy('u.user_id');
+            } else {
+                $queryBuilder->orderBy('u.lastname');
+                $queryBuilder->addOrderBy('u.forename');
+            }
 
-            $sql = "SELECT u.*, um.user_type
-              FROM " . APP__DB_TABLE_PREFIX . "user u
-              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
-              ON u.user_id = um.user_id
-              WHERE (u.user_id IN {$user_set})
-              AND (um.module_id = {$this->moduleId})
-              $order_by_clause";
+            $queryBuilder
+                ->select('u.*', 'um.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'user', 'u')
+                ->leftJoin('u', APP__DB_TABLE_PREFIX . 'user_module', 'um', 'u.user_id = um.user_id')
+                ->where('u.user_id IN (?)')
+                ->andWhere('um.module_id = ?')
+                ->setParameter(0, $user_set, $this->dbConn::PARAM_INT_ARRAY)
+                ->setParameter(1, $this->moduleId, ParameterType::INTEGER);
 
-            return $this->_DAO->fetch($sql);
+            return $queryBuilder->execute()->fetchAllAssociative();
         } else {
             $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
                    . 'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um '
@@ -336,11 +363,9 @@ class EngCIS
                    . 'OR u.admin = 1 '
                    . 'LIMIT 1';
 
-            $parameterType = is_array($user_id) ? $this->dbConn::PARAM_INT_ARRAY : ParameterType::INTEGER;
-
-            return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [$parameterType, ParameterType::INTEGER]);
+            return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
         }
-    }// /->get_user()
+    }
 
     /**
      * Get a user's info by searching on email address
@@ -457,45 +482,6 @@ class EngCIS
     * Private Methods
     * ================================================================================
     */
-
-    /**
-     * Return an ORDER BY clause matching the given parameters
-     *
-     * @param string $row_type type of row being ordered. ['course','module','staff','student']
-     * @param string $ordering type of ordering to do. ['id','name']
-     *
-     * @return string  SQL ORDER BY clause of the form 'ORDER BY fieldname' or NULL if row_type/ordering are invalid
-     */
-    function _order_by_clause($row_type, $ordering = null)
-    {
-        if (!is_array($this->_ordering_types)) {
-            // All available ordering types
-            $this->_ordering_types = array(
-                'module' => array(
-                    'id' => 'lcm.module_id',
-                    'name' => 'lcm.module_title',
-                ),
-                'staff' => array(
-                    'id' => 'lcs.user_id',
-                    'name' => 'lcs.lastname, lcs.forename',
-                ),
-                'student' => array(
-                    'id' => 'lcs.user_id',
-                    'name' => 'lcs.lastname, lcs.forename',
-                ),
-                'user' => array(
-                    'id' => 'u.user_id',
-                    'name' => 'u.lastname, u.forename',
-                ),
-            );
-        }
-
-        if ((array_key_exists($row_type, $this->_ordering_types)) && (array_key_exists($ordering, $this->_ordering_types["$row_type"]))) {
-            return 'ORDER BY ' . $this->_ordering_types["$row_type"]["$ordering"];
-        } else {
-            return null;
-        }
-    }// /->_order_by_clause()
 
     function get_user_academic_years($user_id = null)
     {

@@ -10,12 +10,13 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class GroupHandler
 {
-    // Public Vars
     public $_DAO = null;  // [pmn] due to a poor iterator implementation, this is currently public
 
-    // Private Vars
+    private $dbConn;
 
     /**
      * CONSTRUCTOR
@@ -23,7 +24,8 @@ class GroupHandler
     function __construct()
     {
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
-    }// /->GroupHandler()
+        $this->dbConn = $this->_DAO->getConnection();
+    }
 
     /*
     * ================================================================================
@@ -202,12 +204,19 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_user_collections($user_id, $application_id = null)
+    function get_user_collections($user_id)
     {
-        return $this->_DAO->fetch('SELECT c.* FROM ' . APP__DB_TABLE_PREFIX . '_collection c INNER JOIN ' .
-            APP__DB_TABLE_PREFIX . '_user_module um ON c.module_id = um.module_id LEFT OUTER JOIN ' .
-            APP__DB_TABLE_PREFIX . "assessment a ON cm.collection_id = a.collection_id WHERE um.user_id = {$user_id} AND a.collection_id IS NULL");
-    }// /->get_user_collections()
+        $query =
+            'SELECT c.* ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . '_collection c ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . '_user_module um ' .
+            'ON c.module_id = um.module_id ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON cm.collection_id = a.collection_id WHERE um.user_id = ? ' .
+            'AND a.collection_id IS NULL';
+
+        return $this->dbConn->fetchAllAssociative($query, [$user_id], [ParameterType::INTEGER]);
+    }
 
     /**
      * Get collections belonging to the given module
@@ -218,12 +227,17 @@ class GroupHandler
      */
     function get_module_collections($module_id)
     {
-        return $this->_DAO->fetch('SELECT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
-            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ON c.collection_id = a.collection_id ' .
-            "WHERE c.module_id = {$module_id} AND a.collection_id IS NULL " .
-            'ORDER BY c.collection_name');
+        $query =
+            'SELECT c.*, a.assessment_id AS collection_assessment_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON c.collection_id = a.collection_id ' .
+            'WHERE c.module_id = ? ' .
+            'AND a.collection_id IS NULL ' .
+            'ORDER BY c.collection_name';
 
-    }// /->get_module_collections()
+        return $this->dbConn->fetchAllAssociative($query, [$module_id], [ParameterType::INTEGER]);
+    }
 
     /**
      * function to get member collections
@@ -235,23 +249,22 @@ class GroupHandler
      */
     function get_member_collections($user_id, $application_id = null, $owner_type)
     {
-        if ($owner_type == 'user') {
+        if ($owner_type === 'user') {
             $sql = 'SELECT DISTINCT c.*, NULL AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX .
-                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = {$user_id} AND a.collection_id IS NULL";
-        } else if ($owner_type == 'assessment') {
+                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ? AND a.collection_id IS NULL";
+        } else if ($owner_type === 'assessment') {
             $sql = 'SELECT DISTINCT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = {$user_id}";
+                'assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ?';
         }
 
-        $res = $this->_DAO->fetch($sql);
-        return $res;
-    }// /->get_member_collections()
+        return $this->dbConn->fetchAllAssociative($sql, [$user_id], [ParameterType::INTEGER]);
+    }
 
     /*
     * ================================================================================

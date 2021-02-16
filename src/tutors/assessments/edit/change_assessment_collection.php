@@ -201,7 +201,7 @@ if (!$assessment) {
 <?php
 
     $group_handler = new GroupHandler();
-    $collections = $group_handler->get_user_collections($_user->id, $_config['app_id']);
+    $collections = $group_handler->get_user_collections($_user->id);
 
     if (!$collections) {
 ?>

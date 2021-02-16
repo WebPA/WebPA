@@ -10,6 +10,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 class ResultHandler
@@ -18,6 +19,7 @@ class ResultHandler
     private $_assessment;
     private $_collection;
     private $_collection_id;
+    private $dbConn;
     private $moduleId;
 
     /*
@@ -29,6 +31,7 @@ class ResultHandler
         $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
         $this->_DAO = $DAO;
+        $this->dbConn = $this->_DAO->getConnection();
     }
 
     /*
@@ -73,13 +76,17 @@ class ResultHandler
      */
     function get_responses()
     {
-        return $this->_DAO->fetch("SELECT um.group_id, um.user_id, um.marked_user_id, um.question_id, um.score
-                      FROM " . APP__DB_TABLE_PREFIX . "user_mark um
-                        INNER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON um.assessment_id = a.assessment_id
-                      WHERE um.assessment_id = '{$this->_assessment->id}'
-                        AND a.collection_id = '{$this->_collection_id}'
-                      ORDER BY um.group_id, um.user_id, um.marked_user_id, um.question_id");
-    }// /->get_responses()
+        $query =
+            'SELECT um.group_id, um.user_id, um.marked_user_id, um.question_id, um.score ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON um.assessment_id = a.assessment_id ' .
+            'WHERE um.assessment_id = ? ' .
+            'AND a.collection_id = ? ' .
+            'ORDER BY um.group_id, um.user_id, um.marked_user_id, um.question_id';
+
+        return $this->dbConn->fetchAllAssociative($query, [$this->_assessment->id, $this->_collection_id], [ParameterType::STRING, ParameterType::STRING])
+    }
 
     /**
      * Function to get the marks fot the assessment
