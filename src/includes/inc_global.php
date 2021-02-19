@@ -67,8 +67,8 @@ define('APP__INST_WIDTH', '102'); //image width in pixels
 define('APP__ALLOW_TEXT_INPUT', TRUE);
 
 // enable delete options for users and modules
-define('APP__ENABLE_USER_DELETE', FALSE);
-define('APP__ENABLE_MODULE_DELETE', FALSE);
+define('APP__ENABLE_USER_DELETE', TRUE);
+define('APP__ENABLE_MODULE_DELETE', TRUE);
 
 // set the mail server variables if different mail server is to be used.
 ini_set('SMTP','localhost');
@@ -229,6 +229,9 @@ if ($_user_id){
 if (!is_null($_user)) {
     $CIS->setUser($_user);
 }
+
+// initialise module
+$_module = null;
 
 // If we found a module to load, load it!
 if ($_module_id){

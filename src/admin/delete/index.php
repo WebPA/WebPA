@@ -11,7 +11,8 @@
  //get the include file required
  require_once("../../includes/inc_global.php");
 
- use WebPA\includes\classes\Module;
+use Doctrine\DBAL\ParameterType;
+use WebPA\includes\classes\Module;
  use WebPA\includes\classes\User;
  use WebPA\includes\functions\Common;
 
@@ -58,6 +59,17 @@ $page_intro = '';
     if (intval($module) == $_module_id) {
       $sScreenMsg = "<p>You cannot delete the currently selected module!</p>";
     } else {
+        $usersQuery =
+            'SELECT u.user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON u.user_id = um.user_id ' .
+            'WHERE um.user_id IS NULL ' .
+            'AND um.user_type = ?';
+
+        $usersResult = $DB->getConnection()->fetchAllAssociative($usersQuery, [APP__USER_TYPE_STUDENT], [ParameterType::STRING]);
+
+        die(print_r($usersResult, true));
       $sScreenMsg = "<p>The module has been deleted.</p>";
       $delete_module = new Module();
       $delete_module->module_id = $module;
@@ -68,7 +80,18 @@ $page_intro = '';
     //increase the execution time to handle large numbers of deletions
     ini_set('max_execution_time', 120);
     $sScreenMsg = "<p>Users with no module have been deleted.</p>";
-    $users = $DB->fetch_col("SELECT u.user_id FROM " . APP__DB_TABLE_PREFIX . "user u LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id WHERE (um.user_id IS NULL) AND (u.user_type = '" . APP__USER_TYPE_STUDENT . "')");
+    $usersQuery =
+        'SELECT u.user_id ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+        'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+        'ON u.user_id = um.user_id ' .
+        'WHERE um.user_id IS NULL ' .
+        'AND um.user_type = ?';
+
+    $usersResult = $DB->getConnection()->fetchAllAssociative($usersQuery, [APP__USER_TYPE_STUDENT], [ParameterType::STRING]);
+
+    die(print_r($usersResult, true));
+    $users = $DB->fetch_col();
     $delete_user = new User();
     $delete_user->set_dao_object($DB);
     for ($i=0; $i<count($users); $i++) {

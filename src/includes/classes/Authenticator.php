@@ -32,6 +32,7 @@ class Authenticator
     protected $_error = NULL;
     private $_DAO = NULL;
     private $cis;
+    private $dbConn;
 
     /**
      *  CONSTRUCTOR for the Authenticator class
@@ -65,7 +66,7 @@ class Authenticator
 
         $is_admin = FALSE;
         $DAO = $this->get_DAO();
-        $dbConn = $DAO->getConnection();
+        $this->dbConn = $DAO->getConnection();
 
         if (!is_null($user)) {
             $is_admin = $user['admin'] == 1;
@@ -77,7 +78,7 @@ class Authenticator
                 if (!$is_admin) {
                     $userModuleQuery = 'SELECT module_id, user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
 
-                    $userModule = $dbConn->fetchAssociative($userModuleQuery, [$user['last_module_id'], $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
+                    $userModule = $this->dbConn->fetchAssociative($userModuleQuery, [$user['last_module_id'], $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
                     if (is_null($userModule)) {
                         $this->module_id = NULL;
@@ -85,7 +86,7 @@ class Authenticator
                 } else {
                     $adminModuleQuery = 'SELECT source_id FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-                    $adminModule = $dbConn->fetchAssociative($adminModuleQuery, [$user['last_module_id']], [ParameterType::INTEGER]);
+                    $adminModule = $this->dbConn->fetchAssociative($adminModuleQuery, [$user['last_module_id']], [ParameterType::INTEGER]);
 
                     if (!is_null($adminModule)) {
                         $source_id = $adminModule['source_id'];
@@ -107,7 +108,7 @@ class Authenticator
             if (!empty($this->module_id)) {
                 $moduleQuery = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-                $moduleCode = $dbConn->fetchOne($moduleQuery, [$this->module_id], [ParameterType::INTEGER]);
+                $moduleCode = $this->dbConn->fetchOne($moduleQuery, [$this->module_id], [ParameterType::INTEGER]);
 
                 if (is_null($moduleCode)) {
                     $this->module_id = null;
@@ -119,12 +120,21 @@ class Authenticator
             if (!is_null($this->module_id)) {
                 $userTypeQuery = 'SELECT user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
 
-                $userType = $dbConn->fetchOne($userTypeQuery, [$this->module_id, $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
+                $userType = $this->dbConn->fetchOne($userTypeQuery, [$this->module_id, $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
                 // Update last login date
                 $now = date(MYSQL_DATETIME_FORMAT, time());
-                $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user['user_id']}'";
-                $DAO->execute($sql_login_date);
+                $sql_login_date =
+                    'UPDATE ' . APP__DB_TABLE_PREFIX . 'user ' .
+                    'SET date_last_login = ? ' .
+                    'WHERE user_id = ?';
+
+                $stmt = $this->dbConn->prepare($sql_login_date);
+
+                $stmt->bindParam(1, $now);
+                $stmt->bindParam(2, $user['user_id'], ParameterType::INTEGER);
+
+                $stmt->execute();
 
                 //with the database row data returned get all the information and add it to the class holders
                 $this->user_id = $user['user_id'];

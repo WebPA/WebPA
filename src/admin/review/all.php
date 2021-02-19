@@ -17,11 +17,11 @@ use WebPA\includes\functions\Common;
 //build the string for the information to be collected from the database
 $dbConn = $DB->getConnection();
 
-if ($type == 'module') {
+if ($type === 'module') {
   if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     $stmt = $dbConn->prepare('SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ?');
 
-    $stmt->bindValue($_source_id);
+    $stmt->bindParam(1, $_source_id);
   }
 } else if ($type == APP__USER_TYPE_ADMIN) {
   if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
@@ -32,21 +32,24 @@ if ($type == 'module') {
   }
 } else if (Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
   $_module_id = Common::fetch_SESSION('_module_id', null);
-  $stmt = $dbConn->prepare('SELECT u.user_id, u.source_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, u.date_last_login AS `last login` FROM ' .
-      APP__DB_TABLE_PREFIX . 'user u INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ON u.user_id = um.user_id ' .
-      'WHERE um.module_id = ? AND um.user_type = ? ' .
-      'ORDER BY u.lastname, u.forename, u.source_id, u.username');
 
-  $stmt->bindValue($_module_id, ParameterType::INTEGER);
-  $stmt->bindValue($type);
+  $query =
+      'SELECT u.user_id, u.source_id, u.username AS id, u.lastname, u.forename, u.email, u.id_number AS `id number`, u.date_last_login AS `last login` ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+      'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+      'ON u.user_id = um.user_id ' .
+      'WHERE um.module_id = ? AND um.user_type = ? ' .
+      'ORDER BY u.lastname, u.forename, u.source_id, u.username';
+
+  $stmt = $dbConn->prepare($query);
+
+  $stmt->bindParam(1, $_module_id, ParameterType::INTEGER);
+  $stmt->bindParam(2, $type);
 }
 if (!isset($stmt)) {
   echo ' <p>You need to be logged into the system to see this information.</p>';
 } else {
-  //run the query
-  $stmt->execute();
-
-  $rs = $stmt->fetchAllAssociative();
+  $rs = $stmt->execute()->fetchAllAssociative();
 
   echo '<h2>' . $rstitle . '</h2>';
   echo '<div class="obj">';
