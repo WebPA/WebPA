@@ -8,13 +8,13 @@
  * @link https://github.com/webpa/webpa
  */
 
- //get the include file required
- require_once("../../includes/inc_global.php");
+//get the include file required
+require_once("../../includes/inc_global.php");
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Module;
- use WebPA\includes\classes\User;
- use WebPA\includes\functions\Common;
+use WebPA\includes\classes\User;
+use WebPA\includes\functions\Common;
 
  if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
   header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -29,8 +29,6 @@ $module = Common::fetch_GET('m');
 //set the page information
 if (!$user) {
   $UI->page_title = APP__NAME . ' Delete module';
-} else if ($user == 'unassigned') {
-  $UI->page_title = APP__NAME . ' Delete all system users with no module';
 }else {
   $UI->page_title = APP__NAME . ' Delete system user from module';
 }
@@ -55,52 +53,19 @@ $page_intro = '';
 //----------------------------------------------------------------------
 //process request
 
-  if (!$user) {
-    if (intval($module) == $_module_id) {
+  if (strlen($module) > 0) {
+    if ((int) $module === $_module_id) {
       $sScreenMsg = "<p>You cannot delete the currently selected module!</p>";
     } else {
-        $usersQuery =
-            'SELECT u.user_id ' .
-            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
-            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
-            'ON u.user_id = um.user_id ' .
-            'WHERE um.user_id IS NULL ' .
-            'AND um.user_type = ?';
-
-        $usersResult = $DB->getConnection()->fetchAllAssociative($usersQuery, [APP__USER_TYPE_STUDENT], [ParameterType::STRING]);
-
-        die(print_r($usersResult, true));
       $sScreenMsg = "<p>The module has been deleted.</p>";
       $delete_module = new Module();
       $delete_module->module_id = $module;
       $delete_module->set_dao_object($DB);
       $delete_module->delete();
     }
-  } else if ($user == 'unassigned') {
-    //increase the execution time to handle large numbers of deletions
-    ini_set('max_execution_time', 120);
-    $sScreenMsg = "<p>Users with no module have been deleted.</p>";
-    $usersQuery =
-        'SELECT u.user_id ' .
-        'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
-        'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
-        'ON u.user_id = um.user_id ' .
-        'WHERE um.user_id IS NULL ' .
-        'AND um.user_type = ?';
-
-    $usersResult = $DB->getConnection()->fetchAllAssociative($usersQuery, [APP__USER_TYPE_STUDENT], [ParameterType::STRING]);
-
-    die(print_r($usersResult, true));
-    $users = $DB->fetch_col();
-    $delete_user = new User();
-    $delete_user->set_dao_object($DB);
-    for ($i=0; $i<count($users); $i++) {
-      $delete_user->id = $users[$i];
-      $delete_user->delete();
-    }
-  } else if (intval($user) == $_SESSION['_user_id']) {
+  } else if ((int) $user === $_SESSION['_user_id']) {
     $sScreenMsg = "<p>You cannot delete yourself!</p>";
-  } else {
+  } else if ($user > 0) {
     $user_row = $CIS->get_user($user);
     $delete_user = new User();
     $delete_user->set_dao_object($DB);
@@ -113,6 +78,8 @@ $page_intro = '';
       $sql = 'DELETE FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE user_id = {$user} AND module_id = {$_SESSION['_module_id']}";
       $DB->execute($sql);
     }
+  } else {
+     $errorMsg = '<p>No module or user provided to delete</p>';
   }
 
 
@@ -131,11 +98,13 @@ $page_intro = '';
     echo "<div class=\"success_box\">{$sScreenMsg}</div>";
   }
 
+  if (strlen($errorMsg) > 0) {
+      echo "<div class=\"error_box\">$errorMsg</div>";
+  }
+
 ?>
 
 </div>
 <?php
 
 $UI->content_end();
-
-?>
