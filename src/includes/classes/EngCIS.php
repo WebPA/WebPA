@@ -196,24 +196,6 @@ class EngCIS
     }// /->get_module_students_count
 
     /**
-     * Get an array of student IDs for students on the given modules
-     * @param array $modules modules to count students for
-     * @return array
-     */
-    function get_module_students_id($modules)
-    {
-        if (!empty($modules)) {
-            $module_set = $this->_DAO->build_set((array)$modules, false);
-            return $this->_DAO->fetch_col("SELECT DISTINCT u.id_number AS staff_id
-                      FROM " . APP__DB_TABLE_PREFIX . "user u
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-                      WHERE um.module_id IN $module_set
-                        AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'
-                      ORDER BY u.user_id ASC");
-        }
-    }// /->get_module_students_id()
-
-    /**
      * Get an array of user IDs for students on the given modules (user_id = 'student_{studentID}'
      * @param array $modules modules to count students for
      * @return array
