@@ -22,7 +22,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
 // --------------------------------------------------------------------------------
 
 $group_handler = new GroupHandler();
-$collections = $group_handler->get_member_collections($_user->id, APP__ID, 'user');
+$collections = $group_handler->get_member_collections($_user->id, 'user');
 
 // --------------------------------------------------------------------------------
 // Begin Page

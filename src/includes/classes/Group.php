@@ -18,6 +18,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 class Group {
@@ -27,7 +29,8 @@ class Group {
   public $collection_id = '';   // READONLY
 
   // Private Vars
-  private $_DAO = null;
+  private DAO $_DAO;
+  private Connection $dbConn;
   private $_collection = null;
   private $_members = null;
 
@@ -85,9 +88,16 @@ class Group {
   * @return boolean did load succeed
   */
   function load($id) {
-    $row = $this->_DAO->fetch_row("SELECT * FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE group_id = '$id' LIMIT 1");
+    $groupQuery =
+        'SELECT * ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
+        'WHERE group_id = ? ' .
+        'LIMIT 1';
+
+    $row = $this->dbConn->fetchAssociative($groupQuery, [$id], [ParameterType::STRING]);
+
     return ($row) ? $this->load_from_row($row) : false;
-  }// /->load()
+  }
 
   /**
   * Load the Group from an array row
@@ -177,7 +187,8 @@ class Group {
   */
   function set_dao_object(&$DAO) {
     $this->_DAO =& $DAO;
-  }// /->set_dao_object()
+    $this->dbConn = $this->_DAO->getConnection();
+  }
 
   /**
   * Set this group to use the given GroupCollection as a parent
@@ -280,14 +291,18 @@ class Group {
   * Any unsaved-changes made to the members list are lost
   */
   function refresh_members() {
-    $this->_members = $this->_DAO->fetch_assoc("SELECT user_id, 'member' AS user_role
-                          FROM " . APP__DB_TABLE_PREFIX . "user_group_member
-                          WHERE group_id = '{$this->id}'
-                          ORDER BY user_id ASC
-                          ");
+    $membersQuery =
+        'SELECT user_id, "member" AS user_role ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ' .
+        'WHERE group_id = ? ' .
+        'ORDER BY user_id ASC';
 
-    if (!$this->_members) { $this->_members = array(); }
-  }// /->refresh_members()
+    $this->_members = $this->dbConn->fetchAssociative($membersQuery, [$this->id], [ParameterType::STRING]);
+
+    if (!$this->_members) {
+        $this->_members = array();
+    }
+  }
 
   /**
   * Remove a member from this group
@@ -301,13 +316,4 @@ class Group {
       unset($this->_members[$user_id]);
     }
   }// /->remove_member();
-
-/*
-* ================================================================================
-* Private Methods
-* ================================================================================
-*/
-
-}// /class: Group
-
-?>
+}

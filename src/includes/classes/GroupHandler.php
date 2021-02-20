@@ -242,12 +242,11 @@ class GroupHandler
     /**
      * function to get member collections
      * @param string $user_id ID of the member
-     * @param string $application_id (optional) name of owner-application to search for
      * @param string $owner_type (optional) type of collection-owner to filter against
      *
      * @return array array of collections
      */
-    function get_member_collections($user_id, $application_id = null, $owner_type)
+    function get_member_collections($user_id, $owner_type)
     {
         if ($owner_type === 'user') {
             $sql = 'SELECT DISTINCT c.*, NULL AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .

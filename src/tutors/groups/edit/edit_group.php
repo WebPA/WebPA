@@ -201,7 +201,7 @@ if (!$group) {
       <table class="grid" cellpadding="2" cellspacing="1">
 <?php
   // Get all the possible student members
-  $module_user_ids = (array) $CIS->get_module_students_user_id($_module_id);
+  $module_user_ids = (array) $CIS->get_module_students_user_id([$_module_id]);
 
   // Get all the students who are allocated to some group in this collection
   $collection_member_ids = array_keys( (array) $collection->get_members('member'));

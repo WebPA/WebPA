@@ -10,7 +10,6 @@
 
 namespace WebPA\includes\classes;
 
-use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
@@ -182,38 +181,47 @@ class EngCIS
     /**
      * Get total number of students on one or more modules
      *
-     * @param integer $module module to count students for
-     * @return integer
+     * @param int $moduleId module to count students for
+     *
+     * @return int
      */
-    function get_module_students_count($module)
+    function get_module_students_count($moduleId)
     {
-        $sql = "SELECT COUNT(DISTINCT u.user_id)
-        FROM " . APP__DB_TABLE_PREFIX . "user u
-            INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-        WHERE um.module_id = $module
-          AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'";
-        return $this->_DAO->fetch_value($sql);
-    }// /->get_module_students_count
+        $studentsCountQuery =
+            'SELECT COUNT(DISTINCT u.user_id) AS user_count ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON u.user_id = um.user_id ' .
+            'WHERE um.module_id = ? ' .
+            'AND um.user_type = ?';
+
+        return $this->dbConn->fetchOne($studentsCountQuery, [$moduleId, APP__USER_TYPE_STUDENT], [ParameterType::INTEGER, ParameterType::STRING]);
+    }
 
     /**
      * Get an array of user IDs for students on the given modules (user_id = 'student_{studentID}'
+     *
      * @param array $modules modules to count students for
-     * @return array
+     *
+     * @return array|void
      */
     function get_module_students_user_id($modules)
     {
-        if (!empty($modules)) {
-            $module_set = $this->_DAO->build_set((array)$modules, false);
-            $sql = "SELECT DISTINCT u.user_id
-          FROM " . APP__DB_TABLE_PREFIX . "user u
-            INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE um.module_id IN $module_set
-            AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'
-          ORDER BY u.user_id ASC
-          ";
-            return $this->_DAO->fetch_col($sql);
+        if (empty($modules)) {
+            return;
         }
-    }// /->get_module_students_user_id()
+
+        $sql =
+            'SELECT DISTINCT u.user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON u.user_id = um.user_id ' .
+            'WHERE um.module_id IN (?) ' .
+            'AND um.user_type = ? ' .
+            'ORDER BY u.user_id ASC';
+
+        return $this->dbConn->fetchFirstColumn($sql, [$modules, APP__USER_TYPE_STUDENT], [$this->dbConn::PARAM_STR_ARRAY, ParameterType::STRING]);
+    }
 
     /**
      * Get number of students on individual multiple modules, grouped by module
@@ -332,7 +340,7 @@ class EngCIS
                 ->leftJoin('u', APP__DB_TABLE_PREFIX . 'user_module', 'um', 'u.user_id = um.user_id')
                 ->where('u.user_id IN (?)')
                 ->andWhere('um.module_id = ?')
-                ->setParameter(0, $user_set, $this->dbConn::PARAM_INT_ARRAY)
+                ->setParameter(0, $user_id, $this->dbConn::PARAM_INT_ARRAY)
                 ->setParameter(1, $this->moduleId, ParameterType::INTEGER);
 
             return $queryBuilder->execute()->fetchAllAssociative();
@@ -495,6 +503,4 @@ class EngCIS
         return $years;
     }
 
-}// /class: EngCIS
-
-?>
+}

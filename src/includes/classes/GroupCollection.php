@@ -15,6 +15,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 class GroupCollection
@@ -26,6 +27,7 @@ class GroupCollection
 
     // Private Vars
     private $_DAO = null;
+    private $dbConn;
 
     private $_groups = null;
     private $_group_objects = null;
@@ -38,9 +40,10 @@ class GroupCollection
     /**
      * CONSTRUCTOR for the Group collection function
      */
-    function __construct($DAO)
+    function __construct(DAO $DAO)
     {
         $this->_DAO = $DAO;
+        $this->dbConn = $this->_DAO->getConnection();
         $this->_created_on = time();
     }
 
@@ -79,12 +82,17 @@ class GroupCollection
      */
     function load($id)
     {
-        $row = $this->_DAO->fetch_row("SELECT c.*, a.assessment_id AS collection_assessment_id
-       FROM " . APP__DB_TABLE_PREFIX . "collection c
-         LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON c.collection_id = a.collection_id
-       WHERE c.collection_id = '$id'");
+        $groupCollectionQuery =
+            'SELECT c.*, a.assessment_id AS collection_assessment_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON c.collection_id = a.collection_id ' .
+            'WHERE c.collection_id = ?';
+
+        $row = $this->dbConn->fetchAssociative($groupCollectionQuery, [$id], [ParameterType::STRING]);
+
         return ($row) ? $this->load_from_row($row) : false;
-    }// /->load()
+    }
 
     /**
      * Load the GroupCollection from an array row
@@ -295,12 +303,14 @@ class GroupCollection
      */
     function refresh_groups()
     {
-        $this->_groups = $this->_DAO->fetch("
-      SELECT *
-      FROM " . APP__DB_TABLE_PREFIX . "user_group
-      WHERE collection_id = '{$this->id}'
-      ORDER BY group_name ASC
-    ");
+        $groupsQuery =
+            'SELECT * ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
+            'WHERE collection_id = ? ' .
+            'ORDER BY group_name ASC';
+
+        $this->_groups = $this->dbConn->fetchAllAssociative($groupsQuery, [$this->id], [ParameterType::STRING]);
+
         if (!$this->_groups) {
             $this->_groups = array();
         }
@@ -460,12 +470,16 @@ class GroupCollection
      */
     function get_members($role = null)
     {
-        return $this->_DAO->fetch_assoc("SELECT ugm.user_id, 'member' AS user_role
-                    FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON ugm.group_id = ug.group_id
-                    WHERE ug.collection_id = '{$this->id}'
-                    ORDER BY ugm.user_id ASC");
-    }// /->get_members()
+        $membersQuery =
+            'SELECT ugm.user_id, "member" AS user_role ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON ugm.group_id = ug.group_id ' .
+            'WHERE ug.collection_id = ? ' .
+            'ORDER BY ugm.user_id ASC';
+
+        return $this->dbConn->fetchAllAssociative($membersQuery, [$this->id], [ParameterType::STRING]);
+    }
 
     /**
      * Get row data for this collection's members
@@ -609,6 +623,4 @@ class GroupCollection
     * ================================================================================
     */
 
-}// /class: GroupCollection
-
-?>
+}

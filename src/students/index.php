@@ -28,7 +28,7 @@ $group_handler = new GroupHandler();
 
 // Get a list of collections that the user is a member of
 
-$collections = $group_handler->get_member_collections($_user->id, APP__ID, 'assessment');
+$collections = $group_handler->get_member_collections($_user->id, 'assessment');
 
 $collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
 
