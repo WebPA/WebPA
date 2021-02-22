@@ -478,7 +478,7 @@ class GroupCollection
             'WHERE ug.collection_id = ? ' .
             'ORDER BY ugm.user_id ASC';
 
-        return $this->dbConn->fetchAllAssociative($membersQuery, [$this->id], [ParameterType::STRING]);
+        return $this->dbConn->fetchAllAssociativeIndexed($membersQuery, [$this->id], [ParameterType::STRING]);
     }
 
     /**

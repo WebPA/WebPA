@@ -465,7 +465,7 @@ class EngCIS
             $queryBuilder->setParameter(0, $source_id);
         }
 
-        return $queryBuilder->execute()->fetchAllAssociative();
+        return $queryBuilder->execute()->fetchAllAssociativeIndexed();
     }
 
     /*

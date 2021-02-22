@@ -212,9 +212,8 @@ class Group {
   * @param string $role   Role within the group
   */
   function add_member($user_id, $role) {
-    //if (!is_array($this->_members)) { $this->refresh_members(); }
     $this->_members[$user_id] = $role;
-  }// /->add_member()
+  }
 
   /**
   * Returns the member list belonging to this group
@@ -297,7 +296,7 @@ class Group {
         'WHERE group_id = ? ' .
         'ORDER BY user_id ASC';
 
-    $this->_members = $this->dbConn->fetchAssociative($membersQuery, [$this->id], [ParameterType::STRING]);
+    $this->_members = $this->dbConn->fetchAllAssociativeIndexed($membersQuery, [$this->id], [ParameterType::STRING]);
 
     if (!$this->_members) {
         $this->_members = array();
