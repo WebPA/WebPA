@@ -349,8 +349,7 @@ class EngCIS
                    . 'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um '
                    . 'ON u.user_id = um.user_id '
                    . 'WHERE u.user_id = ? '
-                   . 'AND um.module_id = ? '
-                   . 'OR u.admin = 1 '
+                   . 'AND (um.module_id = ? OR u.admin = 1) '
                    . 'LIMIT 1';
 
             return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
@@ -423,25 +422,27 @@ class EngCIS
         $queryBuilder->orderBy($ordering === 'name' ? 'lcm.module_title' : 'lcm.module_id');
 
         if ($user_id) {
-            $user_set = $this->_DAO->build_set($user_id, false);
+            if (!is_array($user_id)) {
+                $user_id = [$user_id];
+            }
 
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
                 ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
-                ->innerJoin('lcm', 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
-                ->innerJoin('lcsm', 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->innerJoin('lcsm', APP__DB_TABLE_PREFIX . 'user', 'u', 'lcsm.user_id = u.user_id')
                 ->where(
                     $queryBuilder->expr()->and(
                         $queryBuilder->expr()->or(
                             $queryBuilder->expr()->eq('lcm.source_id', '?'),
-                            $queryBuilder->expr()->neq('u.source_id', '')
+                            $queryBuilder->expr()->neq('u.source_id', '""')
                         ),
                         $queryBuilder->expr()->in('lcsm.user_id', '?')
                     )
                 );
 
             $queryBuilder->setParameter(0, $source_id, ParameterType::STRING);
-            $queryBuilder->setParameter(1, $user_set, $dbConn::PARAM_INT_ARRAY);
+            $queryBuilder->setParameter(1, $user_id, $dbConn::PARAM_INT_ARRAY);
         } else if ($username) {
             $user_set = $this->_DAO->build_set($username);
 
@@ -449,7 +450,7 @@ class EngCIS
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
                 ->from(APP__DB_TABLE_PREFIX . 'module lcm')
                 ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
-                ->innerJoin('lcsm', 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->innerJoin('lcsm', APP__DB_TABLE_PREFIX . 'user', 'u', 'lcsm.user_id = u.user_id')
                 ->where('u.source_id = ?')
                 ->andWhere('u.username IN (?)');
 

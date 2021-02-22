@@ -48,17 +48,17 @@ $queryBuilder->select(
         'u.id_number AS id_number',
         'u.date_last_login AS last_login',
         'CASE u.admin WHEN 0 THEN COUNT(um.module_id) ELSE NULL END as modules')
-        ->from(APP__DB_TABLE_PREFIX . 'user u')
+        ->from(APP__DB_TABLE_PREFIX . 'user', 'u')
         ->leftJoin('u', APP__DB_TABLE_PREFIX . 'user_module', 'um', 'u.user_id = um.user_id')
         ->where('u.source_id = :source_id')
-        ->setParameter(':source_id', $_source_id);
+        ->setParameter('source_id', $_source_id);
 
 if (!empty($post_search)) {
   //build the search string dependant on the data entered
   if (!empty($post_lastname)) {
       $queryBuilder->andWhere($queryBuilder->expr()->like('u.lastname', ':last_name'));
       $queryBuilder->addOrderBy('u.lastname');
-      $queryBuilder->setParameter(':last_name', $post_lastname . '%');
+      $queryBuilder->setParameter('last_name', $post_lastname . '%');
 
       $whereClauseSet = true;
   }
@@ -66,7 +66,7 @@ if (!empty($post_search)) {
   if (!empty($post_firstname)) {
       $queryBuilder->andWhere($queryBuilder->expr()->like('u.forename', ':forename'));
       $queryBuilder->addOrderBy('u.forename');
-      $queryBuilder->setParameter(':forename', $post_firstname . '%');
+      $queryBuilder->setParameter('forename', $post_firstname . '%');
 
       $whereClauseSet = true;
   }
@@ -74,7 +74,7 @@ if (!empty($post_search)) {
   if (!empty($post_username)) {
       $queryBuilder->andWhere($queryBuilder->expr()->like('u.username', ':username'));
       $queryBuilder->addOrderBy('u.username');
-      $queryBuilder->setParameter(':username', $post_username . '%');
+      $queryBuilder->setParameter('username', $post_username . '%');
 
       $whereClauseSet = true;
   }
@@ -82,7 +82,7 @@ if (!empty($post_search)) {
   if (!empty($post_id_number)) {
       $queryBuilder->andWhere($queryBuilder->expr()->like('u.id_number', ':id_number'));
       $queryBuilder->addOrderBy('u.id_number');
-      $queryBuilder->setParameter(':id_number', $post_id_number . '%');
+      $queryBuilder->setParameter('id_number', $post_id_number . '%');
 
       $whereClauseSet = true;
   }

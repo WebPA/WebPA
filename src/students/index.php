@@ -29,41 +29,59 @@ $group_handler = new GroupHandler();
 // Get a list of collections that the user is a member of
 
 $collections = $group_handler->get_member_collections($_user->id, 'assessment');
+$collection_ids = [];
 
-$collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
+if (empty($collections)) {
+    $collections = [];
+} else {
+    $collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
+}
+
+$assessments = [];
 
 // Get a list of assessments that match the user's collections (for this year)
+if (count($collections) > 0) {
+    $academic_year = AcademicYear::get_academic_year();
 
-$academic_year = AcademicYear::get_academic_year();
+    $start_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year);
+    $end_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year + 1);
 
-$start_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year);
-$end_date = mktime(0, 0, 0, APP__ACADEMIC_YEAR_START_MONTH, 1, $academic_year + 1);
+    $sql_start_date = date(MYSQL_DATETIME_FORMAT, $start_date);
+    $sql_end_date = date(MYSQL_DATETIME_FORMAT, $end_date);
 
-$sql_start_date = date(MYSQL_DATETIME_FORMAT, $start_date);
-$sql_end_date = date(MYSQL_DATETIME_FORMAT, $end_date);
+    $assessmentsQuery =
+        'SELECT a.* ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+        'WHERE a.module_id = ? ' .
+        'AND a.collection_id IN (?) ' .
+        'AND a.open_date >= ? ' .
+        'AND a.open_date < ? ' .
+        'ORDER BY a.open_date, a.close_date, a.assessment_name';
 
-$assessmentsQuery =
-    'SELECT a.* FROM ' .
-    APP__DB_TABLE_PREFIX . 'assessment a ' .
-    'WHERE a.module_id = ? ' .
-    'AND a.collection_id IN ($collection_ids) ' .
-    'AND a.open_date >= ? ' .
-    'AND a.open_date < ? ' .
-    'ORDER BY a.open_date, a.close_date, a.assessment_name';
-
-$assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$collection_ids, $sql_start_date, $sql_end_date], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::STRING, ParameterType::STRING]);
+    $assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$collection_ids, $sql_start_date, $sql_end_date], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::STRING, ParameterType::STRING]);
+}
 
 // Get a list of those assessments that the user has already taken
-
 $assessment_ids = ArrayFunctions::array_extract_column($assessments, 'assessment_id');
-$assessment_clause = $DB->build_set($assessment_ids);
+$assessments_with_response = [];
 
-$assessments_with_response = $DB->fetch_col('SELECT DISTINCT um.assessment_id ' .
-                                            'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
-                                            "WHERE (a.module_id = {$_module_id}) AND " .
-                                                  "(um.assessment_id IN {$assessment_clause}) AND " .
-                                                  "(um.user_id = {$_user->id}) " .
-                                            'ORDER BY um.assessment_id');
+if ($assessment_ids !== null && count($assessment_ids) > 0) {
+    $respondedAssessmentsQuery =
+        'SELECT DISTINCT um.assessment_id ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+        'LEFT JOIN assessments a ' .
+        'ON a.assessment_id = um.assessment_id ' .
+        'WHERE a.module_id = ? ' .
+        'AND um.assessment_id IN (?) ' .
+        'AND um.user_id = ? ' .
+        'ORDER BY um.assessment_id';
+
+    $assessments_with_response = $DB->getConnection()->fetchFirstColumn(
+        $respondedAssessmentsQuery,
+        [$_module_id, $assessment_ids, $_user->id],
+        [ParameterType::INTEGER, $DB->getConnection()::PARAM_STR_ARRAY, ParameterType::INTEGER]
+    );
+}
 
 // Split the assessments into pending, open and finished
 $pending_assessments = null;

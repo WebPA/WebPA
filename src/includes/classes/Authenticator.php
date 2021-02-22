@@ -100,8 +100,7 @@ class Authenticator
                     $modules = $this->cis->get_user_modules($user['user_id']);
                 }
                 if (count($modules) > 0) {
-                    $ids = array_keys($modules);
-                    $this->module_id = $ids[0];
+                    $this->module_id = $modules[0]['module_id'];
                 }
             }
 

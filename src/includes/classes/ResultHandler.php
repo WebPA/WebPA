@@ -85,7 +85,7 @@ class ResultHandler
             'AND a.collection_id = ? ' .
             'ORDER BY um.group_id, um.user_id, um.marked_user_id, um.question_id';
 
-        return $this->dbConn->fetchAllAssociative($query, [$this->_assessment->id, $this->_collection_id], [ParameterType::STRING, ParameterType::STRING])
+        return $this->dbConn->fetchAllAssociative($query, [$this->_assessment->id, $this->_collection_id], [ParameterType::STRING, ParameterType::STRING]);
     }
 
     /**
@@ -108,15 +108,17 @@ class ResultHandler
      */
     function get_responded_users()
     {
-        return $this->_DAO->fetch_col("
-      SELECT DISTINCT um.user_id
-      FROM " . APP__DB_TABLE_PREFIX . "user_mark um
-        INNER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON um.assessment_id = a.assessment_id
-      WHERE um.assessment_id = '{$this->_assessment->id}'
-            AND a.collection_id = '{$this->_collection->id}'
-      ORDER BY um.user_id
-    ");
-    }// /->get_responded_users()
+        $usersThatRespondedQuery =
+            'SELECT DISTINCT um.user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON um.assessment_id = a.assessment_id ' .
+            'WHERE um.assessment_id = ? ' .
+            'AND a.collection_id = ? ' .
+            'ORDER BY um.user_id';
+
+        return $this->dbConn->fetchFirstColumn($usersThatRespondedQuery, [$this->_assessment->id, $this->_collection->id], [ParameterType::STRING, ParameterType::STRING]);
+    }
 
     /**
      * Fetch a count of the responses for the given group
