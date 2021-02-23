@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class Module {
   // Public Vars
   public $module_code = NULL;
@@ -95,9 +97,15 @@ class Module {
    * Function to delete a module
    */
    function delete(){
+       $deleteModuleQuery =
+           'SELECT collection_id ' .
+           'FROM ' . APP__DB_TABLE_PREFIX . 'collection ' .
+           'WHERE module_id = ?';
 
-     $collections = $this->DAO->fetch_col("SELECT collection_id FROM " . APP__DB_TABLE_PREFIX . "collection WHERE module_id = $this->module_id");
+     $collections = $this->DAO->getConnection()->fetchFirstColumn($deleteModuleQuery, [$this->module_id], [ParameterType::INTEGER]);
+
      $group_handler = new GroupHandler();
+
      for ($i=0; $i<count($collections); $i++) {
        $collection = $group_handler->get_collection($collections[$i]);
        $collection->delete();
