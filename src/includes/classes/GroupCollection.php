@@ -488,12 +488,16 @@ class GroupCollection
      */
     function get_member_rows()
     {
-        return $this->_DAO->fetch("SELECT ugm.group_id, ugm.user_id
-                  FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                    INNER JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON ugm.group_id = ug.group_id
-                  WHERE ug.collection_id = '{$this->id}'
-                  ORDER BY ugm.group_id ASC");
-    }// /->get_member_rows()
+        $memberRowsQuery =
+            'SELECT ugm.group_id, ugm.user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON ugm.group_id = ug.group_id ' .
+            'WHERE ug.collection_id = ? ' .
+            'ORDER BY ugm.group_id ASC';
+
+        return $this->_DAO->getConnection()->fetchAllAssociative($memberRowsQuery, [$this->id],[ParameterType::STRING]);
+    }
 
     /**
      * Get group objects for all the groups the given member belongs to

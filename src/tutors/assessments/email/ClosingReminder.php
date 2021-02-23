@@ -11,6 +11,8 @@
 namespace WebPA\tutors\assessments\email;
 
 //gather all include files needed.
+use Doctrine\DBAL\Connection;
+
 require_once "../../../includes/inc_global.php";
 
 class ClosingReminder
@@ -19,9 +21,13 @@ class ClosingReminder
 
     public function send()
     {
+        $allDueQuery =
+            'SELECT * ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'WHERE a.close_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY)';
+
         //get a list of the assessment that will be run in two days from now
-        $allDue = $DB->fetch("SELECT * FROM " . APP__DB_TABLE_PREFIX . "assessment a
-           WHERE a.close_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY)");
+        $allDue = $DB->getConnection()->fetchAllAssociative($allDueQuery);
 
         if (!empty($allDue)){
             //cycle round and for each collection send the emails

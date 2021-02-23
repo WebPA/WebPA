@@ -10,6 +10,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 class Assessment {
@@ -31,7 +32,8 @@ class Assessment {
   public $email_closing = false;
 
   // Private Vars
-  private $_DAO = null;
+  private DAO $_DAO;
+  private $dbConn;
   private $_xml_parser = null;
 
   private $_collection = null;
@@ -47,10 +49,11 @@ class Assessment {
   /**
   * CONSTRUCTOR for the assessment class
   *
-  * @param string $DAO
+  * @param DAO $DAO
   */
-  function __construct(&$DAO) {
+  function __construct(DAO $DAO) {
     $this->_DAO =& $DAO;
+    $this->dbConn = $this->_DAO->getConnection();
     $this->_locked = null;
   }// /->Assessment()
 
@@ -311,12 +314,13 @@ class Assessment {
   function get_all_marking_params() {
     $params = null;
 
-    $mark_sheets = $this->_DAO->fetch("
-      SELECT date_created, marking_params
-      FROM " . APP__DB_TABLE_PREFIX . "assessment_marking
-      WHERE assessment_id = '{$this->id}'
-      ORDER BY date_created ASC
-    ");
+    $markSheetsQuery =
+      'SELECT date_created, marking_params ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_marking ' .
+      'WHERE assessment_id = ? ' .
+      'ORDER BY date_created ASC';
+
+    $mark_sheets = $this->dbConn->fetchAllAssociative($markSheetsQuery, [$this->id], [ParameterType::STRING]);
 
     if ($mark_sheets) {
       foreach($mark_sheets as $i => $mark_sheet) {

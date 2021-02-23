@@ -18,9 +18,14 @@ class TriggerReminder
 
     public function send()
     {
+        $allDueQuery =
+            'SELECT * ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'WHERE a.open_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) ' .
+            'AND a.email_opening = 1';
+
         //get a list of the assessment that will be run in two days from now
-        $allDue = $DB->fetch("SELECT * FROM " . APP__DB_TABLE_PREFIX . "assessment a
-             WHERE a.open_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) AND a.email_opening = 1");
+        $allDue = $DB->getConnection()->fetchAllAssociative($allDueQuery);
 
         if (!empty($allDue)) {
             //cycle round and for each collection send the emails

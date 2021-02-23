@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
@@ -68,14 +69,20 @@ class WizardStep2
 
         $allow_feedback = $this->wizard->get_field('allow_feedback', 0);
 
-        $sql = 'SELECT DISTINCT f.form_id, f.form_name, m.module_id, m.module_code, m.module_title FROM ' . APP__DB_TABLE_PREFIX .
-            'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-            'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-            'user_module um ON fm.module_id = um.module_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-            'module m ON um.module_id = m.module_id ' .
-            "WHERE (um.user_id = {$user->id}) OR (fm.module_id = {$this->moduleId}) " .
+        $sql =
+            'SELECT DISTINCT f.form_id, f.form_name, m.module_id, m.module_code, m.module_title ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+            'ON f.form_id = fm.form_id ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON fm.module_id = um.module_id ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
+            'ON um.module_id = m.module_id ' .
+            'WHERE um.user_id = ? ' .
+            'OR fm.module_id = ? ' .
             'ORDER BY f.form_name ASC';
-        $forms = $DB->fetch($sql);
+
+        $forms = $DB->getConnection()->fetchAllAssociative($sql, [$user->id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
         $form_id = $this->wizard->get_field('form_id');
         $feedback_name = $this->wizard->get_field('feedback_name');

@@ -8,6 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
@@ -58,21 +59,36 @@ class WizardStep1
 
         $form_id = $this->wizard->get_field('form_id');
 
+        $forms = [];
+
         if (!$this->user->is_admin()) {
-            $sql = 'SELECT f.*, m.module_id, m.module_title FROM ' . APP__DB_TABLE_PREFIX .
-                'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                "user_module um ON fm.module_id = um.module_id INNER JOIN " . APP__DB_TABLE_PREFIX .
-                'module m ON um.module_id = m.module_id ' .
-                "WHERE um.user_id = {$user->id} ORDER BY f.form_name ASC";
+            $sql =
+                'SELECT f.*, m.module_id, m.module_title ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+                'ON f.form_id = fm.form_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+                'ON fm.module_id = um.module_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
+                'ON um.module_id = m.module_id ' .
+                'WHERE um.user_id = ? ' .
+                'ORDER BY f.form_name ASC';
+
+            $forms = $DB->getConnection()->fetchAllAssociative($sql, [$user->id], [ParameterType::INTEGER]);
         } else {
-            $sql = 'SELECT f.*, m.module_id, m.module_title FROM ' . APP__DB_TABLE_PREFIX .
-                'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'module m ON fm.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$this->sourceId}' ORDER BY f.form_name ASC";
+            $sql =
+                'SELECT f.*, m.module_id, m.module_title ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+                'ON f.form_id = fm.form_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
+                'ON fm.module_id = m.module_id ' .
+                'WHERE m.source_id = ? ' .
+                'ORDER BY f.form_name ASC';
+
+            $forms = $DB->getConnection()->fetchAllAssociative($sql, [$this->sourceId], [ParameterType::STRING]);
         }
-        $forms = $DB->fetch($sql);
+
         if (!$forms) {
             $this->wizard->next_button = null;
             ?>
