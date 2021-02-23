@@ -184,31 +184,6 @@ class DAO
     }// /->execute()
 
     /**
-     * Get a single column as a numeric array
-     * column indexes are 0-based
-     * @param string $sql
-     * @param integer $x
-     * @return array
-     */
-    function fetch_col($sql = null, $x = 0)
-    {
-        // If there is an SQL query, get its results instead..
-        if ($sql) {
-            $this->_process_query($sql);
-        }
-
-        $new_array = null;
-
-        // Extract the column value
-        if ($this->_num_rows > 0) {
-            for ($i = 0; $i < $this->_num_rows; $i++) {
-                $new_array[$i] = $this->fetch_value(null, $x, $i);
-            }
-        }
-        return $new_array;
-    } // /->fetch_col()
-
-    /**
      * Get a single value from the result set. Column/row indexes are 0-based. An empty string ('') or no value, will
      * return null
      *
