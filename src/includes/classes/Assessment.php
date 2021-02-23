@@ -112,9 +112,16 @@ class Assessment {
   function load($id) {
     $this->_locked = null;
 
-    $row = $this->_DAO->fetch_row("SELECT * FROM " . APP__DB_TABLE_PREFIX . "assessment WHERE assessment_id = '$id' LIMIT 1");
-    return ($row) ? $this->load_from_row($row) : false;
-  }// /->load()
+    $assessmentQuery =
+        'SELECT * ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'assessment ' .
+        'WHERE assessment_id = ? ' .
+        'LIMIT 1';
+
+    $row = $this->dbConn->fetchAssociative($assessmentQuery, [$id], [ParameterType::STRING]);
+
+    return $row ? $this->load_from_row($row) : false;
+  }
 
   /**
   * Load the Assessment from the given row
