@@ -66,7 +66,15 @@ class GroupCollection
     {
         while (true) {
             $new_id = Common::uuid_create();
-            if ($this->_DAO->fetch_value("SELECT COUNT(collection_id) AS num_id FROM " . APP__DB_TABLE_PREFIX . "collection WHERE collection_id = '$new_id' ") == 0) {
+
+            $countCollectionsQuery =
+                'SELECT COUNT(collection_id) AS num_id ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'collection ' .
+                'WHERE collection_id = ?';
+
+            $collectionCount = $this->dbConn->fetchOne($countCollectionsQuery, [$new_id], [ParameterType::STRING]);
+
+            if ($collectionCount == 0) {
                 break;
             }
         }
@@ -437,12 +445,15 @@ class GroupCollection
      */
     function get_member_count($role = null)
     {
-        return $this->_DAO->fetch_value("SELECT COUNT(ugm.user_id)
-                    FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON ugm.group_id = ug.group_id
-                    WHERE ug.collection_id = '{$this->id}'
-                    ");
-    }// /->get_member_count()
+        $memberCountQuery =
+            'SELECT COUNT(ugm.user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON ugm.group_id = ug.group_id ' .
+            'WHERE ug.collection_id = ?';
+
+        return $this->dbConn->fetchOne($memberCountQuery, [$this->id], [ParameterType::STRING]);
+    }
 
     /**
      * Get a count of the members in this collection by group

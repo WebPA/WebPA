@@ -94,13 +94,16 @@ class ResultHandler
      */
     function get_responses_count_for_assessment()
     {
-        return $this->_DAO->fetch_value("SELECT COUNT(DISTINCT um.user_id)
-                    FROM " . APP__DB_TABLE_PREFIX . "user_mark um
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON um.assessment_id = a.assessment_id
-                    WHERE um.assessment_id = '{$this->_assessment->id}'
-                      AND a.collection_id = '{$this->_collection->id}'");
+        $responseCountsQuery =
+            'SELECT COUNT(DISTINCT um.user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON um.assessment_id = a.assessment_id ' .
+            'WHERE um.assessment_id = ? ' .
+            'AND a.collection_id = ?';
 
-    }// /->get_responses_count_for_assessment()
+        return $this->dbConn->fetchOne($responseCountsQuery, [$this->_assessment->id, $this->_collection->id], [ParameterType::STRING, ParameterType::STRING]);
+    }
 
     /**
      * Function to get the number of students who have responded to the assessment
@@ -128,14 +131,16 @@ class ResultHandler
     function get_responses_count($group_id)
     {
         if ($this->_collection->group_id_exists($group_id)) {
-            return $this->_DAO->fetch_value("
-        SELECT COUNT(DISTINCT user_id)
-        FROM " . APP__DB_TABLE_PREFIX . "user_mark um
-          INNER JOIN " . APP__DB_TABLE_PREFIX . "assessment a ON um.assessment_id = a.assessment_id
-        WHERE um.assessment_id = '{$this->_assessment->id}'
-          AND a.collection_id = '{$this->_collection->id}'
-          AND um.group_id = '$group_id'
-      ");
+            $responseCountQuery =
+                'SELECT COUNT(DISTINCT user_id) ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+                'ON um.assessment_id = a.assessment_id ' .
+                'WHERE um.assessment_id = ? ' .
+                'AND a.collection_id = ? ' .
+                'AND um.group_id = ?';
+
+            return $this->dbConn->fetchOne($responseCountQuery, [$this->_assessment->id, $this->_collection->id, $group_id], [ParameterType::STRING, ParameterType::STRING, ParameterType::STRING]);
         } else {
             return null;
         }
@@ -200,15 +205,18 @@ class ResultHandler
      */
     function user_has_responded($user_id, $assessment_id)
     {
-        $num_responses = $this->_DAO->fetch_value("
-      SELECT COUNT(DISTINCT um.marked_user_id)
-      FROM " . APP__DB_TABLE_PREFIX . "assessment a
-        LEFT JOIN " . APP__DB_TABLE_PREFIX . "user_mark um ON a.assessment_id = um.assessment_id
-          AND a.assessment_id = '$assessment_id'
-          AND um.user_id = $user_id
-    ");
-        return ($num_responses > 0);
-    }// /->user_has_responded()
+        $numberOfResponsesQuery =
+            'SELECT COUNT(DISTINCT um.marked_user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+            'ON a.assessment_id = um.assessment_id ' .
+            'AND a.assessment_id = ? ' .
+            'AND um.user_id = ?';
+
+        $num_responses = $this->dbConn->fetchOne($numberOfResponsesQuery, [$assessment_id, $user_id], [ParameterType::STRING, ParameterType::INTEGER]);
+
+        return $num_responses > 0;
+    }
 
     /**
      * Function for the assessments taken by a user

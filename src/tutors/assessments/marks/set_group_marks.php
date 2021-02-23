@@ -9,6 +9,7 @@
  */
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\XMLParser;
@@ -44,9 +45,12 @@ if ($assessment->load($assessment_id)) {
   $group_handler = new GroupHandler();
   $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-  $group_marks_xml = $DB->fetch_value("SELECT group_mark_xml
-                    FROM " . APP__DB_TABLE_PREFIX . "assessment_group_marks
-                    WHERE assessment_id = '{$assessment->id}'");
+  $groupMarkXmlQuery =
+      'SELECT group_mark_xml ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
+      'WHERE assessment_id = ?';
+
+  $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING])
 
   $xml_parser = null;
 

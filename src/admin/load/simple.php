@@ -14,6 +14,7 @@
 
 require_once('../../includes/inc_global.php');
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\GroupCollection;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\StringFunctions;
@@ -177,12 +178,23 @@ if ($flg_match) {
       $DB->execute($sql);
       $id = $DB->get_insert_id();
       if (!$id) {
-        $id = $DB->fetch_value('SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE source_id = '{$_source_id}' AND username = '{$i['username']}'");
+        $getUserIdQuery =
+            'SELECT user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user ' .
+            'WHERE source_id = ? ' .
+            'AND username = ?';
+
+        $id = $DB->getConnection()->fetchOne($getUserIdQuery, [$_source_id, $i['username']], [ParameterType::STRING, ParameterType::STRING]);
       }
 
       if ($_user->is_admin() && !empty($module_code)) {
-        $sql = "SELECT module_id FROM " . APP__DB_TABLE_PREFIX . "module WHERE source_id = '{$_source_id}' AND module_code = '$module_code'";
-        $module_id = $DB->fetch_value($sql);
+        $sql =
+            'SELECT module_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'module ' .
+            'WHERE source_id = ? ' .
+            'AND module_code = ?';
+
+        $module_id = $DB->getConnection()->fetchOne($sql, [$_source_id, $module_code], [ParameterType::STRING, ParameterType::STRING]);
       } else {
         $module_id = $_module_id;
       }

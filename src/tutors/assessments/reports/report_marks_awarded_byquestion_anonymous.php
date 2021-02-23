@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
@@ -48,11 +49,14 @@ if ($assessment->load($assessment_id)) {
 
   $md_mysql_date = date(MYSQL_DATETIME_FORMAT, $marking_date);
 
-  $params_xml = $DB->fetch_value("SELECT marking_params
-                  FROM " . APP__DB_TABLE_PREFIX . "assessment_marking
-                  WHERE assessment_id = '$assessment->id'
-                    AND date_created = '$md_mysql_date'
-                  LIMIT 1");
+  $getMarkingParametersQuery =
+      'SELECT marking_params ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_marking ' .
+      'WHERE assessment_id = ? ' .
+      'AND date_created = ? ' .
+      'LIMIT 1';
+
+  $params_xml = $DB->getConnection()->fetchOne($getMarkingParametersQuery, [$assessment->id, $md_mysql_date], [ParameterType::STRING, ParameterType::STRING]);
 
   $params = $xml_parser->parse($params_xml);
 

@@ -17,6 +17,7 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\StringFunctions;
 
 class LDAPAuthenticator extends Authenticator
@@ -121,10 +122,17 @@ class LDAPAuthenticator extends Authenticator
             $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ', $els);
             $DAO->execute($sql);
             $id = $DAO->get_insert_id();
+
             if (!$id) {
-                $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '{$this->username}' AND source_id = ''";
-                $id = $DAO->fetch_value($sql);
+                $sql =
+                    'SELECT user_id ' .
+                    'FROM ' . APP__DB_TABLE_PREFIX . 'user ' .
+                    'WHERE username = ? ' .
+                    'AND source_id = ""';
+
+                $id = $DAO->getConnection()->fetchOne($sql, [$this->username], [ParameterType::STRING]);
             }
+
             $sql = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user WHERE user_id = $id";
 
         } else {

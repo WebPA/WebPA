@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
@@ -60,9 +61,12 @@ if ($assessment->load($assessment_id)) {
   $result_handler->set_assessment($assessment);
 
   // check if there are group grades
-  $group_marks_xml = $DB->fetch_value("SELECT group_mark_xml
-                    FROM " . APP__DB_TABLE_PREFIX . "assessment_group_marks
-                    WHERE assessment_id = '{$assessment->id}';");
+  $groupMarksQuery =
+      'SELECT group_mark_xml ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
+      'WHERE assessment_id = ?';
+
+  $group_marks_xml = $DB->getConnection()->fetchOne($groupMarksQuery, [$assessment->id], [ParameterType::STRING]);
 
   $xml_parser = null;
 

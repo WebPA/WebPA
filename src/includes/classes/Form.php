@@ -55,7 +55,17 @@ class Form {
     // generate a new form_id
     while (true) {
       $new_id = Common::uuid_create();
-      if ($this->_DAO->fetch_value("SELECT COUNT(form_id) FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_id = '$new_id'") == 0) { break; }
+
+      $existingFormIdQuery =
+          'SELECT COUNT(form_id) ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'form ' .
+          'WHERE form_id = ?';
+
+      $formIdCount = $this->_DAO->getConnection()->fetchOne($existingFormIdQuery, [$new_id], [ParameterType::STRING]);
+
+      if ($formIdCount == 0) {
+        break;
+      }
     }
     $this->id = $new_id;
   }// ->create()

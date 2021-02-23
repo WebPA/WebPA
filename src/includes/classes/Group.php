@@ -61,7 +61,17 @@ class Group {
     // generate a new project_id
     while (true) {
       $new_id = Common::uuid_create();
-      if ($this->_DAO->fetch_value("SELECT COUNT(group_id) FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE group_id = '$new_id' ") == 0) { break; }
+
+      $countGroupsQuery =
+          'SELECT COUNT(group_id) ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
+          'WHERE group_id = ?';
+
+      $groupCount = $this->dbConn->fetchOne($countGroupsQuery, [$new_id], [ParameterType::STRING]);
+
+      if ($groupCount == 0) {
+          break;
+      }
     }
     $this->id = $new_id;
   }// ->create()

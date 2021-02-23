@@ -35,14 +35,18 @@ switch($action) {
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
     isset($_POST['username']) or die("Username not set.");
 
-    $DB->open();
-    $username = $DB->escape_str($_POST['username']);
-    $DB->close();
-
     $hash = md5(rand());
-    $sql = 'SELECT user_id FROM ' . APP__DB_TABLE_PREFIX . "user WHERE username = '$username' AND source_id = '' AND " .
-           '(email IS NOT NULL) AND (email != \'\')';
-    $uid = $DB->fetch_value($sql);
+
+    $sql =
+        'SELECT user_id ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user ' .
+        'WHERE username = ? ' .
+        'AND source_id = "" ' .
+        'AND email IS NOT NULL ' .
+        'AND email <> ""';
+
+    $uid = $DB->getConnection()->fetchOne($sql, [$_POST['username']], [ParameterType::STRING]);
+
     if (!$uid) {
       $content = "Unable to reset the password for this account.";
       break;
@@ -58,8 +62,10 @@ You have requested for your password to be reset on {$appname}. Please click or 
 
 If you have not requested a password reset, please ignore this email - your password will not be reset without further action.
 TXT;
-    //echo $email;
-    $uemail = $DB->fetch_value("SELECT email FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = $uid");
+    $userEmailQuery = 'SELECT email FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?';
+
+    $uemail = $DB->getConnection()->fetchOne($userEmailQuery, [$uid], [ParameterType::INTEGER]);
+
     mail($uemail,APP__NAME. " Password Reset",$email,"From: " . $BRANDING['email.noreply']);
     $content = "An email has been sent to $uemail.";
     break;
@@ -67,7 +73,15 @@ TXT;
     //phase 4
     $hash = $_POST['hash'];
     $uid = $_POST['uid'];
-    $rslt = $DB->fetch_value("SELECT COUNT(*) FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE hash = '$hash' AND user_id = $uid");
+
+    $query =
+        'SELECT COUNT(*) ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request ' .
+        'WHERE hash = ? ' .
+        'AND user_id = ?';
+
+    $rslt = $DB->getConnection()->fetchOne($query, [$hash, $uid], [ParameterType::STRING, ParameterType::INTEGER]);
+
     if ($rslt) {
       if ($_POST['newpass']==$_POST['confirmpass']) {
         $user = new User();
@@ -100,7 +114,15 @@ TXT;
         $content = "Error: reset link incorrect. If you copied and pasted the link from your mail client, be sure you did so correctly.";
         break;
       }
-      $rslt = $DB->fetch_value("SELECT COUNT(*) FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE hash = '$hash' AND user_id = $uid");
+
+      $query =
+          'SELECT COUNT(*) ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request ' .
+          'WHERE hash = ? ' .
+          'AND user_id = ?';
+
+      $rslt = $DB->getConnection()->fetchOne($query, [$hash, $uid], [ParameterType::STRING, ParameterType::INTEGER]);
+
       if ($rslt) {
       $content = <<<HTML
       <form action="reset.php" method="post">

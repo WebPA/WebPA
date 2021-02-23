@@ -76,12 +76,20 @@ class Assessment {
     // generate a new project_id
     while (true) {
       $new_id = Common::uuid_create();
-      if ($this->_DAO->fetch_value("SELECT COUNT(assessment_id) FROM " . APP__DB_TABLE_PREFIX . "assessment WHERE assessment_id = '$new_id'") == 0) {
+      $projectIdQuery =
+          'SELECT COUNT(assessment_id) ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'assessment ' .
+          'WHERE assessment_id = ?';
+
+      $projectCount = $this->dbConn->fetchOne($projectIdQuery, [$new_id], [ParameterType::STRING]);
+
+      if ($projectCount == 0) {
         break;
       }
     }
+
     $this->id = $new_id;
-  }// ->create()
+  }
 
   /**
   * Delete this Assessment
@@ -94,7 +102,14 @@ class Assessment {
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE assessment_id = '{$this->id}'");
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE assessment_id = '{$this->id}'");
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE assessment_id = '{$this->id}'");
-    $collection = $this->_DAO->fetch_value("SELECT collection_id FROM " . APP__DB_TABLE_PREFIX . "assessment WHERE assessment_id = '{$this->id}'");
+
+    $collectionQuery =
+        'SELECT collection_id ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'assessment ' .
+        'WHERE assessment_id = ?';
+
+    $collection = $this->dbConn->fetchOne($collectionQuery, [$this->id], [ParameterType::STRING]);
+
     $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "assessment WHERE assessment_id = '{$this->id}'");
     $group_handler = new GroupHandler();
     $collection = $group_handler->get_collection($collection);
@@ -246,12 +261,14 @@ class Assessment {
    *
    */
   function get_group_marks() {
-    $groups_and_marks = array();
+    $groups_and_marks = [];
 
-    $group_marks_xml = $this->_DAO->fetch_value("
-       SELECT group_mark_xml
-       FROM " . APP__DB_TABLE_PREFIX . "assessment_group_marks
-       WHERE assessment_id = '{$this->id}'");
+    $groupsAndMarksQuery =
+        'SELECT group_mark_xml ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
+        'WHERE assessment_id = ?';
+
+    $group_marks_xml = $this->dbConn->fetchOne($groupsAndMarksQuery, [$this->id], [ParameterType::STRING]);
 
     if ($group_marks_xml) {
       $xml_parser = new XMLParser();
@@ -350,11 +367,15 @@ class Assessment {
 
     $marking_date_sql = date(MYSQL_DATETIME_FORMAT, $marksheet_id);
 
-    $marking_params = $this->_DAO->fetch_value("SELECT marking_params
-                          FROM " . APP__DB_TABLE_PREFIX . "assessment_marking
-                          WHERE assessment_id = '{$this->id}'
-                            AND date_created='$marking_date_sql'
-                          LIMIT 1");
+    $markingParamsQuery =
+        'SELECT marking_params ' .
+        'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_marking ' .
+        'WHERE assessment_id = ? ' .
+        'AND date_created = ? ' .
+        'LIMIT 1';
+
+    $marking_params = $this->dbConn->fetchOne($markingParamsQuery, [$this->id, $marking_date_sql], [ParameterType::STRING, ParameterType::STRING]);
+
     if ($marking_params) {
       $params = $this->_parse_marking_params($marking_params);
     }
@@ -369,9 +390,12 @@ class Assessment {
   */
   function is_locked() {
     if (is_null($this->_locked)) {
-      $result_count = $this->_DAO->fetch_value("SELECT COUNT(assessment_id)
-                           FROM " . APP__DB_TABLE_PREFIX . "user_mark
-                           WHERE assessment_id = '{$this->id}'");
+      $countAssessmentsQuery =
+          'SELECT COUNT(assessment_id) ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark ' .
+          'WHERE assessment_id = ?';
+
+      $result_count = $this->dbConn->fetchOne($countAssessmentsQuery, [$this->id], [ParameterType::STRING]);
 
       $this->_locked = ($result_count>0);
     }
