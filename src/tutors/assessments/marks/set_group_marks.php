@@ -50,7 +50,7 @@ if ($assessment->load($assessment_id)) {
       'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
       'WHERE assessment_id = ?';
 
-  $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING])
+  $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING]);
 
   $xml_parser = null;
 
