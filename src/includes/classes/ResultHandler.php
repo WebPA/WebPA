@@ -164,7 +164,7 @@ class ResultHandler
         if (!empty($year)) {
             $next_year = $year + 1;
 
-            $month = (string) APP__ACADEMIC_YEAR_START_MONTH);
+            $month = (string) APP__ACADEMIC_YEAR_START_MONTH;
 
             if (APP__ACADEMIC_YEAR_START_MONTH < 10) {
                 $month = '0' . $month;
@@ -174,7 +174,7 @@ class ResultHandler
             $endDate = "$next_year-$month-01 00:00:00";
 
             $sql .=
-                'AND a.open_date >= ? '
+                'AND a.open_date >= ? ' .
                 'AND a.open_date < ? ';
         }
 
