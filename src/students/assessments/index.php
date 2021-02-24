@@ -58,13 +58,14 @@ $assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$co
 $assessment_ids = ArrayFunctions::array_extract_column($assessments, 'assessment_id');
 $assessment_clause = $DB->build_set($assessment_ids);
 
-$assessments_with_response = $DB->fetch_col("
-  SELECT DISTINCT assessment_id
-  FROM " . APP__DB_TABLE_PREFIX . "user_mark
-  WHERE (assessment_id IN {$assessment_clause})
-    AND (user_id = {$_user->id})
-  ORDER BY assessment_id
-");
+$assessmentsWithResponseQuery =
+    'SELECT DISTINCT assessment_id ' .
+    'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark ' .
+    'WHERE assessment_id IN (?) ' .
+    'AND user_id = ? ' .
+    'ORDER BY assessment_id';
+
+$assessments_with_response = $DB->getConnection()->fetchFirstColumn($assessmentsWithResponseQuery, [$assessments, $_user->id], [$DB->getConnection()::PARAM_INT_ARRAY, ParameterType::INTEGER]);
 
 // Split the assessments into pending, open and finished
 $pending_assessments = null;
