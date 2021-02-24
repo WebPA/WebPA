@@ -231,14 +231,21 @@ class EngCIS
      */
     function get_module_grouped_students_count($modules)
     {
-        $module_search = $this->_DAO->build_filter('module_id', (array)$modules, 'OR');
+        $queryBuilder = $this->_DAO->getConnection()->createQueryBuilder();
 
-        return $this->_DAO->fetch_assoc("SELECT module_id, COUNT(user_id)
-                    FROM " . APP__DB_TABLE_PREFIX . "user_module lcsm
-                    WHERE $module_search
-                    GROUP BY module_id
-                    ORDER BY module_id");
-    }// ->get_modules_grouped_students_count()
+        $queryBuilder
+            ->select('module_id', 'COUNT(user_id')
+            ->from(APP__DB_TABLE_PREFIX . 'user_module', 'lcsm')
+            ->where(
+                $queryBuilder->expr()->in('module_id', '?')
+            )
+            ->groupBy('module_id')
+            ->orderBy('module_id');
+
+        $queryBuilder->setParameter(0, $modules, $this->_DAO->getConnection()::PARAM_INT_ARRAY);
+
+        return $queryBuilder->execute()->fetchAllAssociativeIndexed();
+    }
 
     /*
     * --------------------------------------------------------------------------------

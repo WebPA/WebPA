@@ -464,13 +464,17 @@ class GroupCollection
      */
     function get_member_count_by_group($role = null)
     {
-        return $this->_DAO->fetch_assoc("SELECT ugm.group_id, COUNT(user_id)
-                    FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON ugm.group_id = ug.group_id
-                    WHERE ug.collection_id = '{$this->id}'
-                    GROUP BY ugm.group_id
-                    ORDER BY ugm.group_id");
-    }// /->get_member_count_by_group()
+        $memberCountQuery =
+            'SELECT ugm.group_id, COUNT(user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON ugm.group_id = ug.group_id ' .
+            'WHERE ug.collection_id = ? ' .
+            'GROUP BY ugm.group_id ' .
+            'ORDER BY ugm.group_id';
+
+        return $this->dbConn->fetchAllAssociativeIndexed($memberCountQuery, [$this->id], [ParameterType::STRING]);
+    }
 
     /**
      * Get the members actually contained within this collection's groups
@@ -538,12 +542,17 @@ class GroupCollection
      */
     function get_member_roles($user_id)
     {
-        return $this->_DAO->fetch_assoc("SELECT ugm.group_id, 'member' AS user_role
-                    FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON ugm.group_id = ug.group_id
-                    WHERE ug.collection_id = '{$this->id}' AND ugm.user_id = $user_id
-                    ORDER BY ugm.group_id ASC");
-    }// /->get_member_roles()
+        $memberRolesQuery =
+            'SELECT ugm.group_id, "member" AS user_role ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON ugm.group_id = ug.group_id ' .
+            'WHERE ug.collection_id = ? ' .
+            'AND ugm.user_id = ? ' .
+            'ORDER BY ugm.group_id ASC';
+
+        return $this->dbConn->fetchAllAssociativeIndexed($memberRolesQuery, [$this->id, $user_id], [ParameterType::STRING, ParameterType::INTEGER]);
+    }
 
     /**
      * Purge a collection of its members using include/exclude lists
@@ -629,7 +638,9 @@ class GroupCollection
      */
     function get_modules()
     {
-        return $this->_DAO->fetch_assoc("SELECT DISTINCT c.module_id FROM " . APP__DB_TABLE_PREFIX . "collection c");
+        $modulesQuery = 'SELECT DISTINCT c.module_id FROM ' . APP__DB_TABLE_PREFIX . 'collection c';
+
+        return $this->dbConn->fetchFirstColumn($modulesQuery);
     }
 
     /*

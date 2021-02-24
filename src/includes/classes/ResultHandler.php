@@ -154,22 +154,38 @@ class ResultHandler
      */
     function get_responses_count_for_user($user_id, $year = NULL)
     {
-        $sql = "SELECT a.assessment_id, COUNT(DISTINCT um.user_id)
-      FROM " . APP__DB_TABLE_PREFIX . "assessment a
-        LEFT JOIN " . APP__DB_TABLE_PREFIX . "user_mark um ON a.assessment_id = um.assessment_id
-          AND a.module_id = {$this->moduleId} ";
+        $sql =
+            'SELECT a.assessment_id, COUNT(DISTINCT um.user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
+            'ON a.assessment_id = um.assessment_id ' .
+            'AND a.module_id = ? ';
+
         if (!empty($year)) {
             $next_year = $year + 1;
-            $month = strval(APP__ACADEMIC_YEAR_START_MONTH);
+
+            $month = (string) APP__ACADEMIC_YEAR_START_MONTH);
+
             if (APP__ACADEMIC_YEAR_START_MONTH < 10) {
                 $month = '0' . $month;
             }
-            $sql .= "AND a.open_date >= '{$year}-{$month}-01 00:00:00'
-          AND a.open_date < '{$next_year}-{$month}-01 00:00:00' ";
+
+            $startDate = "$year-$month-01 00:00:00";
+            $endDate = "$next_year-$month-01 00:00:00";
+
+            $sql .=
+                'AND a.open_date >= ? '
+                'AND a.open_date < ? ';
         }
+
         $sql .= 'GROUP BY assessment_id';
-        return $this->_DAO->fetch_assoc($sql);
-    }// /->get_responses_count_for_user()
+
+        if (!empty($year)) {
+           return $this->dbConn->fetchAllAssociativeIndexed($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+        }
+
+        return $this->dbConn->fetchFirstColumn($sql, [$this->moduleId], [ParameterType::INTEGER]);
+    }
 
     /**
      * Fetch a count of the members for all this user's assessments (that opened this academic year)
@@ -179,23 +195,39 @@ class ResultHandler
      */
     function get_members_count_for_user($user_id, $year = NULL)
     {
-        $sql = "SELECT a.assessment_id, COUNT(DISTINCT ugm.user_id)
-      FROM " . APP__DB_TABLE_PREFIX . "assessment a
-        LEFT JOIN " . APP__DB_TABLE_PREFIX . "user_group ug ON a.collection_id = ug.collection_id
-        LEFT JOIN " . APP__DB_TABLE_PREFIX . "user_group_member ugm ON ug.group_id = ugm.group_id
-          AND a.module_id = {$this->moduleId} ";
+        $sql =
+            'SELECT a.assessment_id, COUNT(DISTINCT ugm.user_id) ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+            'ON a.collection_id = ug.collection_id ' .
+            'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'ON ug.group_id = ugm.group_id ' .
+            'AND a.module_id = ? ';
+
         if (!empty($year)) {
             $next_year = $year + 1;
-            $month = strval(APP__ACADEMIC_YEAR_START_MONTH);
+            $month = (string) APP__ACADEMIC_YEAR_START_MONTH;
+
             if (APP__ACADEMIC_YEAR_START_MONTH < 10) {
                 $month = '0' . $month;
             }
-            $sql .= "AND a.open_date >= '{$year}-{$month}-01 00:00:00'
-          AND a.open_date < '{$next_year}-{$month}-01 00:00:00' ";
+
+            $startDate = "$year-$month-01 00:00:00";
+            $endDate = "$next_year-$month-01 00:00:00";
+
+            $sql .=
+                'AND a.open_date >= ? ' .
+                'AND a.open_date < ? ';
         }
+
         $sql .= 'GROUP BY a.assessment_id';
-        return $this->_DAO->fetch_assoc($sql);
-    }// /->get_members_count_for_user()
+
+        if (!empty($year)) {
+            return $this->dbConn->fetchAllAssociativeIndexed($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+        }
+
+        return $this->dbConn->fetchFirstColumn($sql, [$this->moduleId], [ParameterType::INTEGER]);
+    }
 
     /**
      * Has the user submitted marks for the given assessment already

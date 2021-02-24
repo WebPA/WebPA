@@ -127,10 +127,12 @@ if ($assessment->load($assessment_id)) {
   $members = ArrayFunctions::array_get_assoc($members_raw,'user_id');
 
   // Get Student Response Information
-  $response_info = $DB->fetch_assoc("SELECT user_id, ip_address, comp_name, date_responded, date_opened
-                    FROM " . APP__DB_TABLE_PREFIX . "user_response
-                    WHERE assessment_id = '$assessment->id'");
+  $responseInfoQuery =
+      'SELECT user_id, ip_address, comp_name, date_responded, date_opened ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'user_response ' .
+      'WHERE assessment_id = ?';
 
+  $response_info = $DB->getConnection()->fetchAllAssociativeIndexed($responseInfoQuery, [$assessment->id], [ParameterType::STRING])
 } else {
   $assessment = null;
 
