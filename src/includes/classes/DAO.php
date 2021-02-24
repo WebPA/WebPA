@@ -184,47 +184,6 @@ class DAO
     }
 
     /**
-     * Get an associative array ( field1-value => field2-value ) from the result set
-     * If you retrieve more than 2 fields, you will get an associative array of row-arrays
-     * e.g.   field1-value => array ( field2 => field2-value, field3 => field3-value, ... ), ...
-     * @param string $sql
-     * @return array
-     */
-    function fetch_assoc($sql = null)
-    {
-        // Need to be in Numeric+Assoc Array mode, so set it
-        $original_output_mode = $this->get_output_mode();
-        $this->set_output($output = 'ARRAY_B');
-
-        // Fetch the new result set
-        $this->_process_query($sql);
-
-        // Reset mode to what it was before
-        $this->set_output($original_output_mode);
-
-        $new_array = null;
-
-        if ($this->_num_rows > 0) {
-            if ($this->get_num_cols() == 2) {
-                // Convert rows to simple associative array
-                for ($i = 0; $i < $this->_num_rows; $i++) {
-                    $new_array["{$this->_result[$i][0]}"] = $this->_result[$i][1];
-                }
-            } else {
-                // Convert rows to associative array of arrays
-                for ($i = 0; $i < $this->_num_rows; $i++) {
-                    $row_array = null;
-                    for ($j = 1; $j < $this->_num_cols; $j++) {
-                        $row_array[$this->_result_cols["$j"]] = $this->_result[$i][$j];
-                    }
-                    $new_array["{$this->_result[$i][0]}"] = $row_array;
-                }
-            }
-        }
-        return $new_array;
-    }// /->fetch_assoc()
-
-    /**
      * Execute the insert query in $sql, using the fields in $fields
      * auto-slashes the given fields
      * @param string $sql string of the form 'INSERT INTO tbl_name ({fields}) VALUES ({values}) '
