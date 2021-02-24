@@ -132,7 +132,7 @@ if ($assessment->load($assessment_id)) {
       'FROM ' . APP__DB_TABLE_PREFIX . 'user_response ' .
       'WHERE assessment_id = ?';
 
-  $response_info = $DB->getConnection()->fetchAllAssociativeIndexed($responseInfoQuery, [$assessment->id], [ParameterType::STRING])
+  $response_info = $DB->getConnection()->fetchAllAssociativeIndexed($responseInfoQuery, [$assessment->id], [ParameterType::STRING]);
 } else {
   $assessment = null;
 
