@@ -192,15 +192,6 @@ class DAO
     // GET_xxx functions
 
     /**
-     * Return an array of columns names from the last query
-     * @return boolean
-     */
-    function get_cols()
-    {
-        return (is_array($this->_result_cols)) ? $this->_result_cols : null;
-    }
-
-    /**
      * Return the number of columns from the last query
      * @return integer
      */
