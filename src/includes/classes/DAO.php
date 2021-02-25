@@ -184,36 +184,6 @@ class DAO
     }
 
     /**
-     * Builds filter clause of the form  (aaa='bbb' OR aaa='ccc' OR aaa='ddd' ... )
-     *
-     * @param string $field_name the field name being checked (aaa in example above)
-     * @param array/value $filter_values the values to compare against.
-     * @param string $logical_operator the operator to use to concatenate the filters (AND, OR, XOR)
-     * @return string
-     */
-    function build_filter($field_name, $filter_values, $logical_operator = 'OR')
-    {
-        $filter_values = (array)$filter_values;  // cast values to array (in case it was only passed one)
-
-        $filter_clause = '(';
-        $w_count = count($filter_values);
-        $i = 1;
-        foreach ($filter_values as $k => $v) {
-            if (!is_int($v)) {
-                $v = $this->escape_str($v);
-            }
-            $filter_clause .= "$field_name = " . $this->_prepare_field_value($v);
-            if ($i < $w_count) {
-                $filter_clause .= " $logical_operator ";
-            }
-            $i++;
-        }
-        $filter_clause .= ')';
-
-        return $filter_clause;
-    }// ->build_filter()
-
-    /**
      * Builds an SQL set of the form  ('aaa','bbb','ccc') for use with IN operators
      *
      * @param array/value $value_array array of values to include in the set
