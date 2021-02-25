@@ -73,41 +73,6 @@ class DAO
         $this->_conn = DriverManager::getConnection($connectionParams);
     }
 
-    /*
-    * ================================================================================
-    * Public Methods
-    * ================================================================================
-    */
-
-    /**
-     * Open database connection
-     * @param boolean $new_link block reusing an existing database connection when the same server/username/password are used
-     * @return boolean
-     */
-    function open($new_link = true)
-    {
-        if (is_null($this->_conn)) {
-            if ($this->_persistent) {
-                $func = 'mysqli_pconnect';
-            } else {
-                $func = 'mysqli_connect';
-            }
-
-
-            $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
-
-            if (!$this->_conn) {
-                die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
-
-                return false;
-            }
-
-            return true;
-        }
-
-        return true;
-    } // /->open()
-
     /**
      * Execute the SQL query, and ignore results (ie, not a SELECT)
      * Sets affected rows (ie could be DELETE/INSERT/REPLACE/UPDATE)
@@ -117,7 +82,6 @@ class DAO
      */
     function execute($sql)
     {
-        $this->open();
         $this->_last_sql = trim($sql);  // Save query
 
         $this->_result_set = @mysqli_query($this->_conn, $sql);
