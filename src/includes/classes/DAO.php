@@ -192,15 +192,6 @@ class DAO
     // GET_xxx functions
 
     /**
-     * Return the number of rows from the last query
-     * @return integer
-     */
-    function get_num_rows()
-    {
-        return $this->_num_rows;
-    }
-
-    /**
      * Return the number of affected rows from the last query (insert/replace/update)
      * @return integer
      */
