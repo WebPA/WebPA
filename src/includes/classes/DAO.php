@@ -183,22 +183,6 @@ class DAO
         }
     }
 
-    /**
-     * Builds an SQL set of the form  ('aaa','bbb','ccc') for use with IN operators
-     *
-     * @param array/value $value_array array of values to include in the set
-     * @return string
-     */
-    function build_set($value_array, $quoted = true)
-    {
-        $value_array = array_map('addslashes', (array)$value_array);
-        if ($quoted) {
-            return '(\'' . implode('\',\'', $value_array) . '\')';
-        } else {
-            return '(' . implode(',', $value_array) . ')';
-        }
-    }// /->build_set()
-
     /*
     * --------------------------------------------------------------------------------
     * Accessor Methods

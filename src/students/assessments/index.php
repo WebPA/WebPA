@@ -55,8 +55,7 @@ $assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$co
 
 // Get a list of those assessments that the user has already taken
 
-$assessment_ids = ArrayFunctions::array_extract_column($assessments, 'assessment_id');
-$assessment_clause = $DB->build_set($assessment_ids);
+$assessment_ids = array_column($assessments, 'assessment_id');
 
 $assessmentsWithResponseQuery =
     'SELECT DISTINCT assessment_id ' .
@@ -65,7 +64,7 @@ $assessmentsWithResponseQuery =
     'AND user_id = ? ' .
     'ORDER BY assessment_id';
 
-$assessments_with_response = $DB->getConnection()->fetchFirstColumn($assessmentsWithResponseQuery, [$assessments, $_user->id], [$DB->getConnection()::PARAM_INT_ARRAY, ParameterType::INTEGER]);
+$assessments_with_response = $DB->getConnection()->fetchFirstColumn($assessmentsWithResponseQuery, [$assessment_ids, $_user->id], [$DB->getConnection()::PARAM_INT_ARRAY, ParameterType::INTEGER]);
 
 // Split the assessments into pending, open and finished
 $pending_assessments = null;

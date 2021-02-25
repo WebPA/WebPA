@@ -451,7 +451,9 @@ class EngCIS
             $queryBuilder->setParameter(0, $source_id, ParameterType::STRING);
             $queryBuilder->setParameter(1, $user_id, $dbConn::PARAM_INT_ARRAY);
         } else if ($username) {
-            $user_set = $this->_DAO->build_set($username);
+            if (!is_array($username)) {
+                $username = [$username];
+            }
 
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
@@ -462,7 +464,7 @@ class EngCIS
                 ->andWhere('u.username IN (?)');
 
             $queryBuilder->setParameter(0, $source_id);
-            $queryBuilder->setParameter(1, $user_set, $dbConn::PARAM_INT_ARRAY);
+            $queryBuilder->setParameter(1, $username, $dbConn::PARAM_INT_ARRAY);
         } else {
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', '"' . APP__USER_TYPE_ADMIN . '" as user_type')

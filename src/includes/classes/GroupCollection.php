@@ -657,16 +657,27 @@ class GroupCollection
      */
     function remove_member($user_id, $role = null)
     {
-        $user_set = $this->_DAO->build_set((array)$user_id);
-        $role_clause = ($role) ? " AND user_role='$role'" : '';
-        $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member ugm
-                      WHERE ugm.user_id IN $user_set AND ugm.group_id IN
-                        (SELECT group_id
-                         FROM " . APP__DB_TABLE_PREFIX . "user_group
-                         WHERE collection_id = '{$this->id}'
-                        )");
+        if (!is_array($user_id)) {
+            $user_id = [$user_id];
+        }
 
-    }// /->remove_member()
+        $removeMemberQuery =
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+            'WHERE ugm.user_id IN (?) ' .
+            'AND ugm.group_id IN ' .
+            '(' .
+            '   SELECT group_id ' .
+            '   FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
+            '   WHERE collection_id = ? ' .
+            ')';
+
+        $stmt = $this->dbConn->prepare($removeMemberQuery);
+
+        $stmt->bindValue(1, $user_id, $this->_DAO->getConnection()::PARAM_STR_ARRAY);
+        $stmt->bindValue(2, $this->id);
+
+        $stmt->execute();
+    }
 
     /*
     * --------------------------------------------------------------------------------
