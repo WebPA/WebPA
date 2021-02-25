@@ -192,15 +192,6 @@ class DAO
     // GET_xxx functions
 
     /**
-     * Return the number of columns from the last query
-     * @return integer
-     */
-    function get_num_cols()
-    {
-        return $this->_num_cols;
-    }
-
-    /**
      * Return the number of rows from the last query
      * @return integer
      */
