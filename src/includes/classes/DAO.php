@@ -184,28 +184,6 @@ class DAO
     }
 
     /**
-     * Execute the insert query in $sql, using the fields in $fields
-     * auto-slashes the given fields
-     * @param string $sql string of the form 'INSERT INTO tbl_name ({fields}) VALUES ({values}) '
-     * @param array $fields array ( fieldname1 => ???, fieldname2 => ???, ... )
-     */
-    function do_insert($sql, $fields)
-    {
-        $fields_str = implode(',', (array)array_keys($fields));
-
-        $values = array();
-        foreach ($fields as $k => $v) {
-            $values[] = $this->_prepare_field_value($v);
-        }
-        $values_str = implode(',', $values);
-
-        $sql = str_replace('{fields}', $fields_str, $sql);
-        $sql = str_replace('{values}', $values_str, $sql);
-
-        return $this->execute($sql);
-    } // /->do_insert()
-
-    /**
      * Execute the insert query in $sql, using multiple VALUES statements as given in $fields
      * Auto-slashes the given fields
      *
