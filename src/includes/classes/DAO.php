@@ -45,7 +45,6 @@ class DAO
     private $_num_rows = null;
     private $_num_affected = null;
 
-    private $_debug = false;      // debug mode (default: off)
     private $_last_error = null;
 
     /**
@@ -94,28 +93,16 @@ class DAO
                 $func = 'mysqli_connect';
             }
 
-            if ($this->_debug) {
-                $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
-                if (!$this->_conn) {
-                    die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
+            $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
 
-                    return false;
-                }
+            if (!$this->_conn) {
+                die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
 
-                return true;
-            } else {
-                $this->_conn = $func($this->_host, $this->_user, $this->_password, $this->_database);
-
-                if (!$this->_conn) {
-                    die ('Can\'t use database due to  : ' . mysqli_connect_errno() . ' - ' . mysqli_connect_error());
-
-                    return false;
-                }
-
-                return true;
+                return false;
             }
 
+            return true;
         }
 
         return true;
@@ -160,11 +147,7 @@ class DAO
         $this->open();
         $this->_last_sql = trim($sql);  // Save query
 
-        if ($this->_debug) {
-            $this->_result_set = mysqli_query($this->_conn, $sql) or $this->_throw_error('Executing SQL');
-        } else {
-            $this->_result_set = @mysqli_query($this->_conn, $sql);
-        }
+        $this->_result_set = @mysqli_query($this->_conn, $sql);
 
         if ($this->_result_set) {
             $this->_num_affected = mysqli_affected_rows($this->_conn);
@@ -183,16 +166,9 @@ class DAO
         }
     }
 
-    /*
-    * --------------------------------------------------------------------------------
-    * Accessor Methods
-    * --------------------------------------------------------------------------------
-    */
-
-    // GET_xxx functions
-
     /**
      * Return last inserted id (for auto-increment columns)
+     *
      * @return integer
      */
     function get_insert_id()
@@ -203,22 +179,6 @@ class DAO
     public function getConnection()
     {
         return $this->_conn;
-    }
-
-    /*
-    * --------------------------------------------------------------------------------
-    * SET_xxx functions
-    * --------------------------------------------------------------------------------
-    */
-
-    /**
-     * Set debug mode
-     * When in debug mode, detailed error reports are echoed
-     * @param boolean
-     */
-    function set_debug($on)
-    {
-        $this->_debug = $on;
     }
 
     /**
@@ -280,11 +240,7 @@ class DAO
         $this->open();
         $this->_last_sql = trim($sql);  // Save query
 
-        if ($this->_debug) {
-            $this->_result_set = mysqli_query($this->_conn, $sql) or $this->_throw_error('Querying database');
-        } else {
-            $this->_result_set = @mysqli_query($this->_conn, $sql);
-        }
+        $this->_result_set = @mysqli_query($this->_conn, $sql);
 
         // If got a result set..
         if ($this->_result_set) {

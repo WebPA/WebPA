@@ -189,7 +189,6 @@ session_start();
 // Initialise DB object
 
 $DB = new DAO( APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
-$DB->set_debug(FALSE);
 
 // Initialise User Object
 
