@@ -184,31 +184,6 @@ class DAO
     }
 
     /**
-     * Execute the update query in $sql, setting the fields in $fields
-     * Auto-slashes the given fields
-     * @param string $sql sql query of the form  'UPDATE tbl_name SET {fields} WHERE xxx=yyy'
-     * @param array $fields of fields and values to set - of the form  array ( fieldname1 => ???, fieldname2 => ???, ... )
-     * @return mixed
-     */
-    function do_update($sql, $fields)
-    {
-        $set_str = '';
-        $fields_count = count($fields);
-        $i = 1;
-
-        foreach ($fields AS $k => $v) {
-            $set_str .= " $k=" . $this->_prepare_field_value($v);
-            if ($i < $fields_count) {
-                $set_str .= ',';
-            }
-            ++$i;
-        }
-
-        $sql = str_replace('{fields}', $set_str, $sql);
-        return $this->execute($sql);
-    } // /->do_update()
-
-    /**
      * Builds filter clause of the form  (aaa='bbb' OR aaa='ccc' OR aaa='ddd' ... )
      *
      * @param string $field_name the field name being checked (aaa in example above)
