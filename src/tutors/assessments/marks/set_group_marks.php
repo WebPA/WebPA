@@ -117,14 +117,42 @@ if ( ($command) && ($assessment) ) {
 
         $xml = $xml_parser->generate_xml($xml_array);
 
-        $fields = array ('assessment_id'  => $assessment->id ,
-                 'group_mark_xml' => $xml ,);
+        // first check if the assessment groups marks record exists
+        $dbConn = $DB->getConnection();
 
-        $DB->do_insert('REPLACE INTO ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ({fields}) VALUES ({values})',$fields);
+        $existingAssessmentGroupsMarks = $dbConn->fetchOne(
+    'SELECT assessment_id FROM assessment_group_marks WHERE assessment_id = ?',
+            [$assessment->id],
+            [ParameterType::STRING]
+        );
+
+        $queryBuilder = $dbConn->createQueryBuilder();
+
+        if ($existingAssessmentGroupsMarks) {
+            // record exists so update it
+            $queryBuilder
+                ->update(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
+                ->where('assessment_id', '?')
+                ->set('group_mark_xml', '?')
+                ->setParameter(0, $assessment->id)
+                ->setParameter(1, $xml);
+        } else {
+            // record does not exist so create it
+            $queryBuilder
+                ->insert(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
+                ->values([
+                    'assessment_id' => '?',
+                    'group_mark_xml' => '?'
+                ])
+                ->setParameter(0, $assessment->id)
+                ->setParameter('group_mark_xml', $xml);
+        }
+
+        $queryBuilder->execute();
+
       }
       break;
-    // --------------------
-  }// /switch
+  }
 }
 
 // --------------------------------------------------------------------------------

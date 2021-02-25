@@ -10,6 +10,7 @@
 
 require_once("../../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\FormRenderer;
@@ -245,17 +246,65 @@ if (($command) && ($assessment)) {
         $computer_name = Common::fetch_SERVER('REMOTE_HOST','');
         $date_opened = Common::fetch_POST('date_opened');
 
-        // Save stats
-        $response = array (
-          'assessment_id'   => $assessment->id ,
-          'group_id'        => $group->id ,
-          'user_id'         => $_user->id ,
-          'ip_address'      => $ip_address ,
-          'comp_name'       => $computer_name ,
-          'date_responded'  => $now ,
-          'date_opened'     => $date_opened ,
+        // find out if a user response already exists
+        $dbConn = $DB->getConnection();
+
+        $existingResponseQuery =
+            'SELECT assessment_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user_response ' .
+            'WHERE assessment_id = ? ' .
+            'AND group_id = ? ' .
+            'AND user_id = ?';
+
+        $userResponse = $dbConn->fetchOne(
+            $existingResponseQuery,
+            [$assessment->id, $group->id, $_user->id],
+            [ParameterType::STRING, ParameterType::STRING, ParameterType::INTEGER]
         );
-        $DB->do_insert("REPLACE INTO " . APP__DB_TABLE_PREFIX . "user_response ({fields}) VALUES ({values}) ", $response);
+
+        $queryBuilder = $dbConn->createQueryBuilder();
+
+        if (!$userResponse) {
+            // user response does not exist so create it
+            $queryBuilder
+                ->insert(APP__DB_TABLE_PREFIX . 'user_response')
+                ->values([
+                    'assessment_id'   => '?',
+                    'group_id'        => '?',
+                    'user_id'         => '?',
+                    'ip_address'      => '?',
+                    'comp_name'       => '?',
+                    'date_responded'  => '?',
+                    'date_opened'     => '?',
+                ])
+                ->setParameter(0, $assessment->id)
+                ->setParameter(1, $group->id)
+                ->setParameter(2, $_user->id, ParameterType::INTEGER)
+                ->setParameter(3, $ip_address)
+                ->setParameter(4, $computer_name)
+                ->setParameter(5, $now)
+                ->setParameter(6, $date_opened);
+        } else {
+            // user response exists so update it
+            $queryBuilder
+                ->update(APP__DB_TABLE_PREFIX . 'user_response')
+                ->where('assessment_id', '?')
+                ->andWhere('group_id', '?')
+                ->andWhere('user_id', '?')
+                ->set('ip_address', '?')
+                ->set('comp_name', '?')
+                ->set('date_responded', '?')
+                ->set('date_opened', '?')
+                ->setParameter(0, $assessment->id)
+                ->setParameter(1, $group->id)
+                ->setParameter(2, $_user->id, ParameterType::INTEGER)
+                ->setParameter(3, $ip_address)
+                ->setParameter(4, $computer_name)
+                ->setParameter(5, $now)
+                ->setParameter(6, $date_opened);
+        }
+
+        $queryBuilder->execute();
 
         foreach ($results as $q => $q_results) {
           foreach ($q_results as $id => $score) {

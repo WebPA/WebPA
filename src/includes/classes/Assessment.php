@@ -172,49 +172,91 @@ class Assessment {
   function save() {
     if (!$this->id) {
       return false;
-    } else {
-      // Save the Form
-      $fields = array (
-      	       'assessment_id'    => $this->id ,
-               'assessment_name'    => $this->name ,
-               'module_id'       => $this->module_id ,
-               'collection_id'    => $this->_collection_id ,
-               'form_xml'       => $this->_form_xml ,
-               'open_date'      => date(MYSQL_DATETIME_FORMAT, $this->open_date) ,
-               'close_date'     => date(MYSQL_DATETIME_FORMAT, $this->close_date) ,
-               'retract_date'     => date(MYSQL_DATETIME_FORMAT, $this->close_date) ,
-               'introduction'     => $this->introduction ,
-               'allow_feedback'   => ($this->allow_feedback) ? 1 : 0 ,
-               'assessment_type'    => ($this->assessment_type)? 1 : 0 ,
-               'student_feedback'   => ($this->allow_assessment_feedback)? 1 : 0 ,
-               'contact_email'    => '' ,
-               'email_opening'    => ($this->email_opening)? 1 : 0 ,
-               'email_closing'    =>($this->email_closing)? 1 : 0 ,
-               'feedback_name'    => $this->feedback_name ,
-               'feedback_length'    => 0 ,
-               'feedback_optional'    => 0
-      );
-
-      $ass_name = $this->_DAO->escape_str($fields['assessment_name']);
-      $ass_intro = $this->_DAO->escape_str($fields['introduction']);
-      $xml = $this->_DAO->_prepare_field_value($fields['form_xml']);
-
-      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'assessment ({fields}) VALUES ({values}) ';
-      $sql .= "ON DUPLICATE KEY UPDATE assessment_name = '{$ass_name}', module_id = {$fields['module_id']}, " .
-              "collection_id = '{$fields['collection_id']}', form_xml = {$xml}, " .
-              "open_date = '{$fields['open_date']}', close_date = '{$fields['close_date']}', " .
-              "retract_date = '{$fields['retract_date']}', " .
-              "introduction = '{$ass_intro}', allow_feedback = {$fields['allow_feedback']}, " .
-              "assessment_type = {$fields['assessment_type']}, student_feedback = {$fields['student_feedback']}, " .
-              "contact_email = '{$fields['contact_email']}', " .
-              "email_opening = {$fields['email_opening']}, email_closing = {$fields['email_closing']}, " .
-              "feedback_name = '{$fields['feedback_name']}', " .
-              "feedback_length = {$fields['feedback_length']}, feedback_optional = {$fields['feedback_optional']}";
-      $this->_DAO->do_insert($sql, $fields);
-
-      return true;
     }
-  }// /->save()
+
+    // check if assessment already exists in the database
+    $storedAssessmentId = $this->dbConn->fetchOne(
+        'SELECT assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'assessment WHERE assessment_id = ?'
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
+    $queryBuilder = $this->dbConn->createQueryBuilder();
+
+    if (!empty($storedAssessmentId)) {
+      // the assessment already exists so we should update it
+      $queryBuilder
+          ->update(APP__DB_TABLE_PREFIX . 'assessment')
+          ->set('assessment_name', '?')
+          ->set('module_id', '?')
+          ->set('collection_id', '?')
+          ->set('form_xml', '?')
+          ->set('open_date', '?')
+          ->set('close_date', '?')
+          ->set('retract_date', '?')
+          ->set('introduction', '?')
+          ->set('allow_feedback', $this->allow_feedback ? 1 : 0)
+          ->set('assessment_type', $this->assessment_type ? 1 : 0)
+          ->set('student_feedback', $this->allow_assessment_feedback ? 1 : 0)
+          ->set('contact_email', '')
+          ->set('email_opening', $this->email_opening ? 1 : 0)
+          ->set('email_closing', $this->email_closing ? 1 : 0)
+          ->set('feedback_name', '?')
+          ->set('feedback_length', '?')
+          ->set('feedback_optional', '?')
+          ->where('assessment_id', '?')
+          ->setParameter(0, $this->name)
+          ->setParameter(1, $this->module_id, ParameterType::INTEGER)
+          ->setParameter(2, $this->_collection_id)
+          ->setParameter(3, $this->_form_xml)
+          ->setParameter(4, date(MYSQL_DATETIME_FORMAT, $this->open_date))
+          ->setParameter(5, date(MYSQL_DATETIME_FORMAT, $this->close_date))
+          ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
+          ->setParameter(7, $this->introduction)
+          ->setParameter(8, $this->feedback_name)
+          ->setParameter(9, $this->id);
+    } else {
+      // the assessment does not exist. Create it
+      $queryBuilder
+          ->insert(APP__DB_TABLE_PREFIX . 'assessment')
+          ->values(
+              [
+                 'assessment_id' => '?',
+                 'assessment_name' => '?',
+                 'module_id' => '?',
+                 'collection_id' => '?',
+                 'form_xml' => '?',
+                 'open_date' => '?',
+                 'close_date' => '?',
+                 'retract_date' => '?',
+                 'introduction' => '?',
+                 'allow_feedback' => $this->allow_feedback ? 1 : 0,
+                 'assessment_type' => $this->assessment_type ? 1 : 0,
+                 'student_feedback' => $this->allow_assessment_feedback ? 1 : 0,
+                 'contact_email' => '',
+                 'email_opening' => $this->email_opening ? 1 : 0 ,
+                 'email_closing' => $this->email_closing ? 1 : 0 ,
+                 'feedback_name' => '?',
+                 'feedback_length' => 0 ,
+                 'feedback_optional' => 0,
+              ]
+          )
+          ->setParameter(0, $this->id)
+          ->setParameter(1, $this->name)
+          ->setParameter(2, $this->module_id, ParameterType::INTEGER)
+          ->setParameter(3, $this->_collection_id)
+          ->setParameter(4, $this->_form_xml)
+          ->setParameter(5, date(MYSQL_DATETIME_FORMAT, $this->open_date))
+          ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
+          ->setParameter(7, date(MYSQL_DATETIME_FORMAT, $this->close_date))
+          ->setParameter(8, $this->introduction)
+          ->setParameter(9, $this->feedback_name);
+    }
+
+    $queryBuilder->execute();
+
+    return true;
+  }
 
 /*
 * --------------------------------------------------------------------------------

@@ -156,19 +156,60 @@ class GroupCollection
                 'collection_locked_on' => ((!$this->_locked_on) ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on)),
             );
 
-            // Save this collection
-            $sql = 'INSERT ' . APP__DB_TABLE_PREFIX . 'collection ({fields}) VALUES ({values}) ' .
-                "ON DUPLICATE KEY UPDATE module_id = {$fields['module_id']}, collection_name = '{$fields['collection_name']}', collection_created_on = '{$fields['collection_created_on']}', ";
-            if (is_null($fields['collection_locked_on'])) {
-                $sql .= 'collection_locked_on = NULL';
+            // before saving, check if this collection already exists in the db
+            $storedCollectionId =
+                $this->dbConn->fetchOne(
+                    'SELECT collection_id FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
+                    [$this->id],
+                    [ParameterType::STRING]
+                );
+
+            $queryBuilder = $this->dbConn->createQueryBuilder();
+
+            $createdOn = date(MYSQL_DATETIME_FORMAT, $this->_created_on);
+            $lockedOn = !$this->_locked_on ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on);
+
+            if (!$storedCollectionId) {
+                // the collection does not exist so create it
+                $queryBuilder
+                    ->insert(APP__DB_TABLE_PREFIX . 'collection')
+                    ->values([
+                        'collection_id' => '?',
+                        'module_id' => '?',
+                        'collection_name' => '?',
+                        'collection_created_on' => '?',
+                        'collection_locked_on' => '?',
+                    ])
+                    ->setParameter(0, $this->id)
+                    ->setParameter(1, $this->module_id, ParameterType::INTEGER)
+                    ->setParameter(2, $this->name)
+                    ->setParameter(3, $createdOn)
+                    ->setParameter(4, $lockedOn);
             } else {
-                $sql .= "collection_locked_on = '{$fields['collection_locked_on']}'";
+                // the collection exists so update it
+                $queryBuilder
+                    ->update(APP__DB_TABLE_PREFIX . 'collection')
+                    ->where('collection_id = ?')
+                    ->set('module_id', '?')
+                    ->set('collection_name', '?')
+                    ->set('collection_created_on', '?')
+                    ->setParameter(0, $this->id)
+                    ->setParameter(1, $this->module_id, ParameterType::INTEGER)
+                    ->setParameter(2, $createdOn);
+
+                // check if the locked field needs to be set
+                if (is_null($lockedOn)) {
+                    $queryBuilder->set('collection_locked_on', 'NULL');
+                } else {
+                    $queryBuilder->set('collection_locked_on', '?')->setParameter(3, $lockedOn);
+                }
             }
-            $this->_DAO->do_insert($sql, $fields);
+
+            $queryBuilder->execute();
 
             return true;
         }
-    }// /->save()
+    }
 
     /**
      * Save open Group objects attached to this GroupCollection

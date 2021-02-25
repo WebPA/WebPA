@@ -132,18 +132,44 @@ class Group {
   function save() {
     if ( (!$this->id) || ($this->_collection->is_locked()) ) {
       return false;
+    }
+
+    if (!is_array($this->_members)) {
+        $this->refresh_members();
+    }
+
+    // check if the group already exists in the database
+    $groupId = $this->dbConn->fetchOne(
+        'SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'group WHERE group_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
+    $queryBuilder = $this->dbConn->createQueryBuilder();
+
+    if (!empty($groupId)) {
+        // group already exists so update it
+        $queryBuilder
+            ->update(APP__DB_TABLE_PREFIX . 'user_group')
+            ->set('group_name', '?')
+            ->where('group_id', '?')
+            ->setParameter(0, $this->name)
+            ->setParameter(1, $this->id);
     } else {
-      if (!is_array($this->_members)) { $this->refresh_members(); }
+        // the group doesn't exist so create it
+        $queryBuilder
+            ->insert(APP__DB_TABLE_PREFIX . 'user_group')
+            ->values([
+               'group_id' => '?',
+               'collection_id' => '?',
+               'group_name' => '?',
+            ])
+            ->setParameter(0, $this->id)
+            ->setParameter(1, $this->_collection->id)
+            ->setParameter(2, $this->name);
+    }
 
-      $_fields = array (
-                'group_id'    => $this->id ,
-                'collection_id' => $this->_collection->id ,
-                'group_name'  => $this->name );
-
-      // Save the Group
-      $sql = 'INSERT ' . APP__DB_TABLE_PREFIX . 'user_group ({fields}) VALUES ({values}) ' .
-         'ON DUPLICATE KEY UPDATE group_name = ' . $this->_DAO->_prepare_field_value($_fields['group_name']);
-      $this->_DAO->do_insert($sql, $_fields);
+    $queryBuilder->execute();
 
       // Save the Group's members by deleting them all, then re-inserting
       $this->_DAO->execute( "DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member
@@ -174,8 +200,7 @@ class Group {
       }
 
       return true;
-    }
-  }// /->save()
+}
 
 /*
 * --------------------------------------------------------------------------------
@@ -324,5 +349,5 @@ class Group {
     if (array_key_exists($user_id, $this->_members)) {
       unset($this->_members[$user_id]);
     }
-  }// /->remove_member();
+  }
 }

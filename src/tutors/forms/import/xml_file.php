@@ -70,19 +70,33 @@ if ($errno == 0){
       $xml = $parser->generate_xml($parsed);
 
       //now add to the database for this user
-      $fields = array(
-                 'form_id' => $new_id,
-                 'form_name' => $formname,
-                 'form_type' => $formtype,
-                 'form_xml' => $xml,
-                );
-      $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ({fields}) VALUES ({values})', $fields);
-      //$DB->do_insert('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET {fields} WHERE user_id = {$new_id}", array('form_xml' => $xml));
-      $fields = array(
-                 'form_id' => $new_id,
-                 'module_id' => $_module_id
-                );
-      $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module ({fields}) VALUES ({values})', $fields);
+      $dbConn = $DB->getConnection();
+
+      $dbConn
+          ->createQueryBuilder()
+          ->insert(APP__DB_TABLE_PREFIX . 'form')
+          ->values([
+              'form_id' => '?',
+              'form_name' => '?',
+              'form_type' => '?',
+              'form_xml' => '?',
+          ])
+          ->setParameter(0, $new_id)
+          ->setParameter(1, $formname)
+          ->setParameter(2, $formtype)
+          ->setParameter(3, $xml)
+          ->execute();
+
+      $dbConn
+          ->createQueryBuilder()
+          ->insert(APP__DB_TABLE_PREFIX . 'form_module')
+          ->values([
+              'form_id' => $new_id,
+              'module_id' => $_module_id
+          ])
+          ->setParameter(0, $new_id)
+          ->setParameter(1, $_module_id, ParameterType::INTEGER)
+          ->execute();
 
       $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"index.php\">'my forms'</a> list.</p>";
     }

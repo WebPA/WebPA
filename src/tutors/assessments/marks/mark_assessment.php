@@ -115,13 +115,23 @@ if ( ($command) && ($assessment) ) {
 
         $mysql_now = date(MYSQL_DATETIME_FORMAT,time());
 
-        $fields = array (
-          'assessment_id'     => $assessment_id ,
-          'date_created'      => $mysql_now ,
-          'date_last_marked'  => $mysql_now ,
-          'marking_params'    => $xml_parser->generate_xml($xml_array) ,
-        );
-        $DB->do_insert('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'assessment_marking ({fields}) VALUES ({values})', $fields);
+        $queryBuilder = $DB->getConnection()->createQueryBuilder();
+
+        $queryBuilder
+            ->insert(APP__DB_TABLE_PREFIX . 'assessment_marking')
+            ->values([
+                'assessment_id'     => $assessment_id ,
+                'date_created'      => $mysql_now ,
+                'date_last_marked'  => $mysql_now ,
+                'marking_params'    => $xml_parser->generate_xml($xml_array) ,
+            ])
+            ->setParameter(0, $assessment_id)
+            ->setParameter(1, $mysql_now)
+            ->setParameter(2, $mysql_now)
+            ->setParameter(3, $xml_parser->generate_xml($xml_array));
+
+        $queryBuilder->execute();
+
         header("Location: $list_url");
         exit;
       }
