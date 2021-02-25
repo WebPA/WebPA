@@ -181,48 +181,6 @@ class DAO
         return $this->_conn;
     }
 
-    /**
-     * Set default output mode for results array
-     * @param string $output
-     * @return boolean
-     */
-    function set_output($output = 'ARRAY_A')
-    {
-        switch ($output) {
-            case 'ARRAY_A'  :
-                $this->_output_type_int = MYSQLI_ASSOC;
-                $this->_output_type = $output;
-                return true;
-                break;
-            // ----------------------------------------
-            case 'ARRAY_B'  :
-                $this->_output_type_int = MYSQLI_BOTH;
-                $this->_output_type = $output;
-                return true;
-                break;
-            // ----------------------------------------
-            case 'ARRAY_N'  :
-                $this->_output_type_int = MYSQLI_NUM;
-                $this->_output_type = $output;
-                return true;
-                break;
-            // ----------------------------------------
-            default :
-                return false;
-                break;
-        }
-    }// /->set_output()
-
-    /**
-     * Escape character string
-     * @param string $str
-     * @return string
-     */
-    function escape_str($str)
-    {
-        return mysqli_real_escape_string($this->_conn, stripslashes($str));
-    }
-
     /*
     * ================================================================================
     * Private Methods

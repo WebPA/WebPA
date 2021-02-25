@@ -167,7 +167,7 @@ if ($flg_match) {
           } else if ($key == 'group_name') {
             $group_name = $val;
           } else {
-            $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+            $els[] = "$key = '" . $val . '\'';
           }
         }
       }
@@ -230,7 +230,7 @@ if ($flg_match) {
       for ($c = 0; $c < count($fields); $c++) {
         $key = $fields[$c];
         $val = $i[$key];
-        $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+        $els[] = "$key = '" . $val . '\'';
       }
       $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module SET ' . implode(', ',$els);
       $els = array();
@@ -238,7 +238,7 @@ if ($flg_match) {
         $key = $fields[$c];
         $val = $i[$key];
         if ($key != 'module_code') {
-          $els[] = "$key = '" . $DB->escape_str($val) . '\'';
+          $els[] = "$key = '" . $val . '\'';
         }
       }
       $sql .= ' ON DUPLICATE KEY UPDATE ' . implode(', ',$els);
