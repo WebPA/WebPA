@@ -179,6 +179,7 @@ class Group {
       // If there are members to re-insert, do it
       if (count($this->_members) > 0) {
         $fields = null;
+
         foreach($this->_members as $user_id => $role) {
           $fields[] = array ('group_id'   => $this->id ,
                      'user_id'    => $user_id ,
@@ -196,7 +197,18 @@ class Group {
                     ");
         }
 
-        $this->_DAO->do_insert_multi("REPLACE INTO " . APP__DB_TABLE_PREFIX . "user_group_member ({fields}) VALUES {values} ", $fields);
+        foreach ($fields as $values) {
+            $this->dbConn
+                ->createQueryBuilder()
+                ->insert(APP__DB_TABLE_PREFIX . 'user_group_member')
+                ->values([
+                    'group_id' => '?',
+                    'user_id' => '?',
+                ])
+                ->setParameter(0, $this->id)
+                ->setParameter(1, $values['user_id'])
+                ->execute();
+        }
       }
 
       return true;

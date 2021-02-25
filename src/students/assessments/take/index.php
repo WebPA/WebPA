@@ -308,21 +308,50 @@ if (($command) && ($assessment)) {
 
         foreach ($results as $q => $q_results) {
           foreach ($q_results as $id => $score) {
-            $result_fields[] = array (
-              'assessment_id'  => $assessment->id ,
-              'group_id'       => $group->id ,
-              'user_id'        => $_user->id ,
-              'marked_user_id' => $id ,
-              'question_id'    => $q ,
-              'score'          => $score ,
-              'date_marked'    => $now ,
-            );
+              $DB->getConnection()
+                  ->createQueryBuilder()
+                  ->insert(APP__DB_TABLE_PREFIX . 'user_mark')
+                  ->values([
+                      'assessment_id'  => $assessment->id ,
+                      'group_id'       => $group->id ,
+                      'user_id'        => $_user->id ,
+                      'marked_user_id' => $id ,
+                      'question_id'    => $q ,
+                      'score'          => $score ,
+                      'date_marked'    => $now ,
+                  ])
+                  ->setParameter(0, $assessment->id)
+                  ->setParameter(1, $group->id)
+                  ->setParameter(2, $_user->id, ParameterType::INTEGER)
+                  ->setParameter(3, $id, ParameterType::INTEGER)
+                  ->setParameter(4, $q, ParameterType::INTEGER)
+                  ->setParameter(5, $score, ParameterType::INTEGER)
+                  ->setParameter(6, $now)
+                  ->execute();
           }
         }
-        $DB->do_insert_multi("REPLACE INTO " . APP__DB_TABLE_PREFIX . "user_mark ({fields}) VALUES {values}", $result_fields);
 
-        //along with the saved marks we want to save the justification section
-        $DB->do_insert_multi("INSERT INTO " . APP__DB_TABLE_PREFIX . "user_justification ({fields}) VALUES {values}", $justification);
+        // along with the saved marks we want to save the justification section
+        foreach ($justification as $userJustification) {
+            $DB->getConnection()
+                ->createQueryBuilder()
+                ->insert(APP__DB_TABLE_PREFIX . 'user_justification')
+                ->values([
+                    'assessment_id' => '?',
+                    'group_id' => '?',
+                    'user_id' => '?',
+                    'marked_user_id' => '?',
+                    'justification_text' => '?',
+                    'date_marked' => '?',
+                ])
+                ->setParameter(0, $userJustification['assessment_id'])
+                ->setParameter(1, $userJustification['group_id'])
+                ->setParameter(2, $userJustification['user_id'])
+                ->setParameter(3, $userJustification['marked_user_id'])
+                ->setParameter(4, $userJustification['justification_text'])
+                ->setParameter(5, $userJustification['date_marked'])
+                ->execute();
+        }
 
         Common::logEvent($DB, 'Assessment submission successful', $_module_id, $assessment->id);
 
