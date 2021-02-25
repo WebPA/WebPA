@@ -184,42 +184,6 @@ class DAO
     }
 
     /**
-     * Execute the insert query in $sql, using multiple VALUES statements as given in $fields
-     * Auto-slashes the given fields
-     *
-     * NOTE  : Unlike ->do_insert, the $fields array is an array[0..n] of assoc-arrays
-     * NOTE  : Only the last insert-id will be available from ->get_insert_id() following execution
-     *
-     * @param string $sql of the form, 'INSERT INTO tbl_name ({fields}) VALUES {values}
-     * @param array $fields array[0..n] of array ( fieldname1 -> ???, fieldname2 => ???, ... )
-     * @return object
-     */
-    function do_insert_multi($sql, $fields)
-    {
-        if (is_array($fields)) {
-            $fields_str = implode(',', array_keys($fields[0]));
-
-            $value_row = null;
-
-            foreach ($fields as $i => $row) {
-                $value_row["$i"] = array();
-                foreach ($row as $k => $v) {
-                    $value_row["$i"][] = $this->_prepare_field_value($v);
-                }
-                $value_row["$i"] = '(' . implode(',', $value_row["$i"]) . ')';
-            }
-            $values_str = implode(',', $value_row);
-
-            $sql = str_replace('{fields}', $fields_str, $sql);
-            $sql = str_replace('{values}', $values_str, $sql);
-
-            return $this->execute($sql);
-        } else {
-            return null;
-        }
-    }// /->do_insert_multi()
-
-    /**
      * Execute the update query in $sql, setting the fields in $fields
      * Auto-slashes the given fields
      * @param string $sql sql query of the form  'UPDATE tbl_name SET {fields} WHERE xxx=yyy'
