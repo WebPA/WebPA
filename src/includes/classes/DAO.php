@@ -200,32 +200,6 @@ class DAO
         return $this->_insert_id;
     }
 
-    /**
-     * Return last run query
-     * @return string
-     */
-    function get_last_sql()
-    {
-        return $this->_last_sql;
-    }
-
-    /**
-     *  Get last mysql error
-     */
-    function get_last_error()
-    {
-        mysqli_error($this->_conn);
-    }
-
-    /**
-     * Get output mode
-     * @return mixed
-     */
-    function get_output_mode()
-    {
-        return $this->_output_type;
-    }
-
     public function getConnection()
     {
         return $this->_conn;
@@ -354,9 +328,9 @@ class DAO
     function _throw_error($err_msg)
     {
         if ($this->_conn) {
-            die("<hr />DATABASE ERROR<hr />$err_msg :: " . mysqli_error($this->_conn) . '<hr />' . $this->get_last_sql() . '<hr />');
+            die("<hr />DATABASE ERROR<hr />$err_msg<hr />");
         } else {
-            die("<hr />DATABASE ERROR<hr />$err_msg :: &lt;NO SERVER&gt;<hr />" . $this->get_last_sql() . '<hr />');
+            die("<hr />DATABASE ERROR<hr />$err_msg :: &lt;NO SERVER&gt;<hr />");
         }
         return false;
     }// /->_throw_error()
