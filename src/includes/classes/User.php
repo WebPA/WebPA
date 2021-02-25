@@ -12,6 +12,8 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class User {
   // Public Vars
   public $username = null;
@@ -26,7 +28,7 @@ class User {
   public $email = null;
   public $type = null;
 
-  public $DAO = null;
+  public DAO $DAO;
 
   /**
   * CONSTRUCTOR for the class function
@@ -143,28 +145,38 @@ class User {
    * Function to update the user details
    */
    function save_user(){
-
-    $_fields = array ('forename'        => $this->forename ,
-              'lastname'        => $this->lastname ,
-              'email'         => $this->email,
-              'username'        => $this->username,
-              'source_id'      => $this->source_id,
-              'password'        => $this->password,
-              'id_number' => $this->id_number,
-              'department_id' => $this->department_id
-              );
-
-    //save the changes to the user
-    $this->DAO->do_update("UPDATE " . APP__DB_TABLE_PREFIX . "user SET {fields} WHERE user_id = {$this->id}; ",$_fields);
+    $this->DAO
+        ->getConnection()
+        ->createQueryBuilder()
+        ->update(APP__DB_TABLE_PREFIX . 'user')
+        ->where('user_id = ?')
+        ->set('forename', '?')
+        ->set('lastname', '?')
+        ->set('email', '?')
+        ->set('username', '?')
+        ->set('source_id', '?')
+        ->set('password', '?')
+        ->set('id_number', '?')
+        ->set('department_id', '?')
+        ->setParameter(0, $this->id, ParameterType::INTEGER)
+        ->setParameter(1, $this->forename)
+        ->setParameter(2, $this->lastname)
+        ->setParameter(3, $this->email)
+        ->setParameter(4, $this->username)
+        ->setParameter(5, $this->source_id)
+        ->setParameter(6, $this->password)
+        ->setParameter(7, $this->id_number)
+        ->setParameter(8, $this->department_id)
+        ->execute();
 
     return true;
    }
 
    /**
     * Function to set the database connection to be used
-    * @param database connection $this->DAO
+    * @param DAO connection $this->DAO
     */
-    function set_dao_object($DB){
+    function set_dao_object(DAO $DB){
       $this->DAO = $DB;
     }
 
@@ -172,22 +184,33 @@ class User {
    * Function to add new user details
    */
    function add_user(){
+       $this->DAO
+           ->getConnection()
+           ->createQueryBuilder()
+           ->insert(APP__DB_TABLE_PREFIX . 'user')
+           ->values([
+               'forename' => '?',
+               'lastname' => '?',
+               'email' => '?',
+               'username' => '?',
+               'source_id' => '?',
+               'password' => '?',
+               'id_number' => '?',
+               'department_id' => '?',
+               'admin' => '?'
+           ])
+           ->setParameter(0, $this->forename)
+           ->setParameter(0, $this->lastname)
+           ->setParameter(1, $this->email)
+           ->setParameter(2, $this->username)
+           ->setParameter(3, $this->source_id)
+           ->setParameter(4, $this->password)
+           ->setParameter(5, $this->id_number)
+           ->setParameter(6, $this->department_id)
+           ->setParameter(7, $this->admin, ParameterType::INTEGER)
+           ->execute();
 
-    $_fields = array ('forename'        => $this->forename ,
-              'lastname'        => $this->lastname ,
-              'email'         => $this->email,
-              'username'        => $this->username,
-              'source_id'      => $this->source_id,
-              'password'        => $this->password,
-              'id_number' => $this->id_number,
-              'department_id' => $this->department_id,
-              'admin' => $this->admin
-              );
-
-    //save the changes to the user
-    $this->DAO->do_update("INSERT INTO " . APP__DB_TABLE_PREFIX . "user SET {fields}", $_fields);
-
-    return $this->DAO->get_insert_id() ;
+    return $this->DAO->getConnection()->lastInsertId('user_id');
    }
 
   /**

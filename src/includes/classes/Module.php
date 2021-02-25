@@ -20,7 +20,7 @@ class Module {
   public $module_title = NULL;
   public $module_id = NULL;
 
-  public $DAO = NULL;
+  public DAO $DAO;
 
   /**
   * CONSTRUCTOR for the class function
@@ -59,22 +59,24 @@ class Module {
    * Function to update the module details
    */
    function save_module(){
+       $dbConn = $this->DAO->getConnection();
 
-    $_fields = array ('module_code'        => $this->module_code ,
-              'module_title'        => $this->module_title,
-               );
+       $stmt = $dbConn->prepare('UPDATE ' . APP__DB_TABLE_PREFIX . 'module SET module_code = ?, module_title = ? WHERE module_id = ?');
 
-    //save the changes to the module
-    $this->DAO->do_update("UPDATE " . APP__DB_TABLE_PREFIX . "module SET {fields} WHERE module_id = {$this->module_id}; ",$_fields);
+       $stmt->bindValue(1, $this->module_code);
+       $stmt->bindValue(2, $this->module_title);
+       $stmt->bindValue(3, $this->module_id, ParameterType::INTEGER);
+
+       $stmt->execute();
 
     return true;
    }
 
    /**
     * Function to set the database connection to be used
-    * @param database connection $DB
+    * @param DAO connection $DB
     */
-    function set_dao_object($DB){
+    function set_dao_object(DAO $DB){
       $this->DAO = $DB;
     }
 
@@ -82,15 +84,19 @@ class Module {
    * Function to add new module details
    */
    function add_module(){
+    $addModuleQuery =
+        'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module ' .
+        '(module_code, module_title) ' .
+        'VALUES (?, ?)';
 
-    $_fields = array ('module_code'        => $this->module_code ,
-              'module_title'        => $this->module_title,
-               );
+    $stmt = $this->DAO->getConnection()->prepare($addModuleQuery);
 
-    //save the changes to the module
-    $this->DAO->do_update('INSERT INTO ' . APP__DB_TABLE_PREFIX . "module SET {fields}", $_fields);
+    $stmt->bindValue(1, $this->module_code);
+    $stmt->bindValue(2, $this->module_title);
 
-    return $this->DAO->get_insert_id() ;
+    $stmt->execute();
+
+    return $this->DAO->getConnection()->lastInsertId('module_id');
    }
 
   /**

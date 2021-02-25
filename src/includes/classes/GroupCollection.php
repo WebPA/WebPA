@@ -271,12 +271,14 @@ class GroupCollection
     {
         $this->_locked_on = time();
         if ($this->id) {
-            $_fields = array(
-                'collection_locked_on' => date(MYSQL_DATETIME_FORMAT, $this->_locked_on),
-            );
-            $this->_DAO->do_update("UPDATE " . APP__DB_TABLE_PREFIX . "collection ({fields}) WHERE collection_id = '{$this->id}' ", $_fields);
+            $stmt = $this->dbConn->prepare('UPDATE ' . APP__DB_TABLE_PREFIX . 'collection SET collection_locked_on = ? WHERE collection_id = ?');
+
+            $stmt->bindValue(1, date(MYSQL_DATETIME_FORMAT, $this->_locked_on));
+            $stmt->bindValue(2, $this->id);
+
+            $stmt->execute();
         }
-    }// /->lock()
+    }
 
     /*
     * --------------------------------------------------------------------------------
