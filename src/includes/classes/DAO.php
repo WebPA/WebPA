@@ -192,15 +192,6 @@ class DAO
     // GET_xxx functions
 
     /**
-     * Return the number of affected rows from the last query (insert/replace/update)
-     * @return integer
-     */
-    function get_num_affected()
-    {
-        return $this->_num_affected;
-    }
-
-    /**
      * Return last inserted id (for auto-increment columns)
      * @return integer
      */
