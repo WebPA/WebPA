@@ -109,31 +109,6 @@ class DAO
     } // /->open()
 
     /**
-     * Close database connection.
-     *
-     * @return bool
-     */
-    function close()
-    {
-        $this->flush();
-        $isClosed = @mysqli_close($this->_conn);
-        $this->_conn = null;
-
-        return $isClosed;
-    }
-
-    /**
-     * Clear results and reset result vars
-     */
-    function flush()
-    {
-        $this->_result = [];
-        $this->_num_rows = null;
-        $this->_num_affected = null;
-        $this->_insert_id = null;
-    } // /->flush()
-
-    /**
      * Execute the SQL query, and ignore results (ie, not a SELECT)
      * Sets affected rows (ie could be DELETE/INSERT/REPLACE/UPDATE)
      * Sets inserted id if query is INSERT/REPLACE (checks first word of query)
@@ -142,8 +117,6 @@ class DAO
      */
     function execute($sql)
     {
-
-        $this->flush();
         $this->open();
         $this->_last_sql = trim($sql);  // Save query
 
@@ -180,94 +153,4 @@ class DAO
     {
         return $this->_conn;
     }
-
-    /*
-    * ================================================================================
-    * Private Methods
-    * ================================================================================
-    */
-
-    /**
-     * Execute the SQL and collect the result set
-     * @param string $sql
-     * @return boolean
-     */
-    function _process_query($sql)
-    {
-        $this->flush();
-        $this->open();
-        $this->_last_sql = trim($sql);  // Save query
-
-        $this->_result_set = @mysqli_query($this->_conn, $sql);
-
-        // If got a result set..
-        if ($this->_result_set) {
-
-            // number of columns returned
-            $this->_num_cols = mysqli_num_fields($this->_result_set);
-
-            // Store column names as an array
-            $this->_result_cols = array();
-
-            while ($field = @mysqli_fetch_field($this->_result_set)) {
-                $this->_result_cols[] = $field->name;
-            }
-
-            // Store the results as an array of row objects
-            while ($row = @mysqli_fetch_array($this->_result_set, $this->_output_type_int)) {
-                $this->_result[] = $row;
-            }
-
-            // number of rows returned
-            $this->_num_rows = count($this->_result);
-
-            // Free the actual result set
-            @mysqli_free_result($this->_result_set);
-
-            // If there were results.. return true
-            return ($this->_num_rows >= 1);
-        } else {
-            $this->_num_cols = 0;
-            $this->_num_rows = 0;
-            $this->_result_cols = null;
-            return false;
-        }
-    } // /->process_query()
-
-    /**
-     * function to capture the thrown error and out put to the screen
-     * @param string $err_msg
-     * @return boolean
-     */
-    function _throw_error($err_msg)
-    {
-        if ($this->_conn) {
-            die("<hr />DATABASE ERROR<hr />$err_msg<hr />");
-        } else {
-            die("<hr />DATABASE ERROR<hr />$err_msg :: &lt;NO SERVER&gt;<hr />");
-        }
-        return false;
-    }// /->_throw_error()
-
-    /**
-     * Prepare a value for putting into the database
-     * Escapes special characters, checks for NULL, and puts in quotes as necessary
-     *
-     * @param integer $value value to prepare
-     *
-     * @return string   en-quoted value, ready for insertion into a database (of the form 'value' or NULL)
-     */
-    function _prepare_field_value($value)
-    {
-        // NULL values don't need quotes, so if it's null, just return a string containing NULL
-        // Else, return an escaped string containing the value enclosed in quotes
-        if (is_null($value)) {
-            return 'NULL';
-        } else if (is_int($value)) {
-            return "$value";
-        } else {
-            return '\'' . $this->escape_str($value) . '\'';
-        }
-
-    }// /->_prepare_field_value()
 }
