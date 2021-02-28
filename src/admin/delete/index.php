@@ -75,8 +75,11 @@ $page_intro = '';
       $delete_user->delete();
     } else {
       $sScreenMsg = "<p>The user has been deleted from the module.</p>";
-      $sql = 'DELETE FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE user_id = {$user} AND module_id = {$_SESSION['_module_id']}";
-      $DB->execute($sql);
+      $DB->getConnection()->executeQuery(
+    'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE user_id = ? AND module_id = ?',
+        [$user, $_SESSION['_module_id']],
+        [ParameterType::INTEGER, ParameterType::INTEGER]
+      );
     }
   } else {
      $errorMsg = '<p>No module or user provided to delete</p>';

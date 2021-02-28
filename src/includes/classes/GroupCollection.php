@@ -131,12 +131,27 @@ class GroupCollection
         if ($this->is_locked()) {
             return false;
         } else {
-            $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member WHERE group_id IN (SELECT group_id FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE collection_id = '{$this->id}')");
-            $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE collection_id = '{$this->id}'");
-            $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "collection WHERE collection_id = '{$this->id}'");
+            $this->dbConn->executeQuery(
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id IN (SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?)',
+                [$this->id],
+                [ParameterType::STRING]
+            );
+
+            $this->dbConn->executeQuery(
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?',
+                [$this->id],
+                [ParameterType::STRING]
+            );
+
+            $this->dbConn->executeQuery(
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
+                [$this->id],
+                [ParameterType::STRING]
+            );
+
             return true;
         }
-    }// /->delete()
+    }
 
     /**
      * Save this GroupCollection
@@ -640,7 +655,13 @@ class GroupCollection
         foreach ($groups as $i => $group_row) {
             if ($group_row['group_name'] == $group_name) {
                 $group_id = $group_row['group_id'];
-                $this->_DAO->execute("INSERT INTO " . APP__DB_TABLE_PREFIX . "user_group_member SET group_id = '$group_id', user_id = $user_id");
+
+                $this->dbConn->executeQuery(
+                    'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_group_member VALUES (?, ?)',
+                    [$group_id, $user_id],
+                    [ParameterType::STRING, ParameterType::INTEGER]
+                );
+
                 break;
             }
         }

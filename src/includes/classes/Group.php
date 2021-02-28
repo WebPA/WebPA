@@ -84,11 +84,21 @@ class Group {
     if ($this->_collection->is_locked()) {
       return false;
     } else {
-      $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member WHERE group_id = '{$this->id}' ");
-      $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group WHERE group_id = '{$this->id}' ");
+        $this->dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id = ?',
+            [$this->id],
+            [ParameterType::STRING]
+        );
+
+        $this->dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE group_id = ?',
+            [$this->id],
+            [ParameterType::STRING]
+        );
+
       return true;
     }
-  }// /->delete()
+  }
 
   /*
   * Load the Group from the database
@@ -172,9 +182,11 @@ class Group {
     $queryBuilder->execute();
 
       // Save the Group's members by deleting them all, then re-inserting
-      $this->_DAO->execute( "DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member
-                   WHERE group_id = '{$this->id}'
-                  ");
+      $this->dbConn->executeQuery(
+          'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id = ?',
+          [$this->id],
+          [ParameterType::STRING]
+      );
 
       // If there are members to re-insert, do it
       if (count($this->_members) > 0) {
@@ -187,14 +199,21 @@ class Group {
 
           // This double-delete nonsense solves a referential integrity problem
           // with students managing to get themselves into TWO groups at once.
-          $this->_DAO->execute("  DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member
-                        WHERE user_id = $user_id AND group_id IN
-                          (
-                            SELECT group_id
-                            FROM " . APP__DB_TABLE_PREFIX . "user_group
-                            WHERE collection_id = '{$this->_collection->id}'
-                          )
-                    ");
+            $deleteQuery =
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ' .
+                'WHERE user_id = ? ' .
+                'AND group_id IN ' .
+                '( ' .
+                'SELECT group_id ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
+                'WHERE collection_id = ? ' .
+                ')';
+
+          $this->dbConn->executeQuery(
+            $deleteQuery,
+            [$user_id, $this->_collection->id],
+            [ParameterType::INTEGER, ParameterType::STRING]
+          );
         }
 
         foreach ($fields as $values) {

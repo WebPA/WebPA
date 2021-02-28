@@ -217,19 +217,63 @@ class User {
    * Function to delete a user
    */
    function delete(){
+       $dbConn = $this->DAO->getConnection();
 
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_owner_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE (marked_user_id = {$this->id}) OR (user_id = {$this->id})");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE (marked_user_id = {$this->id}) OR (user_id = {$this->id})");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_module WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_tracking WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = {$this->id}");
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request WHERE user_id = ?',
+           [$this->id],
+           [ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_owner_id = ?',
+           [$this->id],
+           [ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE marked_user_id = ? OR user_id = ?',
+           [$this->id, $this->id],
+           [ParameterType::INTEGER, ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_mark WHERE marked_user_id = ? OR user_id = ?',
+           [$this->id, $this->id],
+           [ParameterType::INTEGER, ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE user_id = ?',
+           [$this->id],
+           [ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE user_id = ?',
+           [$this->id],
+           [ParameterType::INTEGER]
+       );
+
+       $dbConn->executeQuery(
+           'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE user_id = ?',
+           [$this->id],
+           [ParameterType::INTEGER]
+       );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_tracking WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
 
      $this->id = null;
-
    }
 
 /*

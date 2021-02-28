@@ -19,6 +19,7 @@
 //get the include file required
 require_once('../../includes/inc_global.php');
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
@@ -207,38 +208,54 @@ if ($action) {          //incase we want to do more than save changes in the fut
         }
         if (isset($update)) {
           if (isset($update[APP__USER_TYPE_TUTOR])) {
-            $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
-                   "VALUES ";
-            $sep = '';
+            $createUserModuleQuery =
+                'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
+                '(user_id, module_id, user_type) ' .
+                'VALUES (?, ? , ?) ' .
+                'ON DUPLICATE KEY UPDATE user_type = ?';
+
             foreach ($update[APP__USER_TYPE_TUTOR] as $module) {
-              $sql .= "{$sep}({$user_id}, {$module}, '" . APP__USER_TYPE_TUTOR . "')";
-              $sep = ', ';
+                $DB->getConnection()->executeQuery(
+                    $createUserModuleQuery,
+                    [$user_id, $module, APP__USER_TYPE_TUTOR, APP__USER_TYPE_TUTOR],
+                    [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
+                );
             }
-            $sql .= " ON DUPLICATE KEY UPDATE user_type = '" . APP__USER_TYPE_TUTOR . "'";
-            $DB->execute($sql);
           }
+
           if (isset($update[APP__USER_TYPE_STUDENT])) {
-            $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
-                   "VALUES ";
-            $sep = '';
+            $createUserModuleQuery =
+                'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
+                '(user_id, module_id, user_type) ' .
+                'VALUES (?, ?, ?) ' .
+                'ON DUPLICATE KEY UPDATE user_type = ?';
+
             foreach ($update[APP__USER_TYPE_STUDENT] as $module) {
-              $sql .= "{$sep}({$user_id}, {$module}, '" . APP__USER_TYPE_STUDENT . "')";
-              $sep = ', ';
+                $DB->getConnection()->executeQuery(
+                    $createUserModuleQuery,
+                    [$user_id, $module, APP__USER_TYPE_STUDENT, APP__USER_TYPE_STUDENT],
+                    [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
+                );
             }
-            $sql .= " ON DUPLICATE KEY UPDATE user_type = '" . APP__USER_TYPE_STUDENT . "'";
-            $DB->execute($sql);
           }
         }
         if (isset($delete)) {
-          $sql = "DELETE FROM " . APP__DB_TABLE_PREFIX . "user_module " .
-                 "WHERE (user_id = {$user_id}) AND (module_id IN (";
-          $sep = '';
-          foreach ($delete as $module) {
-            $sql .= "{$sep}{$module}";
-            $sep = ', ';
-          }
-          $sql .= '))';
-          $DB->execute($sql);
+            $queryBuilder = $DB->getConnection()->createQueryBuilder();
+
+            $queryBuilder
+                ->delete(APP__DB_TABLE_PREFIX . 'user_module')
+                ->where(
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->eq('user_id', '?'),
+                        $queryBuilder->expr()->in('module_id', '?')
+                    )
+                );
+
+            $queryBuilder->setParameter(0, $user_id, ParameterType::INTEGER);
+            $queryBuilder->setParameter(1, $delete, $DB->getConnection()::PARAM_INT_ARRAY);
+
+            $queryBuilder->execute();
+
           if (in_array($_module_id, $delete)) {
             header('Location: ../review/');
           }

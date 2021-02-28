@@ -97,11 +97,35 @@ class Assessment {
   * @return boolean true
   */
   function delete() {
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "assessment_group_marks WHERE assessment_id = '{$this->id}'");
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "assessment_marking WHERE assessment_id = '{$this->id}'");
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE assessment_id = '{$this->id}'");
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE assessment_id = '{$this->id}'");
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE assessment_id = '{$this->id}'");
+    $this->dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks WHERE assessment_id = ?',
+            [$this->id],
+            [ParameterType::STRING]
+    );
+
+    $this->dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'assessment_marking WHERE assessment_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
+    $this->dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_mark WHERE assessment_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
+    $this->dbConn->executeQuery(
+    'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE assessment_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
+    $this->dbConn->executeQuery(
+   'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE assessment_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
 
     $collectionQuery =
         'SELECT collection_id ' .
@@ -110,12 +134,18 @@ class Assessment {
 
     $collection = $this->dbConn->fetchOne($collectionQuery, [$this->id], [ParameterType::STRING]);
 
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "assessment WHERE assessment_id = '{$this->id}'");
+    $this->dbConn->executeQuery(
+    'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'assessment WHERE assessment_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
+
     $group_handler = new GroupHandler();
     $collection = $group_handler->get_collection($collection);
     $collection->delete();
+
     return true;
-  }// /->delete()
+  }
 
   /**
   * Load the Assessment from the database

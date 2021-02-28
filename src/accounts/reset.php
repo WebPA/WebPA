@@ -51,10 +51,20 @@ switch($action) {
       $content = "Unable to reset the password for this account.";
       break;
     }
-    //inserts the user/hash pair into the database
-    $sql = "INSERT INTO " . APP__DB_TABLE_PREFIX . "user_reset_request SET hash = '$hash', user_id = $uid";
-    $appname = APP__NAME; $appwww = APP__WWW;
-    $DB->execute($sql);
+    // inserts the user/hash pair into the database
+    $insertUserHashPairQuery =
+        'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_reset_request ' .
+        'SET hash = ?, user_id = ?';
+
+    $appname = APP__NAME;
+    $appwww = APP__WWW;
+
+    $DB->getConnection()->executeQuery(
+        $insertUserHashPairQuery,
+        [$hash, $uid],
+        [ParameterType::STRING, ParameterType::INTEGER]
+    );
+
     $email = <<<TXT
 You have requested for your password to be reset on {$appname}. Please click or copy and paste the following link into your browser to continue the password reset process.
 
@@ -96,7 +106,13 @@ TXT;
         $user->set_dao_object($DB);
         $user->update_password(md5($_POST['newpass']));
         $user->save_user();
-        $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE user_id = $uid");
+
+        $DB->getConnection()->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request WHERE user_id = ?',
+            [$uid],
+            [ParameterType::INTEGER]
+        );
+
         $content = 'Your password has been reset. <a href="'.APP__WWW.'/login.php">Click here</a> to log in again.';
       } else {
         $content = "The two passwords did not match.";

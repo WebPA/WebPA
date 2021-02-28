@@ -116,13 +116,24 @@ class Module {
        $collection = $group_handler->get_collection($collections[$i]);
        $collection->delete();
      }
-     $this->DAO->execute('DELETE FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$this->module_id}");
-     $this->DAO->execute('DELETE FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$this->module_id}");
+
+     $dbConn = $this->DAO->getConnection();
+
+     $dbConn->executeQuery(
+         'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ?',
+         [$this->module_id],
+         [ParameterType::INTEGER]
+     );
+
+     $dbConn->executeQuery(
+         'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?',
+         [$this->module_id],
+         [ParameterType::INTEGER]
+     );
 
      $this->module_code = null;
      $this->module_title = null;
      $this->module_id = null;
-
    }
 
 /*

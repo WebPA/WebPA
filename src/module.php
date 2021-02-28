@@ -21,10 +21,17 @@ if (($_source_id != '') && !$_user->is_admin()) {
 $module_id = Common::fetch_POST('module_id');
 
 if ($module_id) {
-
   // Update last module
-  $sql_last_module = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET last_module_id = '{$module_id}' WHERE user_id = '{$_user_id}'";
-  $DB->execute($sql_last_module);
+  $updateLastModuleQuery =
+      'UPDATE ' . APP__DB_TABLE_PREFIX . 'user ' .
+      'SET last_module_id = ? ' .
+      'WHERE user_id = ?';
+
+  $DB->getConnection()->executeQuery(
+      $updateLastModuleQuery,
+      [$module_id, $_user_id],
+      [ParameterType::INTEGER, ParameterType::INTEGER]
+  );
 
   // Update session
   $dbConn = $DB->getConnection();

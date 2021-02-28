@@ -23,7 +23,7 @@ class Form {
   public $type = null;
 
   // Private Vars
-  private $_DAO = null;
+  private DAO $_DAO;
   private $_questions = null;
   private $_xml_parser = null;
 
@@ -32,9 +32,9 @@ class Form {
   *
   * @param mixed $DAO
   */
-  function __construct(&$DAO) {
+  function __construct(DAO $DAO) {
     $this->_DAO =& $DAO;
-  }// /->Form()
+  }
 
 /*
 * ================================================================================
@@ -77,12 +77,22 @@ class Form {
 
     $_module_id = Common::fetch_SESSION('_module_id', null);
 
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form_module WHERE (form_id = '{$this->id}') AND (module_id = {$_module_id})");
-    $this->_DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_id = '{$this->id}'");
+    $dbConn = $this->_DAO->getConnection();
+
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'form_module WHERE form_id = ? AND module_id = ?',
+        [$this->id, $_module_id],
+        [ParameterType::STRING, ParameterType::INTEGER]
+    );
+
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_id = ?',
+        [$this->id],
+        [ParameterType::STRING]
+    );
 
     return true;
-
-  }// /->delete()
+  }
 
   /**
   * Load the Form from the database
@@ -141,23 +151,41 @@ class Form {
       $form_xml = $this->get_xml();
 
       // Save the Form
-      $this->_DAO->execute('INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form (form_id, form_name, form_type, form_xml) ' .
-         "VALUES ('{$this->id}', '" . $this->name . "', '" . $this->type . "', '') " .
-         "ON DUPLICATE KEY UPDATE form_name = '" . $this->name . "', form_type = '" . $this->type . "'");
-      $this->_DAO->execute('UPDATE ' . APP__DB_TABLE_PREFIX . "form SET form_xml = '{$form_xml}' WHERE form_id = '{$this->id}'");
+      $dbConn = $this->_DAO->getConnection();
+
+      $insertFormQuery =
+        'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ' .
+        '(form_id, form_name, form_type, form_xml) ' .
+        'VALUES (?, ?, ?, "") ' .
+        'ON DUPLICATE KEY UPDATE ' .
+        'form_name = ?, ' .
+        'form_type = ?';
+
+      $dbConn->executeQuery(
+        $insertFormQuery,
+        [$this->id, $this->name, $this->type, $this->name, $this->type],
+        [ParameterType::STRING, ParameterType::STRING, ParameterType::STRING, ParameterType::STRING, ParameterType::STRING]
+      );
+
+      $dbConn->executeQuery(
+          'UPDATE ' . APP__DB_TABLE_PREFIX . 'form SET form_xml = ? WHERE form_id = ?',
+          [$form_xml, $this->id],
+          [ParameterType::STRING, ParameterType::STRING]
+      );
 
       if ($this->modules !== null && count($this->modules) > 0) {
-        $values = array();
         foreach($this->modules as $module_id) {
-          $values[] = "('{$this->id}', {$module_id})";
+          $dbConn->executeQuery(
+              'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module (form_id, module_id) VALUES (?, ?)',
+              [$this->id, $module_id],
+              [ParameterType::STRING, ParameterType::INTEGER]
+          );
         }
-        $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module (form_id, module_id) VALUES ' . implode(', ', $values);
-        $this->_DAO->execute($sql);
       }
 
       return true;
     }
-  }// /->save()
+  }
 
 /*
 * --------------------------------------------------------------------------------

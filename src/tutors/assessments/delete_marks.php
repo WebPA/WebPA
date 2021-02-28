@@ -14,6 +14,7 @@
 
 require_once("../../includes/inc_global.php");
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
@@ -41,14 +42,29 @@ $list_url = "index.php?tab={$tab}&y={$year}";
 if (!empty($user_id)) {
   //we have posted the delete responses for the assessment to this form so now we need to delete the
   //information before carrying on to output the form.
+    $dbConn = $DB->getConnection();
 
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_mark WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
 
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
+
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
 }
 
 $assessment = new Assessment($DB);
+
 if ($assessment->load($assessment_id)) {
   $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 

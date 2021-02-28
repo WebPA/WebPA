@@ -74,36 +74,6 @@ class DAO
     }
 
     /**
-     * Execute the SQL query, and ignore results (ie, not a SELECT)
-     * Sets affected rows (ie could be DELETE/INSERT/REPLACE/UPDATE)
-     * Sets inserted id if query is INSERT/REPLACE (checks first word of query)
-     * @param string $sql
-     * @return boolean
-     */
-    function execute($sql)
-    {
-        $this->_last_sql = trim($sql);  // Save query
-
-        $this->_result_set = @mysqli_query($this->_conn, $sql);
-
-        if ($this->_result_set) {
-            $this->_num_affected = mysqli_affected_rows($this->_conn);
-
-            if (preg_match("/^\\s*(insert|replace) /i", $sql)) {
-                $this->_insert_id = mysqli_insert_id($this->_conn);
-            }
-
-            if ($this->_num_affected) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Return last inserted id (for auto-increment columns)
      *
      * @return integer
