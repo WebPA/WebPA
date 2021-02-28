@@ -23,14 +23,14 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 //set the page information
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'upload data';
-$UI->breadcrumbs = array ('home' => null);
+$UI->breadcrumbs = array('home' => null);
 $UI->help_link = '?q=node/237';
 
 $UI->head();
@@ -69,23 +69,23 @@ $collections = $group_handler->get_module_collections($_module_id);
 $groupsAnnex = '<div style="display: none;" id="collectionNameDiv">
   <label>Collection:';
 if (count($collections) > 0) {
-  $groupsAnnex .= '&nbsp;<select name="collectionlist">';
-  $groupsAnnex .= '<option value="">Create using name entered...</option>';
-  foreach($collections as $collection) {
-    $groupsAnnex .= "<option value=\"{$collection['collection_id']}\">{$collection['collection_name']}</option>";
-  }
-  $groupsAnnex .= '</select></label>&nbsp;<label>new:';
+    $groupsAnnex .= '&nbsp;<select name="collectionlist">';
+    $groupsAnnex .= '<option value="">Create using name entered...</option>';
+    foreach ($collections as $collection) {
+        $groupsAnnex .= "<option value=\"{$collection['collection_id']}\">{$collection['collection_name']}</option>";
+    }
+    $groupsAnnex .= '</select></label>&nbsp;<label>new:';
 }
 $groupsAnnex .= '&nbsp;<input type="text" name="collection"/></label></div>';
 
 if ($_user->is_admin()) {
-  $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'1');
-  $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password, module_code</p>', 'value'=>'4');
-  $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'2');
+    $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'1');
+    $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password, module_code</p>', 'value'=>'4');
+    $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id, module_code</p>', 'value'=>'2');
 } else {
-  $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'1');
-  $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password</p>', 'value'=>'4');
-  $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'2');
+    $filecontenttype[1] = array('screen'=>'<strong>Student Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'1');
+    $filecontenttype[2] = array('screen'=>'<strong>Student Data with Groups</strong>'.$groupsAnnex.'<p>CSV File format = id_number, forename, lastname, email, username, group_name, password</p>', 'value'=>'4');
+    $filecontenttype[3] = array('screen'=>'<strong>Staff Data</strong><p>CSV File format = id_number, forename, lastname, email, username, password, department_id</p>', 'value'=>'2');
 }
 $filecontenttype[4] = array('screen'=>'<strong>Module Data</strong><p>CSV File format = module_code, module_title</p>', 'value'=>'3');
 $fileseparator = 'Select the type of file separator that has been used:';
@@ -119,14 +119,13 @@ $pasteinstruction ='Copy and paste the contents of the file you want to add to t
     </td>
     <td>
       <?php
-        for($checkbox = 1; $checkbox<= count($filecontenttype)-1; $checkbox++){
-
-          echo '<input type="radio" name="rdoFileContentType" value="';
-          echo $filecontenttype[$checkbox]['value'] . '" ';
-          echo "onclick=\"fileTypeSelected({$filecontenttype[$checkbox]['value']})\" id=\"rdoFileContentType-{$filecontenttype[$checkbox]['value']}\"";
-          echo ' />';
-          echo $filecontenttype[$checkbox]['screen'];
-          echo '<br/>';
+        for ($checkbox = 1; $checkbox<= count($filecontenttype)-1; $checkbox++) {
+            echo '<input type="radio" name="rdoFileContentType" value="';
+            echo $filecontenttype[$checkbox]['value'] . '" ';
+            echo "onclick=\"fileTypeSelected({$filecontenttype[$checkbox]['value']})\" id=\"rdoFileContentType-{$filecontenttype[$checkbox]['value']}\"";
+            echo ' />';
+            echo $filecontenttype[$checkbox]['screen'];
+            echo '<br/>';
         }
       ?>
     </td>

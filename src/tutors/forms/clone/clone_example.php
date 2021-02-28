@@ -18,8 +18,8 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 //get the form ID
@@ -28,11 +28,11 @@ $new_form_name = Common::fetch_POST('n');
 $form_id = Common::fetch_POST('f');
 
 if (empty($form_id)) {
-  $form_id = $formid;
+    $form_id = $formid;
 }
 
 if (empty($formid)) {
-  $formid = $form_id;
+    $formid = $form_id;
 }
 
 //get the form information
@@ -40,35 +40,33 @@ $form = new Form($DB);
 $form->load($form_id);
 
 if (!empty($new_form_name)) {
-  //we are going to clone the form and then pass the user to the view area
-  $clone = $form->get_clone();
-  $clone->name = $new_form_name;
-  $clone->owner_id = Common::fetch_SESSION('_user_id', null);
-  $clone->save();
+    //we are going to clone the form and then pass the user to the view area
+    $clone = $form->get_clone();
+    $clone->name = $new_form_name;
+    $clone->owner_id = Common::fetch_SESSION('_user_id', null);
+    $clone->save();
 
-  header( "Location: ../edit/edit_form.php?f={$clone->id}" ) ;
-  exit;
-
+    header("Location: ../edit/edit_form.php?f={$clone->id}") ;
+    exit;
 } else {
 
   // Begin Page
 
-  $UI->page_title = APP__NAME . ' Copy ' . $form->name .' form';
-  $UI->menu_selected = 'my forms';
-  $UI->help_link = '?q=node/244';
-  $UI->breadcrumbs = array  ('home'           => '../../' ,
+    $UI->page_title = APP__NAME . ' Copy ' . $form->name .' form';
+    $UI->menu_selected = 'my forms';
+    $UI->help_link = '?q=node/244';
+    $UI->breadcrumbs = array('home'           => '../../' ,
                'my forms'       => '../' ,
                'copy form'  => null ,);
 
-  $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
-  $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
-  $UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
-  $UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', 'import/');
+    $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
+    $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
+    $UI->set_page_bar_button('Clone a Form', '../../../../images/buttons/button_form_clone.gif', '../clone/');
+    $UI->set_page_bar_button('Import a Form', '../../../../images/buttons/button_form_import.gif', 'import/');
 
-  $UI->head();
-  $UI->body('onload="body_onload()"');
-  $UI->content_start();
-?>
+    $UI->head();
+    $UI->body('onload="body_onload()"');
+    $UI->content_start(); ?>
     <p>You have chosen to take a copy of the : <em><?php echo($form->name); ?></em> form.</p>
 
       <p>Now enter a name for your copy of the form.</p>

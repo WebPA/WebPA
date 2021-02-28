@@ -12,7 +12,7 @@ namespace WebPA\includes\functions;
 
 class TimeDiff
 {
-	/**
+    /**
      * Get the difference between two datetimes as hours, minutes and seconds  (hh:mm:ss)
      *
      * If the time difference is less than 1 hour then only minutes and secconds will be shown
@@ -23,7 +23,8 @@ class TimeDiff
      *
      * @return  string  String representation of the time difference
      */
-    public static function calculate($start_date, $end_date) {
+    public static function calculate($start_date, $end_date)
+    {
         if ($end_date>$start_date) {	// If the start after the end, the result will be a minus
             $prefix = '';
             $remainder = $end_date - $start_date;
@@ -44,8 +45,12 @@ class TimeDiff
         $seconds = $remainder;
 
         // Put leading zeros on minutes and seconds (if required)
-        if ($minutes<=9) { $minutes = '0' . $minutes; }
-        if ($seconds<=9) { $seconds = '0' . $seconds; }
+        if ($minutes<=9) {
+            $minutes = '0' . $minutes;
+        }
+        if ($seconds<=9) {
+            $seconds = '0' . $seconds;
+        }
 
         // Return difference
         if ($hours>0) {

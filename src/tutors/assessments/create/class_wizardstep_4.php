@@ -13,24 +13,26 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-class WizardStep4 {
+class WizardStep4
+{
+    public $wizard;
+    public $step = 4;
 
-  public $wizard;
-  public $step = 4;
+    /*
+    * CONSTRUCTOR
+    */
+    public function __construct(Wizard $wizard)
+    {
+        $this->wizard = $wizard;
 
-  /*
-  * CONSTRUCTOR
-  */
-  function __construct(Wizard $wizard) {
-    $this->wizard = $wizard;
+        $this->wizard->back_button = '&lt; Back';
+        $this->wizard->next_button = 'Next &gt;';
+        $this->wizard->cancel_button = 'Cancel';
+    }// /WizardStep4()
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Next &gt;';
-    $this->wizard->cancel_button = 'Cancel';
-  }// /WizardStep4()
-
-  function head() {
-    ?>
+    public function head()
+    {
+        ?>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -51,17 +53,17 @@ class WizardStep4 {
 //-->
 </script>
 <?php
-  }// /->head()
+    }// /->head()
 
-  function form() {
-    $assessment_type = $this->wizard->get_field('assessment_type',1);
-    ?>
+    public function form()
+    {
+        $assessment_type = $this->wizard->get_field('assessment_type', 1); ?>
     <h2>Assessment Type</h2>
     <div class="form_section">
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <td>
-          <input type="radio" name="assessment_type" value="1" id="both" <?php echo ((!$assessment_type)? 'checked="checked"' : '' );?>>
+          <input type="radio" name="assessment_type" value="1" id="both" <?php echo((!$assessment_type)? 'checked="checked"' : ''); ?>>
         </td>
         <td>
           <label class="small" for="both">Self and peer assessment</label>
@@ -75,7 +77,7 @@ class WizardStep4 {
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <td>
-          <input type="radio" name="assessment_type" value="0" id="peer" <?php echo (($assessment_type)? 'checked="checked"' : '' );?>/>
+          <input type="radio" name="assessment_type" value="0" id="peer" <?php echo(($assessment_type)? 'checked="checked"' : ''); ?>/>
         </td>
         <td>
           <label class="small" for="peer">Peer assessment only</label>
@@ -86,17 +88,17 @@ class WizardStep4 {
     </div>
 
 <?php
-  }// /->form()
+    }// /->form()
 
-  function process_form() {
-    $errors = null;
+    public function process_form()
+    {
+        $errors = null;
 
-    $this->wizard->set_field('assessment_type',Common::fetch_POST('assessment_type'));
+        $this->wizard->set_field('assessment_type', Common::fetch_POST('assessment_type'));
 
 
-    return $errors;
-  }// /->process_form()
-
+        return $errors;
+    }// /->process_form()
 }// /class: WizardStep4
 
 ?>

@@ -15,9 +15,9 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -40,38 +40,38 @@ $group_marks = array();
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-  $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
-  $group_handler = new GroupHandler();
-  $collection = $group_handler->get_collection($assessment->get_collection_id());
+    $group_handler = new GroupHandler();
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-  $groupMarkXmlQuery =
+    $groupMarkXmlQuery =
       'SELECT group_mark_xml ' .
       'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
       'WHERE assessment_id = ?';
 
-  $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING]);
+    $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING]);
 
-  $xml_parser = null;
+    $xml_parser = null;
 
-  if ($group_marks_xml) {
-    $xml_parser = new XMLParser();
-    $xml_array = $xml_parser->parse($group_marks_xml);
+    if ($group_marks_xml) {
+        $xml_parser = new XMLParser();
+        $xml_array = $xml_parser->parse($group_marks_xml);
 
-    if (is_array($xml_array['groups']['group'])) {
-      foreach($xml_array['groups']['group'] as $i => $group) {
-        if (is_array($group)) {
-          if (array_key_exists('_attributes', $group)) {
-            $group_marks[$group['_attributes']['id']] = $group['_attributes']['mark'];
-          } else {
-            $group_marks[$group['id']] = $group['mark'];
-          }
+        if (is_array($xml_array['groups']['group'])) {
+            foreach ($xml_array['groups']['group'] as $i => $group) {
+                if (is_array($group)) {
+                    if (array_key_exists('_attributes', $group)) {
+                        $group_marks[$group['_attributes']['id']] = $group['_attributes']['mark'];
+                    } else {
+                        $group_marks[$group['id']] = $group['mark'];
+                    }
+                }
+            }
         }
-      }
     }
-  }
 } else {
-  $assessment = null;
+    $assessment = null;
 }
 
 // --------------------------------------------------------------------------------
@@ -80,65 +80,64 @@ if ($assessment->load($assessment_id)) {
 $errors = null;
 $bad_group_ids = null;
 
-if ( ($command) && ($assessment) ) {
-  switch ($command) {
+if (($command) && ($assessment)) {
+    switch ($command) {
     case 'save':
       $xml_array = null;
 
-      foreach($_POST as $k => $v) {
-        if (strpos($k, 'group_mark_')===0) {
-          $group_id = str_replace('group_mark_','',$k);
-          $mark = trim( str_replace('%','',$v) );
-          if (!is_numeric($mark)) {
-            if (empty($mark)) {
-              $errors[] = "You must enter a score for each group.";
-            } else {
-              $errors[] = "You must enter a score for each group. $v is not a valid score.";
-            }
+      foreach ($_POST as $k => $v) {
+          if (strpos($k, 'group_mark_')===0) {
+              $group_id = str_replace('group_mark_', '', $k);
+              $mark = trim(str_replace('%', '', $v));
+              if (!is_numeric($mark)) {
+                  if (empty($mark)) {
+                      $errors[] = "You must enter a score for each group.";
+                  } else {
+                      $errors[] = "You must enter a score for each group. $v is not a valid score.";
+                  }
 
-            $bad_group_ids[] = $group_id; // used to highlight the row later
-          }
+                  $bad_group_ids[] = $group_id; // used to highlight the row later
+              }
 
-          // Add mark to XML we will save
-          $xml_array['groups']['group'][] = array ('_attributes'  => array  ('id' => $group_id ,
+              // Add mark to XML we will save
+              $xml_array['groups']['group'][] = array('_attributes'  => array('id' => $group_id ,
                                              'mark' => $mark ,));
 
-          // Add mark to the array we're gonna check
-          $group_marks[$group_id] = $mark;
-        }
+              // Add mark to the array we're gonna check
+              $group_marks[$group_id] = $mark;
+          }
       }
 
       // If there were no errors, save the changes
       if (!$errors) {
+          if (!$xml_parser) {
+              $xml_parser = new XMLParser();
+          }
 
-        if (!$xml_parser) {
-          $xml_parser = new XMLParser();
-        }
+          $xml = $xml_parser->generate_xml($xml_array);
 
-        $xml = $xml_parser->generate_xml($xml_array);
+          // first check if the assessment groups marks record exists
+          $dbConn = $DB->getConnection();
 
-        // first check if the assessment groups marks record exists
-        $dbConn = $DB->getConnection();
+          $existingAssessmentGroupsMarks = $dbConn->fetchOne(
+              'SELECT assessment_id FROM assessment_group_marks WHERE assessment_id = ?',
+              [$assessment->id],
+              [ParameterType::STRING]
+          );
 
-        $existingAssessmentGroupsMarks = $dbConn->fetchOne(
-    'SELECT assessment_id FROM assessment_group_marks WHERE assessment_id = ?',
-            [$assessment->id],
-            [ParameterType::STRING]
-        );
+          $queryBuilder = $dbConn->createQueryBuilder();
 
-        $queryBuilder = $dbConn->createQueryBuilder();
-
-        if ($existingAssessmentGroupsMarks) {
-            // record exists so update it
-            $queryBuilder
+          if ($existingAssessmentGroupsMarks) {
+              // record exists so update it
+              $queryBuilder
                 ->update(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
                 ->where('assessment_id', '?')
                 ->set('group_mark_xml', '?')
                 ->setParameter(0, $assessment->id)
                 ->setParameter(1, $xml);
-        } else {
-            // record does not exist so create it
-            $queryBuilder
+          } else {
+              // record does not exist so create it
+              $queryBuilder
                 ->insert(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
                 ->values([
                     'assessment_id' => '?',
@@ -146,10 +145,9 @@ if ( ($command) && ($assessment) ) {
                 ])
                 ->setParameter(0, $assessment->id)
                 ->setParameter('group_mark_xml', $xml);
-        }
+          }
 
-        $queryBuilder->execute();
-
+          $queryBuilder->execute();
       }
       break;
   }
@@ -163,7 +161,7 @@ $page_title = 'set group marks';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  ('home'       => '../../' ,
+$UI->breadcrumbs = array('home'       => '../../' ,
                'my assessments' => '../' ,
                'set group marks'  => null ,);
 
@@ -182,9 +180,9 @@ span.id_number { color: #666; }
 
 <?php
   if (is_array($bad_group_ids)) {
-    foreach($bad_group_ids as $i => $group_id) {
-      echo("tr#group_$group_id td { background-color: #fcc; }");
-    }
+      foreach ($bad_group_ids as $i => $group_id) {
+          echo("tr#group_$group_id td { background-color: #fcc; }");
+      }
   }
 ?>
 
@@ -216,7 +214,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <?php
 if (!$assessment) {
-?>
+    ?>
   <div class="nav_button_bar">
     <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
@@ -224,7 +222,7 @@ if (!$assessment) {
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
 <?php
 } else {
-?>
+        ?>
 
   <form action="set_group_marks.php?<?php echo($assessment_qs); ?>" method="post" name="groupmark_form">
   <input type="hidden" name="command" value="none" />
@@ -242,14 +240,14 @@ if (!$assessment) {
 <?php
   echo("<p><label>This assessment is using collection: </label><em>{$collection->name}</em></p>");
 
-  $groups = $collection->get_groups_iterator();
+        $groups = $collection->get_groups_iterator();
 
-  if ($groups->size()==0) {
-?>
+        if ($groups->size()==0) {
+            ?>
       <p>This collection does not contain any groups</p>
 <?php
-  } else {
-?>
+        } else {
+            ?>
       <table class="grid" cellpadding="5" cellspacing="1">
       <tr>
         <th>Group</th>
@@ -257,34 +255,33 @@ if (!$assessment) {
         <th>Group Mark</th>
       </tr>
 <?php
-    for($groups->reset(); $groups->is_valid(); $groups->next()) {
-      $group =& $groups->current();
-      $group_members = $group->get_members();
-      $members = ($group_members) ? $CIS->get_user(array_keys($group_members)) : null;
+    for ($groups->reset(); $groups->is_valid(); $groups->next()) {
+        $group =& $groups->current();
+        $group_members = $group->get_members();
+        $members = ($group_members) ? $CIS->get_user(array_keys($group_members)) : null;
 
-      $group_mark = (array_key_exists($group->id, $group_marks)) ? $group_marks["$group->id"] : '';
+        $group_mark = (array_key_exists($group->id, $group_marks)) ? $group_marks["$group->id"] : '';
 
-      echo("<tr id=\"group_{$group->id}\">");
-      echo("<td><label for=\"group_mark_{$group->id}\">{$group->name}</label></td>");
-      echo('<td style="text-align: left">');
-      if (!$members) {
-        echo('-');
-      } else {
-        foreach($members as $i => $member) {
-          echo("{$member['lastname']}, {$member['forename']}");
-          if (!empty($member['id_number'])) {
-            echo(" &nbsp; <span class=\"id_number\">({$member['id_number']})</span>");
-          }
-          echo("<br />");
+        echo("<tr id=\"group_{$group->id}\">");
+        echo("<td><label for=\"group_mark_{$group->id}\">{$group->name}</label></td>");
+        echo('<td style="text-align: left">');
+        if (!$members) {
+            echo('-');
+        } else {
+            foreach ($members as $i => $member) {
+                echo("{$member['lastname']}, {$member['forename']}");
+                if (!empty($member['id_number'])) {
+                    echo(" &nbsp; <span class=\"id_number\">({$member['id_number']})</span>");
+                }
+                echo("<br />");
+            }
         }
-      }
-      echo('</td>');
-      echo("<td><input type=\"text\" name=\"group_mark_{$group->id}\" id=\"group_mark_{$group->id}\" size=\"4\" maxlength=\"5\" value=\"$group_mark\" /> %</td>");
-      echo('</tr>');
+        echo('</td>');
+        echo("<td><input type=\"text\" name=\"group_mark_{$group->id}\" id=\"group_mark_{$group->id}\" size=\"4\" maxlength=\"5\" value=\"$group_mark\" /> %</td>");
+        echo('</tr>');
     }
-    echo('</table>');
-  }
-?>
+            echo('</table>');
+        } ?>
   </div>
 
   <div style="text-align: center">
@@ -293,7 +290,7 @@ if (!$assessment) {
 
   </form>
 <?php
-}
+    }
 ?>
 </div>
 

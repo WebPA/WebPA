@@ -11,25 +11,28 @@
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 
-class WizardStep3 {
+class WizardStep3
+{
 
   // Public
-  public $wizard = null;
-  public $step = 3;
+    public $wizard = null;
+    public $step = 3;
 
-  /*
-  * CONSTRUCTOR
-  */
-  function __construct(&$wizard) {
-    $this->wizard =& $wizard;
+    /*
+    * CONSTRUCTOR
+    */
+    public function __construct(&$wizard)
+    {
+        $this->wizard =& $wizard;
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Send Email';
-    $this->wizard->cancel_button = 'Cancel';
-  }// /WizardStep3()
+        $this->wizard->back_button = '&lt; Back';
+        $this->wizard->next_button = 'Send Email';
+        $this->wizard->cancel_button = 'Cancel';
+    }// /WizardStep3()
 
-  function head() {
-    ?>
+    public function head()
+    {
+        ?>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -40,25 +43,24 @@ class WizardStep3 {
 //-->
 </script>
 <?php
-  }// /->head()
+    }// /->head()
 
-  function form() {
-    $send_to_desc = array ('all'    => 'everyone taking this assessment' ,
+    public function form()
+    {
+        $send_to_desc = array('all'    => 'everyone taking this assessment' ,
                  'groups' => 'selected groups taking this assessment' ,
                  'have'   => 'all the students who HAVE responded' ,
                  'havenot'  => 'any students who HAVE NOT responded' ,);
 
-    $send_email_to = $this->wizard->get_field('send_to');
+        $send_email_to = $this->wizard->get_field('send_to');
 
-    $assessment = $this->wizard->get_var('assessment');
+        $assessment = $this->wizard->get_var('assessment');
 
-    $group_handler = new GroupHandler();
-    $collection = $group_handler->get_collection($assessment->get_collection_id());
+        $group_handler = new GroupHandler();
+        $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-    $collection_member_count = $collection->get_member_count();
-    $num_targets = 0;
-
-?>
+        $collection_member_count = $collection->get_member_count();
+        $num_targets = 0; ?>
     <p>Please confirm the following settings are correct before proceeding.</p>
     <p>If you wish to amend any details, click <em>Back</em>. When you are ready to create your groups, click <em>Send Email</em>.</p>
 
@@ -73,7 +75,7 @@ class WizardStep3 {
         break;
       // --------------------
       case 'groups':
-        $email_groups = explode('|',$this->wizard->get_field('email_groups'));
+        $email_groups = explode('|', $this->wizard->get_field('email_groups'));
         $groups = $collection->get_groups_array();
         $group_member_counts = $collection->get_member_count_by_group();
         $num_targets = 0;
@@ -81,12 +83,12 @@ class WizardStep3 {
             <p>The groups you selected were:</p>
             <ul>
 <?php
-        foreach($groups as $i => $group) {
-          if (in_array($group['group_id'],$email_groups)) {
-            $num_group_members = (array_key_exists($group['group_id'],$group_member_counts)) ? $group_member_counts["{$group['group_id']}"] : 0 ;
-            $num_targets += $num_group_members;
-            echo("<li>{$group['group_name']} <span style=\"font-size: 0.8em; font-weight: normal\">($num_group_members)</span></li>");
-          }
+        foreach ($groups as $i => $group) {
+            if (in_array($group['group_id'], $email_groups)) {
+                $num_group_members = (array_key_exists($group['group_id'], $group_member_counts)) ? $group_member_counts["{$group['group_id']}"] : 0 ;
+                $num_targets += $num_group_members;
+                echo("<li>{$group['group_name']} <span style=\"font-size: 0.8em; font-weight: normal\">($num_group_members)</span></li>");
+            }
         }
 ?>
               </ul>
@@ -114,13 +116,12 @@ class WizardStep3 {
         $num_targets = $num_no_responses;
         echo("<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>");
         break;
-    }
-?>
+    } ?>
     </div>
 
 <?php
     if (!$num_targets) {
-      $this->wizard->next_button = null;  // default NEXT to off
+        $this->wizard->next_button = null;  // default NEXT to off
 ?>
       <div class="error_box">
         <p><strong>There are no students matching your criteria.</strong></p>
@@ -128,7 +129,7 @@ class WizardStep3 {
       </div>
 <?php
     } else {
-?>
+        ?>
       <h2>Email Preview</h2>
       <div class="form_section">
         <div style="padding: 4px; background-color: #eee; border: 1px solid #999;">
@@ -138,16 +139,16 @@ class WizardStep3 {
       </div>
 <?php
     }
-  }// /->form()
+    }// /->form()
 
-  function process_form() {
-    $errors = null;
+    public function process_form()
+    {
+        $errors = null;
 
-    // Send Email
+        // Send Email
 
-    return $errors;
-  }// /->process_form()
-
+        return $errors;
+    }// /->process_form()
 }// /class: WizardStep3
 
 ?>

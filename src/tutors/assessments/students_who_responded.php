@@ -15,15 +15,15 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
 
 $year = Common::fetch_GET('y');
-$tab = Common::fetch_GET('tab','pending');
+$tab = Common::fetch_GET('tab', 'pending');
 
 $assessment_id = Common::fetch_GET('a');
 
@@ -33,22 +33,22 @@ $list_url = "index.php?tab={$tab}&y={$year}";
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-  $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
-  $group_handler = new GroupHandler();
-  $collection = $group_handler->get_collection($assessment->get_collection_id());
+    $group_handler = new GroupHandler();
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-  $groups_iterator = $collection->get_groups_iterator();
+    $groups_iterator = $collection->get_groups_iterator();
 
-  $result_handler = new ResultHandler($DB);
-  $result_handler->set_assessment($assessment);
+    $result_handler = new ResultHandler($DB);
+    $result_handler->set_assessment($assessment);
 
 
-  $responded_users = $result_handler->get_responded_users();
+    $responded_users = $result_handler->get_responded_users();
 
-  $members = $collection->get_members();
+    $members = $collection->get_members();
 } else {
-  $assessment = null;
+    $assessment = null;
 }
 
 // --------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' . 'students who responded';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  ('home'           => '/' ,
+$UI->breadcrumbs = array('home'           => '/' ,
                'my assessments'     => $list_url ,
                'students who responded' => null ,);
 
@@ -92,16 +92,16 @@ $UI->content_start();
   <p>To email an individual student, click on the email link next to their name.</p>
 <?php
 if ($groups_iterator->size()>0) {
-  for($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-    $group =& $groups_iterator->current();
+    for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
+        $group =& $groups_iterator->current();
 
-    $members = $CIS->get_user($group->get_member_ids());
-    echo("<h2>{$group->name}</h2>");
+        $members = $CIS->get_user($group->get_member_ids());
+        echo("<h2>{$group->name}</h2>");
 
-    if (!$members) {
-      echo('<p>This group has no members.</p>');
-    } else {
-?>
+        if (!$members) {
+            echo('<p>This group has no members.</p>');
+        } else {
+            ?>
         <table class="grid" cellspacing="1" cellpadding="2" style="width: 90%">
         <tr>
           <th>name</th>
@@ -109,23 +109,23 @@ if ($groups_iterator->size()>0) {
           <th>responded</th>
         </tr>
 <?php
-      foreach($members as $i => $member) {
-        if (in_array($member['user_id'], (array)$responded_users)) {
-          $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
-          $responded_class = 'class="responded"';
-        } else {
-          $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
-          $responded_class = 'class="notresponded"';
-        }
-        echo("<tr $responded_class><td>{$member['lastname']}, {$member['forename']}");
-        if (!empty($member['id_number'])) {
-          echo(" ({$member['id_number']})");
-        }
-        echo("</td><td><a href=\"mailto:{$member['email']}\">{$member['email']}</a></td><td align=\"center\">$responded_img</td></tr>");
+      foreach ($members as $i => $member) {
+          if (in_array($member['user_id'], (array)$responded_users)) {
+              $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
+              $responded_class = 'class="responded"';
+          } else {
+              $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
+              $responded_class = 'class="notresponded"';
+          }
+          echo("<tr $responded_class><td>{$member['lastname']}, {$member['forename']}");
+          if (!empty($member['id_number'])) {
+              echo(" ({$member['id_number']})");
+          }
+          echo("</td><td><a href=\"mailto:{$member['email']}\">{$member['email']}</a></td><td align=\"center\">$responded_img</td></tr>");
       }
-      echo('</table><br />');
-    }// /if
-  }// /for
+            echo('</table><br />');
+        }// /if
+    }// /for
 }
 ?>
 

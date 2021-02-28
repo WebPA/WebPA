@@ -12,24 +12,26 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-class WizardStep2 {
+class WizardStep2
+{
+    public $wizard;
+    public $step = 2;
 
-  public $wizard;
-  public $step = 2;
+    /*
+    * CONSTRUCTOR
+    */
+    public function __construct(Wizard $wizard)
+    {
+        $this->wizard = $wizard;
 
-  /*
-  * CONSTRUCTOR
-  */
-  public function __construct(Wizard $wizard) {
-    $this->wizard = $wizard;
+        $this->wizard->back_button = '&lt; Back';
+        $this->wizard->next_button = 'Finish';
+        $this->wizard->cancel_button = 'Cancel';
+    }// /WizardStep2()
 
-    $this->wizard->back_button = '&lt; Back';
-    $this->wizard->next_button = 'Finish';
-    $this->wizard->cancel_button = 'Cancel';
-  }// /WizardStep2()
-
-  function head() {
-    ?>
+    public function head()
+    {
+        ?>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -40,22 +42,22 @@ class WizardStep2 {
 //-->
 </script>
 <?php
-  }// /->head()
+    }// /->head()
 
-  function form() {
-    $DB =& $this->wizard->get_var('db');
-    $user =& $this->wizard->get_var('user');
+    public function form()
+    {
+        $DB =& $this->wizard->get_var('db');
+        $user =& $this->wizard->get_var('user');
 
-    $form = new Form($DB);
-    $form->load($this->wizard->get_field('form_id'));
+        $form = new Form($DB);
+        $form->load($this->wizard->get_field('form_id'));
 
-    if (!$form) {
-      $this->wizard->next_button = null;
-      ?>
+        if (!$form) {
+            $this->wizard->next_button = null; ?>
       <p>The select form could not be loaded, please click <em>Back</em> and try again.</p>
       <?php
-    } else {
-      ?>
+        } else {
+            ?>
       <p>You have chosen to clone: <em><?php echo($form->name); ?></em></p>
 
       <p>Now enter a name for your new form.</p>
@@ -70,18 +72,20 @@ class WizardStep2 {
       </div>
 
       <?php
-    }
-  }// /->form()
+        }
+    }// /->form()
 
-  function process_form() {
-    $errors = null;
+    public function process_form()
+    {
+        $errors = null;
 
-    $this->wizard->set_field('clone_form_name',Common::fetch_POST('clone_form_name'));
-    if (empty($this->wizard->get_field('clone_form_name'))) { $errors[] = 'You must enter a name for your new assessment form.'; }
+        $this->wizard->set_field('clone_form_name', Common::fetch_POST('clone_form_name'));
+        if (empty($this->wizard->get_field('clone_form_name'))) {
+            $errors[] = 'You must enter a name for your new assessment form.';
+        }
 
-    return $errors;
-  }// /->process_form()
-
+        return $errors;
+    }// /->process_form()
 }// /class: WizardStep2
 
 ?>

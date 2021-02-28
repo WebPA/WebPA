@@ -55,8 +55,8 @@ $row = 0;
 $fields = array();
 $final_rows = array();
 
-if (($handle = fopen($filename, "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+if (($handle = fopen($filename, "r")) !== false) {
+    while (($data = fgetcsv($handle, 2000, ",")) !== false) {
         $num = count($data);
 
         //if in the first row we should be getting the field names
@@ -82,11 +82,9 @@ if (($handle = fopen($filename, "r")) !== FALSE) {
                     }
                     $row++;
                 }
-
             } else {
                 $flg_match = true;
             }
-
         } else {
             //build the associative array for the table entrys
             for ($c = 0; $c < $num; $c++) {
@@ -96,9 +94,8 @@ if (($handle = fopen($filename, "r")) !== FALSE) {
         $row++;
     }
 
-//now we have the information in arrays continue to process.
+    //now we have the information in arrays continue to process.
     fclose($handle);
-
 }
 
 //check which array we are being given at this point (the one with the named fields or the other)
@@ -168,7 +165,7 @@ if ($flg_match) {
                 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)';
 
             if ($_user->is_admin()) {
-               $insertUserQuery .=
+                $insertUserQuery .=
                    ' ON DUPLICATE KEY UPDATE ' .
                    'id_number = ?, ' .
                    'forename = ?, ' .
@@ -251,7 +248,6 @@ if ($flg_match) {
                     $collection->add_member($id, $group_name);
                 }
             }
-
         }
     } else {
         // as we don't have staff or student then we must have "module"
@@ -262,7 +258,7 @@ if ($flg_match) {
                 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module ' .
                 '(module_code, module_title, source_id) ' .
                 'VALUES (?, ? , ?) ';
-                'ON DUPLICATE KEY UPDATE ' .
+            'ON DUPLICATE KEY UPDATE ' .
                 'module_title = ?, ' .
                 'source_id = ?';
 
@@ -279,7 +275,6 @@ if ($flg_match) {
     }
 
     $user_msg = "<p>Successful upload of the {$filecontenttype[$uploadtype]['screen']} information to the database.</p>";
-
 } else {
     //we want to notify that the information is not structured as expected therefore bounce back to the user
     $user_warning .= "The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.</p>";
@@ -305,12 +300,12 @@ $UI->content_start();
 ?>
 <div class="content_box">
     <?php if (!empty($user_warning)) {
-        echo "<div class=\"warning_box\">{$user_warning}</div>";
-    } ?>
+    echo "<div class=\"warning_box\">{$user_warning}</div>";
+} ?>
 
     <?php if (!empty($user_msg)) {
-        echo $user_msg;
-    } ?>
+    echo $user_msg;
+} ?>
 
 </div>
 

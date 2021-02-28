@@ -51,7 +51,7 @@ define('APP__EMAIL_NO_REPLY', 'no-reply@email.com');
 
 // logo
 define('APP__INST_LOGO', APP__WWW.'/images/logo.png');
-define('APP__INST_LOGO_ALT','Your institution name');
+define('APP__INST_LOGO_ALT', 'Your institution name');
 
 //the following lines are to accomodate the image size within the css file to prevent the image from over flowing the area provided
 define('APP__INST_HEIGHT', '25'); //image height in pixels
@@ -64,17 +64,17 @@ define('APP__INST_WIDTH', '102'); //image width in pixels
 * dependant on this act.
 *
 */
-define('APP__ALLOW_TEXT_INPUT', TRUE);
+define('APP__ALLOW_TEXT_INPUT', true);
 
 // enable delete options for users and modules
-define('APP__ENABLE_USER_DELETE', TRUE);
-define('APP__ENABLE_MODULE_DELETE', TRUE);
+define('APP__ENABLE_USER_DELETE', true);
+define('APP__ENABLE_MODULE_DELETE', true);
 
 // set the mail server variables if different mail server is to be used.
-ini_set('SMTP','localhost');
-ini_set('smtp_port','25');
+ini_set('SMTP', 'localhost');
+ini_set('smtp_port', '25');
 // if using a windows structure you need to set the send mail from
-ini_set('sendmail_from','someone@email.com');
+ini_set('sendmail_from', 'someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
 $LOGIN_AUTHENTICATORS[] = 'DB';
@@ -92,7 +92,7 @@ $LDAP__INFO_REQUIRED = array('displayname','mail','sn');
 // Name of attribute to use to check user type (via function below)
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
 define('LDAP__DEBUG_LEVEL', 7);
-define('LDAP__AUTO_CREATE_USER', TRUE);
+define('LDAP__AUTO_CREATE_USER', true);
 
 // define installed modules
 $INSTALLED_MODS = array();
@@ -106,12 +106,12 @@ define('APP__NAME', 'WebPA OS');
 define('APP__TITLE', 'WebPA OS : Online Peer Assessment System');
 define('APP__ID', 'webpa');
 define('APP__VERSION', '3.1.1');
-define('APP__DESCRIPTION','WebPA, an Open source, online peer assessment system.');
-define('APP__KEYWORDS','peer assessment, online, peer, assessment, tools, open source');
+define('APP__DESCRIPTION', 'WebPA, an Open source, online peer assessment system.');
+define('APP__KEYWORDS', 'peer assessment, online, peer, assessment, tools, open source');
 
 define('APP__DB_TYPE', 'MySQLDAO');
 
-define('APP__DB_PERSISTENT', FALSE);
+define('APP__DB_PERSISTENT', false);
 define('APP__DB_CLIENT_FLAGS', 2);
 
 // User types
@@ -120,18 +120,18 @@ define('APP__USER_TYPE_TUTOR', 'T');
 define('APP__USER_TYPE_STUDENT', 'S');
 
 //Moodle gradebook output allowed...
-define('APP__MOODLE_GRADEBOOK', FALSE); // If the grade book xml for moodle can be output then set to true, else if not required set to false
+define('APP__MOODLE_GRADEBOOK', false); // If the grade book xml for moodle can be output then set to true, else if not required set to false
 
 //Automatic emailing options.
 //this is dependant on cron jobs being set for the following files;
 //  /tutors/assessments/email/TriggerReminder.php
 //  /tutors/assessments/email/ClosingReminber.php
-define('APP__REMINDER_OPENING', FALSE);
-define('APP__REMINDER_CLOSING', FALSE);
+define('APP__REMINDER_OPENING', false);
+define('APP__REMINDER_CLOSING', false);
 
 //set in individual pages to link to the most appropriate help sections.
 //this is not an option that can be changed in the configuration
-define ('APP__HELP_LINK','http://www.webpaproject.com/');
+define('APP__HELP_LINK', 'http://www.webpaproject.com/');
 
 //define the terminology presented to the student as mark, rating or score
 define('APP__MARK_TEXT', 'Score(s)');
@@ -143,7 +143,7 @@ define('APP__COLLECTION_ASSESSMENT', 'assessment');
 //ordinal scale
 //This scale is used in the reports as some institution and academic tutors prefer this scale.
 //However, it must be noted that the majority of universities in the UK are using arithmetic mean for classifications.
-$ordinal_scale = array (
+$ordinal_scale = array(
   'A+' => '78',
   'A'  => '75',
   'B+' => '68',
@@ -188,18 +188,18 @@ session_start();
 
 // Initialise DB object
 
-$DB = new DAO( APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+$DB = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
 
 // Initialise User Object
 
 $_user = null;
 
 // Get info from the session
-$_user_id = Common::fetch_SESSION('_user_id', NULL);
-$_user_source_id = Common::fetch_SESSION('_user_source_id', NULL);
-$_user_context_id = Common::fetch_SESSION('_user_context_id', NULL);
+$_user_id = Common::fetch_SESSION('_user_id', null);
+$_user_source_id = Common::fetch_SESSION('_user_source_id', null);
+$_user_context_id = Common::fetch_SESSION('_user_context_id', null);
 $_source_id = Common::fetch_SESSION('_source_id', '');
-$_module_id = Common::fetch_SESSION('_module_id', NULL);
+$_module_id = Common::fetch_SESSION('_module_id', null);
 $BRANDING['logo'] = Common::fetch_SESSION('branding_logo', APP__INST_LOGO);
 $BRANDING['logo.width'] = Common::fetch_SESSION('branding_logo.width', APP__INST_WIDTH);
 $BRANDING['logo.height'] = Common::fetch_SESSION('branding_logo.height', APP__INST_HEIGHT);
@@ -212,17 +212,16 @@ $BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP
 $CIS = new EngCIS($_source_id, $_module_id);
 
 // If we found a user to load, load 'em!
-if ($_user_id){
+if ($_user_id) {
+    $_user_info = $CIS->get_user($_user_id);
 
-  $_user_info = $CIS->get_user($_user_id);
+    // Actually create the user object
+    $_user = new User();
+    $_user->load_from_row($_user_info);
+    $_user_info = null;   // We're done with the data, so clear it
 
-  // Actually create the user object
-  $_user = new User();
-  $_user->load_from_row($_user_info);
-  $_user_info = null;   // We're done with the data, so clear it
-
-  // save session data
-  $_SESSION['_user_id'] = $_user->id;
+    // save session data
+    $_SESSION['_user_id'] = $_user->id;
 }
 
 if (!is_null($_user)) {
@@ -233,31 +232,28 @@ if (!is_null($_user)) {
 $_module = null;
 
 // If we found a module to load, load it!
-if ($_module_id){
-  $dbConn = $DB->getConnection();
+if ($_module_id) {
+    $dbConn = $DB->getConnection();
 
-  $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
+    $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-  $_module = $dbConn->fetchAssociative($query, [$_SESSION['_module_id']], [ParameterType::INTEGER]);
+    $_module = $dbConn->fetchAssociative($query, [$_SESSION['_module_id']], [ParameterType::INTEGER]);
 
-  $_module_code = $_module['module_code'];
+    $_module_code = $_module['module_code'];
 }
 
 $UI = new UI($INSTALLED_MODS, $_source_id, $BRANDING, $CIS, $_module, $_user);
 
-function get_LDAP_user_type($data) {
-
+function get_LDAP_user_type($data)
+{
     $description_str = $data[0];
 
     //check in the string for staff
-    if(strripos ($description_str, 'staff') !== false) {
-      $user_type = APP__USER_TYPE_TUTOR;
+    if (strripos($description_str, 'staff') !== false) {
+        $user_type = APP__USER_TYPE_TUTOR;
     } else {
-      $user_type = APP__USER_TYPE_STUDENT;
+        $user_type = APP__USER_TYPE_STUDENT;
     }
 
-  return $user_type;
-
+    return $user_type;
 }
-
-?>

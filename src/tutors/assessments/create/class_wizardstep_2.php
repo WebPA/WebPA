@@ -16,7 +16,6 @@ use WebPA\includes\functions\Common;
 
 class WizardStep2
 {
-
     public $wizard = null;
     public $step = 2;
 
@@ -25,7 +24,7 @@ class WizardStep2
     /*
     * CONSTRUCTOR
     */
-    function __construct(Wizard $wizard)
+    public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
 
@@ -36,7 +35,7 @@ class WizardStep2
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep2()
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -62,7 +61,7 @@ class WizardStep2
     }// /->head()
 
 
-    function form()
+    public function form()
     {
         $DB = $this->wizard->get_var('db');
         $user = $this->wizard->get_var('user');
@@ -88,8 +87,7 @@ class WizardStep2
         $feedback_name = $this->wizard->get_field('feedback_name');
 
         if (!$forms) {
-            $this->button_next = '';
-            ?>
+            $this->button_next = ''; ?>
             <p>You haven't yet created any assessment forms.</p>
             <p>You need to <a href="../../forms/create/">create a new form</a> before you will be able to run any peer
                 assessments.</p>
@@ -110,29 +108,27 @@ class WizardStep2
                     if (count($forms) == 1) {
                         $form_id = $forms[0]['form_id'];
                     }
-                    foreach ($forms as $i => $form) {
-                        $checked = ($form_id == $form['form_id']) ? 'checked="checked"' : '';
-                        $intro_text = base64_encode($this->wizard->get_field('introduction'));
-                        if ($form['module_id'] == $this->moduleId) {
-                            $module = '';
-                        } else {
-                            $module = " ({$form['module_title']} [{$form['module_code']}])";
-                        }
-                        echo('<tr>');
-                        echo("<td><input type=\"radio\" name=\"form_id\" id=\"form_{$form['form_id']}\" value=\"{$form['form_id']}\" $checked /></td>");
-                        echo("<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}{$module}</label></td>");
-                        echo("<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>");
-                        echo('</tr>');
-                    }
-                    ?>
+            foreach ($forms as $i => $form) {
+                $checked = ($form_id == $form['form_id']) ? 'checked="checked"' : '';
+                $intro_text = base64_encode($this->wizard->get_field('introduction'));
+                if ($form['module_id'] == $this->moduleId) {
+                    $module = '';
+                } else {
+                    $module = " ({$form['module_title']} [{$form['module_code']}])";
+                }
+                echo('<tr>');
+                echo("<td><input type=\"radio\" name=\"form_id\" id=\"form_{$form['form_id']}\" value=\"{$form['form_id']}\" $checked /></td>");
+                echo("<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}{$module}</label></td>");
+                echo("<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>");
+                echo('</tr>');
+            } ?>
                 </table>
             </div>
             <?php
 
             //check that the system allows student Justification
             if (APP__ALLOW_TEXT_INPUT) {
-                //provide the academic the option
-                ?>
+                //provide the academic the option ?>
                 <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img
                                 src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
                     <br/><br/></div>
@@ -192,10 +188,9 @@ class WizardStep2
                 <?php
             }
         }
-
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -213,7 +208,6 @@ class WizardStep2
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep2
 
 ?>

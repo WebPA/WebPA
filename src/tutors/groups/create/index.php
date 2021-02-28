@@ -13,9 +13,9 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -24,15 +24,15 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
 $wizard = new Wizard('create new groups wizard');
 $wizard->cancel_url = '../../../tutors/groups/';
 
-$wizard->add_step(1,'class_wizardstep_1.php');
-$wizard->add_step(2,'class_wizardstep_2.php');
-$wizard->add_step(3,'class_wizardstep_3.php');
-$wizard->add_step(4,'class_wizardstep_4.php');
+$wizard->add_step(1, 'class_wizardstep_1.php');
+$wizard->add_step(2, 'class_wizardstep_2.php');
+$wizard->add_step(3, 'class_wizardstep_3.php');
+$wizard->add_step(4, 'class_wizardstep_4.php');
 
-$wizard->set_var('CIS',$CIS);
+$wizard->set_var('CIS', $CIS);
 $wizard->set_var('db', $DB);
-$wizard->set_var('config',$_config);
-$wizard->set_var('user',$_user);
+$wizard->set_var('config', $_config);
+$wizard->set_var('user', $_user);
 $wizard->set_var('moduleId', $_module_id);
 
 $wizard->prepare();
@@ -48,7 +48,7 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' Create new groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'                      => '../../' ,
   'my groups'                 => '../' ,
   'create new groups wizard'  => null ,

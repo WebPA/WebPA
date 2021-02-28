@@ -23,7 +23,7 @@ class WizardStep2
     /*
     * CONSTRUCTOR
     */
-    function __construct(Wizard $wizard)
+    public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
 
@@ -34,7 +34,7 @@ class WizardStep2
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep2()
 
-    function head()
+    public function head()
     {
         $html = <<<HTMLEnd
 <script language="JavaScript" type="text/javascript">
@@ -51,7 +51,7 @@ HTMLEnd;
         echo($html);
     }// /->head()
 
-    function form()
+    public function form()
     {
         $CIS = $this->wizard->get_var('CIS');
         $config = $this->wizard->get_var('config');
@@ -64,8 +64,7 @@ HTMLEnd;
             echo("<div class=\"warning_box\"><p><strong>Warning!</strong></p><p>There are no students associated with the module you have selected.</p><p>You can continue to create your groups if you wish but there are no students available, so your groups cannot be populated at this time.</p><p>To choose a different module, click <em>back</em> to view the list of modules available.</p></div>");
         } else {
             echo("<p>The module contains <strong>$total_students $students_plural</strong> in total.</p>");
-        }
-        ?>
+        } ?>
         <p>Now you can set how the new groups will be created. To save time, the system can automatically create
             sequentially named groups for you. If you do not want to use sequential names, or if you just want to create
             all your groups yourself, select <em>0</em> in the <em>Number of groups to create</em> box below.</p>
@@ -108,8 +107,7 @@ HTMLEnd;
                                 'numeric' => 'Numeric (Group 1, Group 2, ..)',
                                 'hashed' => 'Hashed-Numeric (Group #1, Group #2, ..)',
                             );
-                            Form::render_options($options, $this->wizard->get_field('group_numbering'));
-                            ?>
+        Form::render_options($options, $this->wizard->get_field('group_numbering')); ?>
                         </select>
                     </td>
                 </tr>
@@ -118,7 +116,7 @@ HTMLEnd;
         <?php
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -141,7 +139,6 @@ HTMLEnd;
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep2
 
 ?>

@@ -16,15 +16,15 @@ require_once("../includes/inc_global.php");
 
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
  //set the page information
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'admin home';
-$UI->breadcrumbs = array ('home' => null);
+$UI->breadcrumbs = array('home' => null);
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -34,27 +34,27 @@ $UI->content_start();
 
 $page_intro = 'Welcome to the Administration Area for ' . APP__NAME . '. In this section you are able to manage the users of the system (both adding new and editing existing)';
 if ($_user->is_admin()) {
-  $page_intro .= ' as well as generate basic reports on the usage of ' . APP__NAME . ' (the metrics)';
+    $page_intro .= ' as well as generate basic reports on the usage of ' . APP__NAME . ' (the metrics)';
 }
 $page_intro .= '.<br/><br/>The admin area contains the following sections:';
 $menu = $UI->get_menu('Admin');
 if (isset($menu['upload data'])) {
-  $upload = $menu['upload data'];
-  if ($_user->is_admin()) {
-    $section_name = array('Upload Data', 'View Data', 'WebPA Metrics');
-    $section_link = array($upload, 'review/', 'metrics/');
-  } else {
-    $section_name = array('Upload Data', 'View Data');
-    $section_link = array($upload, 'review/');
-  }
+    $upload = $menu['upload data'];
+    if ($_user->is_admin()) {
+        $section_name = array('Upload Data', 'View Data', 'WebPA Metrics');
+        $section_link = array($upload, 'review/', 'metrics/');
+    } else {
+        $section_name = array('Upload Data', 'View Data');
+        $section_link = array($upload, 'review/');
+    }
 } else {
-  if ($_user->is_admin()) {
-    $section_name = array('View Data', 'WebPA Metrics');
-    $section_link = array('review/', 'metrics/');
-  } else {
-    $section_name = array('View Data');
-    $section_link = array('review/');
-  }
+    if ($_user->is_admin()) {
+        $section_name = array('View Data', 'WebPA Metrics');
+        $section_link = array('review/', 'metrics/');
+    } else {
+        $section_name = array('View Data');
+        $section_link = array('review/');
+    }
 }
 $section_definition = array('This is where you can upload the data to the system.',
               'This area allows you to view the uploaded data as well as search and edit user information.',
@@ -67,7 +67,7 @@ $section_definition = array('This is where you can upload the data to the system
 <table class="option_list" style="width: 500px;">
 <?php
   for ($i = 0; $i < count($section_link); $i++) {
-?>
+      ?>
 <tr>
   <td><a href="<?php echo $section_link[$i]; ?>"><img src="../images/icons/load_data.gif" width="32" height="32" alt="" /></a></td>
   <td>

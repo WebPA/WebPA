@@ -32,7 +32,7 @@ class WizardStep1
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep1()
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -47,7 +47,7 @@ class WizardStep1
         <?php
     }// /->head()
 
-    function form()
+    public function form()
     {
         ?>
         <p>To create a new form you just need to give it a name. To avoid confusion, the name should be unique, but you
@@ -69,8 +69,7 @@ class WizardStep1
         <label>What type scoring will your criteria use?</label>
         <p>WebPA offers two different ways that your students can score each other.</p>
         <?php
-        $form_type = $this->wizard->get_field('form_type', 'likert');
-        ?>
+        $form_type = $this->wizard->get_field('form_type', 'likert'); ?>
         <table>
             <tr>
                 <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_likert"
@@ -99,7 +98,7 @@ class WizardStep1
         echo("<input type=\"hidden\" name=\"form_modules[]\" id=\"module_{$this->moduleId}\" value=\"{$this->moduleId}\" />");
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -117,7 +116,6 @@ class WizardStep1
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep1
 
 ?>

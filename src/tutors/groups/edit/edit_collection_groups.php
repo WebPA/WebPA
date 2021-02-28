@@ -13,9 +13,9 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -35,8 +35,8 @@ $collection = $group_handler->get_collection($collection_id);
 $allow_edit = false;
 
 if ($collection) {
-  // Check if the user can edit this group
-  $allow_edit = !$collection->is_locked();
+    // Check if the user can edit this group
+    $allow_edit = !$collection->is_locked();
 }
 
 // --------------------------------------------------------------------------------
@@ -45,26 +45,28 @@ if ($collection) {
 $errors = null;
 
 if ($allow_edit) {
-  switch ($command) {
+    switch ($command) {
     case 'add':
       $new_name = Common::fetch_POST('new_group_name');
-      if (empty($new_name)) { $errors[] = 'You must give your new group a name'; }
+      if (empty($new_name)) {
+          $errors[] = 'You must give your new group a name';
+      }
 
       if (!$errors) {
-        $new_group = $collection->new_group($new_name);
-        $new_group->save();
+          $new_group = $collection->new_group($new_name);
+          $new_group->save();
       }
       break;
     // --------------------
     case 'delete':
       $groups_to_delete = Common::fetch_POST('group');
       if (is_array($groups_to_delete)) {
-        foreach($groups_to_delete as $i => $group_id) {
-          $group =& $collection->get_group_object($group_id);
-          $group->delete();
-          unset($group);
-        }
-        $collection->refresh_groups();
+          foreach ($groups_to_delete as $i => $group_id) {
+              $group =& $collection->get_group_object($group_id);
+              $group->delete();
+              unset($group);
+          }
+          $collection->refresh_groups();
       }
       break;
   }// /switch
@@ -80,7 +82,7 @@ $page_title = ($collection) ? "Groups: {$collection->name}" : 'Groups';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array  ( 'home' => '../../' ,
+$UI->breadcrumbs = array( 'home' => '../../' ,
                 'my groups' => '../' ,
                 "Editing: $collection_name" => "../edit/edit_collection.php?c={$collection->id}" ,
                 $page_title                 => null ,
@@ -118,18 +120,17 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <?php
 if (!$collection) {
-?>
+    ?>
   <p>The collection you selected could not be loaded for some reason - please go back and try again.</p>
 <?php
 } else {
-  if ($collection->is_locked()) {
-    echo("<p>This collection has been locked and cannot be edited.</p>");
-  } else {
-    echo("<p>On this page you can choose which modules to associate with this collection.</p>");
-  }
+        if ($collection->is_locked()) {
+            echo("<p>This collection has been locked and cannot be edited.</p>");
+        } else {
+            echo("<p>On this page you can choose which modules to associate with this collection.</p>");
+        }
 
-  $collection_qs = "c={$collection->id}";
-?>
+        $collection_qs = "c={$collection->id}"; ?>
 
   <form action="edit_collection_groups.php?<?php echo($collection_qs); ?>" method="post" name="collection_groups_form">
   <input type="hidden" name="command" value="add" />
@@ -160,25 +161,24 @@ if (!$collection) {
   // Show all the groups contained in this collection
   $groups = $collection->get_groups_array();
 
-  if (is_array($groups)) {
-    foreach($groups as $i => $group) {
-      $group_qs = "{$collection_qs}&g={$group['group_id']}";
-      echo('<tr>');
-      echo("<td><a href=\"edit_group.php?$group_qs\">{$group['group_name']}</a></td>");
-      echo("<td align=\"center\"><input type=\"checkbox\" name=\"group[]\" id=\"group_{$group['group_id']}\" value=\"{$group['group_id']}\" /></td>");
-      echo('</tr>');
-    }
-    if ($allow_edit) {?>
+        if (is_array($groups)) {
+            foreach ($groups as $i => $group) {
+                $group_qs = "{$collection_qs}&g={$group['group_id']}";
+                echo('<tr>');
+                echo("<td><a href=\"edit_group.php?$group_qs\">{$group['group_name']}</a></td>");
+                echo("<td align=\"center\"><input type=\"checkbox\" name=\"group[]\" id=\"group_{$group['group_id']}\" value=\"{$group['group_id']}\" /></td>");
+                echo('</tr>');
+            }
+            if ($allow_edit) {?>
       <tr>
         <th>&nbsp;</th>
         <th><input type="button" name="deletebutton" id="deletebutton" value="delete" onclick="do_command('delete');" /></th>
       </tr>
       <?php
     }
-  } else {
-    echo('<tr class="in_collection"><td colspan="3">This collection does not contain any groups</td></tr>');
-  }
-?>
+        } else {
+            echo('<tr class="in_collection"><td colspan="3">This collection does not contain any groups</td></tr>');
+        } ?>
     </table>
       <td valign="bottom">
       </td>
@@ -188,7 +188,7 @@ if (!$collection) {
 
   </form>
 <?php
-}
+    }
 ?>
 </div>
 

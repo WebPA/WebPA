@@ -16,9 +16,9 @@ use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -40,15 +40,15 @@ $prev_url = $list_url;
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-  $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
-  $group_handler = new GroupHandler();
-  $collection = $group_handler->get_collection($assessment->get_collection_id());
+    $group_handler = new GroupHandler();
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-  $result_handler = new ResultHandler($DB);
-  $result_handler->set_assessment($assessment);
+    $result_handler = new ResultHandler($DB);
+    $result_handler->set_assessment($assessment);
 } else {
-  $assessment = null;
+    $assessment = null;
 }
 
 $min_penalty = 0;
@@ -62,25 +62,25 @@ $max_tolerance = 20;
 
 $errors = null;
 
-if ( ($command) && ($assessment) ) {
-  switch ($command) {
+if (($command) && ($assessment)) {
+    switch ($command) {
     case 'save':
       // Create Mark Sheet
       $weighting = Common::fetch_POST('pa_weighting', null);
       $weighting = (is_numeric($weighting)) ? (int) $weighting : null;
-      if ( (is_null($weighting)) || ($weighting<=0) || ($weighting>100) ) {
-        $errors[] = 'The PA Weighting must be a number between 1 - 100';
+      if ((is_null($weighting)) || ($weighting<=0) || ($weighting>100)) {
+          $errors[] = 'The PA Weighting must be a number between 1 - 100';
       }
 
       $penalty = Common::fetch_POST('pa_penalty', null);
       $penalty = (is_numeric($penalty)) ? (int) $penalty : null;
-      if ( (is_null($penalty)) || ($penalty<$min_penalty) || ($penalty>$max_penalty) ) {
-        $errors[] = "The Non-completion Penalty must be a number between $min_penalty - $max_penalty";
+      if ((is_null($penalty)) || ($penalty<$min_penalty) || ($penalty>$max_penalty)) {
+          $errors[] = "The Non-completion Penalty must be a number between $min_penalty - $max_penalty";
       }
 
       $penalty_type = Common::fetch_POST('pa_penalty_type', null);
       if ($penalty_type!='pp') {
-        $penalty_type = '%';
+          $penalty_type = '%';
       }
 
       /*
@@ -96,28 +96,28 @@ if ( ($command) && ($assessment) ) {
       $grading = ($grading=='grade_af') ? $grading : 'numeric';
 
       $algorithm = Common::fetch_POST('pa_algorithm', null);
-      $valid_algs = array ('pets', 'webpa');
+      $valid_algs = array('pets', 'webpa');
       if (!in_array($algorithm, $valid_algs)) {
-        $algorithm = 'webpa';
+          $algorithm = 'webpa';
       }
 
       // If there were no errors, save the changes
       if (!$errors) {
-        $xml_parser = new XMLParser();
+          $xml_parser = new XMLParser();
 
-        $xml_array['parameters']['weighting']['_attributes'] = array ( 'value'  => $weighting );
-        $xml_array['parameters']['penalty']['_attributes'] = array ( 'value'  => $penalty );
-        $xml_array['parameters']['penalty_type']['_attributes'] = array ( 'value' => $penalty_type );
+          $xml_array['parameters']['weighting']['_attributes'] = array( 'value'  => $weighting );
+          $xml_array['parameters']['penalty']['_attributes'] = array( 'value'  => $penalty );
+          $xml_array['parameters']['penalty_type']['_attributes'] = array( 'value' => $penalty_type );
 
-        //$xml_array['parameters']['tolerance']['_attributes'] = array ( 'value'  => $tolerance );
-        $xml_array['parameters']['grading']['_attributes'] = array ( 'value'  => $grading );
-        $xml_array['parameters']['algorithm']['_attributes'] = array ( 'value'  => $algorithm );
+          //$xml_array['parameters']['tolerance']['_attributes'] = array ( 'value'  => $tolerance );
+          $xml_array['parameters']['grading']['_attributes'] = array( 'value'  => $grading );
+          $xml_array['parameters']['algorithm']['_attributes'] = array( 'value'  => $algorithm );
 
-        $mysql_now = date(MYSQL_DATETIME_FORMAT,time());
+          $mysql_now = date(MYSQL_DATETIME_FORMAT, time());
 
-        $queryBuilder = $DB->getConnection()->createQueryBuilder();
+          $queryBuilder = $DB->getConnection()->createQueryBuilder();
 
-        $queryBuilder
+          $queryBuilder
             ->insert(APP__DB_TABLE_PREFIX . 'assessment_marking')
             ->values([
                 'assessment_id'     => $assessment_id ,
@@ -130,10 +130,10 @@ if ( ($command) && ($assessment) ) {
             ->setParameter(2, $mysql_now)
             ->setParameter(3, $xml_parser->generate_xml($xml_array));
 
-        $queryBuilder->execute();
+          $queryBuilder->execute();
 
-        header("Location: $list_url");
-        exit;
+          header("Location: $list_url");
+          exit;
       }
       break;
     // --------------------
@@ -148,7 +148,7 @@ $page_title = 'create mark sheet';
 $UI->page_title = $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'        => '../../' ,
   'my assessments'  => '../' ,
   'create mark sheet' => null ,
@@ -203,7 +203,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <?php
 if (!$assessment) {
-?>
+    ?>
   <div class="nav_button_bar">
     <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
@@ -211,7 +211,7 @@ if (!$assessment) {
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
 <?php
 } else {
-?>
+        ?>
 
   <form action="mark_assessment.php?<?php echo($assessment_qs); ?>" method="post" name="mark_form">
   <input type="hidden" name="command" value="none" />
@@ -234,11 +234,10 @@ if (!$assessment) {
       <td>
         <select name="pa_weighting" id="pa_weighting">
 <?php
-  for($i=5; $i<=100; $i=$i+5) {
-    $selected = ($i==50) ? 'selected="selected"' : '' ;
-    echo("<option value=\"$i\" $selected> {$i}% </option>\n");
-  }
-?>
+  for ($i=5; $i<=100; $i=$i+5) {
+      $selected = ($i==50) ? 'selected="selected"' : '' ;
+      echo("<option value=\"$i\" $selected> {$i}% </option>\n");
+  } ?>
         </select>
       </td>
     </tr>
@@ -252,11 +251,10 @@ if (!$assessment) {
       <td>
         <select name="pa_penalty" id="pa_penalty">
 <?php
-  for($i=$min_penalty; $i<=$max_penalty; $i++) {
-    $selected = ($i==0) ? 'selected="selected"' : '' ;
-    echo("<option value=\"$i\" $selected> {$i}% </option>\n");
-  }
-?>
+  for ($i=$min_penalty; $i<=$max_penalty; $i++) {
+      $selected = ($i==0) ? 'selected="selected"' : '' ;
+      echo("<option value=\"$i\" $selected> {$i}% </option>\n");
+  } ?>
         </select>
       </td>
       <td>of their final grade.</td>
@@ -347,7 +345,7 @@ if (!$assessment) {
       // Until we have conducted a full investigation and nailed down what's happening
       // this algorithm is disabled.
       if (false) {
-	      ?>
+          ?>
 	      <tr>
 	        <td><input type="radio" name="pa_algorithm" id="alg_pets" value="pets" /></td>
 	        <td style="padding-bottom: 8px;"><label for="alg_pets">PETS Algorithm
@@ -356,8 +354,7 @@ if (!$assessment) {
 	        </td>
 	      </tr>
 	      <?php
-      }
-      ?>
+      } ?>
       </table>
 
     </div>
@@ -371,7 +368,7 @@ if (!$assessment) {
 
   </form>
 <?php
-}
+    }
 ?>
 </div>
 

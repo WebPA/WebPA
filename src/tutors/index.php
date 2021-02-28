@@ -15,8 +15,8 @@ use WebPA\lang\en\Generic;
 use WebPA\lang\en\tutors\Tutors;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'home';
 $UI->help_link = '?q=node/233';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'      => null ,
 );
 $UI->head();

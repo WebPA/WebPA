@@ -17,9 +17,9 @@ use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
 use WebPA\lang\en\tutors\Tutors;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ $collections = $group_handler->get_user_collections($_user->id);
 $UI->page_title = APP__NAME. ' ' . Generic::EDIT__GROUP;;
 $UI->menu_selected = Generic::MY__GROUPS;
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'      => '/' ,
   'my groups'   => '/groups/' ,
   'edit groups' => null ,
@@ -79,24 +79,24 @@ $UI->content_start();
 <div class="form_section">
 <?php
 if (!$collections) {
-  echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
+    echo('<p>'. Tutors::NO_COLLECTIONS .'</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
+    $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
 
-  echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
+    echo '<p>' . Tutors::GROUPS__EDIT_INST . '</p>';
 
-  $any_locks = false;
-  for($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next() ) {
-    $collection = $collection_iterator->current();
+    $any_locks = false;
+    for ($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next()) {
+        $collection = $collection_iterator->current();
 
-    $group_count = count($collection->get_groups_array());
-    $modules = (is_array($collection->get_modules())) ? implode(', ',$collection->get_modules()) : 'none' ;
+        $group_count = count($collection->get_groups_array());
+        $modules = (is_array($collection->get_modules())) ? implode(', ', $collection->get_modules()) : 'none' ;
 
-    echo('<div class="collection">');
-    echo("  <div><a href=\"edit_collection.php?c={$collection->id}\">{$collection->name}</a></div>");
-    echo("  <div class=\"collection_info\"><div><strong>" . ASSOCIATED__MODULES . ":</strong> $modules</div><div><strong>" . Generic::NO__GROUPS . " :</strong> $group_count</div></div>");
-    echo('</div>');
-  }
+        echo('<div class="collection">');
+        echo("  <div><a href=\"edit_collection.php?c={$collection->id}\">{$collection->name}</a></div>");
+        echo("  <div class=\"collection_info\"><div><strong>" . ASSOCIATED__MODULES . ":</strong> $modules</div><div><strong>" . Generic::NO__GROUPS . " :</strong> $group_count</div></div>");
+        echo('</div>');
+    }
 }
 ?>
 </div>

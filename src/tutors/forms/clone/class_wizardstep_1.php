@@ -38,7 +38,7 @@ class WizardStep1
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep1()
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -52,7 +52,7 @@ class WizardStep1
         <?php
     }// /->head()
 
-    function form()
+    public function form()
     {
         $DB =& $this->wizard->get_var('db');
         $user =& $this->wizard->get_var('user');
@@ -90,8 +90,7 @@ class WizardStep1
         }
 
         if (!$forms) {
-            $this->wizard->next_button = null;
-            ?>
+            $this->wizard->next_button = null; ?>
             <p>You have not created any forms yet, so you cannot select one to clone.</p>
             <p>Please <a href="../create/">create a new form</a> instead.</p>
             <?php
@@ -107,9 +106,7 @@ class WizardStep1
 
                     foreach ($forms as $i => $form) {
                         $checked_str = ($form['form_id'] == $form_id) ? ' checked="checked"' : '';
-                        $title_str = ($form['module_id'] == $this->moduleId) ? '' : " [{$form['module_title']}]";
-
-                        ?>
+                        $title_str = ($form['module_id'] == $this->moduleId) ? '' : " [{$form['module_title']}]"; ?>
                         <tr>
                             <td><input type="radio" name="form_id" id="form_id_<?php echo($form['form_id']); ?>"
                                        value="<?php echo($form['form_id']); ?>"<?php echo($checked_str); ?>/></td>
@@ -118,8 +115,7 @@ class WizardStep1
                             </th>
                         </tr>
                         <?php
-                    }
-                    ?>
+                    } ?>
                 </table>
             </div>
 
@@ -127,7 +123,7 @@ class WizardStep1
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -138,7 +134,6 @@ class WizardStep1
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep1
 
 ?>

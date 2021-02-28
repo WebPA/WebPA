@@ -13,9 +13,9 @@ require_once('../../includes/inc_global.php');
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 $genericFormQuery =
@@ -44,7 +44,7 @@ $forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [$_module_id], [
 $UI->page_title = APP__NAME . ' my forms';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'      => '../' ,
   'my forms'  => null ,
 );
@@ -73,16 +73,14 @@ $UI->content_start();
 <?php
 // @pmn - check to see if there are generic forms
 if ($generic_form) {
-?>
+    ?>
       <h3>generic / example form</h3>
 
 <?php
   //out put the generic form
   foreach ($generic_form as $i => $form) {
-    $clone_url = "clone/clone_example.php?f={$form['form_id']}";
-    $edit_url = "edit/edit_form.php?f={$form['form_id']}";
-
-?>
+      $clone_url = "clone/clone_example.php?f={$form['form_id']}";
+      $edit_url = "edit/edit_form.php?f={$form['form_id']}"; ?>
         <div class="obj">
           <table class="obj" cellpadding="2" cellspacing="2">
           <tr>
@@ -92,12 +90,11 @@ if ($generic_form) {
             </td>
 <?php
     if ($_user->is_admin()) {
-?>
+        ?>
             <td class="button" width="24"><a href="<?php echo($edit_url); ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="edit form" title="edit" /></a></td>
             <td class="button" width="24"><a href="<?php echo($edit_url); ?>&command=delete" onclick="return confirm('This assessment form will be deleted.\n\nClick OK to confirm.');"><img src="../../images/buttons/cross.gif" width="16" height="16" alt="delete form" title="delete" /></a></td>
 <?php
-    }
-?>
+    } ?>
           </tr>
           </table>
         </div>
@@ -109,16 +106,15 @@ if ($generic_form) {
 
 <?php
 if (!$forms) {
-?>
+    ?>
         <p>You do not have any assessment forms at the moment. Please <a href="create/">create a new form</a>.</p>
 <?php
 } else {
 
   //out put the form that the user owns
-  foreach ($forms as $i => $form) {
-    $edit_url = "edit/edit_form.php?f={$form['form_id']}";
-    $export_url = "export/export_form.php?f={$form['form_id']}";
-?>
+        foreach ($forms as $i => $form) {
+            $edit_url = "edit/edit_form.php?f={$form['form_id']}";
+            $export_url = "export/export_form.php?f={$form['form_id']}"; ?>
           <div class="obj">
             <table class="obj" cellpadding="2" cellspacing="2">
             <tr>
@@ -133,8 +129,8 @@ if (!$forms) {
             </table>
           </div>
 <?php
-  }
-}
+        }
+    }
 ?>
     </div>
   </div>

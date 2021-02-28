@@ -14,9 +14,9 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 
-class DBAuthenticator extends Authenticator {
-
-    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
+class DBAuthenticator extends Authenticator
+{
+    public function __construct(EngCIS $cis, $username = null, $password = null)
     {
         parent::__construct($cis, $username, $password);
     }
@@ -24,28 +24,27 @@ class DBAuthenticator extends Authenticator {
     /*
     Authenticate the user against the internal database
     */
-  function authenticate() {
+    public function authenticate()
+    {
+        $this->_error = null;
 
-    $this->_error = NULL;
+        //match the username and password to the values in the database.
+        $password = md5($this->password);
 
-    //match the username and password to the values in the database.
-    $password = md5($this->password);
+        $DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
 
-    $DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+        $dbConn = $DAO->getConnection();
 
-    $dbConn = $DAO->getConnection();
+        $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE username = ? AND password = ? AND source_id = ""';
 
-    $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE username = ? AND password = ? AND source_id = ""';
+        $user = $dbConn->fetchAssociative($query, [$this->username, $password], [ParameterType::STRING, ParameterType::STRING]);
 
-    $user = $dbConn->fetchAssociative($query, [$this->username, $password], [ParameterType::STRING, ParameterType::STRING]);
+        return $this->initialise($user);
+    }
 
-    return $this->initialise($user);
-  }
-
-/*
-================================================================================
-  PRIVATE
-================================================================================
-*/
-
+    /*
+    ================================================================================
+      PRIVATE
+    ================================================================================
+    */
 }// /class DBAuthenticator

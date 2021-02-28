@@ -13,9 +13,9 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -24,14 +24,14 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
 $wizard = new Wizard('create a new form wizard');
 $wizard->cancel_url = "../";
 
-$wizard->add_step(1,'class_wizardstep_1.php');
-$wizard->add_step(2,'class_wizardstep_2.php');
+$wizard->add_step(1, 'class_wizardstep_1.php');
+$wizard->add_step(2, 'class_wizardstep_2.php');
 
 $wizard->show_steps(1); // Hide the last step from the user
 
-$wizard->set_var('db',$DB);
-$wizard->set_var('config',$_config);
-$wizard->set_var('user',$_user);
+$wizard->set_var('db', $DB);
+$wizard->set_var('config', $_config);
+$wizard->set_var('user', $_user);
 $wizard->set_var('moduleId', $_module_id);
 
 $wizard->prepare();
@@ -47,7 +47,7 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' ' .'Create a new form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'                      => '../../' ,
   'my forms'                  => '../' ,
   'create a new form wizard'  => null ,

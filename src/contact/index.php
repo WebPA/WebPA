@@ -26,8 +26,8 @@ $contact_type = Common::fetch_GET('q');
 $UI->page_title = APP__NAME . ' Contact';
 $UI->menu_selected = 'contact';
 $UI->help_link = '?q=node/379#intool';
-$UI->breadcrumbs = array	('home'		=> '../' ,
-							 'contact'	=> null ,);
+$UI->breadcrumbs = array('home'		=> '../' ,
+                             'contact'	=> null ,);
 
 
 $UI->head();
@@ -79,14 +79,14 @@ $UI->content_start();
 				<td>
 					<select name="contact_type" id="contact_type">
 						<?php
-							$contact_types = array	('help'		=> 'Request for help!' ,
-													 'info'		=> 'Information request' ,
-													 'bug'		=> 'Bug / Error report' ,
-													 'wish'		=> 'Suggestion / Wish List' ,
-													 'misc'		=> 'Other type of message' ,);
+                            $contact_types = array('help'		=> 'Request for help!' ,
+                                                     'info'		=> 'Information request' ,
+                                                     'bug'		=> 'Bug / Error report' ,
+                                                     'wish'		=> 'Suggestion / Wish List' ,
+                                                     'misc'		=> 'Other type of message' ,);
 
-							Form::render_options($contact_types, $contact_type);
-						?>
+                            Form::render_options($contact_types, $contact_type);
+                        ?>
 					</select>
 				</td>
 			</tr>

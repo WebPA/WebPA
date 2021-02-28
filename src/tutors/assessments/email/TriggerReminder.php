@@ -44,7 +44,6 @@ class TriggerReminder
                     "\n This is an automated email sent by the WebPA tool \n\n";
 
                 mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
-
             }
             unset($assessment);
         }

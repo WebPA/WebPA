@@ -19,7 +19,6 @@ use WebPA\tutors\assessments\email\AssessmentNotificationTrait;
 
 class WizardStep6
 {
-
     use AssessmentNotificationTrait;
 
     // Public
@@ -41,7 +40,7 @@ class WizardStep6
         $this->wizard->cancel_button = null;
     }
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -55,7 +54,7 @@ class WizardStep6
         <?php
     }// /->head()
 
-    function form()
+    public function form()
     {
         $DB = $this->wizard->get_var('db');
 
@@ -124,8 +123,7 @@ class WizardStep6
             echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
         } else {// Else.. create the form!
             if ($assessment) {
-                $assessment_qs = "a={$assessment->id}";
-                ?>
+                $assessment_qs = "a={$assessment->id}"; ?>
                 <p><strong>Your new assessment has been created.</strong></p>
                 <p style="margin-top: 20px;">To view or amend the details of your new assessment, you can use the <a
                             href="../edit/edit_assessment.php?<?php echo($assessment_qs); ?>">assessment editor</a>.</p>
@@ -143,11 +141,9 @@ class WizardStep6
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $this->wizard->_fields = array(); // kill the wizard's stored fields
         return null;
     }// /->process_form()
-
 }// /class: WizardStep6
-

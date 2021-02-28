@@ -29,7 +29,7 @@ use WebPA\includes\functions\Common;
 
 $action = Common::fetch_POST('action');
 
-switch($action) {
+switch ($action) {
   case "init":
     //phase 2
     //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
@@ -48,8 +48,8 @@ switch($action) {
     $uid = $DB->getConnection()->fetchOne($sql, [$_POST['username']], [ParameterType::STRING]);
 
     if (!$uid) {
-      $content = "Unable to reset the password for this account.";
-      break;
+        $content = "Unable to reset the password for this account.";
+        break;
     }
     // inserts the user/hash pair into the database
     $insertUserHashPairQuery =
@@ -76,7 +76,7 @@ TXT;
 
     $uemail = $DB->getConnection()->fetchOne($userEmailQuery, [$uid], [ParameterType::INTEGER]);
 
-    mail($uemail,APP__NAME. " Password Reset",$email,"From: " . $BRANDING['email.noreply']);
+    mail($uemail, APP__NAME. " Password Reset", $email, "From: " . $BRANDING['email.noreply']);
     $content = "An email has been sent to $uemail.";
     break;
   case "reset":
@@ -93,54 +93,54 @@ TXT;
     $rslt = $DB->getConnection()->fetchOne($query, [$hash, $uid], [ParameterType::STRING, ParameterType::INTEGER]);
 
     if ($rslt) {
-      if ($_POST['newpass']==$_POST['confirmpass']) {
-        $user = new User();
+        if ($_POST['newpass']==$_POST['confirmpass']) {
+            $user = new User();
 
-        $dbConn = $DB->getConnection();
+            $dbConn = $DB->getConnection();
 
-        $userQuery = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?';
+            $userQuery = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?';
 
-        $userRow = $dbConn->fetchAssociative($userQuery, [$uid], [ParameterType::INTEGER]);
+            $userRow = $dbConn->fetchAssociative($userQuery, [$uid], [ParameterType::INTEGER]);
 
-        $user->load_from_row($userRow);
-        $user->set_dao_object($DB);
-        $user->update_password(md5($_POST['newpass']));
-        $user->save_user();
+            $user->load_from_row($userRow);
+            $user->set_dao_object($DB);
+            $user->update_password(md5($_POST['newpass']));
+            $user->save_user();
 
-        $DB->getConnection()->executeQuery(
-            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request WHERE user_id = ?',
-            [$uid],
-            [ParameterType::INTEGER]
-        );
+            $DB->getConnection()->executeQuery(
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request WHERE user_id = ?',
+                [$uid],
+                [ParameterType::INTEGER]
+            );
 
-        $content = 'Your password has been reset. <a href="'.APP__WWW.'/login.php">Click here</a> to log in again.';
-      } else {
-        $content = "The two passwords did not match.";
-      }
+            $content = 'Your password has been reset. <a href="'.APP__WWW.'/login.php">Click here</a> to log in again.';
+        } else {
+            $content = "The two passwords did not match.";
+        }
     } else {
-      $content = "There was an error resetting this password.";
+        $content = "There was an error resetting this password.";
     }
     break;
   default:
     if (isset($_GET['hash'])) {
-      //phase 3
-      $hash = $_GET['hash'];
-      $uid = $_GET['u'];
-      if ((!isset($_GET['hash'])) || (!isset($_GET['u']))) {
-        $content = "Error: reset link incorrect. If you copied and pasted the link from your mail client, be sure you did so correctly.";
-        break;
-      }
+        //phase 3
+        $hash = $_GET['hash'];
+        $uid = $_GET['u'];
+        if ((!isset($_GET['hash'])) || (!isset($_GET['u']))) {
+            $content = "Error: reset link incorrect. If you copied and pasted the link from your mail client, be sure you did so correctly.";
+            break;
+        }
 
-      $query =
+        $query =
           'SELECT COUNT(*) ' .
           'FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request ' .
           'WHERE hash = ? ' .
           'AND user_id = ?';
 
-      $rslt = $DB->getConnection()->fetchOne($query, [$hash, $uid], [ParameterType::STRING, ParameterType::INTEGER]);
+        $rslt = $DB->getConnection()->fetchOne($query, [$hash, $uid], [ParameterType::STRING, ParameterType::INTEGER]);
 
-      if ($rslt) {
-      $content = <<<HTML
+        if ($rslt) {
+            $content = <<<HTML
       <form action="reset.php" method="post">
         <table>
           <tr>
@@ -161,10 +161,10 @@ TXT;
         <input type="hidden" name="action" value="reset" />
       </form>
 HTML;
-      } else {
-        $content = "There was an error resetting this password. Please contact the site administrator.";
-      }
-      break;
+        } else {
+            $content = "There was an error resetting this password. Please contact the site administrator.";
+        }
+        break;
     }
     //phase 1
     //just display the form confirming the password reset.
@@ -203,4 +203,3 @@ echo "<p>\n";
 echo $content;
 echo "</p>\n";
 $UI->content_end(false);
-?>

@@ -37,7 +37,7 @@ class WizardStep3
         $this->wizard->cancel_button = 'Cancel';
     }
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -51,7 +51,7 @@ class WizardStep3
         <?php
     }// /->head()
 
-    function form()
+    public function form()
     {
         $group_handler = new GroupHandler();
         $collections = $group_handler->get_module_collections($this->module['module_id']);
@@ -59,15 +59,13 @@ class WizardStep3
         $collection_id = $this->wizard->get_field('collection_id');
 
         if (!$collections) {
-            $this->button_next = '';
-            ?>
+            $this->button_next = ''; ?>
             <p>You haven't yet created any group collections.</p>
             <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer
                 assessments.</p>
             <?php
         } else {
-            $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $this->wizard->get_var('db'));
-            ?>
+            $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $this->wizard->get_var('db')); ?>
             <p>Please select the collection of groups you wish to use in this assessment from the list below.</p>
             <p>The collection you select will be copied into your new assessment. Subsequent changes to the collection
                 of groups <strong>will not</strong> affect your assessment.</p>
@@ -80,27 +78,26 @@ class WizardStep3
                         $collection_id = $collection->id;
                         unset($collection);
                     }
-                    for ($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next()) {
-                        $collection = $collection_iterator->current();
+            for ($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next()) {
+                $collection = $collection_iterator->current();
 
-                        $group_count = count($collection->get_groups_array());
+                $group_count = count($collection->get_groups_array());
 
-                        $checked = ($collection_id == $collection->id) ? 'checked="checked"' : '';
+                $checked = ($collection_id == $collection->id) ? 'checked="checked"' : '';
 
-                        echo('<tr>');
-                        echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked /></td>");
-                        echo("  <td><label class=\"small\" for=\"collection_{$collection->id}\">{$collection->name}</label>");
-                        echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
-                        echo('</tr>');
-                    }
-                    ?>
+                echo('<tr>');
+                echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked /></td>");
+                echo("  <td><label class=\"small\" for=\"collection_{$collection->id}\">{$collection->name}</label>");
+                echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
+                echo('</tr>');
+            } ?>
                 </table>
             </div>
             <?php
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -111,7 +108,6 @@ class WizardStep3
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep3
 
 ?>

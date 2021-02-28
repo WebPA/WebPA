@@ -12,7 +12,7 @@ namespace WebPA\includes\functions;
 
 use WebPA\includes\classes\DAO;
 
-define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
+define('MYSQL_DATETIME_FORMAT', 'Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
 
 class Common
 {
@@ -24,8 +24,9 @@ class Common
      *
      * @return mixed
      */
-    public static function fetch_GET($key, $default_value = '') {
-      return (isset($_GET[$key])) ? $_GET[$key] : $default_value;
+    public static function fetch_GET($key, $default_value = '')
+    {
+        return (isset($_GET[$key])) ? $_GET[$key] : $default_value;
     }
 
     /**
@@ -36,8 +37,9 @@ class Common
      *
      * @return mixed
      */
-    public static function fetch_POST($key, $default_value = '') {
-      return (isset($_POST[$key])) ? $_POST[$key] : $default_value;
+    public static function fetch_POST($key, $default_value = '')
+    {
+        return (isset($_POST[$key])) ? $_POST[$key] : $default_value;
     }
 
     /**
@@ -48,8 +50,9 @@ class Common
      *
      * @return mixed
      */
-    public static function fetch_SERVER($key, $default_value = '') {
-      return (isset($_SERVER[$key])) ? $_SERVER[$key] : $default_value;
+    public static function fetch_SERVER($key, $default_value = '')
+    {
+        return (isset($_SERVER[$key])) ? $_SERVER[$key] : $default_value;
     }
 
     /**
@@ -60,8 +63,9 @@ class Common
      *
      * @return mixed
      */
-    public static function fetch_SESSION($key, $default_value = '') {
-      return (isset($_SESSION[$key])) ? $_SESSION[$key] : $default_value;
+    public static function fetch_SESSION($key, $default_value = '')
+    {
+        return (isset($_SESSION[$key])) ? $_SESSION[$key] : $default_value;
     }
 
     /**
@@ -70,18 +74,20 @@ class Common
      *
      * @return UUID
      */
-    public static function uuid_create() {
-      // Get random 32-char 'UUID'
-      $uuid_32 = strtoupper( md5( uniqid( rand(), true) ) );
+    public static function uuid_create()
+    {
+        // Get random 32-char 'UUID'
+        $uuid_32 = strtoupper(md5(uniqid(rand(), true)));
 
-      // Convert to the correct 'dashed' format, and return the UUID
-      return preg_replace('#([\dA-F]{8})([\dA-F]{4})([\dA-F]{4})([\dA-F]{4})([\dA-F]{12})#', "\\1-\\2-\\3-\\4-\\5", $uuid_32);
+        // Convert to the correct 'dashed' format, and return the UUID
+        return preg_replace('#([\dA-F]{8})([\dA-F]{4})([\dA-F]{4})([\dA-F]{4})([\dA-F]{12})#', "\\1-\\2-\\3-\\4-\\5", $uuid_32);
     }
 
     /**
      * Add an entry to the tracking table
      */
-    public static function logEvent(DAO $db, $description, $module_id = NULL, $object_id = NULL) {
+    public static function logEvent(DAO $db, $description, $module_id = null, $object_id = null)
+    {
         $dbConn = $db->getConnection();
 
         $now = date(MYSQL_DATETIME_FORMAT);
@@ -106,56 +112,57 @@ class Common
     * @param string $_user
     * @param string $user_type
     */
-    public static function check_user($_user, $user_type = NULL) {
+    public static function check_user($_user, $user_type = null)
+    {
 
       // Is the user valid?
-      if ($_user) {
+        if ($_user) {
 
         // if we're not checking the user type, or we are checking and it matches, return OK
-        if (!$user_type || $_user->is_admin()) {
-          return true;
-        } else {
-          switch ($user_type) {
+            if (!$user_type || $_user->is_admin()) {
+                return true;
+            } else {
+                switch ($user_type) {
             case APP__USER_TYPE_ADMIN:
               if ($_user->is_admin()) {
-                return true;
+                  return true;
               }
               break;
             case APP__USER_TYPE_TUTOR:
               if ($_user->is_tutor()) {
-                return true;
+                  return true;
               }
               break;
             case APP__USER_TYPE_STUDENT:
               if ($_user->is_student()) {
-                return true;
+                  return true;
               }
               break;
           }
-          return false;
+                return false;
+            }
+        } else {
+            return false;
         }
-      } else {
-        return false;
-      }
 
 
-      // If we didn't call 'return' then the user is denied access
+        // If we didn't call 'return' then the user is denied access
 
-      // If they tried to access the main index page, assume they haven't logged in and go to the login page directly
-      if ($_SERVER['PHP_SELF']=='/index.php') {
-        header('Location: '. APP__WWW .'/login.php');
-      } else {  // log them out and give the DENIED message
-        header('Location:'. APP__WWW .'/logout.php?msg=denied');
-      }
-      exit;
+        // If they tried to access the main index page, assume they haven't logged in and go to the login page directly
+        if ($_SERVER['PHP_SELF']=='/index.php') {
+            header('Location: '. APP__WWW .'/login.php');
+        } else {  // log them out and give the DENIED message
+            header('Location:'. APP__WWW .'/logout.php?msg=denied');
+        }
+        exit;
     }
 
     /**
      * This function is a legacy function which appears to determine if a file is located in a particular directory.
      *
      */
-    public static function & rel1($struc, &$file) {
-      return file_exists( ( $file = ( dirname($struc).'/'.$file ) ) );
+    public static function & rel1($struc, &$file)
+    {
+        return file_exists(($file = (dirname($struc).'/'.$file)));
     }
 }
-

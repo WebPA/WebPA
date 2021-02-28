@@ -57,7 +57,7 @@ class XMLParser
     /**
      * CONSTRUCTOR for the XML parser
      */
-    function __construct()
+    public function __construct()
     {
         $this->_init();
     }// /XMLParser()
@@ -65,7 +65,7 @@ class XMLParser
     /**
      * DESTRUCTOR for the xml parser
      */
-    function destroy()
+    public function destroy()
     {
         if (is_resource($this->_parser)) {
             xml_parser_free($this->_parser);
@@ -83,7 +83,7 @@ class XMLParser
      * function to set the data tags
      * @param string $tags
      */
-    function set_cdata_tags($tags)
+    public function set_cdata_tags($tags)
     {
         $this->_cdata_tags = (array)$tags;
     }// /->set_cdata_tags()
@@ -91,7 +91,7 @@ class XMLParser
     /**
      * function to clear
      */
-    function clear()
+    public function clear()
     {
         $this->_init();
     }// /->clear()
@@ -103,7 +103,7 @@ class XMLParser
      *
      * @return array PHP array representing XML structure
      */
-    function parse($xml_data)
+    public function parse($xml_data)
     {
         $this->_parser = xml_parser_create('');
 
@@ -131,7 +131,7 @@ class XMLParser
      * @param array $data xml array structure
      * @return string  xml document
      */
-    function generate_xml(&$data, $level = 0, $prior_key = null)
+    public function generate_xml(&$data, $level = 0, $prior_key = null)
     {
         if ($level == 0) {
             ob_start();
@@ -196,7 +196,6 @@ class XMLParser
             ob_end_clean();
             return $str;
         }
-
     }// ->generate_xml()
 
 
@@ -218,7 +217,7 @@ class XMLParser
      * @param string $tag
      * @param string $attributes
      */
-    function _tag_open(&$parser, $tag, $attributes)
+    public function _tag_open(&$parser, $tag, $attributes)
     {
         $this->data = '';
         $this->_last_opened_tag = $tag;
@@ -251,10 +250,10 @@ class XMLParser
      * @param string $parser
      * @param string $data
      */
-    function _tag_data(&$parser, $data)
+    public function _tag_data(&$parser, $data)
     {
         //you don't need to store whitespace in between tags
-        if ($this->_last_opened_tag != NULL) {
+        if ($this->_last_opened_tag != null) {
             $this->data .= $data;
         }
     }// /->_tag_data()
@@ -264,14 +263,16 @@ class XMLParser
     * @param string $parser
     * @param string $tag
     */
-    function _tag_close(&$parser, $tag)
+    public function _tag_close(&$parser, $tag)
     {
         if ($this->_last_opened_tag == $tag) {
             $this->_parent['_data'] = $this->data;
-            $this->_last_opened_tag = NULL;
+            $this->_last_opened_tag = null;
         }
         array_pop($this->_stack);
-        if ($this->_stack) $this->_parent = &$this->_stack[count($this->_stack) - 1];
+        if ($this->_stack) {
+            $this->_parent = &$this->_stack[count($this->_stack) - 1];
+        }
     }// /->_tag_close()
 
     /*
@@ -285,14 +286,14 @@ class XMLParser
      * @param array $array
      * @return boolean
      */
-    function _count_numeric_items(&$array)
+    public function _count_numeric_items(&$array)
     {
         return is_array($array) ? count(array_filter(array_keys($array), 'is_numeric')) : 0;
     }// /->_count_numeric_items()
 
     /*
     */
-    function _init()
+    public function _init()
     {
         $this->xml_data = '';
         $this->xml_array = null;
@@ -303,7 +304,4 @@ class XMLParser
 
         $this->_cdata_tags = array();
     }// /->_init()
-
 }// /class: XMLParser
-
-?>

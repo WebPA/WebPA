@@ -15,9 +15,9 @@ use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -38,8 +38,8 @@ $collection = $group_handler->get_collection($collection_id);
 $allow_edit = false;
 
 if ($collection) {
-  // Check if the user can edit this group
-  $allow_edit = !$collection->is_locked();
+    // Check if the user can edit this group
+    $allow_edit = !$collection->is_locked();
 }
 
 // --------------------------------------------------------------------------------
@@ -48,17 +48,17 @@ if ($collection) {
 $errors = null;
 
 if ($allow_edit) {
-  switch ($command) {
+    switch ($command) {
     case 'save':
       // Delete all the members with the 'member' role
       $collection->purge_members('member');
 
       // Add the members who should be in a group
       foreach ($_POST as $k => $v) {
-        if ( (strpos($k,'student_')!==false) && (strlen($v)==36) ) {
-          $group =& $collection->get_group_object($v);
-          $group->add_member(str_replace('student_', '', $k), 'member');
-        }
+          if ((strpos($k, 'student_')!==false) && (strlen($v)==36)) {
+              $group =& $collection->get_group_object($v);
+              $group->add_member(str_replace('student_', '', $k), 'member');
+          }
       }
       $collection->save_groups();
 
@@ -82,7 +82,7 @@ $page_title = ($collection) ? "Members: {$collection->name}" : 'Members';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home' => '../../' ,
   'my groups' => '../' ,
   "Editing: $collection_title"  => "../edit/edit_collection.php?gs={$collection->id}" ,
@@ -121,11 +121,11 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <?php
 if (!$collection) {
-  ?>
+    ?>
   <p>The collection you selected could not be loaded for some reason - please go back and try again.</p>
 <?php
 } else {
-?>
+        ?>
 
   <form action="edit_collection_members.php?<?php echo($collection_qs); ?>" method="post" name="collection_members_form">
   <input type="hidden" name="command" value="none" />
@@ -147,37 +147,36 @@ if (!$collection) {
       </tr>
 <?php
     $groups = $collection->get_groups_array();
-    $options[''] = ' - - - - ';
-    foreach($groups as $group) {
-      $options["{$group['group_id']}"] = $group['group_name'];
-    }
-
-    // Get all the possible student members
-    $module_students = $CIS->get_module_students($_module_id,'name');
-
-    // Get collection members
-    $collection_member_rows = $collection->get_member_rows();
-
-    if (is_array($module_students)) {
-      foreach($module_students as $i => $member) {
-        $assigned_group = ArrayFunctions::array_searchvalue($member['user_id'], $collection_member_rows, 'user_id', 'group_id');
-        echo('<tr>');
-        echo("<td>{$member['lastname']}, {$member['forename']} (");
-        if (!empty($member['id_number'])) {
-          echo($member['id_number']);
-        } else {
-          echo($member['username']);
+        $options[''] = ' - - - - ';
+        foreach ($groups as $group) {
+            $options["{$group['group_id']}"] = $group['group_name'];
         }
-        echo(')</td>');
-        echo("<td><select name=\"student_{$member['user_id']}\">");
-        Form::render_options($options, $assigned_group);
-        echo('</select></td>');
-        echo('</tr>');
-      }
-    } else {
-      echo('<tr><td colspan="2">No students available</td></tr>');
-    }
-?>
+
+        // Get all the possible student members
+        $module_students = $CIS->get_module_students($_module_id, 'name');
+
+        // Get collection members
+        $collection_member_rows = $collection->get_member_rows();
+
+        if (is_array($module_students)) {
+            foreach ($module_students as $i => $member) {
+                $assigned_group = ArrayFunctions::array_searchvalue($member['user_id'], $collection_member_rows, 'user_id', 'group_id');
+                echo('<tr>');
+                echo("<td>{$member['lastname']}, {$member['forename']} (");
+                if (!empty($member['id_number'])) {
+                    echo($member['id_number']);
+                } else {
+                    echo($member['username']);
+                }
+                echo(')</td>');
+                echo("<td><select name=\"student_{$member['user_id']}\">");
+                Form::render_options($options, $assigned_group);
+                echo('</select></td>');
+                echo('</tr>');
+            }
+        } else {
+            echo('<tr><td colspan="2">No students available</td></tr>');
+        } ?>
       </table>
 
       </td>
@@ -196,8 +195,7 @@ if (!$collection) {
           <input type="button" name="savebutton2" id="savebutton2" value="save changes" onclick="do_command('save');" />
         </div>
 <?php
-  }
-?>
+  } ?>
       </td>
     </tr>
     </table>
@@ -205,7 +203,7 @@ if (!$collection) {
 
   </form>
 <?php
-}
+    }
 ?>
 </div>
 

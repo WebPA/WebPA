@@ -16,9 +16,9 @@ use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
 use WebPA\lang\en\tutors\Tutors;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ $collections = $group_handler->get_module_collections($_module_id);
 $UI->page_title = APP__NAME. ' ' . Generic::MY__GROUPS;;
 $UI->menu_selected = Generic::MY__GROUPS;
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'        => '../../' ,
   'my groups'   => '../' ,
 );
@@ -53,10 +53,9 @@ $UI->content_start();
 <div class="form_section">
 <?php
 if (!$collections) {
-  echo('<p>' . Tutors::NO__GROUPS__DESC . '</p>');
+    echo('<p>' . Tutors::NO__GROUPS__DESC . '</p>');
 } else {
-  $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB);
-?>
+    $collection_iterator = new SimpleObjectIterator($collections, 'GroupCollection', $DB); ?>
     <p><?php echo Tutors::GROUPS__INSTRUCT__1; ?><img src="../../images/buttons/edit.gif" width="16" height="16" alt="<?php echo Generic::EDIT_QUESTION; ?>" title="edit" /> <?php echo Tutors::GROUPS__INSTRUCT__2; ?></p>
     <div class="info_box">
       <p><?php echo Generic::PLEASE__NOTE; ?></p>
@@ -64,13 +63,12 @@ if (!$collections) {
     </div>
     <div class="obj_list">
 <?php
-  for($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next() ) {
-    $collection = $collection_iterator->current();
+  for ($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next()) {
+      $collection = $collection_iterator->current();
 
-    $group_count = count($collection->get_groups_array());
+      $group_count = count($collection->get_groups_array());
 
-    $edit_url = "edit/edit_collection.php?c={$collection->id}";
-?>
+      $edit_url = "edit/edit_collection.php?c={$collection->id}"; ?>
         <div class="obj">
           <table class="obj" cellpadding="2" cellspacing="2">
           <tr>
@@ -87,8 +85,7 @@ if (!$collections) {
           </table>
         </div>
 <?php
-  }
-?>
+  } ?>
     </div>
 <?php
 }

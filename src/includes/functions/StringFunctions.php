@@ -10,9 +10,9 @@
 
 namespace WebPA\includes\functions;
 
-DEFINE('STR_ALPHA_CHARS','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
-DEFINE('STR_ALPHANUM_CHARS','0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
-DEFINE('STR_UUID_CHARS','0123456789ABCDEF-');
+DEFINE('STR_ALPHA_CHARS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+DEFINE('STR_ALPHANUM_CHARS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+DEFINE('STR_UUID_CHARS', '0123456789ABCDEF-');
 
 class StringFunctions
 {
@@ -24,13 +24,14 @@ class StringFunctions
      *
      * @return string
     */
-    public static function str_random ($length = 8, $valid_chars = null) {
+    public static function str_random($length = 8, $valid_chars = null)
+    {
         if (is_null($valid_chars)) {
             $valid_chars = STR_ALPHANUM_CHARS;
         }
 
         $str = '';
-      while(strlen($str) < $length) {
+        while (strlen($str) < $length) {
             $str .= substr($valid_chars, mt_rand(0, strlen($valid_chars) -1), 1);
         }
         return $str;

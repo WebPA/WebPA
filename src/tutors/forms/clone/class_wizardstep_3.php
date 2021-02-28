@@ -32,7 +32,7 @@ class WizardStep3
         $this->wizard->cancel_button = null;
     }// /WizardStep3()
 
-    function head()
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -46,7 +46,7 @@ class WizardStep3
         <?php
     }// /->head()
 
-    function form()
+    public function form()
     {
         $DB =& $this->wizard->get_var('db');
         $user =& $this->wizard->get_var('user');
@@ -84,12 +84,11 @@ class WizardStep3
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $this->wizard->_fields = array(); // kill the wizard's stored fields
         return null;
     }// /->process_form()
-
 }// /class: WizardStep3
 
 ?>

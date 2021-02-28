@@ -14,9 +14,9 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -26,10 +26,10 @@ $form_id = Common::fetch_GET('f', Common::fetch_POST('form_id'));
 
 $form = new Form($DB);
 if ($form->load($form_id)) {
-  $form_qs = "f={$form->id}";
+    $form_qs = "f={$form->id}";
 } else {
-  $form = null;
-  $form_qs = '';
+    $form = null;
+    $form_qs = '';
 }
 
 // --------------------------------------------------------------------------------
@@ -39,37 +39,37 @@ $wizard = new Wizard('add a new assessment criterion wizard');
 $wiz_step = null;
 
 if ($form) {
-  $wizard->set_wizard_url("index.php?f=$form_id");
+    $wizard->set_wizard_url("index.php?f=$form_id");
 
-  $wizard->cancel_url = "../edit_form.php?f=$form_id";
+    $wizard->cancel_url = "../edit_form.php?f=$form_id";
 
-  $valid_types = array ('likert', 'split100');
+    $valid_types = array('likert', 'split100');
 
-  if ($form->type=='split100') {
-    $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
+    if ($form->type=='split100') {
+        $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
 
-    $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
-    $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
+        $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
+        $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
 
-    $wizard->show_steps(1); // Hide the last step from the user
-  } else {
-    $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
+        $wizard->show_steps(1); // Hide the last step from the user
+    } else {
+        $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
 
-    $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
-    $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
-    $wizard->add_step(3, $wizard_path.'class_wizardstep_3.php');
+        $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
+        $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
+        $wizard->add_step(3, $wizard_path.'class_wizardstep_3.php');
 
-    $wizard->show_steps(2); // Hide the last step from the user
-  }
+        $wizard->show_steps(2); // Hide the last step from the user
+    }
 
-  $wizard->set_var('db',$DB);
-  $wizard->set_var('config',$_config);
-  $wizard->set_var('user',$_user);
-  $wizard->set_var('form',$form);
+    $wizard->set_var('db', $DB);
+    $wizard->set_var('config', $_config);
+    $wizard->set_var('user', $_user);
+    $wizard->set_var('form', $form);
 
-  $wizard->prepare();
+    $wizard->prepare();
 
-  $wiz_step = $wizard->get_step();
+    $wiz_step = $wizard->get_step();
 }
 
 // --------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ if ($form) {
 $UI->page_title = APP__NAME. ' Add a new criterion';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'              => '../../' ,
   'my forms'            => '/../' ,
   "edit: {$form->name}"     => "../edit_form.php?$form_qs" ,
@@ -92,10 +92,10 @@ $UI->set_page_bar_button('Import a Form', '../../../../../images/buttons/button_
 
 $UI->head();
 if ($form) {
-  $wizard->head();
-  $UI->body('onload="body_onload()"');
+    $wizard->head();
+    $UI->body('onload="body_onload()"');
 } else {
-  $UI->body();
+    $UI->body();
 }
 $UI->content_start();
 ?>
@@ -104,8 +104,8 @@ $UI->content_start();
 
 <?php
 if ($form) {
-  $wizard->title();
-  $wizard->draw_errors();
+    $wizard->title();
+    $wizard->draw_errors();
 }
 ?>
 
@@ -113,9 +113,9 @@ if ($form) {
 
 <?php
 if ($form) {
-  $wizard->draw_wizard();
+    $wizard->draw_wizard();
 } else {
-  echo("<p>The given assessment form failed to load so this wizard cannot be started.</p>");
+    echo("<p>The given assessment form failed to load so this wizard cannot be started.</p>");
 }
 ?>
 

@@ -31,7 +31,7 @@ class UI
     /**
      * CONSTRUCTOR for the UI
      */
-    function __construct($installedMods, $sourceId, $branding, $cis, $module, $user)
+    public function __construct($installedMods, $sourceId, $branding, $cis, $module, $user)
     {
         $this->cis = $cis;
         $this->installedMods = $installedMods;
@@ -44,15 +44,13 @@ class UI
 
         // Initialise the menu - sets either staff or student menu items
         if ($this->user) {
-
             if ($this->user->is_staff()) {
                 // Staff menu
                 $this->set_menu('Tutors', array('home' => APP__WWW . '/tutors/index.php',
                     'my forms' => APP__WWW . '/tutors/forms/',
                     'my groups' => APP__WWW . '/tutors/groups/',
                     'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
-
-            } else if ($this->user->is_student()) {
+            } elseif ($this->user->is_student()) {
                 // Student menu
                 $this->set_menu('Students', array('home' => APP__WWW . '/students/index.php',
                     'my groups' => APP__WWW . '/students/groups/',
@@ -78,7 +76,6 @@ class UI
                     require_once($menu_file);
                 }
             }
-
         }
 
         $this->set_menu('Support', array('help' => $helper_link, //this is a link set in each page / area to link to the approriate help
@@ -86,9 +83,9 @@ class UI
 
         if ($this->user) {
             if ($user->is_admin()) {
-                $modules = $this->cis->get_user_modules(NULL, NULL, 'name');
+                $modules = $this->cis->get_user_modules(null, null, 'name');
             } else {
-                $modules = $this->cis->get_user_modules($user->id, NULL, 'name');
+                $modules = $this->cis->get_user_modules($user->id, null, 'name');
             }
 
             if ((($this->sourceId == '') || $this->user->is_admin()) && (count($modules) > 1)) {
@@ -104,7 +101,6 @@ class UI
             $menu['logout'] = APP__WWW . '/logout.php';
         }
         $this->set_menu(' ', $menu);// /$this->set_menu();
-
     }// /->UI()
 
     // --------------------------------------------------------------------------------
@@ -116,7 +112,7 @@ class UI
      * @param string $expire_date
      * @param string $modified_date
      */
-    function headers_expire($expire_date = null, $modified_date = null)
+    public function headers_expire($expire_date = null, $modified_date = null)
     {
         // If no expiry date, expire at 00:00:01 today
         if (!$expire_date) {
@@ -140,13 +136,12 @@ class UI
     /**
      * Function to generate the header
      */
-    function head()
+    public function head()
     {
         /*
         Commented out until the day IE can show a full XHTML page without entering quirks mode
         echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
-        */
-        ?>
+        */ ?>
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -159,13 +154,13 @@ class UI
         <style type="text/css">
             <?php
               if (!isset($_SESSION['_no_header'])) {
-            ?>
+                  ?>
             #app_bar {
-                height: <?php echo $this->branding['logo.margin'];?>px;
+                height: <?php echo $this->branding['logo.margin']; ?>px;
             }
 
             #app_bar #inst_logo {
-                width: <?php echo $this->branding['logo.width'];?>px;
+                width: <?php echo $this->branding['logo.width']; ?>px;
             }
 
             #main {
@@ -174,7 +169,7 @@ class UI
 
             <?php
               } else {
-            ?>
+                  ?>
             #side_bar {
                 padding-top: 20px;
                 top: 20px;
@@ -189,8 +184,7 @@ class UI
             }
 
             <?php
-              }
-            ?>
+              } ?>
         </style>
         <?php
         if (isset($this->branding['css']) && !empty($this->branding['css'])) {
@@ -205,17 +199,16 @@ class UI
      * function to close the body area of the page
      * @param string $extra_attributes
      */
-    function body($extra_attributes = '')
+    public function body($extra_attributes = '')
     {
         echo("\n</head>\n<body $extra_attributes>\n\n");
-
     } // /->body()
 
 
     /**
      * render page header
      */
-    function header()
+    public function header()
     {
         ?>
         <div id="header">
@@ -236,19 +229,18 @@ class UI
                             } else {
                                 echo('<td>&nbsp;</td>');
                             }
-                            echo '<td align="right">';
-                            if (isset($this->branding['logo']) && !empty($this->branding['logo'])) {
-                                echo '<div id="inst_logo"><img src="' . $this->branding['logo'] . '"';
-                                if (isset($this->branding['name']) && !empty($this->branding['name'])) {
-                                    echo ' alt="' . htmlentities($this->branding['name']) . '"';
-                                    echo ' title="' . htmlentities($this->branding['name']) . '"';
-                                }
-                                echo ' /></div>';
-                            } else {
-                                echo '&nbsp;';
-                            }
-                            echo '</td>';
-                            ?>
+                echo '<td align="right">';
+                if (isset($this->branding['logo']) && !empty($this->branding['logo'])) {
+                    echo '<div id="inst_logo"><img src="' . $this->branding['logo'] . '"';
+                    if (isset($this->branding['name']) && !empty($this->branding['name'])) {
+                        echo ' alt="' . htmlentities($this->branding['name']) . '"';
+                        echo ' title="' . htmlentities($this->branding['name']) . '"';
+                    }
+                    echo ' /></div>';
+                } else {
+                    echo '&nbsp;';
+                }
+                echo '</td>'; ?>
 
                         </tr>
                     </table>
@@ -259,12 +251,10 @@ class UI
                         echo("<td>User: {$this->user->forename} {$this->user->lastname}</td>");
                     } else {
                         echo('<td>&nbsp;</td>');
-                    }
-                    ?>
+                    } ?>
                 </div>
                 <?php
-            }
-            ?>
+            } ?>
             <div id="breadcrumb_bar">
                 You are in:
                 <?php
@@ -281,8 +271,7 @@ class UI
                             echo($k);
                         }
                     }
-                }
-                ?>
+                } ?>
             </div>
         </div>
         <?php
@@ -294,12 +283,12 @@ class UI
      * @param string $section_name
      * @param array $section_array
      */
-    function set_menu($section_name, $section_array)
+    public function set_menu($section_name, $section_array)
     {
         $this->_menu[$section_name] = $section_array;
     }
 
-    function get_menu($section_name)
+    public function get_menu($section_name)
     {
         if (isset($this->_menu[$section_name])) {
             return $this->_menu[$section_name];
@@ -311,7 +300,7 @@ class UI
     /**
      * Draw the menu
      */
-    function menu()
+    public function menu()
     {
         // If there's a menu, draw it
         if ($this->_menu) {
@@ -345,16 +334,15 @@ class UI
      * @param string $link
      * @param string $side
      */
-    function set_page_bar_button($text, $img, $link, $side = 'left')
+    public function set_page_bar_button($text, $img, $link, $side = 'left')
     {
         $this->_page_bar_buttons[$side][$text] = array('img' => "../images/buttons/$img", 'link' => $link);
-
     }// /->set_page_bar_button()
 
     /**
      * Draw the page toolbar
      */
-    function page_bar()
+    public function page_bar()
     {
         if (is_array($this->_page_bar_buttons)) {
             ?>
@@ -366,8 +354,7 @@ class UI
                             foreach ($this->_page_bar_buttons['left'] as $text => $button) {
                                 echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
                             }
-                        }
-                        ?>
+                        } ?>
                         <td width="100%">&nbsp;</td>
                         <?php
                         // right-hand buttons are automatically set to target="_blank"
@@ -375,8 +362,7 @@ class UI
                             foreach ($this->_page_bar_buttons['right'] as $text => $button) {
                                 echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" target=\"$text\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
                             }
-                        }
-                        ?>
+                        } ?>
                     </tr>
                 </table>
             </div>
@@ -387,7 +373,7 @@ class UI
     /**
      * Footer
      */
-    function footer()
+    public function footer()
     {
         ?>
         <div id="footer">
@@ -395,15 +381,16 @@ class UI
                 &copy; Loughborough University and University of Hull, 2005 - <?php echo date('Y'); ?>&nbsp;&nbsp;&nbsp;
                 <span style="font-size: small;">Version: <?php
                     echo APP__VERSION;
-                    if (count($this->installedMods) > 0) echo ' [' . implode(",", $this->installedMods) . ']'; ?></span>
+        if (count($this->installedMods) > 0) {
+            echo ' [' . implode(",", $this->installedMods) . ']';
+        } ?></span>
                 <?php
                 if (isset($this->user) && $this->user->is_admin() && $this->sourceId) {
                     echo "<br />\n";
                     echo '      <span style="font-size: small;">Source:&nbsp;';
                     echo ($this->sourceId) ? $this->sourceId : '&lt;' . APP__NAME . '&gt;';
                     echo "</span>\n";
-                }
-                ?>
+                } ?>
             </div>
             <iframe src="<?php echo APP__WWW; ?>/keep_alive.php" height="1" width="1" style="display: none;">keep
                 alive
@@ -415,7 +402,7 @@ class UI
     /**
      * Start main page content
      */
-    function content_start()
+    public function content_start()
     {
         echo('<div id="container">');
         echo('<div id="main">');
@@ -432,7 +419,7 @@ class UI
      * @param boolean $render_header
      * @param boolean $renders_footer
      */
-    function content_end($render_menu = true, $render_header = true, $render_footer = true)
+    public function content_end($render_menu = true, $render_header = true, $render_footer = true)
     {
         ?>
         </div>
@@ -441,8 +428,7 @@ class UI
         <div id="side_bar">
             <?php
             if ($render_menu) {
-                $this->menu();
-                ?>
+                $this->menu(); ?>
                 <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
                     <p><strong>Technical Problem?</strong></p>
                     <p>If you have a problem, find a bug or discover a technical problem in the system, <a
@@ -458,8 +444,7 @@ class UI
                                 title="(email: <?php echo $this->branding['email.help']; ?>)">email us</a> to report it!</p>
                 </div>
                 <?php
-            }
-            ?>
+            } ?>
         </div>
         <?php
         if ($render_header) {
@@ -467,8 +452,7 @@ class UI
         }
         if ($render_footer) {
             $this->footer();
-        }
-        ?>
+        } ?>
         <div class="clear"></div>
         </div> <!-- id="container" -->
         </body>
@@ -483,7 +467,7 @@ class UI
      * @param string $header_text
      * @param string $footer_text
      */
-    function draw_boxed_list($list, $box_class, $header_text, $footer_text)
+    public function draw_boxed_list($list, $box_class, $header_text, $footer_text)
     {
         if (is_array($list)) {
             echo("<div class=\"$box_class\"><p style=\"font-weight: bold;\">$header_text</p><ul class=\"spaced\">");
@@ -496,7 +480,6 @@ class UI
 
     // --------------------------------------------------------------------------------
     // Private Methods
-
 }// /class: UI
 
 ?>

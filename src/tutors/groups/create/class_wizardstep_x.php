@@ -32,7 +32,7 @@ class WizardStep2
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep2()
 
-    function head()
+    public function head()
     {
         $html = <<<HTMLEnd
 <script language="JavaScript" type="text/javascript">
@@ -48,7 +48,7 @@ HTMLEnd;
         echo($html);
     }// /->head()
 
-    function form()
+    public function form()
     {
         $CIS = $this->wizard->get_var('CIS');
         $user = $this->wizard->get_var('user');
@@ -72,8 +72,7 @@ HTMLEnd;
             } else {
                 echo('<p>The modules below are those you are associated with, as either a lead or additional tutor.</p>');
                 echo('<p>Please select the module you want to take students from:</p>');
-            }
-            ?>
+            } ?>
             <h2>Your Modules</h2>
             <div class="form_section">
                 <table class="form" cellpadding="1" cellspacing="1">
@@ -91,15 +90,14 @@ HTMLEnd;
                         echo("<td><input type=\"radio\" name=\"module_id[]\" id=\"module_{$this->module['module_id']}\" value=\"{$this->module['module_id']}\" checked=\"checked\" /></td>");
                         echo("<td><label style=\"font-weight: normal;\" for=\"module_{$this->module['module_id']}\">{$this->module['module_title']} [{$this->module['module_code']}]</label></td>");
                         echo('</tr>');
-                    }
-                    ?>
+                    } ?>
                 </table>
             </div>
             <?php
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
 
@@ -110,7 +108,6 @@ HTMLEnd;
 
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep2
 
 ?>

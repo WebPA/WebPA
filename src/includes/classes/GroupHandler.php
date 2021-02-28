@@ -21,7 +21,7 @@ class GroupHandler
     /**
      * CONSTRUCTOR
      */
-    function __construct()
+    public function __construct()
     {
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
         $this->dbConn = $this->_DAO->getConnection();
@@ -40,7 +40,7 @@ class GroupHandler
      * @param string $group_numbering
      * @return array group names
      */
-    function generate_group_names($num_groups, $group_name_stub = 'Group', $group_numbering = 'numeric')
+    public function generate_group_names($num_groups, $group_name_stub = 'Group', $group_numbering = 'numeric')
     {
         $group_names = null;
 
@@ -127,7 +127,7 @@ class GroupHandler
      *
      * @return object  GroupCollection object
      */
-    function & clone_collection($collection_id, $include_roles = null)
+    public function & clone_collection($collection_id, $include_roles = null)
     {
         // get the collection to clone
         $org_collection = new GroupCollection($this->_DAO);
@@ -177,7 +177,7 @@ class GroupHandler
      *
      * @return array
      */
-    function & create_collection()
+    public function & create_collection()
     {
         $new_collection = new GroupCollection($this->_DAO);
         $new_collection->create();
@@ -190,7 +190,7 @@ class GroupHandler
      * @param string $collection_id ID of GroupCollection to fetch
      * @return object GroupCollection object
      */
-    function get_collection($collection_id)
+    public function get_collection($collection_id)
     {
         $collection = new GroupCollection($this->_DAO);
         return ($collection->load($collection_id)) ? $collection : null;
@@ -204,7 +204,7 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_user_collections($user_id)
+    public function get_user_collections($user_id)
     {
         $query =
             'SELECT c.* ' .
@@ -225,7 +225,7 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_module_collections($module_id)
+    public function get_module_collections($module_id)
     {
         $query =
             'SELECT c.*, a.assessment_id AS collection_assessment_id ' .
@@ -246,7 +246,7 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_member_collections($user_id, $owner_type)
+    public function get_member_collections($user_id, $owner_type)
     {
         if ($owner_type === 'user') {
             $sql = 'SELECT DISTINCT c.*, NULL AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
@@ -254,7 +254,7 @@ class GroupHandler
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX .
                 "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ? AND a.collection_id IS NULL";
-        } else if ($owner_type === 'assessment') {
+        } elseif ($owner_type === 'assessment') {
             $sql = 'SELECT DISTINCT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
@@ -270,5 +270,4 @@ class GroupHandler
     * Private Methods
     * ================================================================================
     */
-
 }// /->class: GroupHandler

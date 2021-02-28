@@ -13,9 +13,9 @@ require_once("../../../includes/inc_global.php");
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -29,9 +29,8 @@ $list_url = '../index.php';
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-
 } else {
-  $assessment = null;
+    $assessment = null;
 }
 
 // --------------------------------------------------------------------------------
@@ -40,7 +39,7 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' . ($assessment) ? $assessment->name : "not open";
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array  ('home'       => '/' ,
+$UI->breadcrumbs = array('home'       => '/' ,
                $assessment->name  => null ,
               );
 
@@ -52,7 +51,7 @@ $UI->content_start();
 
 <?php
 if (!$assessment) {
-  ?>
+    ?>
   <div class="nav_button_bar">
     <a href="<?php echo($list_url) ?>"><img src="/images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
@@ -61,7 +60,7 @@ if (!$assessment) {
   <p>If the problem loading this assessment persists, please use the contact system to <a href="/students/support/contact/index.php?q=bug">report the error</a>.</p>
 <?php
 } else {
-?>
+        ?>
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -73,7 +72,7 @@ if (!$assessment) {
   <p>This assessment is not open at the present time, so you cannot submit any <?php echo APP__MARK_TEXT; ?>.</p>
   <p>If you have missed the deadline, contact your lecturer. Otherwise, if you have another assessment to take, please select it from your <a href="<?php echo($list_url); ?>">assessments list</a>.</p>
 <?php
-}
+    }
 ?>
 </div>
 

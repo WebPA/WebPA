@@ -14,134 +14,138 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 
-class Module {
-  // Public Vars
-  public $module_code = NULL;
-  public $module_title = NULL;
-  public $module_id = NULL;
+class Module
+{
+    // Public Vars
+    public $module_code = null;
+    public $module_title = null;
+    public $module_id = null;
 
-  public DAO $DAO;
+    public DAO $DAO;
 
-  /**
-  * CONSTRUCTOR for the class function
-  * @param string $code
-  * @param string $title
-  */
-  function __construct($module_code = null, $module_title = null) {
-    $this->module_code = $module_code;
-    $this->module_title = $module_title;
-    $this->module_id = null;
-  }// /->Module()
-
-/*
-* ================================================================================
-* PUBLIC
-*================================================================================
-*/
-
-  /**
-  * Load the object from the given data
-  *
-  * @param array $module_info  assoc-array of Module info
-  *
-  * @return boolean did the load succeed
-  */
-  function load_from_row($module_info) {
-    if (is_array($module_info) && isset($module_info['module_id'])) {
-      $this->module_id = $module_info['module_id'];
-      $this->module_code = $module_info['module_code'];
-      $this->module_title = $module_info['module_title'];
-    }
-    return true;
-  }// /->load_from_row()
-
-  /**
-   * Function to update the module details
-   */
-   function save_module(){
-       $dbConn = $this->DAO->getConnection();
-
-       $stmt = $dbConn->prepare('UPDATE ' . APP__DB_TABLE_PREFIX . 'module SET module_code = ?, module_title = ? WHERE module_id = ?');
-
-       $stmt->bindValue(1, $this->module_code);
-       $stmt->bindValue(2, $this->module_title);
-       $stmt->bindValue(3, $this->module_id, ParameterType::INTEGER);
-
-       $stmt->execute();
-
-    return true;
-   }
-
-   /**
-    * Function to set the database connection to be used
-    * @param DAO connection $DB
+    /**
+    * CONSTRUCTOR for the class function
+    * @param string $code
+    * @param string $title
     */
-    function set_dao_object(DAO $DB){
-      $this->DAO = $DB;
+    public function __construct($module_code = null, $module_title = null)
+    {
+        $this->module_code = $module_code;
+        $this->module_title = $module_title;
+        $this->module_id = null;
+    }// /->Module()
+
+    /*
+    * ================================================================================
+    * PUBLIC
+    *================================================================================
+    */
+
+    /**
+    * Load the object from the given data
+    *
+    * @param array $module_info  assoc-array of Module info
+    *
+    * @return boolean did the load succeed
+    */
+    public function load_from_row($module_info)
+    {
+        if (is_array($module_info) && isset($module_info['module_id'])) {
+            $this->module_id = $module_info['module_id'];
+            $this->module_code = $module_info['module_code'];
+            $this->module_title = $module_info['module_title'];
+        }
+        return true;
+    }// /->load_from_row()
+
+    /**
+     * Function to update the module details
+     */
+    public function save_module()
+    {
+        $dbConn = $this->DAO->getConnection();
+
+        $stmt = $dbConn->prepare('UPDATE ' . APP__DB_TABLE_PREFIX . 'module SET module_code = ?, module_title = ? WHERE module_id = ?');
+
+        $stmt->bindValue(1, $this->module_code);
+        $stmt->bindValue(2, $this->module_title);
+        $stmt->bindValue(3, $this->module_id, ParameterType::INTEGER);
+
+        $stmt->execute();
+
+        return true;
     }
 
-  /**
-   * Function to add new module details
-   */
-   function add_module(){
-    $addModuleQuery =
+    /**
+     * Function to set the database connection to be used
+     * @param DAO connection $DB
+     */
+    public function set_dao_object(DAO $DB)
+    {
+        $this->DAO = $DB;
+    }
+
+    /**
+     * Function to add new module details
+     */
+    public function add_module()
+    {
+        $addModuleQuery =
         'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module ' .
         '(module_code, module_title) ' .
         'VALUES (?, ?)';
 
-    $stmt = $this->DAO->getConnection()->prepare($addModuleQuery);
+        $stmt = $this->DAO->getConnection()->prepare($addModuleQuery);
 
-    $stmt->bindValue(1, $this->module_code);
-    $stmt->bindValue(2, $this->module_title);
+        $stmt->bindValue(1, $this->module_code);
+        $stmt->bindValue(2, $this->module_title);
 
-    $stmt->execute();
+        $stmt->execute();
 
-    return $this->DAO->getConnection()->lastInsertId('module_id');
-   }
+        return $this->DAO->getConnection()->lastInsertId('module_id');
+    }
 
-  /**
-   * Function to delete a module
-   */
-   function delete(){
-       $deleteModuleQuery =
+    /**
+     * Function to delete a module
+     */
+    public function delete()
+    {
+        $deleteModuleQuery =
            'SELECT collection_id ' .
            'FROM ' . APP__DB_TABLE_PREFIX . 'collection ' .
            'WHERE module_id = ?';
 
-     $collections = $this->DAO->getConnection()->fetchFirstColumn($deleteModuleQuery, [$this->module_id], [ParameterType::INTEGER]);
+        $collections = $this->DAO->getConnection()->fetchFirstColumn($deleteModuleQuery, [$this->module_id], [ParameterType::INTEGER]);
 
-     $group_handler = new GroupHandler();
+        $group_handler = new GroupHandler();
 
-     for ($i=0; $i<count($collections); $i++) {
-       $collection = $group_handler->get_collection($collections[$i]);
-       $collection->delete();
-     }
+        for ($i=0; $i<count($collections); $i++) {
+            $collection = $group_handler->get_collection($collections[$i]);
+            $collection->delete();
+        }
 
-     $dbConn = $this->DAO->getConnection();
+        $dbConn = $this->DAO->getConnection();
 
-     $dbConn->executeQuery(
-         'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ?',
-         [$this->module_id],
-         [ParameterType::INTEGER]
-     );
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ?',
+            [$this->module_id],
+            [ParameterType::INTEGER]
+        );
 
-     $dbConn->executeQuery(
-         'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?',
-         [$this->module_id],
-         [ParameterType::INTEGER]
-     );
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?',
+            [$this->module_id],
+            [ParameterType::INTEGER]
+        );
 
-     $this->module_code = null;
-     $this->module_title = null;
-     $this->module_id = null;
-   }
+        $this->module_code = null;
+        $this->module_title = null;
+        $this->module_id = null;
+    }
 
-/*
-* ================================================================================
-* PRIVATE
-* ================================================================================
-*/
-
+    /*
+    * ================================================================================
+    * PRIVATE
+    * ================================================================================
+    */
 }// /class: Module
-
-?>

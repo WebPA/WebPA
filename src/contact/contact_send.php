@@ -41,23 +41,21 @@ $app_www = APP__WWW;
 $errors = array();
 
 if ($contact_fullname == '') {
-	$errors[] = 'Name is required';
+    $errors[] = 'Name is required';
 }
 
 if ($contact_message == '') {
-	$errors[] = 'Message is required';
+    $errors[] = 'Message is required';
 }
 
 if ($contact_email == '') {
-	$errors[] = 'Email is required';
-
+    $errors[] = 'Email is required';
 } elseif (!Form::is_email($contact_email)) {
-	$errors[] = 'Email is not valid';
+    $errors[] = 'Email is not valid';
 }
 
 if (empty($errors)) {
-
-$email_body = <<<EndBody
+    $email_body = <<<EndBody
 Contact Sent
 ----------------------------------------
 Application  : $contact_app_id ($app_www)
@@ -87,21 +85,20 @@ $contact_message
 ----------------------------------------
 EndBody;
 
-// Send the email
-$email = new Email();
-$email->set_to($contact_to);
-$email->set_from($contact_email);
-$email->set_subject("$contact_app_id : $contact_type");
-$email->set_body($email_body);
-$email->send();
-
+    // Send the email
+    $email = new Email();
+    $email->set_to($contact_to);
+    $email->set_from($contact_email);
+    $email->set_subject("$contact_app_id : $contact_type");
+    $email->set_body($email_body);
+    $email->send();
 }
 
 // Begin Page
 
 $UI->page_title = APP__NAME . ' Message Sent';
 $UI->menu_selected = 'contact';
-$UI->breadcrumbs = array  ('home'   => '/' ,
+$UI->breadcrumbs = array('home'   => '/' ,
               'contact' => null ,);
 
 $UI->head();

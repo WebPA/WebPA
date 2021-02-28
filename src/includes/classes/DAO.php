@@ -29,7 +29,7 @@ class DAO
      *
      * @return void
      */
-    function __construct($host, $user, $password, $database, $persistent = false)
+    public function __construct($host, $user, $password, $database, $persistent = false)
     {
         $connectionParams = [
             'dbname' => $database,

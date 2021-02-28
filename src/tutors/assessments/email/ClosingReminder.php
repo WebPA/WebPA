@@ -29,11 +29,11 @@ class ClosingReminder
         //get a list of the assessment that will be run in two days from now
         $allDue = $DB->getConnection()->fetchAllAssociative($allDueQuery);
 
-        if (!empty($allDue)){
+        if (!empty($allDue)) {
             //cycle round and for each collection send the emails
             $assessments = count($allDue);
 
-            foreach($allDue as $assessment){
+            foreach ($allDue as $assessment) {
 
                 //specify the details of the email to be sent
                 $subjectLn = 'Reminder: WebPA Assessment closing';
@@ -45,8 +45,7 @@ class ClosingReminder
                     "\n \n -------------------------------------------------------------------------------" .
                     "\n This is an automated email sent by the WebPA tool \n\n";
 
-                mail_assessment_notification ($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
-
+                mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
             }
             unset($assessment);
         }

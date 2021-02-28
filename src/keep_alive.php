@@ -23,7 +23,7 @@ require_once("includes/inc_global.php");
 </head>
 <body onload="body_onload();">
 
-<?php echo( gmdate('H:i:s d-m-Y') ); ?>
+<?php echo(gmdate('H:i:s d-m-Y')); ?>
 
 </body>
 </html>

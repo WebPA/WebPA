@@ -59,7 +59,7 @@ class EngCIS
      *
      * @return array  either an assoc-array of module info or an array of assoc-arrays, containing many modules' info
      */
-    function get_module($modules = null, $ordering = 'id')
+    public function get_module($modules = null, $ordering = 'id')
     {
         $queryBuilder = $this->dbConn->createQueryBuilder();
 
@@ -81,11 +81,11 @@ class EngCIS
                 ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
 
             return $queryBuilder->execute()->fetchAllAssociative();
-        } else if (!empty($modules)) {  // else, just return one row
+        } elseif (!empty($modules)) {  // else, just return one row
             $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id IN ? LIMIT 1';
 
             return $this->dbConn->fetchAssociative($moduleQuery, [$this->sourceId, $modules], [ParameterType::STRING, $dbConn::PARAM_INT_ARRAY]);
-        } else if ($this->user->is_admin()) {
+        } elseif ($this->user->is_admin()) {
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
                 ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
@@ -114,7 +114,7 @@ class EngCIS
      *
      * @return array
      */
-    function get_all_modules()
+    public function get_all_modules()
     {
         return $this->dbConn->fetchAllAssociative('SELECT lcm.module_id, lcm.module_title FROM ' . APP__DB_TABLE_PREFIX . 'module lcm');
     }
@@ -125,7 +125,7 @@ class EngCIS
      * @param string $ordering
      * @return array
      */
-    function get_module_staff($module_id, $ordering)
+    public function get_module_staff($module_id, $ordering)
     {
         $queryBuilder = $this->dbConn->createQueryBuilder();
 
@@ -154,7 +154,7 @@ class EngCIS
      * @param string $ordering
      * @return array
      */
-    function get_module_students($module, $ordering = 'name')
+    public function get_module_students($module, $ordering = 'name')
     {
         $queryBuilder = $this->dbConn->createQueryBuilder();
 
@@ -184,7 +184,7 @@ class EngCIS
      *
      * @return int
      */
-    function get_module_students_count($moduleId)
+    public function get_module_students_count($moduleId)
     {
         $studentsCountQuery =
             'SELECT COUNT(DISTINCT u.user_id) AS user_count ' .
@@ -204,7 +204,7 @@ class EngCIS
      *
      * @return array|void
      */
-    function get_module_students_user_id($modules)
+    public function get_module_students_user_id($modules)
     {
         if (empty($modules)) {
             return;
@@ -228,7 +228,7 @@ class EngCIS
      * @param array $modules modules to count students for
      * @return array
      */
-    function get_module_grouped_students_count($modules)
+    public function get_module_grouped_students_count($modules)
     {
         $queryBuilder = $this->_DAO->getConnection()->createQueryBuilder();
 
@@ -262,11 +262,9 @@ class EngCIS
      *
      * @return array  an array of assoc-arrays, containting many module info
      */
-    function get_staff_modules($staff_id, $staff_username = null, $ordering = 'id')
+    public function get_staff_modules($staff_id, $staff_username = null, $ordering = 'id')
     {
-
         return $this->get_user_modules($staff_id, $staff_username, $ordering);
-
     }// /->get_staff_modules
 
     /**
@@ -276,7 +274,7 @@ class EngCIS
      * @param string/array $module_id  either a single module_id, or an array of module_ids
      * @return integer
      */
-    function staff_has_module($staff_id, $module_id)
+    public function staff_has_module($staff_id, $module_id)
     {
         $module_id = (array)$module_id;
         $staff_modules = $this->get_staff_modules($staff_id);
@@ -307,11 +305,9 @@ class EngCIS
      *
      * @return array an array of module info arrays
      */
-    function get_student_modules($student_id, $student_username = null, $ordering = 'id')
+    public function get_student_modules($student_id, $student_username = null, $ordering = 'id')
     {
-
         return $this->get_user_modules($student_id, $student_username, $ordering);
-
     }// /->get_student_modules()
 
     /*
@@ -328,7 +324,7 @@ class EngCIS
      *
      * @return object
      */
-    function get_user($user_id, $ordering = 'name')
+    public function get_user($user_id, $ordering = 'name')
     {
         $queryBuilder = $this->dbConn->createQueryBuilder();
 
@@ -369,7 +365,7 @@ class EngCIS
      *
      * Returns : an assoc-array of user info
      */
-    function get_user_for_email($email)
+    public function get_user_for_email($email)
     {
         $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE email = ? LIMIT 1';
 
@@ -383,12 +379,11 @@ class EngCIS
      *
      * Returns : an assoc-array of user info
      */
-    function get_user_for_username($username, $source_id = NULL)
+    public function get_user_for_username($username, $source_id = null)
     {
-
         if (is_null($source_id) && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } else if (is_null($source_id)) {
+        } elseif (is_null($source_id)) {
             $source_id = '';
         }
         $this->moduleId = Common::fetch_SESSION('_module_id', null);
@@ -414,14 +409,14 @@ class EngCIS
      *
      * @return array an array of module info arrays
      */
-    function get_user_modules($user_id, $username = NULL, $ordering = 'id', $source_id = NULL)
+    public function get_user_modules($user_id, $username = null, $ordering = 'id', $source_id = null)
     {
         $dbConn = $this->_DAO->getConnection();
         $queryBuilder = $dbConn->createQueryBuilder();
 
         if (is_null($source_id) && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } else if (is_null($source_id)) {
+        } elseif (is_null($source_id)) {
             $source_id = '';
         }
 
@@ -449,7 +444,7 @@ class EngCIS
 
             $queryBuilder->setParameter(0, $source_id, ParameterType::STRING);
             $queryBuilder->setParameter(1, $user_id, $dbConn::PARAM_INT_ARRAY);
-        } else if ($username) {
+        } elseif ($username) {
             if (!is_array($username)) {
                 $username = [$username];
             }
@@ -482,7 +477,7 @@ class EngCIS
     * ================================================================================
     */
 
-    function get_user_academic_years($user_id = null)
+    public function get_user_academic_years($user_id = null)
     {
         if (!empty($user_id)) {
             $query = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
@@ -511,5 +506,4 @@ class EngCIS
 
         return $years;
     }
-
 }

@@ -13,9 +13,9 @@ require_once("../../includes/inc_global.php");
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -29,26 +29,26 @@ $_SESSION['year'] = $year;
 
 $academic_year = strval($year);
 if (APP__ACADEMIC_YEAR_START_MONTH > 1) {
-  $academic_year .= '/' . substr($year + 1, 2, 2);
+    $academic_year .= '/' . substr($year + 1, 2, 2);
 }
 
 $this_year = '-';
 if (APP__ACADEMIC_YEAR_START_MONTH <= 10) {
-  $this_year .= '0';
+    $this_year .= '0';
 }
 $this_year .= APP__ACADEMIC_YEAR_START_MONTH . '-01 00:00:00';
 $next_year = strval($year + 1) . $this_year;
 $this_year = strval($year) . $this_year;
 
-$tabs = array ('pending'  => "?tab=pending&y={$year}" ,
+$tabs = array('pending'  => "?tab=pending&y={$year}" ,
          'open'   => "?tab=open&y={$year}" ,
          'closed'   => "?tab=closed&y={$year}" ,
          'marked'   => "?tab=marked&y={$year}" ,
 );
 
-$tab = Common::fetch_GET('tab','pending');
+$tab = Common::fetch_GET('tab', 'pending');
 
-switch($tab) {
+switch ($tab) {
   case 'pending':
         $include_page = 'inc_list_pending.php';
         break;
@@ -76,7 +76,7 @@ $page_url = APP__WWW . "/tutors/assessments/index.php";
 $UI->page_title = APP__NAME . ' my assessments';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'home'      => '../' ,
   'my assessments'  => null ,
 );
@@ -113,9 +113,9 @@ $UI->content_start();
   <tr>
     <td>&nbsp;</td>
     <?php
-      foreach($tabs as $label => $url) {
-        $tab_status = ($label==$tab) ? 'on' : 'off';
-        echo("<td class=\"tab_{$tab_status}\" width=\"100\"><a class=\"tab\" href=\"{$url}\">". ucfirst($label) .'</a></td>');
+      foreach ($tabs as $label => $url) {
+          $tab_status = ($label==$tab) ? 'on' : 'off';
+          echo("<td class=\"tab_{$tab_status}\" width=\"100\"><a class=\"tab\" href=\"{$url}\">". ucfirst($label) .'</a></td>');
       }
     ?>
     <td>&nbsp;</td>
@@ -134,12 +134,12 @@ $UI->content_start();
       <select name="academic_year" id="academic_year">
         <?php
           for ($i = $start_year; $i <= $last_year; $i++) {
-            $selected_str = ($i == $year) ? 'selected="selected"' : '';
-            echo("<option value=\"$i\" $selected_str>". $i);
-            if (APP__ACADEMIC_YEAR_START_MONTH > 1) {
-              echo('/' . substr($i + 1, 2, 2));
-            }
-            echo ('</option>');
+              $selected_str = ($i == $year) ? 'selected="selected"' : '';
+              echo("<option value=\"$i\" $selected_str>". $i);
+              if (APP__ACADEMIC_YEAR_START_MONTH > 1) {
+                  echo('/' . substr($i + 1, 2, 2));
+              }
+              echo('</option>');
           }
         ?>
       </select>

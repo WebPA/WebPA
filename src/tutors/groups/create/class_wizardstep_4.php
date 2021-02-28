@@ -13,7 +13,6 @@ use WebPA\includes\classes\Wizard;
 
 class WizardStep4
 {
-
     public $wizard = null;
     public $step = 4;
 
@@ -33,7 +32,7 @@ class WizardStep4
         $this->wizard->cancel_button = null;
     }// /WizardStep4()
 
-    function head()
+    public function head()
     {
         $html = <<<HTMLEnd
 <script language="JavaScript" type="text/javascript">
@@ -49,7 +48,7 @@ HTMLEnd;
         echo($html);
     }// /->head()
 
-    function form()
+    public function form()
     {
         $CIS = $this->wizard->get_var('CIS');
         $db = $this->wizard->get_var('db');
@@ -90,9 +89,7 @@ HTMLEnd;
             } else {
                 echo('<p><strong>An error occurred while trying to create your new collection of groups.</strong></p>');
                 echo('<p>You may be able to correct the problem by clicking <em>back</em>, and then <em>next</em> again.</p>');
-            }
-
-            ?>
+            } ?>
             <p><strong>Your new groups have been created.</strong></p>
             <p style="margin-top: 20px;">To allocate students to your new groups, you can use the <a
                         href="../edit/edit_collection.php?c=<?php echo($collection->id); ?>">group editor</a>.</p>
@@ -102,12 +99,11 @@ HTMLEnd;
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $this->wizard->_fields = array(); // kill the wizard's stored fields
         return null;
     }// /->process_form()
-
 }// /class: WizardStep4
 
 ?>

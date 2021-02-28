@@ -13,7 +13,6 @@ use WebPA\includes\classes\Wizard;
 
 class WizardStep3
 {
-
     public $wizard = null;
     public $step = 3;
 
@@ -33,7 +32,7 @@ class WizardStep3
         $this->wizard->cancel_button = 'Cancel';
     }// /WizardStep3()
 
-    function head()
+    public function head()
     {
         $html = <<<HTMLEnd
 <script language="JavaScript" type="text/javascript">
@@ -49,7 +48,7 @@ HTMLEnd;
         echo($html);
     }// /->head()
 
-    function form()
+    public function form()
     {
         $CIS = $this->wizard->get_var('CIS');
 
@@ -57,8 +56,7 @@ HTMLEnd;
         if (!$total_students) {
             $total_students = 0;
         }
-        $students_plural = ($total_students == 1) ? 'student' : 'students';
-        ?>
+        $students_plural = ($total_students == 1) ? 'student' : 'students'; ?>
         <p>Please confirm the following settings are correct before proceeding.</p>
         <p>If you wish to amend any details, click <em>Back</em>. When you are ready to create your groups, click <em>Finish</em>.
         </p>
@@ -84,26 +82,25 @@ HTMLEnd;
                     <?php
                     $num_groups = (int)$this->wizard->get_field('num_groups');
 
-                    $groupHandler = new GroupHandler();
+            $groupHandler = new GroupHandler();
 
-                    $group_names = $groupHandler->generate_group_names(
-                        $num_groups,
-                        $this->wizard->get_field('group_name_stub'),
-                        $this->wizard->get_field('group_numbering')
-                    );
+            $group_names = $groupHandler->generate_group_names(
+                $num_groups,
+                $this->wizard->get_field('group_name_stub'),
+                $this->wizard->get_field('group_numbering')
+            );
 
-                    if ($num_groups <= 5) {
-                        foreach ($group_names as $group_name) {
-                            echo("<div>$group_name</div>");
-                        }
-                    } else {
-                        echo("<div>{$group_names[0]}</div>");
-                        echo("<div>{$group_names[1]}</div>");
-                        echo("<div>&nbsp; ...</div>");
-                        echo('<div>' . $group_names[$num_groups - 2] . '</div>');
-                        echo('<div>' . $group_names[$num_groups - 1] . '</div>');
-                    }
-                    ?>
+            if ($num_groups <= 5) {
+                foreach ($group_names as $group_name) {
+                    echo("<div>$group_name</div>");
+                }
+            } else {
+                echo("<div>{$group_names[0]}</div>");
+                echo("<div>{$group_names[1]}</div>");
+                echo("<div>&nbsp; ...</div>");
+                echo('<div>' . $group_names[$num_groups - 2] . '</div>');
+                echo('<div>' . $group_names[$num_groups - 1] . '</div>');
+            } ?>
                 </div>
             </div>
             <?php
@@ -114,12 +111,11 @@ HTMLEnd;
         }
     }// /->form()
 
-    function process_form()
+    public function process_form()
     {
         $errors = null;
         return $errors;
     }// /->process_form()
-
 }// /class: WizardStep3
 
 ?>

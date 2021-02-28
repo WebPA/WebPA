@@ -114,7 +114,7 @@ if ($command && $assessment) {
                 $bcc_list[] = $_user->email;
 
                 if (is_array($bcc_list)) {
-                  // Send the email
+                    // Send the email
                     $email = new Email();
                     $email->set_bcc($bcc_list);
                     $email->set_from($_user->email);
@@ -168,7 +168,7 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 {
     echo('<table cellpadding="0" cellspacing="0"><tr>');
 
-  // Draw day box
+    // Draw day box
     echo("<td><select name=\"{$fieldName}_day\">");
     FormFunctions::render_options_range(1, 31, 1, date('j', $selectedDatetime));
     echo('</select></td>');
@@ -188,12 +188,12 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
         'December',
     ];
 
-  // Draw month box
+    // Draw month box
     echo("<td><select name=\"{$fieldName}_month\">");
     FormFunctions::render_options($formMonths, date('n', $selectedDatetime));
     echo('</select></td>');
 
-  // Draw year box
+    // Draw year box
     echo("<td><select name=\"{$fieldName}_year\">");
     $year = (date('Y') < date('Y', $selectedDatetime)) ? date('Y') : date('Y', $selectedDatetime) ;
     FormFunctions::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
@@ -201,7 +201,7 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
 
     echo('<th>at</th>');
 
-  // Draw time box
+    // Draw time box
     $time = date('H:i', $selectedDatetime);
     $time_parts = explode(':', $time);
     $time_h = (int) $time_parts[0];
@@ -210,7 +210,7 @@ function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
     echo("<td><select name=\"{$fieldName}_time\">");
     for ($i = 0; $i <= 23; $i++) {
         for ($j = 0; $j <= 45; $j += 15) {
-            $selected = ( ($i == $time_h) && ($j == $time_m) ) ? 'selected="selected"' : '' ;
+            $selected = (($i == $time_h) && ($j == $time_m)) ? 'selected="selected"' : '' ;
             printf('<option value="%1$02d:%2$02d" '. $selected .'> %1$02d:%2$02d </option>', $i, $j);
         }
     }
@@ -226,7 +226,7 @@ $page_title = $assessment ? "manage: {$assessment->name}" : 'manage assessment';
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
-$UI->breadcrumbs = array  ('home'       => '/' ,
+$UI->breadcrumbs = array('home'       => '/' ,
                'my assessments' => '/tutors/assessments/' ,
                $page_title    => null ,);
 
@@ -302,7 +302,7 @@ if (!$assessment) {
     <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
     <?php
 } else {
-    ?>
+        ?>
 
   <form action="edit_assessment.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
   <input type="hidden" name="command" value="none" />
@@ -324,8 +324,7 @@ if (!$assessment) {
           <input class="danger_button" type="button" name="" value="delete assessment" onclick="do_command('delete');">
       </td>
         <?php
-    }
-    ?>
+    } ?>
     </tr>
     </table>
   </div>
@@ -339,8 +338,7 @@ if (!$assessment) {
       <p>Some parts of the assessment are now locked for editing.</p>
     </div>
         <?php
-    }
-    ?>
+    } ?>
 
   <h2>Assessment Details</h2>
   <div class="form_section form_line">
@@ -397,8 +395,7 @@ if (!$assessment) {
 
     <?php
     if (APP__REMINDER_OPENING) {
-        $email_opening = $assessment->email_opening;
-        ?>
+        $email_opening = $assessment->email_opening; ?>
       <p><label>Email a reminder to all students 48 hours before the assessment is opened</label></p>
 
       <div class="form_section">
@@ -416,9 +413,8 @@ if (!$assessment) {
         <?php
     }
 
-    if (APP__REMINDER_CLOSING) {
-        $email_closing = $assessment->email_closing;
-        ?>
+        if (APP__REMINDER_CLOSING) {
+            $email_closing = $assessment->email_closing; ?>
       <p><label>Email all students 48 hours before the assessment closes</label></p>
 
       <div class="form_section">
@@ -434,8 +430,7 @@ if (!$assessment) {
         </table>
       </div>
         <?php
-    }
-    ?>
+        } ?>
   </div>
 
   <h2>Assessment Form</h2>
@@ -443,39 +438,38 @@ if (!$assessment) {
     <?php
     echo("<p><label>You are using a copy of form: </label><em>{$form->name}</em></p>");
 
-    $question_count = (int) $form->get_question_count();
-    if ($question_count==0) {
-        ?>
+        $question_count = (int) $form->get_question_count();
+        if ($question_count==0) {
+            ?>
       <p>This form has no questions.</p>
         <?php
-    } else {
-        ?>
+        } else {
+            ?>
       <p>Below are the questions that your students will use to mark each other.</p>
 
       <ul>
         <?php
         for ($i=0; $i<$question_count; $i++) {
-            $question = $form->get_question($i);
-            ?>
+            $question = $form->get_question($i); ?>
       <li>
           <div class="question">
-              <?php echo( $question['text']['_data']); ?> <span class="question_range">(scoring range: <?php echo($question['range']['_data']); ?>)</span>
+              <?php echo($question['text']['_data']); ?> <span class="question_range">(scoring range: <?php echo($question['range']['_data']); ?>)</span>
           </div>
       </li>
             <?php
         }
-        echo('</ul>');
-    }
+            echo('</ul>');
+        }
 
-  // If not locked, allow change of form
-    if ($assessment->is_locked()) {
-        ?>
+        // If not locked, allow change of form
+        if ($assessment->is_locked()) {
+            ?>
     <div class="info_box">
       <p>Student marks have been recorded, so you can no longer change forms.</p>
     </div>
         <?php
-    } else {
-        ?>
+        } else {
+            ?>
       <p>
           You cannot directly change any aspect of this form or its criteria. If you need to change it, you must
           <a href="change_assessment_form.php?<?php echo($assessment_qs); ?>">
@@ -483,8 +477,7 @@ if (!$assessment) {
           </a>.
       </p>
         <?php
-    }
-    ?>
+        } ?>
     </div>
     <h2>Feedback / Justification</h2>
     <div class="form_section form_line">
@@ -514,7 +507,7 @@ if (!$assessment) {
           <td valign="top"><label class="small" for="allow_assessment_feedback_yes">Yes, allow students to give feedback / justification.</label></td>
         </tr>
         <tr>
-          <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_no" value="0" <?php echo( (!$assessment->allow_assessment_feedback) ? 'checked="checked"' : '' ); ?> /></td>
+          <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_no" value="0" <?php echo((!$assessment->allow_assessment_feedback) ? 'checked="checked"' : ''); ?> /></td>
           <td valign="top"><label class="small" for="allow_assessment_feedback_no">No, don't allow feedback / justification.</label></td>
         </tr>
         </table>
@@ -528,16 +521,16 @@ if (!$assessment) {
     <?php
     echo("<p><label>You are using a copy of collection: </label><em>{$collection->name}</em></p>");
 
-    $groups = $collection->get_groups_iterator();
+        $groups = $collection->get_groups_iterator();
 
-    $num_module_students = $CIS->get_module_students_count($_module_id);
+        $num_module_students = $CIS->get_module_students_count($_module_id);
 
-    if ($groups->size()==0) {
-        ?>
+        if ($groups->size()==0) {
+            ?>
       <p>This collection does not contain any groups</p>
         <?php
-    } else {
-        ?>
+        } else {
+            ?>
       <table class="grid" cellpadding="2" cellspacing="1">
       <tr>
         <th>Group Name</th>
@@ -546,42 +539,41 @@ if (!$assessment) {
       </tr>
         <?php
         $collection_total_members = 0;
-        for ($groups->reset(); $groups->is_valid(); $groups->next()) {
-            $group =& $groups->current();
-            $num_responses = $result_handler->get_responses_count($group->id);
-            $num_responses = $num_responses ?: '-';
+            for ($groups->reset(); $groups->is_valid(); $groups->next()) {
+                $group =& $groups->current();
+                $num_responses = $result_handler->get_responses_count($group->id);
+                $num_responses = $num_responses ?: '-';
 
-            $num_members = $group->get_members_count();
-            $collection_total_members += $num_members;
+                $num_members = $group->get_members_count();
+                $collection_total_members += $num_members;
 
-            echo('<tr>');
-            echo("<td>{$group->name}</td>");
-            echo('<td>'. $num_members .'</td>');
-            echo("<td>$num_responses</td>");
-            echo('</tr>');
+                echo('<tr>');
+                echo("<td>{$group->name}</td>");
+                echo('<td>'. $num_members .'</td>');
+                echo("<td>$num_responses</td>");
+                echo('</tr>');
+            }
+            echo('</table>');
+
+            if ($collection_total_members<$num_module_students) {
+                $diff = $num_module_students - $collection_total_members;
+                $diff_units = ($diff==1) ? 'person remains' : 'people remain';
+                echo("<div class=\"warning_box\"><p><strong>Warning</strong></p><p>Not all of the people within this collection have been allocated a group.</p><p>$diff $diff_units unallocated.</p></div>");
+            }
         }
-        echo('</table>');
 
-        if ($collection_total_members<$num_module_students) {
-            $diff = $num_module_students - $collection_total_members;
-            $diff_units = ($diff==1) ? 'person remains' : 'people remain';
-            echo("<div class=\"warning_box\"><p><strong>Warning</strong></p><p>Not all of the people within this collection have been allocated a group.</p><p>$diff $diff_units unallocated.</p></div>");
-        }
-    }
-
-  // If not locked, allow change of collection
-    if ($assessment->is_locked()) {
-        ?>
+        // If not locked, allow change of collection
+        if ($assessment->is_locked()) {
+            ?>
       <div class="info_box">
         <p>Student marks have been recorded, so you can no longer change collections.</p>
       </div>
         <?php
-    } else {
-        ?>
+        } else {
+            ?>
       <p>You cannot directly change the composition of any of these groups. If you need to change them, you must <a href="change_assessment_collection.php?<?php echo($assessment_qs); ?>">select a different collection of groups to use</a>.</p>
         <?php
-    }
-    ?>
+        } ?>
 
   </div>
    <h2>Assessment Type</h2>
@@ -595,8 +587,7 @@ if (!$assessment) {
     } else {
         $peer_checked = 'checked=\"checked\"';
         $self_checked = '';
-    }
-    ?>
+    } ?>
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
       <td>
@@ -627,11 +618,10 @@ if (!$assessment) {
     <p>Student marks have been recorded, so you can no longer change then assessment type.</p>
   </div>
         <?php
-    }
-    ?>
+    } ?>
   </form>
     <?php
-}
+    }
 ?>
 </div>
 

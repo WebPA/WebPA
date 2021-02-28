@@ -17,9 +17,9 @@ use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -89,26 +89,25 @@ $open_assessments = null;
 $finished_assessments = null;
 
 if ($assessments) {
-
-  foreach($assessments as $i => $assessment) {
-    if ( (is_array($assessments_with_response)) && (in_array($assessment['assessment_id'], $assessments_with_response)) ) {
-      $finished_assessments[] = $assessment;
-    } else {
-      $now = time();
-      $open_date = strtotime($assessment['open_date']);
-      $close_date = strtotime($assessment['close_date']);
-
-      if ($close_date<=$now) {
-        $finished_assessments[] = $assessment;
-      } else {
-        if ($open_date>$now) {
-          $pending_assessments[] = $assessment;
+    foreach ($assessments as $i => $assessment) {
+        if ((is_array($assessments_with_response)) && (in_array($assessment['assessment_id'], $assessments_with_response))) {
+            $finished_assessments[] = $assessment;
         } else {
-          $open_assessments[] = $assessment;
+            $now = time();
+            $open_date = strtotime($assessment['open_date']);
+            $close_date = strtotime($assessment['close_date']);
+
+            if ($close_date<=$now) {
+                $finished_assessments[] = $assessment;
+            } else {
+                if ($open_date>$now) {
+                    $pending_assessments[] = $assessment;
+                } else {
+                    $open_assessments[] = $assessment;
+                }
+            }
         }
-      }
     }
-  }
 }
 
 //------------------------------------------------
@@ -120,7 +119,7 @@ $getting_help = 'You will need to seek help from your tutor.';
 
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'home';
-$UI->breadcrumbs = array  ('home'       => null ,
+$UI->breadcrumbs = array('home'       => null ,
                           );
 $UI->help_link = '?q=node/329';
 
@@ -135,12 +134,12 @@ $UI->content_start();
 <div class="content_box">
   <?php
   if (!$open_assessments) {
-    ?>
+      ?>
     <p>There are no assessments in this module available for you to take at the moment.</p>
     <p>To view all the assessments you are registered on, please check the <a href="assessments/">my assessments</a> section.</p>
     <?php
   } else {
-    ?>
+      ?>
     <p>Below is a list of the assessments in this module you can take now.</p>
     <p>To view all the assessments you are registered on in this module, please check the <a href="assessments/">my assessments</a> section.</p>
 
@@ -150,35 +149,34 @@ $UI->content_start();
       $status = 'open';
       $status_capitalized = ucfirst($status);
 
-      $assessment_iterator = new SimpleObjectIterator($open_assessments,'Assessment', $DB);
+      $assessment_iterator = new SimpleObjectIterator($open_assessments, 'Assessment', $DB);
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-        $assessment =& $assessment_iterator->current();
-        $take_url = "assessments/take/index.php?a={$assessment->id}";
+          $assessment =& $assessment_iterator->current();
+          $take_url = "assessments/take/index.php?a={$assessment->id}";
 
-        echo("<div class=\"assessment_open\">");
-        echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-        echo('<tr>');
-        echo("  <td width=\"24\"><img src=\"../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-        echo('  <td valign="top">');
-        echo('    <div class="assessment_info">');
-        echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-        echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-        echo('    </div>');
-        echo('  </td>');
-        echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
-        echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
-        echo('  </td>');
-        echo('</tr>');
-        echo('</table>');
-        echo('</div>');
-      }
-    ?>
+          echo("<div class=\"assessment_open\">");
+          echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
+          echo('<tr>');
+          echo("  <td width=\"24\"><img src=\"../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
+          echo('  <td valign="top">');
+          echo('    <div class="assessment_info">');
+          echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
+          echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
+          echo('    </div>');
+          echo('  </td>');
+          echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
+          echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
+          echo('  </td>');
+          echo('</tr>');
+          echo('</table>');
+          echo('</div>');
+      } ?>
     </div>
     <?php
   }
 
   if ($pending_assessments) {
-    ?>
+      ?>
     <h2>Pending Assessments</h2>
     <p>These assessments scheduled for some point in the future.</p>
     <div class="form_section form_line">
@@ -186,27 +184,26 @@ $UI->content_start();
       $status = 'pending';
       $status_capitalized = ucfirst($status);
 
-      $assessment_iterator = new SimpleObjectIterator($pending_assessments,'Assessment', $DB);
+      $assessment_iterator = new SimpleObjectIterator($pending_assessments, 'Assessment', $DB);
 
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-        $assessment =& $assessment_iterator->current();
-        $take_url = "/assessments/take/index.php?a={$assessment->id}";
+          $assessment =& $assessment_iterator->current();
+          $take_url = "/assessments/take/index.php?a={$assessment->id}";
 
-        echo("<div class=\"assessment\">");
-        echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-        echo('<tr>');
-        echo("  <td width=\"24\"><img src=\"/images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-        echo('  <td valign="top">');
-        echo('    <div class="assessment_info">');
-        echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-        echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-        echo('    </div>');
-        echo('  </td>');
-        echo('</tr>');
-        echo('</table>');
-        echo('</div>');
-      }
-    ?>
+          echo("<div class=\"assessment\">");
+          echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
+          echo('<tr>');
+          echo("  <td width=\"24\"><img src=\"/images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
+          echo('  <td valign="top">');
+          echo('    <div class="assessment_info">');
+          echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
+          echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
+          echo('    </div>');
+          echo('  </td>');
+          echo('</tr>');
+          echo('</table>');
+          echo('</div>');
+      } ?>
     </div>
     <?php
   }

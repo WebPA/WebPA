@@ -21,37 +21,37 @@ use WebPA\includes\functions\Common;
 $msg = Common::fetch_GET('msg', null);
 
 switch ($msg) {
-  case 'connfailed' :
+  case 'connfailed':
         $message_class = 'warning';
         $message = 'A connection to the authentication server could not be established.<br />Please try again later.';
         break;
   // --------------------
-  case 'denied' :
+  case 'denied':
         $message_class = 'warning';
         $message = 'You attempted to access a restricted page.<br />It may be that your session has timed out so please re-enter your details.';
         break;
   // --------------------
-  case 'no access' :
+  case 'no access':
         $message_class = 'warning';
         $message = 'Your account has been disabled.<br />Please contact support if you do not think this should be the case.';
         break;
   // --------------------
-  case 'invalid' :
+  case 'invalid':
         $message_class = 'warning';
         $message = 'Your username and password were rejected.<br />Please check your details and try again.';
         break;
   // --------------------
-  case 'cookies' :
+  case 'cookies':
         $message_class = 'warning';
         $message = 'Unable to connect to ' . APP__NAME . '; please ensure that your browser is not blocking third-party cookies';
         break;
   // --------------------
-  case 'logout' :
+  case 'logout':
         $message_class = 'info';
         $message = 'You have logged out.<br />If you wish to log back in, please re-enter your details.';
         break;
   // --------------------
-  default :
+  default:
         $message_class = 'info';
         $message = 'To start using ' . APP__NAME . ' you have to log in.';
         break;
@@ -63,7 +63,7 @@ switch ($msg) {
 $UI->page_title = APP__NAME . ' Login';
 $UI->menu_selected = '';
 $UI->help_link = '?q=node/26';
-$UI->breadcrumbs = array  (
+$UI->breadcrumbs = array(
   'login page'  => null ,
 );
 
