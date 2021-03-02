@@ -18,6 +18,11 @@ use WebPA\includes\classes\UI;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 
+// load environment config
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+
+$dotenv->load();
+
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
 
@@ -37,11 +42,11 @@ ini_set('session.cookie_path', '/');
 define('APP__ACADEMIC_YEAR_START_MONTH', 9);
 
 //Database information
-define('APP__DB_HOST', 'webpa-db'); // If on a non-standard port, use this format:  <server>:<port>
-define('APP__DB_USERNAME', 'root');
-define('APP__DB_PASSWORD', 'rootpass');
-define('APP__DB_DATABASE', 'webpa');
-define('APP__DB_TABLE_PREFIX', 'pa2_');
+define('APP__DB_HOST', $_ENV['DB_HOST']); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_USERNAME', $_ENV['DB_USER']);
+define('APP__DB_PASSWORD', $_ENV['DB_PASS']);
+define('APP__DB_DATABASE', $_ENV['DB_NAME']);
+define('APP__DB_TABLE_PREFIX', $_ENV['DB_PREFIX']);
 
 // Contact info
 define('APP__EMAIL_HELP', 'someone@email.com');
