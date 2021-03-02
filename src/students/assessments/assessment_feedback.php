@@ -29,17 +29,16 @@ $range = 0.1;   // Multiplied by average score to give AVG range
 
 // --------------------------------------------------------------------------------
 
-$extractMax = function ($input_array)
-{
+$extractMax = function ($input_array) {
     return array_keys($input_array, max($input_array));
 };
 
-$extractMin = function ($input_array)
-{
+$extractMin = function ($input_array) {
     return array_keys($input_array, min($input_array));
-}
+};
 
 $assessment = new Assessment($DB);
+
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
     echo 'Error: The requested assessment could not be loaded.';

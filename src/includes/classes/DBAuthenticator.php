@@ -66,7 +66,8 @@ class DBAuthenticator extends Authenticator
      *
      * @throws \Doctrine\DBAL\Exception
      */
-    private function rehashPassword($username, $password) {
+    private function rehashPassword($username, $password)
+    {
         $newHash = password_hash($password, PASSWORD_DEFAULT);
 
         $updatePasswordQuery =

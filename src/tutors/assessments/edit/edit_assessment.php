@@ -162,8 +162,7 @@ if ($command && $assessment) {
 
 // --------------------------------------------------------------------------------
 // Render a set of dropdown boxes for datetime selection
-$renderDatetimeBoxes = function ($fieldName, $selectedDatetime)
-{
+$renderDatetimeBoxes = function ($fieldName, $selectedDatetime) {
     echo '<table cellpadding="0" cellspacing="0"><tr>';
 
     // Draw day box

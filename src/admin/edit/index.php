@@ -128,7 +128,7 @@ if ($canEdit) {
             $password = StringFunctions::str_random();
         }
 
-        $edit_user->update_password($password));
+        $edit_user->update_password($password);
     }
 
     if ((($new_user && !$user_found) || $_user->is_admin()) && Common::fetch_POST('username')) {

@@ -18,7 +18,8 @@ class TriggerReminder
 
     private DAO $dao;
 
-    public function __construct(DAO $dao) {
+    public function __construct(DAO $dao)
+    {
         $this->dao = $dao;
     }
 

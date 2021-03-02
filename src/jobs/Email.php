@@ -14,6 +14,6 @@ $closingReminder->send();
 
 // execute email trigger reminder
 
-$triggerReminder = new TriggerReminder();
+$triggerReminder = new TriggerReminder($DB);
 
 $triggerReminder->send();
