@@ -50,7 +50,7 @@ class User
     {
         $this->username = $username;
         $this->source_id = '';
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->id = null;
         $this->type = null;
         $this->id_number = null;
@@ -148,7 +148,7 @@ class User
      */
     public function update_password($password)
     {
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**

@@ -32,10 +32,10 @@ $action = Common::fetch_POST('action');
 switch ($action) {
   case 'init':
     //phase 2
-    //first, we create a random hash for this user. this doesn't need to be especially secure, so md5(rand()) will do fine.
+    //first, we create a random hash for this user.
     isset($_POST['username']) or exit('Username not set.');
 
-    $hash = md5(rand());
+    $hash = password_hash(mt_rand(), PASSWORD_DEFAULT);
 
     $sql =
         'SELECT user_id ' .
@@ -104,7 +104,7 @@ switch ($action) {
 
             $user->load_from_row($userRow);
             $user->set_dao_object($DB);
-            $user->update_password(md5($_POST['newpass']));
+            $user->update_password($_POST['newpass']);
             $user->save_user();
 
             $DB->getConnection()->executeQuery(

@@ -114,11 +114,11 @@ if ($flg_match) {
         $finalRowsCount = count($final_rows);
 
         for ($counter = 0; $counter < $finalRowsCount; $counter++) {
-            // if there are passwords in the list, they will need to be MD5 hashed
+            // if there are passwords in the list, they will need to be hashed
             if (!empty($final_rows[$counter]['password'])) {
-                $final_rows[$counter]['password'] = md5($final_rows[$counter]['password']);
+                $final_rows[$counter]['password'] = password_hash($final_rows[$counter]['password'], PASSWORD_DEFAULT);
             } else {
-                $final_rows[$counter]['password'] = md5(StringFunctions::str_random());
+                $final_rows[$counter]['password'] = password_hash(StringFunctions::str_random(), PASSWORD_DEFAULT);
             }
         }
 
