@@ -61,4 +61,4 @@ $dao = new DAO('webpa-db', 'root', 'rootpass', 'webpa');
 
 $closingReminder = new ClosingReminder($dao);
 
-//$closingReminder->send();
+$closingReminder->send();
