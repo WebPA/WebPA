@@ -8,8 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once '../../../includes/inc_global.php';
-
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;

@@ -55,10 +55,3 @@ class ClosingReminder
         }
     }
 }
-
-// This file was previously procedural. This is why we instantiate and call the function
-$dao = new DAO('webpa-db', 'root', 'rootpass', 'webpa');
-
-$closingReminder = new ClosingReminder($dao);
-
-$closingReminder->send();

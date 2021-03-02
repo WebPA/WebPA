@@ -10,8 +10,6 @@
 
 namespace WebPA\includes\classes;
 
-include_once __DIR__ . '/../inc_global.php';
-
 class UI
 {
     public $page_title = '';

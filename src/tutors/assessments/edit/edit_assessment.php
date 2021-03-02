@@ -162,7 +162,7 @@ if ($command && $assessment) {
 
 // --------------------------------------------------------------------------------
 // Render a set of dropdown boxes for datetime selection
-function render_datetime_boxes($fieldName, $selectedDatetime)
+$renderDatetimeBoxes = function ($fieldName, $selectedDatetime)
 {
     echo '<table cellpadding="0" cellspacing="0"><tr>';
 
@@ -215,7 +215,7 @@ function render_datetime_boxes($fieldName, $selectedDatetime)
     echo '</select></td>';
 
     echo '</tr></table>';
-}
+};
 
 // --------------------------------------------------------------------------------
 // Begin Page
@@ -360,11 +360,11 @@ if (!$assessment) {
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <th><label>Opening date</label></th>
-        <td><?php render_datetime_boxes('open_date', $assessment->open_date); ?></td>
+        <td><?php $renderDatetimeBoxes('open_date', $assessment->open_date); ?></td>
       </tr>
       <tr>
         <th><label>Closing date</label></th>
-        <td><?php render_datetime_boxes('close_date', $assessment->close_date); ?></td>
+        <td><?php $renderDatetimeBoxes('close_date', $assessment->close_date); ?></td>
       </tr>
       </table>
     </div>

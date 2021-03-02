@@ -8,8 +8,6 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once '../../../includes/inc_global.php';
-
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\classes\Wizard;
@@ -112,8 +110,4 @@ class WizardStep3
 
         return $errors;
     }
-
-    // /->process_form()
-}// /class: WizardStep3
-
-?>
+}

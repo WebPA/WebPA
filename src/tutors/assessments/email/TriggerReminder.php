@@ -10,11 +10,17 @@
 
 namespace WebPA\tutors\assessments\email;
 
-require_once '../../../includes/inc_global.php';
+use WebPA\includes\classes\DAO;
 
 class TriggerReminder
 {
     use AssessmentNotificationTrait;
+
+    private DAO $dao;
+
+    public function __construct(DAO $dao) {
+        $this->dao = $dao;
+    }
 
     public function send()
     {
@@ -25,14 +31,10 @@ class TriggerReminder
             'AND a.email_opening = 1';
 
         //get a list of the assessment that will be run in two days from now
-        $allDue = $DB->getConnection()->fetchAllAssociative($allDueQuery);
+        $allDue = $this->dao->getConnection()->fetchAllAssociative($allDueQuery);
 
         if (!empty($allDue)) {
-            //cycle round and for each collection send the emails
-            $assessments = count($allDue);
-
             foreach ($allDue as $assessment) {
-
                 //specify the details of the email to be sent
                 $subjectLn = 'Reminder: WebPA Assessment opening';
                 $body = ' This is a reminder that the assessment your tutor set is due to open. The details are as below;' .
@@ -49,7 +51,3 @@ class TriggerReminder
         }
     }
 }
-
-$triggerReminder = new TriggerReminder();
-
-$triggerReminder->send();

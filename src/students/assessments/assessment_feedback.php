@@ -29,12 +29,12 @@ $range = 0.1;   // Multiplied by average score to give AVG range
 
 // --------------------------------------------------------------------------------
 
-function extract_max($input_array)
+$extractMax = function ($input_array)
 {
     return array_keys($input_array, max($input_array));
-}
+};
 
-function extract_min($input_array)
+$extractMin = function ($input_array)
 {
     return array_keys($input_array, min($input_array));
 }
@@ -212,8 +212,8 @@ if ((!$assessment) || (!$group_names)) {
                 $min_score_per_question[$question] = ($min_score[$question]['mark_received'] / $awarded_total[$question])*4;
             }
             //display best based on the normalised mark when there are more that 1-2 best criteria
-            //extract_max which will return the array keys
-            $returned_max = extract_max($max_score_per_question);
+            // extractMax which will return the array keys
+            $returned_max = $extractMax($max_score_per_question);
 
             $msg_failure = '';
 
@@ -248,7 +248,8 @@ if ((!$assessment) || (!$group_names)) {
             //No area for development should be identified if their lowest score is above the median AND
             //is greater than 80% of their highest score
 
-            $returned_min = extract_min($min_score_per_question);
+            $returned_min = $extractMin($min_score_per_question);
+
             if (is_array($returned_min)) {
                 $returned_min_count = count($returned_min);
 
@@ -309,5 +310,3 @@ if ((!$assessment) || (!$group_names)) {
 <?php
 
 $UI->content_end(false, false, false);
-
-?>

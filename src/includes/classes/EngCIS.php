@@ -15,8 +15,6 @@ use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 
-include_once __DIR__ . '/../inc_global.php';
-
 class EngCIS
 {
     private $_DAO;

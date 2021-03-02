@@ -13,8 +13,6 @@ namespace WebPA\includes\classes;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
-include_once __DIR__ . '/../inc_global.php';
-
 class Form
 {
     // Public Vars
