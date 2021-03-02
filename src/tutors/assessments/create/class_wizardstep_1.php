@@ -14,14 +14,9 @@ use WebPA\includes\functions\Form;
 
 class WizardStep1
 {
-
-  // Public
     public $wizard = null;
     public $step = 1;
 
-    /*
-    * CONSTRUCTOR
-    */
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -29,7 +24,7 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
 
     public function head()
     {
@@ -39,7 +34,7 @@ class WizardStep1
 
   function body_onload() {
     document.getElementById('assessment_name').focus();
-  }// /body_onload()
+  }
 
   function open_close(id) {
     id = document.getElementById(id);
@@ -55,14 +50,14 @@ class WizardStep1
 //-->
 </script>
 <?php
-    }// /->head()
-
+    }
 
     public function form()
     {
         $today = time();
 
         $open_date = $this->wizard->get_field('open_date');
+
         if (is_null($open_date)) {
             $open_date = mktime(9, 0, 0);
         }  // default start time, today @ 9am
@@ -80,7 +75,7 @@ class WizardStep1
         /*
         * Render a set of dropdown boxes for datetime selection
         */
-        function render_datetime_boxes($field_name = 'datetime', $selected_datetime)
+        $renderTimeBoxes = function ($field_name, $selected_datetime)
         {
             echo('<table cellpadding="0" cellspacing="0"><tr>');
 
@@ -136,11 +131,11 @@ class WizardStep1
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <th><label>Opening date</label></th>
-        <td><?php render_datetime_boxes('open_date', $open_date); ?></td>
+        <td><?php $renderTimeBoxes('open_date', $open_date); ?></td>
       </tr>
       <tr>
         <th><label>Closing date</label></th>
-        <td><?php render_datetime_boxes('close_date', $close_date); ?></td>
+        <td><?php $renderTimeBoxes('close_date', $close_date); ?></td>
       </tr>
       </table>
     </div>
@@ -196,7 +191,6 @@ class WizardStep1
       </div>
 <?php
     }
-
         if (APP__REMINDER_CLOSING) {
             ?>
       <p><label>Do you want to email all students 48 hours before the assessment closes?</label></p>
@@ -259,5 +253,5 @@ class WizardStep1
         $this->wizard->set_field('email_closing', Common::fetch_POST('email_closing'));
 
         return $errors;
-    }// /->process_form()
-}// /class: WizardStep1
+    }
+}

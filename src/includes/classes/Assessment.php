@@ -322,12 +322,12 @@ class Assessment
     public function get_db()
     {
         return $this->_DAO;
-    }// /->get_db
+    }
 
     public function get_form()
     {
         // Get the number of questions used in this assessment, and create an array of that size
-        $form = new Form($db);
+        $form = new Form($this->get_db());
         $form_xml =& $this->_form_xml;
         $form->load_from_xml($form_xml);
 
@@ -556,5 +556,5 @@ class Assessment
         $params['algorithm'] = (array_key_exists('algorithm', $xml_array['parameters'])) ? $xml_array['parameters']['algorithm']['_attributes']['value'] : 'webpa' ;
 
         return $params;
-    }// /->_parse_marking_params()
-}// /class: Assessment
+    }
+}

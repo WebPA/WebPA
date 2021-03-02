@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once "../../../includes/inc_global.php";
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
@@ -22,7 +22,7 @@ class WizardStep6
     use AssessmentNotificationTrait;
 
     // Public
-    public $wizard = null;
+    public $wizard;
     public $step = 6;
     private $module;
 
@@ -106,7 +106,7 @@ class WizardStep6
                 "\n To complete your assessment please go to: " . APP__WWW .
                 "\n \n -------------------------------------------------------------------------------" .
                 "\n This is an automated email sent by the WebPA tool \n\n";
-            $returned = mail_assessment_notification($coll_id, $subjectLn, $body, $_user_id);
+            $returned = $this->mail_assessment_notification($coll_id, $subjectLn, $body, $_user_id);
 
             //deal will any errors that are returned.
 

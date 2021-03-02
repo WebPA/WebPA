@@ -11,7 +11,7 @@
 
 namespace WebPA\includes\classes;
 
-use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 
 class DAO

@@ -85,7 +85,6 @@ if (!$assessment->load($assessment_id)) {
             $penalties = array();
         }
 
-
         $questions = $algorithm->get_questions();
 
         $group_names = $algorithm->get_group_names();
@@ -106,8 +105,8 @@ if (!$assessment->load($assessment_id)) {
         $collection =& $group_handler->get_collection($assessment->get_collection_id());
 
         $form = $assessment->get_form();
-    }// /if-else(is algorithm)
-}// /if-else(is assessment)
+    }
+}
 
 
 $UI->page_title = APP__NAME . ' Feedback Report';

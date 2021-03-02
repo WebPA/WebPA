@@ -13,8 +13,6 @@
 
 namespace WebPA\tutors\assessments\email;
 
-require_once("../../../includes/inc_global.php");
-
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;

@@ -164,7 +164,7 @@ if ($command && $assessment) {
 /*
 * Render a set of dropdown boxes for datetime selection
 */
-function render_datetime_boxes($fieldName = 'datetime', $selectedDatetime)
+function render_datetime_boxes($fieldName, $selectedDatetime)
 {
     echo('<table cellpadding="0" cellspacing="0"><tr>');
 

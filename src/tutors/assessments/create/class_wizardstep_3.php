@@ -59,7 +59,7 @@ class WizardStep3
         $collection_id = $this->wizard->get_field('collection_id');
 
         if (!$collections) {
-            $this->button_next = ''; ?>
+            $this->wizard->next_button = ''; ?>
             <p>You haven't yet created any group collections.</p>
             <p>You need to <a href="../../groups/create/">create some groups</a> before you will be able to run any peer
                 assessments.</p>

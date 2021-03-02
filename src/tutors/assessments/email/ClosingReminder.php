@@ -10,14 +10,17 @@
 
 namespace WebPA\tutors\assessments\email;
 
-//gather all include files needed.
-use Doctrine\DBAL\Connection;
-
-require_once "../../../includes/inc_global.php";
+use WebPA\includes\classes\DAO;
 
 class ClosingReminder
 {
     use AssessmentNotificationTrait;
+
+    private DAO $dao;
+
+    public function __construct(DAO $dao) {
+       $this->dao = $dao;
+    }
 
     public function send()
     {
@@ -27,7 +30,7 @@ class ClosingReminder
             'WHERE a.close_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY)';
 
         //get a list of the assessment that will be run in two days from now
-        $allDue = $DB->getConnection()->fetchAllAssociative($allDueQuery);
+        $allDue = $this->dao->getConnection()->fetchAllAssociative($allDueQuery);
 
         if (!empty($allDue)) {
             //cycle round and for each collection send the emails
@@ -45,7 +48,7 @@ class ClosingReminder
                     "\n \n -------------------------------------------------------------------------------" .
                     "\n This is an automated email sent by the WebPA tool \n\n";
 
-                mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
+                $this->mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
             }
             unset($assessment);
         }
@@ -53,6 +56,8 @@ class ClosingReminder
 }
 
 // This file was previously procedural. This is why we instantiate and call the function
-$closingReminder = new ClosingReminder();
+$dao = new DAO('webpa-db', 'root', 'rootpass', 'webpa');
 
-$closingReminder->send();
+$closingReminder = new ClosingReminder($dao);
+
+//$closingReminder->send();

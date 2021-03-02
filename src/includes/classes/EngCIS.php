@@ -14,7 +14,6 @@ use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
-use function Doctrine\DBAL\Query\QueryBuilder;
 
 include_once __DIR__ . '/../inc_global.php';
 
@@ -84,7 +83,11 @@ class EngCIS
         } elseif (!empty($modules)) {  // else, just return one row
             $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id IN ? LIMIT 1';
 
-            return $this->dbConn->fetchAssociative($moduleQuery, [$this->sourceId, $modules], [ParameterType::STRING, $dbConn::PARAM_INT_ARRAY]);
+            return $this->dbConn->fetchAssociative(
+                $moduleQuery,
+                [$this->sourceId, $modules],
+                [ParameterType::STRING, $this->dbConn::PARAM_INT_ARRAY]
+            );
         } elseif ($this->user->is_admin()) {
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')

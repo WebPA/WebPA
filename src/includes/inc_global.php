@@ -78,7 +78,6 @@ ini_set('sendmail_from', 'someone@email.com');
 
 //define the authentication to be used and in the order they are to be applied
 $LOGIN_AUTHENTICATORS[] = 'DB';
-$LOGIN_AUTHENTICATORS[] = 'LDAP';
 
 // LDAP settings
 define('LDAP__HOST', "kdc.lboro.ac.uk");

@@ -87,7 +87,7 @@ class WizardStep2
         $feedback_name = $this->wizard->get_field('feedback_name');
 
         if (!$forms) {
-            $this->button_next = ''; ?>
+            $this->wizard->next_button = ''; ?>
             <p>You haven't yet created any assessment forms.</p>
             <p>You need to <a href="../../forms/create/">create a new form</a> before you will be able to run any peer
                 assessments.</p>
