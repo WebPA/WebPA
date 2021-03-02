@@ -122,10 +122,12 @@ if ($canEdit) {
     }
     //check to see if the password needs to be saved
     $password = Common::fetch_POST('password', '');
+
     if ((($password != '!!!!!!') && !empty($password)) || empty($user_id)) {
         if (($password == '!!!!!!') || empty($password)) {
             $password = StringFunctions::str_random();
         }
+
         $edit_user->update_password(md5($password));
     }
 

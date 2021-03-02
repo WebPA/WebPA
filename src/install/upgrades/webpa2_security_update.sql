@@ -1,0 +1,1 @@
+ALTER TABLE pa2_user MODIFY COLUMN password VARCHAR(255);
