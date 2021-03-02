@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\functions\Common;
@@ -78,11 +78,11 @@ $page_title = ($form) ? "Edit form: {$form->name}" : 'Edit form';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array(
-  'home'         => '../../' ,
-  'my forms'     => '../' ,
-  $page_title    => null ,
-);
+$UI->breadcrumbs = [
+  'home'         => '../../',
+  'my forms'     => '../',
+  $page_title    => null,
+];
 
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
 $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
@@ -104,7 +104,7 @@ $UI->head();
         break;
       case 'preview' :
         var popupwin;
-        popupwin = window.open('preview_form.php?f=<?php echo($form->id); ?>','preview');
+        popupwin = window.open('preview_form.php?f=<?php echo $form->id; ?>','preview');
         popupwin.focus();
         break;
       default :
@@ -137,7 +137,7 @@ if (!$form) {
 <?php
 } else {
         ?>
-  <form action="edit_form.php?<?php echo($form_qs); ?>" method="post" name="assessmentform_form">
+  <form action="edit_form.php?<?php echo $form_qs; ?>" method="post" name="assessmentform_form">
   <input type="hidden" name="command" value="none" />
 
   <div class="nav_button_bar">
@@ -156,17 +156,17 @@ if (!$form) {
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
       <th><label for="form_name">Name</label></th>
-      <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40" value="<?php echo($form->name)?>" /></td>
+      <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40" value="<?php echo $form->name?>" /></td>
     </tr>
     <tr>
       <th style="vertical-align: top;"><label for="form_type">Scoring Type</label></th>
       <td>
         <select name="form_type" id="form_type">
           <option value="likert" <?php if ($form->type=='likert') {
-            echo('selected="selected"');
+            echo 'selected="selected"';
         } ?>> Likert Scale </option>
           <option value="split100" <?php if ($form->type=='split100') {
-            echo('selected="selected"');
+            echo 'selected="selected"';
         } ?>> Split 100 </option>
         </select>
 <?php
@@ -195,13 +195,13 @@ if (!$form) {
   $question_count = (int) $form->get_question_count();
         if ($question_count==0) {
             ?>
-      <p>You have not added any assessment criteria to this form yet. You need to <a class="button" href="../edit/add_question/index.php?<?php echo($form_qs); ?>">add&nbsp;a&nbsp;new&nbsp;criterion</a> before the form can be used.</p>
+      <p>You have not added any assessment criteria to this form yet. You need to <a class="button" href="../edit/add_question/index.php?<?php echo $form_qs; ?>">add&nbsp;a&nbsp;new&nbsp;criterion</a> before the form can be used.</p>
 <?php
         } else {
             ?>
       <p>The group will rate themselves and each other against the assessment criteria you specify.</p>
       <p>e.g. <em>"Ability to communicate"</em> or <em>"Contribution to the analysis of the experimental data"</em>.</p>
-      <p>You can edit a criterion by clicking on the <img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /> button, or you can <a class="button" href="../edit/add_question/index.php?<?php echo($form_qs); ?>">add&nbsp;a&nbsp;new&nbsp;criterion</a></p>
+      <p>You can edit a criterion by clicking on the <img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /> button, or you can <a class="button" href="../edit/add_question/index.php?<?php echo $form_qs; ?>">add&nbsp;a&nbsp;new&nbsp;criterion</a></p>
 
       <div class="obj_list">
 <?php
@@ -214,52 +214,52 @@ if (!$form) {
           <table class="obj" cellpadding="0" cellspacing="0">
           <tr>
             <td class="obj_info" valign="top">
-              <div class="obj_name"><a class="text" href="<?php echo($edit_url); ?>"><?php echo($question['text']['_data']); ?></a></div>
+              <div class="obj_name"><a class="text" href="<?php echo $edit_url; ?>"><?php echo $question['text']['_data']; ?></a></div>
 <?php
       if (array_key_exists('desc', $question)) {
           $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
-          echo("<div class=\"obj_info_text\">$question_desc</div>");
+          echo "<div class=\"obj_info_text\">$question_desc</div>";
       }
 
         if ($form->type!='split100') {
             ?>
-                  <div class="obj_info_text">Scoring range: <?php echo($question['range']['_data']); ?></div>
+                  <div class="obj_info_text">Scoring range: <?php echo $question['range']['_data']; ?></div>
 <?php
         foreach ($question as $k => $v) {
             if (strpos($k, 'scorelabel')===0) {
                 $num = str_replace('scorelabel', '', $k);
-                echo("<div class=\"obj_info_text\">Score $num : {$v['_data']}</div>");
+                echo "<div class=\"obj_info_text\">Score $num : {$v['_data']}</div>";
             }
         }
         } ?>
             </td>
 
-            <td class="button"><a href="<?php echo($edit_url); ?>"><img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /></a></td>
+            <td class="button"><a href="<?php echo $edit_url; ?>"><img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit question" title="edit" /></a></td>
 
             <td class="button" width="20">
 <?php
-      echo('<a href="question_action.php?' . $question_qs . '&a=clone"><img src="../../../images/buttons/clone.gif" width="16" height="16" alt="clone" title="clone" /></a>'); ?>
+      echo '<a href="question_action.php?' . $question_qs . '&a=clone"><img src="../../../images/buttons/clone.gif" width="16" height="16" alt="clone" title="clone" /></a>'; ?>
             </td>
 
             <td class="button" width="20">
 <?php
       if ($i>0) {
-          echo('<a href="question_action.php?' . $question_qs . '&a=up"><img src="../../../images/buttons/arrow_green_up.gif" width="16" height="16" alt="move up" title="move up" /></a>');
+          echo '<a href="question_action.php?' . $question_qs . '&a=up"><img src="../../../images/buttons/arrow_green_up.gif" width="16" height="16" alt="move up" title="move up" /></a>';
       } else {
-          echo('<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />');
+          echo '<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />';
       } ?>
             </td>
 
             <td class="button" width="20">
 <?php
       if ($i<($question_count-1)) {
-          echo('<a href="question_action.php?' . $question_qs . '&a=down"><img src="../../../images/buttons/arrow_green_down.gif" width="16" height="16" alt="move down" title="move down" /></a>');
+          echo '<a href="question_action.php?' . $question_qs . '&a=down"><img src="../../../images/buttons/arrow_green_down.gif" width="16" height="16" alt="move down" title="move down" /></a>';
       } else {
-          echo('<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />');
+          echo '<img src="../../../images/buttons/blank.gif" width="16" height="16" alt="" />';
       } ?>
             </td>
 
-            <td class="button" width="20"><a href="question_action.php?<?php echo($question_qs); ?>&a=delete"><img src="../../../images/buttons/cross.gif" width="16" height="16" alt="delete" title="delete" /></a></td>
+            <td class="button" width="20"><a href="question_action.php?<?php echo $question_qs; ?>&a=delete"><img src="../../../images/buttons/cross.gif" width="16" height="16" alt="delete" title="delete" /></a></td>
           </tr>
           </table>
         </div>

@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('includes/inc_global.php');
+require_once 'includes/inc_global.php';
 
 $url = '';
 if (isset($_GET['url'])) {

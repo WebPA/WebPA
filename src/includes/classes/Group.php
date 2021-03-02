@@ -25,15 +25,20 @@ use WebPA\includes\functions\Common;
 class Group
 {
     // Public Vars
-    public $id = null;
+    public $id;
+
     public $name = '';
+
     public $collection_id = '';   // READONLY
 
     // Private Vars
     private DAO $_DAO;
+
     private Connection $dbConn;
-    private $_collection = null;
-    private $_members = null;
+
+    private $_collection;
+
+    private $_members;
 
     /**
     * CONSTRUCTOR for group
@@ -42,7 +47,9 @@ class Group
     {
         $this->_collection = null;
         $this->_members = null;
-    }// /->Group()
+    }
+
+    // /->Group()
 
     /*
     * ================================================================================
@@ -77,7 +84,9 @@ class Group
             }
         }
         $this->id = $new_id;
-    }// ->create()
+    }
+
+    // ->create()
 
     /**
     * Delete this Group (and all its members)
@@ -87,21 +96,20 @@ class Group
     {
         if ($this->_collection->is_locked()) {
             return false;
-        } else {
-            $this->dbConn->executeQuery(
+        }
+        $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id = ?',
                 [$this->id],
                 [ParameterType::STRING]
             );
 
-            $this->dbConn->executeQuery(
+        $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE group_id = ?',
                 [$this->id],
                 [ParameterType::STRING]
             );
 
-            return true;
-        }
+        return true;
     }
 
     /*
@@ -137,8 +145,9 @@ class Group
         $this->name = $row['group_name'];
         $this->collection_id = $row['collection_id'];
         return true;
-    }// /->load_from_row()
+    }
 
+    // /->load_from_row()
 
     /*
     * Save this Group
@@ -200,9 +209,9 @@ class Group
             $fields = null;
 
             foreach ($this->_members as $user_id => $role) {
-                $fields[] = array('group_id'   => $this->id ,
-                     'user_id'    => $user_id ,
-                    );
+                $fields[] = ['group_id'   => $this->id,
+                     'user_id'    => $user_id,
+                    ];
 
                 // This double-delete nonsense solves a referential integrity problem
                 // with students managing to get themselves into TWO groups at once.
@@ -251,10 +260,12 @@ class Group
     */
     public function get_as_array()
     {
-        return array('group_id'   => $this->id ,
-             'collection_id'=> $this->_collection->id ,
-             'group_name' => $this->name ,);
-    }// /->get_as_array()
+        return ['group_id'   => $this->id,
+             'collection_id'=> $this->_collection->id,
+             'group_name' => $this->name, ];
+    }
+
+    // /->get_as_array()
 
     /**
     * Set this group to use the given DAO object
@@ -272,7 +283,9 @@ class Group
     {
         $this->_collection =& $collection;
         $this->collection_id = $this->_collection->id;
-    }// /->set_collection_object()
+    }
+
+    // /->set_collection_object()
 
     /*
     * --------------------------------------------------------------------------------
@@ -303,7 +316,9 @@ class Group
             $this->refresh_members();
         }
         return $this->_members;
-    }// /->get_members()
+    }
+
+    // /->get_members()
 
     /**
     * Returns the member list belonging to this group
@@ -316,7 +331,9 @@ class Group
             $this->refresh_members();
         }
         return array_keys($this->_members);
-    }// /->get_member_ids()
+    }
+
+    // /->get_member_ids()
 
     /**
     * Returns a count of the number of members belonging to this group
@@ -329,7 +346,9 @@ class Group
             $this->refresh_members();
         }
         return count($this->_members);
-    }// ->get_members_count()
+    }
+
+    // ->get_members_count()
 
     /**
     * Purge the group of members using include/exclude lists
@@ -353,9 +372,9 @@ class Group
 
         // If we're purging everything, do it
         if ((!$target_roles) && (!$protect_roles)) {
-            $this->_members = array();  // empty array, not NULL, as that would usually trigger a ->refresh_members() call in other member functions
+            $this->_members = [];  // empty array, not NULL, as that would usually trigger a ->refresh_members() call in other member functions
         } else {
-            $post_purge_members = array();
+            $post_purge_members = [];
 
             // If there's a target list.. save the untargetted roles
             if ($target_roles) {
@@ -376,7 +395,9 @@ class Group
             $this->_members = $post_purge_members;
         }
         return true;
-    }// /->purge_members()
+    }
+
+    // /->purge_members()
 
     /**
     * Refresh the member list for this object from the database
@@ -393,7 +414,7 @@ class Group
         $this->_members = $this->dbConn->fetchAllAssociativeIndexed($membersQuery, [$this->id], [ParameterType::STRING]);
 
         if (!$this->_members) {
-            $this->_members = array();
+            $this->_members = [];
         }
     }
 

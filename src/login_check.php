@@ -16,7 +16,7 @@
 
 namespace WebPA;
 
-require_once("./includes/inc_global.php");
+require_once './includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -64,7 +64,7 @@ if (($username) && ($password)) {
     } elseif ($_auth->is_disabled()) {
         $msg = 'no access';
     } else {
-        $_SESSION = array();
+        $_SESSION = [];
         session_destroy();
         session_name(SESSION_NAME);
         session_start();

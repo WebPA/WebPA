@@ -21,9 +21,7 @@ class DBAuthenticator extends Authenticator
         parent::__construct($cis, $username, $password);
     }
 
-    /*
-    Authenticate the user against the internal database
-    */
+    // Authenticate the user against the internal database
     public function authenticate()
     {
         $this->_error = null;

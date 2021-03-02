@@ -16,7 +16,7 @@ use WebPA\includes\classes\SimpleObjectIterator;
 
 ?>
 
-<h2>Pending assessments for <?php echo($academic_year); ?></h2>
+<h2>Pending assessments for <?php echo $academic_year; ?></h2>
 
 <p>These assessments are scheduled to open for students at some point in the future.</p>
 <hr />
@@ -87,21 +87,21 @@ if (!$assessments) {
       <tr>
         <td class="icon" width="24"><img src="../../images/icons/pending_icon.gif" alt="Pending" title="Pending" height="24" width="24" /></td>
         <td class="obj_info">
-          <div class="obj_name"><?php echo($assessment->name); ?></div>
-          <div class="obj_info_text">scheduled: <?php echo($assessment->get_date_string('open_date')); ?> &nbsp;-&nbsp; <?php echo($assessment->get_date_string('close_date')); ?></div>
-          <div class="obj_info_text">student responses: <?php echo("$num_responses / $num_members $completed_msg"); ?></div>
+          <div class="obj_name"><?php echo $assessment->name; ?></div>
+          <div class="obj_info_text">scheduled: <?php echo $assessment->get_date_string('open_date'); ?> &nbsp;-&nbsp; <?php echo $assessment->get_date_string('close_date'); ?></div>
+          <div class="obj_info_text">student responses: <?php echo "$num_responses / $num_members $completed_msg"; ?></div>
         </td>
         <td class="buttons">
-          <a href="<?php echo($edit_url); ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
-          <a href="<?php echo($email_url); ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
-          <a href="<?php echo($responded_url); ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
-          <a href="<?php echo($groupmark_url); ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
+          <a href="<?php echo $edit_url; ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
+          <a href="<?php echo $email_url; ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
+          <a href="<?php echo $responded_url; ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
+          <a href="<?php echo $groupmark_url; ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
         </td>
       </tr>
       </table>
     </div>
 <?php
         }
-        echo("  </div>\n");
+        echo "  </div>\n";
     }
 ?>

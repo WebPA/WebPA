@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -30,7 +30,7 @@ $assessment_id = Common::fetch_GET('a');
 
 $command = Common::fetch_POST('command');
 
-$list_url = "../index.php";
+$list_url = '../index.php';
 
 // --------------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ if (($command) && ($assessment)) {
 
             // Loop through every question and total up the scores for each one
 
-                  $q_total_marks = array();
+                  $q_total_marks = [];
 
                   for ($q=0; $q<$question_count; $q++) {
                       $q_total_marks[$q] = 0;
@@ -157,7 +157,7 @@ if (($command) && ($assessment)) {
                               } else {
                                   $score = (int) $score;
                                   if (($score<0) || ($score>$group_total)) {
-                                      $errors[] = "Your " . APP__MARK_TEXT . " of $score for '$name' in Q{$q_num} is invalid.<br /> " . APP__MARK_TEXT . " must be between 0 and $group_total.";
+                                      $errors[] = 'Your ' . APP__MARK_TEXT . " of $score for '$name' in Q{$q_num} is invalid.<br /> " . APP__MARK_TEXT . " must be between 0 and $group_total.";
                                       $error_style_ids["$q_id"] = 1;
                                   }
                                   $results["$q"]["$id"] = $score;
@@ -174,7 +174,7 @@ if (($command) && ($assessment)) {
                       $q_num = $q + 1;
 
                       if ($q_total!==$group_total) {
-                          $errors[] = "The total " . APP__MARK_TEXT . " for Q{$q_num} should be $group_total.  You have " . APP__MARK_TEXT . " totalling $q_total.";
+                          $errors[] = 'The total ' . APP__MARK_TEXT . " for Q{$q_num} should be $group_total.  You have " . APP__MARK_TEXT . " totalling $q_total.";
                       }
                   }
               } else {
@@ -202,7 +202,7 @@ if (($command) && ($assessment)) {
                               if (($score>=$min_score) && ($score<=$max_score)) {
                                   $results["$q"]["$id"] = $score;
                               } else {
-                                  $errors[] = "The " . APP__MARK_TEXT . " of '$score' given in Q{$q_num} for '$name' is not allowed. " . APP__MARK_TEXT . " must be between $min_score and $max_score.";
+                                  $errors[] = 'The ' . APP__MARK_TEXT . " of '$score' given in Q{$q_num} for '$name' is not allowed. " . APP__MARK_TEXT . " must be between $min_score and $max_score.";
                                   $error_style_ids["$q_id"] = 1;
                               }
                           }
@@ -218,12 +218,12 @@ if (($command) && ($assessment)) {
                           $justification_fetch = strip_tags(Common::fetch_POST($id));
 
                           if (!is_null($justification_fetch)) {
-                              $justification[] = array('assessment_id'    =>  $assessment->id,
+                              $justification[] = ['assessment_id'    =>  $assessment->id,
                                    'group_id'       =>  $group->id,
                                    'user_id'        =>  $_user->id,
                                    'marked_user_id'   =>  $id,
                                    'justification_text' =>  $justification_fetch,
-                                   'date_marked'      =>  date(MYSQL_DATETIME_FORMAT, time()),);
+                                   'date_marked'      =>  date(MYSQL_DATETIME_FORMAT, time()), ];
                           }
                       }
                   }
@@ -309,13 +309,13 @@ if (($command) && ($assessment)) {
                   ->createQueryBuilder()
                   ->insert(APP__DB_TABLE_PREFIX . 'user_mark')
                   ->values([
-                      'assessment_id'  => $assessment->id ,
-                      'group_id'       => $group->id ,
-                      'user_id'        => $_user->id ,
-                      'marked_user_id' => $id ,
-                      'question_id'    => $q ,
-                      'score'          => $score ,
-                      'date_marked'    => $now ,
+                      'assessment_id'  => $assessment->id,
+                      'group_id'       => $group->id,
+                      'user_id'        => $_user->id,
+                      'marked_user_id' => $id,
+                      'question_id'    => $q,
+                      'score'          => $score,
+                      'date_marked'    => $now,
                   ])
                   ->setParameter(0, $assessment->id)
                   ->setParameter(1, $group->id)
@@ -352,11 +352,11 @@ if (($command) && ($assessment)) {
 
           Common::logEvent($DB, 'Assessment submission successful', $_module_id, $assessment->id);
 
-          header("Location: ". APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
+          header('Location: '. APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
           exit;
-      } else {
-          Common::logEvent($DB, 'Assessment submission failed', $_module_id, $assessment->id);
       }
+          Common::logEvent($DB, 'Assessment submission failed', $_module_id, $assessment->id);
+      
 
       break;
   }// /switch
@@ -368,10 +368,10 @@ if (($command) && ($assessment)) {
 $UI->page_title = APP__NAME . ' ' . $assessment->name;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array(
-  'home'             => '/' ,
-  $assessment->name  => null ,
-);
+$UI->breadcrumbs = [
+  'home'             => '/',
+  $assessment->name  => null,
+];
 
 $UI->head();
 ?>
@@ -383,7 +383,7 @@ $UI->head();
 // rows to highlight because they have errors:
 if (is_array($error_style_ids)) {
     foreach ($error_style_ids as $id => $v) {
-        echo("#{$id} td { background-color: #fcc; }\n");
+        echo "#{$id} td { background-color: #fcc; }\n";
     }
 }
 
@@ -419,7 +419,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
@@ -427,14 +427,14 @@ if (!$assessment) {
 <?php
 } else {
         ?>
-  <form action="index.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
+  <form action="index.php?<?php echo $assessment_qs; ?>" method="post" name="assessment_form">
   <input type="hidden" name="command" value="none" />
-  <input type="hidden" name="date_opened" value="<?php echo(date(MYSQL_DATETIME_FORMAT, time())); ?>" />
+  <input type="hidden" name="date_opened" value="<?php echo date(MYSQL_DATETIME_FORMAT, time()); ?>" />
 
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
+      <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
     </tr>
     </table>
   </div>
@@ -461,7 +461,7 @@ if (!$assessment) {
       ?>
     <h3>Introduction</h3>
     <div class="form_section">
-      <p class="introduction"><?php echo(nl2br(htmlentities($assessment->introduction))); ?></p>
+      <p class="introduction"><?php echo nl2br(htmlentities($assessment->introduction)); ?></p>
     </div>
 <?php
   } ?>

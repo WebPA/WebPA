@@ -10,7 +10,7 @@
 
 namespace WebPA\tutors\assessments\email;
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 class TriggerReminder
 {
@@ -35,7 +35,7 @@ class TriggerReminder
 
                 //specify the details of the email to be sent
                 $subjectLn = 'Reminder: WebPA Assessment opening';
-                $body = " This is a reminder that the assessment your tutor set is due to open. The details are as below;" .
+                $body = ' This is a reminder that the assessment your tutor set is due to open. The details are as below;' .
                     "\n Assessment Name:  " . $assessment['assessment_name'] .
                     "\n Open from:  " . $assessment['open_date'] .
                     "\n Closes on:  " . $assessment['close_date'] .

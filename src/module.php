@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("includes/inc_global.php");
+require_once 'includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
@@ -46,7 +46,7 @@ if ($module_id) {
     Common::logEvent($DB, 'Leave module', $_module_id);
     Common::logEvent($DB, 'Enter module', $module_id);
 
-    header('Location: ' . APP__WWW . "/");
+    header('Location: ' . APP__WWW . '/');
 
     exit;
 }
@@ -54,7 +54,7 @@ if ($module_id) {
 //set the page information
 $UI->page_title = 'Change Module';
 $UI->menu_selected = 'change module';
-$UI->breadcrumbs = array('home' => './', 'change source' => null);
+$UI->breadcrumbs = ['home' => './', 'change source' => null];
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -79,19 +79,19 @@ $page_intro = 'Use this page to change the currently selected module.';
       $modules = $CIS->get_user_modules($_user->id, null, 'name');
   }
 
-    echo "<table>";
+    echo '<table>';
     if (count($modules) > 0) {
         foreach ($modules as $id => $module) {
             $checked_str = (isset($_module_id) && ($id == $_module_id)) ? ' checked="checked"' : '' ;
-            echo('<tr>');
-            echo("  <td><input type=\"radio\" name=\"module_id\" id=\"module_{$id}\" value=\"{$id}\"{$checked_str} /></td>");
-            echo("  <td><label style=\"font-weight: normal;\" for=\"module_{$id}\">{$module['module_title']} [{$module['module_code']}]</label></td>");
-            echo('</tr>');
+            echo '<tr>';
+            echo "  <td><input type=\"radio\" name=\"module_id\" id=\"module_{$id}\" value=\"{$id}\"{$checked_str} /></td>";
+            echo "  <td><label style=\"font-weight: normal;\" for=\"module_{$id}\">{$module['module_title']} [{$module['module_code']}]</label></td>";
+            echo '</tr>';
         }
     } else {
-        echo('<tr>');
-        echo('  <td colspan="2">No modules</td>');
-        echo('</tr>');
+        echo '<tr>';
+        echo '  <td colspan="2">No modules</td>';
+        echo '</tr>';
     }
 ?>
 </table>

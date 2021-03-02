@@ -55,8 +55,7 @@ class TimeDiff
         // Return difference
         if ($hours>0) {
             return "$hours:$minutes:$seconds";
-        } else {
-            return "$minutes:$seconds";
         }
+        return "$minutes:$seconds";
     }
 }

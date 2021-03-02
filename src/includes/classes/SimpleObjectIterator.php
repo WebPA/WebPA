@@ -18,12 +18,16 @@ class SimpleObjectIterator
 {
     // Public Vars
     public $array;
+
     public $class_name;
+
     public $class_constructor_args;
+
     public $count;
 
     // Private Vars
     private $_key;
+
     private $_value;
 
     /**
@@ -65,7 +69,9 @@ class SimpleObjectIterator
         $temp->load_from_row($this->_value);
 
         return $temp;
-    }// /->current()
+    }
+
+    // /->current()
 
     /**
     * Move pointer to the next object in the list
@@ -75,7 +81,9 @@ class SimpleObjectIterator
         next($this->array);
         $this->_key = key($this->array);
         $this->_value = ("$this->_key" != '') ? $this->array[$this->_key] : null ;
-    }// /->next()
+    }
+
+    // /->next()
 
     /**
     * Reset pointer to the start of the list
@@ -85,7 +93,9 @@ class SimpleObjectIterator
         reset($this->array);
         $this->_key = key($this->array);
         $this->_value = ("$this->_key" != '') ? $this->array[$this->_key] : null ;
-    }// /->reset()
+    }
+
+    // /->reset()
 
     /**
     * Get the number of objects in the list
@@ -95,7 +105,9 @@ class SimpleObjectIterator
     public function size()
     {
         return $this->count;
-    }// /->size()
+    }
+
+    // /->size()
 
     /*
     * Is the current pointer position valid?
@@ -103,8 +115,10 @@ class SimpleObjectIterator
     */
     public function is_valid()
     {
-        return ("$this->_key" != '');
-    }// /->is_valid()
+        return "$this->_key" != '';
+    }
+
+    // /->is_valid()
 
     /*
     * --------------------------------------------------------------------------------
@@ -122,7 +136,7 @@ class SimpleObjectIterator
         $this->count = count($array);
 
         if ($this->count==0) {
-            $this->array = array();
+            $this->array = [];
         }
 
         $this->reset();

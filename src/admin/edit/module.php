@@ -16,7 +16,7 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\classes\Module;
 use WebPA\includes\functions\Common;
@@ -34,7 +34,7 @@ $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staf
 $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
 $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array('home' => '../','review data'=>'../review/','edit'=>null, );
+$UI->breadcrumbs = ['home' => '../', 'review data'=>'../review/', 'edit'=>null];
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -83,7 +83,7 @@ if ($action) {          //incase we want to do more than save changes in the fut
     $edit_module->load_from_row($module_id);
 
     //send notification to the screen that the save has occured.
-    $sScreenMsg = "The changes made for the module have been saved";
+    $sScreenMsg = 'The changes made for the module have been saved';
 
   }
 }

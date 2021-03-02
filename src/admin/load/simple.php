@@ -12,7 +12,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('../../includes/inc_global.php');
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\GroupCollection;
@@ -24,22 +24,22 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR) || ($_source_id != '')) {
     exit;
 }
 
-$uploadtype = $_REQUEST["rdoFileContentType"];
+$uploadtype = $_REQUEST['rdoFileContentType'];
 $filename = $_FILES['uploadedfile']['tmp_name'];
 
 //define variable we are using
 $user_warning = '';
 $user_msg = '';
 
-$filecontenttype[1] = array('screen' => '<strong>Student Data</strong>',);
-$filecontenttype[2] = array('screen' => '<strong>Staff Data</strong>',);
-$filecontenttype[3] = array('screen' => '<strong>Module Data</strong>');
-$filecontenttype[4] = array('screen' => '<strong>Student Data with Groups</strong>');
+$filecontenttype[1] = ['screen' => '<strong>Student Data</strong>'];
+$filecontenttype[2] = ['screen' => '<strong>Staff Data</strong>'];
+$filecontenttype[3] = ['screen' => '<strong>Module Data</strong>'];
+$filecontenttype[4] = ['screen' => '<strong>Student Data with Groups</strong>'];
 
-$expected_fields[1] = array(0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
-$expected_fields[2] = array(0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id');
-$expected_fields[3] = array(0 => 'module_code', 'module_title');
-$expected_fields[4] = array(0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id', 'group_name');
+$expected_fields[1] = [0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id'];
+$expected_fields[2] = [0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id'];
+$expected_fields[3] = [0 => 'module_code', 'module_title'];
+$expected_fields[4] = [0 => 'id_number', 'forename', 'lastname', 'email', 'username', 'password', 'department_id', 'group_name'];
 
 if ($_user->is_admin()) {
     $expected_fields[1][] = 'module_code';
@@ -52,11 +52,11 @@ $flg_match = false;
 ini_set('max_execution_time', 120);
 
 $row = 0;
-$fields = array();
-$final_rows = array();
+$fields = [];
+$final_rows = [];
 
-if (($handle = fopen($filename, "r")) !== false) {
-    while (($data = fgetcsv($handle, 2000, ",")) !== false) {
+if (($handle = fopen($filename, 'r')) !== false) {
+    while (($data = fgetcsv($handle, 2000, ',')) !== false) {
         $num = count($data);
 
         //if in the first row we should be getting the field names
@@ -133,7 +133,7 @@ if ($flg_match) {
                 $collection_id = $_REQUEST['collectionlist'];
             }
 
-            $modules = array();
+            $modules = [];
 
             if (empty($collection_id)) {
                 $collection_name = $_REQUEST['collection'];
@@ -156,7 +156,7 @@ if ($flg_match) {
         $fields = $expected_fields[$uploadtype];
 
         foreach ($final_rows as $i) {
-            $module_code = isset($i['module_code']) ? $i['module_code'] : '';
+            $module_code = $i['module_code'] ?? '';
             $group_name = isset($i['group_name']) ? $i[$group_name] : '';
 
             $insertUserQuery =
@@ -277,14 +277,14 @@ if ($flg_match) {
     $user_msg = "<p>Successful upload of the {$filecontenttype[$uploadtype]['screen']} information to the database.</p>";
 } else {
     //we want to notify that the information is not structured as expected therefore bounce back to the user
-    $user_warning .= "The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href=\"../\">try again</a>. Alternatively you may wish to download a template to put the information in.</p>";
+    $user_warning .= 'The information supplied cannot be processed.</div><div><p>We suggest that you review the information to be uploaded and they <a href="../">try again</a>. Alternatively you may wish to download a template to put the information in.</p>';
 }
 
 //write to screen the page information
 //set the page information
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'upload data';
-$UI->breadcrumbs = array('home' => null);
+$UI->breadcrumbs = ['home' => null];
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');

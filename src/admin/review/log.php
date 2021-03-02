@@ -11,7 +11,7 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\User;
@@ -22,13 +22,13 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     exit;
 }
 
-$type = "log";
-$rstitle = "Log Data";
+$type = 'log';
+$rstitle = 'Log Data';
 
 //set the page information
-$UI->page_title = APP__NAME . " view log data";
+$UI->page_title = APP__NAME . ' view log data';
 $UI->menu_selected = 'view data';
-$UI->breadcrumbs = array('home' => '../','review data'=>'./','log data'=>null);
+$UI->breadcrumbs = ['home' => '../', 'review data'=>'./', 'log data'=>null];
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');
@@ -60,7 +60,7 @@ if ($_user->is_admin()) {
 }
 
 $query .= 'FROM ' . APP__DB_TABLE_PREFIX . 'user_tracking ' .
-          "WHERE user_id = ? AND ((module_id = ?) OR (module_id IS NULL)) " .
+          'WHERE user_id = ? AND ((module_id = ?) OR (module_id IS NULL)) ' .
           'ORDER BY datetime DESC, description';
 
 $dbConn = $DB->getConnection();

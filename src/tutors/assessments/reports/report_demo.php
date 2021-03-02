@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\NewAlgorithm;
@@ -58,10 +58,10 @@ if ($assessment->load($assessment_id)) {
     // ----------------------------------------
     // Get a list of the members who took this assessment (grouped by 'group')
 
-    $group_members['G1'] = array('S1' ,
-                   'S2' ,
-                   'S3' ,
-                   'S4' ,);
+    $group_members['G1'] = ['S1',
+                   'S2',
+                   'S3',
+                   'S4', ];
 
     // ----------------------------------------
     // Get the questions used in this assessment
@@ -71,77 +71,77 @@ if ($assessment->load($assessment_id)) {
     // ----------------------------------------
     // Get the student submissions for this assessment
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 4 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 4];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 3 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 3];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 2 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 2];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 1 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S1', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 1];
     // ==========
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 5 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 5];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 4 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 4];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 2 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 3 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 2];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 3];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 3 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 4 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 2 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 3];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 4];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S2', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 2];
     // ==========
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 1 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 0, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 1, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 2, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 3, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S1', 'question_id' => 4, 'score' => 1];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 1 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 0, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 1, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 2, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 3, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S2', 'question_id' => 4, 'score' => 1];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 1 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 1 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 0, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 1, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 2, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 3, 'score' => 1];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S3', 'question_id' => 4, 'score' => 1];
 
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 5 );
-    $responses[] = array( 'group_id' => 'G1' , 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 5 );
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 0, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 1, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 2, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 3, 'score' => 5];
+    $responses[] = ['group_id' => 'G1', 'user_id' => 'S4', 'marked_user_id' => 'S4', 'question_id' => 4, 'score' => 5];
 
     // ----------------------------------------
     $algorithm = new NewAlgorithm();
@@ -159,10 +159,10 @@ if ($assessment->load($assessment_id)) {
 
     $member_ids = array_keys($webpa_scores);
 
-    $member_names['S1'] = array( 'user_id' => 'S1', 'lastname' => 'Student 1', 'forename' => '', 'id_number' => 'S1' );
-    $member_names['S2'] = array( 'user_id' => 'S2', 'lastname' => 'Student 2', 'forename' => '', 'id_number' => 'S2' );
-    $member_names['S3'] = array( 'user_id' => 'S3', 'lastname' => 'Student 3', 'forename' => '', 'id_number' => 'S3' );
-    $member_names['S4'] = array( 'user_id' => 'S4', 'lastname' => 'Student 4', 'forename' => '', 'id_number' => 'S4' );
+    $member_names['S1'] = ['user_id' => 'S1', 'lastname' => 'Student 1', 'forename' => '', 'id_number' => 'S1'];
+    $member_names['S2'] = ['user_id' => 'S2', 'lastname' => 'Student 2', 'forename' => '', 'id_number' => 'S2'];
+    $member_names['S3'] = ['user_id' => 'S3', 'lastname' => 'Student 3', 'forename' => '', 'id_number' => 'S3'];
+    $member_names['S4'] = ['user_id' => 'S4', 'lastname' => 'Student 4', 'forename' => '', 'id_number' => 'S4'];
 } else {
     $assessment = null;
 }
@@ -174,9 +174,9 @@ $page_title = ($assessment) ? "{$assessment->name}" : 'report';
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
-$UI->breadcrumbs = array('home'       => '../../../' ,
-               'my assessments' => '../../' ,
-               $page_title    => null ,);
+$UI->breadcrumbs = ['home'       => '../../../',
+               'my assessments' => '../../',
+               $page_title    => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -202,7 +202,7 @@ $UI->content_start();
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to reports list</a>
+  <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to reports list</a>
 </div>
 
 <h2 style="font-size: 150%;">Student Grades</h2>
@@ -227,12 +227,12 @@ foreach ($member_names as $i => $member) {
         $penalty_str = (array_key_exists($member['user_id'], $submissions)) ? '&nbsp;' : "-{$marking_params['penalty']}%";
     }
 
-    echo('<tr>');
-    echo("<td style=\"text-align: left\"> {$member['lastname']}, {$member['forename']} ({$member['id_number']})</td>");
-    echo("<td>$score</td>");
-    echo("<td>{$grade}%</td>");
-    echo("<td>$penalty_str</td>");
-    echo('</tr>');
+    echo '<tr>';
+    echo "<td style=\"text-align: left\"> {$member['lastname']}, {$member['forename']} ({$member['id_number']})</td>";
+    echo "<td>$score</td>";
+    echo "<td>{$grade}%</td>";
+    echo "<td>$penalty_str</td>";
+    echo '</tr>';
 }
 ?>
   </table>

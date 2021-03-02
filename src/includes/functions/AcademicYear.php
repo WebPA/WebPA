@@ -33,7 +33,9 @@ class AcademicYear
         }
 
         return $year;
-    }// /get_academic_year()
+    }
+
+    // /get_academic_year()
 
     public static function dateToYear($date)
     {

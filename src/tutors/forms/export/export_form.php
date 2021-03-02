@@ -9,7 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
- require_once("../../../includes/inc_global.php");
+ require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;

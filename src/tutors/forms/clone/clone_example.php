@@ -12,7 +12,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\functions\Common;
@@ -48,16 +48,16 @@ if (!empty($new_form_name)) {
 
     header("Location: ../edit/edit_form.php?f={$clone->id}") ;
     exit;
-} else {
+}
 
   // Begin Page
 
     $UI->page_title = APP__NAME . ' Copy ' . $form->name .' form';
     $UI->menu_selected = 'my forms';
     $UI->help_link = '?q=node/244';
-    $UI->breadcrumbs = array('home'           => '../../' ,
-               'my forms'       => '../' ,
-               'copy form'  => null ,);
+    $UI->breadcrumbs = ['home'           => '../../',
+               'my forms'       => '../',
+               'copy form'  => null, ];
 
     $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
     $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');
@@ -67,7 +67,7 @@ if (!empty($new_form_name)) {
     $UI->head();
     $UI->body('onload="body_onload()"');
     $UI->content_start(); ?>
-    <p>You have chosen to take a copy of the : <em><?php echo($form->name); ?></em> form.</p>
+    <p>You have chosen to take a copy of the : <em><?php echo $form->name; ?></em> form.</p>
 
       <p>Now enter a name for your copy of the form.</p>
 <form action="clone_example.php" method="POST">
@@ -75,14 +75,14 @@ if (!empty($new_form_name)) {
         <table class="form" cellpadding="2" cellspacing="2">
           <tr>
             <th><label for="clone_form_name">Name for new form</label></th>
-            <td><input type="text" name="n" id="clone_form_name" size="50" maxlength="100" value="<?php echo($form->name); ?>" /></td>
+            <td><input type="text" name="n" id="clone_form_name" size="50" maxlength="100" value="<?php echo $form->name; ?>" /></td>
           </tr>
         </table>
 
   <input type="hidden" name="f" value="<?php echo $formid; ?>" size="40" maxlength="40"/>
 
 
- <!-- <td class="button"><a href="<?php echo("clone_example.php?f={$formid}&n="); ?>">OK</a></td> -->
+ <!-- <td class="button"><a href="<?php echo "clone_example.php?f={$formid}&n="; ?>">OK</a></td> -->
 
   <input type="submit" name="ok" value="ok"/>
 
@@ -92,5 +92,5 @@ if (!empty($new_form_name)) {
 </form>
 <?php
   $UI->content_end();
-}
+
 ?>

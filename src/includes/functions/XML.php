@@ -25,8 +25,7 @@ class XML
         if (!$objDom->schemaValidate($xsd)) {
             libxml_get_errors();
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 }

@@ -80,7 +80,7 @@ class Common
         $uuid_32 = strtoupper(md5(uniqid(rand(), true)));
 
         // Convert to the correct 'dashed' format, and return the UUID
-        return preg_replace('#([\dA-F]{8})([\dA-F]{4})([\dA-F]{4})([\dA-F]{4})([\dA-F]{12})#', "\\1-\\2-\\3-\\4-\\5", $uuid_32);
+        return preg_replace('#([\dA-F]{8})([\dA-F]{4})([\dA-F]{4})([\dA-F]{4})([\dA-F]{12})#', '\\1-\\2-\\3-\\4-\\5', $uuid_32);
     }
 
     /**
@@ -121,8 +121,8 @@ class Common
         // if we're not checking the user type, or we are checking and it matches, return OK
             if (!$user_type || $_user->is_admin()) {
                 return true;
-            } else {
-                switch ($user_type) {
+            }
+            switch ($user_type) {
             case APP__USER_TYPE_ADMIN:
               if ($_user->is_admin()) {
                   return true;
@@ -139,11 +139,10 @@ class Common
               }
               break;
           }
-                return false;
-            }
-        } else {
             return false;
         }
+        return false;
+        
 
 
         // If we didn't call 'return' then the user is denied access

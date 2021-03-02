@@ -21,21 +21,26 @@ use WebPA\includes\functions\Common;
 class GroupCollection
 {
     // Public Vars
-    public $id = null;
-    public $module_id = null;
+    public $id;
+
+    public $module_id;
+
     public $name = '';
 
     // Private Vars
-    private $_DAO = null;
+    private $_DAO;
+
     private $dbConn;
 
-    private $_groups = null;
-    private $_group_objects = null;
+    private $_groups;
 
-    private $_created_on = null;
-    private $_locked_on = null;
+    private $_group_objects;
 
-    private $_assessment_id = null;
+    private $_created_on;
+
+    private $_locked_on;
+
+    private $_assessment_id;
 
     /**
      * CONSTRUCTOR for the Group collection function
@@ -79,7 +84,9 @@ class GroupCollection
             }
         }
         $this->id = $new_id;
-    }// ->create()
+    }
+
+    // ->create()
 
     /**
      * Load the GroupCollection from the database
@@ -118,7 +125,9 @@ class GroupCollection
         $this->_locked_on = ((is_null($row['collection_locked_on'])) ? null : strtotime($row['collection_locked_on']));
         $this->_assessment_id = $row['collection_assessment_id'];
         return true;
-    }// /->load_from_row()
+    }
+
+    // /->load_from_row()
 
     /**
      * Delete this GroupCollection (and all its groups, members, and module links)
@@ -130,27 +139,26 @@ class GroupCollection
     {
         if ($this->is_locked()) {
             return false;
-        } else {
-            $this->dbConn->executeQuery(
+        }
+        $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id IN (SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?)',
                 [$this->id],
                 [ParameterType::STRING]
             );
 
-            $this->dbConn->executeQuery(
+        $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?',
                 [$this->id],
                 [ParameterType::STRING]
             );
 
-            $this->dbConn->executeQuery(
+        $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
                 [$this->id],
                 [ParameterType::STRING]
             );
 
-            return true;
-        }
+        return true;
     }
 
     /**
@@ -162,31 +170,31 @@ class GroupCollection
     {
         if ((!$this->id) || ($this->is_locked())) {
             return false;
-        } else {
-            // load all necessary info
-            $fields = array('collection_id' => $this->id,
+        }
+        // load all necessary info
+        $fields = ['collection_id' => $this->id,
                 'module_id' => $this->module_id,
                 'collection_name' => $this->name,
                 'collection_created_on' => date(MYSQL_DATETIME_FORMAT, $this->_created_on),
                 'collection_locked_on' => ((!$this->_locked_on) ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on)),
-            );
+            ];
 
-            // before saving, check if this collection already exists in the db
-            $storedCollectionId =
+        // before saving, check if this collection already exists in the db
+        $storedCollectionId =
                 $this->dbConn->fetchOne(
                     'SELECT collection_id FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
                     [$this->id],
                     [ParameterType::STRING]
                 );
 
-            $queryBuilder = $this->dbConn->createQueryBuilder();
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
-            $createdOn = date(MYSQL_DATETIME_FORMAT, $this->_created_on);
-            $lockedOn = !$this->_locked_on ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on);
+        $createdOn = date(MYSQL_DATETIME_FORMAT, $this->_created_on);
+        $lockedOn = !$this->_locked_on ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on);
 
-            if (!$storedCollectionId) {
-                // the collection does not exist so create it
-                $queryBuilder
+        if (!$storedCollectionId) {
+            // the collection does not exist so create it
+            $queryBuilder
                     ->insert(APP__DB_TABLE_PREFIX . 'collection')
                     ->values([
                         'collection_id' => '?',
@@ -200,9 +208,9 @@ class GroupCollection
                     ->setParameter(2, $this->name)
                     ->setParameter(3, $createdOn)
                     ->setParameter(4, $lockedOn);
-            } else {
-                // the collection exists so update it
-                $queryBuilder
+        } else {
+            // the collection exists so update it
+            $queryBuilder
                     ->update(APP__DB_TABLE_PREFIX . 'collection')
                     ->where('collection_id = ?')
                     ->set('module_id', '?')
@@ -212,18 +220,17 @@ class GroupCollection
                     ->setParameter(1, $this->module_id, ParameterType::INTEGER)
                     ->setParameter(2, $createdOn);
 
-                // check if the locked field needs to be set
-                if (is_null($lockedOn)) {
-                    $queryBuilder->set('collection_locked_on', 'NULL');
-                } else {
-                    $queryBuilder->set('collection_locked_on', '?')->setParameter(3, $lockedOn);
-                }
+            // check if the locked field needs to be set
+            if (is_null($lockedOn)) {
+                $queryBuilder->set('collection_locked_on', 'NULL');
+            } else {
+                $queryBuilder->set('collection_locked_on', '?')->setParameter(3, $lockedOn);
             }
-
-            $queryBuilder->execute();
-
-            return true;
         }
+
+        $queryBuilder->execute();
+
+        return true;
     }
 
     /**
@@ -239,7 +246,9 @@ class GroupCollection
                 }
             }
         }
-    }// /->save_groups()
+    }
+
+    // /->save_groups()
 
     /*
     * --------------------------------------------------------------------------------
@@ -260,7 +269,9 @@ class GroupCollection
                 $this->_assessment_id = $id;
                 break;
         }
-    }// /->set_owner_info()
+    }
+
+    // /->set_owner_info()
 
     /**
      * Is this GroupCollection locked?
@@ -269,8 +280,10 @@ class GroupCollection
      */
     public function is_locked()
     {
-        return ((!is_null($this->_locked_on)) || ($this->_locked_on));
-    }// /->is_locked()
+        return (!is_null($this->_locked_on)) || ($this->_locked_on);
+    }
+
+    // /->is_locked()
 
     /*
     * --------------------------------------------------------------------------------
@@ -318,7 +331,9 @@ class GroupCollection
             $this->refresh_groups();
         }
         return $this->_groups;
-    }// /->get_groups_array()
+    }
+
+    // /->get_groups_array()
 
     /**
      * Check if there is a group in this GroupCollection with the given name
@@ -340,7 +355,9 @@ class GroupCollection
         }
 
         return $is_valid_group;
-    }// /->group_exists()
+    }
+
+    // /->group_exists()
 
     /**
      * Check if the group exists
@@ -362,7 +379,9 @@ class GroupCollection
         }
 
         return $is_valid_group;
-    }// /->group_id_exists()
+    }
+
+    // /->group_id_exists()
 
     /**
      * Refresh this collection's list of groups
@@ -378,10 +397,12 @@ class GroupCollection
         $this->_groups = $this->dbConn->fetchAllAssociative($groupsQuery, [$this->id], [ParameterType::STRING]);
 
         if (!$this->_groups) {
-            $this->_groups = array();
+            $this->_groups = [];
         }
         uasort($this->_groups, ['self', 'group_title_natural_sort']);
-    }// /->refresh_groups()
+    }
+
+    // /->refresh_groups()
 
     private static function group_title_natural_sort($group_a, $group_b)
     {
@@ -411,7 +432,9 @@ class GroupCollection
             $this->_group_objects["{$group_object->id}"] =& $group_object;
             $group_object->set_collection_object($this);
         }
-    }// /->add_group_object()
+    }
+
+    // /->add_group_object()
 
     /**
      * Get the group object corresponding to the given group_id
@@ -430,19 +453,20 @@ class GroupCollection
         // If this group exists in this collection
         if ($this->group_id_exists($group_id)) {
             // If we already have a copy of the Group object, return it
-            if ((array_key_exists($group_id, (array)$this->_group_objects)) && (is_object($this->_group_objects[$group_id]))) {
+            if ((array_key_exists($group_id, (array) $this->_group_objects)) && (is_object($this->_group_objects[$group_id]))) {
                 return $this->_group_objects[$group_id];
-            } else {
-                $new_group = new Group();
-                $new_group->set_dao_object($this->_DAO);
-                $new_group->set_collection_object($this);
-                $new_group->load($group_id);
-                $this->_group_objects[$group_id] =& $new_group;
-                return $new_group;
             }
+            $new_group = new Group();
+            $new_group->set_dao_object($this->_DAO);
+            $new_group->set_collection_object($this);
+            $new_group->load($group_id);
+            $this->_group_objects[$group_id] =& $new_group;
+            return $new_group;
         }
         return null;
-    }// /->get_group_object()
+    }
+
+    // /->get_group_object()
 
     /**
      * Create a new Group object using this GroupCollection as the parent
@@ -462,7 +486,9 @@ class GroupCollection
         $this->_group[$new_group->id] = $new_group->get_as_array();
         $this->_group_objects[$new_group->id] =& $new_group;
         return $new_group;
-    }// /->new_group()
+    }
+
+    // /->new_group()
 
     /**
      * Get an iterator object containg the groups belonging to this collection
@@ -589,7 +615,9 @@ class GroupCollection
             }
             return $groups;
         }
-    }// /->get_member_groups()
+    }
+
+    // /->get_member_groups()
 
     /**
      * Get a user's roles for each group in this collection
@@ -638,7 +666,9 @@ class GroupCollection
                 $group->purge_members($target_roles, $protect_roles);
             }
         }
-    }// /->purge_members()
+    }
+
+    // /->purge_members()
 
     /**
      * Add member to the collection
@@ -664,7 +694,9 @@ class GroupCollection
                 break;
             }
         }
-    }// /->add_member()
+    }
+
+    // /->add_member()
 
     /**
      * Remove members from the collection

@@ -65,7 +65,7 @@ if (!isset($stmt)) {
                 } elseif (($field_name != 'user_id') && ($field_name != 'module_id')) {
                     echo "<th>{$field_name}</th>";
                 } elseif (($type == 'module') || !$_source_id) {
-                    echo "<th class=\"icon\">&nbsp;</th>";
+                    echo '<th class="icon">&nbsp;</th>';
                 }
             }
             echo "</tr>\n";
@@ -101,7 +101,7 @@ if (!isset($stmt)) {
                     echo '</td>';
                 }
             } elseif ($field_name == 'module_id') {
-                echo "<td class=\"icon\">";
+                echo '<td class="icon">';
                 if (!$_source_id) {
                     echo '<a href="../../edit/module.php?m=' .$field_value . '">';
                     echo '<img src="../../../images/buttons/edit.gif" width="16" height="16" alt="Edit module" title="Edit module" /></a>';
@@ -120,7 +120,7 @@ if (!isset($stmt)) {
                 }
                 echo '</td>';
             } elseif ($field_name == 'enabled') {
-                echo "<td class=\"obj_info_text\">";
+                echo '<td class="obj_info_text">';
                 if ($field_value == 1) {
                     echo 'Yes';
                 } else {
@@ -128,7 +128,7 @@ if (!isset($stmt)) {
                 }
                 echo '</td>';
             } elseif (strlen($field_value) <= 0) {
-                echo "<td class=\"obj_info_text\">&nbsp;</td>";
+                echo '<td class="obj_info_text">&nbsp;</td>';
             } elseif (($field_name == 'id') && $style) {
                 echo "<td class=\"obj_info_text\"><span title=\"{$source_id}\">{$field_value}</span></td>";
             } elseif ($field_name == 'email') {

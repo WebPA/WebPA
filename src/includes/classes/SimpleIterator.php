@@ -16,13 +16,15 @@ namespace WebPA\includes\classes;
 class SimpleIterator
 {
     // Public Vars
-    public $array = null;
+    public $array;
+
     public $count = 0;
 
     // Private Vars
 
-    private $_key = null;
-    private $_value = null;
+    private $_key;
+
+    private $_value;
 
     /**
     * CONSTRUCTOR for the simple iterator class
@@ -32,7 +34,9 @@ class SimpleIterator
     {
         // sub-classes can override the creator, so all the work is done in _initialise()
         $this->_initialise($array);
-    }// /->SimpleIterator()
+    }
+
+    // /->SimpleIterator()
 
     /*
     * ================================================================================
@@ -47,7 +51,9 @@ class SimpleIterator
     public function &current()
     {
         return $this->_value;
-    }// /->current()
+    }
+
+    // /->current()
 
     /**
      * function next
@@ -61,7 +67,9 @@ class SimpleIterator
         } else {
             $this->_value = null;
         }
-    }// /->next()
+    }
+
+    // /->next()
 
     /**
      * function reset
@@ -75,7 +83,9 @@ class SimpleIterator
         } else {
             $this->_value = null;
         }
-    }// /->reset()
+    }
+
+    // /->reset()
 
     /**
      * function size
@@ -84,7 +94,9 @@ class SimpleIterator
     public function size()
     {
         return $this->count;
-    }// /->size()
+    }
+
+    // /->size()
 
     /**
      * function to check validity
@@ -92,14 +104,17 @@ class SimpleIterator
      */
     public function is_valid()
     {
-        return ("$this->_key" != '');
-    }// /->is_valid()
+        return "$this->_key" != '';
+    }
+
+    // /->is_valid()
 
     /*
     * ================================================================================
     * Private Methods
     * ================================================================================
     */
+
     /**
      * Function to initalise
      * @param array $array
@@ -110,5 +125,7 @@ class SimpleIterator
         $this->count = count($array);
 
         $this->reset();
-    }// /->_intialise()
+    }
+
+    // /->_intialise()
 }// /class: SimpleIterator

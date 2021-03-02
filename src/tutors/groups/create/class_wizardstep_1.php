@@ -14,11 +14,10 @@ use WebPA\includes\functions\Common;
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -26,24 +25,28 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
+
+    // /WizardStep1()
 
     public function head()
     {
         $html = <<<HTMLEnd
-<script language="JavaScript" type="text/javascript">
-<!--
+            <script language="JavaScript" type="text/javascript">
+            <!--
 
-  function body_onload() {
-    document.getElementById('collection_name').focus();
-  }// /body_onload()
+              function body_onload() {
+                document.getElementById('collection_name').focus();
+              }// /body_onload()
 
-//-->
-</script>
-HTMLEnd;
+            //-->
+            </script>
+            HTMLEnd;
 
-        echo($html);
-    }// /->head()
+        echo $html;
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -54,12 +57,14 @@ HTMLEnd;
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
       <th><label for="collection_name">Name for this new collection</label></th>
-      <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo($this->wizard->get_field('collection_name')); ?>" /></td>
+      <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo $this->wizard->get_field('collection_name'); ?>" /></td>
     </tr>
     </table>
 
 <?php
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -71,7 +76,9 @@ HTMLEnd;
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

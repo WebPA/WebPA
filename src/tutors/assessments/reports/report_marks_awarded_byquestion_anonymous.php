@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -96,7 +96,7 @@ if ($assessment->load($assessment_id)) {
     if ($question_count>0) {
         $questions = range(0, $question_count-1);
     } else {
-        $questions = array();
+        $questions = [];
     }
 
     // ----------------------------------------
@@ -125,7 +125,7 @@ if ($assessment->load($assessment_id)) {
     $members = ArrayFunctions::array_get_assoc($members_raw, 'user_id');
 } else {
     $assessment = null;
-    echo('Error: The assessment could not be loaded.');
+    echo 'Error: The assessment could not be loaded.';
     exit;
 }
 
@@ -167,13 +167,13 @@ if ($type == 'view') {
       foreach ($group_members as $group_id => $g_members) {
           $g_member_count = count($group_members[$group_id]); ?>
       <div style="margin-top: 40px; page-break-after: always;">
-        <h3><?php echo($group_names[$group_id]); ?></h3>
+        <h3><?php echo $group_names[$group_id]; ?></h3>
 
 <?php
       foreach ($questions as $question_id) {
           $q_index = $question_id+1;
           $question = $form->get_question($question_id);
-          echo("<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>"); ?>
+          echo "<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>"; ?>
           <table class="grid" cellpadding="2" cellspacing="1" style="font-size: 0.8em">
           <tr>
             <th>&nbsp;</th>
@@ -181,18 +181,18 @@ if ($type == 'view') {
         foreach ($g_members as $i => $member_id) {
             $char = chr(65+$i);
             $members[$member_id]['lastname'] = "Student $char";
-            echo("<th class=\"top_names\"> {$members[$member_id]['lastname']}</th>");
+            echo "<th class=\"top_names\"> {$members[$member_id]['lastname']}</th>";
         } ?>
           </tr>
 <?php
-        $q_total = array();
+        $q_total = [];
           foreach ($g_members as $i => $member_id) {
               $q_total[$member_id] = 0;
           }
 
           foreach ($g_members as $i => $member_id) {
-              echo('<tr>');
-              echo("<th>{$members[$member_id]['lastname']}</th>");
+              echo '<tr>';
+              echo "<th>{$members[$member_id]['lastname']}</th>";
 
               foreach ($g_members as $j => $target_member_id) {
                   if ($assessment->assessment_type == '0') {
@@ -209,15 +209,15 @@ if ($type == 'view') {
                   if (is_null($score)) {
                       $score = '-';
                   }
-                  echo("<td>$score</td>");
+                  echo "<td>$score</td>";
               }
-              echo('</tr>');
+              echo '</tr>';
           } ?>
           <tr class="q_total">
             <th>Score Received</th>
 <?php
         foreach ($g_members as $i => $member_id) {
-            echo("<th>{$q_total[$member_id]}</th>");
+            echo "<th>{$q_total[$member_id]}</th>";
         } ?>
           </tr>
           </table>
@@ -240,41 +240,41 @@ if ($type == 'view') {
 * --------------------------------------------------------------------------------
 */
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"webpa_marks_awarded_byquestion.csv\"");
+    header('Content-Disposition: attachment; filename="webpa_marks_awarded_byquestion.csv"');
     header('Content-Type: text/csv');
 
-    echo('"Marks Awarded For Each Question (anonymous)"'."\n\n");
-    echo("\"{$assessment->name}\"\n\n");
+    echo '"Marks Awarded For Each Question (anonymous)"'."\n\n";
+    echo "\"{$assessment->name}\"\n\n";
 
     if (($assessment) && ($groups_iterator->size()>0)) {
         foreach ($group_members as $group_id => $g_members) {
             $g_member_count = count($group_members[$group_id]);
 
-            echo("\"{$group_names[$group_id]}\"\n");
+            echo "\"{$group_names[$group_id]}\"\n";
 
             foreach ($questions as $question_id) {
                 $q_index = $question_id+1;
                 $question = $form->get_question($question_id);
 
-                echo("\n");
-                echo("\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n");
+                echo "\n";
+                echo "\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n";
 
-                echo("\"\",");
+                echo '"",';
 
                 foreach ($g_members as $i => $member_id) {
                     $char = chr(65+$i);
                     $members[$member_id]['lastname'] = "Student $char";
 
-                    echo("\"{$members[$member_id]['lastname']}\"");
+                    echo "\"{$members[$member_id]['lastname']}\"";
                     if ($i<$g_member_count) {
-                        echo(',');
+                        echo ',';
                     }
                 }
 
-                echo("\n");
+                echo "\n";
 
                 foreach ($g_members as $i => $member_id) {
-                    echo("\"{$members[$member_id]['lastname']}\",");
+                    echo "\"{$members[$member_id]['lastname']}\",";
 
                     foreach ($g_members as $j => $target_member_id) {
                         if ($assessment->assessment_type == '0') {
@@ -292,15 +292,15 @@ if ($type == 'download-csv') {
                             $score = '-';
                         }
 
-                        echo("\"$score\"");
+                        echo "\"$score\"";
                         if ($j<$g_member_count) {
-                            echo(',');
+                            echo ',';
                         }
                     }
-                    echo("\n");
+                    echo "\n";
                 }
             }
-            echo("\n\n");
+            echo "\n\n";
         }
     }
 }

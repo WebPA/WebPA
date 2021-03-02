@@ -13,10 +13,10 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
-use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
+use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -159,15 +159,15 @@ $runStudentsAssessedStmt->bindValue($next_year);
 //view on screen
 if ($format == 'html') {
     //set the page information
-    $UI->page_title = APP__NAME . " general usage report";
+    $UI->page_title = APP__NAME . ' general usage report';
     $UI->menu_selected = 'metrics';
-    $UI->breadcrumbs = array('home' => '../../');
+    $UI->breadcrumbs = ['home' => '../../'];
     $UI->help_link = '?q=node/237';
     $UI->head();
     $UI->body();
     $UI->content_start();
 
-    echo "<div class=\"content_box\">";
+    echo '<div class="content_box">';
 
     if (!empty($assessments_run)) {
         // This returns a Result object... what can we do with it?
@@ -178,7 +178,7 @@ if ($format == 'html') {
         echo "<h2>Assessments run in WebPA ({$academic_year})</h2>";
 
         if ($rs_assessments) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
             $icounter = 0;
 
             //loop round the initial array
@@ -192,14 +192,14 @@ if ($format == 'html') {
                     }
                 }
 
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($assessment as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter ++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -213,7 +213,7 @@ if ($format == 'html') {
         echo "<h2>Number of groups per assessment ({$academic_year})</h2>";
 
         if ($rs_groups) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
 
             $icounter = 0;
             //loop round the initial array
@@ -226,14 +226,14 @@ if ($format == 'html') {
                     }
                 }
 
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($groups as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter ++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -247,7 +247,7 @@ if ($format == 'html') {
         echo "<h2>Number of students per assessment ({$academic_year})</h2>";
 
         if ($rs_students) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
 
             $icounter = 0;
             //loop round the initial array
@@ -259,14 +259,14 @@ if ($format == 'html') {
                         echo "<th>{$row}</th>";
                     }
                 }
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($students as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -279,7 +279,7 @@ if ($format == 'html') {
         echo "<h2>Assessments where feedback has been used ({$academic_year})</h2>";
 
         if ($rs_feedback) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
 
             $icounter = 0;
 
@@ -292,14 +292,14 @@ if ($format == 'html') {
                     }
                 }
 
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($feedback as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -313,7 +313,7 @@ if ($format == 'html') {
         echo "<h2>Number of Respondents per assessment ({$academic_year})</h2>";
 
         if ($rs_respondents) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
 
             $icounter=0;
             //loop round the initial array
@@ -325,14 +325,14 @@ if ($format == 'html') {
                     }
                 }
 
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($responses as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -346,7 +346,7 @@ if ($format == 'html') {
         echo "<h2>Modules which have run an assessment ({$academic_year})</h2>";
 
         if ($rs_runners) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
 
             $icounter = 0;
             //loop round the initial array
@@ -358,14 +358,14 @@ if ($format == 'html') {
                     }
                 }
 
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($runner as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
                 $icounter++;
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
@@ -379,32 +379,32 @@ if ($format == 'html') {
         echo "<h2>Number of students who have carried out an assessment ({$academic_year})</h2>";
 
         if ($rs_students) {
-            echo "<table class=\"grid\">";
+            echo '<table class="grid">';
             //loop round the initial array
             foreach ($rs_students as $student) {
-                echo "<tr>";
+                echo '<tr>';
                 foreach ($student as $row) {
                     echo "<td>{$row}</td>";
                 }
-                echo "</tr>";
+                echo '</tr>';
             }
-            echo "</table>";
+            echo '</table>';
         } else {
             echo '<p>None</p>';
         }
     }
 
-    echo "</div>";
+    echo '</div>';
     $UI->content_end();
 }
 
 //-------------------------------------------------------------------------------
 //output csv
 if ($format == 'csv') {
-    header("Content-Disposition: attachment; filename=\"metrics.csv\"");
+    header('Content-Disposition: attachment; filename="metrics.csv"');
     header('Content-Type: text/csv');
 
-    echo('"WebPA - Metrics report"'."\n");
+    echo '"WebPA - Metrics report"'."\n";
 
 
     if (!empty($assessments_run)) {
@@ -593,10 +593,10 @@ if ($format == 'csv') {
 //------------------------------------------------------------------------------------
 //export as rtf
 if ($format == 'rtf') {
-    header("Content-Disposition: attachment;filename=student_grades.rtf");
+    header('Content-Disposition: attachment;filename=student_grades.rtf');
     header("Content-Type: text/enriched\n");
 
-    echo('WebPA - Metrics report'."\n\n");
+    echo 'WebPA - Metrics report'."\n\n";
 
     if (!empty($assessments_run)) {
         $runAssessmentsStmt->execute();
@@ -775,18 +775,18 @@ if ($format == 'rtf') {
 //------------------------------------------------------------------------------------
 //export as xml
 if ($format == 'xml') {
-    header("Content-Disposition: attachment; file=\"webpa_metrics.xml\"");
+    header('Content-Disposition: attachment; file="webpa_metrics.xml"');
     header('Content-Type: text/xml');
 
-    echo("<?xml version=\"1.0\" ?> ");
-    echo"<metrics_report>";
+    echo '<?xml version="1.0" ?> ';
+    echo'<metrics_report>';
 
     if (!empty($assessments_run)) {
         $runAssessmentsStmt->execute();
 
         $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Assessments run in WebPA ({$academic_year})</description>";
         if ($rs_assessments) {
             //loop round the initial array
@@ -797,15 +797,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_groups)) {
@@ -813,7 +813,7 @@ if ($format == 'xml') {
 
         $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Number of groups per assessment ({$academic_year})</description>";
         if ($rs_groups) {
             foreach ($rs_groups as $groups) {
@@ -823,15 +823,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_students)) {
@@ -839,7 +839,7 @@ if ($format == 'xml') {
 
         $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Number of students per assessment ({$academic_year})</description>";
 
         if ($rs_students) {
@@ -851,15 +851,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_feedback)) {
@@ -867,7 +867,7 @@ if ($format == 'xml') {
 
         $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Assessments where feedback has been used ({$academic_year})</description>";
         if ($rs_feedback) {
             //loop round the initial array
@@ -878,15 +878,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_respondents)) {
@@ -894,7 +894,7 @@ if ($format == 'xml') {
 
         $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
 
         echo "<description>Number of Respondents per assessment ({$academic_year})</description>";
 
@@ -907,15 +907,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_modules)) {
@@ -923,7 +923,7 @@ if ($format == 'xml') {
 
         $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Modules which have run an assessment ({$academic_year})</description>";
 
         if ($rs_runners) {
@@ -935,15 +935,15 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
     if (!empty($assessment_students_thisyear)) {
@@ -951,7 +951,7 @@ if ($format == 'xml') {
 
         $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
 
-        echo "<metrics>";
+        echo '<metrics>';
         echo "<description>Number of students who have carried out an assessment ({$academic_year})</description>";
         if ($rs_students) {
             //loop round the initial array
@@ -962,16 +962,16 @@ if ($format == 'xml') {
 
                 //get the number of elements in the arrays
                 $array_count = count($field_names);
-                echo "<metric>";
+                echo '<metric>';
                 for ($count=0; $count<$array_count; $count++) {
                     echo "<field_{$count}>{$field_names[$count]}</field_{$count}>";
                     echo "<value_{$count}>{$field_content[$count]}</value_{$count}>";
                 }
-                echo "</metric>";
+                echo '</metric>';
             }
         }
-        echo "</metrics>";
+        echo '</metrics>';
     }
 
-    echo"</metrics_report>";
+    echo'</metrics_report>';
 }

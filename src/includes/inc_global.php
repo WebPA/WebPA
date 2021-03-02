@@ -12,8 +12,8 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use Doctrine\DBAL\ParameterType;
-use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\DAO;
+use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\UI;
 use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
@@ -21,9 +21,7 @@ use WebPA\includes\functions\Common;
 // Set the correct timezone for your server.
 date_default_timezone_set('Europe/London');
 
-/*
- * Configuration
- */
+// Configuration
 
 ////
 // User configuration section
@@ -80,21 +78,21 @@ ini_set('sendmail_from', 'someone@email.com');
 $LOGIN_AUTHENTICATORS[] = 'DB';
 
 // LDAP settings
-define('LDAP__HOST', "kdc.lboro.ac.uk");
+define('LDAP__HOST', 'kdc.lboro.ac.uk');
 define('LDAP__PORT', 3268);
 define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
 define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
 define('LDAP__FILTER', 'name={username}*');
 define('LDAP__BINDRDN', '');
 define('LDAP__PASSWD', '');
-$LDAP__INFO_REQUIRED = array('displayname','mail','sn');
+$LDAP__INFO_REQUIRED = ['displayname', 'mail', 'sn'];
 // Name of attribute to use to check user type (via function below)
 define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
 define('LDAP__DEBUG_LEVEL', 7);
 define('LDAP__AUTO_CREATE_USER', true);
 
 // define installed modules
-$INSTALLED_MODS = array();
+$INSTALLED_MODS = [];
 
 ////
 // System configuration section - do not change unless you know what you're doing!
@@ -142,7 +140,7 @@ define('APP__COLLECTION_ASSESSMENT', 'assessment');
 //ordinal scale
 //This scale is used in the reports as some institution and academic tutors prefer this scale.
 //However, it must be noted that the majority of universities in the UK are using arithmetic mean for classifications.
-$ordinal_scale = array(
+$ordinal_scale = [
   'A+' => '78',
   'A'  => '75',
   'B+' => '68',
@@ -159,13 +157,13 @@ $ordinal_scale = array(
   'X'  => '25',
   'X-' => '15',
   'Z'  =>'0',
-);
+];
 
 // When reporting grades as decimals, define the precision, etc using this constant
-define('APP__REPORT_DECIMALS', "%01.2f");
+define('APP__REPORT_DECIMALS', '%01.2f');
 
 // File upload error messages
-$FILE_ERRORS = array(
+$FILE_ERRORS = [
   UPLOAD_ERR_OK => 'There is no error, the file uploaded with success.',
   UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
   UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
@@ -173,8 +171,8 @@ $FILE_ERRORS = array(
   UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
   UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
   UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
-  UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload.'
-  );
+  UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload.',
+  ];
 
 // Old config compatibility
 $_config['app_id'] = APP__ID;

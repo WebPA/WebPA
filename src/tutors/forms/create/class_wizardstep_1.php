@@ -14,13 +14,12 @@ use WebPA\includes\functions\Common;
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
     private $moduleId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -30,7 +29,9 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
+
+    // /WizardStep1()
 
     public function head()
     {
@@ -45,7 +46,9 @@ class WizardStep1
           //-->
         </script>
         <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -59,7 +62,7 @@ class WizardStep1
             <tr>
                 <th><label for="form_name">Name for this new form</label></th>
                 <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40"
-                           value="<?php echo($this->wizard->get_field('form_name')); ?>"/></td>
+                           value="<?php echo $this->wizard->get_field('form_name'); ?>"/></td>
             </tr>
         </table>
 
@@ -73,7 +76,7 @@ class WizardStep1
         <table>
             <tr>
                 <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_likert"
-                                                        value="likert" <?php echo((($form_type == 'likert') ? 'checked="checked"' : '')); ?> />
+                                                        value="likert" <?php echo ($form_type == 'likert') ? 'checked="checked"' : ''; ?> />
                 </td>
                 <td>
                     <label for="type_likert">Likert Scale <span style="font-weight: normal;">(default)</span></label>
@@ -83,7 +86,7 @@ class WizardStep1
             </tr>
             <tr>
                 <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_split100"
-                                                        value="split100" <?php echo((($form_type == 'split100') ? 'checked="checked"' : '')); ?> />
+                                                        value="split100" <?php echo ($form_type == 'split100') ? 'checked="checked"' : ''; ?> />
                 </td>
                 <td>
                     <label for="type_split100">Split 100</label>
@@ -95,8 +98,10 @@ class WizardStep1
             </tr>
         </table>
         <?php
-        echo("<input type=\"hidden\" name=\"form_modules[]\" id=\"module_{$this->moduleId}\" value=\"{$this->moduleId}\" />");
-    }// /->form()
+        echo "<input type=\"hidden\" name=\"form_modules[]\" id=\"module_{$this->moduleId}\" value=\"{$this->moduleId}\" />";
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -115,7 +120,9 @@ class WizardStep1
         $this->wizard->set_field('form_type', Common::fetch_POST('form_type'));
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

@@ -23,7 +23,9 @@ class NewAlgorithm extends WebPAAlgorithm
     public function __construct()
     {
         WebPAAlgorithm::_init();
-    }// /->NewAlgorithm()
+    }
+
+    // /->NewAlgorithm()
 
     /*
     * ================================================================================
@@ -31,15 +33,11 @@ class NewAlgorithm extends WebPAAlgorithm
     * ================================================================================
     */
 
-    /*
-    * Calculate the WebPA and group scores for each member
-    */
+    // Calculate the WebPA and group scores for each member
     public function calculate()
     {
 
-    /*
-    * Perform a few different tasks and initialisations by looping through all the responses
-    */
+    // Perform a few different tasks and initialisations by looping through all the responses
         foreach ($this->_responses as $i => $response) {
             // Process the responses and re-factor the array into a more usable form
             $this->_group_member_responses["{$response['group_id']}"]["{$response['user_id']}"]["{$response['question_id']}"]["{$response['marked_user_id']}"] = $response['score'];
@@ -60,8 +58,8 @@ class NewAlgorithm extends WebPAAlgorithm
         foreach ($this->_groups as $group_id => $group_mark) {
             $group_had_submissions = false;
 
-            $this->_group_member_frac_scores_awarded["$group_id"] = array();
-            $this->_group_member_total_received[$group_id] =  array();
+            $this->_group_member_frac_scores_awarded["$group_id"] = [];
+            $this->_group_member_total_received[$group_id] =  [];
 
             // Take each member in turn
             foreach ($this->_group_members["$group_id"] as $i => $member_id) {
@@ -89,7 +87,7 @@ class NewAlgorithm extends WebPAAlgorithm
                      */
 
                     $this->_group_member_total_awarded["$group_id"]["$member_id"] = 0;  // Initialise member-total
-                    $this->group_member_awarded["$group_id"]["$member_id"] = array();
+                    $this->group_member_awarded["$group_id"]["$member_id"] = [];
 
                     if (!array_key_exists($group_id, $this->_group_member_responses)) {
 
@@ -202,7 +200,9 @@ class NewAlgorithm extends WebPAAlgorithm
                 }
             }
         }// /foreach(group)
-    }// /->calculate()
+    }
+
+    // /->calculate()
 
 /*
 * ================================================================================

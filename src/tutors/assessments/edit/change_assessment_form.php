@@ -10,7 +10,7 @@
  *
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -45,7 +45,7 @@ if ($assessment->load($assessment_id)) {
     $form->load_from_xml($form_xml);
 } else {
     $assessment = null;
-    $assessment_url = "../";
+    $assessment_url = '../';
 }
 
 // --------------------------------------------------------------------------------
@@ -88,10 +88,10 @@ $manage_text = ($assessment) ? "manage: {$assessment->name}" : 'manage assessmen
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array('home'       => '../../' ,
-               'my assessments' => '../' ,
-               $manage_text   => $assessment_url ,
-               "change form"    => null ,);
+$UI->breadcrumbs = ['home'       => '../../',
+               'my assessments' => '../',
+               $manage_text   => $assessment_url,
+               'change form'    => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -137,7 +137,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
+    <a href="<?php echo $assessment_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
@@ -147,7 +147,7 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
+      <td><a href="<?php echo $assessment_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
     </tr>
     </table>
   </div>
@@ -163,13 +163,13 @@ if (!$assessment) {
   } else {
       ?>
 
-    <form action="change_assessment_form.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
+    <form action="change_assessment_form.php?<?php echo $assessment_qs; ?>" method="post" name="assessment_form">
     <input type="hidden" name="command" value="none" />
 
     <h2>Current Form</h2>
     <div class="form_section form_line">
 <?php
-    echo("<p><label>You are currently using form: </label><em>{$form->name}</em></p>");
+    echo "<p><label>You are currently using form: </label><em>{$form->name}</em></p>";
 
       $question_count = (int) $form->get_question_count();
       if ($question_count==0) {
@@ -184,10 +184,10 @@ if (!$assessment) {
 <?php
         for ($i=0; $i<$question_count; $i++) {
             $question = $form->get_question($i); ?>
-          <li><div class="question"><?php echo($question['text']['_data']); ?> <span class="question_range">(scoring range: <?php echo($question['range']['_data']); ?>)</span></div></li>
+          <li><div class="question"><?php echo $question['text']['_data']; ?> <span class="question_range">(scoring range: <?php echo $question['range']['_data']; ?>)</span></div></li>
 <?php
         }
-          echo('</ul>');
+          echo '</ul>';
       } ?>
     </div>
 
@@ -220,11 +220,11 @@ if (!$assessment) {
         foreach ($forms as $i => $new_form) {
             $checked = ($form->id==$new_form['form_id']) ? 'checked="checked"' : '' ;
             $intro_text = base64_encode($assessment->introduction);
-            echo('<tr>');
-            echo("<td><input type=\"radio\" name=\"form_id\" id=\"form_{$new_form['form_id']}\" value=\"{$new_form['form_id']}\" $checked /></td>");
-            echo("<td><label class=\"small\" for=\"form_{$new_form['form_id']}\">{$new_form['form_name']}</label></td>");
-            echo("<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"/tutors/forms/edit/preview_form.php?f={$new_form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>");
-            echo('</tr>');
+            echo '<tr>';
+            echo "<td><input type=\"radio\" name=\"form_id\" id=\"form_{$new_form['form_id']}\" value=\"{$new_form['form_id']}\" $checked /></td>";
+            echo "<td><label class=\"small\" for=\"form_{$new_form['form_id']}\">{$new_form['form_name']}</label></td>";
+            echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"/tutors/forms/edit/preview_form.php?f={$new_form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>";
+            echo '</tr>';
         } ?>
           </table>
         </div>

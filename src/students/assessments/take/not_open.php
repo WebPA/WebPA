@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\functions\Common;
@@ -36,12 +36,12 @@ if ($assessment->load($assessment_id)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' ' . ($assessment) ? $assessment->name : "not open";
+$UI->page_title = APP__NAME . ' ' . ($assessment) ? $assessment->name : 'not open';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array('home'       => '/' ,
-               $assessment->name  => null ,
-              );
+$UI->breadcrumbs = ['home'       => '/',
+               $assessment->name  => null,
+              ];
 
 $UI->head();
 $UI->content_start();
@@ -53,7 +53,7 @@ $UI->content_start();
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="/images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="/images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - However, in this case, the assessment is <em>not open and cannot accept student <?php echo APP__MARK_TEXT; ?></em>.</p>
@@ -64,13 +64,13 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="/images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
+      <td><a href="<?php echo $list_url; ?>"><img src="/images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
     </tr>
     </table>
   </div>
 
   <p>This assessment is not open at the present time, so you cannot submit any <?php echo APP__MARK_TEXT; ?>.</p>
-  <p>If you have missed the deadline, contact your lecturer. Otherwise, if you have another assessment to take, please select it from your <a href="<?php echo($list_url); ?>">assessments list</a>.</p>
+  <p>If you have missed the deadline, contact your lecturer. Otherwise, if you have another assessment to take, please select it from your <a href="<?php echo $list_url; ?>">assessments list</a>.</p>
 <?php
     }
 ?>

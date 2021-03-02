@@ -12,23 +12,23 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
-use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
+use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
     exit;
 }
 
-$intro_text = "<p>This page allows you to build a report on commonly requested metrics about the WebPA systems usage.</p>";
-$task_text = "<p>Please tick all the boxes for the information that you would like to have in your report. Then click the generate button to view the report.</p>";
+$intro_text = '<p>This page allows you to build a report on commonly requested metrics about the WebPA systems usage.</p>';
+$task_text = '<p>Please tick all the boxes for the information that you would like to have in your report. Then click the generate button to view the report.</p>';
 
 //set the page information
-$UI->page_title = APP__NAME . " metrics of use";
+$UI->page_title = APP__NAME . ' metrics of use';
 $UI->menu_selected = 'metrics';
-$UI->breadcrumbs = array('home' => '../../');
+$UI->breadcrumbs = ['home' => '../../'];
 $UI->help_link = '?q=node/237';
 $UI->head();
 ?>
@@ -46,7 +46,7 @@ $UI->body();
 $UI->content_start();
 
 echo $intro_text;
-echo "<div class=\"content_box\">";
+echo '<div class="content_box">';
 echo $task_text;
 
 //write a list of the elements that can be selected for the report
@@ -60,11 +60,11 @@ echo $task_text;
 <?php
 for ($i = $years[0]; $i <= $years[1]; $i++) {
     $selected_str = ($i == $year) ? 'selected="selected"' : '';
-    echo("<option value=\"$i\" $selected_str>". $i);
+    echo "<option value=\"$i\" $selected_str>". $i;
     if (APP__ACADEMIC_YEAR_START_MONTH > 1) {
-        echo('/' . substr($i + 1, 2, 2));
+        echo '/' . substr($i + 1, 2, 2);
     }
-    echo('</option>');
+    echo '</option>';
 }
 ?>
   </select>

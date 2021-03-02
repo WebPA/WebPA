@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\ArrayFunctions;
@@ -82,12 +82,12 @@ $page_title = ($collection) ? "Members: {$collection->name}" : 'Members';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array(
-  'home' => '../../' ,
-  'my groups' => '../' ,
-  "Editing: $collection_title"  => "../edit/edit_collection.php?gs={$collection->id}" ,
-  $page_title           => null ,
-);
+$UI->breadcrumbs = [
+  'home' => '../../',
+  'my groups' => '../',
+  "Editing: $collection_title"  => "../edit/edit_collection.php?gs={$collection->id}",
+  $page_title           => null,
+];
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
@@ -116,7 +116,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo($collection_name); ?></a>
+  <a href="<?php echo $collection_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo $collection_name; ?></a>
 </div>
 
 <?php
@@ -127,7 +127,7 @@ if (!$collection) {
 } else {
         ?>
 
-  <form action="edit_collection_members.php?<?php echo($collection_qs); ?>" method="post" name="collection_members_form">
+  <form action="edit_collection_members.php?<?php echo $collection_qs; ?>" method="post" name="collection_members_form">
   <input type="hidden" name="command" value="none" />
 
   <h2>Available Students</h2>
@@ -161,21 +161,21 @@ if (!$collection) {
         if (is_array($module_students)) {
             foreach ($module_students as $i => $member) {
                 $assigned_group = ArrayFunctions::array_searchvalue($member['user_id'], $collection_member_rows, 'user_id', 'group_id');
-                echo('<tr>');
-                echo("<td>{$member['lastname']}, {$member['forename']} (");
+                echo '<tr>';
+                echo "<td>{$member['lastname']}, {$member['forename']} (";
                 if (!empty($member['id_number'])) {
-                    echo($member['id_number']);
+                    echo $member['id_number'];
                 } else {
-                    echo($member['username']);
+                    echo $member['username'];
                 }
-                echo(')</td>');
-                echo("<td><select name=\"student_{$member['user_id']}\">");
+                echo ')</td>';
+                echo "<td><select name=\"student_{$member['user_id']}\">";
                 Form::render_options($options, $assigned_group);
-                echo('</select></td>');
-                echo('</tr>');
+                echo '</select></td>';
+                echo '</tr>';
             }
         } else {
-            echo('<tr><td colspan="2">No students available</td></tr>');
+            echo '<tr><td colspan="2">No students available</td></tr>';
         } ?>
       </table>
 

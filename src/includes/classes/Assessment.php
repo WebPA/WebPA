@@ -15,37 +15,49 @@ use WebPA\includes\functions\Common;
 
 class Assessment
 {
+    // Public Vars
+    public $id;
 
-  // Public Vars
-    public $id = null;
     public $name = '';
-    public $module_id = null;
 
-    public $open_date = null;
-    public $close_date = null;
+    public $module_id;
+
+    public $open_date;
+
+    public $close_date;
+
     public $introduction = '';
 
     public $allow_feedback = false;
+
     public $assessment_type = 1;
+
     public $allow_assessment_feedback = false;
+
     public $feedback_name = 'feedback';
+
     public $email_opening = false;
+
     public $email_closing = false;
 
     // Private Vars
     private DAO $_DAO;
+
     private $dbConn;
-    private $_xml_parser = null;
 
-    private $_collection = null;
-    private $_collection_id = null;
+    private $_xml_parser;
 
-    private $_form = null;
+    private $_collection;
+
+    private $_collection_id;
+
+    private $_form;
+
     private $_form_xml = '';
 
     private $_finished = false;
 
-    private $_locked = null;
+    private $_locked;
 
     /**
     * CONSTRUCTOR for the assessment class
@@ -57,7 +69,9 @@ class Assessment
         $this->_DAO =& $DAO;
         $this->dbConn = $this->_DAO->getConnection();
         $this->_locked = null;
-    }// /->Assessment()
+    }
+
+    // /->Assessment()
 
     /**
     * ================================================================================
@@ -198,7 +212,9 @@ class Assessment
         $this->feedback_name = ($row['feedback_name']);
 
         return true;
-    }// /->load_from_row()
+    }
+
+    // /->load_from_row()
 
     /**
     * Save this Assessment
@@ -271,10 +287,10 @@ class Assessment
                  'assessment_type' => $this->assessment_type ? 1 : 0,
                  'student_feedback' => $this->allow_assessment_feedback ? 1 : 0,
                  'contact_email' => '',
-                 'email_opening' => $this->email_opening ? 1 : 0 ,
-                 'email_closing' => $this->email_closing ? 1 : 0 ,
+                 'email_opening' => $this->email_opening ? 1 : 0,
+                 'email_closing' => $this->email_closing ? 1 : 0,
                  'feedback_name' => '?',
-                 'feedback_length' => 0 ,
+                 'feedback_length' => 0,
                  'feedback_optional' => 0,
               ]
           )
@@ -332,12 +348,16 @@ class Assessment
         $form->load_from_xml($form_xml);
 
         return $form;
-    }// /->get_form()
+    }
+
+    // /->get_form()
 
     public function get_form_xml()
     {
         return $this->_form_xml;
-    }// /->get_form_xml()
+    }
+
+    // /->get_form_xml()
 
     /**
      * Get the group marks.
@@ -370,22 +390,30 @@ class Assessment
         }
 
         return $groups_and_marks;
-    }// /->get_group_marks()
+    }
+
+    // /->get_group_marks()
 
     public function set_form_xml($xml)
     {
         $this->_form_xml = $xml;
-    }// /->set_form_xml()
+    }
+
+    // /->set_form_xml()
 
     public function get_collection_id()
     {
         return $this->_collection_id;
-    }// /->get_collection_id()
+    }
+
+    // /->get_collection_id()
 
     public function set_collection_id($collection_id)
     {
         $this->_collection_id = $collection_id;
-    }// /->set_collection_id()
+    }
+
+    // /->set_collection_id()
 
     /*
     * Get the current status of this assessment
@@ -411,7 +439,9 @@ class Assessment
         }
 
         return $status;
-    }// /->get_status
+    }
+
+    // /->get_status
 
     /**
      * function to get the date string
@@ -427,7 +457,9 @@ class Assessment
         if ($date == 'close_date') {
             return date($date_format, $this->close_date);
         }
-    }// /->get_date_string()
+    }
+
+    // /->get_date_string()
 
     /**
      * Get all the marksheets available for this assessment.
@@ -455,7 +487,9 @@ class Assessment
         }
 
         return $params;
-    }// /->get_all_marking_params()
+    }
+
+    // /->get_all_marking_params()
 
     /**
      * Enter description here...
@@ -484,7 +518,9 @@ class Assessment
         }
 
         return $params;
-    }// /->get_marking_params()
+    }
+
+    // /->get_marking_params()
 
     /**
     * Is this Assessment locked for editing
@@ -504,7 +540,9 @@ class Assessment
             $this->_locked = ($result_count>0);
         }
         return $this->_locked;
-    }// /->is_locked()
+    }
+
+    // /->is_locked()
 
     /**
     * Set database connection
@@ -513,7 +551,9 @@ class Assessment
     public function set_db(& $db)
     {
         $this->_DAO =& $db;
-    }// /->set_db()
+    }
+
+    // /->set_db()
 
     /*
     * --------------------------------------------------------------------------------
@@ -521,12 +561,12 @@ class Assessment
     * --------------------------------------------------------------------------------
     */
 
-    /*
-    * Finish this assessment, save settings and lock from editing/marking
-    */
+    // Finish this assessment, save settings and lock from editing/marking
     public function finish()
     {
-    }// /->finish()
+    }
+
+    // /->finish()
 
     /*
     * ================================================================================

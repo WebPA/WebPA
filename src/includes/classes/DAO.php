@@ -36,7 +36,7 @@ class DAO
             'user' => $user,
             'password' => $password,
             'host' => $host,
-            'driver' => 'mysqli'
+            'driver' => 'mysqli',
         ];
 
         $this->_conn = DriverManager::getConnection($connectionParams);

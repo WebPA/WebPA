@@ -9,7 +9,7 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Module;
@@ -40,7 +40,7 @@ if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array('home' => '../','review data'=>'../review/','edit'=>null, );
+$UI->breadcrumbs = ['home' => '../', 'review data'=>'../review/', 'edit'=>null];
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -55,26 +55,26 @@ $page_intro = '';
 
   if (strlen($module) > 0) {
       if ((int) $module === $_module_id) {
-          $sScreenMsg = "<p>You cannot delete the currently selected module!</p>";
+          $sScreenMsg = '<p>You cannot delete the currently selected module!</p>';
       } else {
-          $sScreenMsg = "<p>The module has been deleted.</p>";
+          $sScreenMsg = '<p>The module has been deleted.</p>';
           $delete_module = new Module();
           $delete_module->module_id = $module;
           $delete_module->set_dao_object($DB);
           $delete_module->delete();
       }
   } elseif ((int) $user === $_SESSION['_user_id']) {
-      $sScreenMsg = "<p>You cannot delete yourself!</p>";
+      $sScreenMsg = '<p>You cannot delete yourself!</p>';
   } elseif ($user > 0) {
       $user_row = $CIS->get_user($user);
       $delete_user = new User();
       $delete_user->set_dao_object($DB);
       $delete_user->load_from_row($user_row);
       if (Common::check_user($_user, APP__USER_TYPE_ADMIN) && $delete_user->is_admin()) {
-          $sScreenMsg = "<p>The administrator has been deleted.</p>";
+          $sScreenMsg = '<p>The administrator has been deleted.</p>';
           $delete_user->delete();
       } else {
-          $sScreenMsg = "<p>The user has been deleted from the module.</p>";
+          $sScreenMsg = '<p>The user has been deleted from the module.</p>';
           $DB->getConnection()->executeQuery(
               'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE user_id = ? AND module_id = ?',
               [$user, $_SESSION['_module_id']],

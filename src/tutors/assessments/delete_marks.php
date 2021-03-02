@@ -12,7 +12,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -89,9 +89,9 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' . 'students who responded';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array('home'           => '/' ,
-               'my assessments'     => $list_url ,
-               'students who responded' => null ,);
+$UI->breadcrumbs = ['home'           => '/',
+               'my assessments'     => $list_url,
+               'students who responded' => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -116,7 +116,7 @@ $UI->content_start();
 <div class="content_box">
 
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The following list shows which students in each group have submitted their responses to the assessment.</p>
@@ -128,10 +128,10 @@ $UI->content_start();
           $group =& $groups_iterator->current();
 
           $members = $CIS->get_user($group->get_member_ids());
-          echo("<h2>{$group->name}</h2>");
+          echo "<h2>{$group->name}</h2>";
 
           if (!$members) {
-              echo('<p>This group has no members.</p>');
+              echo '<p>This group has no members.</p>';
           } else {
               ?>
         <table class="grid" cellspacing="1" cellpadding="2" style="width: 90%">
@@ -143,22 +143,22 @@ $UI->content_start();
         <?php
         foreach ($members as $i => $member) {
             $flgResponse = false;
-            if (in_array($member['user_id'], (array)$responded_users)) {
+            if (in_array($member['user_id'], (array) $responded_users)) {
                 $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
                 $responded_class = 'class="responded"';
                 $allowDelete = "<a href=\"delete_marks.php?a={$assessment_id}&tab={$tab}&y={$year}&u={$member['user_id']}\" ><img src=\"../../images/icons/cancel.png\" width=\"16\" height=\"16\" alt=\"Delete submission\" /></a>";
             } else {
                 $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
                 $responded_class = 'class="notresponded"';
-                $allowDelete = "<img src=\"../../images/icons/cancel_greyed.png\" width=\"16\" height=\"16\" alt=\"Delete submission\" />";
+                $allowDelete = '<img src="../../images/icons/cancel_greyed.png" width="16" height="16" alt="Delete submission" />';
             }
-            echo("<tr $responded_class><td>{$member['lastname']}, {$member['forename']}");
+            echo "<tr $responded_class><td>{$member['lastname']}, {$member['forename']}";
             if (!empty($member['id_number'])) {
-                echo(" ({$member['id_number']})");
+                echo " ({$member['id_number']})";
             }
-            echo("</td><td align=\"center\">$responded_img</td><td>{$allowDelete}</td></tr>");
+            echo "</td><td align=\"center\">$responded_img</td><td>{$allowDelete}</td></tr>";
         }
-              echo('</table><br />');
+              echo '</table><br />';
           }// /if
       }// /for
   }

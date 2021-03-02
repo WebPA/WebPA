@@ -18,15 +18,20 @@ include_once __DIR__ . '/../inc_global.php';
 class Form
 {
     // Public Vars
-    public $id = null;
+    public $id;
+
     public $name = '';
-    public $modules = null;
-    public $type = null;
+
+    public $modules;
+
+    public $type;
 
     // Private Vars
     private DAO $_DAO;
-    private $_questions = null;
-    private $_xml_parser = null;
+
+    private $_questions;
+
+    private $_xml_parser;
 
     /*
     * CONSTRUCTOR
@@ -71,7 +76,9 @@ class Form
             }
         }
         $this->id = $new_id;
-    }// ->create()
+    }
+
+    // ->create()
 
     /**
     * Delete this Group (and all its members)
@@ -129,7 +136,9 @@ class Form
         $this->type = (is_null($row['form_type'])) ? 'likert' : $row['form_type'];
         $this->_load_xml($row['form_xml']);
         return true;
-    }// /->load_from_row()
+    }
+
+    // /->load_from_row()
 
     /**
     * Load the Form from xml
@@ -153,14 +162,14 @@ class Form
     {
         if (!$this->id) {
             return false;
-        } else {
-            // Actually create and save the xml
-            $form_xml = $this->get_xml();
+        }
+        // Actually create and save the xml
+        $form_xml = $this->get_xml();
 
-            // Save the Form
-            $dbConn = $this->_DAO->getConnection();
+        // Save the Form
+        $dbConn = $this->_DAO->getConnection();
 
-            $insertFormQuery =
+        $insertFormQuery =
         'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form ' .
         '(form_id, form_name, form_type, form_xml) ' .
         'VALUES (?, ?, ?, "") ' .
@@ -168,30 +177,29 @@ class Form
         'form_name = ?, ' .
         'form_type = ?';
 
-            $dbConn->executeQuery(
+        $dbConn->executeQuery(
                 $insertFormQuery,
                 [$this->id, $this->name, $this->type, $this->name, $this->type],
                 [ParameterType::STRING, ParameterType::STRING, ParameterType::STRING, ParameterType::STRING, ParameterType::STRING]
             );
 
-            $dbConn->executeQuery(
+        $dbConn->executeQuery(
                 'UPDATE ' . APP__DB_TABLE_PREFIX . 'form SET form_xml = ? WHERE form_id = ?',
                 [$form_xml, $this->id],
                 [ParameterType::STRING, ParameterType::STRING]
             );
 
-            if ($this->modules !== null && count($this->modules) > 0) {
-                foreach ($this->modules as $module_id) {
-                    $dbConn->executeQuery(
+        if ($this->modules !== null && count($this->modules) > 0) {
+            foreach ($this->modules as $module_id) {
+                $dbConn->executeQuery(
                         'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'form_module (form_id, module_id) VALUES (?, ?)',
                         [$this->id, $module_id],
                         [ParameterType::STRING, ParameterType::INTEGER]
                     );
-                }
             }
-
-            return true;
         }
+
+        return true;
     }
 
     /*
@@ -212,7 +220,9 @@ class Form
         $clone_form->load_from_xml($this->get_xml()); // Creates an EXACT clone of the existing form
         $clone_form->id = $temp_id;
         return $clone_form;
-    }// /->get_clone()
+    }
+
+    // /->get_clone()
 
     /*
     * --------------------------------------------------------------------------------
@@ -231,7 +241,9 @@ class Form
         } else {
             $this->_questions[0] = $question_array;
         }
-    }// /->add_question()
+    }
+
+    // /->add_question()
 
     /**
     * Get an individual question's info
@@ -244,7 +256,9 @@ class Form
         if (array_key_exists($index, (array) $this->_questions)) {
             return $this->_questions[$index];
         }
-    }// /->get_question()
+    }
+
+    // /->get_question()
 
     /**
     * Get a count of the number of questions
@@ -257,7 +271,9 @@ class Form
             $result = count($this->_questions);
         }
         return  $result;
-    }// /->get_question_count()
+    }
+
+    // /->get_question_count()
 
     /**
     * Set an individual question's info
@@ -268,7 +284,9 @@ class Form
     {
         $index = (int) $index;
         $this->_questions[$index] = $question_array;
-    }// /->set_question()
+    }
+
+    // /->set_question()
 
     /**
     * Remove a question from this form
@@ -281,7 +299,9 @@ class Form
             unset($this->_questions[$index]);
             $this->_questions = array_values($this->_questions);
         }
-    }// /->remove_question()
+    }
+
+    // /->remove_question()
 
     /*
     * --------------------------------------------------------------------------------
@@ -308,9 +328,9 @@ class Form
         if ($this->get_question_count()>0) {
             foreach ($this->_questions as $i => $question) {
                 $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
-                $new_question = array('questionid' => 'Q'.($i+1) ,
-                     'text'       => $question['text']['_data'] ,
-                     'desc'       => $question_desc ,);
+                $new_question = ['questionid' => 'Q'.($i+1),
+                     'text'       => $question['text']['_data'],
+                     'desc'       => $question_desc, ];
 
                 $questions_to_save[] = $new_question;
             }
@@ -319,7 +339,9 @@ class Form
 
         $this->_xml_parser->set_cdata_tags('desc');
         return $this->_xml_parser->generate_xml($xml_array);
-    }// /->get_xml()
+    }
+
+    // /->get_xml()
 
     /**
     * Load the xml data of the form (questions, etc)
@@ -351,7 +373,9 @@ class Form
         } else {
             $this->_questions = null;
         }
-    }// /->_load_xml()
+    }
+
+    // /->_load_xml()
 
 /*
 * ================================================================================

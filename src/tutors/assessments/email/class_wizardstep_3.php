@@ -13,14 +13,12 @@ use WebPA\includes\classes\ResultHandler;
 
 class WizardStep3
 {
+    // Public
+    public $wizard;
 
-  // Public
-    public $wizard = null;
     public $step = 3;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -28,7 +26,9 @@ class WizardStep3
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Send Email';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep3()
+    }
+
+    // /WizardStep3()
 
     public function head()
     {
@@ -43,14 +43,16 @@ class WizardStep3
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
-        $send_to_desc = array('all'    => 'everyone taking this assessment' ,
-                 'groups' => 'selected groups taking this assessment' ,
-                 'have'   => 'all the students who HAVE responded' ,
-                 'havenot'  => 'any students who HAVE NOT responded' ,);
+        $send_to_desc = ['all'    => 'everyone taking this assessment',
+                 'groups' => 'selected groups taking this assessment',
+                 'have'   => 'all the students who HAVE responded',
+                 'havenot'  => 'any students who HAVE NOT responded', ];
 
         $send_email_to = $this->wizard->get_field('send_to');
 
@@ -66,12 +68,12 @@ class WizardStep3
 
     <h2>Recipients</h2>
     <div class="form_section">
-      <p>You have opted to send this email to <em><?php echo($send_to_desc["$send_email_to"]); ?></em>.</p>
+      <p>You have opted to send this email to <em><?php echo $send_to_desc["$send_email_to"]; ?></em>.</p>
 <?php
     switch ($send_email_to) {
       case 'all':
         $num_targets = $collection_member_count;
-        echo("<p>This email will be sent to all $collection_member_count students.</p>");
+        echo "<p>This email will be sent to all $collection_member_count students.</p>";
         break;
       // --------------------
       case 'groups':
@@ -87,7 +89,7 @@ class WizardStep3
             if (in_array($group['group_id'], $email_groups)) {
                 $num_group_members = (array_key_exists($group['group_id'], $group_member_counts)) ? $group_member_counts["{$group['group_id']}"] : 0 ;
                 $num_targets += $num_group_members;
-                echo("<li>{$group['group_name']} <span style=\"font-size: 0.8em; font-weight: normal\">($num_group_members)</span></li>");
+                echo "<li>{$group['group_name']} <span style=\"font-size: 0.8em; font-weight: normal\">($num_group_members)</span></li>";
             }
         }
 ?>
@@ -102,7 +104,7 @@ class WizardStep3
         $result_handler->set_assessment($assessment);
         $num_responses = $result_handler->get_responses_count_for_assessment();
         $num_targets = $num_responses;
-        echo("<p>This email will be sent to the $num_responses students who have taken this assessment.</p>");
+        echo "<p>This email will be sent to the $num_responses students who have taken this assessment.</p>";
         break;
       // --------------------
 
@@ -114,7 +116,7 @@ class WizardStep3
         $num_responses = $result_handler->get_responses_count_for_assessment();
         $num_no_responses = $collection_member_count - $num_responses;
         $num_targets = $num_no_responses;
-        echo("<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>");
+        echo "<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>";
         break;
     } ?>
     </div>
@@ -133,13 +135,15 @@ class WizardStep3
       <h2>Email Preview</h2>
       <div class="form_section">
         <div style="padding: 4px; background-color: #eee; border: 1px solid #999;">
-          Subject:  <?php echo($this->wizard->get_field('email_subject')); ?><br /><br />
-          <?php echo(nl2br($this->wizard->get_field('email_text'))); ?>
+          Subject:  <?php echo $this->wizard->get_field('email_subject'); ?><br /><br />
+          <?php echo nl2br($this->wizard->get_field('email_text')); ?>
         </div>
       </div>
 <?php
     }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -148,7 +152,9 @@ class WizardStep3
         // Send Email
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep3
 
 ?>

@@ -14,7 +14,7 @@ use Doctrine\DBAL\ParameterType;
 
 class GroupHandler
 {
-    public $_DAO = null;  // [pmn] due to a poor iterator implementation, this is currently public
+    public $_DAO;  // [pmn] due to a poor iterator implementation, this is currently public
 
     private $dbConn;
 
@@ -83,7 +83,7 @@ class GroupHandler
         $prefix = '';
 
         if ($group_num >= 26) {
-            $prefix = chr(64 + (int)($group_num / 26));
+            $prefix = chr(64 + (int) ($group_num / 26));
         }
 
         $suffix = chr(65 + ($group_num % 26));
@@ -168,7 +168,9 @@ class GroupHandler
         }
 
         return $clone_collection;
-    }// /->clone_collection()
+    }
+
+    // /->clone_collection()
 
     /**
      * Create a new GroupCollection object (gives it a new UUID and returns the object)
@@ -182,7 +184,9 @@ class GroupHandler
         $new_collection = new GroupCollection($this->_DAO);
         $new_collection->create();
         return $new_collection;
-    }// /->create_collection()
+    }
+
+    // /->create_collection()
 
     /**
      * Get a GroupCollection object corresponding to the given group_set_id
@@ -194,7 +198,9 @@ class GroupHandler
     {
         $collection = new GroupCollection($this->_DAO);
         return ($collection->load($collection_id)) ? $collection : null;
-    }// /->get_collection()
+    }
+
+    // /->get_collection()
 
     /**
      * Get collections belonging to the given user
@@ -253,7 +259,7 @@ class GroupHandler
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX .
-                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ? AND a.collection_id IS NULL";
+                'assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ? AND a.collection_id IS NULL';
         } elseif ($owner_type === 'assessment') {
             $sql = 'SELECT DISTINCT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .

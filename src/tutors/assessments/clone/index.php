@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -23,9 +23,9 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 $UI->page_title = APP__NAME .' Create a new assessment';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array('home'         => '../../' ,
-               'my assessments'   => '../' ,
-               'clone an assessment'  => null ,);
+$UI->breadcrumbs = ['home'         => '../../',
+               'my assessments'   => '../',
+               'clone an assessment'  => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');

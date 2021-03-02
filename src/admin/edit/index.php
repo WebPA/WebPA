@@ -17,7 +17,7 @@
  */
 
 //get the include file required
-require_once('../../includes/inc_global.php');
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\User;
@@ -40,7 +40,7 @@ if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
     $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 }
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array('home' => '../','review data'=>'../review/','edit'=>null, );
+$UI->breadcrumbs = ['home' => '../', 'review data'=>'../review/', 'edit'=>null];
 $UI->help_link = '?q=node/237';
 
 //build the content to be written to the screen
@@ -195,7 +195,7 @@ if ($action) {          //incase we want to do more than save changes in the fut
           } elseif (!$edit_user->is_admin() && ($type != APP__USER_TYPE_ADMIN)) {
               $user_modules = $CIS->get_user_modules($user_id);
               if (!is_array($user_modules)) {
-                  $user_modules = array();
+                  $user_modules = [];
               }
               if (!array_key_exists($_module_id, $user_modules)) {
                   $update[$type][] = $_module_id;

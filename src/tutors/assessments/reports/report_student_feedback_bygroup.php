@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\AlgorithmFactory;
@@ -38,9 +38,9 @@ $marking_date = (int) Common::fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
-    echo('Error: The requested assessment could not be loaded.');
+    echo 'Error: The requested assessment could not be loaded.';
     exit;
-} else {
+}
     $xml_parser = new XMLParser();
 
     // ----------------------------------------
@@ -48,7 +48,7 @@ if (!$assessment->load($assessment_id)) {
     $marking_params = $assessment->get_marking_params($marking_date);
 
     if (!$marking_params) {
-        echo('Error: The requested marksheet could not be loaded.');
+        echo 'Error: The requested marksheet could not be loaded.';
         exit;
     }
 
@@ -61,9 +61,9 @@ if (!$assessment->load($assessment_id)) {
     $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
     if (!$algorithm) {
-        echo('Error: The requested algorithm could not be loaded.');
+        echo 'Error: The requested algorithm could not be loaded.';
         exit;
-    } else {
+    }
         $algorithm->set_grade_ordinals($ordinal_scale);
         $algorithm->set_assessment($assessment);
         $algorithm->set_marking_params($marking_params);
@@ -78,13 +78,13 @@ if (!$assessment->load($assessment_id)) {
 
         $penalties = $algorithm->get_penalties();
         if (!$penalties) {
-            $penalties = array();
+            $penalties = [];
         }
 
         $group_names = $algorithm->get_group_names();
         $group_members = $algorithm->get_group_members();
         $member_ids = array_keys($webpa_scores);
-    }// /if-else(is algorithm)
+    // /if-else(is algorithm)
 
     //------------------------------------------------------------
     //get the feedback / Justification
@@ -98,18 +98,18 @@ if (!$assessment->load($assessment_id)) {
     $feedback = null;
 
     foreach ($fetch_comments as $comment) {
-        $id = $CIS->get_user($comment["user_id"]);
-        $marker_id = $id["user_id"];
-        $marker = $id["lastname"] . ", " . $id["forename"];
-        $id = $CIS->get_user($comment["marked_user_id"]);
-        $marked = $id["lastname"] . ", " . $id["forename"];
+        $id = $CIS->get_user($comment['user_id']);
+        $marker_id = $id['user_id'];
+        $marker = $id['lastname'] . ', ' . $id['forename'];
+        $id = $CIS->get_user($comment['marked_user_id']);
+        $marked = $id['lastname'] . ', ' . $id['forename'];
 
-        $feedback []  = array(  'marker_id'   =>  $marker_id,
+        $feedback []  = ['marker_id'   =>  $marker_id,
                             'marker'    =>  $marker,
                             'marked'    =>  $marked,
-                            'feedback'    =>  $comment["justification_text"]);
+                            'feedback'    =>  $comment['justification_text'], ];
     }
-}
+
 
 /*
 * --------------------------------------------------------------------------------
@@ -149,8 +149,8 @@ if ($type == 'view') {
       foreach ($group_members as $group_id => $g_members) {
           ?>
       <div style="margin-top: 40px;">
-        <h3><?php echo($group_names[$group_id]); ?></h3>
-        <p>Overall group mark: <?php echo($groups_and_marks[$group_id]); ?>%.</p>
+        <h3><?php echo $group_names[$group_id]; ?></h3>
+        <p>Overall group mark: <?php echo $groups_and_marks[$group_id]; ?>%.</p>
         <table class="grid" cellpadding="2" cellspacing="1">
         <tr>
           <th>name</th>
@@ -165,11 +165,11 @@ if ($type == 'view') {
 
               foreach ($feedback as $j) {
                   if ($j['marker_id'] == $g_members[$i]) {
-                      echo('<tr>');
-                      echo("<td style=\"text-align:left\"> {$j['marker']}</td>");
-                      echo("<td style=\"text-align:left\">{$j['marked']}</td>");
-                      echo("<td style=\"text-align:left\">{$j['feedback']}</td>");
-                      echo('</tr>');
+                      echo '<tr>';
+                      echo "<td style=\"text-align:left\"> {$j['marker']}</td>";
+                      echo "<td style=\"text-align:left\">{$j['marked']}</td>";
+                      echo "<td style=\"text-align:left\">{$j['feedback']}</td>";
+                      echo '</tr>';
                   }
               }
           } ?>
@@ -191,26 +191,26 @@ if ($type == 'view') {
 * --------------------------------------------------------------------------------
 */
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"webpa_student_feedback.csv\"");
+    header('Content-Disposition: attachment; filename="webpa_student_feedback.csv"');
     header('Content-Type: text/csv');
 
-    echo('"Student feedback and Justification (by Group)"'."\n\n");
+    echo '"Student feedback and Justification (by Group)"'."\n\n";
 
     if (($assessment) && ($groups_and_marks)) {
         foreach ($group_members as $group_id => $g_members) {
-            echo("\"Group\",\"{$group_names[$group_id]}\"\n");
-            echo("\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n");
-            echo("\"Name\",\"feedback recipient\",\"feedback / justification comments\"\n");
+            echo "\"Group\",\"{$group_names[$group_id]}\"\n";
+            echo "\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n";
+            echo "\"Name\",\"feedback recipient\",\"feedback / justification comments\"\n";
             $j = 0;
             foreach ($g_members as $i => $member_id) {
                 //loop round the array with all the user data, so that we can out put it
                 foreach ($feedback as $j) {
                     if ($j['marker_id'] == $g_members[$i]) {
-                        echo("\"{$j['marker']}\",\"{$j['marked']}\",\"{$j['feedback']}\"\n");
+                        echo "\"{$j['marker']}\",\"{$j['marked']}\",\"{$j['feedback']}\"\n";
                     }
                 }
             }
-            echo("\n\n");
+            echo "\n\n";
         }
     }
 }

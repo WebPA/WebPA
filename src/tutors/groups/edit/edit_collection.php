@@ -9,7 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
@@ -26,7 +26,7 @@ $collection_id = Common::fetch_GET('c');
 
 $command = Common::fetch_POST('command', Common::fetch_GET('command'));
 
-$list_url = "../../../tutors/groups/";
+$list_url = '../../../tutors/groups/';
 
 // --------------------------------------------------------------------------------
 
@@ -78,11 +78,11 @@ $page_title = ($collection) ? "Editing: {$collection->name}" : 'Editing Unknown 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array(
-  'home'        => '../../' ,
-  'my groups'     => '../' ,
-  $page_title     => null ,
-);
+$UI->breadcrumbs = [
+  'home'        => '../../',
+  'my groups'     => '../',
+  $page_title     => null,
+];
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
@@ -126,13 +126,13 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <div class="content_box">
 
-<form action="edit_collection.php?<?php echo($collection_qs); ?>" method="post" name="collection_form">
+<form action="edit_collection.php?<?php echo $collection_qs; ?>" method="post" name="collection_form">
 <input type="hidden" name="command" value="none">
 
 <div class="nav_button_bar">
   <table cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to my groups</a></td>
+    <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to my groups</a></td>
 <?php
 if ($collection) {
     ?>
@@ -157,7 +157,7 @@ if (!$collection) {
     <table class="form" cellpadding="2" cellspacing="2">
     <tr>
       <th><label for="collection_name">Name</label></th>
-      <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo($collection->name); ?>" /></td>
+      <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo $collection->name; ?>" /></td>
       <td>
         <input type="button" name="savebutton" value="update name" onclick="do_command('save');" />
       </td>
@@ -176,12 +176,12 @@ if (!$collection) {
 
         $collection_total_members = 0;
         if ($num_groups==0) {
-            echo("<p>You do not have any groups in this collection. To use this collection you need to <a href=\"edit_collection_groups.php?$collection_qs\">add groups</a>.</p>");
+            echo "<p>You do not have any groups in this collection. To use this collection you need to <a href=\"edit_collection_groups.php?$collection_qs\">add groups</a>.</p>";
         } else {
             ?>
     <p>These are the groups contained in this collection.</p>
     <p>To edit an individual group and its members click on <img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit group" title="edit" /> in the list below.</p>
-    <div style="text-align: right;"><a class="button" href="edit_collection_members.php?<?php echo($collection_qs); ?>">assign all students to groups</a> &nbsp; &nbsp; <a class="button" href="edit_collection_groups.php?<?php echo($collection_qs); ?>">add/remove groups</a></div>
+    <div style="text-align: right;"><a class="button" href="edit_collection_members.php?<?php echo $collection_qs; ?>">assign all students to groups</a> &nbsp; &nbsp; <a class="button" href="edit_collection_groups.php?<?php echo $collection_qs; ?>">add/remove groups</a></div>
 
     <div class="obj_list">
 <?php
@@ -195,13 +195,13 @@ if (!$collection) {
       <div class="obj">
         <table class="obj" cellpadding="2" cellspacing="2">
         <tr>
-          <td width="24"><a class="text" href="<?php echo($edit_url); ?>"><img src="../../../images/icons/groups.gif" alt="Groups" height="24" width="24" /></a></td>
+          <td width="24"><a class="text" href="<?php echo $edit_url; ?>"><img src="../../../images/icons/groups.gif" alt="Groups" height="24" width="24" /></a></td>
           <td class="obj_info">
-            <div class="obj_name"><a class="text" href="<?php echo($edit_url); ?>"><?php echo($group->name); ?></a></div>
-            <div class="obj_info_text">Contains <?php echo("$num_members $num_members_units"); ?></div>
+            <div class="obj_name"><a class="text" href="<?php echo $edit_url; ?>"><?php echo $group->name; ?></a></div>
+            <div class="obj_info_text">Contains <?php echo "$num_members $num_members_units"; ?></div>
           </td>
           <td class="buttons">
-            <a href="<?php echo($edit_url); ?>"><img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit group" title="edit" /></a>
+            <a href="<?php echo $edit_url; ?>"><img src="../../../images/buttons/edit.gif" width="16" height="16" alt="edit group" title="edit" /></a>
           </td>
         </tr>
         </table>
@@ -213,7 +213,7 @@ if (!$collection) {
     $num_module_students_units = ($num_module_students==1) ? 'student' : 'students';
             $num_members_units = ($collection_total_members==1) ? 'member' : 'members';
 
-            echo("<p>There are $num_groups $num_groups_units, containing $collection_total_members $num_members_units (out of a possible $num_module_students $num_module_students_units).</p>");
+            echo "<p>There are $num_groups $num_groups_units, containing $collection_total_members $num_members_units (out of a possible $num_module_students $num_module_students_units).</p>";
         } ?>
   </div>
 

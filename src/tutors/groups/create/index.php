@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
@@ -48,11 +48,11 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' Create new groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array(
-  'home'                      => '../../' ,
-  'my groups'                 => '../' ,
-  'create new groups wizard'  => null ,
-);
+$UI->breadcrumbs = [
+  'home'                      => '../../',
+  'my groups'                 => '../',
+  'create new groups wizard'  => null,
+];
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');

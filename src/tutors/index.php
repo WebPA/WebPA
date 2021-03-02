@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
+require_once '../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
@@ -25,9 +25,9 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'home';
 $UI->help_link = '?q=node/233';
-$UI->breadcrumbs = array(
-  'home'      => null ,
-);
+$UI->breadcrumbs = [
+  'home'      => null,
+];
 $UI->head();
 $UI->body();
 

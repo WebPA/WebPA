@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
@@ -17,11 +17,10 @@ use WebPA\includes\classes\Wizard;
 class WizardStep5
 {
     public $wizard;
+
     public $step = 5;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -29,7 +28,9 @@ class WizardStep5
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep4()
+    }
+
+    // /WizardStep4()
 
     public function head()
     {
@@ -43,7 +44,9 @@ class WizardStep5
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -56,15 +59,15 @@ class WizardStep5
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <th width="100">Name:</th>
-        <td><?php echo($this->wizard->get_field('assessment_name')); ?></td>
+        <td><?php echo $this->wizard->get_field('assessment_name'); ?></td>
       </tr>
       <tr>
         <th>Opens at:</th>
-        <td><?php echo(date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date'))); ?></td>
+        <td><?php echo date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date')); ?></td>
       </tr>
       <tr>
         <th>Closes at:</th>
-        <td><?php echo(date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date'))); ?></td>
+        <td><?php echo date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date')); ?></td>
       </tr>
 <?php
     if (($this->wizard->get_field('open_date')<$now) && ($this->wizard->get_field('close_date')>$now)) {
@@ -81,13 +84,13 @@ class WizardStep5
     }
 
         if (!empty($this->wizard->get_field('introduction'))) {
-            echo('<tr><td colspan="2" style="font-weight: bold;">Includes an introduction</td></tr>');
+            echo '<tr><td colspan="2" style="font-weight: bold;">Includes an introduction</td></tr>';
         }
 
         if ($this->wizard->get_field('email')== '1') {
-            echo('<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will be emailed when you finish.</td></tr>');
+            echo '<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will be emailed when you finish.</td></tr>';
         } else {
-            echo('<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will <b>NOT</b> be emailed when you finish.</td></tr>');
+            echo '<tr><td colspan="2" style="font-weight: bold;">All students for the assessment will <b>NOT</b> be emailed when you finish.</td></tr>';
         } ?>
       </table>
     </div>
@@ -95,9 +98,9 @@ class WizardStep5
     <h2>Assessment Type</h2>
     <div class="form_section">
       <?php if ($this->wizard->get_field('assessment_type')=='1') {
-            echo "Self and peer assessment";
+            echo 'Self and peer assessment';
         } else {
-            echo "Peer assessment only";
+            echo 'Peer assessment only';
         } ?>
     </div>
 
@@ -114,20 +117,20 @@ class WizardStep5
           <div class="error_box"><p><strong>ERROR : </strong>unable to load the selected form</p></div>
 <?php
         } else {
-            echo("<p><strong>Form : </strong>{$form->name}</p>");
+            echo "<p><strong>Form : </strong>{$form->name}</p>";
             $question_count = (int) $form->get_question_count();
             if ($question_count==0) {
                 $this->wizard->next_button = null; ?>
             <div class="error_box"><p><strong>ERROR : </strong>this form contains no questions</p></div>
 <?php
             } else {
-                echo('<div style="margin-left: 10px;">');
+                echo '<div style="margin-left: 10px;">';
                 for ($i=0; $i<$question_count; $i++) {
                     $question = $form->get_question($i); ?>
-            <div style="padding: 0px 2px 2px 10px;">- <?php echo($question['text']['_data']); ?> (<?php echo($question['range']['_data']); ?>)</div>
+            <div style="padding: 0px 2px 2px 10px;">- <?php echo $question['text']['_data']; ?> (<?php echo $question['range']['_data']; ?>)</div>
           <?php
                 }
-                echo('</div>');
+                echo '</div>';
             }
         } ?>
     </div>
@@ -143,42 +146,46 @@ class WizardStep5
           <div class="error_box"><p><strong>ERROR : </strong>unable to load the selected collection of groups</p></div>
 <?php
         } else {
-            echo("<p><strong>Collection : </strong>{$collection->name}</p>");
+            echo "<p><strong>Collection : </strong>{$collection->name}</p>";
             $groups = $collection->get_groups_array();
             if (count((array) $groups)==0) {
                 $this->wizard->next_button = null; ?>
             <div class="error_box"><p><strong>ERROR : </strong>this collection does not contain any groups</p></div>
 <?php
             } else {
-                echo('<div style="margin-left: 10px;">');
+                echo '<div style="margin-left: 10px;">';
 
                 $num_groups = count($groups);
                 if ($num_groups<=5) {
                     foreach ($groups as $group) {
-                        echo("<div>- {$group['group_name']}</div>");
+                        echo "<div>- {$group['group_name']}</div>";
                     }
                 } else {
-                    echo("<div>- {$groups[0]['group_name']}</div>");
-                    echo("<div>- {$groups[1]['group_name']}</div>");
-                    echo("<div>&nbsp; &nbsp;...</div>");
-                    echo('<div>- '. $groups[$num_groups-2]['group_name'] .'</div>');
-                    echo('<div>- '. $groups[$num_groups-1]['group_name'] .'</div>');
+                    echo "<div>- {$groups[0]['group_name']}</div>";
+                    echo "<div>- {$groups[1]['group_name']}</div>";
+                    echo '<div>&nbsp; &nbsp;...</div>';
+                    echo '<div>- '. $groups[$num_groups-2]['group_name'] .'</div>';
+                    echo '<div>- '. $groups[$num_groups-1]['group_name'] .'</div>';
                 }
 
-                echo('</div>');
+                echo '</div>';
             }
         } ?>
     </div>
 
 <?php
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
         $errors = null;
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep4
 
 ?>

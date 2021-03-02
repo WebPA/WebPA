@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
@@ -22,7 +22,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 // Initialise wizard
 
 $wizard = new Wizard('clone an existing form wizard');
-$wizard->cancel_url = "../";
+$wizard->cancel_url = '../';
 
 $wizard->add_step(1, 'class_wizardstep_1.php');
 $wizard->add_step(2, 'class_wizardstep_2.php');
@@ -48,11 +48,11 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' Clone an existing form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array(
-  'home'          => '../../' ,
-  'my forms'        => '../' ,
-  'clone a form wizard' => null ,
-);
+$UI->breadcrumbs = [
+  'home'          => '../../',
+  'my forms'        => '../',
+  'clone a form wizard' => null,
+];
 
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
 $UI->set_page_bar_button('Create Form', '../../../../images/buttons/button_form_create.gif', '../create/');

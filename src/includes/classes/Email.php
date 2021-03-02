@@ -17,19 +17,22 @@ class Email
 {
     // Public Vars
 
-
     // Private Vars
-    private $_to = null;
-    private $_cc = null;
-    private $_bcc = null;
+    private $_to;
 
-    private $_from = null;
+    private $_cc;
 
-    private $_subject = null;
-    private $_body = null;
+    private $_bcc;
+
+    private $_from;
+
+    private $_subject;
+
+    private $_body;
 
     private $_message_type = 'text';
-    private $_headers = null;
+
+    private $_headers;
 
     /**
     * CONSTRUCTOR for the email class
@@ -37,13 +40,16 @@ class Email
     public function __construct()
     {
         $this->_init();
-    } // /->Email()
+    }
+
+    // /->Email()
 
     /*
     * ================================================================================
     * Public Methods
     * ================================================================================
     */
+
     /**
      * Function to set who the email will go to
      * @param string $to
@@ -55,7 +61,9 @@ class Email
         } else {
             $this->_to = $to;
         }
-    }// ->set_to()
+    }
+
+    // ->set_to()
 
     /**
      * function to set the cc person for an email
@@ -73,7 +81,9 @@ class Email
             }
             $this->_headers['Cc'] = implode(',', $cc);
         }
-    }// /->set_cc()
+    }
+
+    // /->set_cc()
 
     /**
      * function to set the bcc for the email
@@ -91,7 +101,9 @@ class Email
             }
             $this->_headers['Bcc'] = implode(',', $bcc);
         }
-    }// /->set_bcc()
+    }
+
+    // /->set_bcc()
 
     /**
      * function to set who the email is from
@@ -102,7 +114,9 @@ class Email
         $this->_from = $from;
         $this->_headers['From'] = $this->_from;
         $this->_headers['Reply-To'] = $this->_from;
-    }// /->set_from()
+    }
+
+    // /->set_from()
 
     /**
      * function to set the message type
@@ -119,7 +133,9 @@ class Email
             unset($this->_headers['MIME-Version']);
             unset($this->_headers['Content-Type']);
         }
-    }// /->set_message_type()
+    }
+
+    // /->set_message_type()
 
     /**
      * function to set the subject from the email
@@ -128,7 +144,9 @@ class Email
     public function set_subject($subject)
     {
         $this->_subject = $subject;
-    }// /->set_subject()
+    }
+
+    // /->set_subject()
 
     /**
      * Function to set the message body
@@ -137,7 +155,9 @@ class Email
     public function set_body($body)
     {
         $this->_body = $body;
-    }// /->set_body()
+    }
+
+    // /->set_body()
 
     /**
      * Function to send the email
@@ -145,13 +165,16 @@ class Email
     public function send()
     {
         $this->_send();
-    }// /->send()
+    }
+
+    // /->send()
 
     /*
     * ================================================================================
     * Private Methods
     * ================================================================================
     */
+
     /**
      * function to initalise
      */
@@ -168,7 +191,9 @@ class Email
 
         $this->_message_type = 'text';
         $this->_headers['X-Mailer'] = 'PHP/'. phpversion();
-    }// /->_init()
+    }
+
+    // /->_init()
 
     /**
      * Function to send the email
@@ -189,5 +214,7 @@ class Email
         }
 
         return mail($to, $subject, $message, $headers);
-    }// /->_send()
+    }
+
+    // /->_send()
 } // /class: Email

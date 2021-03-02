@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
@@ -36,16 +36,16 @@ $marking_date = (int) Common::fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
-    echo('Error: The requested assessment could not be loaded.');
+    echo 'Error: The requested assessment could not be loaded.';
     exit;
-} else {
+}
 
   // ----------------------------------------
     // Get the marking parameters used for the marksheet this report will display
     $marking_params = $assessment->get_marking_params($marking_date);
 
     if (!$marking_params) {
-        echo('Error: The requested marksheet could not be loaded.');
+        echo 'Error: The requested marksheet could not be loaded.';
         exit;
     }
 
@@ -58,9 +58,9 @@ if (!$assessment->load($assessment_id)) {
     $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
     if (!$algorithm) {
-        echo('Error: The requested algorithm could not be loaded.');
+        echo 'Error: The requested algorithm could not be loaded.';
         exit;
-    } else {
+    }
         $algorithm->set_grade_ordinals($ordinal_scale);
         $algorithm->set_assessment($assessment);
         $algorithm->set_marking_params($marking_params);
@@ -75,14 +75,14 @@ if (!$assessment->load($assessment_id)) {
 
         $penalties = $algorithm->get_penalties();
         if (!$penalties) {
-            $penalties = array();
+            $penalties = [];
         }
 
         $group_names = $algorithm->get_group_names();
         $group_members = $algorithm->get_group_members();
         $member_ids = array_keys($webpa_scores);
-    }// /if-else(is algorithm)
-}// /if-else(is assessment)
+    // /if-else(is algorithm)
+// /if-else(is assessment)
 
 /*
  * --------------------------------------------------------------------------------
@@ -124,29 +124,29 @@ if ($type == 'view') {
   foreach ($group_members as $group_id => $g_members) {
       $g_member_count = count($group_members[$group_id]); ?>
     <div style="margin-top: 40px; page-break-after: always;">
-      <h3><?php echo($group_names[$group_id]); ?></h3>
+      <h3><?php echo $group_names[$group_id]; ?></h3>
 <?php
     foreach ($questions as $question_id => $question) {
         $q_index = $question_id+1;
 
-        echo("<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>"); ?>
+        echo "<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>"; ?>
         <table class="grid" cellpadding="2" cellspacing="1" style="font-size: 0.8em">
         <tr>
           <th>&nbsp;</th>
 <?php
       foreach ($g_members as $i => $member_id) {
           $individ = $CIS->get_user($member_id);
-          echo("<th class=\"top_names\"> {$individ['lastname']}, {$individ['forename']}<br />(");
+          echo "<th class=\"top_names\"> {$individ['lastname']}, {$individ['forename']}<br />(";
           if (!empty($individ['id_number'])) {
-              echo($individ['id_number']);
+              echo $individ['id_number'];
           } else {
-              echo($individ['username']);
+              echo $individ['username'];
           }
-          echo(')</th>');
+          echo ')</th>';
       } ?>
         </tr>
 <?php
-      $q_total = array();
+      $q_total = [];
 
         foreach ($g_members as $i => $member_id) {
             $q_total[$member_id] = 0;
@@ -154,14 +154,14 @@ if ($type == 'view') {
 
         foreach ($g_members as $i => $member_id) {
             $individ = $CIS->get_user($member_id);
-            echo('<tr>');
-            echo("<th>{$individ['lastname']}, {$individ['forename']}<br />(");
+            echo '<tr>';
+            echo "<th>{$individ['lastname']}, {$individ['forename']}<br />(";
             if (!empty($individ['id_number'])) {
-                echo($individ['id_number']);
+                echo $individ['id_number'];
             } else {
-                echo($individ['username']);
+                echo $individ['username'];
             }
-            echo(')</th>');
+            echo ')</th>';
 
             foreach ($g_members as $j => $target_member_id) {
                 if ($assessment->assessment_type == '0') {
@@ -178,15 +178,15 @@ if ($type == 'view') {
                 if (is_null($score)) {
                     $score = '-';
                 }
-                echo("<td>$score</td>");
+                echo "<td>$score</td>";
             }
-            echo('</tr>');
+            echo '</tr>';
         } ?>
         <tr class="q_total">
           <th>Score Received</th>
 <?php
       foreach ($g_members as $i => $member_id) {
-          echo("<th>{$q_total[$member_id]}</th>");
+          echo "<th>{$q_total[$member_id]}</th>";
       } ?>
         </tr>
         </table>
@@ -209,57 +209,57 @@ if ($type == 'view') {
  */
 
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"webpa_marks_awarded_byquestion.csv\"");
+    header('Content-Disposition: attachment; filename="webpa_marks_awarded_byquestion.csv"');
     header('Content-Type: text/csv');
 
-    echo('"Marks Awarded For Each Question"'."\n\n");
-    echo("\"{$assessment->name}\"\n\n");
+    echo '"Marks Awarded For Each Question"'."\n\n";
+    echo "\"{$assessment->name}\"\n\n";
 
     foreach ($group_members as $group_id => $g_members) {
         $g_member_count = count($group_members[$group_id]);
 
-        $q_total = array();
+        $q_total = [];
 
         foreach ($g_members as $i => $member_id) {
             $q_total[$member_id] = 0;
         }
 
-        echo("\"{$group_names[$group_id]}\"\n");
+        echo "\"{$group_names[$group_id]}\"\n";
 
         foreach ($questions as $question_id => $question) {
             $q_index = $question_id+1;
 
-            echo("\n");
-            echo("\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n");
+            echo "\n";
+            echo "\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n";
 
-            echo("\"\",");
+            echo '"",';
 
             foreach ($g_members as $i => $member_id) {
                 $individ = $CIS->get_user($member_id);
-                echo("\"{$individ['lastname']}, {$individ['forename']} (");
+                echo "\"{$individ['lastname']}, {$individ['forename']} (";
                 if (!empty($individ['id_number'])) {
-                    echo($individ['id_number']);
+                    echo $individ['id_number'];
                 } else {
-                    echo($individ['username']);
+                    echo $individ['username'];
                 }
-                echo(')"');
+                echo ')"';
                 if ($i<$g_member_count) {
-                    echo(',');
+                    echo ',';
                 }
             }
 
-            echo("\n");
+            echo "\n";
 
             foreach ($g_members as $i => $member_id) {
                 $individ = $CIS->get_user($member_id);
 
-                echo("\"{$individ['lastname']}, {$individ['forename']} (");
+                echo "\"{$individ['lastname']}, {$individ['forename']} (";
                 if (!empty($individ['id_number'])) {
-                    echo($individ['id_number']);
+                    echo $individ['id_number'];
                 } else {
-                    echo($individ['username']);
+                    echo $individ['username'];
                 }
-                echo(')",');
+                echo ')",';
 
                 foreach ($g_members as $j => $target_member_id) {
                     if ($assessment->assessment_type == '0') {
@@ -277,15 +277,15 @@ if ($type == 'download-csv') {
                         $score = '-';
                     }
 
-                    echo("\"$score\"");
+                    echo "\"$score\"";
                     if ($j<$g_member_count) {
-                        echo(',');
+                        echo ',';
                     }
                 }
-                echo("\n");
+                echo "\n";
             }
         }
-        echo("\n\n");
+        echo "\n\n";
     }
 }
 ?>

@@ -10,7 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -21,10 +21,10 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 
 //write to screen the page information
 //set the page information
-$UI->page_title = APP__NAME ." Upload templates";
+$UI->page_title = APP__NAME .' Upload templates';
 $UI->menu_selected = 'upload data';
-$UI->breadcrumbs = array('home' => '../../',
-              'Upload'=>'../');
+$UI->breadcrumbs = ['home' => '../../',
+              'Upload'=>'../', ];
 $UI->help_link = '?q=node/237';
 
 $UI->head();

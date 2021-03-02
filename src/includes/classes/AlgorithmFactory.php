@@ -16,12 +16,11 @@ use WebPA\includes\classes\algorithms\WebPAAlgorithm;
 
 class AlgorithmFactory
 {
-
-/*
-* ================================================================================
-* Public Methods
-* ================================================================================
-*/
+    /*
+    * ================================================================================
+    * Public Methods
+    * ================================================================================
+    */
 
     /**
      * Get an instance of the requested algorithm class.
@@ -51,5 +50,7 @@ class AlgorithmFactory
     }
 
         return $algorithm;
-    }// /->get_algorithm()
+    }
+
+    // /->get_algorithm()
 }// /class

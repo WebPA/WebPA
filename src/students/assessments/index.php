@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\GroupHandler;
@@ -99,9 +99,9 @@ if ($assessments) {
 $UI->page_title = APP__NAME . ' my assessments';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array(
-                'my assessments'      => null ,
-              );
+$UI->breadcrumbs = [
+                'my assessments'      => null,
+              ];
 
 
 $UI->head();
@@ -116,9 +116,9 @@ $UI->content_start();
 
 <?php
 if ((!$open_assessments) && (!$pending_assessments) && (!$finished_assessments)) {
-    echo('<p>You are not registered with any peer assessments in this module at the moment.</p>');
+    echo '<p>You are not registered with any peer assessments in this module at the moment.</p>';
 } else {
-    echo('<p>You are registered on the following peer assessments in this module:</p>');
+    echo '<p>You are registered on the following peer assessments in this module:</p>';
 
     if ($open_assessments) {
         ?>
@@ -134,22 +134,22 @@ if ((!$open_assessments) && (!$pending_assessments) && (!$finished_assessments))
             $assessment =& $assessment_iterator->current();
             $take_url = "take/index.php?a={$assessment->id}";
 
-            echo("<div class=\"assessment_open\">");
-            echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-            echo('<tr>');
-            echo("  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-            echo('  <td valign="top">');
-            echo('    <div class="assessment_info">');
-            echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-            echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-            echo('    </div>');
-            echo('  </td>');
-            echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
-            echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
-            echo('  </td>');
-            echo('</tr>');
-            echo('</table>');
-            echo('</div>');
+            echo '<div class="assessment_open">';
+            echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
+            echo '<tr>';
+            echo "  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+            echo '  <td valign="top">';
+            echo '    <div class="assessment_info">';
+            echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
+            echo '      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>';
+            echo '    </div>';
+            echo '  </td>';
+            echo '  <td class="buttons" style="line-height: 2em; text-align: right;">';
+            echo "    <a class=\"button\" href=\"$take_url\">Take Assessment</a>";
+            echo '  </td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '</div>';
         } ?>
       </div>
 <?php
@@ -168,19 +168,19 @@ if ((!$open_assessments) && (!$pending_assessments) && (!$finished_assessments))
             $assessment =& $assessment_iterator->current();
             $take_url = "take/index.php?a={$assessment->id}";
 
-            echo("<div class=\"assessment\">");
-            echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-            echo('<tr>');
-            echo("  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-            echo('  <td valign="top">');
-            echo('    <div class="assessment_info">');
-            echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-            echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-            echo('    </div>');
-            echo('  </td>');
-            echo('</tr>');
-            echo('</table>');
-            echo('</div>');
+            echo '<div class="assessment">';
+            echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
+            echo '<tr>';
+            echo "  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+            echo '  <td valign="top">';
+            echo '    <div class="assessment_info">';
+            echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
+            echo '      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>';
+            echo '    </div>';
+            echo '  </td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '</div>';
         } ?>
       </div>
 <?php
@@ -205,27 +205,27 @@ if ((!$open_assessments) && (!$pending_assessments) && (!$finished_assessments))
 
             $completed_msg = ((is_array($assessments_with_response)) && (in_array($assessment->id, $assessments_with_response))) ? 'COMPLETED': 'DID NOT<br />SUBMIT';
 
-            echo("<div class=\"assessment_finished\">");
-            echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-            echo('<tr>');
-            echo("  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-            echo('  <td valign="top">');
-            echo('    <div class="assessment_info">');
-            echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-            echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-            echo('    </div>');
-            echo('  </td>');
-            echo('  <td style="font-weight: bold; text-align: center;">');
-            echo("    $completed_msg");
+            echo '<div class="assessment_finished">';
+            echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
+            echo '<tr>';
+            echo "  <td width=\"24\"><img src=\"../../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+            echo '  <td valign="top">';
+            echo '    <div class="assessment_info">';
+            echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
+            echo '      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>';
+            echo '    </div>';
+            echo '  </td>';
+            echo '  <td style="font-weight: bold; text-align: center;">';
+            echo "    $completed_msg";
             if (($assessment->allow_feedback) && ($assessment->close_date<$now)) {
-                echo("<div style=\"margin-top: 0.5em;\"><a href=\"assessment_feedback.php?a={$assessment->id}\" target=\"_blank\">view feedback</a></div>");
+                echo "<div style=\"margin-top: 0.5em;\"><a href=\"assessment_feedback.php?a={$assessment->id}\" target=\"_blank\">view feedback</a></div>";
             }
-            echo('  </td>');
-            echo('</tr>');
-            echo('</table>');
-            echo('</div>');
+            echo '  </td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '</div>';
         }
-        echo("    </div>\n");
+        echo "    </div>\n";
     }
 }
 ?>

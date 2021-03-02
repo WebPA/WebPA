@@ -8,10 +8,10 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
-use WebPA\includes\functions\Common;
 use WebPA\includes\functions\AcademicYear;
+use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
@@ -40,11 +40,11 @@ $this_year .= APP__ACADEMIC_YEAR_START_MONTH . '-01 00:00:00';
 $next_year = strval($year + 1) . $this_year;
 $this_year = strval($year) . $this_year;
 
-$tabs = array('pending'  => "?tab=pending&y={$year}" ,
-         'open'   => "?tab=open&y={$year}" ,
-         'closed'   => "?tab=closed&y={$year}" ,
-         'marked'   => "?tab=marked&y={$year}" ,
-);
+$tabs = ['pending'  => "?tab=pending&y={$year}",
+         'open'   => "?tab=open&y={$year}",
+         'closed'   => "?tab=closed&y={$year}",
+         'marked'   => "?tab=marked&y={$year}",
+];
 
 $tab = Common::fetch_GET('tab', 'pending');
 
@@ -68,7 +68,7 @@ switch ($tab) {
 
 $qs = "tab={$tab}&y={$year}";
 
-$page_url = APP__WWW . "/tutors/assessments/index.php";
+$page_url = APP__WWW . '/tutors/assessments/index.php';
 
 // --------------------------------------------------------------------------------
 // Begin Page
@@ -76,10 +76,10 @@ $page_url = APP__WWW . "/tutors/assessments/index.php";
 $UI->page_title = APP__NAME . ' my assessments';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array(
-  'home'      => '../' ,
-  'my assessments'  => null ,
-);
+$UI->breadcrumbs = [
+  'home'      => '../',
+  'my assessments'  => null,
+];
 
 $UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '');
 $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', 'create/');
@@ -93,7 +93,7 @@ $change_onclick = ' onclick="change_academic_year()"';
   function change_academic_year() {
     year_sbox = document.getElementById('academic_year');
     chosen_year = year_sbox.options[year_sbox.selectedIndex].value;
-    if (chosen_year) { window.location.href='<?php echo($page_url ."?tab={$tab}&y="); ?>'+chosen_year; }
+    if (chosen_year) { window.location.href='<?php echo $page_url ."?tab={$tab}&y="; ?>'+chosen_year; }
   }
 
 //-->
@@ -115,7 +115,7 @@ $UI->content_start();
     <?php
       foreach ($tabs as $label => $url) {
           $tab_status = ($label==$tab) ? 'on' : 'off';
-          echo("<td class=\"tab_{$tab_status}\" width=\"100\"><a class=\"tab\" href=\"{$url}\">". ucfirst($label) .'</a></td>');
+          echo "<td class=\"tab_{$tab_status}\" width=\"100\"><a class=\"tab\" href=\"{$url}\">". ucfirst($label) .'</a></td>';
       }
     ?>
     <td>&nbsp;</td>
@@ -135,11 +135,11 @@ $UI->content_start();
         <?php
           for ($i = $start_year; $i <= $last_year; $i++) {
               $selected_str = ($i == $year) ? 'selected="selected"' : '';
-              echo("<option value=\"$i\" $selected_str>". $i);
+              echo "<option value=\"$i\" $selected_str>". $i;
               if (APP__ACADEMIC_YEAR_START_MONTH > 1) {
-                  echo('/' . substr($i + 1, 2, 2));
+                  echo '/' . substr($i + 1, 2, 2);
               }
-              echo('</option>');
+              echo '</option>';
           }
         ?>
       </select>
@@ -149,7 +149,7 @@ $UI->content_start();
   </table>
 
 <?php
-include_once($include_page);
+include_once $include_page;
 ?>
 
   </form>

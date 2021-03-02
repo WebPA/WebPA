@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('../../../includes/inc_global.php');
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\Wizard;
@@ -23,7 +23,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 // Initialise wizard
 
 $wizard = new Wizard('clone own groups wizard');
-$wizard->cancel_url = "../";
+$wizard->cancel_url = '../';
 
 $wizard->add_step(1, 'class_wizardstep_1.php');
 $wizard->add_step(2, 'class_wizardstep_2.php');
@@ -48,12 +48,12 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' Clone own groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array(
-  'home'                      => '../../' ,
-  'my groups'                 => '../' ,
-  'clone groups'              => '../clone/' ,
-  'clone own groups wizard'   => null ,
-);
+$UI->breadcrumbs = [
+  'home'                      => '../../',
+  'my groups'                 => '../',
+  'clone groups'              => '../clone/',
+  'clone own groups wizard'   => null,
+];
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');

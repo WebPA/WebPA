@@ -21,7 +21,7 @@ use WebPA\includes\functions\Common;
 
 trait AssessmentNotificationTrait
 {
-    /***************************************************************
+    /*
      * Function mail_assessment_notification
      *
      * Sends an email to the complete collection when called

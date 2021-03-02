@@ -12,14 +12,12 @@ use WebPA\includes\functions\Common;
 
 class WizardStep2
 {
+    // Public
+    public $wizard;
 
-  // Public
-    public $wizard = null;
     public $step = 2;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -27,23 +25,27 @@ class WizardStep2
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep2()
+    }
+
+    // /WizardStep2()
 
     public function head()
     {
         $html = <<<HTMLEnd
-<script language="JavaScript" type="text/javascript">
-<!--
+            <script language="JavaScript" type="text/javascript">
+            <!--
 
-  function body_onload() {
-  }// /body_onload()
+              function body_onload() {
+              }// /body_onload()
 
-//-->
-</script>
-HTMLEnd;
+            //-->
+            </script>
+            HTMLEnd;
 
-        echo($html);
-    }// /->head()
+        echo $html;
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -53,7 +55,7 @@ HTMLEnd;
         if (empty($this->wizard->get_field('collection_name'))) {
             $this->wizard->set_field('collection_name', $collection->name);
         } ?>
-    <p>You have chosen to clone: <em><?php echo($collection->name); ?></em></p>
+    <p>You have chosen to clone: <em><?php echo $collection->name; ?></em></p>
     <h2>Name of Clone</h2>
     <p>To avoid confusion, the name of your cloned collection of groups should be unique, but you can use the same name if you wish.</p>
     <p>The name should be describe what the groups are for. For example, if the students are doing coursework for module 05ABC123, then name the collection, <em>05ABC123 - Coursework Groups</em>.</p>
@@ -62,12 +64,14 @@ HTMLEnd;
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <th><label for="collection_name">Name for this new collection</label></th>
-        <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo($this->wizard->get_field('collection_name')); ?>" /></td>
+        <td><input type="text" name="collection_name" id="collection_name" maxlength="50" size="40" value="<?php echo $this->wizard->get_field('collection_name'); ?>" /></td>
       </tr>
       </table>
     </div>
 <?php
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -79,7 +83,9 @@ HTMLEnd;
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2
 
 ?>

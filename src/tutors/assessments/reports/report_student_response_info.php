@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -97,7 +97,7 @@ if ($assessment->load($assessment_id)) {
     if ($question_count>0) {
         $questions = range(0, $question_count-1);
     } else {
-        $questions = array();
+        $questions = [];
     }
 
     // ----------------------------------------
@@ -135,7 +135,7 @@ if ($assessment->load($assessment_id)) {
 } else {
     $assessment = null;
 
-    echo('Error: The assessment could not be loaded.');
+    echo 'Error: The assessment could not be loaded.';
     exit;
 }
 
@@ -175,7 +175,7 @@ if ($type == 'view') {
       foreach ($group_members as $group_id => $g_members) {
           ?>
       <div style="margin-top: 40px;">
-        <h3><?php echo($group_names[$group_id]); ?></h3>
+        <h3><?php echo $group_names[$group_id]; ?></h3>
         <table class="grid" cellpadding="2" cellspacing="1">
         <tr>
           <th>name</th>
@@ -209,20 +209,20 @@ if ($type == 'view') {
 
           $individ = $CIS->get_user($member_id);
 
-          echo('<tr>');
-          echo("<td style=\"text-align: left\"> {$individ['lastname']}, {$individ['forename']} (");
+          echo '<tr>';
+          echo "<td style=\"text-align: left\"> {$individ['lastname']}, {$individ['forename']} (";
           if (!empty($individ['id_number'])) {
-              echo($individ['id_number']);
+              echo $individ['id_number'];
           } else {
-              echo($individ['username']);
+              echo $individ['username'];
           }
-          echo(')</td>');
-          echo("<td>$started</td>");
-          echo("<td>$finished</td>");
-          echo("<td>$time_taken</td>");
-          echo("<td>$ip_address</td>");
-          echo("<td>$computer_name</td>");
-          echo('</tr>');
+          echo ')</td>';
+          echo "<td>$started</td>";
+          echo "<td>$finished</td>";
+          echo "<td>$time_taken</td>";
+          echo "<td>$ip_address</td>";
+          echo "<td>$computer_name</td>";
+          echo '</tr>';
       } ?>
         </table>
       </div>
@@ -243,18 +243,18 @@ if ($type == 'view') {
 * --------------------------------------------------------------------------------
 */
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"webpa_student_response_info.csv\"");
+    header('Content-Disposition: attachment; filename="webpa_student_response_info.csv"');
     header('Content-Type: text/csv');
 
-    echo('"Student Response Information"'."\n\n");
-    echo("\"{$assessment->name}\"\n\n");
+    echo '"Student Response Information"'."\n\n";
+    echo "\"{$assessment->name}\"\n\n";
 
     if (($assessment) && ($groups_iterator->size()>0)) {
         foreach ($group_members as $group_id => $g_members) {
-            echo("\"Group\",\"{$group_names[$group_id]}\"\n");
-            echo("\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n");
+            echo "\"Group\",\"{$group_names[$group_id]}\"\n";
+            echo "\"Overall group mark\",\"{$groups_and_marks[$group_id]}\"\n";
 
-            echo('"Name","Started","Finished","Time Taken","IP Address","Computer Name"'."\n");
+            echo '"Name","Started","Finished","Time Taken","IP Address","Computer Name"'."\n";
 
             foreach ($g_members as $i => $member_id) {
                 if (array_key_exists($member_id, $response_info)) {
@@ -277,20 +277,20 @@ if ($type == 'download-csv') {
                     $computer_name = '';
                 }
                 $individ = $CIS->get_user($member_id);
-                echo("\"{$individ['lastname']}, {$individ['forename']} (");
+                echo "\"{$individ['lastname']}, {$individ['forename']} (";
                 if (!empty($individ['id_number'])) {
-                    echo($individ['id_number']);
+                    echo $individ['id_number'];
                 } else {
-                    echo($individ['username']);
+                    echo $individ['username'];
                 }
-                echo(')",');
-                echo("\"$started\",");
-                echo("\"$finished\",");
-                echo("\"$time_taken\",");
-                echo("\"$ip_address\",");
-                echo("\"$computer_name\"\n");
+                echo ')",';
+                echo "\"$started\",";
+                echo "\"$finished\",";
+                echo "\"$time_taken\",";
+                echo "\"$ip_address\",";
+                echo "\"$computer_name\"\n";
             }
-            echo("\n\n");
+            echo "\n\n";
         }
     }
 }

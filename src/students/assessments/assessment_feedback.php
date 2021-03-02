@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
@@ -42,9 +42,9 @@ function extract_min($input_array)
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
-    echo('Error: The requested assessment could not be loaded.');
+    echo 'Error: The requested assessment could not be loaded.';
     exit;
-} else {
+}
 
   // ----------------------------------------
     // Get the marking parameters used for the marksheet this report will display
@@ -66,9 +66,9 @@ if (!$assessment->load($assessment_id)) {
     $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
     if (!$algorithm) {
-        echo('Error: The requested algorithm could not be loaded.');
+        echo 'Error: The requested algorithm could not be loaded.';
         exit;
-    } else {
+    }
         $algorithm->set_grade_ordinals($ordinal_scale);
         $algorithm->set_assessment($assessment);
         $algorithm->set_marking_params($marking_params);
@@ -82,7 +82,7 @@ if (!$assessment->load($assessment_id)) {
 
         $penalties = $algorithm->get_penalties();
         if (!$penalties) {
-            $penalties = array();
+            $penalties = [];
         }
 
         $questions = $algorithm->get_questions();
@@ -91,7 +91,7 @@ if (!$assessment->load($assessment_id)) {
         $group_members = $algorithm->get_group_members();
         $member_ids = array_keys($webpa_scores);
 
-        $member_names = array();
+        $member_names = [];
 
         for ($i =0; $i<count($group_members); $i++) {
             $array_key = array_keys($group_members);
@@ -105,8 +105,8 @@ if (!$assessment->load($assessment_id)) {
         $collection =& $group_handler->get_collection($assessment->get_collection_id());
 
         $form = $assessment->get_form();
-    }
-}
+    
+
 
 
 $UI->page_title = APP__NAME . ' Feedback Report';
@@ -128,7 +128,7 @@ $UI->content_start();
 
 
 
-<h2><?php echo($assessment->name); ?></h2>
+<h2><?php echo $assessment->name; ?></h2>
 <p style="margin-bottom: 2em;">The following is based on your relative contribution in the group, measured from the self and peer assessment
    <?php echo APP__MARK_TEXT; ?> only and does <b>not</b> take account of the overall group <?php echo APP__MARK_TEXT; ?> for the project.</p>
 </p>
@@ -160,7 +160,7 @@ if ((!$assessment) || (!$group_names)) {
 
         $question_count = count($questions);
 
-        $awarded_total = array();
+        $awarded_total = [];
 
         foreach ($questions as $question_id => $question) {
             $awarded_total[$question_id] = 0;
@@ -203,7 +203,7 @@ if ((!$assessment) || (!$group_names)) {
 
         //check to see if the answer are all the same for all questions
         if ($match==$question_count) {
-            echo "<p>Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria.</p>";
+            echo '<p>Your group has <?php echo APP__MARK_TEXT; ?> everyone equally, hence we are unable to provide feedback on your relative performance for different assessment criteria.</p>';
         } else {
 
     //get the fractional values and work out the greatest
@@ -226,23 +226,23 @@ if ((!$assessment) || (!$group_names)) {
                     if ($max_score[$returned_max[0]]['mark_received']==$max_score[$returned_max[1]]['mark_received']) {
                         //leave in incase we want to offer more than one result
                         $element = $form->get_question($returned_max[0]);
-                        echo "<h3>Your strongest contribution within this project was rated by your group as:</h3>";
-                        echo "<p><b>" . $element['text']['_data'];
-                        echo "</b><br/>" . $element['desc']['_data'];
-                        echo "</p>";
+                        echo '<h3>Your strongest contribution within this project was rated by your group as:</h3>';
+                        echo '<p><b>' . $element['text']['_data'];
+                        echo '</b><br/>' . $element['desc']['_data'];
+                        echo '</p>';
                     } else {
                         $element = $form->get_question($returned_max[0]);
-                        echo "<h3>Your strongest contribution within this project was rated by your group as:</h3>";
-                        echo "<p><b>" . $element['text']['_data'];
-                        echo "</b><br/>" . $element['desc']['_data'];
-                        echo "</p>";
+                        echo '<h3>Your strongest contribution within this project was rated by your group as:</h3>';
+                        echo '<p><b>' . $element['text']['_data'];
+                        echo '</b><br/>' . $element['desc']['_data'];
+                        echo '</p>';
                     }
                 }
             } else {
-                $msg_failure = "<p>WebPA has been unable to generate any feedback</p>";
+                $msg_failure = '<p>WebPA has been unable to generate any feedback</p>';
             }
 
-            echo "<br/><br/>";
+            echo '<br/><br/>';
 
             //only display if the score is below the median and one mark below the others
             //No area for development should be identified if their lowest score is above the median AND
@@ -263,17 +263,17 @@ if ((!$assessment) || (!$group_names)) {
 
                         //compare to ensure that the lowest if below the median
                         if ($min_score_per_question[$returned_min[0]]<$median) {
-                            echo "<h3>An area you may wish to develop is your contribution to:</h3>";
-                            echo "<p><b>" . $element['text']['_data'];
-                            echo "</b><br/>" . $element['desc']['_data'];
-                            echo "</p>";
+                            echo '<h3>An area you may wish to develop is your contribution to:</h3>';
+                            echo '<p><b>' . $element['text']['_data'];
+                            echo '</b><br/>' . $element['desc']['_data'];
+                            echo '</p>';
                         }
                     } else {
                         $element = $form->get_question($returned_min[0]);
-                        echo "<h3>An area you may wish to develop is your contribution to:</h3>";
-                        echo "<p><b>" . $element['text']['_data'];
-                        echo "</b><br/>" . $element['desc']['_data'];
-                        echo "</p>";
+                        echo '<h3>An area you may wish to develop is your contribution to:</h3>';
+                        echo '<p><b>' . $element['text']['_data'];
+                        echo '</b><br/>' . $element['desc']['_data'];
+                        echo '</p>';
                     }
                 } else {
                     $element = $form->get_question($returned_min[0]);
@@ -285,14 +285,14 @@ if ((!$assessment) || (!$group_names)) {
 
                     //compare to ensure that the lowest if below the median
                     if ($min_score_per_question[$returned_min[0]]<$median) {
-                        echo "<h3>An area you may wish to develop is your contribution to:</h3>";
-                        echo "<p><b>" . $element['text']['_data'];
-                        echo "</b><br/>" . $element['desc']['_data'];
-                        echo "</p>";
+                        echo '<h3>An area you may wish to develop is your contribution to:</h3>';
+                        echo '<p><b>' . $element['text']['_data'];
+                        echo '</b><br/>' . $element['desc']['_data'];
+                        echo '</p>';
                     }
                 }
             } else {
-                $msg_failure = "<p>WebPA has been unable to generate any feedback</p>";
+                $msg_failure = '<p>WebPA has been unable to generate any feedback</p>';
             }
         }
         echo "  </div>\n";

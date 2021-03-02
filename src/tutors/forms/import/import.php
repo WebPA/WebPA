@@ -9,7 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('../../../includes/inc_global.php');
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\XMLParser;
@@ -102,7 +102,7 @@ if ($empty>0) {
           ->insert(APP__DB_TABLE_PREFIX . 'form_module')
           ->values([
               'form_id' => $new_id,
-              'module_id' => $_module_id
+              'module_id' => $_module_id,
           ])
           ->setParameter(0, $new_id)
           ->setParameter(1, $_module_id, ParameterType::INTEGER)
@@ -114,14 +114,14 @@ if ($empty>0) {
         $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
     }
 } else {
-    $action_notify = "<p>There was no form information to upload.<br> Please go back and try again</p>";
+    $action_notify = '<p>There was no form information to upload.<br> Please go back and try again</p>';
 }
 
 $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array('home'      => '/' ,
-            'my forms'  => null ,);
+$UI->breadcrumbs = ['home'      => '/',
+            'my forms'  => null, ];
 
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
 $UI->set_page_bar_button('Create a new Form', '../../../../images/buttons/button_form_create.gif', '../create/');

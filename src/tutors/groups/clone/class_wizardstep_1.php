@@ -14,11 +14,10 @@ use WebPA\includes\functions\Common;
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct($wizard)
     {
         $this->wizard = $wizard;
@@ -26,24 +25,28 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
+
+    // /WizardStep1()
 
     public function head()
     {
         $html = <<<HTMLEnd
-<script language="JavaScript" type="text/javascript">
-<!--
+            <script language="JavaScript" type="text/javascript">
+            <!--
 
-  function body_onload() {
-    document.getElementById('collection_name').focus();
-  }// /body_onload()
+              function body_onload() {
+                document.getElementById('collection_name').focus();
+              }// /body_onload()
 
-//-->
-</script>
-HTMLEnd;
+            //-->
+            </script>
+            HTMLEnd;
 
-        echo($html);
-    }// /->head()
+        echo $html;
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -75,16 +78,18 @@ HTMLEnd;
           $group_plural = ($group_count==1) ? 'group' : 'groups';
 
           $checked_str = ($collection->id==$this->wizard->get_field('collection_id')) ? 'checked="checked"' : '' ;
-          echo('<tr>');
-          echo("<td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked_str /></td>");
-          echo("<td><label style=\"font-weight: normal;\" for=\"collection_{$collection->id}\">{$collection->name} &nbsp; ($group_count $group_plural)</label></td>");
-          echo('</tr>');
+          echo '<tr>';
+          echo "<td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked_str /></td>";
+          echo "<td><label style=\"font-weight: normal;\" for=\"collection_{$collection->id}\">{$collection->name} &nbsp; ($group_count $group_plural)</label></td>";
+          echo '</tr>';
       } ?>
         </table>
       </div>
 <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -96,7 +101,9 @@ HTMLEnd;
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

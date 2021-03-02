@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once "../../../includes/inc_global.php";
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Form;
@@ -23,12 +23,12 @@ class WizardStep6
 
     // Public
     public $wizard;
+
     public $step = 6;
+
     private $module;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -52,7 +52,9 @@ class WizardStep6
           //-->
         </script>
         <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -99,7 +101,7 @@ class WizardStep6
         if ($send_email == '1') {
             $_user_id = Common::fetch_SESSION('_user_id', null);
             $subjectLn = 'Your Tutor has set a WebPA assessment';
-            $body = "Your tutor has set a WebPA assessment for your group. The details are as below;" .
+            $body = 'Your tutor has set a WebPA assessment for your group. The details are as below;' .
                 "\n Assessment Name:  " . $this->wizard->get_field('assessment_name') .
                 "\n Open from:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('open_date')) .
                 "\n Closes on:  " . date('G:i \o\n l, jS F Y', $this->wizard->get_field('close_date')) .
@@ -119,16 +121,16 @@ class WizardStep6
         if (is_array($errors)) {
             $this->wizard->back_button = '&lt; Back';
             $this->wizard->cancel_button = 'Cancel';
-            echo('<p><strong>Unable to create your new assessment.</strong></p>');
-            echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+            echo '<p><strong>Unable to create your new assessment.</strong></p>';
+            echo '<p>To correct the problem, click <em>back</em> and amend the details entered.</p>';
         } else {// Else.. create the form!
             if ($assessment) {
                 $assessment_qs = "a={$assessment->id}"; ?>
                 <p><strong>Your new assessment has been created.</strong></p>
                 <p style="margin-top: 20px;">To view or amend the details of your new assessment, you can use the <a
-                            href="../edit/edit_assessment.php?<?php echo($assessment_qs); ?>">assessment editor</a>.</p>
+                            href="../edit/edit_assessment.php?<?php echo $assessment_qs; ?>">assessment editor</a>.</p>
                 <p style="margin-top: 20px;">To send an email alert to the students due to take this new assessment, use
-                    the <a href="../email/index.php?<?php echo($assessment_qs); ?>">email wizard</a>.</p>
+                    the <a href="../email/index.php?<?php echo $assessment_qs; ?>">email wizard</a>.</p>
                 <p style="margin-top: 20px;">Alternatively, you can return to <a href="../index.php">my assessments</a>,
                     or to the <a href="../../../">WebPA home page</a>.</p>
                 <?php
@@ -139,11 +141,15 @@ class WizardStep6
                 <?php
             }
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
-        $this->wizard->_fields = array(); // kill the wizard's stored fields
+        $this->wizard->_fields = []; // kill the wizard's stored fields
         return null;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep6

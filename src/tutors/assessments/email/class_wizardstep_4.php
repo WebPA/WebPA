@@ -15,14 +15,12 @@ use WebPA\includes\functions\ArrayFunctions;
 
 class WizardStep4
 {
+    // Public
+    public $wizard;
 
-  // Public
-    public $wizard = null;
     public $step = 4;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -32,7 +30,9 @@ class WizardStep4
         $this->wizard->cancel_button = null;
 
         ob_start();
-    }// /WizardStep4()
+    }
+
+    // /WizardStep4()
 
     public function head()
     {
@@ -46,7 +46,9 @@ class WizardStep4
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -131,19 +133,21 @@ class WizardStep4
         if (is_array($errors)) {
             $this->wizard->back_button = '&lt; Back';
             $this->wizard->cancel_button = 'Cancel';
-            echo('<p><strong>Unable to send email.</strong></p>');
-            echo('<p>To try correcting the problem, click <em>back</em> and amend the details entered.</p>');
+            echo '<p><strong>Unable to send email.</strong></p>';
+            echo '<p>To try correcting the problem, click <em>back</em> and amend the details entered.</p>';
         } else {
             ?>
       <p><strong>Your email has been sent.</strong></p>
-      <p style="margin-top: 20px;">You can now return to <a href="<?php echo($this->wizard->get_field('list_url')); ?>">your assessment list</a>, or to the <a href="/">WebPA home page</a>.</p>
+      <p style="margin-top: 20px;">You can now return to <a href="<?php echo $this->wizard->get_field('list_url'); ?>">your assessment list</a>, or to the <a href="/">WebPA home page</a>.</p>
 <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
-        $this->wizard->_fields = array(); // kill the wizard's stored fields
+        $this->wizard->_fields = []; // kill the wizard's stored fields
         return null;
     }
 }

@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\functions\Common;
@@ -39,10 +39,10 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' .  "finished: $assessment->name";
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array(
-  'home'             => '/' ,
-  $assessment->name  => null ,
-);
+$UI->breadcrumbs = [
+  'home'             => '/',
+  $assessment->name  => null,
+];
 
 $UI->head();
 $UI->content_start();
@@ -54,7 +54,7 @@ $UI->content_start();
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - Your <?php echo APP__MARK_TEXT; ?> for this assessment should have been saved so please check this from the <a href="../../">my assessments</a> section.</p>
@@ -65,7 +65,7 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
+      <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a></td>
     </tr>
     </table>
   </div>

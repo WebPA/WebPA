@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../../includes/inc_global.php");
+require_once '../../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\Wizard;
@@ -43,7 +43,7 @@ if ($form) {
 
     $wizard->cancel_url = "../edit_form.php?f=$form_id";
 
-    $valid_types = array('likert', 'split100');
+    $valid_types = ['likert', 'split100'];
 
     if ($form->type=='split100') {
         $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
@@ -78,12 +78,12 @@ if ($form) {
 $UI->page_title = APP__NAME. ' Add a new criterion';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array(
-  'home'              => '../../' ,
-  'my forms'            => '/../' ,
-  "edit: {$form->name}"     => "../edit_form.php?$form_qs" ,
-  'add a new question'      => null ,
-);
+$UI->breadcrumbs = [
+  'home'              => '../../',
+  'my forms'            => '/../',
+  "edit: {$form->name}"     => "../edit_form.php?$form_qs",
+  'add a new question'      => null,
+];
 
 $UI->set_page_bar_button('List Forms', '../../../../../images/buttons/button_form_list.gif', '../../');
 $UI->set_page_bar_button('Create Form', '../../../../../images/buttons/button_form_create.gif', '../../create/');
@@ -115,7 +115,7 @@ if ($form) {
 if ($form) {
     $wizard->draw_wizard();
 } else {
-    echo("<p>The given assessment form failed to load so this wizard cannot be started.</p>");
+    echo '<p>The given assessment form failed to load so this wizard cannot be started.</p>';
 }
 ?>
 

@@ -14,7 +14,8 @@ use WebPA\includes\functions\Form;
 
 class WizardStep1
 {
-    public $wizard = null;
+    public $wizard;
+
     public $step = 1;
 
     public function __construct(Wizard $wizard)
@@ -72,31 +73,28 @@ class WizardStep1
         $email_opening = $this->wizard->get_field('email_opening', 0);
         $email_closing = $this->wizard->get_field('email_closing', 0);
 
-        /*
-        * Render a set of dropdown boxes for datetime selection
-        */
-        $renderTimeBoxes = function ($field_name, $selected_datetime)
-        {
-            echo('<table cellpadding="0" cellspacing="0"><tr>');
+        // Render a set of dropdown boxes for datetime selection
+        $renderTimeBoxes = function ($field_name, $selected_datetime) {
+            echo '<table cellpadding="0" cellspacing="0"><tr>';
 
             // Draw day box
-            echo("<td><select name=\"{$field_name}_day\">");
+            echo "<td><select name=\"{$field_name}_day\">";
             Form::render_options_range(1, 31, 1, date('j', $selected_datetime));
-            echo('</select></td>');
+            echo '</select></td>';
 
-            $form_months = array( 1 => 'January','February','March','April','May','June','July','August','September','October','November','December');
+            $form_months = [1 => 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
             // Draw month box
-            echo("<td><select name=\"{$field_name}_month\">");
+            echo "<td><select name=\"{$field_name}_month\">";
             Form::render_options($form_months, date('n', $selected_datetime));
-            echo('</select></td>');
+            echo '</select></td>';
 
             // Draw year box
-            echo("<td><select name=\"{$field_name}_year\">");
+            echo "<td><select name=\"{$field_name}_year\">";
             Form::render_options_range(date('Y', time()), date('Y', time())+1, 1, date('Y', $selected_datetime));
-            echo('</select></td>');
+            echo '</select></td>';
 
-            echo('<th>at</th>');
+            echo '<th>at</th>';
 
             // Draw time box
             $time = date('H:i', $selected_datetime);
@@ -104,16 +102,16 @@ class WizardStep1
             $time_h = (int) $time_parts[0];
             $time_m = (int) $time_parts[1];
 
-            echo("<td><select name=\"{$field_name}_time\">");
+            echo "<td><select name=\"{$field_name}_time\">";
             for ($i=0; $i<=23; $i++) {
                 for ($j=0; $j<=45; $j=$j+15) {
                     $selected = (($i == $time_h) && ($j == $time_m)) ? 'selected="selected"' : '' ;
                     printf('<option value="%1$02d:%2$02d" '. $selected .'> %1$02d:%2$02d </option>', $i, $j);
                 }
             }
-            echo('</select></td>');
+            echo '</select></td>';
 
-            echo('</tr></table>');
+            echo '</tr></table>';
         } ?>
     <p>To create a new assessment you must first give it a name. To avoid confusion, the name should be unique, but you can create assessments using the same name if you wish.</p>
 
@@ -121,7 +119,7 @@ class WizardStep1
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <th><label for="assessment_name">Name for this new assessment</label></th>
-        <td><input type="text" name="assessment_name" id="assessment_name" maxlength="100" size="40" value="<?php echo($this->wizard->get_field('assessment_name')); ?>" /></td>
+        <td><input type="text" name="assessment_name" id="assessment_name" maxlength="100" size="40" value="<?php echo $this->wizard->get_field('assessment_name'); ?>" /></td>
       </tr>
       </table>
     </div>
@@ -146,7 +144,7 @@ class WizardStep1
       <table class="form" cellpadding="2" cellspacing="2" width="100%">
       <tr>
         <th valign="top" style="padding-top: 2px; vertical-align: top;"><label for="introduction">Introduction</label></th>
-        <td width="100%"><textarea name="introduction" id="introduction" rows="6" cols="40" style="width: 90%;"><?php echo($this->wizard->get_field('introduction')); ?></textarea></td>
+        <td width="100%"><textarea name="introduction" id="introduction" rows="6" cols="40" style="width: 90%;"><?php echo $this->wizard->get_field('introduction'); ?></textarea></td>
       </tr>
       </table>
     </div>
@@ -162,11 +160,11 @@ class WizardStep1
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
-          <td><input type="radio" name="email" id="email_yes" value="1" <?php echo(($email) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email" id="email_yes" value="1" <?php echo ($email) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_yes">Yes, email all students.</label></td>
         </tr>
         <tr>
-          <td><input type="radio" name="email" id="email_no" value="0" <?php echo((!$email) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email" id="email_no" value="0" <?php echo (!$email) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_no">No, don't email all students.</label></td>
         </tr>
         </table>
@@ -180,11 +178,11 @@ class WizardStep1
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
-          <td><input type="radio" name="email_opening" id="email_opening_yes" value="1" <?php echo(($email_opening) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email_opening" id="email_opening_yes" value="1" <?php echo ($email_opening) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_opening_yes">Yes, email all students.</label></td>
         </tr>
         <tr>
-          <td><input type="radio" name="email_opening" id="email_opening_no" value="0" <?php echo((!$email_opening) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email_opening" id="email_opening_no" value="0" <?php echo (!$email_opening) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_opening_no">No, don't email all students.</label></td>
         </tr>
         </table>
@@ -198,11 +196,11 @@ class WizardStep1
       <div class="form_section">
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
-          <td><input type="radio" name="email_closing" id="email_closing_yes" value="1" <?php echo(($email_closing) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email_closing" id="email_closing_yes" value="1" <?php echo ($email_closing) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_closing_yes">Yes, email all students.</label></td>
         </tr>
         <tr>
-          <td><input type="radio" name="email_closing" id="email_closing_no" value="0" <?php echo((!$email_closing) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="email_closing" id="email_closing_no" value="0" <?php echo (!$email_closing) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="email_closing_no">No, don't email all students.</label></td>
         </tr>
         </table>
@@ -214,8 +212,9 @@ class WizardStep1
 
 
 <?php
-    }// /->form()
+    }
 
+    // /->form()
 
     public function process_form()
     {

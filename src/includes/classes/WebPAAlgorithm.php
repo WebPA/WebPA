@@ -15,22 +15,33 @@ namespace WebPA\includes\classes;
 class WebPAAlgorithm
 {
     // Public Vars
-    public $_groups = null;
-    public $_group_members = null;
-    public $_questions = null;
-    public $_responses = null;
-    public $_marking_params = null;
+    public $_groups;
 
-    public $_group_member_responses = null;
-    public $_group_member_total_awarded = null;
-    public $_group_member_frac_scores_awarded = null;
-    public $_group_member_total_received = null;
-    public $_group_member_webpa_scores = null;
-    public $_group_member_intermediate_grades = null;
-    public $_group_member_grades = null;
+    public $_group_members;
 
-    public $_group_member_submitted = null;
-    public $_member_submitted = null;
+    public $_questions;
+
+    public $_responses;
+
+    public $_marking_params;
+
+    public $_group_member_responses;
+
+    public $_group_member_total_awarded;
+
+    public $_group_member_frac_scores_awarded;
+
+    public $_group_member_total_received;
+
+    public $_group_member_webpa_scores;
+
+    public $_group_member_intermediate_grades;
+
+    public $_group_member_grades;
+
+    public $_group_member_submitted;
+
+    public $_member_submitted;
 
     // Private Vars
 
@@ -63,25 +74,25 @@ class WebPAAlgorithm
     public function get_webpa_scores($group_id = null)
     {
         if (!is_array($this->_group_member_webpa_scores)) {
-            return array();
-        } else {
-            if ($group_id) {
-                return $this->_group_member_webpa_scores["$group_id"];
-            } else {
-                $scores = array();
-                foreach ($this->_group_member_webpa_scores as $group_id => $member_scores) {
-                    // [pmn] FIXED : needs this foreach to list scores by member_id
-
-                    foreach ($member_scores as $member_id => $score) {
-                        $scores[$member_id] = $score;
-                    }
-                    //$scores = array_merge($scores, $member_scores);
-                }
-                ksort($scores);
-                return $scores;
-            }
+            return [];
         }
-    } // /->get_webpa_scores()
+        if ($group_id) {
+            return $this->_group_member_webpa_scores["$group_id"];
+        }
+        $scores = [];
+        foreach ($this->_group_member_webpa_scores as $group_id => $member_scores) {
+            // [pmn] FIXED : needs this foreach to list scores by member_id
+
+            foreach ($member_scores as $member_id => $score) {
+                $scores[$member_id] = $score;
+            }
+            //$scores = array_merge($scores, $member_scores);
+        }
+        ksort($scores);
+        return $scores;
+    }
+
+    // /->get_webpa_scores()
 
     /**
     * Function to Get grades
@@ -93,17 +104,18 @@ class WebPAAlgorithm
     {
         if ($group_id) {
             return $this->_group_member_intermediate_grades["$group_id"];
-        } else {
-            $grades = array();
-            foreach ($this->_group_member_intermediate_grades as $group_id => $member_grades) {
-                foreach ($member_grades as $member_id => $grade) {
-                    $grades[$member_id] = $grade;
-                }
-            }
-            ksort($grades);
-            return $grades;
         }
-    } // /->get_intermediate_grades()
+        $grades = [];
+        foreach ($this->_group_member_intermediate_grades as $group_id => $member_grades) {
+            foreach ($member_grades as $member_id => $grade) {
+                $grades[$member_id] = $grade;
+            }
+        }
+        ksort($grades);
+        return $grades;
+    }
+
+    // /->get_intermediate_grades()
 
     /**
     * Function to Get grades
@@ -115,17 +127,18 @@ class WebPAAlgorithm
     {
         if ($group_id) {
             return $this->_group_member_grades["$group_id"];
-        } else {
-            $grades = array();
-            foreach ($this->_group_member_grades as $group_id => $member_grades) {
-                foreach ($member_grades as $member_id => $grade) {
-                    $grades[$member_id] = $grade;
-                }
-            }
-            ksort($grades);
-            return $grades;
         }
-    } // /->get_grades()
+        $grades = [];
+        foreach ($this->_group_member_grades as $group_id => $member_grades) {
+            foreach ($member_grades as $member_id => $grade) {
+                $grades[$member_id] = $grade;
+            }
+        }
+        ksort($grades);
+        return $grades;
+    }
+
+    // /->get_grades()
 
     /**
      * Function to get members submitting
@@ -137,10 +150,11 @@ class WebPAAlgorithm
     {
         if ($group_id) {
             return (array_key_exists($group_id, $this->_group_member_submitted)) ? $this->_group_member_submitted["$group_id"] : null ;
-        } else {
-            return $this->_member_submitted;
         }
-    }// /->get_members_submitting()
+        return $this->_member_submitted;
+    }
+
+    // /->get_members_submitting()
 
     /**
      * Get the response given by one member of a group to another member for a particular question
@@ -181,7 +195,9 @@ class WebPAAlgorithm
     public function set_groups(& $groups)
     {
         $this->_groups =& $groups;
-    }// /->set_groups()
+    }
+
+    // /->set_groups()
 
     /*
     * Set group members
@@ -191,7 +207,9 @@ class WebPAAlgorithm
     public function set_group_members(& $group_members)
     {
         $this->_group_members =& $group_members;
-    }// /->set_group_members()
+    }
+
+    // /->set_group_members()
 
     /*
     * Set marking parameters
@@ -201,7 +219,9 @@ class WebPAAlgorithm
     public function set_marking_params(& $marking_params)
     {
         $this->_marking_params =& $marking_params;
-    }// /->set_marking_params()
+    }
+
+    // /->set_marking_params()
 
     /*
     * Set questions
@@ -212,7 +232,9 @@ class WebPAAlgorithm
     public function set_questions(& $questions)
     {
         $this->_questions =& $questions;
-    }// /->set_questions()
+    }
+
+    // /->set_questions()
 
     /*
     * Set member responses
@@ -222,7 +244,9 @@ class WebPAAlgorithm
     public function set_responses(& $responses)
     {
         $this->_responses =& $responses;
-    }// /->set_responses()
+    }
+
+    // /->set_responses()
 
     /*
     * --------------------------------------------------------------------------------
@@ -230,14 +254,14 @@ class WebPAAlgorithm
     * --------------------------------------------------------------------------------
     */
 
-    /*
-    * Calculate the WebPA and group scores for each student
-    */
+    // Calculate the WebPA and group scores for each student
     public function calculate()
     {
-        echo('<p>ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden.</p>');
+        echo '<p>ERROR: WebPAAlgorithm->calculate() is an abstract method and should be overridden.</p>';
         exit;
-    }// /->calculate()
+    }
+
+    // /->calculate()
 
     /*
     * ================================================================================
@@ -263,5 +287,7 @@ class WebPAAlgorithm
 
         $this->_group_member_submitted = null;
         $this->_member_submitted = null;
-    }// /->_init()
+    }
+
+    // /->_init()
 }// /class: WebPAAlgorithm

@@ -16,10 +16,15 @@ use WebPA\includes\functions\Common;
 class ResultHandler
 {
     private $_DAO;
+
     private $_assessment;
+
     private $_collection;
+
     private $_collection_id;
+
     private $dbConn;
+
     private $moduleId;
 
     /*
@@ -68,7 +73,9 @@ class ResultHandler
     public function & get_assessment()
     {
         return $this->_assessment;
-    }// /->get_assessment()
+    }
+
+    // /->get_assessment()
 
     /**
      * Fetch all responses for this assessment
@@ -141,10 +148,11 @@ class ResultHandler
                 'AND um.group_id = ?';
 
             return $this->dbConn->fetchOne($responseCountQuery, [$this->_assessment->id, $this->_collection->id, $group_id], [ParameterType::STRING, ParameterType::STRING, ParameterType::STRING]);
-        } else {
-            return null;
         }
-    }// /->get_responses_count()
+        return null;
+    }
+
+    // /->get_responses_count()
 
     /**
      * Fetch a count of the responses for all this user's assessments (that opened this academic year)

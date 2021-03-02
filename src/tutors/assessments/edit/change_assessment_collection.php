@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
@@ -43,7 +43,7 @@ if ($assessment->load($assessment_id)) {
     $collection =& $group_handler->get_collection($assessment->get_collection_id());
 } else {
     $assessment = null;
-    $assessment_url = "../";
+    $assessment_url = '../';
 }
 
 // --------------------------------------------------------------------------------
@@ -108,10 +108,10 @@ $manage_text = ($assessment) ? "manage: {$assessment->name}" : 'manage assessmen
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array('home'         => '/' ,
-               'my assessments'   => '/tutors/assessments/' ,
-               $manage_text     => $assessment_url ,
-               'change collection'  => null ,);
+$UI->breadcrumbs = ['home'         => '/',
+               'my assessments'   => '/tutors/assessments/',
+               $manage_text     => $assessment_url,
+               'change collection'  => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -157,7 +157,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($assessment_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
+    <a href="<?php echo $assessment_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
@@ -167,7 +167,7 @@ if (!$assessment) {
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($assessment_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
+      <td><a href="<?php echo $assessment_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to the assessment</a></td>
     </tr>
     </table>
   </div>
@@ -183,19 +183,19 @@ if (!$assessment) {
   } else {
       ?>
 
-    <form action="change_assessment_collection.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
+    <form action="change_assessment_collection.php?<?php echo $assessment_qs; ?>" method="post" name="assessment_form">
     <input type="hidden" name="command" value="none" />
 
     <h2>Current Collection</h2>
     <div class="form_section form_line">
 <?php
-    echo("<p><label>You are currently using collection: </label><em>{$collection->name}</em></p>");
+    echo "<p><label>You are currently using collection: </label><em>{$collection->name}</em></p>";
 
 //    $modules = (is_array($collection->get_modules())) ? implode(', ',$collection->get_modules()) : 'none' ;
       $group_count = count($collection->get_groups_array());
 
 //    echo("  <div style=\"margin-left: 50px; font-size: 84%;\"><div>Associated Modules : $modules</div><div>Number of Groups : $group_count</div></div>");
-      echo("  <div style=\"margin-left: 50px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div>"); ?>
+      echo "  <div style=\"margin-left: 50px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div>"; ?>
     </div>
 
 
@@ -223,12 +223,12 @@ if (!$assessment) {
           $group_count = count($new_collection->get_groups_array());
 //        $modules = (is_array($new_collection->get_modules())) ? implode(', ',$new_collection->get_modules()) : 'none' ;
 
-          echo('<tr>');
-          echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$new_collection->id}\" value=\"{$new_collection->id}\" /></td>");
-          echo("  <td><label class=\"small\" for=\"collection_{$new_collection->id}\">{$new_collection->name}</label>");
+          echo '<tr>';
+          echo "  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$new_collection->id}\" value=\"{$new_collection->id}\" /></td>";
+          echo "  <td><label class=\"small\" for=\"collection_{$new_collection->id}\">{$new_collection->name}</label>";
 //        echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Associated Modules : $modules</div><div>Number of Groups : $group_count</div></div></td>");
-          echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
-          echo('</tr>');
+          echo "  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>";
+          echo '</tr>';
       } ?>
           </table>
         </div>

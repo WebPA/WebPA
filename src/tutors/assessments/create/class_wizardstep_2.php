@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Wizard;
@@ -16,14 +16,13 @@ use WebPA\includes\functions\Common;
 
 class WizardStep2
 {
-    public $wizard = null;
+    public $wizard;
+
     public $step = 2;
 
     private $moduleId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -33,7 +32,9 @@ class WizardStep2
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep2()
+    }
+
+    // /WizardStep2()
 
     public function head()
     {
@@ -58,8 +59,9 @@ class WizardStep2
           //-->
         </script>
         <?php
-    }// /->head()
+    }
 
+    // /->head()
 
     public function form()
     {
@@ -116,11 +118,11 @@ class WizardStep2
                 } else {
                     $module = " ({$form['module_title']} [{$form['module_code']}])";
                 }
-                echo('<tr>');
-                echo("<td><input type=\"radio\" name=\"form_id\" id=\"form_{$form['form_id']}\" value=\"{$form['form_id']}\" $checked /></td>");
-                echo("<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}{$module}</label></td>");
-                echo("<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>");
-                echo('</tr>');
+                echo '<tr>';
+                echo "<td><input type=\"radio\" name=\"form_id\" id=\"form_{$form['form_id']}\" value=\"{$form['form_id']}\" $checked /></td>";
+                echo "<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}{$module}</label></td>";
+                echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>";
+                echo '</tr>';
             } ?>
                 </table>
             </div>
@@ -128,7 +130,7 @@ class WizardStep2
 
             //check that the system allows student Justification
             if (APP__ALLOW_TEXT_INPUT) {
-                //provide the academic the option ?>
+                //provide the academic the option?>
                 <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img
                                 src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
                     <br/><br/></div>
@@ -143,14 +145,14 @@ class WizardStep2
                         <table class="form" cellpadding="2" cellspacing="2">
                             <tr>
                                 <td><input type="radio" name="allow_feedback" id="allow_feedback_yes"
-                                           value="1" <?php echo(($allow_feedback) ? 'checked="checked"' : ''); ?> />
+                                           value="1" <?php echo ($allow_feedback) ? 'checked="checked"' : ''; ?> />
                                 </td>
                                 <td valign="top"><label class="small" for="allow_feedback_yes">Yes, allow students to
                                         view feedback.</label></td>
                             </tr>
                             <tr>
                                 <td><input type="radio" name="allow_feedback" id="allow_feedback_no"
-                                           value="0" <?php echo((!$allow_feedback) ? 'checked="checked"' : ''); ?> />
+                                           value="0" <?php echo (!$allow_feedback) ? 'checked="checked"' : ''; ?> />
                                 </td>
                                 <td valign="top"><label class="small" for="allow_feedback_no">No, there is no feedback
                                         for this assessment.</label></td>
@@ -166,18 +168,18 @@ class WizardStep2
                             <tr>
                                 <td><label class="small" for="feedback_name">Title </label></td>
                                 <td><input type="text" name="feedback_name" id="feedback_name" maxlength="100" size="40"
-                                           value="<?php echo($this->wizard->get_field('feedback_name')); ?>"></td>
+                                           value="<?php echo $this->wizard->get_field('feedback_name'); ?>"></td>
                             </tr>
                             <tr>
                                 <td><input type="radio" name="allow_text_input" id="allow_text_input_yes"
-                                           value="1" <?php echo(($this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''); ?>>
+                                           value="1" <?php echo ($this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
                                 </td>
                                 <td><label class="small" for="allow_text_input_yes"><b>Yes</b>, allow students to
                                         comment.</label></td>
                             </tr>
                             <tr>
                                 <td><input type="radio" name="allow_text_input" id="allow_text_input_no"
-                                           value="0" <?php echo((!$this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''); ?>>
+                                           value="0" <?php echo (!$this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
                                 </td>
                                 <td><label class="small" for="allow_text_input_no"><b>No</b>, don't allow students to
                                         comment.</label></td>
@@ -188,7 +190,9 @@ class WizardStep2
                 <?php
             }
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -207,7 +211,9 @@ class WizardStep2
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2
 
 ?>

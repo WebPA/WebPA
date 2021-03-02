@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
@@ -16,11 +16,10 @@ use WebPA\includes\functions\Common;
 class WizardStep4
 {
     public $wizard;
+
     public $step = 4;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -28,7 +27,9 @@ class WizardStep4
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep4()
+    }
+
+    // /WizardStep4()
 
     public function head()
     {
@@ -53,7 +54,9 @@ class WizardStep4
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -63,7 +66,7 @@ class WizardStep4
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <td>
-          <input type="radio" name="assessment_type" value="1" id="both" <?php echo((!$assessment_type)? 'checked="checked"' : ''); ?>>
+          <input type="radio" name="assessment_type" value="1" id="both" <?php echo (!$assessment_type)? 'checked="checked"' : ''; ?>>
         </td>
         <td>
           <label class="small" for="both">Self and peer assessment</label>
@@ -77,7 +80,7 @@ class WizardStep4
       <table class="form" cellpadding="2" cellspacing="2">
       <tr>
         <td>
-          <input type="radio" name="assessment_type" value="0" id="peer" <?php echo(($assessment_type)? 'checked="checked"' : ''); ?>/>
+          <input type="radio" name="assessment_type" value="0" id="peer" <?php echo ($assessment_type)? 'checked="checked"' : ''; ?>/>
         </td>
         <td>
           <label class="small" for="peer">Peer assessment only</label>
@@ -88,7 +91,9 @@ class WizardStep4
     </div>
 
 <?php
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -98,7 +103,9 @@ class WizardStep4
 
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep4
 
 ?>

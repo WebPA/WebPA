@@ -54,10 +54,11 @@ class ArrayFunctions
                 }
             }
             return $extracted_columns;
-        } else {
-            return null;
         }
-    }// /array_extract_column()
+        return null;
+    }
+
+    // /array_extract_column()
 
     /**
      *  Get an associative array, keyed using the given index
@@ -79,5 +80,7 @@ class ArrayFunctions
             }
         }
         return $assoc_array;
-    }// /array_get_assoc()
+    }
+
+    // /array_get_assoc()
 }

@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
@@ -82,11 +82,11 @@ $page_title = ($collection) ? "Groups: {$collection->name}" : 'Groups';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array( 'home' => '../../' ,
-                'my groups' => '../' ,
-                "Editing: $collection_name" => "../edit/edit_collection.php?c={$collection->id}" ,
-                $page_title                 => null ,
-);
+$UI->breadcrumbs = ['home' => '../../',
+                'my groups' => '../',
+                "Editing: $collection_name" => "../edit/edit_collection.php?c={$collection->id}",
+                $page_title                 => null,
+];
 
 $UI->set_page_bar_button('List Groups', '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button('Create Groups', '../../../../images/buttons/button_group_create.gif', '../create/');
@@ -115,7 +115,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo($collection_name); ?></a>
+  <a href="<?php echo $collection_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo $collection_name; ?></a>
 </div>
 
 <?php
@@ -125,14 +125,14 @@ if (!$collection) {
 <?php
 } else {
         if ($collection->is_locked()) {
-            echo("<p>This collection has been locked and cannot be edited.</p>");
+            echo '<p>This collection has been locked and cannot be edited.</p>';
         } else {
-            echo("<p>On this page you can choose which modules to associate with this collection.</p>");
+            echo '<p>On this page you can choose which modules to associate with this collection.</p>';
         }
 
         $collection_qs = "c={$collection->id}"; ?>
 
-  <form action="edit_collection_groups.php?<?php echo($collection_qs); ?>" method="post" name="collection_groups_form">
+  <form action="edit_collection_groups.php?<?php echo $collection_qs; ?>" method="post" name="collection_groups_form">
   <input type="hidden" name="command" value="add" />
 
   <h2>New Group</h2>
@@ -164,10 +164,10 @@ if (!$collection) {
         if (is_array($groups)) {
             foreach ($groups as $i => $group) {
                 $group_qs = "{$collection_qs}&g={$group['group_id']}";
-                echo('<tr>');
-                echo("<td><a href=\"edit_group.php?$group_qs\">{$group['group_name']}</a></td>");
-                echo("<td align=\"center\"><input type=\"checkbox\" name=\"group[]\" id=\"group_{$group['group_id']}\" value=\"{$group['group_id']}\" /></td>");
-                echo('</tr>');
+                echo '<tr>';
+                echo "<td><a href=\"edit_group.php?$group_qs\">{$group['group_name']}</a></td>";
+                echo "<td align=\"center\"><input type=\"checkbox\" name=\"group[]\" id=\"group_{$group['group_id']}\" value=\"{$group['group_id']}\" /></td>";
+                echo '</tr>';
             }
             if ($allow_edit) {?>
       <tr>
@@ -177,7 +177,7 @@ if (!$collection) {
       <?php
     }
         } else {
-            echo('<tr class="in_collection"><td colspan="3">This collection does not contain any groups</td></tr>');
+            echo '<tr class="in_collection"><td colspan="3">This collection does not contain any groups</td></tr>';
         } ?>
     </table>
       <td valign="bottom">

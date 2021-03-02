@@ -9,7 +9,7 @@
  */
 
 //get the include file required
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -24,9 +24,9 @@ $rstitle = 'Staff Data';
 $user_type = 'tutor';
 
 //set the page information
-$UI->page_title = APP__NAME . " view staff data";
+$UI->page_title = APP__NAME . ' view staff data';
 $UI->menu_selected = 'view data';
-$UI->breadcrumbs = array('home' => '../../','review data'=>'../', 'staff information'=>null,);
+$UI->breadcrumbs = ['home' => '../../', 'review data'=>'../', 'staff information'=>null];
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../../images/buttons/button_student_user.png', '../student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../../images/buttons/button_staff_user.png', '../staff/index.php');

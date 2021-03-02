@@ -14,11 +14,10 @@ use WebPA\includes\classes\Wizard;
 class WizardStep2
 {
     public $wizard;
+
     public $step = 2;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -28,7 +27,9 @@ class WizardStep2
         $this->wizard->cancel_button = null;
 
         ob_start();
-    }// /WizardStep2()
+    }
+
+    // /WizardStep2()
 
     public function head()
     {
@@ -42,7 +43,9 @@ class WizardStep2
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -62,8 +65,8 @@ class WizardStep2
         if (is_array($errors)) {
             $this->wizard->back_button = '&lt; Back';
             $this->wizard->cancel_button = 'Cancel';
-            echo('<p><strong>Unable to create your new form.</strong></p>');
-            echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+            echo '<p><strong>Unable to create your new form.</strong></p>';
+            echo '<p>To correct the problem, click <em>back</em> and amend the details entered.</p>';
         } else {// Else.. create the form!
 
             $saved = $form->save();
@@ -78,18 +81,22 @@ class WizardStep2
                 header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?f={$form->id}");
                 exit; ?>
         <p><strong>Your new assessment form has been created.</strong></p>
-        <p style="margin-top: 20px;">To add question and marking information to your form, you can use the <a href="../index.php?f=<?php echo($form->id); ?>">form editor</a>.</p>
+        <p style="margin-top: 20px;">To add question and marking information to your form, you can use the <a href="../index.php?f=<?php echo $form->id; ?>">form editor</a>.</p>
         <p style="margin-top: 20px;">Alternatively, you can return to <a href="/tutors/forms/">my forms</a>, or to the <a href="/">WebPA home page</a>.</p>
 <?php
             }
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
-        $this->wizard->_fields = array(); // kill the wizard's stored fields
+        $this->wizard->_fields = []; // kill the wizard's stored fields
         return null;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2
 
 ?>

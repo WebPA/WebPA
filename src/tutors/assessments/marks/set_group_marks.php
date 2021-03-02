@@ -7,7 +7,7 @@
  *
  * @link https://github.com/webpa/webpa
  */
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -36,7 +36,7 @@ $prev_url = $list_url;
 
 // --------------------------------------------------------------------------------
 
-$group_marks = array();
+$group_marks = [];
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
@@ -91,7 +91,7 @@ if (($command) && ($assessment)) {
               $mark = trim(str_replace('%', '', $v));
               if (!is_numeric($mark)) {
                   if (empty($mark)) {
-                      $errors[] = "You must enter a score for each group.";
+                      $errors[] = 'You must enter a score for each group.';
                   } else {
                       $errors[] = "You must enter a score for each group. $v is not a valid score.";
                   }
@@ -100,8 +100,8 @@ if (($command) && ($assessment)) {
               }
 
               // Add mark to XML we will save
-              $xml_array['groups']['group'][] = array('_attributes'  => array('id' => $group_id ,
-                                             'mark' => $mark ,));
+              $xml_array['groups']['group'][] = ['_attributes'  => ['id' => $group_id,
+                                             'mark' => $mark, ]];
 
               // Add mark to the array we're gonna check
               $group_marks[$group_id] = $mark;
@@ -141,7 +141,7 @@ if (($command) && ($assessment)) {
                 ->insert(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
                 ->values([
                     'assessment_id' => '?',
-                    'group_mark_xml' => '?'
+                    'group_mark_xml' => '?',
                 ])
                 ->setParameter(0, $assessment->id)
                 ->setParameter('group_mark_xml', $xml);
@@ -161,9 +161,9 @@ $page_title = 'set group marks';
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array('home'       => '../../' ,
-               'my assessments' => '../' ,
-               'set group marks'  => null ,);
+$UI->breadcrumbs = ['home'       => '../../',
+               'my assessments' => '../',
+               'set group marks'  => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -181,7 +181,7 @@ span.id_number { color: #666; }
 <?php
   if (is_array($bad_group_ids)) {
       foreach ($bad_group_ids as $i => $group_id) {
-          echo("tr#group_$group_id td { background-color: #fcc; }");
+          echo "tr#group_$group_id td { background-color: #fcc; }";
       }
   }
 ?>
@@ -216,7 +216,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
@@ -224,13 +224,13 @@ if (!$assessment) {
 } else {
         ?>
 
-  <form action="set_group_marks.php?<?php echo($assessment_qs); ?>" method="post" name="groupmark_form">
+  <form action="set_group_marks.php?<?php echo $assessment_qs; ?>" method="post" name="groupmark_form">
   <input type="hidden" name="command" value="none" />
 
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td><a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a></td>
+      <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a></td>
     </tr>
     </table>
   </div>
@@ -238,7 +238,7 @@ if (!$assessment) {
   <h2>Group Marks</h2>
   <div class="form_section">
 <?php
-  echo("<p><label>This assessment is using collection: </label><em>{$collection->name}</em></p>");
+  echo "<p><label>This assessment is using collection: </label><em>{$collection->name}</em></p>";
 
         $groups = $collection->get_groups_iterator();
 
@@ -262,25 +262,25 @@ if (!$assessment) {
 
         $group_mark = (array_key_exists($group->id, $group_marks)) ? $group_marks["$group->id"] : '';
 
-        echo("<tr id=\"group_{$group->id}\">");
-        echo("<td><label for=\"group_mark_{$group->id}\">{$group->name}</label></td>");
-        echo('<td style="text-align: left">');
+        echo "<tr id=\"group_{$group->id}\">";
+        echo "<td><label for=\"group_mark_{$group->id}\">{$group->name}</label></td>";
+        echo '<td style="text-align: left">';
         if (!$members) {
-            echo('-');
+            echo '-';
         } else {
             foreach ($members as $i => $member) {
-                echo("{$member['lastname']}, {$member['forename']}");
+                echo "{$member['lastname']}, {$member['forename']}";
                 if (!empty($member['id_number'])) {
-                    echo(" &nbsp; <span class=\"id_number\">({$member['id_number']})</span>");
+                    echo " &nbsp; <span class=\"id_number\">({$member['id_number']})</span>";
                 }
-                echo("<br />");
+                echo '<br />';
             }
         }
-        echo('</td>');
-        echo("<td><input type=\"text\" name=\"group_mark_{$group->id}\" id=\"group_mark_{$group->id}\" size=\"4\" maxlength=\"5\" value=\"$group_mark\" /> %</td>");
-        echo('</tr>');
+        echo '</td>';
+        echo "<td><input type=\"text\" name=\"group_mark_{$group->id}\" id=\"group_mark_{$group->id}\" size=\"4\" maxlength=\"5\" value=\"$group_mark\" /> %</td>";
+        echo '</tr>';
     }
-            echo('</table>');
+            echo '</table>';
         } ?>
   </div>
 

@@ -18,10 +18,10 @@ namespace WebPA\includes\classes\algorithms;
 
 class PetsAlgorithm extends Algorithm
 {
+    // Public Properties
+    protected $_group_split100;
 
-  // Public Properties
-    protected $_group_split100 = null;
-    protected $_group_average_per_question = null;
+    protected $_group_average_per_question;
 
     /**
      * Constructor
@@ -30,7 +30,9 @@ class PetsAlgorithm extends Algorithm
      */
     public function __construct()
     {
-    }// /->__construct()
+    }
+
+    // /->__construct()
 
     /*
     * ================================================================================
@@ -133,7 +135,9 @@ class PetsAlgorithm extends Algorithm
         $this->_applyGradingStyle();
 
         return true;
-    }// /->calculate()
+    }
+
+    // /->calculate()
 
     /*
     * ================================================================================
@@ -176,7 +180,9 @@ class PetsAlgorithm extends Algorithm
         }// /if(likert questions)
 
         return true;
-    }// ->_convertFromLikert()
+    }
+
+    // ->_convertFromLikert()
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a peer-only assessment.
@@ -258,7 +264,9 @@ class PetsAlgorithm extends Algorithm
 
         // @todo: if there's a non-submission, fake the scores using avg / q
     // score = ( old-score / (total_marks_awarded_in_peeronly / num_members - 1) ) * peer_only_avg_per_question
-    }// /->_preparePeerOnly()
+    }
+
+    // /->_preparePeerOnly()
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a self-&-peer assessment.
@@ -319,5 +327,7 @@ class PetsAlgorithm extends Algorithm
         }// /foreach(group)
 
         return true;
-    }// /->_prepareSelfPeer()
+    }
+
+    // /->_prepareSelfPeer()
 }// /class

@@ -15,17 +15,27 @@ include_once __DIR__ . '/../inc_global.php';
 class UI
 {
     public $page_title = '';
+
     public $menu_selected = '';
-    public $breadcrumbs = null;
+
+    public $breadcrumbs;
+
     public $help_link = '';
 
     private $user;
+
     private $_menu;
+
     private $_page_bar_buttons;
+
     private $cis;
+
     private $installedMods;
+
     private $sourceId;
+
     private $branding;
+
     private $module;
 
     /**
@@ -46,22 +56,22 @@ class UI
         if ($this->user) {
             if ($this->user->is_staff()) {
                 // Staff menu
-                $this->set_menu('Tutors', array('home' => APP__WWW . '/tutors/index.php',
+                $this->set_menu('Tutors', ['home' => APP__WWW . '/tutors/index.php',
                     'my forms' => APP__WWW . '/tutors/forms/',
                     'my groups' => APP__WWW . '/tutors/groups/',
-                    'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
+                    'my assessments' => APP__WWW . '/tutors/assessments/', ]);// /$this->set_menu()
             } elseif ($this->user->is_student()) {
                 // Student menu
-                $this->set_menu('Students', array('home' => APP__WWW . '/students/index.php',
+                $this->set_menu('Students', ['home' => APP__WWW . '/students/index.php',
                     'my groups' => APP__WWW . '/students/groups/',
-                    'my assessments' => APP__WWW . '/students/assessments/'));// /$this->set_menu()
+                    'my assessments' => APP__WWW . '/students/assessments/', ]);// /$this->set_menu()
             }
 
             //Admin menu
             if ($this->user->is_staff()) {
-                $menu = array('admin home' => APP__WWW . '/admin/index.php',
+                $menu = ['admin home' => APP__WWW . '/admin/index.php',
                     'upload data' => APP__WWW . '/admin/load/index.php',
-                    'view data' => APP__WWW . '/admin/review/index.php');
+                    'view data' => APP__WWW . '/admin/review/index.php', ];
                 if ($this->user->is_admin()) {
                     $menu['metrics'] = APP__WWW . '/admin/metrics/index.php';
                 }
@@ -73,13 +83,13 @@ class UI
                 $mod = strtolower($mod);
                 $menu_file = DOC__ROOT . "mod/$mod/menu.php";
                 if (file_exists($menu_file)) {
-                    require_once($menu_file);
+                    require_once $menu_file;
                 }
             }
         }
 
-        $this->set_menu('Support', array('help' => $helper_link, //this is a link set in each page / area to link to the approriate help
-            'contact' => APP__WWW . '/contact/'));// /$this->set_menu();
+        $this->set_menu('Support', ['help' => $helper_link, //this is a link set in each page / area to link to the approriate help
+            'contact' => APP__WWW . '/contact/', ]);// /$this->set_menu();
 
         if ($this->user) {
             if ($user->is_admin()) {
@@ -89,7 +99,7 @@ class UI
             }
 
             if ((($this->sourceId == '') || $this->user->is_admin()) && (count($modules) > 1)) {
-                $this->set_menu('  ', array('change module' => APP__WWW . '/module.php'));
+                $this->set_menu('  ', ['change module' => APP__WWW . '/module.php']);
             }
         }
 
@@ -101,7 +111,9 @@ class UI
             $menu['logout'] = APP__WWW . '/logout.php';
         }
         $this->set_menu(' ', $menu);// /$this->set_menu();
-    }// /->UI()
+    }
+
+    // /->UI()
 
     // --------------------------------------------------------------------------------
     // Public Methods
@@ -128,10 +140,11 @@ class UI
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $modified_date) . ' GMT');
         header('Cache-Control: no-store, no-cache, must-revalidate');   // HTTP/1.1
         header('Cache-Control: post-check=0, pre-check=0', false);    // HTTP/1.1
-        header("Cache-control: private", false);
+        header('Cache-control: private', false);
         header('Pragma: no-cache');   // HTTP/1.0
-    } // /-headers_expire()
+    }
 
+    // /-headers_expire()
 
     /**
      * Function to generate the header
@@ -148,9 +161,9 @@ class UI
         <head>
         <meta http-equiv="content-language" content="EN"/>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <title><?php echo(APP__NAME) ?></title>
-        <link href="<?php echo(APP__WWW) ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo(APP__WWW) ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css"/>
+        <title><?php echo APP__NAME ?></title>
+        <link href="<?php echo APP__WWW ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo APP__WWW ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             <?php
               if (!isset($_SESSION['_no_header'])) {
@@ -192,8 +205,9 @@ class UI
             <link href="<?php echo $this->branding['css']; ?>" rel="stylesheet" type="text/css"/>
             <?php
         }
-    } // /->head()
+    }
 
+    // /->head()
 
     /**
      * function to close the body area of the page
@@ -201,9 +215,10 @@ class UI
      */
     public function body($extra_attributes = '')
     {
-        echo("\n</head>\n<body $extra_attributes>\n\n");
-    } // /->body()
+        echo "\n</head>\n<body $extra_attributes>\n\n";
+    }
 
+    // /->body()
 
     /**
      * render page header
@@ -227,7 +242,7 @@ class UI
                             if (isset($this->module)) {
                                 echo "<td>{$this->module['module_title']} [{$this->module['module_code']}]</td>";
                             } else {
-                                echo('<td>&nbsp;</td>');
+                                echo '<td>&nbsp;</td>';
                             }
                 echo '<td align="right">';
                 if (isset($this->branding['logo']) && !empty($this->branding['logo'])) {
@@ -248,9 +263,9 @@ class UI
                 <div id="module_bar">
                     <?php
                     if ($this->user) {
-                        echo("<td>User: {$this->user->forename} {$this->user->lastname}</td>");
+                        echo "<td>User: {$this->user->forename} {$this->user->lastname}</td>";
                     } else {
-                        echo('<td>&nbsp;</td>');
+                        echo '<td>&nbsp;</td>';
                     } ?>
                 </div>
                 <?php
@@ -263,19 +278,21 @@ class UI
                     foreach ($this->breadcrumbs as $k => $v) {
                         --$num_crumbs;
                         if (!is_null($v)) {
-                            echo("<a class=\"breadcrumb\" href=\"$v\">$k</a>");
+                            echo "<a class=\"breadcrumb\" href=\"$v\">$k</a>";
                             if ($num_crumbs > 0) {
-                                echo(' &gt; ');
+                                echo ' &gt; ';
                             }
                         } else {
-                            echo($k);
+                            echo $k;
                         }
                     }
                 } ?>
             </div>
         </div>
         <?php
-    }// /->header()
+    }
+
+    // /->header()
 
     /**
      * Set the given section name to the given assoc-array of links
@@ -292,9 +309,8 @@ class UI
     {
         if (isset($this->_menu[$section_name])) {
             return $this->_menu[$section_name];
-        } else {
-            return array();
         }
+        return [];
     }
 
     /**
@@ -323,9 +339,11 @@ class UI
             }// /for
 
             $menu_html .= '</div>';
-            echo($menu_html);
+            echo $menu_html;
         }
-    }// /->menu()
+    }
+
+    // /->menu()
 
     /**
      * Set a page bar button
@@ -336,8 +354,10 @@ class UI
      */
     public function set_page_bar_button($text, $img, $link, $side = 'left')
     {
-        $this->_page_bar_buttons[$side][$text] = array('img' => "../images/buttons/$img", 'link' => $link);
-    }// /->set_page_bar_button()
+        $this->_page_bar_buttons[$side][$text] = ['img' => "../images/buttons/$img", 'link' => $link];
+    }
+
+    // /->set_page_bar_button()
 
     /**
      * Draw the page toolbar
@@ -352,7 +372,7 @@ class UI
                         <?php
                         if (array_key_exists('left', $this->_page_bar_buttons)) {
                             foreach ($this->_page_bar_buttons['left'] as $text => $button) {
-                                echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
+                                echo "<td><a class=\"page_bar_link\" href=\"{$button['link']}\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>";
                             }
                         } ?>
                         <td width="100%">&nbsp;</td>
@@ -360,7 +380,7 @@ class UI
                         // right-hand buttons are automatically set to target="_blank"
                         if (array_key_exists('right', $this->_page_bar_buttons)) {
                             foreach ($this->_page_bar_buttons['right'] as $text => $button) {
-                                echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" target=\"$text\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
+                                echo "<td><a class=\"page_bar_link\" href=\"{$button['link']}\" target=\"$text\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>";
                             }
                         } ?>
                     </tr>
@@ -368,7 +388,9 @@ class UI
             </div>
             <?php
         }
-    }// /->page_bar()
+    }
+
+    // /->page_bar()
 
     /**
      * Footer
@@ -382,7 +404,7 @@ class UI
                 <span style="font-size: small;">Version: <?php
                     echo APP__VERSION;
         if (count($this->installedMods) > 0) {
-            echo ' [' . implode(",", $this->installedMods) . ']';
+            echo ' [' . implode(',', $this->installedMods) . ']';
         } ?></span>
                 <?php
                 if (isset($this->user) && $this->user->is_admin() && $this->sourceId) {
@@ -397,21 +419,25 @@ class UI
             </iframe>
         </div>
         <?php
-    }// /->footer()
+    }
+
+    // /->footer()
 
     /**
      * Start main page content
      */
     public function content_start()
     {
-        echo('<div id="container">');
-        echo('<div id="main">');
+        echo '<div id="container">';
+        echo '<div id="main">';
         $this->page_bar();
-        echo('<div id="content">');
+        echo '<div id="content">';
         if ($this->page_title) {
-            echo("<h1>{$this->page_title}</h1>\n\n");
+            echo "<h1>{$this->page_title}</h1>\n\n";
         }
-    }// /content_start()
+    }
+
+    // /content_start()
 
     /**
      * End main page content
@@ -458,7 +484,9 @@ class UI
         </body>
         </html>
         <?php
-    }// /content_end()
+    }
+
+    // /content_end()
 
     /**
      * function to draw the boxed list
@@ -470,13 +498,15 @@ class UI
     public function draw_boxed_list($list, $box_class, $header_text, $footer_text)
     {
         if (is_array($list)) {
-            echo("<div class=\"$box_class\"><p style=\"font-weight: bold;\">$header_text</p><ul class=\"spaced\">");
+            echo "<div class=\"$box_class\"><p style=\"font-weight: bold;\">$header_text</p><ul class=\"spaced\">";
             foreach ($list as $item) {
-                echo("<li>$item</li>");
+                echo "<li>$item</li>";
             }
-            echo("</ul><p>$footer_text</p></div>");
+            echo "</ul><p>$footer_text</p></div>";
         }
-    }// ->draw_boxed_list()
+    }
+
+    // ->draw_boxed_list()
 
     // --------------------------------------------------------------------------------
     // Private Methods

@@ -9,7 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\functions\Common;
@@ -100,12 +100,12 @@ $page_title = ($group) ? "Editing: {$group->name}" : Generic::EDDITING__GROUP;
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/253';
-$UI->breadcrumbs = array(
-  'home'            => '../../' ,
-  'my groups'         => '../' ,
-  "Editing: $collection_name" => "edit_collection.php?c={$collection->id}" ,
-  $page_title         => null ,
-);
+$UI->breadcrumbs = [
+  'home'            => '../../',
+  'my groups'         => '../',
+  "Editing: $collection_name" => "edit_collection.php?c={$collection->id}",
+  $page_title         => null,
+];
 
 $UI->set_page_bar_button(Generic::BTN__LIST_GROUPS, '../../../../images/buttons/button_group_list.gif', '../');
 $UI->set_page_bar_button(Generic::BTN__CREATE_GROUPS, '../../../../images/buttons/button_group_create.gif', '../create/');
@@ -147,16 +147,16 @@ $UI->content_start();
 $UI->draw_boxed_list($errors, 'error_box', Generic::FOLLOWING__FOUND, Generic::NO_CHANGES);
 
 if ($collection->is_locked()) {
-    echo(Tutors::COLLECTION__LOCKED);
+    echo Tutors::COLLECTION__LOCKED;
 } else {
-    echo(Tutors::GROUPS__EDIT_INST);
+    echo Tutors::GROUPS__EDIT_INST;
 }
 ?>
 
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($collection_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo($collection_name); ?></a>
+  <a href="<?php echo $collection_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to <?php echo $collection_name; ?></a>
 </div>
 
 <?php
@@ -165,7 +165,7 @@ if (!$group) {
 } else {
     $group_qs = "{$collection_qs}&g={$group->id}"; ?>
 
-  <form action="edit_group.php?<?php echo($group_qs); ?>" method="post" name="group_form">
+  <form action="edit_group.php?<?php echo $group_qs; ?>" method="post" name="group_form">
   <input type="hidden" name="command" value="none" />
 
   <h2>Group Name</h2>
@@ -177,9 +177,9 @@ if (!$group) {
       <td>
 <?php
   if ($collection->is_locked()) {
-      echo($group->name);
+      echo $group->name;
   } else {
-      echo("<input type=\"text\" name=\"group_name\" id=\"group_name\" maxlength=\"50\" size=\"40\" value=\"{$group->name}\" />");
+      echo "<input type=\"text\" name=\"group_name\" id=\"group_name\" maxlength=\"50\" size=\"40\" value=\"{$group->name}\" />";
   } ?>
       </td>
     </tr>
@@ -211,23 +211,23 @@ if (!$group) {
 
     $group_students = $CIS->get_user($group_student_ids);
 
-    echo('<tr class="in_group"><th width="400">Students already in this group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+    echo '<tr class="in_group"><th width="400">Students already in this group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>';
     if (is_array($group_students)) {
         foreach ($group_students as $i => $member) {
-            echo('<tr class="in_group">');
-            echo("<td>{$member['lastname']}, {$member['forename']} (");
+            echo '<tr class="in_group">';
+            echo "<td>{$member['lastname']}, {$member['forename']} (";
             if (!empty($member['id_number'])) {
-                echo($member['id_number']);
+                echo $member['id_number'];
             } else {
-                echo($member['username']);
+                echo $member['username'];
             }
-            echo(')</td>');
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" checked=\"checked\" /></td>");
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" /></td>");
-            echo('</tr>');
+            echo ')</td>';
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" checked=\"checked\" /></td>";
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" /></td>";
+            echo '</tr>';
         }
     } else {
-        echo('<tr class="in_group"><td colspan="3">This group has no members</td></tr>');
+        echo '<tr class="in_group"><td colspan="3">This group has no members</td></tr>';
     }
 
     // Show the students who aren't in ANY group in this collection
@@ -238,23 +238,23 @@ if (!$group) {
     }
     $unalloc_students = $CIS->get_user($unalloc_student_ids);
 
-    echo('<tr class="no_group"><th>Students not yet assigned to a group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+    echo '<tr class="no_group"><th>Students not yet assigned to a group</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>';
     if (is_array($unalloc_students)) {
         foreach ($unalloc_students as $i => $member) {
-            echo('<tr class="no_group">');
-            echo("<td>{$member['lastname']}, {$member['forename']} (");
+            echo '<tr class="no_group">';
+            echo "<td>{$member['lastname']}, {$member['forename']} (";
             if (!empty($member['id_number'])) {
-                echo($member['id_number']);
+                echo $member['id_number'];
             } else {
-                echo($member['username']);
+                echo $member['username'];
             }
-            echo(')</td>');
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" /></td>");
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" checked=\"checked\" /></td>");
-            echo('</tr>');
+            echo ')</td>';
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" /></td>";
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" checked=\"checked\" /></td>";
+            echo '</tr>';
         }
     } else {
-        echo('<tr class="no_group"><td colspan="3">All the available students have been assigned</td></tr>');
+        echo '<tr class="no_group"><td colspan="3">All the available students have been assigned</td></tr>';
     }
 
     // Show the students who are in OTHER groups in this collection
@@ -265,23 +265,23 @@ if (!$group) {
     }
     $collection_students = $CIS->get_user($collection_member_ids);
 
-    echo('<tr class="other_group"><th>Students assigned to other groups in this collection</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>');
+    echo '<tr class="other_group"><th>Students assigned to other groups in this collection</th><th align="center" width="50">In</th><th align="center" width="50">Out</th></tr>';
     if (is_array($collection_students)) {
         foreach ($collection_students as $i => $member) {
-            echo('<tr class="other_group">');
-            echo("<td>{$member['lastname']}, {$member['forename']} (");
+            echo '<tr class="other_group">';
+            echo "<td>{$member['lastname']}, {$member['forename']} (";
             if (!empty($member['id_number'])) {
-                echo($member['id_number']);
+                echo $member['id_number'];
             } else {
-                echo($member['username']);
+                echo $member['username'];
             }
-            echo(')</td>');
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" /></td>");
-            echo("<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" checked=\"checked\" /></td>");
-            echo('</tr>');
+            echo ')</td>';
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_in\" value=\"1\" /></td>";
+            echo "<td class=\"radio\"><input type=\"radio\" name=\"student_{$member['user_id']}\" id=\"{$member['user_id']}_out\" value=\"0\" checked=\"checked\" /></td>";
+            echo '</tr>';
         }
     } else {
-        echo('<tr class="other_group"><td colspan="3">There are no students allocated to any other groups</td></tr>');
+        echo '<tr class="other_group"><td colspan="3">There are no students allocated to any other groups</td></tr>';
     } ?>
       </table>
 

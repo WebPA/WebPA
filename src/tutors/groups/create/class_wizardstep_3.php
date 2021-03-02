@@ -13,14 +13,13 @@ use WebPA\includes\classes\Wizard;
 
 class WizardStep3
 {
-    public $wizard = null;
+    public $wizard;
+
     public $step = 3;
 
     private $moduleId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -30,23 +29,27 @@ class WizardStep3
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep3()
+    }
+
+    // /WizardStep3()
 
     public function head()
     {
         $html = <<<HTMLEnd
-<script language="JavaScript" type="text/javascript">
-<!--
+            <script language="JavaScript" type="text/javascript">
+            <!--
 
-  function body_onload() {
-  }// /body_onload()
+              function body_onload() {
+              }// /body_onload()
 
-//-->
-</script>
-HTMLEnd;
+            //-->
+            </script>
+            HTMLEnd;
 
-        echo($html);
-    }// /->head()
+        echo $html;
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -63,24 +66,24 @@ HTMLEnd;
 
         <h2>Name</h2>
         <div style="margin: 0px 0px 16px 25px;">This collection of groups will be
-            called: <?php echo($this->wizard->get_field('collection_name')); ?></div>
+            called: <?php echo $this->wizard->get_field('collection_name'); ?></div>
 
         <h2>Students</h2>
         <div style="margin: 0px 0px 16px 25px;">
-            <p><?php echo("$total_students $students_plural"); ?> available.</p>
+            <p><?php echo "$total_students $students_plural"; ?> available.</p>
         </div>
 
         <h2>Groups</h2>
         <?php
-        $num_groups = (int)$this->wizard->get_field('num_groups');
+        $num_groups = (int) $this->wizard->get_field('num_groups');
         if ($num_groups > 0) {
             ?>
             <div style="margin: 0px 0px 16px 25px;">
                 <p>The following groups will be created in the new
-                    <strong><?php echo($this->wizard->get_field('groupset_name')); ?></strong> collection:</p>
+                    <strong><?php echo $this->wizard->get_field('groupset_name'); ?></strong> collection:</p>
                 <div style="margin-left: 25px;">
                     <?php
-                    $num_groups = (int)$this->wizard->get_field('num_groups');
+                    $num_groups = (int) $this->wizard->get_field('num_groups');
 
             $groupHandler = new GroupHandler();
 
@@ -92,14 +95,14 @@ HTMLEnd;
 
             if ($num_groups <= 5) {
                 foreach ($group_names as $group_name) {
-                    echo("<div>$group_name</div>");
+                    echo "<div>$group_name</div>";
                 }
             } else {
-                echo("<div>{$group_names[0]}</div>");
-                echo("<div>{$group_names[1]}</div>");
-                echo("<div>&nbsp; ...</div>");
-                echo('<div>' . $group_names[$num_groups - 2] . '</div>');
-                echo('<div>' . $group_names[$num_groups - 1] . '</div>');
+                echo "<div>{$group_names[0]}</div>";
+                echo "<div>{$group_names[1]}</div>";
+                echo '<div>&nbsp; ...</div>';
+                echo '<div>' . $group_names[$num_groups - 2] . '</div>';
+                echo '<div>' . $group_names[$num_groups - 1] . '</div>';
             } ?>
                 </div>
             </div>
@@ -109,13 +112,17 @@ HTMLEnd;
             <div style="margin: 0px 0px 16px 25px;">You have chosen not to create any groups at this time.</div>
             <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
         $errors = null;
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep3
 
 ?>

@@ -9,7 +9,7 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -18,19 +18,19 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     exit;
 }
 
-$filecontenttype = array();
-$filecontenttype[] = array('link'=>'student','screen'=>'Student', 'def'=>'View the student data currently in the system',);
-$filecontenttype[] = array('link'=>'staff','screen'=>'Staff', 'def'=>'View the staff data currently in the system',);
+$filecontenttype = [];
+$filecontenttype[] = ['link'=>'student', 'screen'=>'Student', 'def'=>'View the student data currently in the system'];
+$filecontenttype[] = ['link'=>'staff', 'screen'=>'Staff', 'def'=>'View the staff data currently in the system'];
 if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
-    $filecontenttype[] = array('link'=>'admin','screen'=>'Administrators', 'def'=>'View the administrator data currently in the system',);
-    $filecontenttype[] = array('link'=>'module','screen'=>'Module', 'def'=>'View the module information currently in the system',);
+    $filecontenttype[] = ['link'=>'admin', 'screen'=>'Administrators', 'def'=>'View the administrator data currently in the system'];
+    $filecontenttype[] = ['link'=>'module', 'screen'=>'Module', 'def'=>'View the module information currently in the system'];
 }
-$filecontenttype[] = array('link'=>'../search', 'screen'=>'Search', 'def'=>'Search for a student or staff user of the system',);
+$filecontenttype[] = ['link'=>'../search', 'screen'=>'Search', 'def'=>'Search for a student or staff user of the system'];
 
 //set the page information
-$UI->page_title = APP__NAME . " view data";
+$UI->page_title = APP__NAME . ' view data';
 $UI->menu_selected = 'view data';
-$UI->breadcrumbs = array('home' => null);
+$UI->breadcrumbs = ['home' => null];
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', 'student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', 'staff/index.php');

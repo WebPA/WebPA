@@ -16,22 +16,32 @@ use Doctrine\DBAL\ParameterType;
 
 class Authenticator
 {
+    // Public variables
+    public $user_id;
 
-// Public variables
-    public $user_id = null;
-    public $source_id = null;
-    public $user_type = null;
-    public $module_id = null;
-    public $module_code = null;
+    public $source_id;
+
+    public $user_type;
+
+    public $module_id;
+
+    public $module_code;
 
     // Private variables
-    protected $username = null;
-    protected $password = null;
+    protected $username;
+
+    protected $password;
+
     protected $_authenticated = false;
-    protected $_disabled = null;
-    protected $_error = null;
-    private $_DAO = null;
+
+    protected $_disabled;
+
+    protected $_error;
+
+    private $_DAO;
+
     private $cis;
+
     private $dbConn;
 
     /**
@@ -43,7 +53,9 @@ class Authenticator
 
         $this->username = $username;
         $this->password = $password;
-    }// /->Authenticator()
+    }
+
+    // /->Authenticator()
 
     /*
     ================================================================================
@@ -153,65 +165,63 @@ class Authenticator
         return $this->_authenticated;
     }
 
-    /*
-    Is the user authenticated?
-    */
+    // Is the user authenticated?
     public function is_authenticated()
     {
         return $this->_authenticated;
-    }// /->is_authenticated()
+    }
 
-    /*
-    Is the user disabled?
-    */
+    // /->is_authenticated()
+
+    // Is the user disabled?
     public function is_disabled()
     {
         return $this->_disabled;
-    }// /->is_disabled()
+    }
 
-    /*
-    Is this user admin?
-    */
+    // /->is_disabled()
+
+    // Is this user admin?
     public function is_admin()
     {
-        return ($this->user_type == APP__USER_TYPE_ADMIN);
-    }// /->is_admin()
+        return $this->user_type == APP__USER_TYPE_ADMIN;
+    }
 
-    /*
-    Is this user staff?
-    */
+    // /->is_admin()
+
+    // Is this user staff?
     public function is_staff()
     {
         return ($this->user_type == APP__USER_TYPE_TUTOR) || ($this->user_type == APP__USER_TYPE_ADMIN);
-    }// /->is_staff()
+    }
 
-    /*
-    Is this user tutor?
-    */
+    // /->is_staff()
+
+    // Is this user tutor?
     public function is_tutor()
     {
-        return ($this->user_type == APP__USER_TYPE_TUTOR);
-    }// /->is_staff()
+        return $this->user_type == APP__USER_TYPE_TUTOR;
+    }
 
-    /*
-    Is this user student?
-    */
+    // /->is_staff()
+
+    // Is this user student?
     public function is_student()
     {
-        return ($this->user_type == APP__USER_TYPE_STUDENT);
-    }// /->is_student()
+        return $this->user_type == APP__USER_TYPE_STUDENT;
+    }
 
-    /*
-    Get the last authorisation error
-    */
+    // /->is_student()
+
+    // Get the last authorisation error
     public function get_error()
     {
         return $this->_error;
-    }// /->get_error()
+    }
 
-    /*
-    Get the DAO object
-    */
+    // /->get_error()
+
+    // Get the DAO object
     public function get_DAO()
     {
         if (is_null($this->_DAO)) {

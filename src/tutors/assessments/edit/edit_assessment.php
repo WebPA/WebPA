@@ -70,7 +70,7 @@ if ($command && $assessment) {
             }
 
             // Create an open date time object
-            list($time_h, $time_m) = explode(':', Common::fetch_POST('open_date_time'));
+            [$time_h, $time_m] = explode(':', Common::fetch_POST('open_date_time'));
 
             $openDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
@@ -82,7 +82,7 @@ if ($command && $assessment) {
             ));
 
             // Create a close date time object
-            list($time_h, $time_m) = explode(':', Common::fetch_POST('close_date_time'));
+            [$time_h, $time_m] = explode(':', Common::fetch_POST('close_date_time'));
 
             $closeDate = DateTimeImmutable::createFromFormat('U', mktime(
                 $time_h,
@@ -161,17 +161,15 @@ if ($command && $assessment) {
 }
 
 // --------------------------------------------------------------------------------
-/*
-* Render a set of dropdown boxes for datetime selection
-*/
+// Render a set of dropdown boxes for datetime selection
 function render_datetime_boxes($fieldName, $selectedDatetime)
 {
-    echo('<table cellpadding="0" cellspacing="0"><tr>');
+    echo '<table cellpadding="0" cellspacing="0"><tr>';
 
     // Draw day box
-    echo("<td><select name=\"{$fieldName}_day\">");
+    echo "<td><select name=\"{$fieldName}_day\">";
     FormFunctions::render_options_range(1, 31, 1, date('j', $selectedDatetime));
-    echo('</select></td>');
+    echo '</select></td>';
 
     $formMonths = [
         1 => 'January',
@@ -189,17 +187,17 @@ function render_datetime_boxes($fieldName, $selectedDatetime)
     ];
 
     // Draw month box
-    echo("<td><select name=\"{$fieldName}_month\">");
+    echo "<td><select name=\"{$fieldName}_month\">";
     FormFunctions::render_options($formMonths, date('n', $selectedDatetime));
-    echo('</select></td>');
+    echo '</select></td>';
 
     // Draw year box
-    echo("<td><select name=\"{$fieldName}_year\">");
+    echo "<td><select name=\"{$fieldName}_year\">";
     $year = (date('Y') < date('Y', $selectedDatetime)) ? date('Y') : date('Y', $selectedDatetime) ;
     FormFunctions::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
-    echo('</select></td>');
+    echo '</select></td>';
 
-    echo('<th>at</th>');
+    echo '<th>at</th>';
 
     // Draw time box
     $time = date('H:i', $selectedDatetime);
@@ -207,16 +205,16 @@ function render_datetime_boxes($fieldName, $selectedDatetime)
     $time_h = (int) $time_parts[0];
     $time_m = (int) $time_parts[1];
 
-    echo("<td><select name=\"{$fieldName}_time\">");
+    echo "<td><select name=\"{$fieldName}_time\">";
     for ($i = 0; $i <= 23; $i++) {
         for ($j = 0; $j <= 45; $j += 15) {
             $selected = (($i == $time_h) && ($j == $time_m)) ? 'selected="selected"' : '' ;
             printf('<option value="%1$02d:%2$02d" '. $selected .'> %1$02d:%2$02d </option>', $i, $j);
         }
     }
-    echo('</select></td>');
+    echo '</select></td>';
 
-    echo('</tr></table>');
+    echo '</tr></table>';
 }
 
 // --------------------------------------------------------------------------------
@@ -226,9 +224,9 @@ $page_title = $assessment ? "manage: {$assessment->name}" : 'manage assessment';
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
-$UI->breadcrumbs = array('home'       => '/' ,
-               'my assessments' => '/tutors/assessments/' ,
-               $page_title    => null ,);
+$UI->breadcrumbs = ['home'       => '/',
+               'my assessments' => '/tutors/assessments/',
+               $page_title    => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -259,7 +257,7 @@ span.question_range { font-size: 0.8em; }
             break;
       case 'preview' :
             var popupwin;
-            popupwin = window.open('../../tutors/forms/preview_form.php?f=<?php echo($form->id); ?>','preview');
+            popupwin = window.open('../../tutors/forms/preview_form.php?f=<?php echo $form->id; ?>','preview');
             popupwin.focus();
             break;
       default :
@@ -294,7 +292,7 @@ $UI->draw_boxed_list(
 if (!$assessment) {
     ?>
     <div class="nav_button_bar">
-        <a href="<?php echo($list_url) ?>">
+        <a href="<?php echo $list_url ?>">
             <img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list
         </a>
     </div>
@@ -304,14 +302,14 @@ if (!$assessment) {
 } else {
         ?>
 
-  <form action="edit_assessment.php?<?php echo($assessment_qs); ?>" method="post" name="assessment_form">
+  <form action="edit_assessment.php?<?php echo $assessment_qs; ?>" method="post" name="assessment_form">
   <input type="hidden" name="command" value="none" />
 
   <div class="nav_button_bar">
     <table cellpadding="0" cellspacing="0" width="100%">
     <tr>
       <td>
-          <a href="<?php echo($list_url); ?>">
+          <a href="<?php echo $list_url; ?>">
               <img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list
           </a>
       </td>
@@ -379,7 +377,7 @@ if (!$assessment) {
             <label for="introduction">Introduction</label>
         </th>
         <td width="100%">
-            <textarea name="introduction" id="introduction" rows="5" cols="40" style="width: 90%;"><?php echo($assessment->introduction); ?></textarea>
+            <textarea name="introduction" id="introduction" rows="5" cols="40" style="width: 90%;"><?php echo $assessment->introduction; ?></textarea>
         </td>
       </tr>
       </table>
@@ -436,7 +434,7 @@ if (!$assessment) {
   <h2>Assessment Form</h2>
   <div class="form_section form_line">
     <?php
-    echo("<p><label>You are using a copy of form: </label><em>{$form->name}</em></p>");
+    echo "<p><label>You are using a copy of form: </label><em>{$form->name}</em></p>";
 
         $question_count = (int) $form->get_question_count();
         if ($question_count==0) {
@@ -453,12 +451,12 @@ if (!$assessment) {
             $question = $form->get_question($i); ?>
       <li>
           <div class="question">
-              <?php echo($question['text']['_data']); ?> <span class="question_range">(scoring range: <?php echo($question['range']['_data']); ?>)</span>
+              <?php echo $question['text']['_data']; ?> <span class="question_range">(scoring range: <?php echo $question['range']['_data']; ?>)</span>
           </div>
       </li>
             <?php
         }
-            echo('</ul>');
+            echo '</ul>';
         }
 
         // If not locked, allow change of form
@@ -472,7 +470,7 @@ if (!$assessment) {
             ?>
       <p>
           You cannot directly change any aspect of this form or its criteria. If you need to change it, you must
-          <a href="change_assessment_form.php?<?php echo($assessment_qs); ?>">
+          <a href="change_assessment_form.php?<?php echo $assessment_qs; ?>">
               select a different assessment form to use
           </a>.
       </p>
@@ -507,7 +505,7 @@ if (!$assessment) {
           <td valign="top"><label class="small" for="allow_assessment_feedback_yes">Yes, allow students to give feedback / justification.</label></td>
         </tr>
         <tr>
-          <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_no" value="0" <?php echo((!$assessment->allow_assessment_feedback) ? 'checked="checked"' : ''); ?> /></td>
+          <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_no" value="0" <?php echo (!$assessment->allow_assessment_feedback) ? 'checked="checked"' : ''; ?> /></td>
           <td valign="top"><label class="small" for="allow_assessment_feedback_no">No, don't allow feedback / justification.</label></td>
         </tr>
         </table>
@@ -519,7 +517,7 @@ if (!$assessment) {
   <div class="form_section form_line">
 
     <?php
-    echo("<p><label>You are using a copy of collection: </label><em>{$collection->name}</em></p>");
+    echo "<p><label>You are using a copy of collection: </label><em>{$collection->name}</em></p>";
 
         $groups = $collection->get_groups_iterator();
 
@@ -547,18 +545,18 @@ if (!$assessment) {
                 $num_members = $group->get_members_count();
                 $collection_total_members += $num_members;
 
-                echo('<tr>');
-                echo("<td>{$group->name}</td>");
-                echo('<td>'. $num_members .'</td>');
-                echo("<td>$num_responses</td>");
-                echo('</tr>');
+                echo '<tr>';
+                echo "<td>{$group->name}</td>";
+                echo '<td>'. $num_members .'</td>';
+                echo "<td>$num_responses</td>";
+                echo '</tr>';
             }
-            echo('</table>');
+            echo '</table>';
 
             if ($collection_total_members<$num_module_students) {
                 $diff = $num_module_students - $collection_total_members;
                 $diff_units = ($diff==1) ? 'person remains' : 'people remain';
-                echo("<div class=\"warning_box\"><p><strong>Warning</strong></p><p>Not all of the people within this collection have been allocated a group.</p><p>$diff $diff_units unallocated.</p></div>");
+                echo "<div class=\"warning_box\"><p><strong>Warning</strong></p><p>Not all of the people within this collection have been allocated a group.</p><p>$diff $diff_units unallocated.</p></div>";
             }
         }
 
@@ -571,7 +569,7 @@ if (!$assessment) {
         <?php
         } else {
             ?>
-      <p>You cannot directly change the composition of any of these groups. If you need to change them, you must <a href="change_assessment_collection.php?<?php echo($assessment_qs); ?>">select a different collection of groups to use</a>.</p>
+      <p>You cannot directly change the composition of any of these groups. If you need to change them, you must <a href="change_assessment_collection.php?<?php echo $assessment_qs; ?>">select a different collection of groups to use</a>.</p>
         <?php
         } ?>
 

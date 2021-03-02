@@ -9,15 +9,12 @@
  */
 class WizardStep2
 {
-
     // Public
-    public $wizard = null;
+    public $wizard;
+
     public $step = 2;
 
-
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -25,8 +22,9 @@ class WizardStep2
         $this->wizard->back_button = null;
         $this->wizard->next_button = null;
         $this->wizard->cancel_button = null;
-    }// /WizardStep2()
+    }
 
+    // /WizardStep2()
 
     public function head()
     {
@@ -40,8 +38,9 @@ class WizardStep2
 //-->
 </script>
 <?php
-    }// /->head()
+    }
 
+    // /->head()
 
     public function form()
     {
@@ -63,20 +62,23 @@ class WizardStep2
         if (is_array($errors)) {
             $this->wizard->back_button = '&lt; Back';
             $this->wizard->cancel_button = 'Cancel';
-            echo('<p><strong>Unable to create your new assessment criterion.</strong></p>');
-            echo('<p>To correct the problem, click <em>back</em> and amend the details entered.</p>');
+            echo '<p><strong>Unable to create your new assessment criterion.</strong></p>';
+            echo '<p>To correct the problem, click <em>back</em> and amend the details entered.</p>';
         } else {// Else.. create the form!
             ?>
 			<p><strong>Your changes to this criterion have been saved.</strong></p>
-			<p style="margin-top: 20px;">You can now return to <a href="/tutors/forms/edit/edit_form.php?f=<?php echo($form->id); ?>">editing your form</a>.</p>
+			<p style="margin-top: 20px;">You can now return to <a href="/tutors/forms/edit/edit_form.php?f=<?php echo $form->id; ?>">editing your form</a>.</p>
 			<?php
         }
-    }// /->form()
+    }
 
+    // /->form()
 
     public function process_form()
     {
-        $this->wizard->_fields = array();	// kill the wizard's stored fields
+        $this->wizard->_fields = [];	// kill the wizard's stored fields
         return null;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2

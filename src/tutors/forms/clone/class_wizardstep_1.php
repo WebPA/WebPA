@@ -15,15 +15,16 @@ use WebPA\includes\functions\Common;
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
     private $moduleId;
+
     private $user;
+
     private $sourceId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -36,7 +37,9 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
+
+    // /WizardStep1()
 
     public function head()
     {
@@ -50,7 +53,9 @@ class WizardStep1
           //-->
         </script>
         <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -108,10 +113,10 @@ class WizardStep1
                         $checked_str = ($form['form_id'] == $form_id) ? ' checked="checked"' : '';
                         $title_str = ($form['module_id'] == $this->moduleId) ? '' : " [{$form['module_title']}]"; ?>
                         <tr>
-                            <td><input type="radio" name="form_id" id="form_id_<?php echo($form['form_id']); ?>"
-                                       value="<?php echo($form['form_id']); ?>"<?php echo($checked_str); ?>/></td>
+                            <td><input type="radio" name="form_id" id="form_id_<?php echo $form['form_id']; ?>"
+                                       value="<?php echo $form['form_id']; ?>"<?php echo $checked_str; ?>/></td>
                             <th style="text-align: left"><label class="small"
-                                                                for="form_id_<?php echo($form['form_id']); ?>"><?php echo("{$form['form_name']}{$title_str}"); ?></label>
+                                                                for="form_id_<?php echo $form['form_id']; ?>"><?php echo "{$form['form_name']}{$title_str}"; ?></label>
                             </th>
                         </tr>
                         <?php
@@ -121,7 +126,9 @@ class WizardStep1
 
             <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -133,7 +140,9 @@ class WizardStep1
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

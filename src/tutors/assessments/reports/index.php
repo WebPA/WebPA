@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
@@ -118,11 +118,11 @@ $page_title = ($assessment) ? "reports: {$assessment->name}" : 'reports';
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
-$UI->breadcrumbs = array(
-  'home'          => '../../' ,
-  'my assessments'    => '../' ,
-  $page_title       => null ,
-);
+$UI->breadcrumbs = [
+  'home'          => '../../',
+  'my assessments'    => '../',
+  $page_title       => null,
+];
 $UI->help_link = '?q=node/235';
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons//button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../../create/');
@@ -150,27 +150,27 @@ $UI->content_start();
 <div class="content_box">
 
 <div class="nav_button_bar">
-  <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+  <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
 </div>
 
-<p>Reports available for: <em><?php echo($assessment->name)?></em>.</p>
+<p>Reports available for: <em><?php echo $assessment->name?></em>.</p>
 
 <?php
 if ($marking_params) {
-    $penalty_type = ($marking_params['penalty_type']=='pp') ? ' pp' : '%' ;   // Add a space to the 'pp'. ?>
+    $penalty_type = ($marking_params['penalty_type']=='pp') ? ' pp' : '%' ;   // Add a space to the 'pp'.?>
   <p style="padding-left: 1em; font-size: 0.8em;">
     (
-    Algorithm: <?php echo($marking_params['algorithm']); ?>. &nbsp;
+    Algorithm: <?php echo $marking_params['algorithm']; ?>. &nbsp;
 
-    Weighting: <?php echo($marking_params['weighting']); ?>%. &nbsp;
+    Weighting: <?php echo $marking_params['weighting']; ?>%. &nbsp;
 
-    Penalty: <?php echo($marking_params['penalty'].$penalty_type); ?>. &nbsp;
+    Penalty: <?php echo $marking_params['penalty'].$penalty_type; ?>. &nbsp;
 
     Grading: <?php
       if ($marking_params['grading']=='grade_af') {
-          echo('A-F.');
+          echo 'A-F.';
       } else {
-          echo('Numeric (%).');
+          echo 'Numeric (%).';
       } ?>
     )
   </p>
@@ -183,7 +183,7 @@ if (!$do_reports) {
     ?>
   <div class="warning_box">
     <p><strong>Unable to display reports</strong></p>
-    <p><?php echo($no_reports_reason); ?></p>
+    <p><?php echo $no_reports_reason; ?></p>
   </div>
 <?php
 } else {
@@ -201,11 +201,11 @@ if (!$do_reports) {
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
         <div>View Report:</div>
-        <a href="report_marks_awarded_byquestion_named.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <a href="report_marks_awarded_byquestion_named.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
       </td>
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_marks_awarded_byquestion_named.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <a href="report_marks_awarded_byquestion_named.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
       </td>
     </tr>
     </table>
@@ -220,11 +220,11 @@ if (!$do_reports) {
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
         <div>View Report:</div>
-        <a  href="report_marks_awarded_byquestion_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <a  href="report_marks_awarded_byquestion_anonymous.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
       </td>
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_marks_awarded_byquestion_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <a href="report_marks_awarded_byquestion_anonymous.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
       </td>
     </tr>
     </table>
@@ -239,11 +239,11 @@ if (!$do_reports) {
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
         <div>View Report</div>
-        <a href="report_student_response_info.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <a href="report_student_response_info.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
       </td>
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_student_response_info.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <a href="report_student_response_info.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
       </td>
     </tr>
     </table>
@@ -254,7 +254,7 @@ if (!$do_reports) {
       ?>
     <div class="warning_box">
       <p><strong>Unable to display the other reports</strong></p>
-      <p><?php echo($no_reports_reason); ?></p>
+      <p><?php echo $no_reports_reason; ?></p>
     </div>
 <?php
   } else {
@@ -269,28 +269,28 @@ if (!$do_reports) {
         </td>
         <td class="downloads"  nowrap="nowrap"  valign="top">
           <div>View Report:</div>
-          <a href="report_student_grades.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <a href="report_student_grades.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <a href="report_student_grades.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+          <a href="report_student_grades.php?t=download-xml&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
         </td>
         <?php
         if (APP__MOODLE_GRADEBOOK) {
             ?>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades.php?t=download-moodle-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/moodle.gif" width="32" height="32" alt="Moodle - Moodle Gradebook Import XML" /></a>
+          <a href="report_student_grades.php?t=download-moodle-xml&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/moodle.gif" width="32" height="32" alt="Moodle - Moodle Gradebook Import XML" /></a>
         </td>
         <?php
         } ?>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+          <a href="report_student_grades.php?t=download-rtf&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
         </td>
       </tr>
       </table>
@@ -305,19 +305,19 @@ if (!$do_reports) {
         </td>
         <td class="downloads" nowrap="nowrap" valign="top">
           <div>View Report:</div>
-          <a href="report_student_grades_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <a href="report_student_grades_bygroup.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <a href="report_student_grades_bygroup.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+          <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades_bygroup.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+          <a href="report_student_grades_bygroup.php?t=download-rtf&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
         </td>
       </tr>
       </table>
@@ -335,11 +335,11 @@ if (!$do_reports) {
         </td>
         <td class="downloads" nowrap="nowrap" valign="top">
           <div>View Report:</div>
-          <a href="report_student_feedback_bygroup.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+          <a href="report_student_feedback_bygroup.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_feedback_bygroup.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <a href="report_student_feedback_bygroup.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
         </td>
       </tr>
       </table>
@@ -353,7 +353,7 @@ if (!$do_reports) {
         </td>
         <td class="downloads" valign="top">
           <div>Download:</div>
-          <a href="report_student_grades_comments.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+          <a href="report_student_grades_comments.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
         </td>
       </tr>
       </table>
@@ -363,7 +363,7 @@ if (!$do_reports) {
     }
   }
 
-        // output the reports as requested from the UEA, UK -- Source forge request id 2042746 ?>
+        // output the reports as requested from the UEA, UK -- Source forge request id 2042746?>
 <hr>
   <div class="report">
     <table cellpadding="2" cellspacing="2" width="100%">
@@ -374,21 +374,21 @@ if (!$do_reports) {
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
         <div>View Report:</div>
-        <a href="report_uea.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <a href="report_uea.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
       </td>
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_uea.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <a href="report_uea.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
       </td>
       <!--
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+        <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
       </td>
       -->
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_uea.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+        <a href="report_uea.php?t=download-rtf&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
       </td>
 
     </tr>
@@ -403,21 +403,21 @@ if (!$do_reports) {
       </td>
       <td class="downloads" nowrap="nowrap" valign="top">
         <div>View Report:</div>
-        <a href="report_uea_anonymous.php?t=view&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
+        <a href="report_uea_anonymous.php?t=view&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/report.png" width="32" height="32" alt="Report - View the report" /></a>
       </td>
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_uea_anonymous.php?t=download-csv&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
+        <a href="report_uea_anonymous.php?t=download-csv&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/csv.gif" width="32" height="32" alt="CSV - Excel Spreadsheet" /></a>
       </td>
       <!--
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
+        <a href="report_student_grades_bygroup.php?t=download-xml&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/xml.gif" width="32" height="32" alt="XML -  XML File" /></a>
       </td>
       -->
       <td class="downloads" valign="top">
         <div>Download:</div>
-        <a href="report_uea_anonymous.php?t=download-rtf&<?php echo($qs); ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
+        <a href="report_uea_anonymous.php?t=download-rtf&<?php echo $qs; ?>" target="_blank"><img src="../../../images/file_icons/page_white_word.png" width="32" height="32" alt="RTF -  Rich Text File / MS Word" /></a>
       </td>
 
     </tr>

@@ -8,13 +8,13 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
+require_once '../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
-use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\functions\AcademicYear;
+use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_STUDENT)) {
@@ -119,8 +119,8 @@ $getting_help = 'You will need to seek help from your tutor.';
 
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'home';
-$UI->breadcrumbs = array('home'       => null ,
-                          );
+$UI->breadcrumbs = ['home'       => null,
+                          ];
 $UI->help_link = '?q=node/329';
 
 $UI->head();
@@ -154,22 +154,22 @@ $UI->content_start();
           $assessment =& $assessment_iterator->current();
           $take_url = "assessments/take/index.php?a={$assessment->id}";
 
-          echo("<div class=\"assessment_open\">");
-          echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-          echo('<tr>');
-          echo("  <td width=\"24\"><img src=\"../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-          echo('  <td valign="top">');
-          echo('    <div class="assessment_info">');
-          echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-          echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-          echo('    </div>');
-          echo('  </td>');
-          echo('  <td class="buttons" style="line-height: 2em; text-align: right;">');
-          echo("    <a class=\"button\" href=\"$take_url\">Take Assessment</a>");
-          echo('  </td>');
-          echo('</tr>');
-          echo('</table>');
-          echo('</div>');
+          echo '<div class="assessment_open">';
+          echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
+          echo '<tr>';
+          echo "  <td width=\"24\"><img src=\"../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+          echo '  <td valign="top">';
+          echo '    <div class="assessment_info">';
+          echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
+          echo '      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>';
+          echo '    </div>';
+          echo '  </td>';
+          echo '  <td class="buttons" style="line-height: 2em; text-align: right;">';
+          echo "    <a class=\"button\" href=\"$take_url\">Take Assessment</a>";
+          echo '  </td>';
+          echo '</tr>';
+          echo '</table>';
+          echo '</div>';
       } ?>
     </div>
     <?php
@@ -190,19 +190,19 @@ $UI->content_start();
           $assessment =& $assessment_iterator->current();
           $take_url = "/assessments/take/index.php?a={$assessment->id}";
 
-          echo("<div class=\"assessment\">");
-          echo('<table class="assessment_info" cellpadding="0" cellspacing="0">');
-          echo('<tr>');
-          echo("  <td width=\"24\"><img src=\"/images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>");
-          echo('  <td valign="top">');
-          echo('    <div class="assessment_info">');
-          echo("      <div class=\"assessment_name\">{$assessment->name}</div>");
-          echo('      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>');
-          echo('    </div>');
-          echo('  </td>');
-          echo('</tr>');
-          echo('</table>');
-          echo('</div>');
+          echo '<div class="assessment">';
+          echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
+          echo '<tr>';
+          echo "  <td width=\"24\"><img src=\"/images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+          echo '  <td valign="top">';
+          echo '    <div class="assessment_info">';
+          echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
+          echo '      <div class="assessment_schedule">scheduled: '. $assessment->get_date_string('open_date') .' &nbsp;-&nbsp; '. $assessment->get_date_string('close_date') . ' </div>';
+          echo '    </div>';
+          echo '  </td>';
+          echo '</tr>';
+          echo '</table>';
+          echo '</div>';
       } ?>
     </div>
     <?php

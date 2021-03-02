@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("includes/inc_global.php");
+require_once 'includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -17,7 +17,7 @@ if (isset($_SESSION['_user_id'])) {
 }
 
 $old_session = $_SESSION;
-$_SESSION = array();
+$_SESSION = [];
 session_destroy();
 
 if (isset($old_session['logout_url'])) {
@@ -36,10 +36,10 @@ if (isset($old_session['logout_url'])) {
             session_name(),
             '',
             time() - 42000,
-            $params["path"],
-            $params["domain"],
-            $params["secure"],
-            $params["httponly"]
+            $params['path'],
+            $params['domain'],
+            $params['secure'],
+            $params['httponly']
         );
     }
 } else {

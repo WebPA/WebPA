@@ -18,29 +18,39 @@ class Wizard
 {
     // Public Vars
     public $back_button = '&lt; Back';
+
     public $next_button = 'Next &gt;';
+
     public $cancel_button = 'Cancel';
+
     public $cancel_url = '';
 
     public $name = '';
 
     // Private Vars
-    private $_page_url = null;
-    private $_head_content = null;
-    private $_form_content = null;
+    private $_page_url;
+
+    private $_head_content;
+
+    private $_form_content;
 
     private $_current_step = 1;
+
     private $_total_steps = 1;
-    private $_override_num_steps = null;
 
-    private $_last_wizstep = null;
-    private $_current_wizstep = null;
+    private $_override_num_steps;
 
-    private $_step_includes = array();
-    private $_fields = array();
-    private $_vars = array();
+    private $_last_wizstep;
 
-    private $_errors = null;
+    private $_current_wizstep;
+
+    private $_step_includes = [];
+
+    private $_fields = [];
+
+    private $_vars = [];
+
+    private $_errors;
 
     /**
     * CONSTRUCTOR for the wizard class
@@ -49,13 +59,15 @@ class Wizard
     public function __construct($name)
     {
         $this->name = $name;
-        $this->_page_url = $_SERVER["PHP_SELF"];
+        $this->_page_url = $_SERVER['PHP_SELF'];
 
         $this->_fields = unserialize(base64_decode(Common::fetch_POST('wiz_stored_fields', null)));
         if (!is_array($this->_fields)) {
-            $this->_fields = array();
+            $this->_fields = [];
         }
-    }// /->Wizard()
+    }
+
+    // /->Wizard()
 
     /*
     * --------------------------------------------------------------------------------
@@ -72,7 +84,9 @@ class Wizard
     {
         $step_num = (int) $step_num;
         $this->_step_includes["$step_num"] = $step_include_file;
-    }// /add_step()
+    }
+
+    // /add_step()
 
     /**
      * Function to write errors to screen
@@ -86,14 +100,16 @@ class Wizard
         <ul class="spaced">
         <?php
         foreach ($this->_errors as $error_msg) {
-            echo("<li>$error_msg</li>");
+            echo "<li>$error_msg</li>";
         } ?>
         </ul>
         <p>Please check the information in the form and try again.</p>
       </div>
       <?php
         }
-    }// ->draw_errors()
+    }
+
+    // ->draw_errors()
 
     /**
      * function to write the wizard information to the screen
@@ -104,13 +120,13 @@ class Wizard
 
         // build the wizard HTML code
         $html = <<<HTMLEnd
-    <form action="{$this->_page_url}" method="post" name="wizard_form" onsubmit="return wizard_form_onsubmit();">
-    <input type="hidden" name="wiz_stored_fields" value="$wiz_fields" />
-    <input type="hidden" name="wiz_command" id="wiz_command" value="none" />
+                <form action="{$this->_page_url}" method="post" name="wizard_form" onsubmit="return wizard_form_onsubmit();">
+                <input type="hidden" name="wiz_stored_fields" value="$wiz_fields" />
+                <input type="hidden" name="wiz_command" id="wiz_command" value="none" />
 
-    <div style="min-height: 170px;">
-HTMLEnd;
-        echo($html);
+                <div style="min-height: 170px;">
+            HTMLEnd;
+        echo $html;
 
         if ($this->_current_wizstep) {
             $this->_current_wizstep->form();
@@ -122,21 +138,23 @@ HTMLEnd;
         $temp_cancel = (empty($this->cancel_button)) ? '&nbsp;': "<input type=\"button\" name=\"wiz_command_cancel\" id=\"wiz_command_cancel\" onclick=\"do_command('cancel')\" value=\"$this->cancel_button\" />";
 
         $html = <<<HTMLEnd
-    </div>
+                </div>
 
-    <table align="center" style="margin-top: 20px;" cellpadding="0" cellspacing="0" width="70%">
-    <tr>
-      <td align="left" width="33%">$temp_back</td>
-      <td align="center" width="33%">$temp_cancel</td>
-      <td align="right" width="33%">$temp_next</td>
-    </tr>
-    </table>
+                <table align="center" style="margin-top: 20px;" cellpadding="0" cellspacing="0" width="70%">
+                <tr>
+                  <td align="left" width="33%">$temp_back</td>
+                  <td align="center" width="33%">$temp_cancel</td>
+                  <td align="right" width="33%">$temp_next</td>
+                </tr>
+                </table>
 
-    </form>
-HTMLEnd;
+                </form>
+            HTMLEnd;
 
-        echo($html);
-    }// /->draw_wizard()
+        echo $html;
+    }
+
+    // /->draw_wizard()
 
     /**
      * function prepare
@@ -179,7 +197,7 @@ HTMLEnd;
       // get the last page we loaded
             if (($do_last) && ($this->_current_step>1)) {
                 $last_wiz_num = $this->_current_step - 1;
-                include_once($this->_step_includes["$last_wiz_num"]);
+                include_once $this->_step_includes["$last_wiz_num"];
                 eval("\$this->_last_wizstep = new WizardStep{$last_wiz_num}(\$this);");
 
                 if ($this->_last_wizstep) {
@@ -196,14 +214,16 @@ HTMLEnd;
             // If the last page of the wizard was OK (or didn't exist), get the next page
             if ($do_next) {
                 // get the current step
-                include_once($this->_step_includes["{$this->_current_step}"]);
+                include_once $this->_step_includes["{$this->_current_step}"];
                 eval("\$this->_current_wizstep = new WizardStep{$this->_current_step}(\$this);");
             }
         }
 
         $this->_current_step = $this->_current_wizstep->step;
         $this->_fields['current_step'] = $this->_current_step;
-    }// /->prepare()
+    }
+
+    // /->prepare()
 
     /**
      * function to write the title of the wizard step to the screen
@@ -212,12 +232,14 @@ HTMLEnd;
     {
         if (!is_null($this->_override_num_steps)) {
             if ($this->_current_step<=$this->_override_num_steps) {
-                echo("<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_override_num_steps}</strong> in the {$this->name}.</p>");
+                echo "<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_override_num_steps}</strong> in the {$this->name}.</p>";
             }
         } else {
-            echo("<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_total_steps}</strong> in the {$this->name}.</p>");
+            echo "<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_total_steps}</strong> in the {$this->name}.</p>";
         }
-    }// /->title()
+    }
+
+    // /->title()
 
     /**
      * function to get the field names for the input boxes
@@ -227,7 +249,9 @@ HTMLEnd;
     public function get_field($field_name, $default = null)
     {
         return (array_key_exists($field_name, $this->_fields)) ? $this->_fields["$field_name"] :  $default ;
-    }// /->get_field()
+    }
+
+    // /->get_field()
 
     /**
      * function to set the fields used in the wizard
@@ -237,7 +261,9 @@ HTMLEnd;
     public function set_field($field_name, $field_value)
     {
         $this->_fields["$field_name"] = $field_value;
-    }// /->set_field()
+    }
+
+    // /->set_field()
 
     /**
      * function to set variables
@@ -247,7 +273,9 @@ HTMLEnd;
     public function set_var($var_name, &$var_value)
     {
         $this->_vars["$var_name"] =& $var_value;
-    }// /->set_var()
+    }
+
+    // /->set_var()
 
     /**
      * function to get the variable by name
@@ -267,7 +295,9 @@ HTMLEnd;
     public function get_step()
     {
         return $this->_current_step;
-    }// /->get_step()
+    }
+
+    // /->get_step()
 
     /**
      * function to set the url for the wizard
@@ -276,7 +306,9 @@ HTMLEnd;
     public function set_wizard_url($url)
     {
         $this->_page_url = $url;
-    }// /->set_page_url()
+    }
+
+    // /->set_page_url()
 
     /**
      * function to show the steps
@@ -285,7 +317,9 @@ HTMLEnd;
     public function show_steps($num_steps)
     {
         $this->_override_num_steps = $num_steps;
-    }// /->show_steps
+    }
+
+    // /->show_steps
 
     /**
      * function to wite the head for the wizard page
@@ -295,24 +329,26 @@ HTMLEnd;
         $this->_current_wizstep->head();
 
         $html = <<<HTMLEnd
-<script language="JavaScript" type="text/javascript">
-<!--
+            <script language="JavaScript" type="text/javascript">
+            <!--
 
-  function do_command(str_comm) {
-    document.getElementById('wiz_command').value = str_comm;
-    document.wizard_form.submit();
-  }// /do_command
+              function do_command(str_comm) {
+                document.getElementById('wiz_command').value = str_comm;
+                document.wizard_form.submit();
+              }// /do_command
 
-  function wizard_form_onsubmit() {
-    return (document.wizard_form.wiz_command.value !='none');
-  }
+              function wizard_form_onsubmit() {
+                return (document.wizard_form.wiz_command.value !='none');
+              }
 
-//-->
-</script>
-HTMLEnd;
+            //-->
+            </script>
+            HTMLEnd;
 
-        echo($html);
-    }// /->head()
+        echo $html;
+    }
+
+    // /->head()
 
 /*
 * --------------------------------------------------------------------------------

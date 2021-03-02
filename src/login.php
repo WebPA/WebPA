@@ -11,7 +11,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("includes/inc_global.php");
+require_once 'includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -63,9 +63,9 @@ switch ($msg) {
 $UI->page_title = APP__NAME . ' Login';
 $UI->menu_selected = '';
 $UI->help_link = '?q=node/26';
-$UI->breadcrumbs = array(
-  'login page'  => null ,
-);
+$UI->breadcrumbs = [
+  'login page'  => null,
+];
 
 
 $UI->head();
@@ -96,7 +96,7 @@ $UI->content_start();
 ?>
 
 
-<?php echo("<p class=\"$message_class\">$message</p>"); ?>
+<?php echo "<p class=\"$message_class\">$message</p>"; ?>
 
 <div class="content_box">
 

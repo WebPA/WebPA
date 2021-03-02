@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
@@ -30,8 +30,8 @@ $collections = $group_handler->get_member_collections($_user->id, 'user');
 $UI->page_title = APP__NAME . ' my groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = array('home'         => '/' ,
-               'my groups'    => null );
+$UI->breadcrumbs = ['home'         => '/',
+               'my groups'    => null, ];
 
 $UI->head();
 ?>
@@ -82,8 +82,8 @@ if (!$collections) {
       $groups = $collection->get_member_groups($_user->id);
 
 
-      echo('<div class="collection">');
-      echo("  <div class=\"collection_name\">{$collection->name}</div>");
+      echo '<div class="collection">';
+      echo "  <div class=\"collection_name\">{$collection->name}</div>";
 
       foreach ($groups as $i => $group) {
           $member_ids = array_keys($group->get_members());
@@ -91,15 +91,15 @@ if (!$collections) {
         <div class="group">
           <table cellpadding="2" cellspacing="2">
           <tr>
-            <td valign="top"><div class="group_name"><?php echo($group->name); ?></div></td>
+            <td valign="top"><div class="group_name"><?php echo $group->name; ?></div></td>
             <td valign="top">
               <div class="members">
 <?php
       foreach ($members as $i => $member) {
           if ($_user->id==$member['user_id']) {
-              echo("      <div class=\"own_member_name\">{$member['forename']} {$member['lastname']}</div>");
+              echo "      <div class=\"own_member_name\">{$member['forename']} {$member['lastname']}</div>";
           } else {
-              echo("      <div class=\"member_name\">{$member['forename']} {$member['lastname']}</div>");
+              echo "      <div class=\"member_name\">{$member['forename']} {$member['lastname']}</div>";
           }
       } ?>
               </div>
@@ -109,7 +109,7 @@ if (!$collections) {
         </div>
 <?php
       }
-      echo('</div>');
+      echo '</div>';
   }
     }
 ?>

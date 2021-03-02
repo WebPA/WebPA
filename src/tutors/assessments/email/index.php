@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\Wizard;
@@ -74,11 +74,11 @@ if ($assessment) {
 $UI->page_title = APP__NAME . ' email your students';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array(
-  'home'        => '../../' ,
-  'my assessments'  => '../' ,
-  'email students'  => null ,
-);
+$UI->breadcrumbs = [
+  'home'        => '../../',
+  'my assessments'  => '../',
+  'email students'  => null,
+];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -108,7 +108,7 @@ if ($assessment) {
 if ($assessment) {
     $wizard->draw_wizard();
 } else {
-    echo("<p>The given assessment failed to load so this wizard cannot be started.</p>");
+    echo '<p>The given assessment failed to load so this wizard cannot be started.</p>';
 }
 ?>
 

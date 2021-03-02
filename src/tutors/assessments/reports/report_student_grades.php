@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
@@ -36,16 +36,16 @@ $marking_date = (int) Common::fetch_GET('md');
 $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
-    echo('Error: The requested assessment could not be loaded.');
+    echo 'Error: The requested assessment could not be loaded.';
     exit;
-} else {
+}
 
   // ----------------------------------------
     // Get the marking parameters used for the marksheet this report will display
     $marking_params = $assessment->get_marking_params($marking_date);
 
     if (!$marking_params) {
-        echo('Error: The requested marksheet could not be loaded.');
+        echo 'Error: The requested marksheet could not be loaded.';
         exit;
     }
 
@@ -58,9 +58,9 @@ if (!$assessment->load($assessment_id)) {
     $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
     if (!$algorithm) {
-        echo('Error: The requested algorithm could not be loaded.');
+        echo 'Error: The requested algorithm could not be loaded.';
         exit;
-    } else {
+    }
         $algorithm->set_grade_ordinals($ordinal_scale);
         $algorithm->set_assessment($assessment);
         $algorithm->set_marking_params($marking_params);
@@ -74,13 +74,13 @@ if (!$assessment->load($assessment_id)) {
 
         $penalties = $algorithm->get_penalties();
         if (!$penalties) {
-            $penalties = array();
+            $penalties = [];
         }
 
         $group_members = $algorithm->get_group_members();
         $member_ids = array_keys($webpa_scores);
 
-        $member_names = array();
+        $member_names = [];
 
         for ($i =0; $i<count($group_members); $i++) {
             $array_key = array_keys($group_members);
@@ -89,8 +89,8 @@ if (!$assessment->load($assessment_id)) {
                 array_push($member_names, $CIS->get_user($temp[$j]));
             }
         }
-    }// /if-else(is algorithm)
-}// /if-else(is assessment)
+    // /if-else(is algorithm)
+// /if-else(is assessment)
 
 /*
  * --------------------------------------------------------------------------------
@@ -124,20 +124,20 @@ if ($type == 'view') {
 
 <?php
   if ($marking_params) {
-      $penalty_type = ($marking_params['penalty_type']=='pp') ? ' pp' : '%' ;   // Add a space to the 'pp'. ?>
+      $penalty_type = ($marking_params['penalty_type']=='pp') ? ' pp' : '%' ;   // Add a space to the 'pp'.?>
     <p style="margin-bottom: 2em; padding-left: 1em; font-size: 0.8em;">
       (
-      Algorithm: <?php echo($marking_params['algorithm']); ?>. &nbsp;
+      Algorithm: <?php echo $marking_params['algorithm']; ?>. &nbsp;
 
-      Weighting: <?php echo($marking_params['weighting']); ?>%. &nbsp;
+      Weighting: <?php echo $marking_params['weighting']; ?>%. &nbsp;
 
-      Penalty: <?php echo($marking_params['penalty'].$penalty_type); ?>. &nbsp;
+      Penalty: <?php echo $marking_params['penalty'].$penalty_type; ?>. &nbsp;
 
       Grading: <?php
         if ($marking_params['grading']=='grade_af') {
-            echo('A-F.');
+            echo 'A-F.';
         } else {
-            echo('Numeric (%).');
+            echo 'Numeric (%).';
         } ?>
       )
     </p>
@@ -170,19 +170,19 @@ if ($type == 'view') {
           $penalty_str = '&nbsp;';
       }
 
-      echo('<tr>');
-      echo("<td style=\"text-align: left\"> {$member['lastname']}, {$member['forename']} (");
+      echo '<tr>';
+      echo "<td style=\"text-align: left\"> {$member['lastname']}, {$member['forename']} (";
       if (!empty($member['id_number'])) {
-          echo($member['id_number']);
+          echo $member['id_number'];
       } else {
-          echo($member['username']);
+          echo $member['username'];
       }
-      echo(')</td>');
-      echo("<td>$score</td>");
-      echo("<td>$intermediate_grade</td>");
-      echo("<td>$penalty_str</td>");
-      echo("<td class=\"important\">$grade</td>");
-      echo('</tr>');
+      echo ')</td>';
+      echo "<td>$score</td>";
+      echo "<td>$intermediate_grade</td>";
+      echo "<td>$penalty_str</td>";
+      echo "<td class=\"important\">$grade</td>";
+      echo '</tr>';
   } ?>
   </table>
 
@@ -199,13 +199,13 @@ if ($type == 'view') {
  */
 
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"webpa_student_grades.csv\"");
+    header('Content-Disposition: attachment; filename="webpa_student_grades.csv"');
     header('Content-Type: text/csv');
 
-    echo('"Student Grades (by student)"'."\n\n");
-    echo("\"{$assessment->name}\"\n\n");
+    echo '"Student Grades (by student)"'."\n\n";
+    echo "\"{$assessment->name}\"\n\n";
 
-    echo('"name","WebPA score","Intermediate Grade","Non-Submission Penalty","Final grade"'."\n");
+    echo '"name","WebPA score","Intermediate Grade","Non-Submission Penalty","Final grade"'."\n";
 
     foreach ($member_names as $i => $member) {
         $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -221,13 +221,13 @@ if ($type == 'download-csv') {
             $penalty_str = '';
         }
 
-        echo("\"{$member['lastname']}, {$member['forename']} (");
+        echo "\"{$member['lastname']}, {$member['forename']} (";
         if (!empty($member['id_number'])) {
-            echo($member['id_number']);
+            echo $member['id_number'];
         } else {
-            echo($member['username']);
+            echo $member['username'];
         }
-        echo(")\",\"$score\",\"$intermediate_grade\",\"$penalty_str\",\"$grade\"\n");
+        echo ")\",\"$score\",\"$intermediate_grade\",\"$penalty_str\",\"$grade\"\n";
     }
 }
 
@@ -238,15 +238,15 @@ if ($type == 'download-csv') {
  */
 
 if ($type == 'download-xml') {
-    header("Content-Disposition: attachment; filename=\"webpa_student_grades.xml\"");
+    header('Content-Disposition: attachment; filename="webpa_student_grades.xml"');
     header('Content-Type: application/xml');
 
-    echo("<?xml version=\"1.0\" ?>\n");
+    echo "<?xml version=\"1.0\" ?>\n";
 
-    echo("<assessment>\n");
-    echo("\t<assessment_title>{$assessment->name}</assessment_title>\n");
-    echo("\t<weighting>{$marking_params['weighting'] }</weighting>\n");
-    echo("\t<penalty>{$marking_params['penalty']}</penalty>\n");
+    echo "<assessment>\n";
+    echo "\t<assessment_title>{$assessment->name}</assessment_title>\n";
+    echo "\t<weighting>{$marking_params['weighting'] }</weighting>\n";
+    echo "\t<penalty>{$marking_params['penalty']}</penalty>\n";
 
     foreach ($member_names as $i => $member) {
         $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -262,26 +262,26 @@ if ($type == 'download-xml') {
             $penalty_str = '';
         }
 
-        echo("\t<student>\n");
-        echo("\t\t<name>\n");
-        echo("\t\t\t<forename>{$member['forename']}</forename>\n");
-        echo("\t\t\t<lastname>{$member['lastname']}</lastname>\n");
-        echo("\t\t</name>\n");
-        echo("\t\t<institutional_student_number>");
+        echo "\t<student>\n";
+        echo "\t\t<name>\n";
+        echo "\t\t\t<forename>{$member['forename']}</forename>\n";
+        echo "\t\t\t<lastname>{$member['lastname']}</lastname>\n";
+        echo "\t\t</name>\n";
+        echo "\t\t<institutional_student_number>";
         if (!empty($member['id_number'])) {
-            echo($member['id_number']);
+            echo $member['id_number'];
         } else {
-            echo($member['username']);
+            echo $member['username'];
         }
-        echo("</institutional_student_number>\n");
-        echo("\t\t<webpa_score>{$score}</webpa_score>\n");
-        echo("\t\t<intermediate_grade>{$intermediate_grade}</intermediate_grade>\n");
-        echo("\t\t<penalty>{$penalty_str}</penalty>\n");
-        echo("\t\t<final_grade>{$grade}</final_grade>\n");
-        echo("\t</student>\n");
+        echo "</institutional_student_number>\n";
+        echo "\t\t<webpa_score>{$score}</webpa_score>\n";
+        echo "\t\t<intermediate_grade>{$intermediate_grade}</intermediate_grade>\n";
+        echo "\t\t<penalty>{$penalty_str}</penalty>\n";
+        echo "\t\t<final_grade>{$grade}</final_grade>\n";
+        echo "\t</student>\n";
     }
 
-    echo("</assessment>\n");
+    echo "</assessment>\n";
 }
 
 /*
@@ -293,17 +293,17 @@ if ($type == 'download-xml') {
  * --------------------------------------------------------------------------------
  */
 if ($type == 'download-moodle-xml') {
-    header("Content-Disposition: attachment; filename=\"webpa_student_grades.xml\"");
+    header('Content-Disposition: attachment; filename="webpa_student_grades.xml"');
     header('Content-Type: text/xml');
 
     //create an id number which is the assessment and date for the unique upload number required
     $tempAssessmentId = $assessment->id;
-    $tempAssessmentId = $tempAssessmentId . date("Ymd");
+    $tempAssessmentId = $tempAssessmentId . date('Ymd');
     ;
 
-    echo("<?xml version=\"1.0\" ?> ");
+    echo '<?xml version="1.0" ?> ';
 
-    echo("<results batch=\"[{$tempAssessmentId}]\">");
+    echo "<results batch=\"[{$tempAssessmentId}]\">";
 
     foreach ($member_names as $i => $member) {
         $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -319,22 +319,22 @@ if ($type == 'download-moodle-xml') {
             $penalty_str = '';
         }
 
-        echo("<result>");
-        echo("<state>['new']</state>");
-        echo("<assignment>{$assessment->id}</assignment>");
+        echo '<result>';
+        echo "<state>['new']</state>";
+        echo "<assignment>{$assessment->id}</assignment>";
         ;
-        echo("<student>");
+        echo '<student>';
         if (!empty($member['id_number'])) {
-            echo($member['id_number']);
+            echo $member['id_number'];
         } else {
-            echo($member['username']);
+            echo $member['username'];
         }
-        echo("</student>");
-        echo("<score>{$grade}</score>");
-        echo("</result>");
+        echo '</student>';
+        echo "<score>{$grade}</score>";
+        echo '</result>';
     }
 
-    echo("</results>");
+    echo '</results>';
 }
 
 /*
@@ -344,7 +344,7 @@ if ($type == 'download-moodle-xml') {
  */
 
 if ($type == 'download-rtf') {
-    header("Content-Disposition: attachment; filename=student_grades.rtf");
+    header('Content-Disposition: attachment; filename=student_grades.rtf');
     header("Content-Type: text/enriched\n");
 
     echo "Assessment Name:\t{$assessment->name}\nWeighting:\t{$marking_params['weighting']}";
@@ -368,9 +368,9 @@ if ($type == 'download-rtf') {
         echo "\nName:\t{$member['forename']} {$member['lastname']}";
         echo "\nStudent Number:\t";
         if (!empty($member['id_number'])) {
-            echo($member['id_number']);
+            echo $member['id_number'];
         } else {
-            echo($member['username']);
+            echo $member['username'];
         }
         echo "\nWebpa Score:\t{$score}";
         echo "\nIntermediate grade:\t{$intermediate_grade}";

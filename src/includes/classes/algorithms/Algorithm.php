@@ -18,20 +18,25 @@ use WebPA\includes\classes\ResultHandler;
 
 abstract class Algorithm
 {
-
-  // Private Vars
+    // Private Vars
     protected $_assessment;
-    protected $_grade_ordinals = array();
+
+    protected $_grade_ordinals = [];
+
     protected $_params;
 
     protected $_peeronly = false;
 
     protected $_group_grades;
+
     protected $_group_members;
+
     protected $_group_names;
 
     protected $_form_type;
+
     protected $_questions;
+
     protected $_question_info;
 
     protected $_responses;
@@ -41,54 +46,65 @@ abstract class Algorithm
     // These properties are used for checking what's actually happened in the assessment
     // Sub-classes should not use these for their calculations
 
-    protected $_actual_responses = null;
+    protected $_actual_responses;
 
-    protected $_actual_group_submitters = array();
-    protected $_actual_submitters = array();
+    protected $_actual_group_submitters = [];
 
-    protected $_actual_marks_awarded = null;
-    protected $_actual_marks_received = null;
+    protected $_actual_submitters = [];
 
-    protected $_actual_marks_awarded_by_member_question = null;
-    protected $_actual_marks_received_by_member_question = null;
+    protected $_actual_marks_awarded;
 
-    protected $_actual_total_marks_awarded = null;
-    protected $_actual_total_marks_received = null;
+    protected $_actual_marks_received;
+
+    protected $_actual_marks_awarded_by_member_question;
+
+    protected $_actual_marks_received_by_member_question;
+
+    protected $_actual_total_marks_awarded;
+
+    protected $_actual_total_marks_received;
 
     // These properties are used in the algorithm calculations
     // They can be manipulated to correct scoring problems (like peer-only and poor submissions)
 
-    protected $_calc_responses = null;
+    protected $_calc_responses;
 
-    protected $_calc_group_submitters = array();
-    protected $_calc_submitters = array();
+    protected $_calc_group_submitters = [];
 
-    protected $_calc_marks_awarded = null;
-    protected $_calc_marks_received = null;
+    protected $_calc_submitters = [];
 
-    protected $_calc_marks_awarded_by_member_question = null;
-    protected $_calc_marks_received_by_member_question = null;
+    protected $_calc_marks_awarded;
 
-    protected $_calc_total_marks_awarded = null;
-    protected $_calc_total_marks_received = null;
+    protected $_calc_marks_received;
+
+    protected $_calc_marks_awarded_by_member_question;
+
+    protected $_calc_marks_received_by_member_question;
+
+    protected $_calc_total_marks_awarded;
+
+    protected $_calc_total_marks_received;
 
     // These properties contain the final outputs from the algorithm
 
-    protected $_webpa_scores = null;          // The mutiplication factor based on relative performance
-  protected $_intermediate_grades = null;   // The intermediate grades (before penalties are applied)
-  protected $_grades = null;                // The final grades
-  protected $_penalties = null;             // Textual description of the penalties each member incurred
+    protected $_webpa_scores;          // The mutiplication factor based on relative performance
 
+    protected $_intermediate_grades;   // The intermediate grades (before penalties are applied)
 
+    protected $_grades;                // The final grades
 
-  /**
-   * Constructor
-   *
-   * @return  Algorithm
-   */
+    protected $_penalties;             // Textual description of the penalties each member incurred
+
+    /**
+     * Constructor
+     *
+     * @return  Algorithm
+     */
     public function __construct()
     {
-    }// /->Algorithm()
+    }
+
+    // /->Algorithm()
 
 
 
@@ -97,8 +113,6 @@ abstract class Algorithm
     * Public Methods
     * ================================================================================
     */
-
-
 
     /**
      * Calculate the student's final grades.
@@ -109,8 +123,6 @@ abstract class Algorithm
      * @return  boolean  The operation was successful.
      */
     abstract public function calculate();
-
-
 
     /**
      * Get the final grades for every student.
@@ -123,9 +135,9 @@ abstract class Algorithm
     public function get_grades()
     {
         return $this->_grades;
-    }// /->get_grades()
+    }
 
-
+    // /->get_grades()
 
     /**
      * Get the names of the groups involved in the assessment.
@@ -137,9 +149,9 @@ abstract class Algorithm
     public function get_group_names()
     {
         return $this->_group_names;
-    }// /->get_group_names()
+    }
 
-
+    // /->get_group_names()
 
     /**
      * Get the names of the groups involved in the assessment.
@@ -151,9 +163,9 @@ abstract class Algorithm
     public function get_group_members()
     {
         return $this->_group_members;
-    }// /->get_group_members()
+    }
 
-
+    // /->get_group_members()
 
     /**
      * Get the intermediate grades for every student.
@@ -167,32 +179,37 @@ abstract class Algorithm
     public function get_intermediate_grades()
     {
         return $this->_intermediate_grades;
-    }// /->get_intermediate_grades()
+    }
 
-
+    // /->get_intermediate_grades()
 
     public function get_marks_awarded()
     {
         return $this->_actual_marks_awarded;
-    }// /->get_marks_awarded()
+    }
 
-
+    // /->get_marks_awarded()
 
     public function get_marks_received()
     {
         return $this->_actual_marks_received;
-    }// /->get_marks_received()
+    }
+
+    // /->get_marks_received()
 
     public function get_total_marks_awarded()
     {
         return $this->_actual_total_marks_awarded;
-    }// /->get_total_marks_awarded()
+    }
+
+    // /->get_total_marks_awarded()
 
     public function get_total_marks_received()
     {
         return $this->_actual_total_marks_received;
-    }// /->get_total_marks_received()
+    }
 
+    // /->get_total_marks_received()
 
     /**
      * Get the score given by one member of a group to another member for a particular question
@@ -217,9 +234,9 @@ abstract class Algorithm
             }
         }
         return $score;
-    }// /->get_member_response()
+    }
 
-
+    // /->get_member_response()
 
     /**
      * Get a list of penalised students, and the amount they were penalised.
@@ -233,9 +250,9 @@ abstract class Algorithm
     public function get_penalties()
     {
         return $this->_penalties;
-    }// /->get_penalties()
+    }
 
-
+    // /->get_penalties()
 
     /**
      * Get the questions used in the assessment.
@@ -247,9 +264,9 @@ abstract class Algorithm
     public function get_questions()
     {
         return $this->_question_info;
-    }// /->get_questions()
+    }
 
-
+    // /->get_questions()
 
     /**
      * Get a list of students who submitted.
@@ -261,9 +278,9 @@ abstract class Algorithm
     public function get_submitters()
     {
         return (!empty($this->_actual_submitters)) ? $this->_actual_submitters : null ;
-    }// /->get_submitters()
+    }
 
-
+    // /->get_submitters()
 
     /**
      * Get the WebPA scores for every student.
@@ -278,9 +295,9 @@ abstract class Algorithm
     public function get_webpa_scores()
     {
         return $this->_webpa_scores;
-    }// /->get_webpa_scores()
+    }
 
-
+    // /->get_webpa_scores()
 
     /**
      * Set which assessment to use.
@@ -325,7 +342,7 @@ abstract class Algorithm
 
         $question_count = (int) $form->get_question_count();
 
-        $this->_questions = ($question_count>0) ? range(0, $question_count-1) : array();
+        $this->_questions = ($question_count>0) ? range(0, $question_count-1) : [];
         foreach ($this->_questions as $i => $question_id) {
             $this->_question_info[$question_id] = $form->get_question($question_id);
         }
@@ -337,9 +354,9 @@ abstract class Algorithm
         $this->_responses = $result_handler->get_responses();
 
         return true;
-    }// /->set_assessment()
+    }
 
-
+    // /->set_assessment()
 
     /**
      * Set grade letter ordinal scales.
@@ -352,9 +369,9 @@ abstract class Algorithm
     {
         $this->_ordinal_scale = $ordinal_scale;
         return true;
-    }// /->set_grade_ordinals()
+    }
 
-
+    // /->set_grade_ordinals()
 
     /**
      * Set marking parameters.
@@ -367,7 +384,9 @@ abstract class Algorithm
     {
         $this->_params = $marking_params;
         return true;
-    }// /->set_marking_params()
+    }
+
+    // /->set_marking_params()
 
 
 
@@ -376,8 +395,6 @@ abstract class Algorithm
     * Private Methods
     * ================================================================================
     */
-
-
 
     /**
      * Apply any criterion weightings to the students' fractional marks.
@@ -390,9 +407,9 @@ abstract class Algorithm
     // @todo : criterion weightings should make an appearnce in a future version.
 
         return true;
-    }// /->_applyCriterionWeightings()
+    }
 
-
+    // /->_applyCriterionWeightings()
 
     /**
      * Convert the current grades to the required display format.
@@ -417,10 +434,9 @@ abstract class Algorithm
                 foreach ($this->_ordinal_scale as $grade_letter => $grade_numeric) {
                     if ($grade>$grade_numeric) {
                         break;
-                    } else {
-                        $this->_intermediate_grades[$id] = $grade_letter;
-                        $grade_set = true;
                     }
+                    $this->_intermediate_grades[$id] = $grade_letter;
+                    $grade_set = true;
                 }
 
                 // If we didn't set at least one grade-letter, then the student must have the top grade
@@ -436,10 +452,9 @@ abstract class Algorithm
                 foreach ($this->_ordinal_scale as $grade_letter => $grade_numeric) {
                     if ($grade>$grade_numeric) {
                         break;
-                    } else {
-                        $this->_grades[$id] = $grade_letter;
-                        $grade_set = true;
                     }
+                    $this->_grades[$id] = $grade_letter;
+                    $grade_set = true;
                 }
 
                 // If we didn't set at least one grade-letter, then the student must have the top grade
@@ -468,9 +483,9 @@ abstract class Algorithm
     }// /switch()
 
         return true;
-    }// /->__applyGradingStyle()
+    }
 
-
+    // /->__applyGradingStyle()
 
     /**
      * Apply any applicable penalties to the final grades
@@ -481,7 +496,7 @@ abstract class Algorithm
     {
         if ($this->_grades) {
             if (is_null($this->_actual_submitters)) {
-                $this->_actual_submitters = array();
+                $this->_actual_submitters = [];
             }
 
             // If the penalty is a percentage..
@@ -536,9 +551,9 @@ abstract class Algorithm
         }
 
         return true;
-    }// /->_applyPenalties()
+    }
 
-
+    // /->_applyPenalties()
 
     /**
      * Initialise some of the algorithm's properties based prior to calculating the grades.
@@ -561,11 +576,11 @@ abstract class Algorithm
         }
 
 
-        $this->_actual_submitters = array();
-        $this->_actual_group_submitters = array();
+        $this->_actual_submitters = [];
+        $this->_actual_group_submitters = [];
 
-        $this->_calc_submitters = array();
-        $this->_calc_group_submitters = array();
+        $this->_calc_submitters = [];
+        $this->_calc_group_submitters = [];
 
 
         // Initialise awarded/received scores
@@ -573,7 +588,7 @@ abstract class Algorithm
 
       // Initial marks from each student to each student.
             // This array is built in the following loop, so it is specific to each group.
-            $initial_students_marks = array();
+            $initial_students_marks = [];
 
             foreach ($this->_group_members[$group_id] as $i => $member_id) {
                 $this->_actual_marks_awarded_by_member_question[$member_id] = $initial_marks_per_question;
@@ -657,9 +672,9 @@ abstract class Algorithm
 
 
         return true;
-    }// /->_initialise()
+    }
 
-
+    // /->_initialise()
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a peer-only assessment.
@@ -667,8 +682,6 @@ abstract class Algorithm
      * @return  boolean  The operation was successful.
      */
     abstract protected function _preparePeerOnly();
-
-
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a self-&-peer assessment.

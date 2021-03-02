@@ -18,8 +18,9 @@ class ClosingReminder
 
     private DAO $dao;
 
-    public function __construct(DAO $dao) {
-       $this->dao = $dao;
+    public function __construct(DAO $dao)
+    {
+        $this->dao = $dao;
     }
 
     public function send()
@@ -40,7 +41,7 @@ class ClosingReminder
 
                 //specify the details of the email to be sent
                 $subjectLn = 'Reminder: WebPA Assessment closing';
-                $body = " This is a reminder that the assessment your tutor set is due to close. The details are as below;" .
+                $body = ' This is a reminder that the assessment your tutor set is due to close. The details are as below;' .
                     "\n Assessment Name:  " . $assessment['assessment_name'] .
                     "\n Open from:  " . $assessment['open_date'] .
                     "\n Closes on:  " . $assessment['close_date'] .

@@ -12,14 +12,12 @@ use WebPA\includes\functions\Common;
 
 class WizardStep1
 {
+    // Public
+    public $wizard;
 
-  // Public
-    public $wizard = null;
     public $step = 1;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -27,7 +25,9 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
+
+    // /WizardStep1()
 
     public function head()
     {
@@ -42,7 +42,9 @@ class WizardStep1
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -62,11 +64,11 @@ class WizardStep1
       <table cellpadding="2" cellspacing="2">
       <tr>
         <th><label for="question_text">Criterion Text</label></th>
-        <td><input type="text" name="question_text" id="question_text" maxlength="255" size="50" value="<?php echo($this->wizard->get_field('question_text')); ?>" /></td>
+        <td><input type="text" name="question_text" id="question_text" maxlength="255" size="50" value="<?php echo $this->wizard->get_field('question_text'); ?>" /></td>
       </tr>
       <tr>
         <th valign="top" width="100"><label for="question_desc">Description</label><br /><span style="font-size: 0.8em; font-weight: normal;">(optional)</span></th>
-        <td><textarea name="question_desc" id="question_desc" cols="60" rows="3" style="width: 90%;"><?php echo($this->wizard->get_field('question_desc')); ?></textarea></td>
+        <td><textarea name="question_desc" id="question_desc" cols="60" rows="3" style="width: 90%;"><?php echo $this->wizard->get_field('question_desc'); ?></textarea></td>
       </tr>
       </table>
 
@@ -74,7 +76,9 @@ class WizardStep1
 
     </div>
 <?php
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -88,7 +92,9 @@ class WizardStep1
         $this->wizard->set_field('question_desc', Common::fetch_POST('question_desc'));
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

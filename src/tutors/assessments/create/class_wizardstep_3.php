@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\SimpleObjectIterator;
@@ -17,15 +17,15 @@ use WebPA\includes\functions\Common;
 
 class WizardStep3
 {
-    public $wizard = null;
+    public $wizard;
+
     public $step = 3;
 
     private $module;
+
     private $groupHandler;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -49,7 +49,9 @@ class WizardStep3
           //-->
         </script>
         <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -85,17 +87,19 @@ class WizardStep3
 
                 $checked = ($collection_id == $collection->id) ? 'checked="checked"' : '';
 
-                echo('<tr>');
-                echo("  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked /></td>");
-                echo("  <td><label class=\"small\" for=\"collection_{$collection->id}\">{$collection->name}</label>");
-                echo("  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>");
-                echo('</tr>');
+                echo '<tr>';
+                echo "  <td><input type=\"radio\" name=\"collection_id\" id=\"collection_{$collection->id}\" value=\"{$collection->id}\" $checked /></td>";
+                echo "  <td><label class=\"small\" for=\"collection_{$collection->id}\">{$collection->name}</label>";
+                echo "  <div style=\"margin-left: 10px; font-size: 84%;\"><div>Number of Groups : $group_count</div></div></td>";
+                echo '</tr>';
             } ?>
                 </table>
             </div>
             <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -107,7 +111,9 @@ class WizardStep3
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep3
 
 ?>

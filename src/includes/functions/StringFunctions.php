@@ -10,9 +10,9 @@
 
 namespace WebPA\includes\functions;
 
-DEFINE('STR_ALPHA_CHARS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
-DEFINE('STR_ALPHANUM_CHARS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
-DEFINE('STR_UUID_CHARS', '0123456789ABCDEF-');
+define('STR_ALPHA_CHARS', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+define('STR_ALPHANUM_CHARS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');
+define('STR_UUID_CHARS', '0123456789ABCDEF-');
 
 class StringFunctions
 {

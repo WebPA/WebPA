@@ -15,14 +15,12 @@ use WebPA\includes\functions\Form;
 
 class WizardStep2
 {
+    // Public
+    public $wizard;
 
-  // Public
-    public $wizard = null;
     public $step = 2;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(&$wizard)
     {
         $this->wizard =& $wizard;
@@ -30,7 +28,9 @@ class WizardStep2
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep2()
+    }
+
+    // /WizardStep2()
 
     public function head()
     {
@@ -45,15 +45,17 @@ class WizardStep2
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
-        $send_to_desc = array('all'    => 'everyone taking this assessment' ,
-                 'groups' => 'selected groups taking this assessment' ,
-                 'have'   => 'all the students who HAVE responded' ,
-                 'havenot'  => 'any students who HAVE NOT responded' ,
-                );
+        $send_to_desc = ['all'    => 'everyone taking this assessment',
+                 'groups' => 'selected groups taking this assessment',
+                 'have'   => 'all the students who HAVE responded',
+                 'havenot'  => 'any students who HAVE NOT responded',
+                ];
 
         $send_email_to = $this->wizard->get_field('send_to');
 
@@ -67,7 +69,7 @@ class WizardStep2
 
         if (array_key_exists($send_email_to, $send_to_desc)) {
             ?>
-      <p>You have opted to send this email to <em><?php echo($send_to_desc["$send_email_to"]); ?></em>.</p>
+      <p>You have opted to send this email to <em><?php echo $send_to_desc["$send_email_to"]; ?></em>.</p>
 <?php
       if ($send_email_to=='groups') {
           $email_groups = explode('|', $this->wizard->get_field('email_groups'));
@@ -99,7 +101,7 @@ class WizardStep2
           switch ($send_email_to) {
           case 'all':
             $num_targets = $collection_member_count;
-            echo("<p>This email will be sent to all $collection_member_count students.</p>");
+            echo "<p>This email will be sent to all $collection_member_count students.</p>";
             break;
 
           // --------------------
@@ -110,7 +112,7 @@ class WizardStep2
             $result_handler->set_assessment($assessment);
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_targets = $num_responses;
-            echo("<p>This email will be sent to the $num_responses students who have taken this assessment.</p>");
+            echo "<p>This email will be sent to the $num_responses students who have taken this assessment.</p>";
 
             break;
 
@@ -123,7 +125,7 @@ class WizardStep2
             $num_responses = $result_handler->get_responses_count_for_assessment();
             $num_no_responses = $collection_member_count - $num_responses;
             $num_targets = $num_no_responses;
-            echo("<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>");
+            echo "<p>This email will be sent to the $num_no_responses students who have not yet taken this assessment.</p>";
             break;
         }
       }
@@ -144,18 +146,20 @@ class WizardStep2
           <table class="form" cellpadding="2" cellspacing="2">
           <tr>
             <th><label for="email_subject">Subject</label></th>
-            <td><input name="email_subject" id="email_subject" maxlength="100" size="64" value="<?php echo($this->wizard->get_field('email_subject')); ?>" /></td>
+            <td><input name="email_subject" id="email_subject" maxlength="100" size="64" value="<?php echo $this->wizard->get_field('email_subject'); ?>" /></td>
           </tr>
           <tr>
             <th style="vertical-align: top"><label for="email_text">Text</label></th>
-            <td><textarea name="email_text" id="email_text" cols="60" rows="8"><?php echo($this->wizard->get_field('email_text')); ?></textarea></td>
+            <td><textarea name="email_text" id="email_text" cols="60" rows="8"><?php echo $this->wizard->get_field('email_text'); ?></textarea></td>
           </tr>
           </table>
         </div>
 <?php
             }
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -204,7 +208,9 @@ class WizardStep2
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2
 
 ?>

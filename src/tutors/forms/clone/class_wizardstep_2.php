@@ -15,11 +15,10 @@ use WebPA\includes\functions\Common;
 class WizardStep2
 {
     public $wizard;
+
     public $step = 2;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -27,7 +26,9 @@ class WizardStep2
         $this->wizard->back_button = '&lt; Back';
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep2()
+    }
+
+    // /WizardStep2()
 
     public function head()
     {
@@ -42,7 +43,9 @@ class WizardStep2
 //-->
 </script>
 <?php
-    }// /->head()
+    }
+
+    // /->head()
 
     public function form()
     {
@@ -58,7 +61,7 @@ class WizardStep2
       <?php
         } else {
             ?>
-      <p>You have chosen to clone: <em><?php echo($form->name); ?></em></p>
+      <p>You have chosen to clone: <em><?php echo $form->name; ?></em></p>
 
       <p>Now enter a name for your new form.</p>
 
@@ -66,14 +69,16 @@ class WizardStep2
         <table class="form" cellpadding="2" cellspacing="2">
           <tr>
             <th><label for="clone_form_name">Name for new form</label></th>
-            <td><input type="text" name="clone_form_name" id="clone_form_name" size="50" maxlength="100" value="<?php echo($this->wizard->get_field('clone_form_name')); ?>" /></td>
+            <td><input type="text" name="clone_form_name" id="clone_form_name" size="50" maxlength="100" value="<?php echo $this->wizard->get_field('clone_form_name'); ?>" /></td>
           </tr>
         </table>
       </div>
 
       <?php
         }
-    }// /->form()
+    }
+
+    // /->form()
 
     public function process_form()
     {
@@ -85,7 +90,9 @@ class WizardStep2
         }
 
         return $errors;
-    }// /->process_form()
+    }
+
+    // /->process_form()
 }// /class: WizardStep2
 
 ?>

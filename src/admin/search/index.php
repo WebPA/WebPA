@@ -12,7 +12,7 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -105,16 +105,16 @@ if (!empty($post_search)) {
         $rs = $queryBuilder->execute()->fetchAllAssociative();
     } else {
         //nothing has been entered that can be searched for
-        $sMessage = "<p>You have not entered any information for the search<br/>Please check and re-try.</p>";
+        $sMessage = '<p>You have not entered any information for the search<br/>Please check and re-try.</p>';
     }
 }
 
 //------------------------------------------------------------------------
 
 //set the page information
-$UI->page_title = APP__NAME . "  search for a user";
+$UI->page_title = APP__NAME . '  search for a user';
 $UI->menu_selected = 'view data';
-$UI->breadcrumbs = array('home' => '../review/', 'search'=>null,);
+$UI->breadcrumbs = ['home' => '../review/', 'search'=>null];
 $UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
@@ -131,7 +131,7 @@ $UI->content_start();
 
 $page_intro = '<p>Search the WebPA system for a user within the system</p>';
 $page_description = '<p>Enter the any combination of the information below for the individual that you would like to locate in the WebPA system. The person being searched for can be a student or staff member. When you are ready click the "Search Button".</p>';
-$rstitle = "Search results";
+$rstitle = 'Search results';
 ?>
 <?php echo $page_intro; ?>
 
@@ -154,7 +154,7 @@ if (empty($sMessage)) {
                     } elseif (($field_name != 'user_id') && ($field_name != 'module_id')) {
                         echo "<th>{$field_name}</th>";
                     } elseif (!$_source_id) {
-                        echo "<th class=\"icon\">&nbsp;</th>";
+                        echo '<th class="icon">&nbsp;</th>';
                     }
                 }
                 echo "</tr>\n";
@@ -177,33 +177,33 @@ if (empty($sMessage)) {
         echo '</div>';
     } else {
         if (!empty($post_search)) {
-            echo "<div class=\"warning_box\">The search has not found any matching information.</div>";
+            echo '<div class="warning_box">The search has not found any matching information.</div>';
         }
         echo $page_description;
-        echo "<form method=\"get\" name=\"search\" action=\"index.php\">" ;
-        echo "<table class=\"option_list\" style=\"width: 500px;\">";
-        echo  "<tr><td><label for=\"firstname\">First name</label></td><td><input type=\"text\" id=\"firstname\" name=\"firstname\" ></td></tr>";
-        echo  "<tr><td><label for=\"lastname\">Last name</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
-        echo  "<tr><td><label for=\"username\">Username</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
-        echo  "<tr><td><label for=\"id_number\">ID number</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
-        echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"Search\" id=\"Search\"></td></tr>";
-        echo "</table>";
-        echo "</form>";
+        echo '<form method="get" name="search" action="index.php">' ;
+        echo '<table class="option_list" style="width: 500px;">';
+        echo  '<tr><td><label for="firstname">First name</label></td><td><input type="text" id="firstname" name="firstname" ></td></tr>';
+        echo  '<tr><td><label for="lastname">Last name</label></td><td><input type="text" id="lastname" name="lastname"></td></tr>';
+        echo  '<tr><td><label for="username">Username</label></td><td><input type="text" id="username" name="username"></td></tr>';
+        echo  '<tr><td><label for="id_number">ID number</label></td><td><input type="text" id="id_number" name="id_number"></td></tr>';
+        echo  '<tr><td><input type="hidden" id="search" name="search" value="search"></td><td><input type="Submit" value="Search" id="Search"></td></tr>';
+        echo '</table>';
+        echo '</form>';
     }
 } else {
     if (!empty($sMessage)) {
         echo "<div class=\"warning_box\">{$sMessage}</div>";
     }
     echo $page_description;
-    echo "<form method=\"get\" name=\"search\" action=\"index.php\">" ;
-    echo "<table class=\"option_list\" style=\"width: 500px;\">";
-    echo  "<tr><td><label for=\"lastname\">Last name</label></td><td><input type=\"text\" id=\"lastname\" name=\"lastname\"></td></tr>";
-    echo  "<tr><td><label for=\"name\">First name</label></td><td><input type=\"text\" id=\"name\" name=\"name\" ></td></tr>";
-    echo  "<tr><td><label for=\"username\">Username</label></td><td><input type=\"text\" id=\"username\" name=\"username\"></td></tr>";
-    echo  "<tr><td><label for=\"id_number\">ID number</label></td><td><input type=\"text\" id=\"id_number\" name=\"id_number\"></td></tr>";
-    echo  "<tr><td><input type=\"hidden\" id=\"search\" name=\"search\" value=\"search\"></td><td><input type=\"Submit\" value=\"Search\" id=\"Search\"></td></tr>";
-    echo "</table>";
-    echo "</form>";
+    echo '<form method="get" name="search" action="index.php">' ;
+    echo '<table class="option_list" style="width: 500px;">';
+    echo  '<tr><td><label for="lastname">Last name</label></td><td><input type="text" id="lastname" name="lastname"></td></tr>';
+    echo  '<tr><td><label for="name">First name</label></td><td><input type="text" id="name" name="name" ></td></tr>';
+    echo  '<tr><td><label for="username">Username</label></td><td><input type="text" id="username" name="username"></td></tr>';
+    echo  '<tr><td><label for="id_number">ID number</label></td><td><input type="text" id="id_number" name="id_number"></td></tr>';
+    echo  '<tr><td><input type="hidden" id="search" name="search" value="search"></td><td><input type="Submit" value="Search" id="Search"></td></tr>';
+    echo '</table>';
+    echo '</form>';
 }
 ?>
 </div>

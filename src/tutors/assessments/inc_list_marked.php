@@ -27,7 +27,7 @@ use WebPA\includes\classes\XMLParser;
 
 ?>
 
-<h2>Marked assessments for <?php echo($academic_year); ?></h2>
+<h2>Marked assessments for <?php echo $academic_year; ?></h2>
 
 <p>These assessments are both closed and have been marked to produce student grades.</p>
 
@@ -109,16 +109,16 @@ if (!$assessments) {
       <tr>
         <td class="icon" width="24"><img src="../../images/icons/finished_icon.gif" alt="Finished" title="Finished" height="24" width="24" /></td>
         <td class="obj_info">
-          <div class="obj_name"><?php echo($assessment->name); ?></div>
-          <div class="obj_info_text">scheduled: <?php echo($assessment->get_date_string('open_date')); ?> &nbsp;-&nbsp; <?php echo($assessment->get_date_string('close_date')); ?></div>
-          <div class="obj_info_text">student responses: <?php echo("$num_responses / $num_members $completed_msg"); ?></div>
+          <div class="obj_name"><?php echo $assessment->name; ?></div>
+          <div class="obj_info_text">scheduled: <?php echo $assessment->get_date_string('open_date'); ?> &nbsp;-&nbsp; <?php echo $assessment->get_date_string('close_date'); ?></div>
+          <div class="obj_info_text">student responses: <?php echo "$num_responses / $num_members $completed_msg"; ?></div>
         </td>
         <td class="buttons">
-          <a href="<?php echo($edit_url); ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
-          <a href="<?php echo($email_url); ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
-          <a href="<?php echo($responded_url); ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
-          <a href="<?php echo($groupmark_url); ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
-          <a href="<?php echo($mark_url); ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
+          <a href="<?php echo $edit_url; ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
+          <a href="<?php echo $email_url; ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
+          <a href="<?php echo $responded_url; ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
+          <a href="<?php echo $groupmark_url; ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
+          <a href="<?php echo $mark_url; ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
         </td>
       </tr>
       </table>
@@ -133,31 +133,31 @@ if (!$assessments) {
             $tolerance = ($params['tolerance']==0) ? 'N/A' : "+/- {$params['tolerance']}%" ;
             $grading = ($params['grading']=='grade_af') ? 'A-F' : 'Numeric (%)' ;
 
-            echo('    <div class="mark_sheet">');
-            echo('      <table class="mark_sheet_info" cellpadding="0" cellspacing="0">');
-            echo('      <tr>');
-            echo('        <td>');
-            echo('          <div class="mark_sheet_title">Mark Sheet</div>');
-            echo("          <div class=\"info\" style=\"font-weight: bold;\">Algorithm: {$algorithm}.</div>");
-            echo("          <div class=\"info\">PA weighting: {$params['weighting']}%</div>");
-            echo("          <div class=\"info\">Non-completion penalty: {$params['penalty']}{$penalty_type}</div>");
+            echo '    <div class="mark_sheet">';
+            echo '      <table class="mark_sheet_info" cellpadding="0" cellspacing="0">';
+            echo '      <tr>';
+            echo '        <td>';
+            echo '          <div class="mark_sheet_title">Mark Sheet</div>';
+            echo "          <div class=\"info\" style=\"font-weight: bold;\">Algorithm: {$algorithm}.</div>";
+            echo "          <div class=\"info\">PA weighting: {$params['weighting']}%</div>";
+            echo "          <div class=\"info\">Non-completion penalty: {$params['penalty']}{$penalty_type}</div>";
 
             // @todo : implement tolerances and show to users clearly.
             //          echo("          <div class=\"info\">Score Tolerance: {$tolerance}</div>");
 
-            echo("          <div class=\"info\">Grading: {$grading}</div>");
-            echo('        </td>');
-            echo('        <td class="buttons" style="line-height: 2em;">');
-            echo("          <a class=\"button\" href=\"$reports_url\">View&nbsp;Reports</a>");
-            echo('        </td>');
-            echo('      </tr>');
-            echo('      </table>');
-            echo('    </div>');
+            echo "          <div class=\"info\">Grading: {$grading}</div>";
+            echo '        </td>';
+            echo '        <td class="buttons" style="line-height: 2em;">';
+            echo "          <a class=\"button\" href=\"$reports_url\">View&nbsp;Reports</a>";
+            echo '        </td>';
+            echo '      </tr>';
+            echo '      </table>';
+            echo '    </div>';
         }
     }// /if(mark sheets)
-            echo("    </div>\n");
+            echo "    </div>\n";
         }
         $xml_parser->destroy();
-        echo("  </div>\n");
+        echo "  </div>\n";
     }
 ?>

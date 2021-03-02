@@ -17,9 +17,11 @@ use Doctrine\DBAL\ParameterType;
 class Module
 {
     // Public Vars
-    public $module_code = null;
-    public $module_title = null;
-    public $module_id = null;
+    public $module_code;
+
+    public $module_title;
+
+    public $module_id;
 
     public DAO $DAO;
 
@@ -33,7 +35,9 @@ class Module
         $this->module_code = $module_code;
         $this->module_title = $module_title;
         $this->module_id = null;
-    }// /->Module()
+    }
+
+    // /->Module()
 
     /*
     * ================================================================================
@@ -56,7 +60,9 @@ class Module
             $this->module_title = $module_info['module_title'];
         }
         return true;
-    }// /->load_from_row()
+    }
+
+    // /->load_from_row()
 
     /**
      * Function to update the module details

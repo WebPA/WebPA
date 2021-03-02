@@ -14,17 +14,16 @@ namespace WebPA\includes\classes\algorithms;
 
 class WebPAAlgorithm extends Algorithm
 {
-
-
-
-  /**
-   * Constructor
-   *
-   * @return  object  A new instance of this class.
-   */
+    /**
+     * Constructor
+     *
+     * @return  object  A new instance of this class.
+     */
     public function __construct()
     {
-    }// /->__construct()
+    }
+
+    // /->__construct()
 
 
 
@@ -33,8 +32,6 @@ class WebPAAlgorithm extends Algorithm
     * Public Methods
     * ================================================================================
     */
-
-
 
     /**
      * Calculate the student's final grades.
@@ -65,8 +62,8 @@ class WebPAAlgorithm extends Algorithm
 
         // Take each group in turn
         foreach ($this->_group_grades as $group_id => $group_mark) {
-            $group_member_frac_scores_awarded[$group_id] = array();
-            $group_member_total_received[$group_id] =  array();
+            $group_member_frac_scores_awarded[$group_id] = [];
+            $group_member_total_received[$group_id] =  [];
 
             // Take each member in turn
             foreach ($this->_group_members[$group_id] as $i => $member_id) {
@@ -184,7 +181,9 @@ class WebPAAlgorithm extends Algorithm
 
 
         return true;
-    }// /->calculate()
+    }
+
+    // /->calculate()
 
 
 
@@ -193,8 +192,6 @@ class WebPAAlgorithm extends Algorithm
     * Private Methods
     * ================================================================================
     */
-
-
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a peer-only assessment.
@@ -269,9 +266,9 @@ class WebPAAlgorithm extends Algorithm
         }// /foreach(group)
 
         return true;
-    }// /->_preparePeerOnly()
+    }
 
-
+    // /->_preparePeerOnly()
 
     /**
      * Prepare the ->_calc_?? properties, ready for the algorithm to process a self-&-peer assessment.
@@ -297,5 +294,7 @@ class WebPAAlgorithm extends Algorithm
         $this->_calc_total_marks_received = $this->_actual_total_marks_received;
 
         return true;
-    }// /->_prepareSelfPeer()
+    }
+
+    // /->_prepareSelfPeer()
 }// /class

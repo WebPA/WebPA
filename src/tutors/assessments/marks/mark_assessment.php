@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
@@ -96,7 +96,7 @@ if (($command) && ($assessment)) {
       $grading = ($grading=='grade_af') ? $grading : 'numeric';
 
       $algorithm = Common::fetch_POST('pa_algorithm', null);
-      $valid_algs = array('pets', 'webpa');
+      $valid_algs = ['pets', 'webpa'];
       if (!in_array($algorithm, $valid_algs)) {
           $algorithm = 'webpa';
       }
@@ -105,13 +105,13 @@ if (($command) && ($assessment)) {
       if (!$errors) {
           $xml_parser = new XMLParser();
 
-          $xml_array['parameters']['weighting']['_attributes'] = array( 'value'  => $weighting );
-          $xml_array['parameters']['penalty']['_attributes'] = array( 'value'  => $penalty );
-          $xml_array['parameters']['penalty_type']['_attributes'] = array( 'value' => $penalty_type );
+          $xml_array['parameters']['weighting']['_attributes'] = ['value'  => $weighting];
+          $xml_array['parameters']['penalty']['_attributes'] = ['value'  => $penalty];
+          $xml_array['parameters']['penalty_type']['_attributes'] = ['value' => $penalty_type];
 
           //$xml_array['parameters']['tolerance']['_attributes'] = array ( 'value'  => $tolerance );
-          $xml_array['parameters']['grading']['_attributes'] = array( 'value'  => $grading );
-          $xml_array['parameters']['algorithm']['_attributes'] = array( 'value'  => $algorithm );
+          $xml_array['parameters']['grading']['_attributes'] = ['value'  => $grading];
+          $xml_array['parameters']['algorithm']['_attributes'] = ['value'  => $algorithm];
 
           $mysql_now = date(MYSQL_DATETIME_FORMAT, time());
 
@@ -120,10 +120,10 @@ if (($command) && ($assessment)) {
           $queryBuilder
             ->insert(APP__DB_TABLE_PREFIX . 'assessment_marking')
             ->values([
-                'assessment_id'     => $assessment_id ,
-                'date_created'      => $mysql_now ,
-                'date_last_marked'  => $mysql_now ,
-                'marking_params'    => $xml_parser->generate_xml($xml_array) ,
+                'assessment_id'     => $assessment_id,
+                'date_created'      => $mysql_now,
+                'date_last_marked'  => $mysql_now,
+                'marking_params'    => $xml_parser->generate_xml($xml_array),
             ])
             ->setParameter(0, $assessment_id)
             ->setParameter(1, $mysql_now)
@@ -148,11 +148,11 @@ $page_title = 'create mark sheet';
 $UI->page_title = $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array(
-  'home'        => '../../' ,
-  'my assessments'  => '../' ,
-  'create mark sheet' => null ,
-);
+$UI->breadcrumbs = [
+  'home'        => '../../',
+  'my assessments'  => '../',
+  'create mark sheet' => null,
+];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -205,7 +205,7 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 if (!$assessment) {
     ?>
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
@@ -213,11 +213,11 @@ if (!$assessment) {
 } else {
         ?>
 
-  <form action="mark_assessment.php?<?php echo($assessment_qs); ?>" method="post" name="mark_form">
+  <form action="mark_assessment.php?<?php echo $assessment_qs; ?>" method="post" name="mark_form">
   <input type="hidden" name="command" value="none" />
 
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url); ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a>
+    <a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessment list</a>
   </div>
 
 
@@ -236,7 +236,7 @@ if (!$assessment) {
 <?php
   for ($i=5; $i<=100; $i=$i+5) {
       $selected = ($i==50) ? 'selected="selected"' : '' ;
-      echo("<option value=\"$i\" $selected> {$i}% </option>\n");
+      echo "<option value=\"$i\" $selected> {$i}% </option>\n";
   } ?>
         </select>
       </td>
@@ -253,7 +253,7 @@ if (!$assessment) {
 <?php
   for ($i=$min_penalty; $i<=$max_penalty; $i++) {
       $selected = ($i==0) ? 'selected="selected"' : '' ;
-      echo("<option value=\"$i\" $selected> {$i}% </option>\n");
+      echo "<option value=\"$i\" $selected> {$i}% </option>\n";
   } ?>
         </select>
       </td>

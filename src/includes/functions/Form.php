@@ -22,7 +22,9 @@ class Form
     public static function is_email($email_address)
     {
         return filter_var($email_address, FILTER_VALIDATE_EMAIL) === false ? false : true;
-    }// /is_email()
+    }
+
+    // /is_email()
 
     /**
      * Render an associative array as <option></option> tags
@@ -36,25 +38,27 @@ class Form
         if (!$switch_kv) {
             if (!is_null($selected)) {
                 foreach ($arr as $k => $v) {
-                    echo("<option value=\"$k\" ". (($k==$selected) ? 'selected="selected"' : '') ."> $v </option>");
+                    echo "<option value=\"$k\" ". (($k==$selected) ? 'selected="selected"' : '') ."> $v </option>";
                 }
             } else {
                 foreach ($arr as $k => $v) {
-                    echo("<option value=\"$k\"> $v </option>");
+                    echo "<option value=\"$k\"> $v </option>";
                 }
             }
         } else {
             if ($selected) {
                 foreach ($arr as $k => $v) {
-                    echo("<option value=\"$v\" ". (($v==$selected) ? 'selected="selected"' : '') ."> $v </option>");
+                    echo "<option value=\"$v\" ". (($v==$selected) ? 'selected="selected"' : '') ."> $v </option>";
                 }
             } else {
                 foreach ($arr as $k => $v) {
-                    echo("<option value=\"$v\"> $v </option>");
+                    echo "<option value=\"$v\"> $v </option>";
                 }
             }
         }
-    }// /render_options()
+    }
+
+    // /render_options()
 
     /**
      * Render <option></option> tags for the given range of values
@@ -68,9 +72,11 @@ class Form
     {
         for ($i=$start; $i<=$end; $i += $increment) {
             $selected_str = ($i==$selected) ? 'selected="selected"' : '';
-            echo("<option value=\"$i\" $selected_str> $i </option>");
+            echo "<option value=\"$i\" $selected_str> $i </option>";
         }
-    }// /render_options_range()
+    }
+
+    // /render_options_range()
 
     /**
      * write to screen the check box grid
@@ -84,7 +90,7 @@ class Form
     public static function render_checkbox_grid($arr, $input_name, $selected_arr, $switch_value_label = false, $num_cols = 1)
     {
         if (is_null($selected_arr)) {
-            $selected_arr = array();
+            $selected_arr = [];
         } else {
             $selected_arr = (array) $selected_arr;
         }
@@ -102,24 +108,26 @@ class Form
         foreach ($arr_to_use as $value => $label) {
             if (($i % $num_cols)==0) {
                 if ($i!=0) {
-                    echo('</tr>');
+                    echo '</tr>';
                 }
                 if ($i!=$count-1) {
-                    echo('<tr>');
+                    echo '<tr>';
                 }
             }
             $id = $input_name .'_'. str_replace(' ', '_', $value);
             $checked_str = (in_array($value, $selected_arr)) ? 'checked="checked"' : '';
 
-            echo("<td><input type=\"checkbox\" name=\"{$input_name}[]\" id=\"$id\" value=\"$value\" $checked_str /></td>");
-            echo("<th><label for=\"$id\">$label</label></th>");
+            echo "<td><input type=\"checkbox\" name=\"{$input_name}[]\" id=\"$id\" value=\"$value\" $checked_str /></td>";
+            echo "<th><label for=\"$id\">$label</label></th>";
             $i++;
         }
-        echo(str_repeat('<td>&nbsp;</td><td>&nbsp;</td>', $empty_cols));
-        echo('</tr>'); ?>
+        echo str_repeat('<td>&nbsp;</td><td>&nbsp;</td>', $empty_cols);
+        echo '</tr>'; ?>
         </table>
         <?php
-    }// /render_checkbox_grid()
+    }
+
+    // /render_checkbox_grid()
 
     /**
      * Write to screen the radio buttons
@@ -148,14 +156,16 @@ class Form
             foreach ($arr_to_use as $value => $label) {
                 $id = $input_name .'_'. str_replace(' ', '_', $value);
                 $checked_str = ($value==$selected_str) ? 'checked="checked"' : '';
-                echo('<tr>');
-                echo("<td><input type=\"radio\" name=\"$input_name\" id=\"$id\" value=\"$value\" $checked_str /></td>");
-                echo("<th><label for=\"$id\">$label</label></th>");
-                echo('</tr>');
+                echo '<tr>';
+                echo "<td><input type=\"radio\" name=\"$input_name\" id=\"$id\" value=\"$value\" $checked_str /></td>";
+                echo "<th><label for=\"$id\">$label</label></th>";
+                echo '</tr>';
             }
         //	}
         ?>
         </table>
         <?php
-    }// /render_radio_boxes()
+    }
+
+    // /render_radio_boxes()
 }

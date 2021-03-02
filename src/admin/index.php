@@ -12,7 +12,7 @@
  */
 
 //get the include file required
-require_once("../includes/inc_global.php");
+require_once '../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
@@ -24,7 +24,7 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
  //set the page information
 $UI->page_title = APP__NAME;
 $UI->menu_selected = 'admin home';
-$UI->breadcrumbs = array('home' => null);
+$UI->breadcrumbs = ['home' => null];
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -41,24 +41,24 @@ $menu = $UI->get_menu('Admin');
 if (isset($menu['upload data'])) {
     $upload = $menu['upload data'];
     if ($_user->is_admin()) {
-        $section_name = array('Upload Data', 'View Data', 'WebPA Metrics');
-        $section_link = array($upload, 'review/', 'metrics/');
+        $section_name = ['Upload Data', 'View Data', 'WebPA Metrics'];
+        $section_link = [$upload, 'review/', 'metrics/'];
     } else {
-        $section_name = array('Upload Data', 'View Data');
-        $section_link = array($upload, 'review/');
+        $section_name = ['Upload Data', 'View Data'];
+        $section_link = [$upload, 'review/'];
     }
 } else {
     if ($_user->is_admin()) {
-        $section_name = array('View Data', 'WebPA Metrics');
-        $section_link = array('review/', 'metrics/');
+        $section_name = ['View Data', 'WebPA Metrics'];
+        $section_link = ['review/', 'metrics/'];
     } else {
-        $section_name = array('View Data');
-        $section_link = array('review/');
+        $section_name = ['View Data'];
+        $section_link = ['review/'];
     }
 }
-$section_definition = array('This is where you can upload the data to the system.',
+$section_definition = ['This is where you can upload the data to the system.',
               'This area allows you to view the uploaded data as well as search and edit user information.',
-              'This section allows you to generate reports on the usage of WebPA locally.');
+              'This section allows you to generate reports on the usage of WebPA locally.', ];
 ?>
 <p><?php echo $page_intro; ?></p>
 

@@ -17,17 +17,27 @@ use Doctrine\DBAL\ParameterType;
 class User
 {
     // Public Vars
-    public $username = null;
-    public $source_id = null;
-    public $password = null;
-    public $id = null;
-    public $admin = null;
-    public $id_number = null;
-    public $department_id = null;
-    public $forename = null;
-    public $lastname = null;
-    public $email = null;
-    public $type = null;
+    public $username;
+
+    public $source_id;
+
+    public $password;
+
+    public $id;
+
+    public $admin;
+
+    public $id_number;
+
+    public $department_id;
+
+    public $forename;
+
+    public $lastname;
+
+    public $email;
+
+    public $type;
 
     public DAO $DAO;
 
@@ -48,7 +58,9 @@ class User
         $this->forename = null;
         $this->lastname = null;
         $this->admin = 0;
-    }// /->User()
+    }
+
+    // /->User()
 
     /*
     * ================================================================================
@@ -83,7 +95,9 @@ class User
             }
         }
         return true;
-    }// /->load_from_row()
+    }
+
+    // /->load_from_row()
 
     /**
     * Is this user admin?
@@ -92,8 +106,10 @@ class User
     */
     public function is_admin()
     {
-        return ($this->admin == 1);
-    }// /->is_admin()
+        return $this->admin == 1;
+    }
+
+    // /->is_admin()
 
     /**
     * Is this user staff?
@@ -103,23 +119,25 @@ class User
     public function is_staff()
     {
         return ($this->type == APP__USER_TYPE_ADMIN) || ($this->type == APP__USER_TYPE_TUTOR);
-    }// /->is_staff()
+    }
 
-    /*
-    Is this user tutor?
-    */
+    // /->is_staff()
+
+    // Is this user tutor?
     public function is_tutor()
     {
-        return ($this->type == APP__USER_TYPE_TUTOR);
-    }// /->is_staff()
+        return $this->type == APP__USER_TYPE_TUTOR;
+    }
 
-    /*
-    Is this user student?
-    */
+    // /->is_staff()
+
+    // Is this user student?
     public function is_student()
     {
-        return ($this->type == APP__USER_TYPE_STUDENT);
-    }// /->is_student()
+        return $this->type == APP__USER_TYPE_STUDENT;
+    }
+
+    // /->is_student()
 
     /**
      * Update password
@@ -210,7 +228,7 @@ class User
                'password' => '?',
                'id_number' => '?',
                'department_id' => '?',
-               'admin' => '?'
+               'admin' => '?',
            ])
            ->setParameter(0, $this->forename)
            ->setParameter(0, $this->lastname)

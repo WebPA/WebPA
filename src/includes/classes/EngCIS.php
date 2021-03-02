@@ -11,19 +11,24 @@
 namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
+use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
-use WebPA\includes\functions\AcademicYear;
 
 include_once __DIR__ . '/../inc_global.php';
 
 class EngCIS
 {
     private $_DAO;
+
     private $_ordering_types;
+
     private $user;
+
     private $sourceId;
+
     private $moduleId;
+
     private $dbConn;
 
     /**
@@ -80,7 +85,8 @@ class EngCIS
                 ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
 
             return $queryBuilder->execute()->fetchAllAssociative();
-        } elseif (!empty($modules)) {  // else, just return one row
+        }
+        if (!empty($modules)) {  // else, just return one row
             $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id IN ? LIMIT 1';
 
             return $this->dbConn->fetchAssociative(
@@ -88,7 +94,8 @@ class EngCIS
                 [$this->sourceId, $modules],
                 [ParameterType::STRING, $this->dbConn::PARAM_INT_ARRAY]
             );
-        } elseif ($this->user->is_admin()) {
+        }
+        if ($this->user->is_admin()) {
             $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
                 ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
@@ -96,8 +103,8 @@ class EngCIS
                 ->setParameter(0, $this->sourceId, ParameterType::STRING);
 
             return $queryBuilder->execute()->fetchAllAssociative();
-        } else {
-            $queryBuilder
+        }
+        $queryBuilder
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
                 ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
                 ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
@@ -108,8 +115,7 @@ class EngCIS
                 ->setParameter(1, $this->user->id, ParameterType::INTEGER)
                 ->setParameter(2, $this->sourceId, ParameterType::STRING);
 
-            return $queryBuilder->execute()->fetchAllAssociative();
-        }
+        return $queryBuilder->execute()->fetchAllAssociative();
     }
 
     /**
@@ -268,7 +274,9 @@ class EngCIS
     public function get_staff_modules($staff_id, $staff_username = null, $ordering = 'id')
     {
         return $this->get_user_modules($staff_id, $staff_username, $ordering);
-    }// /->get_staff_modules
+    }
+
+    // /->get_staff_modules
 
     /**
      * Is the given staff member associated with the given modules?
@@ -279,18 +287,19 @@ class EngCIS
      */
     public function staff_has_module($staff_id, $module_id)
     {
-        $module_id = (array)$module_id;
+        $module_id = (array) $module_id;
         $staff_modules = $this->get_staff_modules($staff_id);
         if (!$staff_modules) {
             return false;
-        } else {
-            $arr_module_id = ArrayFunctions::array_extract_column($staff_modules, 'module_id');
-            $diff = array_diff($module_id, $arr_module_id);
-
-            // If the array is empty, then the staff member has those modules
-            return (count(array_diff($module_id, $arr_module_id)) === 0);
         }
-    }// /->staff_has_module()
+        $arr_module_id = ArrayFunctions::array_extract_column($staff_modules, 'module_id');
+        $diff = array_diff($module_id, $arr_module_id);
+
+        // If the array is empty, then the staff member has those modules
+        return count(array_diff($module_id, $arr_module_id)) === 0;
+    }
+
+    // /->staff_has_module()
 
     /*
     * --------------------------------------------------------------------------------
@@ -311,7 +320,9 @@ class EngCIS
     public function get_student_modules($student_id, $student_username = null, $ordering = 'id')
     {
         return $this->get_user_modules($student_id, $student_username, $ordering);
-    }// /->get_student_modules()
+    }
+
+    // /->get_student_modules()
 
     /*
     * --------------------------------------------------------------------------------
@@ -349,16 +360,15 @@ class EngCIS
                 ->setParameter(1, $this->moduleId, ParameterType::INTEGER);
 
             return $queryBuilder->execute()->fetchAllAssociative();
-        } else {
-            $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+        }
+        $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
                    . 'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um '
                    . 'ON u.user_id = um.user_id '
                    . 'WHERE u.user_id = ? '
                    . 'AND (um.module_id = ? OR u.admin = 1) '
                    . 'LIMIT 1';
 
-            return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
-        }
+        return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
     }
 
     /**

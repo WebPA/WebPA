@@ -8,7 +8,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
+require_once '../includes/inc_global.php';
 
 use WebPA\includes\classes\Email;
 use WebPA\includes\functions\Common;
@@ -38,7 +38,7 @@ $contact_message = Common::fetch_POST('contact_message');
 
 $app_www = APP__WWW;
 
-$errors = array();
+$errors = [];
 
 if ($contact_fullname == '') {
     $errors[] = 'Name is required';
@@ -56,34 +56,34 @@ if ($contact_email == '') {
 
 if (empty($errors)) {
     $email_body = <<<EndBody
-Contact Sent
-----------------------------------------
-Application  : $contact_app_id ($app_www)
-Contact Type : $contact_type
-Date         : $contact_date
-----------------------------------------
+        Contact Sent
+        ----------------------------------------
+        Application  : $contact_app_id ($app_www)
+        Contact Type : $contact_type
+        Date         : $contact_date
+        ----------------------------------------
 
-Contact Details
-----------------------------------------
-Fullname : $contact_fullname
-Username : $contact_username
-Email    : $contact_email
-Phone    : $contact_phone
-----------------------------------------
+        Contact Details
+        ----------------------------------------
+        Fullname : $contact_fullname
+        Username : $contact_username
+        Email    : $contact_email
+        Phone    : $contact_phone
+        ----------------------------------------
 
-User Account Details
-----------------------------------------
-User ID  : $contact_user_id
-Fullname : $contact_user_fullname
-Username : $contact_user_username
-Email    : $contact_user_email
-----------------------------------------
+        User Account Details
+        ----------------------------------------
+        User ID  : $contact_user_id
+        Fullname : $contact_user_fullname
+        Username : $contact_user_username
+        Email    : $contact_user_email
+        ----------------------------------------
 
-Message:
-----------------------------------------
-$contact_message
-----------------------------------------
-EndBody;
+        Message:
+        ----------------------------------------
+        $contact_message
+        ----------------------------------------
+        EndBody;
 
     // Send the email
     $email = new Email();
@@ -98,8 +98,8 @@ EndBody;
 
 $UI->page_title = APP__NAME . ' Message Sent';
 $UI->menu_selected = 'contact';
-$UI->breadcrumbs = array('home'   => '/' ,
-              'contact' => null ,);
+$UI->breadcrumbs = ['home'   => '/',
+              'contact' => null, ];
 
 $UI->head();
 $UI->body();
@@ -108,20 +108,20 @@ $UI->content_start();
 ?>
 
   <div class="content_box">
-    <?php if (empty($errors)) : ?>
+    <?php if (empty($errors)) { ?>
     <p>Your message has now been sent.</p>
     <p>We will try and respond as soon as possible, but at times our team can be very busy. We apologise in advance for any delay in getting back to you.</p>
     <p>Thanks for your time</p>
-    <?php else : ?>
+    <?php } else { ?>
     	<p>Please correct the following errors:</p>
     	<ul>
-    	<?php foreach ($errors as $error) : ?>
+    	<?php foreach ($errors as $error) { ?>
     		<li><?php echo $error?></li>
-    	<?php endforeach; ?>
+    	<?php } ?>
     	</ul>
     	<br>
     	<button onclick="javascript:window.history.back();">Fix Errors</button>
-    <?php endif; ?>
+    <?php } ?>
   </div>
 <?php
 

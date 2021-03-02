@@ -10,7 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\AlgorithmFactory;
 use WebPA\includes\classes\Assessment;
@@ -40,15 +40,15 @@ $assessment = new Assessment($DB);
 if (!$assessment->load($assessment_id)) {
     $assessment = null;
 
-    echo('Error: The requested assessment could not be loaded.');
+    echo 'Error: The requested assessment could not be loaded.';
     exit;
-} else {
+}
 
   // ----------------------------------------
     // Get the marking parameters used for the marksheet this report will display
     $marking_params = $assessment->get_marking_params($marking_date);
     if (!$marking_params) {
-        echo('Error: The requested marksheet could not be loaded.');
+        echo 'Error: The requested marksheet could not be loaded.';
         exit;
     }
 
@@ -57,16 +57,16 @@ if (!$assessment->load($assessment_id)) {
     $algorithm = AlgorithmFactory::get_algorithm($marking_params['algorithm']);
 
     if (!$algorithm) {
-        echo('Error: The requested algorithm could not be loaded.');
+        echo 'Error: The requested algorithm could not be loaded.';
         exit;
-    } else {
+    }
         $algorithm->set_assessment($assessment);
         $algorithm->set_marking_params($marking_params);
         $algorithm->calculate();
 
         $group_members = $algorithm->get_group_members();
 
-        $member_names = array();
+        $member_names = [];
 
         for ($i =0; $i<count($group_members); $i++) {
             $array_key = array_keys($group_members);
@@ -75,8 +75,8 @@ if (!$assessment->load($assessment_id)) {
                 array_push($member_names, $CIS->get_user($temp[$j]));
             }
         }
-    }// /if-else(is algorithm)
-}// /if-else(is assessment)
+    // /if-else(is algorithm)
+// /if-else(is assessment)
 
 
 // ----------------------------------------
@@ -90,7 +90,7 @@ $question_count = (int) $form->get_question_count();
 if ($question_count>0) {
     $questions = range(0, $question_count-1);
 } else {
-    $questions = array();
+    $questions = [];
 }
 
 //get the information in the format required
@@ -201,14 +201,14 @@ if ($type == 'view') {
                     $scores_row = $scores_row . "<td>{$score}</td>";
                 }
                 if ($q_count == 0) {
-                    echo "<tr><th>&nbsp;</th>";
+                    echo '<tr><th>&nbsp;</th>';
                     echo $markers_row;
                 }
                 echo "</tr><tr><th>{$question}</th>";
                 echo $scores_row;
                 $q_count++;
             }
-            echo "</tr></table><br/><br/>";
+            echo '</tr></table><br/><br/>';
         }
     } ?>
 
@@ -228,7 +228,7 @@ if ($type == 'view') {
  */
 
 if ($type == 'download-rtf') {
-    header("Content-Disposition: attachment; filename=uea.rtf");
+    header('Content-Disposition: attachment; filename=uea.rtf');
     header("Content-Type: text/enriched\n");
 
     $group_names = $algorithm->get_group_names();
@@ -268,7 +268,7 @@ if ($type == 'download-rtf') {
 }
 
 if ($type == 'download-csv') {
-    header("Content-Disposition: attachment; filename=\"uea_report_style.csv\"");
+    header('Content-Disposition: attachment; filename="uea_report_style.csv"');
     header('Content-Type: text/csv');
 
     $group_names = $algorithm->get_group_names();
