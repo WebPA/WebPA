@@ -708,14 +708,12 @@ class GroupCollection
      */
     public function remove_member($user_id, $role = null)
     {
-        if (!is_array($user_id)) {
-            $user_id = [$user_id];
-        }
+        $userIdClause = is_array($user_id) ? 'user_id IN (?) ' : 'user_id = ? ';
 
         $removeMemberQuery =
-            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
-            'WHERE ugm.user_id IN (?) ' .
-            'AND ugm.group_id IN ' .
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member ' .
+            'WHERE ' . $userIdClause .
+            'AND group_id IN ' .
             '(' .
             '   SELECT group_id ' .
             '   FROM ' . APP__DB_TABLE_PREFIX . 'user_group ' .
@@ -724,7 +722,9 @@ class GroupCollection
 
         $stmt = $this->dbConn->prepare($removeMemberQuery);
 
-        $stmt->bindValue(1, $user_id, $this->_DAO->getConnection()::PARAM_STR_ARRAY);
+        $userIdParamType = is_array($user_id) ? $this->_DAO->getConnection()::PARAM_INT_ARRAY : ParameterType::INTEGER;
+
+        $stmt->bindValue(1, $user_id, $userIdParamType);
         $stmt->bindValue(2, $this->id);
 
         $stmt->execute();

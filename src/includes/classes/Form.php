@@ -115,7 +115,7 @@ class Form
 
         $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'form  WHERE form_id = ?';
 
-        $form = $dbConn->fetchAssociative($query, [$id], [ParameterType::INTEGER]);
+        $form = $dbConn->fetchAssociative($query, [$id], [ParameterType::STRING]);
 
         return $form ? $this->load_from_row($form) : false;
     }
@@ -133,6 +133,7 @@ class Form
         $this->name = $row['form_name'];
         $this->type = (is_null($row['form_type'])) ? 'likert' : $row['form_type'];
         $this->_load_xml($row['form_xml']);
+
         return true;
     }
 

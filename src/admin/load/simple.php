@@ -157,12 +157,12 @@ if ($flg_match) {
 
         foreach ($final_rows as $i) {
             $module_code = $i['module_code'] ?? '';
-            $group_name = isset($i['group_name']) ? $i[$group_name] : '';
+            $group_name = isset($i['group_name']) ? $i['group_name'] : '';
 
             $insertUserQuery =
                 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user ' .
                 '(id_number, forename, lastname, email, username, password, department_id, source_id, admin) ' .
-                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)';
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)';
 
             if ($_user->is_admin()) {
                 $insertUserQuery .=
@@ -232,8 +232,8 @@ if ($flg_match) {
 
                 $DB->getConnection()->executeQuery(
                     $insertUserModuleQuery,
-                    [$id, $module_id, $user_type],
-                    [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING]
+                    [$id, $module_id, $user_type, $user_type],
+                    [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
                 );
 
                 if (!empty($collection_id) && !empty($group_name)) {
@@ -257,8 +257,8 @@ if ($flg_match) {
             $insertModuleQuery =
                 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'module ' .
                 '(module_code, module_title, source_id) ' .
-                'VALUES (?, ? , ?) ';
-            'ON DUPLICATE KEY UPDATE ' .
+                'VALUES (?, ? , ?) ' .
+                'ON DUPLICATE KEY UPDATE ' .
                 'module_title = ?, ' .
                 'source_id = ?';
 

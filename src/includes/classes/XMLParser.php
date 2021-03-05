@@ -229,7 +229,7 @@ class XMLParser
      * @param string $tag
      * @param string $attributes
      */
-    public function _tag_open(&$parser, $tag, $attributes)
+    public function _tag_open($parser, $tag, $attributes)
     {
         $this->data = '';
         $this->_last_opened_tag = $tag;
@@ -257,14 +257,12 @@ class XMLParser
         $this->_stack[] = &$this->_parent;
     }
 
-    // /->_tag_open()
-
     /**
      * tag-data event handler
      * @param string $parser
      * @param string $data
      */
-    public function _tag_data(&$parser, $data)
+    public function _tag_data($parser, $data)
     {
         //you don't need to store whitespace in between tags
         if ($this->_last_opened_tag != null) {
@@ -279,7 +277,7 @@ class XMLParser
     * @param string $parser
     * @param string $tag
     */
-    public function _tag_close(&$parser, $tag)
+    public function _tag_close($parser, $tag)
     {
         if ($this->_last_opened_tag == $tag) {
             $this->_parent['_data'] = $this->data;
