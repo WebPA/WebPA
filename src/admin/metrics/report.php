@@ -135,11 +135,11 @@ $runModulesPerAssessmentsStmt = $dbConn->prepare('SELECT DISTINCT m.module_code,
    'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
    'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ? ' .
-   'ORDER BY a.assessment_name, m.module_code');
+   'ORDER BY m.module_code');
 
-$runModulesPerAssessmentsStmt->bindValue($_source_id);
-$runModulesPerAssessmentsStmt->bindValue($this_year);
-$runModulesPerAssessmentsStmt->bindValue($next_year);
+$runModulesPerAssessmentsStmt->bindValue(1, $_source_id);
+$runModulesPerAssessmentsStmt->bindValue(2, $this_year);
+$runModulesPerAssessmentsStmt->bindValue(3, $next_year);
 
 //number of students who has carried out an assessment this year
 $runStudentsAssessedStmt = $dbConn->prepare('SELECT COUNT(DISTINCT ugm.user_id) as \'Total unique students assessed\' ' .
@@ -149,11 +149,9 @@ $runStudentsAssessedStmt = $dbConn->prepare('SELECT COUNT(DISTINCT ugm.user_id) 
    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
    'WHERE m.source_id = ? AND a.open_date >= ? AND a.open_date < ?');
 
-$runStudentsAssessedStmt->bindValue($_source_id);
-$runStudentsAssessedStmt->bindValue($this_year);
-$runStudentsAssessedStmt->bindValue($next_year);
-
-
+$runStudentsAssessedStmt->bindValue(1, $_source_id);
+$runStudentsAssessedStmt->bindValue(2, $this_year);
+$runStudentsAssessedStmt->bindValue(3, $next_year);
 
 //-------------------------------------------------------
 //view on screen
@@ -171,9 +169,9 @@ if ($format == 'html') {
 
     if (!empty($assessments_run)) {
         // This returns a Result object... what can we do with it?
-        $runAssessmentsStmt->execute();
+        $runAssessmentsResult = $runAssessmentsStmt->execute();
 
-        $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+        $rs_assessments = $runAssessmentsResult->fetchAllAssociative();
 
         echo "<h2>Assessments run in WebPA ({$academic_year})</h2>";
 
@@ -206,9 +204,9 @@ if ($format == 'html') {
     }
 
     if (!empty($assessment_groups)) {
-        $runGroupsPerAssessmentStmt->execute();
+        $runGroupsPerAssessmentResult = $runGroupsPerAssessmentStmt->execute();
 
-        $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+        $rs_groups = $runGroupsPerAssessmentResult->fetchAllAssociative();
 
         echo "<h2>Number of groups per assessment ({$academic_year})</h2>";
 
@@ -240,9 +238,9 @@ if ($format == 'html') {
     }
 
     if (!empty($assessment_students)) {
-        $runStudentsPerAssessmentStmt->execute();
+        $runStudentsPerAssessmentResult = $runStudentsPerAssessmentStmt->execute();
 
-        $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+        $rs_students = $runStudentsPerAssessmentResult->fetchAllAssociative();
 
         echo "<h2>Number of students per assessment ({$academic_year})</h2>";
 
@@ -272,9 +270,9 @@ if ($format == 'html') {
         }
     }
     if (!empty($assessment_feedback)) {
-        $runFeedbackStmt->execute();
+        $runFeedbackResult = $runFeedbackStmt->execute();
 
-        $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+        $rs_feedback = $runFeedbackResult->fetchAllAssociative();
 
         echo "<h2>Assessments where feedback has been used ({$academic_year})</h2>";
 
@@ -306,9 +304,9 @@ if ($format == 'html') {
     }
 
     if (!empty($assessment_respondents)) {
-        $runRespondentsStmt->execute();
+        $runRespondentsResult = $runRespondentsStmt->execute();
 
-        $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+        $rs_respondents = $runRespondentsResult->fetchAllAssociative();
 
         echo "<h2>Number of Respondents per assessment ({$academic_year})</h2>";
 
@@ -339,9 +337,9 @@ if ($format == 'html') {
     }
 
     if (!empty($assessment_modules)) {
-        $runModulesPerAssessmentsStmt->execute();
+        $runModulesPerAssessmentsResult = $runModulesPerAssessmentsStmt->execute();
 
-        $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+        $rs_runners = $runModulesPerAssessmentsResult->fetchAllAssociative();
 
         echo "<h2>Modules which have run an assessment ({$academic_year})</h2>";
 
@@ -372,9 +370,9 @@ if ($format == 'html') {
     }
 
     if (!empty($assessment_students_thisyear)) {
-        $runStudentsAssessedStmt->execute();
+        $runStudentsAssessedResult = $runStudentsAssessedStmt->execute();
 
-        $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+        $rs_students = $runStudentsAssessedResult->fetchAllAssociative();
 
         echo "<h2>Number of students who have carried out an assessment ({$academic_year})</h2>";
 
@@ -408,9 +406,9 @@ if ($format == 'csv') {
 
 
     if (!empty($assessments_run)) {
-        $runAssessmentsStmt->execute();
+        $runAssessmentsResult = $runAssessmentsStmt->execute();
 
-        $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+        $rs_assessments = $runAssessmentsResult->fetchAllAssociative();
 
         echo "\n\"Assessments run in WebPA ({$academic_year})\"\n";
         if ($rs_assessments) {
@@ -436,9 +434,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_groups)) {
-        $runGroupsPerAssessmentStmt->execute();
+        $runGroupsPerAssessmentResult = $runGroupsPerAssessmentStmt->execute();
 
-        $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+        $rs_groups = $runGroupsPerAssessmentResult->fetchAllAssociative();
 
         echo "\n\"Number of groups per assessment ({$academic_year})\"\n";
         if ($rs_groups) {
@@ -463,9 +461,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_students)) {
-        $runStudentsPerAssessmentStmt->execute();
+        $runStudentsPerAssessmentResult = $runStudentsPerAssessmentStmt->execute();
 
-        $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+        $rs_students = $runStudentsPerAssessmentResult->fetchAllAssociative();
 
         echo "\n\"Number of students per assessment ({$academic_year})\"\n";
         if ($rs_students) {
@@ -490,9 +488,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_feedback)) {
-        $runFeedbackStmt->execute;
+        $runFeedbackResult = $runFeedbackStmt->execute;
 
-        $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+        $rs_feedback = $runFeedbackResult->fetchAllAssociative();
 
         echo "\n\"Assessments where feedback has been used ({$academic_year})\"\n";
         if ($rs_feedback) {
@@ -517,9 +515,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_respondents)) {
-        $runRespondentsStmt->execute();
+        $runRespondentsResult = $runRespondentsStmt->execute();
 
-        $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+        $rs_respondents = $runRespondentsResult->fetchAllAssociative();
 
         echo "\n\"Number of respondents per assessment ({$academic_year})\"\n";
 
@@ -545,9 +543,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_modules)) {
-        $runModulesPerAssessmentsStmt->execute();
+        $runModulesPerAssessmentsResult = $runModulesPerAssessmentsStmt->execute();
 
-        $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+        $rs_runners = $runModulesPerAssessmentsResult->fetchAllAssociative();
 
         echo "\n\"Modules which have run an assessment ({$academic_year})\"\n";
 
@@ -573,9 +571,9 @@ if ($format == 'csv') {
     }
 
     if (!empty($assessment_students_thisyear)) {
-        $runStudentsAssessedStmt->execute();
+        $runStudentsAssessedResult = $runStudentsAssessedStmt->execute();
 
-        $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+        $rs_students = $runStudentsAssessedResult->fetchAllAssociative();
         echo "\n\"Number of students who have carried out an assessment ({$academic_year})\"\n";
         if ($rs_students) {
             //loop round the initial array
@@ -599,9 +597,9 @@ if ($format == 'rtf') {
     echo 'WebPA - Metrics report'."\n\n";
 
     if (!empty($assessments_run)) {
-        $runAssessmentsStmt->execute();
+        $runAssessmentsResult = $runAssessmentsStmt->execute();
 
-        $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+        $rs_assessments = $runAssessmentsResult->fetchAllAssociative();
 
         echo "\nAssessments run in WebPA ({$academic_year})\n\n";
         $icounter = 0;
@@ -623,9 +621,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_groups)) {
-        $runGroupsPerAssessmentStmt->execute();
+        $runGroupsPerAssessmentResult = $runGroupsPerAssessmentStmt->execute();
 
-        $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+        $rs_groups = $runGroupsPerAssessmentResult->fetchAllAssociative();
 
         echo "\nNumber of groups per assessment ({$academic_year})\n\n";
 
@@ -649,9 +647,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_students)) {
-        $runStudentsPerAssessmentStmt->execute();
+        $runStudentsPerAssessmentResult = $runStudentsPerAssessmentStmt->execute();
 
-        $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+        $rs_students = $runStudentsPerAssessmentResult->fetchAllAssociative();
 
         echo "\nNumber of students per assessment ({$academic_year})\n\n";
         if ($rs_students) {
@@ -675,9 +673,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_feedback)) {
-        $runFeedbackStmt->execute;
+        $runFeedbackResult = $runFeedbackStmt->execute;
 
-        $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+        $rs_feedback = $runFeedbackResult->fetchAllAssociative();
 
         echo "\nAssessments where feedback has been used ({$academic_year})\n\n";
         if ($rs_feedback) {
@@ -701,9 +699,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_respondents)) {
-        $runRespondentsStmt->execute();
+        $runRespondentsResult = $runRespondentsStmt->execute();
 
-        $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+        $rs_respondents = $runRespondentsResult->fetchAllAssociative();
 
         echo "\nNumber of Respondents per assessment ({$academic_year})\n\n";
 
@@ -728,9 +726,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_modules)) {
-        $runModulesPerAssessmentsStmt->execute();
+        $runModulesPerAssessmentsResult = $runModulesPerAssessmentsStmt->execute();
 
-        $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+        $rs_runners = $runModulesPerAssessmentsResult->fetchAllAssociative();
 
         echo "\nModules which have run an assessment ({$academic_year})\n\n";
 
@@ -755,9 +753,9 @@ if ($format == 'rtf') {
     }
 
     if (!empty($assessment_students_thisyear)) {
-        $runStudentsAssessedStmt->execute();
+        $runStudentsAssessedResult = $runStudentsAssessedStmt->execute();
 
-        $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+        $rs_students = $runStudentsAssessedResult->fetchAllAssociative();
 
         echo "\nNumber of students who have carried out an assessment ({$academic_year})\n\n";
         if ($rs_students) {
@@ -782,9 +780,9 @@ if ($format == 'xml') {
     echo'<metrics_report>';
 
     if (!empty($assessments_run)) {
-        $runAssessmentsStmt->execute();
+        $runAssessmentsResult = $runAssessmentsStmt->execute();
 
-        $rs_assessments = $runAssessmentsStmt->fetchAllAssociative();
+        $rs_assessments = $runAssessmentsResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Assessments run in WebPA ({$academic_year})</description>";
@@ -809,9 +807,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_groups)) {
-        $runGroupsPerAssessmentStmt->execute();
+        $runGroupsPerAssessmentResult = $runGroupsPerAssessmentStmt->execute();
 
-        $rs_groups = $runGroupsPerAssessmentStmt->fetchAllAssociative();
+        $rs_groups = $runGroupsPerAssessmentResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Number of groups per assessment ({$academic_year})</description>";
@@ -835,9 +833,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_students)) {
-        $runStudentsPerAssessmentStmt->execute();
+        $runStudentsPerAssessmentResult = $runStudentsPerAssessmentStmt->execute();
 
-        $rs_students = $runStudentsPerAssessmentStmt->fetchAllAssociative();
+        $rs_students = $runStudentsPerAssessmentResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Number of students per assessment ({$academic_year})</description>";
@@ -863,9 +861,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_feedback)) {
-        $runFeedbackStmt->execute;
+        $runFeedbackResult = $runFeedbackStmt->execute;
 
-        $rs_feedback = $runFeedbackStmt->fetchAllAssociative();
+        $rs_feedback = $$runFeedbackResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Assessments where feedback has been used ({$academic_year})</description>";
@@ -890,9 +888,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_respondents)) {
-        $runRespondentsStmt->execute();
+        $runRespondentsResult = $runRespondentsStmt->execute();
 
-        $rs_respondents = $runRespondentsStmt->fetchAllAssociative();
+        $rs_respondents = $runRespondentsResult->fetchAllAssociative();
 
         echo '<metrics>';
 
@@ -919,9 +917,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_modules)) {
-        $runModulesPerAssessmentsStmt->execute();
+        $runModulesPerAssessmentsResult = $runModulesPerAssessmentsStmt->execute();
 
-        $rs_runners = $runModulesPerAssessmentsStmt->fetchAllAssociative();
+        $rs_runners = $runModulesPerAssessmentsResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Modules which have run an assessment ({$academic_year})</description>";
@@ -947,9 +945,9 @@ if ($format == 'xml') {
     }
 
     if (!empty($assessment_students_thisyear)) {
-        $runStudentsAssessedStmt->execute();
+        $runStudentsAssessedResult = $runStudentsAssessedStmt->execute();
 
-        $rs_students = $runStudentsAssessedStmt->fetchAllAssociative();
+        $rs_students = $runStudentsAssessedResult->fetchAllAssociative();
 
         echo '<metrics>';
         echo "<description>Number of students who have carried out an assessment ({$academic_year})</description>";

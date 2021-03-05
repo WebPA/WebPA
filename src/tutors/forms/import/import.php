@@ -87,14 +87,14 @@ if ($empty>0) {
             $dbConn
           ->createQueryBuilder()
           ->update(APP__DB_TABLE_PREFIX . 'form')
-          ->where('form_id', '?')
           ->set('form_name', '?')
           ->set('form_type', '?')
           ->set('form_xml', '?')
-          ->setParameter(0, $new_id)
-          ->setParameter(1, $formname)
-          ->setParameter(2, $formtype)
-          ->setParameter(3, $xml)
+          ->where('form_id', '?')
+          ->setParameter(0, $formname)
+          ->setParameter(1, $formtype)
+          ->setParameter(2, $xml)
+          ->setParameter(3, $new_id)
           ->execute();
 
             $dbConn

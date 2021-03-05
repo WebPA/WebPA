@@ -285,20 +285,20 @@ if (($command) && ($assessment)) {
               // user response exists so update it
               $queryBuilder
                 ->update(APP__DB_TABLE_PREFIX . 'user_response')
-                ->where('assessment_id', '?')
-                ->andWhere('group_id', '?')
-                ->andWhere('user_id', '?')
                 ->set('ip_address', '?')
                 ->set('comp_name', '?')
                 ->set('date_responded', '?')
                 ->set('date_opened', '?')
-                ->setParameter(0, $assessment->id)
-                ->setParameter(1, $group->id)
-                ->setParameter(2, $_user->id, ParameterType::INTEGER)
-                ->setParameter(3, $ip_address)
-                ->setParameter(4, $computer_name)
-                ->setParameter(5, $now)
-                ->setParameter(6, $date_opened);
+                ->where('assessment_id', '?')
+                ->andWhere('group_id', '?')
+                ->andWhere('user_id', '?')
+                ->setParameter(0, $ip_address)
+                ->setParameter(1, $computer_name)
+                ->setParameter(2, $now)
+                ->setParameter(3, $date_opened)
+                ->setParameter(4, $assessment->id)
+                ->setParameter(5, $group->id)
+                ->setParameter(6, $_user->id, ParameterType::INTEGER);
           }
 
           $queryBuilder->execute();

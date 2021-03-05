@@ -131,10 +131,10 @@ if (($command) && ($assessment)) {
               // record exists so update it
               $queryBuilder
                 ->update(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
-                ->where('assessment_id', '?')
                 ->set('group_mark_xml', '?')
-                ->setParameter(0, $assessment->id)
-                ->setParameter(1, $xml);
+                ->where('assessment_id', '?')
+                ->setParameter(0, $xml)
+                ->setParameter(1, $assessment->id);
           } else {
               // record does not exist so create it
               $queryBuilder

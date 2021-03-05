@@ -78,19 +78,19 @@ class EngCIS
                 ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
                 ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
                 ->where('lcm.source_id = :source_id')
-                ->andWhere('module_id IN :modules')
+                ->andWhere('module_id IN (:modules)')
                 ->setParameter(':source_id', $this->sourceId)
                 ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
 
             return $queryBuilder->execute()->fetchAllAssociative();
         }
         if (!empty($modules)) {  // else, just return one row
-            $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id IN ? LIMIT 1';
+            $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id = ? LIMIT 1';
 
             return $this->dbConn->fetchAssociative(
                 $moduleQuery,
                 [$this->sourceId, $modules],
-                [ParameterType::STRING, $this->dbConn::PARAM_INT_ARRAY]
+                [ParameterType::STRING, ParameterType::INTEGER]
             );
         }
         if ($this->user->is_admin()) {

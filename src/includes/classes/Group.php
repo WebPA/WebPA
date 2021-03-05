@@ -166,7 +166,7 @@ class Group
 
         // check if the group already exists in the database
         $groupId = $this->dbConn->fetchOne(
-            'SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'group WHERE group_id = ?',
+            'SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE group_id = ?',
             [$this->id],
             [ParameterType::STRING]
         );
@@ -178,7 +178,7 @@ class Group
             $queryBuilder
             ->update(APP__DB_TABLE_PREFIX . 'user_group')
             ->set('group_name', '?')
-            ->where('group_id', '?')
+            ->where('group_id = ?')
             ->setParameter(0, $this->name)
             ->setParameter(1, $this->id);
         } else {

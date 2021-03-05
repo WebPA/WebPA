@@ -3,3 +3,4 @@ vendor/
 .idea/
 *.orig
 .env
+/src/mod/**

@@ -212,13 +212,13 @@ class GroupCollection
             // the collection exists so update it
             $queryBuilder
                     ->update(APP__DB_TABLE_PREFIX . 'collection')
-                    ->where('collection_id = ?')
                     ->set('module_id', '?')
                     ->set('collection_name', '?')
                     ->set('collection_created_on', '?')
-                    ->setParameter(0, $this->id)
-                    ->setParameter(1, $this->module_id, ParameterType::INTEGER)
-                    ->setParameter(2, $createdOn);
+                    ->where('collection_id = ?')
+                    ->setParameter(0, $this->module_id, ParameterType::INTEGER)
+                    ->setParameter(1, $createdOn)
+                    ->setParameter(2, $this->id);
 
             // check if the locked field needs to be set
             if (is_null($lockedOn)) {

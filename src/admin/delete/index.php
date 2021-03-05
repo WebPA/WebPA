@@ -101,7 +101,7 @@ $page_intro = '';
       echo "<div class=\"success_box\">{$sScreenMsg}</div>";
   }
 
-  if (strlen($errorMsg) > 0) {
+  if (isset($errorMsg) && strlen($errorMsg) > 0) {
       echo "<div class=\"error_box\">$errorMsg</div>";
   }
 

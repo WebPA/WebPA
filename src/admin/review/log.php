@@ -67,12 +67,12 @@ $dbConn = $DB->getConnection();
 
 $stmt = $dbConn->prepare($query);
 
-$stmt->bindValue($user_id, ParameterType::INTEGER);
-$stmt->bindValue($_module_id, ParameterType::INTEGER);
+$stmt->bindValue(1, $user_id, ParameterType::INTEGER);
+$stmt->bindValue(2, $_module_id, ParameterType::INTEGER);
 
-$stmt->execute();
+$results = $stmt->execute();
 
-$rs = $stmt->fetchAllAssociative();
+$rs = $results->fetchAllAssociative();
 
 echo "<h2>{$rstitle} for {$user->forename} {$user->lastname} ({$user->username})</h2>";
 

@@ -33,7 +33,7 @@ date_default_timezone_set('Europe/London');
 ////
 
 define('APP__WWW', '');
-define('DOC__ROOT', ''); //must include the trailing /
+define('DOC__ROOT', '/var/www/src/'); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -97,7 +97,7 @@ define('LDAP__DEBUG_LEVEL', 7);
 define('LDAP__AUTO_CREATE_USER', true);
 
 // define installed modules
-$INSTALLED_MODS = [];
+$INSTALLED_MODS = ['lti'];
 
 ////
 // System configuration section - do not change unless you know what you're doing!
