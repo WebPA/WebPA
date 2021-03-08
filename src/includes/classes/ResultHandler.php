@@ -163,7 +163,7 @@ class ResultHandler
     public function get_responses_count_for_user($user_id, $year = null)
     {
         $sql =
-            'SELECT a.assessment_id, COUNT(DISTINCT um.user_id) ' .
+            'SELECT a.assessment_id, COUNT(DISTINCT um.user_id) AS response_count ' .
             'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
             'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
             'ON a.assessment_id = um.assessment_id ' .
@@ -189,10 +189,10 @@ class ResultHandler
         $sql .= 'GROUP BY assessment_id';
 
         if (!empty($year)) {
-            return $this->dbConn->fetchAllAssociativeIndexed($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+            return  $this->dbConn->fetchAllKeyValue($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
         }
 
-        return $this->dbConn->fetchFirstColumn($sql, [$this->moduleId], [ParameterType::INTEGER]);
+        return $this->dbConn->fetchAllKeyValue($sql, [$this->moduleId], [ParameterType::INTEGER]);
     }
 
     /**
@@ -204,7 +204,7 @@ class ResultHandler
     public function get_members_count_for_user($user_id, $year = null)
     {
         $sql =
-            'SELECT a.assessment_id, COUNT(DISTINCT ugm.user_id) ' .
+            'SELECT a.assessment_id, COUNT(DISTINCT ugm.user_id) AS members_count ' .
             'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
             'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
             'ON a.collection_id = ug.collection_id ' .
@@ -231,10 +231,10 @@ class ResultHandler
         $sql .= 'GROUP BY a.assessment_id';
 
         if (!empty($year)) {
-            return $this->dbConn->fetchAllAssociativeIndexed($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+            return $this->dbConn->fetchAllKeyValue($sql, [$this->moduleId, $startDate, $endDate], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
         }
 
-        return $this->dbConn->fetchFirstColumn($sql, [$this->moduleId], [ParameterType::INTEGER]);
+        return $this->dbConn->fetchAllKeyValue($sql, [$this->moduleId], [ParameterType::INTEGER]);
     }
 
     /**

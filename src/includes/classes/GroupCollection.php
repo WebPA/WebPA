@@ -123,7 +123,7 @@ class GroupCollection
         $this->name = $row['collection_name'];
         $this->_created_on = strtotime($row['collection_created_on']);
         $this->_locked_on = ((is_null($row['collection_locked_on'])) ? null : strtotime($row['collection_locked_on']));
-        $this->_assessment_id = $row['collection_assessment_id'];
+        $this->_assessment_id = $row['collection_assessment_id'] ?? null;
         return true;
     }
 
@@ -140,6 +140,7 @@ class GroupCollection
         if ($this->is_locked()) {
             return false;
         }
+
         $this->dbConn->executeQuery(
                 'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id IN (SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?)',
                 [$this->id],
@@ -217,8 +218,9 @@ class GroupCollection
                     ->set('collection_created_on', '?')
                     ->where('collection_id = ?')
                     ->setParameter(0, $this->module_id, ParameterType::INTEGER)
-                    ->setParameter(1, $createdOn)
-                    ->setParameter(2, $this->id);
+                    ->setParameter(1, $this->name)
+                    ->setParameter(2, $createdOn)
+                    ->setParameter(3, $this->id);
 
             // check if the locked field needs to be set
             if (is_null($lockedOn)) {
@@ -557,7 +559,7 @@ class GroupCollection
             'GROUP BY ugm.group_id ' .
             'ORDER BY ugm.group_id';
 
-        return $this->dbConn->fetchAllAssociativeIndexed($memberCountQuery, [$this->id], [ParameterType::STRING]);
+        return $this->dbConn->fetchAllKeyValue($memberCountQuery, [$this->id], [ParameterType::STRING]);
     }
 
     /**
@@ -577,7 +579,7 @@ class GroupCollection
             'WHERE ug.collection_id = ? ' .
             'ORDER BY ugm.user_id ASC';
 
-        return $this->dbConn->fetchAllAssociativeIndexed($membersQuery, [$this->id], [ParameterType::STRING]);
+        return $this->dbConn->fetchAllKeyValue($membersQuery, [$this->id], [ParameterType::STRING]);
     }
 
     /**
@@ -637,7 +639,7 @@ class GroupCollection
             'AND ugm.user_id = ? ' .
             'ORDER BY ugm.group_id ASC';
 
-        return $this->dbConn->fetchAllAssociativeIndexed($memberRolesQuery, [$this->id, $user_id], [ParameterType::STRING, ParameterType::INTEGER]);
+        return $this->dbConn->fetchAllKeyValue($memberRolesQuery, [$this->id, $user_id], [ParameterType::STRING, ParameterType::INTEGER]);
     }
 
     /**

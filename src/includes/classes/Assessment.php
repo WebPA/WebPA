@@ -229,8 +229,8 @@ class Assessment
 
         // check if assessment already exists in the database
         $storedAssessmentId = $this->dbConn->fetchOne(
-            'SELECT assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'assessment WHERE assessment_id = ?'
-        [$this->id],
+            'SELECT assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'assessment WHERE assessment_id = ?',
+            [$this->id],
             [ParameterType::STRING]
         );
 
@@ -251,7 +251,7 @@ class Assessment
           ->set('allow_feedback', $this->allow_feedback ? 1 : 0)
           ->set('assessment_type', $this->assessment_type ? 1 : 0)
           ->set('student_feedback', $this->allow_assessment_feedback ? 1 : 0)
-          ->set('contact_email', '')
+          ->set('contact_email', '""')
           ->set('email_opening', $this->email_opening ? 1 : 0)
           ->set('email_closing', $this->email_closing ? 1 : 0)
           ->set('feedback_name', '?')
@@ -286,7 +286,7 @@ class Assessment
                  'allow_feedback' => $this->allow_feedback ? 1 : 0,
                  'assessment_type' => $this->assessment_type ? 1 : 0,
                  'student_feedback' => $this->allow_assessment_feedback ? 1 : 0,
-                 'contact_email' => '',
+                 'contact_email' => '""',
                  'email_opening' => $this->email_opening ? 1 : 0,
                  'email_closing' => $this->email_closing ? 1 : 0,
                  'feedback_name' => '?',

@@ -40,7 +40,7 @@ $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
     $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
     $assessment_url = "edit_assessment.php?{$assessment_qs}";
-    $collection =& $group_handler->get_collection($assessment->get_collection_id());
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 } else {
     $assessment = null;
     $assessment_url = '../';

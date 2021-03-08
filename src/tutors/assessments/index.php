@@ -37,8 +37,8 @@ if (APP__ACADEMIC_YEAR_START_MONTH <= 10) {
     $this_year .= '0';
 }
 $this_year .= APP__ACADEMIC_YEAR_START_MONTH . '-01 00:00:00';
-$next_year = strval($year + 1) . $this_year;
-$this_year = strval($year) . $this_year;
+$next_year = (string) ($year + 1) . $this_year;
+$this_year = (string) $year . $this_year;
 
 $tabs = ['pending'  => "?tab=pending&y={$year}",
          'open'   => "?tab=open&y={$year}",

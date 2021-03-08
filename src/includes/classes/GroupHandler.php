@@ -214,11 +214,12 @@ class GroupHandler
     {
         $query =
             'SELECT c.* ' .
-            'FROM ' . APP__DB_TABLE_PREFIX . '_collection c ' .
-            'INNER JOIN ' . APP__DB_TABLE_PREFIX . '_user_module um ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
             'ON c.module_id = um.module_id ' .
             'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
-            'ON cm.collection_id = a.collection_id WHERE um.user_id = ? ' .
+            'ON c.collection_id = a.collection_id ' .
+            'WHERE um.user_id = ? ' .
             'AND a.collection_id IS NULL';
 
         return $this->dbConn->fetchAllAssociative($query, [$user_id], [ParameterType::INTEGER]);

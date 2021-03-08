@@ -411,7 +411,7 @@ class Group
         'WHERE group_id = ? ' .
         'ORDER BY user_id ASC';
 
-        $this->_members = $this->dbConn->fetchAllAssociativeIndexed($membersQuery, [$this->id], [ParameterType::STRING]);
+        $this->_members = $this->dbConn->fetchAllKeyValue($membersQuery, [$this->id], [ParameterType::STRING]);
 
         if (!$this->_members) {
             $this->_members = [];

@@ -179,7 +179,7 @@ class EngCIS
             ->innerJoin('lcs', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcs.user_id = lcsm.user_id AND lcsm.module_id = ?')
             ->where('lcsm.user_type = ?')
             ->setParameter(0, $module, ParameterType::INTEGER)
-            ->setParameters(1, APP__USER_TYPE_STUDENT, ParameterType::STRING);
+            ->setParameter(1, APP__USER_TYPE_STUDENT, ParameterType::STRING);
 
         return $queryBuilder->execute()->fetchAllAssociative();
     }
@@ -250,7 +250,7 @@ class EngCIS
 
         $queryBuilder->setParameter(0, $modules, $this->_DAO->getConnection()::PARAM_INT_ARRAY);
 
-        return $queryBuilder->execute()->fetchAllAssociativeIndexed();
+        return $queryBuilder->execute()->fetchAllKeyValue();
     }
 
     /*
