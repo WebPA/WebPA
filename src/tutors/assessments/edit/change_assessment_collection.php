@@ -76,27 +76,25 @@ if (($command) && ($assessment)) {
                   }
 
                   if (!$errors) {
-                      // Delete the old collection
-                      $collection->delete();
-
                       // Connect the collection to the assessment
                       $new_collection->set_owner_info($assessment->id, APP__COLLECTION_ASSESSMENT);
                       $new_collection->save();
                       $assessment->set_collection_id($new_collection->id);
+                      $assessment->save();
+
+                      // Delete the old collection
+                      $collection->delete();
                   }
               }
           }
 
-          // If there were no errors, save the changes
+          // If there were no errors, reload the assessment
           if (!$errors) {
-              $assessment->save();
-              $collection =& $new_collection; // Not strictly needed, as this page will now redirects but for debugging it can come in handy
-
               header("Location: $assessment_url");
           }
       }
       break;
-  }// /switch
+  }
 }
 
 // --------------------------------------------------------------------------------
