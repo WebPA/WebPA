@@ -51,7 +51,21 @@ $assessmentsQuery =
     'AND a.open_date < ? ' .
     'ORDER BY a.open_date, a.close_date, a.assessment_name';
 
-$assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$collection_ids, $sql_start_date, $sql_end_date], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::STRING, ParameterType::STRING]);
+$assessments = $DB->getConnection()->fetchAllAssociative(
+        $assessmentsQuery,
+        [
+            $_module_id,
+            $collection_ids,
+            $sql_start_date,
+            $sql_end_date
+        ],
+        [
+            ParameterType::INTEGER,
+            $DB->getConnection()::PARAM_STR_ARRAY,
+            ParameterType::STRING,
+            ParameterType::STRING
+        ]
+);
 
 // Get a list of those assessments that the user has already taken
 

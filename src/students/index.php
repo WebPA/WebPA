@@ -58,7 +58,21 @@ if (count($collections) > 0) {
         'AND a.open_date < ? ' .
         'ORDER BY a.open_date, a.close_date, a.assessment_name';
 
-    $assessments = $DB->getConnection()->fetchAllAssociative($assessmentsQuery, [$collection_ids, $sql_start_date, $sql_end_date], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::STRING, ParameterType::STRING]);
+    $assessments = $DB->getConnection()->fetchAllAssociative(
+            $assessmentsQuery,
+            [
+                $_module_id,
+                $collection_ids,
+                $sql_start_date,
+                $sql_end_date
+            ],
+            [
+                ParameterType::INTEGER,
+                $DB->getConnection()::PARAM_STR_ARRAY,
+                ParameterType::STRING,
+                ParameterType::STRING
+            ]
+    );
 }
 
 // Get a list of those assessments that the user has already taken
@@ -69,7 +83,7 @@ if ($assessment_ids !== null && count($assessment_ids) > 0) {
     $respondedAssessmentsQuery =
         'SELECT DISTINCT um.assessment_id ' .
         'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark um ' .
-        'LEFT JOIN assessments a ' .
+        'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
         'ON a.assessment_id = um.assessment_id ' .
         'WHERE a.module_id = ? ' .
         'AND um.assessment_id IN (?) ' .
