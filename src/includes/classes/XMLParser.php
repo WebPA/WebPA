@@ -165,11 +165,11 @@ class XMLParser
                     $sub_array = array_flip(array_keys((array) $value));
 
                     // If the tag has attributes, show them
-                    if ((in_array('_attributes', $sub_array)) && (!empty($value['_attributes']))) {
+                    // For backwards compatibility reasons, we do a check on if the sub_array is empty. Previously this was an in_array() check which always returned true
+                    if (!empty($sub_array) && !empty($value['_attributes'])) {
                         foreach ($value['_attributes'] as $attr_name => $attr_value) {
                             echo ' ' . $attr_name . '="' . htmlspecialchars($attr_value) . '"';
                         }
-                        reset($data[$key]['_attributes']);
                     }
 
                     // Get the tag's value
@@ -199,11 +199,12 @@ class XMLParser
                 }
             }
         }
-        reset($data);
 
         if ($level == 0) {
             $str = &ob_get_contents();
+
             ob_end_clean();
+
             return $str;
         }
     }

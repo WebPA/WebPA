@@ -59,8 +59,8 @@ class WizardStep1
 
     public function form()
     {
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
 
         $form_id = $this->wizard->get_field('form_id');
 

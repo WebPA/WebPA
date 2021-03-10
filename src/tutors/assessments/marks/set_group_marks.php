@@ -50,7 +50,11 @@ if ($assessment->load($assessment_id)) {
       'FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks ' .
       'WHERE assessment_id = ?';
 
-    $group_marks_xml = $DB->getConnection()->fetchOne($groupMarkXmlQuery, [$assessment->id], [ParameterType::STRING]);
+    $group_marks_xml = $DB->getConnection()->fetchOne(
+            $groupMarkXmlQuery,
+            [$assessment->id],
+            [ParameterType::STRING]
+    );
 
     $xml_parser = null;
 
@@ -120,7 +124,7 @@ if (($command) && ($assessment)) {
           $dbConn = $DB->getConnection();
 
           $existingAssessmentGroupsMarks = $dbConn->fetchOne(
-              'SELECT assessment_id FROM assessment_group_marks WHERE assessment_id = ?',
+              'SELECT assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'assessment_group_marks WHERE assessment_id = ?',
               [$assessment->id],
               [ParameterType::STRING]
           );
@@ -132,7 +136,7 @@ if (($command) && ($assessment)) {
               $queryBuilder
                 ->update(APP__DB_TABLE_PREFIX . 'assessment_group_marks')
                 ->set('group_mark_xml', '?')
-                ->where('assessment_id', '?')
+                ->where('assessment_id = ?')
                 ->setParameter(0, $xml)
                 ->setParameter(1, $assessment->id);
           } else {
@@ -144,9 +148,11 @@ if (($command) && ($assessment)) {
                     'group_mark_xml' => '?',
                 ])
                 ->setParameter(0, $assessment->id)
-                ->setParameter('group_mark_xml', $xml);
+                ->setParameter(1, $xml);
           }
 
+          $testQuery = $queryBuilder->getSQL();
+          $parameters = $queryBuilder->getParameters();
           $queryBuilder->execute();
       }
       break;

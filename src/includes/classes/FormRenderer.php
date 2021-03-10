@@ -229,7 +229,7 @@ class FormRenderer
 
                     $score = Common::fetch_POST("q_{$q}_{$id}");
 
-                    $initial_total += $score;
+                    $initial_total += (int) $score;
 
                     echo "<tr id=\"q_{$q}_{$id}\" $class>";
                     echo "<td class=\"participant\" width=\"200\" valign=\"middle\">$name</th>\n";
