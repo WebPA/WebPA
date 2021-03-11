@@ -287,7 +287,13 @@ if ($type == 'download-csv') {
                             $score = $algorithm->get_member_response($group_id, $member_id, $question_id, $target_member_id);
                         }
 
-                        $q_total[$target_member_id] += (int) $score;
+                        // there is a chance that q total won't have been set if a student has not answered any questions
+                        $q_total = $q_total ?? [];
+
+                        if (count($q_total) > 0) {
+                            $q_total[$target_member_id] += (int) $score;
+                        }
+
                         if (is_null($score)) {
                             $score = '-';
                         }

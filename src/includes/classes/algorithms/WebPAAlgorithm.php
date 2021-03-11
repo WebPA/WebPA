@@ -141,7 +141,7 @@ class WebPAAlgorithm extends Algorithm
                     /* (6)
                      * Get the member's intermediate grade = Web-PA score * weighted-group-mark   (does not include penalties)
                      */
-                    if (is_array($this->_calc_group_submitters[$group_id])) {
+                    if (is_array($this->_calc_group_submitters) && array_key_exists($group_id, $this->_calc_group_submitters)) {
                         $intermediate_grade = (($total_frac_score * $multi_factor * $pa_group_mark) + $nonpa_group_mark);
                     } else {
                         $intermediate_grade = $pa_group_mark + $nonpa_group_mark;
