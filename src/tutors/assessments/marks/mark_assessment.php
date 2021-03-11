@@ -120,10 +120,10 @@ if (($command) && ($assessment)) {
           $queryBuilder
             ->insert(APP__DB_TABLE_PREFIX . 'assessment_marking')
             ->values([
-                'assessment_id'     => $assessment_id,
-                'date_created'      => $mysql_now,
-                'date_last_marked'  => $mysql_now,
-                'marking_params'    => $xml_parser->generate_xml($xml_array),
+                'assessment_id'     => '?',
+                'date_created'      => '?',
+                'date_last_marked'  => '?',
+                'marking_params'    => '?',
             ])
             ->setParameter(0, $assessment_id)
             ->setParameter(1, $mysql_now)

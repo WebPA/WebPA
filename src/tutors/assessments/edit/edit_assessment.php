@@ -450,7 +450,10 @@ if (!$assessment) {
             $question = $form->get_question($i); ?>
       <li>
           <div class="question">
-              <?php echo $question['text']['_data']; ?> <span class="question_range">(scoring range: <?php echo $question['range']['_data']; ?>)</span>
+              <?php echo $question['text']['_data']; ?>
+              <?php if (isset($question['range'])) : ?>
+              <span class="question_range">(scoring range: <?php echo $question['range']['_data']; ?>)</span>
+              <?php endif; ?>
           </div>
       </li>
             <?php

@@ -122,13 +122,17 @@ class WizardStep5
             <div class="error_box"><p><strong>ERROR : </strong>this form contains no questions</p></div>
 <?php
             } else {
-                echo '<div style="margin-left: 10px;">';
-                for ($i=0; $i<$question_count; $i++) {
-                    $question = $form->get_question($i); ?>
-            <div style="padding: 0px 2px 2px 10px;">- <?php echo $question['text']['_data']; ?> (<?php echo $question['range']['_data']; ?>)</div>
-          <?php
-                }
-                echo '</div>';
+                ?>
+                <div style="margin-left: 10px;"></div>
+                <?php for ($i=0; $i<$question_count; $i++) : ?>
+                    <?php $question = $form->get_question($i); ?>
+                    <div style="padding: 0px 2px 2px 10px;">
+                        - <?= $question['text']['_data'] ?>
+                        <?= array_key_exists('range', $question) ? "({$question['range']['_data']})" : '' ?>
+                    </div>
+              <?php endfor; ?>
+                </div>
+            <?php
             }
         } ?>
     </div>

@@ -50,8 +50,6 @@ if (($command) && ($form)) {
               $errors[] = 'You must give this form a name.';
           }
 
-          $form->type = Common::fetch_POST('form_type');
-
       // If there were no errors, save the changes
       if (!$errors) {
           $form->save();
@@ -159,26 +157,9 @@ if (!$form) {
       <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40" value="<?php echo $form->name?>" /></td>
     </tr>
     <tr>
-      <th style="vertical-align: top;"><label for="form_type">Scoring Type</label></th>
+      <th style="vertical-align: top;">Scoring Type</th>
       <td>
-        <select name="form_type" id="form_type">
-          <option value="likert" <?php if ($form->type=='likert') {
-            echo 'selected="selected"';
-        } ?>> Likert Scale </option>
-          <option value="split100" <?php if ($form->type=='split100') {
-            echo 'selected="selected"';
-        } ?>> Split 100 </option>
-        </select>
-<?php
-  if ($form->type=='likert') {
-      ?>
-          <p style="font-size: 0.8em;">Changing from <em>likert scale</em> to <em>split 100</em> will keep your criteria's text, but delete the scoring ranges and labels.</p>
-<?php
-  } else {
-      ?>
-          <p style="font-size: 0.8em;">Changing from <em>split 100</em> to <em>likert scale</em> will keep your criteria's text, and set all scoring ranges to 1-5.</p>
-<?php
-  } ?>
+        <?= $form->type === 'likert' ? 'Likert Scale' : 'Split 100' ?>
       </td>
     </tr>
     </table>
@@ -221,7 +202,7 @@ if (!$form) {
           echo "<div class=\"obj_info_text\">$question_desc</div>";
       }
 
-        if ($form->type!='split100') {
+        if ($form->type!='split100' && isset($question['range'])) {
             ?>
                   <div class="obj_info_text">Scoring range: <?php echo $question['range']['_data']; ?></div>
 <?php

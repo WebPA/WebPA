@@ -10,6 +10,7 @@
 
 namespace WebPA\includes\functions;
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\DAO;
 
 define('MYSQL_DATETIME_FORMAT', 'Y-m-d H:i:s');    // MYSQL datetime format (for update/insert/etc)
@@ -96,14 +97,23 @@ class Common
             $module_id = (int) $module_id;
         }
 
-        $dbConn->insert(APP__DB_TABLE_PREFIX . 'user_tracking', [
-            'user_id' => (int) $_SESSION['_user_id'],
-            'datetime' => $now,
-            'ip_address' => $_SERVER['REMOTE_ADDR'],
-            'description' => $description,
-            'module_id' => $module_id,
-            'object_id' => $object_id,
-        ]);
+        $query =
+            'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_tracking ' .
+            '(user_id, datetime, ip_address, description, module_id, object_id) ' .
+            'VALUES (?, ?, ?, ?, ?, ?) ' .
+            'ON DUPLICATE KEY UPDATE user_id = ?';
+
+        $stmt = $dbConn->prepare($query);
+
+        $stmt->bindValue(1, (int) $_SESSION['_user_id'], ParameterType::INTEGER);
+        $stmt->bindValue(2, $now);
+        $stmt->bindValue(3, $_SERVER['REMOTE_ADDR']);
+        $stmt->bindValue(4, $description);
+        $stmt->bindValue(5, $module_id, ParameterType::INTEGER);
+        $stmt->bindValue(6, $object_id);
+        $stmt->bindValue(7, (int) $_SESSION['_user_id'], ParameterType::INTEGER);
+
+        $stmt->execute();
     }
 
     /**
