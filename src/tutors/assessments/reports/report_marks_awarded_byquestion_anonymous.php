@@ -173,7 +173,9 @@ if ($type == 'view') {
       foreach ($questions as $question_id) {
           $q_index = $question_id+1;
           $question = $form->get_question($question_id);
-          echo "<p>Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})</p>"; ?>
+          echo "<p>Q{$q_index} : {$question['text']['_data']}"; ?>
+          <?= array_key_exists('range', $question) ? "(range: {$question['range']['_data']})" : '' ?>
+          </p>
           <table class="grid" cellpadding="2" cellspacing="1" style="font-size: 0.8em">
           <tr>
             <th>&nbsp;</th>
