@@ -232,7 +232,13 @@ if ($type == 'download-csv') {
             $q_index = $question_id+1;
 
             echo "\n";
-            echo "\"Q{$q_index} : {$question['text']['_data']} (range: {$question['range']['_data']})\"\n";
+            echo "\"Q{$q_index} : {$question['text']['_data']}";
+
+            if (array_key_exists('range', $question)) {
+                echo "(range: {$question['range']['_data']})\"\n";
+            } else {
+                echo "\"\n";
+            }
 
             echo '"",';
 
