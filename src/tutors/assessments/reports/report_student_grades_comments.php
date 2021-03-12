@@ -100,7 +100,7 @@ if (!$assessment->load($assessment_id)) {
       'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
       'WHERE assessment_id = ?';
 
-    $fetch_comments = $DB->getConnection()->fetchAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
+    $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
 
     $feedback = null;
 

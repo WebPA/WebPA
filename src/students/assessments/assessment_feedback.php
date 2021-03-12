@@ -101,7 +101,7 @@ if (!$assessment->load($assessment_id)) {
         }
 
         $group_handler = new GroupHandler();
-        $collection =& $group_handler->get_collection($assessment->get_collection_id());
+        $collection = $group_handler->get_collection($assessment->get_collection_id());
 
         $form = $assessment->get_form();
     

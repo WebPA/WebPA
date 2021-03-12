@@ -93,21 +93,27 @@ if (!$assessment->load($assessment_id)) {
       'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
       'WHERE assessment_id = ?';
 
-    $fetch_comments = $DB->getConnection()->fetchAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
+    $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
 
     $feedback = null;
 
     foreach ($fetch_comments as $comment) {
+        if (!is_array($comment)) {
+            break;
+        }
+
         $id = $CIS->get_user($comment['user_id']);
         $marker_id = $id['user_id'];
         $marker = $id['lastname'] . ', ' . $id['forename'];
         $id = $CIS->get_user($comment['marked_user_id']);
         $marked = $id['lastname'] . ', ' . $id['forename'];
 
-        $feedback []  = ['marker_id'   =>  $marker_id,
-                            'marker'    =>  $marker,
-                            'marked'    =>  $marked,
-                            'feedback'    =>  $comment['justification_text'], ];
+        $feedback []  = [
+            'marker_id' =>  $marker_id,
+            'marker' =>  $marker,
+            'marked' =>  $marked,
+            'feedback' =>  $comment['justification_text'],
+        ];
     }
 
 
@@ -163,6 +169,10 @@ if ($type == 'view') {
           foreach ($g_members as $i => $member_id) {
               //loop round the array with all the user data, so that we can out put it
 
+              if (!isset($feedback)) {
+                  continue;
+              }
+
               foreach ($feedback as $j) {
                   if ($j['marker_id'] == $g_members[$i]) {
                       echo '<tr>';
@@ -170,6 +180,14 @@ if ($type == 'view') {
                       echo "<td style=\"text-align:left\">{$j['marked']}</td>";
                       echo "<td style=\"text-align:left\">{$j['feedback']}</td>";
                       echo '</tr>';
+                  } else {
+                        ?>
+                        <tr>
+                            <td style="text-align: left;">-</td>
+                            <td style="text-align: left;">-</td>
+                            <td style="text-align: left;">-</td>
+                        </tr>
+                        <?php
                   }
               }
           } ?>
