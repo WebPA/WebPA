@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- Fixed a large amount of SQL injection attacks
+- Change password hashing to use the native password_hash() function in PHP instead of MD5 hashing which is insecure
 
 ## [3.1.1] - 2020-10-02
 ### Fixed
