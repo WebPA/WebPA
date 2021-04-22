@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Change default authenticator to be database instead of SAML (PR #64)
 
+## [Unreleased]
+
 ## [3.0.7] - 2020-01-20
 ### Fixed
 - Remove a blank line at the top of a PHP class that was causing a fatal error
