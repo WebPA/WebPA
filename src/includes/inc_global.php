@@ -34,12 +34,12 @@ date_default_timezone_set('Europe/London');
 
 define('APP__WWW', $_ENV['APP_WWW']);
 define('DOC__ROOT', $_ENV['DOC_ROOT']); //must include the trailing /
-define('CUSTOM_CSS', '');  // Optional custom CSS file
-define('SESSION_NAME', 'WEBPA');
+define('CUSTOM_CSS', $_ENV['CUSTOM_CSS_PATH']);  // Optional custom CSS file
+define('SESSION_NAME', $_ENV['SESSION_NAME']);
 ini_set('session.cookie_path', '/');
 
 // The month (1-12) in which the academic year is deemed to start (always on 1st of the month)
-define('APP__ACADEMIC_YEAR_START_MONTH', 9);
+define('APP__ACADEMIC_YEAR_START_MONTH', $_ENV['ACADEMIC_YEAR_START_MONTH']);
 
 //Database information
 define('APP__DB_HOST', $_ENV['DB_HOST']); // If on a non-standard port, use this format:  <server>:<port>
@@ -49,16 +49,16 @@ define('APP__DB_DATABASE', $_ENV['DB_NAME']);
 define('APP__DB_TABLE_PREFIX', $_ENV['DB_PREFIX']);
 
 // Contact info
-define('APP__EMAIL_HELP', 'someone@email.com');
-define('APP__EMAIL_NO_REPLY', 'no-reply@email.com');
+define('APP__EMAIL_HELP', $_ENV['HELP_EMAIL']);
+define('APP__EMAIL_NO_REPLY', $_ENV['NO_REPLY_EMAIL']);
 
 // logo
-define('APP__INST_LOGO', APP__WWW.'/images/logo.png');
-define('APP__INST_LOGO_ALT', 'Your institution name');
+define('APP__INST_LOGO', $_ENV['LOGO_PATH']);
+define('APP__INST_LOGO_ALT', $_ENV['LOGO_ALT_TEXT']);
 
 //the following lines are to accomodate the image size within the css file to prevent the image from over flowing the area provided
-define('APP__INST_HEIGHT', '25'); //image height in pixels
-define('APP__INST_WIDTH', '102'); //image width in pixels
+define('APP__INST_HEIGHT', $_ENV['LOGO_HEIGHT']); //image height in pixels
+define('APP__INST_WIDTH', $_ENV['LOGO_WIDTH']); //image width in pixels
 
 //define whether the option to allow textual input is allowed
 /*NB. In the UK if requested any information about the student would need to be
@@ -67,17 +67,17 @@ define('APP__INST_WIDTH', '102'); //image width in pixels
 * dependant on this act.
 *
 */
-define('APP__ALLOW_TEXT_INPUT', true);
+define('APP__ALLOW_TEXT_INPUT', $_ENV['ALLOW_TEXT_INPUT'] === 'true');
 
 // enable delete options for users and modules
-define('APP__ENABLE_USER_DELETE', true);
-define('APP__ENABLE_MODULE_DELETE', true);
+define('APP__ENABLE_USER_DELETE', $_ENV['ENABLE_USER_DELETE'] === 'true');
+define('APP__ENABLE_MODULE_DELETE', $_ENV['ENABLE_MODULE_DELETE'] === 'true');
 
 // set the mail server variables if different mail server is to be used.
-ini_set('SMTP', 'localhost');
-ini_set('smtp_port', '25');
+ini_set('SMTP', $_ENV['SMTP_HOST']);
+ini_set('smtp_port', $_ENV['SMTP_PORT']);
 // if using a windows structure you need to set the send mail from
-ini_set('sendmail_from', 'someone@email.com');
+ini_set('sendmail_from', $_ENV['EMAIL_ADDRESS']);
 
 //define the authentication to be used and in the order they are to be applied
 $LOGIN_AUTHENTICATORS[] = 'DB';
@@ -97,32 +97,27 @@ define('APP__VERSION', '3.1.2');
 define('APP__DESCRIPTION', 'WebPA, an Open source, online peer assessment system.');
 define('APP__KEYWORDS', 'peer assessment, online, peer, assessment, tools, open source');
 
-define('APP__DB_TYPE', 'MySQLDAO');
-
-define('APP__DB_PERSISTENT', false);
-define('APP__DB_CLIENT_FLAGS', 2);
-
 // User types
 define('APP__USER_TYPE_ADMIN', 'A');
 define('APP__USER_TYPE_TUTOR', 'T');
 define('APP__USER_TYPE_STUDENT', 'S');
 
 //Moodle gradebook output allowed...
-define('APP__MOODLE_GRADEBOOK', false); // If the grade book xml for moodle can be output then set to true, else if not required set to false
+define('APP__MOODLE_GRADEBOOK', $_ENV['ALLOW_MOODLE_GRADEBOOK'] === 'true'); // If the grade book xml for moodle can be output then set to true, else if not required set to false
 
 //Automatic emailing options.
 //this is dependant on cron jobs being set for the following files;
 //  /tutors/assessments/email/TriggerReminder.php
 //  /tutors/assessments/email/ClosingReminber.php
-define('APP__REMINDER_OPENING', false);
-define('APP__REMINDER_CLOSING', false);
+define('APP__REMINDER_OPENING', $_ENV['SEND_OPENING_REMINDER'] === 'true');
+define('APP__REMINDER_CLOSING', $_ENV['SEND_CLOSING_REMINDER'] === 'true');
 
 //set in individual pages to link to the most appropriate help sections.
 //this is not an option that can be changed in the configuration
 define('APP__HELP_LINK', 'http://www.webpaproject.com/');
 
 //define the terminology presented to the student as mark, rating or score
-define('APP__MARK_TEXT', 'Score(s)');
+define('APP__MARK_TEXT', $_ENV['MARK_TERMINOLOGY']);
 
 // Collection owner types
 define('APP__COLLECTION_USER', 'user');
