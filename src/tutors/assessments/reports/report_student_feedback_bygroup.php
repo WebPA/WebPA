@@ -181,7 +181,7 @@ if ($type == 'view') {
                       echo "<td style=\"text-align:left\">{$j['feedback']}</td>";
                       echo '</tr>';
                   } else {
-                        ?>
+                      ?>
                         <tr>
                             <td style="text-align: left;">-</td>
                             <td style="text-align: left;">-</td>

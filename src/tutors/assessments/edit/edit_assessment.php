@@ -451,9 +451,9 @@ if (!$assessment) {
       <li>
           <div class="question">
               <?php echo $question['text']['_data']; ?>
-              <?php if (isset($question['range'])) : ?>
+              <?php if (isset($question['range'])) { ?>
               <span class="question_range">(scoring range: <?php echo $question['range']['_data']; ?>)</span>
-              <?php endif; ?>
+              <?php } ?>
           </div>
       </li>
             <?php

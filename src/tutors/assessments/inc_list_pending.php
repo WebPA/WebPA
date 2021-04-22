@@ -45,14 +45,14 @@ $assessments = $DB->getConnection()->fetchAllAssociative(
         $this_year,
         $next_year,
         $now,
-        $now
+        $now,
     ],
     [
         ParameterType::INTEGER,
         ParameterType::STRING,
         ParameterType::STRING,
         ParameterType::STRING,
-        ParameterType::STRING
+        ParameterType::STRING,
     ]
 );
 

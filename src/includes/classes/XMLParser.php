@@ -309,7 +309,6 @@ class XMLParser
     }
 
     // /->_count_numeric_items()
-
     
     public function _init()
     {

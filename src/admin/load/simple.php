@@ -157,7 +157,7 @@ if ($flg_match) {
 
         foreach ($final_rows as $i) {
             $module_code = $i['module_code'] ?? '';
-            $group_name = isset($i['group_name']) ? $i['group_name'] : '';
+            $group_name = $i['group_name'] ?? '';
 
             $insertUserQuery =
                 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user ' .

@@ -64,13 +64,13 @@ if (count($collections) > 0) {
                 $_module_id,
                 $collection_ids,
                 $sql_start_date,
-                $sql_end_date
+                $sql_end_date,
             ],
             [
                 ParameterType::INTEGER,
                 $DB->getConnection()::PARAM_STR_ARRAY,
                 ParameterType::STRING,
-                ParameterType::STRING
+                ParameterType::STRING,
             ]
     );
 }
