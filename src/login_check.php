@@ -42,10 +42,6 @@ if (($username) && ($password)) {
 
         $_auth = new $classname($CIS, $username, $password);
 
-        if ($LOGIN_AUTHENTICATORS[$i] === 'LDAP') {
-            $_auth->setRequiredInfo($LDAP__INFO_REQUIRED);
-        }
-
         if ($_auth->authenticate()) {
             $authenticated = true;
             break;

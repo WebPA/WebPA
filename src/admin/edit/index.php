@@ -288,13 +288,7 @@ if (empty($user_id)) {
     $page_intro .= ' Just enter the username for users already added to the system.';
 }
 
-if (!in_array('LDAP', $LOGIN_AUTHENTICATORS)) {
-    $page_conditions = 'N.B. Users authenticated directly from the WebPA <strong>database</strong> must be given a password.';
-} elseif (LDAP__AUTO_CREATE_USER) {
-    $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> will automatically be added to the database and updated each time they log in; the password stored is a random value.';
-} else {
-    $page_conditions = 'N.B. Users authenticated via <strong>LDAP</strong> must be added to the database before they are able to log in; a random password will be added automatically.';
-}
+$page_conditions = 'N.B. Users authenticated directly from the WebPA <strong>database</strong> must be given a password.';
 
 echo '<p>' . $page_intro . '</p>';
 

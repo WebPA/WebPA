@@ -19,7 +19,7 @@ use WebPA\includes\classes\User;
 use WebPA\includes\functions\Common;
 
 // load environment config
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
 
 $dotenv->load();
 
@@ -32,8 +32,8 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
-define('APP__WWW', '');
-define('DOC__ROOT', '/var/www/src/'); //must include the trailing /
+define('APP__WWW', $_ENV['APP_WWW']);
+define('DOC__ROOT', $_ENV['DOC_ROOT']); //must include the trailing /
 define('CUSTOM_CSS', '');  // Optional custom CSS file
 define('SESSION_NAME', 'WEBPA');
 ini_set('session.cookie_path', '/');
@@ -82,22 +82,8 @@ ini_set('sendmail_from', 'someone@email.com');
 //define the authentication to be used and in the order they are to be applied
 $LOGIN_AUTHENTICATORS[] = 'DB';
 
-// LDAP settings
-define('LDAP__HOST', 'kdc.lboro.ac.uk');
-define('LDAP__PORT', 3268);
-define('LDAP__USERNAME_EXT', '@lboro.ac.uk');
-define('LDAP__BASE', 'dc=lboro, dc=ac, dc=uk');
-define('LDAP__FILTER', 'name={username}*');
-define('LDAP__BINDRDN', '');
-define('LDAP__PASSWD', '');
-$LDAP__INFO_REQUIRED = ['displayname', 'mail', 'sn'];
-// Name of attribute to use to check user type (via function below)
-define('LDAP__USER_TYPE_ATTRIBUTE', 'description');
-define('LDAP__DEBUG_LEVEL', 7);
-define('LDAP__AUTO_CREATE_USER', true);
-
 // define installed modules
-$INSTALLED_MODS = ['lti'];
+$INSTALLED_MODS = [];
 
 ////
 // System configuration section - do not change unless you know what you're doing!
@@ -245,17 +231,3 @@ if ($_module_id) {
 }
 
 $UI = new UI($INSTALLED_MODS, $_source_id, $BRANDING, $CIS, $_module, $_user);
-
-function get_LDAP_user_type($data)
-{
-    $description_str = $data[0];
-
-    //check in the string for staff
-    if (strripos($description_str, 'staff') !== false) {
-        $user_type = APP__USER_TYPE_TUTOR;
-    } else {
-        $user_type = APP__USER_TYPE_STUDENT;
-    }
-
-    return $user_type;
-}
