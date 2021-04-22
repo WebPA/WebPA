@@ -31,30 +31,57 @@ composer create-project --prefer-dist --no-dev webpa/webpa webpa
 
 Alternatively you can download the latest release from this repository's [release page](https://github.com/WebPA/WebPA/releases).
 
-### Setup
+### Configuration
 
-Edit the includes/inc\_global.php file in the includes directory to configure the application; in particular:
+WebPA has a number of configuration options allowing you to set your database credentials, SMTP mail host details and 
+various other options.
 
-- APP\_\_WWW: URL to the instance of WebPA (without a closing "/");
-- DOC\_\_ROOT: directory path to the WebPA files (with a closing "/" or "\\");
-- database settings:
-	- APP\_\_DB\_HOST: host name
-	- APP\_\_DB\_USERNAME: username
-	- APP\_\_DB\_PASSWORD: password
-	- APP\_\_DB\_DATABASE: database name
-	- APP\_\_DB\_TABLE\_PREFIX: table prefix (default is `pa2_` which means that the new version can share the same database as the old version if required)
-- Configure the LDAP settings if you wish to authenticate via LDAP.
+The application comes bundled with a `.env.example` file which lists all of the configuation key-value pairs you can
+set. 
+
+For speedy development, you can copy this `.env.example` file to a file called `.env` and change the values to suit your
+environment. The path of this file can be set in the `includes/inc_global.php` file.
+
+For production environments, please *avoid* using the `.env` file as storing sensitive credentials in a file could be a 
+security risk. Instead you should set these key-pairs as environment variables. In Apache, you can set these in your 
+`.htaccess` file as follows:
+
+```
+SetEnv DB_HOST localhost
+```
+
+At a minimum, you should set the following environmental variables to let WebPA function:
+
+* APP_WWW - URL to your instance of WebPA (set without a closing '/')
+* DOC_ROOT - Directory path to the WebPA files (set with a closing '/')
+* DB_HOST - Database host
+* DB_USER - Database username
+* DB_PASS - Database password
+* DB_NAME - Database name
+* DB_PREFIX - Database table prefix. Usually set to 'pa2_'
+
+For more information on the dotenv file please visit the 
+[dotenv package's repository](https://github.com/vlucas/phpdotenv). For more information on setting environmental 
+variables in Apache, please [visit Apache's website](https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv).
+
+### Initialise the Database
      
 Run the following scripts to initialise the database (edit the files to change the names and password as reqired):
 
 - install/webpa2\_database.sql: create the database schema and user account;
 - install/webpa2\_tables.sql: create the database tables;
 - install/webpa2\_administrator.sql: create an administrator account and sample module.
-     
-Login to WebPA:
 
-- navigate to root of WebPA application;
-- enter a username of "admin" and a password of "admin"
+#### Upgrading an Existing Installation
+
+If you already have WebPA installed and are upgrading from version 3.1.0 or below, please run:
+
+- install/webpa\_security\_update.sql
+     
+### Login to WebPA
+
+- navigate to root of WebPA application
+- enter a username of _admin_ and a password of _admin_
 - change the password to something more secure after logging in
 		 
 Delete the _install_ folder when you're finished.
@@ -93,4 +120,4 @@ install instructions.
 
 WebPA was originally developed by the Centre for Engineering and Design Education at [Loughborough University](http://www.lboro.ac.uk/) with financial support from [JISC](https://www.jisc.ac.uk/)'s e-Learning Capital Programme.
 
-It continues to be mainted by a number of [open source contributors](https://github.com/WebPA/WebPA/graphs/contributors). We thank them for their time and effort supporting this system.
+It continues to be maintained by a number of [open source contributors](https://github.com/WebPA/WebPA/graphs/contributors). We thank them for their time and effort supporting this system.
