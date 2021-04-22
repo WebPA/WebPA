@@ -1,5 +1,5 @@
 <?php
-require_once("includes/inc_global.php");
+require_once 'includes/inc_global.php';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
  "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,7 +23,7 @@ require_once("includes/inc_global.php");
 </head>
 <body onload="body_onload();">
 
-<?php echo( gmdate('H:i:s d-m-Y') ); ?>
+<?php echo gmdate('H:i:s d-m-Y'); ?>
 
 </body>
 </html>

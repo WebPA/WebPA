@@ -1,0 +1,65 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('mod')
+    ->in(__DIR__ . '/src');
+
+$config = new PhpCsFixer\Config();
+
+return $config
+    ->setRules([
+        '@PSR2' => true,
+        '@PHP74Migration' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'no_alias_language_construct_call' => true,
+        'no_mixed_echo_print' => true,
+        'no_multiline_whitespace_around_double_arrow' => true,
+        'no_trailing_comma_in_singleline_array' => true,
+        'no_whitespace_before_comma_in_array' => true,
+        'normalize_index_brace' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'trim_array_spaces' => true,
+        'whitespace_after_comma_in_array' => true,
+        'lowercase_static_reference' => true,
+        'magic_constant_casing' => true,
+        'magic_method_casing' => true,
+        'native_function_casing' => true,
+        'native_function_type_declaration_casing' => true,
+        'cast_spaces' => true,
+        'lowercase_cast' => true,
+        'no_short_bool_cast' => true,
+        'no_unset_cast' => true,
+        'short_scalar_cast' => true,
+        'class_attributes_separation' => true,
+        'class_definition' => true,
+        'no_blank_lines_after_class_opening' => true,
+        'no_null_property_initialization' => true,
+        'protected_to_private' => true,
+        'self_static_accessor' => true,
+        'single_class_element_per_statement' => true,
+        'single_trait_insert_per_statement' => true,
+        'multiline_comment_opening_closing' => true,
+        'no_empty_comment' => true,
+        'single_line_comment_style' => true,
+        'include' => true,
+        'no_alternative_syntax' => true,
+        'no_superfluous_elseif' => true,
+        'no_trailing_comma_in_list_call' => true,
+        'no_unneeded_control_parentheses' => true,
+        'no_unneeded_curly_braces' => true,
+        'no_useless_else' => true,
+        'simplified_if_return' => true,
+        'switch_case_space' => true,
+        'switch_continue_to_break' => true,
+        'function_typehint_space' => true,
+        'method_argument_space' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
+        'return_type_declaration' => true,
+        'fully_qualified_strict_types' => true,
+        'global_namespace_import' => true,
+        'no_leading_import_slash' => true,
+        'no_unused_imports' => true,
+        'ordered_imports' => true,
+        'single_quote' => true,
+    ])
+    ->setFinder($finder);

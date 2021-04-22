@@ -16,14 +16,14 @@
  */
 
 //get the include file required
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
 use WebPA\includes\classes\Module;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
  //set the page information
@@ -34,7 +34,7 @@ $UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staf
 $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
 $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
 $UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
-$UI->breadcrumbs = array ('home' => '../','review data'=>'../review/','edit'=>null, );
+$UI->breadcrumbs = ['home' => '../', 'review data'=>'../review/', 'edit'=>null];
 $UI->help_link = '?q=node/237';
 $UI->head();
 $UI->body();
@@ -63,7 +63,7 @@ $edit_module->load_from_row($module_id);
 $action = Common::fetch_POST('save');
 
 if ($action) {          //incase we want to do more than save changes in the future
-  switch ($action) {
+    switch ($action) {
     case 'Save Changes':
     //put all the elements back into the structures
     $edit_module->module_code = Common::fetch_POST('module_code');
@@ -72,9 +72,9 @@ if ($action) {          //incase we want to do more than save changes in the fut
     //save all of the data
     $edit_module->set_dao_object($DB);
     if (empty($module)) {
-      $module = $edit_module->add_module();
+        $module = $edit_module->add_module();
     } else {
-      $edit_module->save_module();
+        $edit_module->save_module();
     }
 
     //reload module
@@ -83,10 +83,9 @@ if ($action) {          //incase we want to do more than save changes in the fut
     $edit_module->load_from_row($module_id);
 
     //send notification to the screen that the save has occured.
-    $sScreenMsg = "The changes made for the module have been saved";
+    $sScreenMsg = 'The changes made for the module have been saved';
 
   }
-
 }
 
 //-----------------------------------------------------------------------
@@ -103,8 +102,8 @@ $page_intro = '<p>Here you are able to edit the details of a module within the s
 
 <?php
 
-  if(!empty($sScreenMsg)){
-    echo "<div class=\"success_box\">{$sScreenMsg}</div>";
+  if (!empty($sScreenMsg)) {
+      echo "<div class=\"success_box\">{$sScreenMsg}</div>";
   }
 
 ?>

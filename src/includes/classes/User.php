@@ -12,209 +12,305 @@
 
 namespace WebPA\includes\classes;
 
-class User {
-  // Public Vars
-  public $username = null;
-  public $source_id = null;
-  public $password = null;
-  public $id = null;
-  public $admin = null;
-  public $id_number = null;
-  public $department_id = null;
-  public $forename = null;
-  public $lastname = null;
-  public $email = null;
-  public $type = null;
+use Doctrine\DBAL\ParameterType;
 
-  public $DAO = null;
+class User
+{
+    // Public Vars
+    public $username;
 
-  /**
-  * CONSTRUCTOR for the class function
-  * @param string $username
-  * @param string $passsword
-  */
-  function __construct($username = null, $password = null) {
-    $this->username = $username;
-    $this->source_id = '';
-    $this->password = $password;
-    $this->id = null;
-    $this->type = null;
-    $this->id_number = null;
-    $this->department_id = null;
-    $this->forename = null;
-    $this->lastname = null;
-    $this->admin = 0;
-  }// /->User()
+    public $source_id;
 
-/*
-* ================================================================================
-* PUBLIC
-*================================================================================
-*/
+    public $password;
 
-  /**
-  * Load the object from the given data
-  *
-  * @param array $user_info  assoc-array of User info
-  *
-  * @return boolean did the load succeed
-  */
-  function load_from_row($user_info) {
-    if (is_array($user_info)) {
-      $this->id = $user_info['user_id'];
-      $this->admin = $user_info['admin'];
-      $this->id_number = $user_info['id_number'];
-      $this->department_id = $user_info['department_id'];
-      $this->username = $user_info['username'];
-      $this->source_id = $user_info['source_id'];
-      $this->password = $user_info['password'];
-      $this->forename = $user_info['forename'];
-      $this->lastname = $user_info['lastname'];
-      $this->email = $user_info['email'];
-      if ($this->admin) {
-        $this->type = APP__USER_TYPE_ADMIN;
-      } else {
-        $this->type = $user_info['user_type'];
-      }
-    }
-    return true;
-  }// /->load_from_row()
+    public $id;
 
-  /**
-  * Is this user admin?
-  *
-  * @return boolean user is admin
-  */
-  function is_admin() {
-    return ($this->admin == 1);
-  }// /->is_admin()
+    public $admin;
 
-  /**
-  * Is this user staff?
-  *
-  * @return boolean user is staff
-  */
-  function is_staff() {
-    return ($this->type == APP__USER_TYPE_ADMIN) || ($this->type == APP__USER_TYPE_TUTOR);
-  }// /->is_staff()
+    public $id_number;
 
-  /*
-  Is this user tutor?
-  */
-  function is_tutor() {
-    return ($this->type == APP__USER_TYPE_TUTOR);
-  }// /->is_staff()
+    public $department_id;
 
-  /*
-  Is this user student?
-  */
-  function is_student() {
-    return ($this->type == APP__USER_TYPE_STUDENT);
-  }// /->is_student()
+    public $forename;
 
-  /**
-   * Update password
-   *
-   * Updates the password used by the user
-   *
-   * @param string $password
-   */
-  function update_password($password){
-    $this->password = $password;
-  }
+    public $lastname;
 
-  /**
-   * Function to update the username
-   * @param string $username
-   */
-   function update_username($username){
-    $this->username = $username;
-   }
+    public $email;
 
-  /**
-   * Function to update the source_id
-   * @param string $source_id
-   */
-   function update_source_id($source_id){
-    $this->source_id = $source_id;
-   }
+    public $type;
 
-  /**
-   * Function to update the user details
-   */
-   function save_user(){
+    public DAO $DAO;
 
-    $_fields = array ('forename'        => $this->forename ,
-              'lastname'        => $this->lastname ,
-              'email'         => $this->email,
-              'username'        => $this->username,
-              'source_id'      => $this->source_id,
-              'password'        => $this->password,
-              'id_number' => $this->id_number,
-              'department_id' => $this->department_id
-              );
-
-    //save the changes to the user
-    $this->DAO->do_update("UPDATE " . APP__DB_TABLE_PREFIX . "user SET {fields} WHERE user_id = {$this->id}; ",$_fields);
-
-    return true;
-   }
-
-   /**
-    * Function to set the database connection to be used
-    * @param database connection $this->DAO
+    /**
+    * CONSTRUCTOR for the class function
+    * @param string $username
+    * @param string $passsword
     */
-    function set_dao_object($DB){
-      $this->DAO = $DB;
+    public function __construct($username = null, $password = null)
+    {
+        $this->username = $username;
+        $this->source_id = '';
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->id = null;
+        $this->type = null;
+        $this->id_number = null;
+        $this->department_id = null;
+        $this->forename = null;
+        $this->lastname = null;
+        $this->admin = 0;
     }
 
-  /**
-   * Function to add new user details
-   */
-   function add_user(){
+    // /->User()
 
-    $_fields = array ('forename'        => $this->forename ,
-              'lastname'        => $this->lastname ,
-              'email'         => $this->email,
-              'username'        => $this->username,
-              'source_id'      => $this->source_id,
-              'password'        => $this->password,
-              'id_number' => $this->id_number,
-              'department_id' => $this->department_id,
-              'admin' => $this->admin
-              );
+    /*
+    * ================================================================================
+    * PUBLIC
+    *================================================================================
+    */
 
-    //save the changes to the user
-    $this->DAO->do_update("INSERT INTO " . APP__DB_TABLE_PREFIX . "user SET {fields}", $_fields);
+    /**
+    * Load the object from the given data
+    *
+    * @param array $user_info  assoc-array of User info
+    *
+    * @return boolean did the load succeed
+    */
+    public function load_from_row($user_info)
+    {
+        if (is_array($user_info)) {
+            $this->id = $user_info['user_id'];
+            $this->admin = $user_info['admin'];
+            $this->id_number = $user_info['id_number'];
+            $this->department_id = $user_info['department_id'];
+            $this->username = $user_info['username'];
+            $this->source_id = $user_info['source_id'];
+            $this->password = $user_info['password'];
+            $this->forename = $user_info['forename'];
+            $this->lastname = $user_info['lastname'];
+            $this->email = $user_info['email'];
+            if ($this->admin) {
+                $this->type = APP__USER_TYPE_ADMIN;
+            } else {
+                $this->type = $user_info['user_type'];
+            }
+        }
+        return true;
+    }
 
-    return $this->DAO->get_insert_id() ;
-   }
+    // /->load_from_row()
 
-  /**
-   * Function to delete a user
-   */
-   function delete(){
+    /**
+    * Is this user admin?
+    *
+    * @return boolean user is admin
+    */
+    public function is_admin()
+    {
+        return $this->admin == 1;
+    }
 
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_reset_request WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "form WHERE form_owner_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE (marked_user_id = {$this->id}) OR (user_id = {$this->id})");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE (marked_user_id = {$this->id}) OR (user_id = {$this->id})");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_group_member WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_module WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_tracking WHERE user_id = {$this->id}");
-     $this->DAO->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user WHERE user_id = {$this->id}");
+    // /->is_admin()
 
-     $this->id = null;
+    /**
+    * Is this user staff?
+    *
+    * @return boolean user is staff
+    */
+    public function is_staff()
+    {
+        return ($this->type == APP__USER_TYPE_ADMIN) || ($this->type == APP__USER_TYPE_TUTOR);
+    }
 
-   }
+    // /->is_staff()
 
-/*
-* ================================================================================
-* PRIVATE
-* ================================================================================
-*/
+    // Is this user tutor?
+    public function is_tutor()
+    {
+        return $this->type == APP__USER_TYPE_TUTOR;
+    }
 
+    // /->is_staff()
+
+    // Is this user student?
+    public function is_student()
+    {
+        return $this->type == APP__USER_TYPE_STUDENT;
+    }
+
+    // /->is_student()
+
+    /**
+     * Update password
+     *
+     * Updates the password used by the user
+     *
+     * @param string $password
+     */
+    public function update_password($password)
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    /**
+     * Function to update the username
+     * @param string $username
+     */
+    public function update_username($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Function to update the source_id
+     * @param string $source_id
+     */
+    public function update_source_id($source_id)
+    {
+        $this->source_id = $source_id;
+    }
+
+    /**
+     * Function to update the user details
+     */
+    public function save_user()
+    {
+        $this->DAO
+        ->getConnection()
+        ->createQueryBuilder()
+        ->update(APP__DB_TABLE_PREFIX . 'user')
+        ->set('forename', '?')
+        ->set('lastname', '?')
+        ->set('email', '?')
+        ->set('username', '?')
+        ->set('source_id', '?')
+        ->set('password', '?')
+        ->set('id_number', '?')
+        ->set('department_id', '?')
+        ->where('user_id = ?')
+        ->setParameter(0, $this->forename)
+        ->setParameter(1, $this->lastname)
+        ->setParameter(2, $this->email)
+        ->setParameter(3, $this->username)
+        ->setParameter(4, $this->source_id)
+        ->setParameter(5, $this->password)
+        ->setParameter(6, $this->id_number)
+        ->setParameter(7, $this->department_id)
+        ->setParameter(8, $this->id, ParameterType::INTEGER)
+        ->execute();
+
+        return true;
+    }
+
+    /**
+     * Function to set the database connection to be used
+     * @param DAO connection $this->DAO
+     */
+    public function set_dao_object(DAO $DB)
+    {
+        $this->DAO = $DB;
+    }
+
+    /**
+     * Function to add new user details
+     */
+    public function add_user()
+    {
+        $this->DAO
+           ->getConnection()
+           ->createQueryBuilder()
+           ->insert(APP__DB_TABLE_PREFIX . 'user')
+           ->values([
+               'forename' => '?',
+               'lastname' => '?',
+               'email' => '?',
+               'username' => '?',
+               'source_id' => '?',
+               'password' => '?',
+               'id_number' => '?',
+               'department_id' => '?',
+               'admin' => '?',
+           ])
+           ->setParameter(0, $this->forename)
+           ->setParameter(1, $this->lastname)
+           ->setParameter(2, $this->email)
+           ->setParameter(3, $this->username)
+           ->setParameter(4, $this->source_id)
+           ->setParameter(5, $this->password)
+           ->setParameter(6, $this->id_number)
+           ->setParameter(7, $this->department_id)
+           ->setParameter(8, $this->admin, ParameterType::INTEGER)
+           ->execute();
+
+        return $this->DAO->getConnection()->lastInsertId('user_id');
+    }
+
+    /**
+     * Function to delete a user
+     */
+    public function delete()
+    {
+        $dbConn = $this->DAO->getConnection();
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_reset_request WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_owner_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE marked_user_id = ? OR user_id = ?',
+            [$this->id, $this->id],
+            [ParameterType::INTEGER, ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_mark WHERE marked_user_id = ? OR user_id = ?',
+            [$this->id, $this->id],
+            [ParameterType::INTEGER, ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_tracking WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $dbConn->executeQuery(
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE user_id = ?',
+            [$this->id],
+            [ParameterType::INTEGER]
+        );
+
+        $this->id = null;
+    }
+
+    /*
+    * ================================================================================
+    * PRIVATE
+    * ================================================================================
+    */
 }// /class: User
-
-?>

@@ -8,21 +8,21 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once('../../../includes/inc_global.php');
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = array('home'      => '../../' ,
-            'my forms'  => '../' ,
-            'load form' => null,);
+$UI->breadcrumbs = ['home'      => '../../',
+            'my forms'  => '../',
+            'load form' => null, ];
 
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');
 $UI->set_page_bar_button('Create a new Form', '../../../../images/buttons/button_form_create.gif', '../create/');

@@ -10,20 +10,22 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class GroupHandler
 {
-    // Public Vars
-    public $_DAO = null;  // [pmn] due to a poor iterator implementation, this is currently public
+    public $_DAO;  // [pmn] due to a poor iterator implementation, this is currently public
 
-    // Private Vars
+    private $dbConn;
 
     /**
      * CONSTRUCTOR
      */
-    function __construct()
+    public function __construct()
     {
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
-    }// /->GroupHandler()
+        $this->dbConn = $this->_DAO->getConnection();
+    }
 
     /*
     * ================================================================================
@@ -38,7 +40,7 @@ class GroupHandler
      * @param string $group_numbering
      * @return array group names
      */
-    function generate_group_names($num_groups, $group_name_stub = 'Group', $group_numbering = 'numeric')
+    public function generate_group_names($num_groups, $group_name_stub = 'Group', $group_numbering = 'numeric')
     {
         $group_names = null;
 
@@ -81,7 +83,7 @@ class GroupHandler
         $prefix = '';
 
         if ($group_num >= 26) {
-            $prefix = chr(64 + (int)($group_num / 26));
+            $prefix = chr(64 + (int) ($group_num / 26));
         }
 
         $suffix = chr(65 + ($group_num % 26));
@@ -125,7 +127,7 @@ class GroupHandler
      *
      * @return object  GroupCollection object
      */
-    function & clone_collection($collection_id, $include_roles = null)
+    public function & clone_collection($collection_id, $include_roles = null)
     {
         // get the collection to clone
         $org_collection = new GroupCollection($this->_DAO);
@@ -166,7 +168,9 @@ class GroupHandler
         }
 
         return $clone_collection;
-    }// /->clone_collection()
+    }
+
+    // /->clone_collection()
 
     /**
      * Create a new GroupCollection object (gives it a new UUID and returns the object)
@@ -175,12 +179,14 @@ class GroupHandler
      *
      * @return array
      */
-    function & create_collection()
+    public function & create_collection()
     {
         $new_collection = new GroupCollection($this->_DAO);
         $new_collection->create();
         return $new_collection;
-    }// /->create_collection()
+    }
+
+    // /->create_collection()
 
     /**
      * Get a GroupCollection object corresponding to the given group_set_id
@@ -188,11 +194,13 @@ class GroupHandler
      * @param string $collection_id ID of GroupCollection to fetch
      * @return object GroupCollection object
      */
-    function get_collection($collection_id)
+    public function get_collection($collection_id)
     {
         $collection = new GroupCollection($this->_DAO);
         return ($collection->load($collection_id)) ? $collection : null;
-    }// /->get_collection()
+    }
+
+    // /->get_collection()
 
     /**
      * Get collections belonging to the given user
@@ -202,12 +210,20 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_user_collections($user_id, $application_id = null)
+    public function get_user_collections($user_id)
     {
-        return $this->_DAO->fetch('SELECT c.* FROM ' . APP__DB_TABLE_PREFIX . '_collection c INNER JOIN ' .
-            APP__DB_TABLE_PREFIX . '_user_module um ON c.module_id = um.module_id LEFT OUTER JOIN ' .
-            APP__DB_TABLE_PREFIX . "assessment a ON cm.collection_id = a.collection_id WHERE um.user_id = {$user_id} AND a.collection_id IS NULL");
-    }// /->get_user_collections()
+        $query =
+            'SELECT c.* ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON c.module_id = um.module_id ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON c.collection_id = a.collection_id ' .
+            'WHERE um.user_id = ? ' .
+            'AND a.collection_id IS NULL';
+
+        return $this->dbConn->fetchAllAssociative($query, [$user_id], [ParameterType::INTEGER]);
+    }
 
     /**
      * Get collections belonging to the given module
@@ -216,47 +232,49 @@ class GroupHandler
      *
      * @return array array of collections
      */
-    function get_module_collections($module_id)
+    public function get_module_collections($module_id)
     {
-        return $this->_DAO->fetch('SELECT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
-            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ON c.collection_id = a.collection_id ' .
-            "WHERE c.module_id = {$module_id} AND a.collection_id IS NULL " .
-            'ORDER BY c.collection_name');
+        $query =
+            'SELECT c.*, a.assessment_id AS collection_assessment_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'collection c ' .
+            'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'ON c.collection_id = a.collection_id ' .
+            'WHERE c.module_id = ? ' .
+            'AND a.collection_id IS NULL ' .
+            'ORDER BY c.collection_name';
 
-    }// /->get_module_collections()
+        return $this->dbConn->fetchAllAssociative($query, [$module_id], [ParameterType::INTEGER]);
+    }
 
     /**
      * function to get member collections
      * @param string $user_id ID of the member
-     * @param string $application_id (optional) name of owner-application to search for
      * @param string $owner_type (optional) type of collection-owner to filter against
      *
      * @return array array of collections
      */
-    function get_member_collections($user_id, $application_id = null, $owner_type)
+    public function get_member_collections($user_id, $owner_type)
     {
-        if ($owner_type == 'user') {
+        if ($owner_type === 'user') {
             $sql = 'SELECT DISTINCT c.*, NULL AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX .
-                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = {$user_id} AND a.collection_id IS NULL";
-        } else if ($owner_type == 'assessment') {
+                'assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ? AND a.collection_id IS NULL';
+        } elseif ($owner_type === 'assessment') {
             $sql = 'SELECT DISTINCT c.*, a.assessment_id AS collection_assessment_id FROM ' . APP__DB_TABLE_PREFIX .
                 'collection c INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group ug ON c.collection_id = ug.collection_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
                 'user_group_member ugm ON ug.group_id = ugm.group_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                "assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = {$user_id}";
+                'assessment a ON a.collection_id = c.collection_id WHERE ugm.user_id = ?';
         }
 
-        $res = $this->_DAO->fetch($sql);
-        return $res;
-    }// /->get_member_collections()
+        return $this->dbConn->fetchAllAssociative($sql, [$user_id], [ParameterType::INTEGER]);
+    }
 
     /*
     * ================================================================================
     * Private Methods
     * ================================================================================
     */
-
 }// /->class: GroupHandler

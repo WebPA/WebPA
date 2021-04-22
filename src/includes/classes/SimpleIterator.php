@@ -13,91 +13,119 @@
 
 namespace WebPA\includes\classes;
 
-class SimpleIterator {
-  // Public Vars
-  public $array = null;
-  public $count = 0;
+class SimpleIterator
+{
+    // Public Vars
+    public $array;
 
-  // Private Vars
+    public $count = 0;
 
-  private $_key = null;
-  private $_value = null;
+    // Private Vars
 
-  /**
-  * CONSTRUCTOR for the simple iterator class
-  * @param array $array
-  */
-  function __construct(&$array = []) {
-    // sub-classes can override the creator, so all the work is done in _initialise()
-    $this->_initialise($array);
-  }// /->SimpleIterator()
+    private $_key;
 
-/*
-* ================================================================================
-* Public Methods
-* ================================================================================
-*/
+    private $_value;
 
-/**
- * function current
- * @return integer
- */
-  function &current() {
-    return $this->_value;
-  }// /->current()
+    /**
+    * CONSTRUCTOR for the simple iterator class
+    * @param array $array
+    */
+    public function __construct(&$array = [])
+    {
+        // sub-classes can override the creator, so all the work is done in _initialise()
+        $this->_initialise($array);
+    }
 
-/**
- * function next
- */
-  function next() {
-    next($this->array);
-    $this->_key = key($this->array);
-    if ("$this->_key" != '') { $this->_value =& $this->array[$this->_key]; }
-    else { $this->_value = null; }
-  }// /->next()
+    // /->SimpleIterator()
 
-/**
- * function reset
- */
-  function reset() {
-    reset($this->array);
-    $this->_key = key($this->array);
-    if ("$this->_key" != '') { $this->_value =& $this->array[$this->_key]; }
-    else { $this->_value = null; }
-  }// /->reset()
+    /*
+    * ================================================================================
+    * Public Methods
+    * ================================================================================
+    */
 
-/**
- * function size
- * @return integer
- */
-  function size() {
-    return $this->count;
-  }// /->size()
+    /**
+     * function current
+     * @return integer
+     */
+    public function &current()
+    {
+        return $this->_value;
+    }
 
-/**
- * function to check validity
- * @return boolean
- */
-  function is_valid() {
-    return ("$this->_key" != '');
-  }// /->is_valid()
+    // /->current()
 
-/*
-* ================================================================================
-* Private Methods
-* ================================================================================
-*/
-/**
- * Function to initalise
- * @param array $array
- */
-  function _initialise(&$array = []) {
-    $this->array =& $array;
-    $this->count = count($array);
+    /**
+     * function next
+     */
+    public function next()
+    {
+        next($this->array);
+        $this->_key = key($this->array);
+        if ("$this->_key" != '') {
+            $this->_value =& $this->array[$this->_key];
+        } else {
+            $this->_value = null;
+        }
+    }
 
-    $this->reset();
-  }// /->_intialise()
+    // /->next()
 
+    /**
+     * function reset
+     */
+    public function reset()
+    {
+        reset($this->array);
+        $this->_key = key($this->array);
+        if ("$this->_key" != '') {
+            $this->_value =& $this->array[$this->_key];
+        } else {
+            $this->_value = null;
+        }
+    }
+
+    // /->reset()
+
+    /**
+     * function size
+     * @return integer
+     */
+    public function size()
+    {
+        return $this->count;
+    }
+
+    // /->size()
+
+    /**
+     * function to check validity
+     * @return boolean
+     */
+    public function is_valid()
+    {
+        return "$this->_key" != '';
+    }
+
+    // /->is_valid()
+
+    /*
+    * ================================================================================
+    * Private Methods
+    * ================================================================================
+    */
+
+    /**
+     * Function to initalise
+     * @param array $array
+     */
+    public function _initialise(&$array = [])
+    {
+        $this->array =& $array;
+        $this->count = count($array);
+
+        $this->reset();
+    }
+
+    // /->_intialise()
 }// /class: SimpleIterator
-
-?>

@@ -9,13 +9,13 @@
  */
 
 //get the include file required
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 $table = 'user';
@@ -25,9 +25,9 @@ $user_type = 'administrator';
 
 
 //set the page information
-$UI->page_title = APP__NAME . " view administrator data";
+$UI->page_title = APP__NAME . ' view administrator data';
 $UI->menu_selected = 'view data';
-$UI->breadcrumbs = array ('home' => '../../','review data'=>'../', 'administrator information'=>null,);
+$UI->breadcrumbs = ['home' => '../../', 'review data'=>'../', 'administrator information'=>null];
 $UI->help_link = '?q=node/237';
 $UI->set_page_bar_button('View Student Data', '../../../../images/buttons/button_student_user.png', '../student/index.php');
 $UI->set_page_bar_button('View Staff Data', '../../../../images/buttons/button_staff_user.png', '../staff/index.php');

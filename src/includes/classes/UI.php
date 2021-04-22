@@ -10,28 +10,36 @@
 
 namespace WebPA\includes\classes;
 
-include_once __DIR__ . '/../inc_global.php';
-
 class UI
 {
     public $page_title = '';
+
     public $menu_selected = '';
-    public $breadcrumbs = null;
+
+    public $breadcrumbs;
+
     public $help_link = '';
 
     private $user;
+
     private $_menu;
+
     private $_page_bar_buttons;
+
     private $cis;
+
     private $installedMods;
+
     private $sourceId;
+
     private $branding;
+
     private $module;
 
     /**
      * CONSTRUCTOR for the UI
      */
-    function __construct($installedMods, $sourceId, $branding, $cis, $module, $user)
+    public function __construct($installedMods, $sourceId, $branding, $cis, $module, $user)
     {
         $this->cis = $cis;
         $this->installedMods = $installedMods;
@@ -44,26 +52,24 @@ class UI
 
         // Initialise the menu - sets either staff or student menu items
         if ($this->user) {
-
             if ($this->user->is_staff()) {
                 // Staff menu
-                $this->set_menu('Tutors', array('home' => APP__WWW . '/tutors/index.php',
+                $this->set_menu('Tutors', ['home' => APP__WWW . '/tutors/index.php',
                     'my forms' => APP__WWW . '/tutors/forms/',
                     'my groups' => APP__WWW . '/tutors/groups/',
-                    'my assessments' => APP__WWW . '/tutors/assessments/'));// /$this->set_menu()
-
-            } else if ($this->user->is_student()) {
+                    'my assessments' => APP__WWW . '/tutors/assessments/', ]);// /$this->set_menu()
+            } elseif ($this->user->is_student()) {
                 // Student menu
-                $this->set_menu('Students', array('home' => APP__WWW . '/students/index.php',
+                $this->set_menu('Students', ['home' => APP__WWW . '/students/index.php',
                     'my groups' => APP__WWW . '/students/groups/',
-                    'my assessments' => APP__WWW . '/students/assessments/'));// /$this->set_menu()
+                    'my assessments' => APP__WWW . '/students/assessments/', ]);// /$this->set_menu()
             }
 
             //Admin menu
             if ($this->user->is_staff()) {
-                $menu = array('admin home' => APP__WWW . '/admin/index.php',
+                $menu = ['admin home' => APP__WWW . '/admin/index.php',
                     'upload data' => APP__WWW . '/admin/load/index.php',
-                    'view data' => APP__WWW . '/admin/review/index.php');
+                    'view data' => APP__WWW . '/admin/review/index.php', ];
                 if ($this->user->is_admin()) {
                     $menu['metrics'] = APP__WWW . '/admin/metrics/index.php';
                 }
@@ -75,23 +81,23 @@ class UI
                 $mod = strtolower($mod);
                 $menu_file = DOC__ROOT . "mod/$mod/menu.php";
                 if (file_exists($menu_file)) {
-                    require_once($menu_file);
+                    require_once $menu_file;
                 }
             }
-
         }
 
-        $this->set_menu('Support', array('help' => $helper_link, //this is a link set in each page / area to link to the approriate help
-            'contact' => APP__WWW . '/contact/'));// /$this->set_menu();
+        $this->set_menu('Support', ['help' => $helper_link, //this is a link set in each page / area to link to the approriate help
+            'contact' => APP__WWW . '/contact/', ]);// /$this->set_menu();
 
         if ($this->user) {
             if ($user->is_admin()) {
-                $modules = $this->cis->get_user_modules(NULL, NULL, 'name');
+                $modules = $this->cis->get_user_modules(null, null, 'name');
             } else {
-                $modules = $this->cis->get_user_modules($user->id, NULL, 'name');
+                $modules = $this->cis->get_user_modules($user->id, null, 'name');
             }
+
             if ((($this->sourceId == '') || $this->user->is_admin()) && (count($modules) > 1)) {
-                $this->set_menu('  ', array('change module' => APP__WWW . '/module.php'));
+                $this->set_menu('  ', ['change module' => APP__WWW . '/module.php']);
             }
         }
 
@@ -103,8 +109,9 @@ class UI
             $menu['logout'] = APP__WWW . '/logout.php';
         }
         $this->set_menu(' ', $menu);// /$this->set_menu();
+    }
 
-    }// /->UI()
+    // /->UI()
 
     // --------------------------------------------------------------------------------
     // Public Methods
@@ -115,7 +122,7 @@ class UI
      * @param string $expire_date
      * @param string $modified_date
      */
-    function headers_expire($expire_date = null, $modified_date = null)
+    public function headers_expire($expire_date = null, $modified_date = null)
     {
         // If no expiry date, expire at 00:00:01 today
         if (!$expire_date) {
@@ -131,40 +138,40 @@ class UI
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $modified_date) . ' GMT');
         header('Cache-Control: no-store, no-cache, must-revalidate');   // HTTP/1.1
         header('Cache-Control: post-check=0, pre-check=0', false);    // HTTP/1.1
-        header("Cache-control: private", false);
+        header('Cache-control: private', false);
         header('Pragma: no-cache');   // HTTP/1.0
-    } // /-headers_expire()
+    }
 
+    // /-headers_expire()
 
     /**
      * Function to generate the header
      */
-    function head()
+    public function head()
     {
         /*
         Commented out until the day IE can show a full XHTML page without entering quirks mode
         echo('<?xml version="1.0" encoding="UTF-8"?>'."\n");
-        */
-        ?>
+        */ ?>
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
         <head>
         <meta http-equiv="content-language" content="EN"/>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <title><?php echo(APP__NAME) ?></title>
-        <link href="<?php echo(APP__WWW) ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo(APP__WWW) ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css"/>
+        <title><?php echo APP__NAME ?></title>
+        <link href="<?php echo APP__WWW ?>/css/webpa.css" media="screen" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo APP__WWW ?>/css/webpa_print.css" media="print" rel="stylesheet" type="text/css"/>
         <style type="text/css">
             <?php
               if (!isset($_SESSION['_no_header'])) {
-            ?>
+                  ?>
             #app_bar {
-                height: <?php echo $this->branding['logo.margin'];?>px;
+                height: <?php echo $this->branding['logo.margin']; ?>px;
             }
 
             #app_bar #inst_logo {
-                width: <?php echo $this->branding['logo.width'];?>px;
+                width: <?php echo $this->branding['logo.width']; ?>px;
             }
 
             #main {
@@ -173,7 +180,7 @@ class UI
 
             <?php
               } else {
-            ?>
+                  ?>
             #side_bar {
                 padding-top: 20px;
                 top: 20px;
@@ -188,8 +195,7 @@ class UI
             }
 
             <?php
-              }
-            ?>
+              } ?>
         </style>
         <?php
         if (isset($this->branding['css']) && !empty($this->branding['css'])) {
@@ -197,24 +203,25 @@ class UI
             <link href="<?php echo $this->branding['css']; ?>" rel="stylesheet" type="text/css"/>
             <?php
         }
-    } // /->head()
+    }
 
+    // /->head()
 
     /**
      * function to close the body area of the page
      * @param string $extra_attributes
      */
-    function body($extra_attributes = '')
+    public function body($extra_attributes = '')
     {
-        echo("\n</head>\n<body $extra_attributes>\n\n");
+        echo "\n</head>\n<body $extra_attributes>\n\n";
+    }
 
-    } // /->body()
-
+    // /->body()
 
     /**
      * render page header
      */
-    function header()
+    public function header()
     {
         ?>
         <div id="header">
@@ -233,21 +240,20 @@ class UI
                             if (isset($this->module)) {
                                 echo "<td>{$this->module['module_title']} [{$this->module['module_code']}]</td>";
                             } else {
-                                echo('<td>&nbsp;</td>');
+                                echo '<td>&nbsp;</td>';
                             }
-                            echo '<td align="right">';
-                            if (isset($this->branding['logo']) && !empty($this->branding['logo'])) {
-                                echo '<div id="inst_logo"><img src="' . $this->branding['logo'] . '"';
-                                if (isset($this->branding['name']) && !empty($this->branding['name'])) {
-                                    echo ' alt="' . htmlentities($this->branding['name']) . '"';
-                                    echo ' title="' . htmlentities($this->branding['name']) . '"';
-                                }
-                                echo ' /></div>';
-                            } else {
-                                echo '&nbsp;';
-                            }
-                            echo '</td>';
-                            ?>
+                echo '<td align="right">';
+                if (isset($this->branding['logo']) && !empty($this->branding['logo'])) {
+                    echo '<div id="inst_logo"><img src="' . $this->branding['logo'] . '"';
+                    if (isset($this->branding['name']) && !empty($this->branding['name'])) {
+                        echo ' alt="' . htmlentities($this->branding['name']) . '"';
+                        echo ' title="' . htmlentities($this->branding['name']) . '"';
+                    }
+                    echo ' /></div>';
+                } else {
+                    echo '&nbsp;';
+                }
+                echo '</td>'; ?>
 
                         </tr>
                     </table>
@@ -255,15 +261,13 @@ class UI
                 <div id="module_bar">
                     <?php
                     if ($this->user) {
-                        echo("<td>User: {$this->user->forename} {$this->user->lastname}</td>");
+                        echo "<td>User: {$this->user->forename} {$this->user->lastname}</td>";
                     } else {
-                        echo('<td>&nbsp;</td>');
-                    }
-                    ?>
+                        echo '<td>&nbsp;</td>';
+                    } ?>
                 </div>
                 <?php
-            }
-            ?>
+            } ?>
             <div id="breadcrumb_bar">
                 You are in:
                 <?php
@@ -272,20 +276,21 @@ class UI
                     foreach ($this->breadcrumbs as $k => $v) {
                         --$num_crumbs;
                         if (!is_null($v)) {
-                            echo("<a class=\"breadcrumb\" href=\"$v\">$k</a>");
+                            echo "<a class=\"breadcrumb\" href=\"$v\">$k</a>";
                             if ($num_crumbs > 0) {
-                                echo(' &gt; ');
+                                echo ' &gt; ';
                             }
                         } else {
-                            echo($k);
+                            echo $k;
                         }
                     }
-                }
-                ?>
+                } ?>
             </div>
         </div>
         <?php
-    }// /->header()
+    }
+
+    // /->header()
 
     /**
      * Set the given section name to the given assoc-array of links
@@ -293,24 +298,23 @@ class UI
      * @param string $section_name
      * @param array $section_array
      */
-    function set_menu($section_name, $section_array)
+    public function set_menu($section_name, $section_array)
     {
         $this->_menu[$section_name] = $section_array;
     }
 
-    function get_menu($section_name)
+    public function get_menu($section_name)
     {
         if (isset($this->_menu[$section_name])) {
             return $this->_menu[$section_name];
-        } else {
-            return array();
         }
+        return [];
     }
 
     /**
      * Draw the menu
      */
-    function menu()
+    public function menu()
     {
         // If there's a menu, draw it
         if ($this->_menu) {
@@ -333,9 +337,11 @@ class UI
             }// /for
 
             $menu_html .= '</div>';
-            echo($menu_html);
+            echo $menu_html;
         }
-    }// /->menu()
+    }
+
+    // /->menu()
 
     /**
      * Set a page bar button
@@ -344,16 +350,17 @@ class UI
      * @param string $link
      * @param string $side
      */
-    function set_page_bar_button($text, $img, $link, $side = 'left')
+    public function set_page_bar_button($text, $img, $link, $side = 'left')
     {
-        $this->_page_bar_buttons[$side][$text] = array('img' => "../images/buttons/$img", 'link' => $link);
+        $this->_page_bar_buttons[$side][$text] = ['img' => "../images/buttons/$img", 'link' => $link];
+    }
 
-    }// /->set_page_bar_button()
+    // /->set_page_bar_button()
 
     /**
      * Draw the page toolbar
      */
-    function page_bar()
+    public function page_bar()
     {
         if (is_array($this->_page_bar_buttons)) {
             ?>
@@ -363,30 +370,30 @@ class UI
                         <?php
                         if (array_key_exists('left', $this->_page_bar_buttons)) {
                             foreach ($this->_page_bar_buttons['left'] as $text => $button) {
-                                echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
+                                echo "<td><a class=\"page_bar_link\" href=\"{$button['link']}\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>";
                             }
-                        }
-                        ?>
+                        } ?>
                         <td width="100%">&nbsp;</td>
                         <?php
                         // right-hand buttons are automatically set to target="_blank"
                         if (array_key_exists('right', $this->_page_bar_buttons)) {
                             foreach ($this->_page_bar_buttons['right'] as $text => $button) {
-                                echo("<td><a class=\"page_bar_link\" href=\"{$button['link']}\" target=\"$text\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>");
+                                echo "<td><a class=\"page_bar_link\" href=\"{$button['link']}\" target=\"$text\" title=\"$text\"><img src=\"{$button['img']}\" alt=\"$text\" height=\"50\" /></a></td>";
                             }
-                        }
-                        ?>
+                        } ?>
                     </tr>
                 </table>
             </div>
             <?php
         }
-    }// /->page_bar()
+    }
+
+    // /->page_bar()
 
     /**
      * Footer
      */
-    function footer()
+    public function footer()
     {
         ?>
         <div id="footer">
@@ -394,36 +401,41 @@ class UI
                 &copy; Loughborough University and University of Hull, 2005 - <?php echo date('Y'); ?>&nbsp;&nbsp;&nbsp;
                 <span style="font-size: small;">Version: <?php
                     echo APP__VERSION;
-                    if (count($this->installedMods) > 0) echo ' [' . implode(",", $this->installedMods) . ']'; ?></span>
+        if (count($this->installedMods) > 0) {
+            echo ' [' . implode(',', $this->installedMods) . ']';
+        } ?></span>
                 <?php
                 if (isset($this->user) && $this->user->is_admin() && $this->sourceId) {
                     echo "<br />\n";
                     echo '      <span style="font-size: small;">Source:&nbsp;';
                     echo ($this->sourceId) ? $this->sourceId : '&lt;' . APP__NAME . '&gt;';
                     echo "</span>\n";
-                }
-                ?>
+                } ?>
             </div>
             <iframe src="<?php echo APP__WWW; ?>/keep_alive.php" height="1" width="1" style="display: none;">keep
                 alive
             </iframe>
         </div>
         <?php
-    }// /->footer()
+    }
+
+    // /->footer()
 
     /**
      * Start main page content
      */
-    function content_start()
+    public function content_start()
     {
-        echo('<div id="container">');
-        echo('<div id="main">');
+        echo '<div id="container">';
+        echo '<div id="main">';
         $this->page_bar();
-        echo('<div id="content">');
+        echo '<div id="content">';
         if ($this->page_title) {
-            echo("<h1>{$this->page_title}</h1>\n\n");
+            echo "<h1>{$this->page_title}</h1>\n\n";
         }
-    }// /content_start()
+    }
+
+    // /content_start()
 
     /**
      * End main page content
@@ -431,7 +443,7 @@ class UI
      * @param boolean $render_header
      * @param boolean $renders_footer
      */
-    function content_end($render_menu = true, $render_header = true, $render_footer = true)
+    public function content_end($render_menu = true, $render_header = true, $render_footer = true)
     {
         ?>
         </div>
@@ -440,8 +452,7 @@ class UI
         <div id="side_bar">
             <?php
             if ($render_menu) {
-                $this->menu();
-                ?>
+                $this->menu(); ?>
                 <div class="alert_box" style="margin: 40px 8px 8px 8px; font-size: 0.7em;">
                     <p><strong>Technical Problem?</strong></p>
                     <p>If you have a problem, find a bug or discover a technical problem in the system, <a
@@ -457,8 +468,7 @@ class UI
                                 title="(email: <?php echo $this->branding['email.help']; ?>)">email us</a> to report it!</p>
                 </div>
                 <?php
-            }
-            ?>
+            } ?>
         </div>
         <?php
         if ($render_header) {
@@ -466,14 +476,15 @@ class UI
         }
         if ($render_footer) {
             $this->footer();
-        }
-        ?>
+        } ?>
         <div class="clear"></div>
         </div> <!-- id="container" -->
         </body>
         </html>
         <?php
-    }// /content_end()
+    }
+
+    // /content_end()
 
     /**
      * function to draw the boxed list
@@ -482,20 +493,21 @@ class UI
      * @param string $header_text
      * @param string $footer_text
      */
-    function draw_boxed_list($list, $box_class, $header_text, $footer_text)
+    public function draw_boxed_list($list, $box_class, $header_text, $footer_text)
     {
         if (is_array($list)) {
-            echo("<div class=\"$box_class\"><p style=\"font-weight: bold;\">$header_text</p><ul class=\"spaced\">");
+            echo "<div class=\"$box_class\"><p style=\"font-weight: bold;\">$header_text</p><ul class=\"spaced\">";
             foreach ($list as $item) {
-                echo("<li>$item</li>");
+                echo "<li>$item</li>";
             }
-            echo("</ul><p>$footer_text</p></div>");
+            echo "</ul><p>$footer_text</p></div>";
         }
-    }// ->draw_boxed_list()
+    }
+
+    // ->draw_boxed_list()
 
     // --------------------------------------------------------------------------------
     // Private Methods
-
 }// /class: UI
 
 ?>

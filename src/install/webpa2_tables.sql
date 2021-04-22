@@ -77,7 +77,7 @@ CREATE TABLE pa2_user (
   user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   source_id varchar(255) NOT NULL DEFAULT '',
   username varchar(255) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   id_number varchar(255) DEFAULT NULL,
   department_id varchar(255) DEFAULT NULL,
   forename varchar(255) NOT NULL,

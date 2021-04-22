@@ -10,19 +10,24 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
-use WebPA\includes\functions\AcademicYear;
-
-include_once __DIR__ . '/../inc_global.php';
 
 class EngCIS
 {
     private $_DAO;
+
     private $_ordering_types;
+
     private $user;
+
     private $sourceId;
+
     private $moduleId;
+
+    private $dbConn;
 
     /**
      * CONSTRUCTOR
@@ -33,7 +38,8 @@ class EngCIS
         $this->moduleId = $moduleId;
 
         $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
-        $this->_DAO->set_debug(false);
+
+        $this->dbConn = $this->_DAO->getConnection();
     }
 
     public function setUser(User $user)
@@ -55,46 +61,69 @@ class EngCIS
      *
      * @return array  either an assoc-array of module info or an array of assoc-arrays, containing many modules' info
      */
-    function get_module($modules = null, $ordering = 'id')
+    public function get_module($modules = null, $ordering = 'id')
     {
-        $module_search = $this->_DAO->build_filter('module_id', (array)$modules);
-        $order_by_clause = $this->_order_by_clause('module', $ordering);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
+
+        if ($ordering === 'name') {
+            $queryBuilder->orderBy('lcm.module_id');
+        } else {
+            $queryBuilder->orderBy('lcm.module_title');
+        }
 
         // If there's more than one module to search for, get all the rows
         if (is_array($modules)) {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$this->sourceId}') AND $module_search
-                    $order_by_clause");
-        } else if (!empty($modules)) {  // else, just return one row
-            return $this->_DAO->fetch_row("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                      FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                      WHERE (lcm.source_id = '{$this->sourceId}') AND $module_search
-                      LIMIT 1");
-        } else if ($this->user->is_admin()) {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                    WHERE (lcm.source_id = '{$this->sourceId}')
-                    $order_by_clause");
-        } else {
-            return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title, lcm.module_code
-                  FROM " . APP__DB_TABLE_PREFIX . "module lcm
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcm.module_id = lcsm.module_id
-                  WHERE (lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "') AND
-                        (user_id = $this->user->id) AND (lcm.source_id = '{$this->sourceId}')
-                  $order_by_clause");
+            // get all modules
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->where('lcm.source_id = :source_id')
+                ->andWhere('module_id IN (:modules)')
+                ->setParameter(':source_id', $this->sourceId)
+                ->setParameter(':modules', $modules, $this->dbConn::PARAM_INT_ARRAY);
+
+            return $queryBuilder->execute()->fetchAllAssociative();
         }
-    }// /->get_module()
+        if (!empty($modules)) {  // else, just return one row
+            $moduleQuery = 'SELECT module_id, module_title, module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE source_id = ? AND module_id = ? LIMIT 1';
+
+            return $this->dbConn->fetchAssociative(
+                $moduleQuery,
+                [$this->sourceId, $modules],
+                [ParameterType::STRING, ParameterType::INTEGER]
+            );
+        }
+        if ($this->user->is_admin()) {
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->where('lcm.source_id = ?')
+                ->setParameter(0, $this->sourceId, ParameterType::STRING);
+
+            return $queryBuilder->execute()->fetchAllAssociative();
+        }
+        $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->where('lcsm.user_type = ?')
+                ->andWhere('user_id = ?')
+                ->andWhere('lcm.source_id = ?')
+                ->setParameter(0, APP__USER_TYPE_TUTOR, ParameterType::STRING)
+                ->setParameter(1, $this->user->id, ParameterType::INTEGER)
+                ->setParameter(2, $this->sourceId, ParameterType::STRING);
+
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /**
      * Get all the module info as an array
      *
      * @return array
      */
-    function get_all_modules()
+    public function get_all_modules()
     {
-        return $this->_DAO->fetch("SELECT lcm.module_id, lcm.module_title
-                    FROM " . APP__DB_TABLE_PREFIX . "module lcm");
+        return $this->dbConn->fetchAllAssociative('SELECT lcm.module_id, lcm.module_title FROM ' . APP__DB_TABLE_PREFIX . 'module lcm');
     }
 
     /**
@@ -103,17 +132,28 @@ class EngCIS
      * @param string $ordering
      * @return array
      */
-    function get_module_staff($module_id, $ordering)
+    public function get_module_staff($module_id, $ordering)
     {
-        $order_by_clause = $this->_order_by_clause('staff', $ordering);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
-        return $this->_DAO->fetch("SELECT lcs.*
-                  FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcs.user_id = lcsm.user_id
-                  WHERE lcsm.user_type = '" . APP__USER_TYPE_TUTOR . "'
-                    AND module_id = $module_id
-                  $order_by_clause");
-    }// /->get_module_staff()
+        if ($ordering === 'id') {
+            $queryBuilder->orderBy('lcs.user_id');
+        } else {
+            $queryBuilder->orderBy('lcs.lastname');
+            $queryBuilder->addOrderBy('lcs.forename');
+        }
+
+        $queryBuilder
+            ->select('lcs.*')
+            ->from(APP__DB_TABLE_PREFIX . 'user lcs')
+            ->innerJoin('lcs', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcs.user_id = lcsm.user_id')
+            ->where('lcsm.user_type = ?')
+            ->andWhere('module_id = ?')
+            ->setParameter(0, APP__USER_TYPE_TUTOR, ParameterType::STRING)
+            ->setParameter(1, $module_id, ParameterType::INTEGER);
+
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /**
      * Get array of students for one or more modules
@@ -121,72 +161,73 @@ class EngCIS
      * @param string $ordering
      * @return array
      */
-    function get_module_students($module, $ordering = 'name')
+    public function get_module_students($module, $ordering = 'name')
     {
-        $order_by_clause = $this->_order_by_clause('student', $ordering);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
-        $sql = "SELECT DISTINCT lcs.*, lcs.id_number AS student_id
-                  FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                  INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module lcsm ON lcs.user_id = lcsm.user_id AND lcsm.module_id = $module
-                  WHERE lcsm.user_type = '" . APP__USER_TYPE_STUDENT . "'
-                  $order_by_clause
-                  ";
-        return $this->_DAO->fetch($sql);
-    }// /->get_module_students()
+        if ($ordering === 'id') {
+            $queryBuilder->orderBy('lcs.user_id');
+        } else {
+            $queryBuilder->orderBy('lcs.lastname');
+            $queryBuilder->addOrderBy('lcs.forename');
+        }
+
+        $queryBuilder
+            ->select('lcs.*', 'lcs.id_number as student_id')
+            ->distinct()
+            ->from(APP__DB_TABLE_PREFIX . 'user', 'lcs')
+            ->innerJoin('lcs', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcs.user_id = lcsm.user_id AND lcsm.module_id = ?')
+            ->where('lcsm.user_type = ?')
+            ->setParameter(0, $module, ParameterType::INTEGER)
+            ->setParameter(1, APP__USER_TYPE_STUDENT, ParameterType::STRING);
+
+        return $queryBuilder->execute()->fetchAllAssociative();
+    }
 
     /**
      * Get total number of students on one or more modules
      *
-     * @param integer $module module to count students for
-     * @return integer
+     * @param int $moduleId module to count students for
+     *
+     * @return int
      */
-    function get_module_students_count($module)
+    public function get_module_students_count($moduleId)
     {
-        $sql = "SELECT COUNT(DISTINCT u.user_id)
-        FROM " . APP__DB_TABLE_PREFIX . "user u
-            INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-        WHERE um.module_id = $module
-          AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'";
-        return $this->_DAO->fetch_value($sql);
-    }// /->get_module_students_count
+        $studentsCountQuery =
+            'SELECT COUNT(DISTINCT u.user_id) AS user_count ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON u.user_id = um.user_id ' .
+            'WHERE um.module_id = ? ' .
+            'AND um.user_type = ?';
 
-    /**
-     * Get an array of student IDs for students on the given modules
-     * @param array $modules modules to count students for
-     * @return array
-     */
-    function get_module_students_id($modules)
-    {
-        if (!empty($modules)) {
-            $module_set = $this->_DAO->build_set((array)$modules, false);
-            return $this->_DAO->fetch_col("SELECT DISTINCT u.id_number AS staff_id
-                      FROM " . APP__DB_TABLE_PREFIX . "user u
-                      INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-                      WHERE um.module_id IN $module_set
-                        AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'
-                      ORDER BY u.user_id ASC");
-        }
-    }// /->get_module_students_id()
+        return $this->dbConn->fetchOne($studentsCountQuery, [$moduleId, APP__USER_TYPE_STUDENT], [ParameterType::INTEGER, ParameterType::STRING]);
+    }
 
     /**
      * Get an array of user IDs for students on the given modules (user_id = 'student_{studentID}'
+     *
      * @param array $modules modules to count students for
-     * @return array
+     *
+     * @return array|void
      */
-    function get_module_students_user_id($modules)
+    public function get_module_students_user_id($modules)
     {
-        if (!empty($modules)) {
-            $module_set = $this->_DAO->build_set((array)$modules, false);
-            $sql = "SELECT DISTINCT u.user_id
-          FROM " . APP__DB_TABLE_PREFIX . "user u
-            INNER JOIN " . APP__DB_TABLE_PREFIX . "user_module um ON u.user_id = um.user_id
-          WHERE um.module_id IN $module_set
-            AND um.user_type = '" . APP__USER_TYPE_STUDENT . "'
-          ORDER BY u.user_id ASC
-          ";
-            return $this->_DAO->fetch_col($sql);
+        if (empty($modules)) {
+            return;
         }
-    }// /->get_module_students_user_id()
+
+        $sql =
+            'SELECT DISTINCT u.user_id ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'user u ' .
+            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON u.user_id = um.user_id ' .
+            'WHERE um.module_id IN (?) ' .
+            'AND um.user_type = ? ' .
+            'ORDER BY u.user_id ASC';
+
+        return $this->dbConn->fetchFirstColumn($sql, [$modules, APP__USER_TYPE_STUDENT], [$this->dbConn::PARAM_STR_ARRAY, ParameterType::STRING]);
+    }
 
     /**
      * Get number of students on individual multiple modules, grouped by module
@@ -194,62 +235,29 @@ class EngCIS
      * @param array $modules modules to count students for
      * @return array
      */
-    function get_module_grouped_students_count($modules)
+    public function get_module_grouped_students_count($modules)
     {
-        $module_search = $this->_DAO->build_filter('module_id', (array)$modules, 'OR');
+        $queryBuilder = $this->_DAO->getConnection()->createQueryBuilder();
 
-        return $this->_DAO->fetch_assoc("SELECT module_id, COUNT(user_id)
-                    FROM " . APP__DB_TABLE_PREFIX . "user_module lcsm
-                    WHERE $module_search
-                    GROUP BY module_id
-                    ORDER BY module_id");
-    }// ->get_modules_grouped_students_count()
+        $queryBuilder
+            ->select('module_id', 'COUNT(user_id')
+            ->from(APP__DB_TABLE_PREFIX . 'user_module', 'lcsm')
+            ->where(
+                $queryBuilder->expr()->in('module_id', '?')
+            )
+            ->groupBy('module_id')
+            ->orderBy('module_id');
+
+        $queryBuilder->setParameter(0, $modules, $this->_DAO->getConnection()::PARAM_INT_ARRAY);
+
+        return $queryBuilder->execute()->fetchAllKeyValue();
+    }
 
     /*
     * --------------------------------------------------------------------------------
     * Staff Methods
     * --------------------------------------------------------------------------------
     */
-
-    /**
-     * Get staff info
-     * Can work with either staff_id or staff_username alone (staff_id takes precedent)
-     *
-     * @param string/array $staff_id  staff ID(s) to search for (use NULL if searching on username)
-     * @param string/array $staff_username  staff username(s) to search for
-     * @param string $ordering ordering mode
-     *
-     * @return array either an assoc-array of staff member info or an array of assoc-arrays, containting many staff members' info
-     */
-    function get_staff($staff_id, $staff_username = null, $ordering = 'name')
-    {
-        if ($staff_id) {
-            $staff_set = $this->_DAO->build_set($staff_id, false);
-            $sql_WHERE = "user_id IN $staff_set ";
-        } else {
-            if ($staff_username) {
-                $staff_set = $this->_DAO->build_set($staff_username);
-                $sql_WHERE = "username IN $staff_set ";
-            } else {
-                return null;
-            }
-        }
-
-        $order_by_clause = $this->_order_by_clause('staff', $ordering);
-
-        // If there's more than one staff member to search for, get all the rows
-        if ((is_array($staff_id)) || (is_array($staff_username))) {
-            return $this->_DAO->fetch("SELECT lcs.*
-                    FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                    WHERE $sql_WHERE
-                    $order_by_clause");
-        } else {  // else, just return one row
-            return $this->_DAO->fetch_row("SELECT lcs.*
-                      FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                      WHERE $sql_WHERE
-                      LIMIT 1");
-        }
-    }// /->get_staff()
 
     /**
      * Get array of modules for the given staff member(s)
@@ -261,12 +269,12 @@ class EngCIS
      *
      * @return array  an array of assoc-arrays, containting many module info
      */
-    function get_staff_modules($staff_id, $staff_username = null, $ordering = 'id')
+    public function get_staff_modules($staff_id, $staff_username = null, $ordering = 'id')
     {
-
         return $this->get_user_modules($staff_id, $staff_username, $ordering);
+    }
 
-    }// /->get_staff_modules
+    // /->get_staff_modules
 
     /**
      * Is the given staff member associated with the given modules?
@@ -275,65 +283,27 @@ class EngCIS
      * @param string/array $module_id  either a single module_id, or an array of module_ids
      * @return integer
      */
-    function staff_has_module($staff_id, $module_id)
+    public function staff_has_module($staff_id, $module_id)
     {
-        $module_id = (array)$module_id;
+        $module_id = (array) $module_id;
         $staff_modules = $this->get_staff_modules($staff_id);
         if (!$staff_modules) {
             return false;
-        } else {
-            $arr_module_id = ArrayFunctions::array_extract_column($staff_modules, 'module_id');
-            $diff = array_diff($module_id, $arr_module_id);
-
-            // If the array is empty, then the staff member has those modules
-            return (count(array_diff($module_id, $arr_module_id)) === 0);
         }
-    }// /->staff_has_module()
+        $arr_module_id = ArrayFunctions::array_extract_column($staff_modules, 'module_id');
+        $diff = array_diff($module_id, $arr_module_id);
+
+        // If the array is empty, then the staff member has those modules
+        return count(array_diff($module_id, $arr_module_id)) === 0;
+    }
+
+    // /->staff_has_module()
 
     /*
     * --------------------------------------------------------------------------------
     * Student Methods
     * --------------------------------------------------------------------------------
     */
-
-    /**
-     * Get student info
-     * Can work with either student_id or student_username alone (student_id takes precedent)
-     *
-     * @param string/array $student_id  student ID(s) to search for (use NULL if searching on username)
-     * @param string/array $student_username  student
-     * @param string $ordering ordering mode
-     *
-     * @returns  array either an assoc-array of student info or an array of assoc-arrays, containting many students info
-     */
-    function get_student($student_id = null, $student_username = null, $ordering = 'name')
-    {
-        if ($student_id) {
-            $student_set = $this->_DAO->build_set($student_id, false);
-            $sql_WHERE = "user_id IN $student_set ";
-        } else {
-            if ($student_username) {
-                $student_set = $this->_DAO->build_set($student_username);
-                $sql_WHERE = "username IN $student_set ";
-            } else {
-                return null;
-            }
-        }
-
-        // If there's more than one student to search for, get all the rows
-        if ((is_array($student_id)) || (is_array($student_username))) {
-            $order_by_clause = $this->_order_by_clause('student', $ordering);
-            return $this->_DAO->fetch("SELECT lcs.*
-                    FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                    WHERE $sql_WHERE
-                    $order_by_clause");
-        } else {  // else, just return one row
-            return $this->_DAO->fetch_row("SELECT lcs.*
-                      FROM " . APP__DB_TABLE_PREFIX . "user lcs
-                      WHERE $sql_WHERE
-                      LIMIT 1");
-        }
-    }// /->get_student()
 
     /**
      * Get array of modules for the given student(s)
@@ -345,12 +315,12 @@ class EngCIS
      *
      * @return array an array of module info arrays
      */
-    function get_student_modules($student_id, $student_username = null, $ordering = 'id')
+    public function get_student_modules($student_id, $student_username = null, $ordering = 'id')
     {
-
         return $this->get_user_modules($student_id, $student_username, $ordering);
+    }
 
-    }// /->get_student_modules()
+    // /->get_student_modules()
 
     /*
     * --------------------------------------------------------------------------------
@@ -366,34 +336,38 @@ class EngCIS
      *
      * @return object
      */
-    function get_user($user_id, $ordering = 'name')
+    public function get_user($user_id, $ordering = 'name')
     {
-        $user_set = $this->_DAO->build_set($user_id, false);
+        $queryBuilder = $this->dbConn->createQueryBuilder();
 
         if (is_array($user_id)) {
-            $order_by_clause = $this->_order_by_clause('user', $ordering);
+            if ($ordering === 'id') {
+                $queryBuilder->orderBy('u.user_id');
+            } else {
+                $queryBuilder->orderBy('u.lastname');
+                $queryBuilder->addOrderBy('u.forename');
+            }
 
-            $sql = "SELECT u.*, um.user_type
-              FROM " . APP__DB_TABLE_PREFIX . "user u
-              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
-              ON u.user_id = um.user_id
-              WHERE (u.user_id IN {$user_set})
-              AND (um.module_id = {$this->moduleId})
-              $order_by_clause";
+            $queryBuilder
+                ->select('u.*', 'um.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'user', 'u')
+                ->leftJoin('u', APP__DB_TABLE_PREFIX . 'user_module', 'um', 'u.user_id = um.user_id')
+                ->where('u.user_id IN (?)')
+                ->andWhere('um.module_id = ?')
+                ->setParameter(0, $user_id, $this->dbConn::PARAM_INT_ARRAY)
+                ->setParameter(1, $this->moduleId, ParameterType::INTEGER);
 
-            return $this->_DAO->fetch($sql);
-        } else {
-            $sql = "SELECT u.*, um.user_type
-              FROM " . APP__DB_TABLE_PREFIX . "user u
-              LEFT OUTER JOIN " . APP__DB_TABLE_PREFIX . "user_module um
-              ON u.user_id = um.user_id
-              WHERE (u.user_id IN {$user_set})
-              AND (um.module_id = {$this->moduleId} OR u.admin = 1)
-              LIMIT 1";
-
-            return $this->_DAO->fetch_row($sql);
+            return $queryBuilder->execute()->fetchAllAssociative();
         }
-    }// /->get_user()
+        $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+                   . 'LEFT OUTER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um '
+                   . 'ON u.user_id = um.user_id '
+                   . 'WHERE u.user_id = ? '
+                   . 'AND (um.module_id = ? OR u.admin = 1) '
+                   . 'LIMIT 1';
+
+        return $this->dbConn->fetchAssociative($query, [$user_id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
+    }
 
     /**
      * Get a user's info by searching on email address
@@ -402,13 +376,12 @@ class EngCIS
      *
      * Returns : an assoc-array of user info
      */
-    function get_user_for_email($email)
+    public function get_user_for_email($email)
     {
-        return $this->_DAO->fetch_row("SELECT scu.*
-                     FROM " . APP__DB_TABLE_PREFIX . "user scu
-                     WHERE email = '$email'
-                     LIMIT 1");
-    }// /->get_user_for_email()
+        $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE email = ? LIMIT 1';
+
+        return $this->dbConn->fetchAssociative($query, [$email], [ParameterType::STRING]);
+    }
 
     /**
      * Get a user's info by searching on username
@@ -417,24 +390,25 @@ class EngCIS
      *
      * Returns : an assoc-array of user info
      */
-    function get_user_for_username($username, $source_id = NULL)
+    public function get_user_for_username($username, $source_id = null)
     {
-
         if (is_null($source_id) && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } else if (is_null($source_id)) {
+        } elseif (is_null($source_id)) {
             $source_id = '';
         }
         $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
-        $sql = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u LEFT OUTER JOIN ' .
-            '  (SELECT * FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$this->moduleId}) um " .
-            '  ON u.user_id = um.user_id ' .
-            "WHERE username = '{$username}' AND source_id = '{$source_id}'";
+        $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+               . 'LEFT OUTER JOIN ( '
+               . 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? '
+               . ') um '
+               . 'ON u.user_id = um.user_id '
+               . 'WHERE username = ? '
+               . 'AND source_id = ?';
 
-        return $this->_DAO->fetch_row($sql);
-
-    }// /->get_user_for_username()
+        return $this->dbConn->fetchAssociative($query, [$this->moduleId, $username, $source_id], [ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]);
+    }
 
     /**
      * Get array of modules for the given user(s)
@@ -446,41 +420,67 @@ class EngCIS
      *
      * @return array an array of module info arrays
      */
-    function get_user_modules($user_id, $username = NULL, $ordering = 'id', $source_id = NULL)
+    public function get_user_modules($user_id, $username = null, $ordering = 'id', $source_id = null)
     {
+        $dbConn = $this->_DAO->getConnection();
+        $queryBuilder = $dbConn->createQueryBuilder();
 
         if (is_null($source_id) && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } else if (is_null($source_id)) {
+        } elseif (is_null($source_id)) {
             $source_id = '';
         }
 
-        $order_by_clause = $this->_order_by_clause('module', $ordering);
+        $queryBuilder->orderBy($ordering === 'name' ? 'lcm.module_title' : 'lcm.module_id');
 
         if ($user_id) {
-            $user_set = $this->_DAO->build_set($user_id, false);
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
-                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
-                "WHERE ((lcm.source_id = '{$source_id}') OR (u.source_id <> '')) AND (lcsm.user_id IN {$user_set}) " .
-                "{$order_by_clause}";
-        } else if ($username) {
-            $user_set = $this->_DAO->build_set($username);
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, lcsm.user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module lcsm ON lcm.module_id = lcsm.module_id ' .
-                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user u ON lcsm.user_id = u.user_id ' .
-                "WHERE (u.source_id = '{$source_id}') AND (u.username IN {$user_set}) " .
-                "{$order_by_clause}";
+            if (!is_array($user_id)) {
+                $user_id = [$user_id];
+            }
+
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module', 'lcm')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->innerJoin('lcsm', APP__DB_TABLE_PREFIX . 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->where(
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->or(
+                            $queryBuilder->expr()->eq('lcm.source_id', '?'),
+                            $queryBuilder->expr()->neq('u.source_id', '""')
+                        ),
+                        $queryBuilder->expr()->in('lcsm.user_id', '?')
+                    )
+                );
+
+            $queryBuilder->setParameter(0, $source_id, ParameterType::STRING);
+            $queryBuilder->setParameter(1, $user_id, $dbConn::PARAM_INT_ARRAY);
+        } elseif ($username) {
+            if (!is_array($username)) {
+                $username = [$username];
+            }
+
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', 'lcsm.user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->innerJoin('lcm', APP__DB_TABLE_PREFIX . 'user_module', 'lcsm', 'lcm.module_id = lcsm.module_id')
+                ->innerJoin('lcsm', APP__DB_TABLE_PREFIX . 'user', 'u', 'lcsm.user_id = u.user_id')
+                ->where('u.source_id = ?')
+                ->andWhere('u.username IN (?)');
+
+            $queryBuilder->setParameter(0, $source_id);
+            $queryBuilder->setParameter(1, $username, $dbConn::PARAM_INT_ARRAY);
         } else {
-            $sql = 'SELECT lcm.module_id, lcm.module_title, lcm.module_code, \'' . APP__USER_TYPE_ADMIN . '\' user_type ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'module lcm ' .
-                "WHERE (lcm.source_id = '{$source_id}') " .
-                "{$order_by_clause}";
+            $queryBuilder
+                ->select('lcm.module_id', 'lcm.module_title', 'lcm.module_code', '"' . APP__USER_TYPE_ADMIN . '" as user_type')
+                ->from(APP__DB_TABLE_PREFIX . 'module lcm')
+                ->where('lcm.source_id = ?');
+
+            $queryBuilder->setParameter(0, $source_id);
         }
 
-        return $this->_DAO->fetch_assoc($sql);
-
-    }// /->get_user_modules
+        return $queryBuilder->execute()->fetchAllAssociativeIndexed();
+    }
 
     /*
     * ================================================================================
@@ -488,60 +488,23 @@ class EngCIS
     * ================================================================================
     */
 
-    /**
-     * Return an ORDER BY clause matching the given parameters
-     *
-     * @param string $row_type type of row being ordered. ['course','module','staff','student']
-     * @param string $ordering type of ordering to do. ['id','name']
-     *
-     * @return string  SQL ORDER BY clause of the form 'ORDER BY fieldname' or NULL if row_type/ordering are invalid
-     */
-    function _order_by_clause($row_type, $ordering = null)
-    {
-        if (!is_array($this->_ordering_types)) {
-            // All available ordering types
-            $this->_ordering_types = array(
-                'module' => array(
-                    'id' => 'lcm.module_id',
-                    'name' => 'lcm.module_title',
-                ),
-                'staff' => array(
-                    'id' => 'lcs.user_id',
-                    'name' => 'lcs.lastname, lcs.forename',
-                ),
-                'student' => array(
-                    'id' => 'lcs.user_id',
-                    'name' => 'lcs.lastname, lcs.forename',
-                ),
-                'user' => array(
-                    'id' => 'u.user_id',
-                    'name' => 'u.lastname, u.forename',
-                ),
-            );
-        }
-
-        if ((array_key_exists($row_type, $this->_ordering_types)) && (array_key_exists($ordering, $this->_ordering_types["$row_type"]))) {
-            return 'ORDER BY ' . $this->_ordering_types["$row_type"]["$ordering"];
-        } else {
-            return null;
-        }
-    }// /->_order_by_clause()
-
-    function get_user_academic_years($user_id = null)
+    public function get_user_academic_years($user_id = null)
     {
         if (!empty($user_id)) {
-            $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
+            $query = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
                 'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
                 'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$this->sourceId}' AND m.module_id = '{$this->moduleId}'";
-        } else {
-            $sql = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
-                'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
-                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$this->sourceId}'";
-        }
+                'WHERE m.source_id = ? AND m.module_id = ?';
 
-        $dates = $this->_DAO->fetch_row($sql);
+            $dates = $this->dbConn->fetchAssociative($query, [$this->sourceId, $this->moduleId], [ParameterType::STRING, ParameterType::INTEGER]);
+        } else {
+            $query = 'SELECT MIN(a.open_date) first, MAX(a.open_date) last ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ON a.module_id = m.module_id ' .
+                'WHERE m.source_id = ?';
+
+            $dates = $this->dbConn->fetchAssociative($query, [$this->sourceId], [ParameterType::STRING]);
+        }
 
         // Ensure that the first record contains some dates as we could return a null record
         if (!empty($dates['first'])) {
@@ -554,7 +517,4 @@ class EngCIS
 
         return $years;
     }
-
-}// /class: EngCIS
-
-?>
+}

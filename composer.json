@@ -24,10 +24,12 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "ext-xml": "*",
         "ext-session": "*",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+        "doctrine/dbal": "^3.0",
+        "vlucas/phpdotenv": "^5.3"
     },
     "support": {
         "email": "andrew@noexceptions.io",
@@ -39,6 +41,8 @@
         "psr-4": {"WebPA\\": "src/"}
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.25"
+        "phpstan/phpstan": "^0.12.25",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "squizlabs/php_codesniffer": "^3.5"
     }
 }

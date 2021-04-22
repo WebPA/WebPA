@@ -10,7 +10,7 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../includes/inc_global.php");
+require_once '../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
@@ -26,8 +26,8 @@ $contact_type = Common::fetch_GET('q');
 $UI->page_title = APP__NAME . ' Contact';
 $UI->menu_selected = 'contact';
 $UI->help_link = '?q=node/379#intool';
-$UI->breadcrumbs = array	('home'		=> '../' ,
-							 'contact'	=> null ,);
+$UI->breadcrumbs = ['home'		=> '../',
+                             'contact'	=> null, ];
 
 
 $UI->head();
@@ -53,21 +53,21 @@ $UI->content_start();
 		<p>Please supply as much information with your message as possible (especially when sending a bug report!), this will allow us to respond to your message much faster!</p>
 
 		<form action="contact_send.php" method="post" name="contact_form">
-		<input type="hidden" name="contact_app" value="<?php echo($_config['app_id']); ?>" />
+		<input type="hidden" name="contact_app" value="<?php echo $_config['app_id']; ?>" />
 
 		<div class="form_section">
 			<table class="form" cellpadding="2" cellspacing="2">
 			<tr>
 				<td><label for="contact_name">Your Name</label></td>
-				<td><input type="text" name="contact_name" id="contact_name" maxlength="60" size="50" value="<?php echo("{$_user->forename} {$_user->lastname}"); ?>" /></td>
+				<td><input type="text" name="contact_name" id="contact_name" maxlength="60" size="50" value="<?php echo "{$_user->forename} {$_user->lastname}"; ?>" /></td>
 			</tr>
 			<tr>
 				<td><label for="contact_username">Your Username</label></td>
-				<td><input type="text" name="contact_username" id="contact_username" maxlength="15" size="10" value="<?php echo($_user->username); ?>" /></td>
+				<td><input type="text" name="contact_username" id="contact_username" maxlength="15" size="10" value="<?php echo $_user->username; ?>" /></td>
 			</tr>
 			<tr>
 				<td><label for="contact_email">Your Email</label></td>
-				<td><input type="text" name="contact_email" id="contact_email" maxlength="255" size="50" value="<?php echo($_user->email); ?>" /></td>
+				<td><input type="text" name="contact_email" id="contact_email" maxlength="255" size="50" value="<?php echo $_user->email; ?>" /></td>
 			</tr>
 			<tr>
 				<td><label for="contact_phone">Your Phone Number</label></td>
@@ -79,14 +79,14 @@ $UI->content_start();
 				<td>
 					<select name="contact_type" id="contact_type">
 						<?php
-							$contact_types = array	('help'		=> 'Request for help!' ,
-													 'info'		=> 'Information request' ,
-													 'bug'		=> 'Bug / Error report' ,
-													 'wish'		=> 'Suggestion / Wish List' ,
-													 'misc'		=> 'Other type of message' ,);
+                            $contact_types = ['help'		=> 'Request for help!',
+                                                     'info'		=> 'Information request',
+                                                     'bug'		=> 'Bug / Error report',
+                                                     'wish'		=> 'Suggestion / Wish List',
+                                                     'misc'		=> 'Other type of message', ];
 
-							Form::render_options($contact_types, $contact_type);
-						?>
+                            Form::render_options($contact_types, $contact_type);
+                        ?>
 					</select>
 				</td>
 			</tr>

@@ -8,21 +8,23 @@
  * @link https://github.com/webpa/webpa
  */
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
     private $moduleId;
+
     private $user;
+
     private $sourceId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -35,9 +37,11 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Next &gt;';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
 
-    function head()
+    // /WizardStep1()
+
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -49,33 +53,49 @@ class WizardStep1
           //-->
         </script>
         <?php
-    }// /->head()
+    }
 
-    function form()
+    // /->head()
+
+    public function form()
     {
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
 
         $form_id = $this->wizard->get_field('form_id');
 
+        $forms = [];
+
         if (!$this->user->is_admin()) {
-            $sql = 'SELECT f.*, m.module_id, m.module_title FROM ' . APP__DB_TABLE_PREFIX .
-                'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                "user_module um ON fm.module_id = um.module_id INNER JOIN " . APP__DB_TABLE_PREFIX .
-                'module m ON um.module_id = m.module_id ' .
-                "WHERE um.user_id = {$user->id} ORDER BY f.form_name ASC";
+            $sql =
+                'SELECT f.*, m.module_id, m.module_title ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+                'ON f.form_id = fm.form_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+                'ON fm.module_id = um.module_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
+                'ON um.module_id = m.module_id ' .
+                'WHERE um.user_id = ? ' .
+                'ORDER BY f.form_name ASC';
+
+            $forms = $DB->getConnection()->fetchAllAssociative($sql, [$user->id], [ParameterType::INTEGER]);
         } else {
-            $sql = 'SELECT f.*, m.module_id, m.module_title FROM ' . APP__DB_TABLE_PREFIX .
-                'form f INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'form_module fm ON f.form_id = fm.form_id INNER JOIN ' . APP__DB_TABLE_PREFIX .
-                'module m ON fm.module_id = m.module_id ' .
-                "WHERE m.source_id = '{$this->sourceId}' ORDER BY f.form_name ASC";
+            $sql =
+                'SELECT f.*, m.module_id, m.module_title ' .
+                'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+                'ON f.form_id = fm.form_id ' .
+                'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
+                'ON fm.module_id = m.module_id ' .
+                'WHERE m.source_id = ? ' .
+                'ORDER BY f.form_name ASC';
+
+            $forms = $DB->getConnection()->fetchAllAssociative($sql, [$this->sourceId], [ParameterType::STRING]);
         }
-        $forms = $DB->fetch($sql);
+
         if (!$forms) {
-            $this->wizard->next_button = null;
-            ?>
+            $this->wizard->next_button = null; ?>
             <p>You have not created any forms yet, so you cannot select one to clone.</p>
             <p>Please <a href="../create/">create a new form</a> instead.</p>
             <?php
@@ -91,27 +111,26 @@ class WizardStep1
 
                     foreach ($forms as $i => $form) {
                         $checked_str = ($form['form_id'] == $form_id) ? ' checked="checked"' : '';
-                        $title_str = ($form['module_id'] == $this->moduleId) ? '' : " [{$form['module_title']}]";
-
-                        ?>
+                        $title_str = ($form['module_id'] == $this->moduleId) ? '' : " [{$form['module_title']}]"; ?>
                         <tr>
-                            <td><input type="radio" name="form_id" id="form_id_<?php echo($form['form_id']); ?>"
-                                       value="<?php echo($form['form_id']); ?>"<?php echo($checked_str); ?>/></td>
+                            <td><input type="radio" name="form_id" id="form_id_<?php echo $form['form_id']; ?>"
+                                       value="<?php echo $form['form_id']; ?>"<?php echo $checked_str; ?>/></td>
                             <th style="text-align: left"><label class="small"
-                                                                for="form_id_<?php echo($form['form_id']); ?>"><?php echo("{$form['form_name']}{$title_str}"); ?></label>
+                                                                for="form_id_<?php echo $form['form_id']; ?>"><?php echo "{$form['form_name']}{$title_str}"; ?></label>
                             </th>
                         </tr>
                         <?php
-                    }
-                    ?>
+                    } ?>
                 </table>
             </div>
 
             <?php
         }
-    }// /->form()
+    }
 
-    function process_form()
+    // /->form()
+
+    public function process_form()
     {
         $errors = null;
 
@@ -121,8 +140,9 @@ class WizardStep1
         }
 
         return $errors;
-    }// /->process_form()
+    }
 
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

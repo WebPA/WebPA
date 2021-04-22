@@ -13,8 +13,6 @@
 
 namespace WebPA\tutors\assessments\email;
 
-require_once("../../../includes/inc_global.php");
-
 use WebPA\includes\classes\Email;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\GroupHandler;
@@ -23,7 +21,7 @@ use WebPA\includes\functions\Common;
 
 trait AssessmentNotificationTrait
 {
-    /***************************************************************
+    /*
      * Function mail_assessment_notification
      *
      * Sends an email to the complete collection when called
@@ -35,7 +33,8 @@ trait AssessmentNotificationTrait
      * @param string $body_content Body content of the email to be sent
      * @return mixed Either a true if successful or an error message is failed
      */
-    function mail_assessment_notification ($collectionId, $subjectLn, $body_content, $_user_id){
+    public function mail_assessment_notification($collectionId, $subjectLn, $body_content, $_user_id)
+    {
         //get the collection to whom the email is to be sent
         $group_handler = new GroupHandler();
         $collection = $group_handler->clone_collection($collectionId);
@@ -49,7 +48,7 @@ trait AssessmentNotificationTrait
         $bcc_list = null;
 
         $sourceId = Common::fetch_SESSION('_source_id', '');
-        $moduleId = Common::fetch_SESSION('_module_id', NULL);
+        $moduleId = Common::fetch_SESSION('_module_id', null);
 
         $CISa = new EngCIS($sourceId, $moduleId);
 
@@ -60,7 +59,6 @@ trait AssessmentNotificationTrait
             //get the current userID
             $this_user = $CISa->get_user($_user_id);
             $bcc_list[] = $this_user['email'];
-
         } else {
             $errors[] = 'Unable to build email list - no students to email.';
             return $errors;
@@ -83,5 +81,3 @@ trait AssessmentNotificationTrait
         return true;
     }
 }
-
-

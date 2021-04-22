@@ -12,22 +12,23 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../includes/inc_global.php");
+require_once '../../includes/inc_global.php';
 
+use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
 
 $year = Common::fetch_GET('y');
-$tab = Common::fetch_GET('tab','open');
+$tab = Common::fetch_GET('tab', 'open');
 
 $assessment_id = Common::fetch_GET('a');
 
@@ -39,32 +40,47 @@ $list_url = "index.php?tab={$tab}&y={$year}";
 
 //check the content of 'u'/ $user_id if a user ID is present then we delete this before proceeding
 if (!empty($user_id)) {
-  //we have posted the delete responses for the assessment to this form so now we need to delete the
-  //information before carrying on to output the form.
+    //we have posted the delete responses for the assessment to this form so now we need to delete the
+    //information before carrying on to output the form.
+    $dbConn = $DB->getConnection();
 
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_mark WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_justification WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
-  $DB->execute("DELETE FROM " . APP__DB_TABLE_PREFIX . "user_response WHERE user_id = {$user_id} and assessment_id = '{$assessment_id}'");
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_mark WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
 
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
+
+    $dbConn->executeQuery(
+        'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE user_id = ? AND assessment_id = ?',
+        [$user_id, $assessment_id],
+        [ParameterType::INTEGER, ParameterType::STRING]
+    );
 }
 
 $assessment = new Assessment($DB);
+
 if ($assessment->load($assessment_id)) {
-  $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
 
-  $group_handler = new GroupHandler();
-  $collection = $group_handler->get_collection($assessment->get_collection_id());
+    $group_handler = new GroupHandler();
+    $collection = $group_handler->get_collection($assessment->get_collection_id());
 
-  $groups_iterator = $collection->get_groups_iterator();
+    $groups_iterator = $collection->get_groups_iterator();
 
-  $result_handler = new ResultHandler($DB);
-  $result_handler->set_assessment($assessment);
+    $result_handler = new ResultHandler($DB);
+    $result_handler->set_assessment($assessment);
 
-  $responded_users = $result_handler->get_responded_users();
+    $responded_users = $result_handler->get_responded_users();
 
-  $members = $collection->get_members();
+    $members = $collection->get_members();
 } else {
-  $assessment = null;
+    $assessment = null;
 }
 
 // --------------------------------------------------------------------------------
@@ -73,9 +89,9 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' . 'students who responded';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  ('home'           => '/' ,
-               'my assessments'     => $list_url ,
-               'students who responded' => null ,);
+$UI->breadcrumbs = ['home'           => '/',
+               'my assessments'     => $list_url,
+               'students who responded' => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -100,7 +116,7 @@ $UI->content_start();
 <div class="content_box">
 
   <div class="nav_button_bar">
-    <a href="<?php echo($list_url) ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
+    <a href="<?php echo $list_url ?>"><img src="../../images/buttons/arrow_green_left.gif" alt="back -"> back to assessments list</a>
   </div>
 
   <p>The following list shows which students in each group have submitted their responses to the assessment.</p>
@@ -108,16 +124,16 @@ $UI->content_start();
   <p>To delete the entries provided by a student click on the <img src="../../images/icons/cancel.png" width="16" height="16" alt="Delete submission" /> image (if not greyed out).</p>
 <?php
   if ($groups_iterator->size()>0) {
-    for($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-      $group =& $groups_iterator->current();
+      for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
+          $group =& $groups_iterator->current();
 
-      $members = $CIS->get_user($group->get_member_ids());
-      echo("<h2>{$group->name}</h2>");
+          $members = $CIS->get_user($group->get_member_ids());
+          echo "<h2>{$group->name}</h2>";
 
-      if (!$members) {
-        echo('<p>This group has no members.</p>');
-      } else {
-        ?>
+          if (!$members) {
+              echo '<p>This group has no members.</p>';
+          } else {
+              ?>
         <table class="grid" cellspacing="1" cellpadding="2" style="width: 90%">
         <tr>
           <th>name</th>
@@ -125,27 +141,26 @@ $UI->content_start();
           <th>delete submission</th>
         </tr>
         <?php
-        foreach($members as $i => $member) {
-          $flgResponse = false;
-          if (in_array($member['user_id'], (array)$responded_users)) {
-            $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
-            $responded_class = 'class="responded"';
-            $allowDelete = "<a href=\"delete_marks.php?a={$assessment_id}&tab={$tab}&y={$year}&u={$member['user_id']}\" ><img src=\"../../images/icons/cancel.png\" width=\"16\" height=\"16\" alt=\"Delete submission\" /></a>";
-          } else {
-            $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
-            $responded_class = 'class="notresponded"';
-            $allowDelete = "<img src=\"../../images/icons/cancel_greyed.png\" width=\"16\" height=\"16\" alt=\"Delete submission\" />";
-          }
-          echo("<tr $responded_class><td>{$member['lastname']}, {$member['forename']}");
-          if (!empty($member['id_number'])) {
-            echo(" ({$member['id_number']})");
-          }
-          echo("</td><td align=\"center\">$responded_img</td><td>{$allowDelete}</td></tr>");
-
+        foreach ($members as $i => $member) {
+            $flgResponse = false;
+            if (in_array($member['user_id'], (array) $responded_users)) {
+                $responded_img = '<img src="../../images/icons/tick.gif" width="16" height="16" alt="Responded" />';
+                $responded_class = 'class="responded"';
+                $allowDelete = "<a href=\"delete_marks.php?a={$assessment_id}&tab={$tab}&y={$year}&u={$member['user_id']}\" ><img src=\"../../images/icons/cancel.png\" width=\"16\" height=\"16\" alt=\"Delete submission\" /></a>";
+            } else {
+                $responded_img = '<img src="../../images/icons/cross.gif" width="16" height="16" alt="Not Responded"/>';
+                $responded_class = 'class="notresponded"';
+                $allowDelete = '<img src="../../images/icons/cancel_greyed.png" width="16" height="16" alt="Delete submission" />';
+            }
+            echo "<tr $responded_class><td>{$member['lastname']}, {$member['forename']}";
+            if (!empty($member['id_number'])) {
+                echo " ({$member['id_number']})";
+            }
+            echo "</td><td align=\"center\">$responded_img</td><td>{$allowDelete}</td></tr>";
         }
-        echo('</table><br />');
-      }// /if
-    }// /for
+              echo '</table><br />';
+          }// /if
+      }// /for
   }
 ?>
 

@@ -8,15 +8,15 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\FormRenderer;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
@@ -26,9 +26,9 @@ $form_id = Common::fetch_GET('f');
 
 $intro_text = Common::fetch_GET('i', null);
 if ($intro_text) {
-  $intro_text = base64_decode($intro_text);
+    $intro_text = base64_decode($intro_text);
 } else {
-  $intro_text = '<< Your introduction text will go in here >>';
+    $intro_text = '<< Your introduction text will go in here >>';
 }
 
 $form = new Form($DB);
@@ -38,13 +38,13 @@ $form_renderer = new FormRenderer();
 
 $form_renderer->set_form($form);
 
-$people = array (
-  'fake1' => '<em>Yourself</em>' ,
-  'fake2' => 'Alice' ,
-  'fake3' => 'Bob' ,
-  'fake4' => 'Claire' ,
-  'fake5' => 'David' ,
-);
+$people = [
+  'fake1' => '<em>Yourself</em>',
+  'fake2' => 'Alice',
+  'fake3' => 'Bob',
+  'fake4' => 'Claire',
+  'fake5' => 'David',
+];
 
 $form_renderer->set_participants($people);
 
@@ -96,10 +96,10 @@ $UI->content_start();
 
 <?php
 if (!empty($intro_text)) {
-  ?>
+    ?>
   <h3>Introduction</h3>
   <div class="form_section">
-    <p class="introduction"><?php echo(nl2br(htmlentities($intro_text))); ?></p>
+    <p class="introduction"><?php echo nl2br(htmlentities($intro_text)); ?></p>
   </div>
   <?php
 }

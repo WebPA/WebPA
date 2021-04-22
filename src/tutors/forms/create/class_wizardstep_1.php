@@ -14,13 +14,12 @@ use WebPA\includes\functions\Common;
 class WizardStep1
 {
     public $wizard;
+
     public $step = 1;
 
     private $moduleId;
 
-    /*
-    * CONSTRUCTOR
-    */
+    // CONSTRUCTOR
     public function __construct(Wizard $wizard)
     {
         $this->wizard = $wizard;
@@ -30,9 +29,11 @@ class WizardStep1
         $this->wizard->back_button = null;
         $this->wizard->next_button = 'Finish';
         $this->wizard->cancel_button = 'Cancel';
-    }// /WizardStep1()
+    }
 
-    function head()
+    // /WizardStep1()
+
+    public function head()
     {
         ?>
         <script language="JavaScript" type="text/javascript">
@@ -45,9 +46,11 @@ class WizardStep1
           //-->
         </script>
         <?php
-    }// /->head()
+    }
 
-    function form()
+    // /->head()
+
+    public function form()
     {
         ?>
         <p>To create a new form you just need to give it a name. To avoid confusion, the name should be unique, but you
@@ -59,7 +62,7 @@ class WizardStep1
             <tr>
                 <th><label for="form_name">Name for this new form</label></th>
                 <td><input type="text" name="form_name" id="form_name" maxlength="100" size="40"
-                           value="<?php echo($this->wizard->get_field('form_name')); ?>"/></td>
+                           value="<?php echo $this->wizard->get_field('form_name'); ?>"/></td>
             </tr>
         </table>
 
@@ -69,12 +72,11 @@ class WizardStep1
         <label>What type scoring will your criteria use?</label>
         <p>WebPA offers two different ways that your students can score each other.</p>
         <?php
-        $form_type = $this->wizard->get_field('form_type', 'likert');
-        ?>
+        $form_type = $this->wizard->get_field('form_type', 'likert'); ?>
         <table>
             <tr>
                 <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_likert"
-                                                        value="likert" <?php echo((($form_type == 'likert') ? 'checked="checked"' : '')); ?> />
+                                                        value="likert" <?php echo ($form_type == 'likert') ? 'checked="checked"' : ''; ?> />
                 </td>
                 <td>
                     <label for="type_likert">Likert Scale <span style="font-weight: normal;">(default)</span></label>
@@ -84,7 +86,7 @@ class WizardStep1
             </tr>
             <tr>
                 <td style="vertical-align: top;"><input type="radio" name="form_type" id="type_split100"
-                                                        value="split100" <?php echo((($form_type == 'split100') ? 'checked="checked"' : '')); ?> />
+                                                        value="split100" <?php echo ($form_type == 'split100') ? 'checked="checked"' : ''; ?> />
                 </td>
                 <td>
                     <label for="type_split100">Split 100</label>
@@ -96,10 +98,12 @@ class WizardStep1
             </tr>
         </table>
         <?php
-        echo("<input type=\"hidden\" name=\"form_modules[]\" id=\"module_{$this->moduleId}\" value=\"{$this->moduleId}\" />");
-    }// /->form()
+        echo "<input type=\"hidden\" name=\"form_modules[]\" id=\"module_{$this->moduleId}\" value=\"{$this->moduleId}\" />";
+    }
 
-    function process_form()
+    // /->form()
+
+    public function process_form()
     {
         $errors = null;
 
@@ -116,8 +120,9 @@ class WizardStep1
         $this->wizard->set_field('form_type', Common::fetch_POST('form_type'));
 
         return $errors;
-    }// /->process_form()
+    }
 
+    // /->process_form()
 }// /class: WizardStep1
 
 ?>

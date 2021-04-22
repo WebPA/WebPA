@@ -8,32 +8,32 @@
  * @link https://github.com/webpa/webpa
  */
 
-require_once("../../../includes/inc_global.php");
+require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
-if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)){
-  header('Location:'. APP__WWW .'/logout.php?msg=denied');
-  exit;
+if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
+    header('Location:'. APP__WWW .'/logout.php?msg=denied');
+    exit;
 }
 
 // --------------------------------------------------------------------------------
 // Initialise wizard
 
 $wizard = new Wizard('create a new assessment wizard');
-$wizard->cancel_url = "../";
+$wizard->cancel_url = '../';
 
-$wizard->add_step(1,'class_wizardstep_1.php');
-$wizard->add_step(2,'class_wizardstep_2.php');
-$wizard->add_step(3,'class_wizardstep_3.php');
-$wizard->add_step(4,'class_wizardstep_4.php');
-$wizard->add_step(5,'class_wizardstep_5.php');
-$wizard->add_step(6,'class_wizardstep_6.php');
+$wizard->add_step(1, 'class_wizardstep_1.php');
+$wizard->add_step(2, 'class_wizardstep_2.php');
+$wizard->add_step(3, 'class_wizardstep_3.php');
+$wizard->add_step(4, 'class_wizardstep_4.php');
+$wizard->add_step(5, 'class_wizardstep_5.php');
+$wizard->add_step(6, 'class_wizardstep_6.php');
 
-$wizard->set_var('db',$DB);
-$wizard->set_var('config',$_config);
-$wizard->set_var('user',$_user);
+$wizard->set_var('db', $DB);
+$wizard->set_var('config', $_config);
+$wizard->set_var('user', $_user);
 $wizard->set_var('module', $_module);
 $wizard->set_var('moduleId', $_module_id);
 
@@ -50,9 +50,9 @@ $wiz_step = $wizard->get_step();
 $UI->page_title = APP__NAME . ' Create a new assessment';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = array  ('home'               => '../../' ,
-               'my assessments'         => '../' ,
-               'create a new assessment wizard' => null ,);
+$UI->breadcrumbs = ['home'               => '../../',
+               'my assessments'         => '../',
+               'create a new assessment wizard' => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');

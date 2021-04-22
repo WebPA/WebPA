@@ -12,35 +12,50 @@
 
 namespace WebPA\includes\classes;
 
+use Doctrine\DBAL\ParameterType;
+
 class Authenticator
 {
+    // Public variables
+    public $user_id;
 
-// Public variables
-    public $user_id = NULL;
-    public $source_id = NULL;
-    public $user_type = NULL;
-    public $module_id = NULL;
-    public $module_code = NULL;
+    public $source_id;
 
-// Private variables
-    protected $username = NULL;
-    protected $password = NULL;
-    protected $_authenticated = FALSE;
-    protected $_disabled = NULL;
-    protected $_error = NULL;
-    private $_DAO = NULL;
+    public $user_type;
+
+    public $module_id;
+
+    public $module_code;
+
+    // Private variables
+    protected $username;
+
+    protected $password;
+
+    protected $_authenticated = false;
+
+    protected $_disabled;
+
+    protected $_error;
+
+    private $_DAO;
+
     private $cis;
+
+    private $dbConn;
 
     /**
      *  CONSTRUCTOR for the Authenticator class
      */
-    public function __construct(EngCIS $cis, $username = NULL, $password = NULL)
+    public function __construct(EngCIS $cis, $username = null, $password = null)
     {
         $this->cis = $cis;
 
         $this->username = $username;
         $this->password = $password;
-    }// /->Authenticator()
+    }
+
+    // /->Authenticator()
 
     /*
     ================================================================================
@@ -48,43 +63,53 @@ class Authenticator
     ================================================================================
     */
 
-    /*
-    Initialise the user details
-    */
-    function initialise($sql)
+    /**
+     * Initialise the user details.
+     *
+     * @param $user
+     *
+     * @return bool
+     */
+    public function initialise($user)
     {
-        $this->user_type = NULL;
-        $this->_authenticated = FALSE;
-        $this->_disabled = TRUE;
+        $this->user_type = null;
+        $this->_authenticated = false;
+        $this->_disabled = true;
 
-        $is_admin = FALSE;
+        $is_admin = false;
         $DAO = $this->get_DAO();
-        $user_data = $DAO->fetch_row($sql);
-        if (!is_null($user_data)) {
-            $is_admin = $user_data['admin'] == 1;
-            $source_id = $user_data['source_id'];
+        $this->dbConn = $DAO->getConnection();
 
-            $this->module_id = $user_data['last_module_id'];
+        if (!is_null($user)) {
+            $is_admin = $user['admin'] == 1;
+            $source_id = $user['source_id'];
+
+            $this->module_id = $user['last_module_id'];
+
             if (!empty($this->module_id)) {
                 if (!$is_admin) {
-                    $sql_user_module = 'SELECT module_id, user_type FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$user_data['last_module_id']} AND user_id = {$user_data['user_id']}";
-                    $user_module = $DAO->fetch_row($sql_user_module);
-                    if (is_null($user_module)) {
-                        $this->module_id = NULL;
+                    $userModuleQuery = 'SELECT module_id, user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
+
+                    $userModule = $this->dbConn->fetchAssociative($userModuleQuery, [$user['last_module_id'], $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
+
+                    if (is_null($userModule)) {
+                        $this->module_id = null;
                     }
                 } else {
-                    $sql_admin_module = 'SELECT source_id FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$user_data['last_module_id']}";
-                    $admin_module = $DAO->fetch_row($sql_admin_module);
-                    if (!is_null($admin_module)) {
-                        $source_id = $admin_module['source_id'];
+                    $adminModuleQuery = 'SELECT source_id FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
+
+                    $adminModule = $this->dbConn->fetchAssociative($adminModuleQuery, [$user['last_module_id']], [ParameterType::INTEGER]);
+
+                    if (!is_null($adminModule)) {
+                        $source_id = $adminModule['source_id'];
                     }
                 }
             }
             if (empty($this->module_id)) {
                 if ($is_admin) {
-                    $modules = $this->cis->get_user_modules(NULL, NULL, NULL, $source_id);
+                    $modules = $this->cis->get_user_modules(null, null, null, $source_id);
                 } else {
-                    $modules = $this->cis->get_user_modules($user_data['user_id']);
+                    $modules = $this->cis->get_user_modules($user['user_id']);
                 }
                 if (count($modules) > 0) {
                     $ids = array_keys($modules);
@@ -93,114 +118,117 @@ class Authenticator
             }
 
             if (!empty($this->module_id)) {
+                $moduleQuery = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
 
-                $sql_module = 'SELECT module_code FROM ' . APP__DB_TABLE_PREFIX . "module WHERE module_id = {$this->module_id}"; // AND source_id = '{$source_id}'";
-                $module = $DAO->fetch_row($sql_module);
-                if (is_null($module)) {
-                    $this->module_id = NULL;
+                $moduleCode = $this->dbConn->fetchOne($moduleQuery, [$this->module_id], [ParameterType::INTEGER]);
+
+                if (is_null($moduleCode)) {
+                    $this->module_id = null;
                 } else {
-                    $this->module_code = $module['module_code'];
+                    $this->module_code = $moduleCode;
                 }
             }
 
             if (!is_null($this->module_id)) {
+                $userTypeQuery = 'SELECT user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? AND user_id = ?';
 
-                $sql_user_module = 'SELECT user_type FROM ' . APP__DB_TABLE_PREFIX . "user_module WHERE module_id = {$this->module_id} AND user_id = {$user_data['user_id']}";
-                $user_module = $DAO->fetch_row($sql_user_module);
+                $userType = $this->dbConn->fetchOne($userTypeQuery, [$this->module_id, $user['user_id']], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
                 // Update last login date
                 $now = date(MYSQL_DATETIME_FORMAT, time());
-                $sql_login_date = 'UPDATE ' . APP__DB_TABLE_PREFIX . "user SET date_last_login = '{$now}' WHERE user_id = '{$user_data['user_id']}'";
-                $DAO->execute($sql_login_date);
+                $sql_login_date =
+                    'UPDATE ' . APP__DB_TABLE_PREFIX . 'user ' .
+                    'SET date_last_login = ? ' .
+                    'WHERE user_id = ?';
+
+                $stmt = $this->dbConn->prepare($sql_login_date);
+
+                $stmt->bindParam(1, $now);
+                $stmt->bindParam(2, $user['user_id'], ParameterType::INTEGER);
+
+                $stmt->execute();
 
                 //with the database row data returned get all the information and add it to the class holders
-                $this->user_id = $user_data['user_id'];
+                $this->user_id = $user['user_id'];
                 $this->source_id = $source_id;
                 if (!$is_admin) {
-                    $this->user_type = $user_module['user_type'];
+                    $this->user_type = $userType;
                 } else {
                     $this->user_type = APP__USER_TYPE_ADMIN;
                 }
 
-                $this->_disabled = ($user_data['disabled'] == 1);
+                $this->_disabled = ($user['disabled'] == 1);
                 $this->_authenticated = !$this->_disabled;
-
             }
-
         }
 
         return $this->_authenticated;
-
     }
 
-    /*
-    Is the user authenticated?
-    */
-    function is_authenticated()
+    // Is the user authenticated?
+    public function is_authenticated()
     {
         return $this->_authenticated;
-    }// /->is_authenticated()
+    }
 
-    /*
-    Is the user disabled?
-    */
-    function is_disabled()
+    // /->is_authenticated()
+
+    // Is the user disabled?
+    public function is_disabled()
     {
         return $this->_disabled;
-    }// /->is_disabled()
+    }
 
-    /*
-    Is this user admin?
-    */
-    function is_admin()
+    // /->is_disabled()
+
+    // Is this user admin?
+    public function is_admin()
     {
-        return ($this->user_type == APP__USER_TYPE_ADMIN);
-    }// /->is_admin()
+        return $this->user_type == APP__USER_TYPE_ADMIN;
+    }
 
-    /*
-    Is this user staff?
-    */
-    function is_staff()
+    // /->is_admin()
+
+    // Is this user staff?
+    public function is_staff()
     {
         return ($this->user_type == APP__USER_TYPE_TUTOR) || ($this->user_type == APP__USER_TYPE_ADMIN);
-    }// /->is_staff()
+    }
 
-    /*
-    Is this user tutor?
-    */
-    function is_tutor()
+    // /->is_staff()
+
+    // Is this user tutor?
+    public function is_tutor()
     {
-        return ($this->user_type == APP__USER_TYPE_TUTOR);
-    }// /->is_staff()
+        return $this->user_type == APP__USER_TYPE_TUTOR;
+    }
 
-    /*
-    Is this user student?
-    */
-    function is_student()
+    // /->is_staff()
+
+    // Is this user student?
+    public function is_student()
     {
-        return ($this->user_type == APP__USER_TYPE_STUDENT);
-    }// /->is_student()
+        return $this->user_type == APP__USER_TYPE_STUDENT;
+    }
 
-    /*
-    Get the last authorisation error
-    */
-    function get_error()
+    // /->is_student()
+
+    // Get the last authorisation error
+    public function get_error()
     {
         return $this->_error;
-    }// /->get_error()
+    }
 
-    /*
-    Get the DAO object
-    */
-    function get_DAO()
+    // /->get_error()
+
+    // Get the DAO object
+    public function get_DAO()
     {
-
         if (is_null($this->_DAO)) {
             $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
         }
 
         return $this->_DAO;
-
     }
 
     /*
@@ -208,7 +236,4 @@ class Authenticator
       PRIVATE
     ================================================================================
     */
-
 }// /class Authenticator
-
-?>

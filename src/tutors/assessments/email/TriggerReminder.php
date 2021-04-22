@@ -10,27 +10,35 @@
 
 namespace WebPA\tutors\assessments\email;
 
-require_once("../../../includes/inc_global.php");
+use WebPA\includes\classes\DAO;
 
 class TriggerReminder
 {
     use AssessmentNotificationTrait;
 
+    private DAO $dao;
+
+    public function __construct(DAO $dao)
+    {
+        $this->dao = $dao;
+    }
+
     public function send()
     {
+        $allDueQuery =
+            'SELECT * ' .
+            'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+            'WHERE a.open_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) ' .
+            'AND a.email_opening = 1';
+
         //get a list of the assessment that will be run in two days from now
-        $allDue = $DB->fetch("SELECT * FROM " . APP__DB_TABLE_PREFIX . "assessment a
-             WHERE a.open_date = DATE_ADD(CURDATE(), INTERVAL 2 DAY) AND a.email_opening = 1");
+        $allDue = $this->dao->getConnection()->fetchAllAssociative($allDueQuery);
 
         if (!empty($allDue)) {
-            //cycle round and for each collection send the emails
-            $assessments = count($allDue);
-
             foreach ($allDue as $assessment) {
-
                 //specify the details of the email to be sent
                 $subjectLn = 'Reminder: WebPA Assessment opening';
-                $body = " This is a reminder that the assessment your tutor set is due to open. The details are as below;" .
+                $body = ' This is a reminder that the assessment your tutor set is due to open. The details are as below;' .
                     "\n Assessment Name:  " . $assessment['assessment_name'] .
                     "\n Open from:  " . $assessment['open_date'] .
                     "\n Closes on:  " . $assessment['close_date'] .
@@ -38,14 +46,9 @@ class TriggerReminder
                     "\n \n -------------------------------------------------------------------------------" .
                     "\n This is an automated email sent by the WebPA tool \n\n";
 
-                mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
-
+                $this->mail_assessment_notification($assessment['collection_id'], $subjectLn, $body, $assessment['owner_id']);
             }
             unset($assessment);
         }
     }
 }
-
-$triggerReminder = new TriggerReminder();
-
-$triggerReminder->send();

@@ -14,19 +14,18 @@ use DOMDocument;
 
 class XML
 {
-     public static function validate($xml, $xsd){
-         libxml_use_internal_errors(true);
+    public static function validate($xml, $xsd)
+    {
+        libxml_use_internal_errors(true);
 
-         $objDom = new DOMDocument('1.0', 'utf-8');
+        $objDom = new DOMDocument('1.0', 'utf-8');
 
-         $objDom->loadXML($xml);
+        $objDom->loadXML($xml);
 
-         if (!$objDom->schemaValidate($xsd)) {
-
-    	     libxml_get_errors();
-             return false;
-         } else {
-            return true;
-         }
+        if (!$objDom->schemaValidate($xsd)) {
+            libxml_get_errors();
+            return false;
+        }
+        return true;
     }
 }
