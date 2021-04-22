@@ -103,12 +103,11 @@ define('APP__USER_TYPE_TUTOR', 'T');
 define('APP__USER_TYPE_STUDENT', 'S');
 
 //Moodle gradebook output allowed...
-define('APP__MOODLE_GRADEBOOK', $_ENV['ALLOW_MOODLE_GRADEBOOK'] === 'true'); // If the grade book xml for moodle can be output then set to true, else if not required set to false
+define('APP__MOODLE_GRADEBOOK', $_ENV['ENABLE_MOODLE_GRADEBOOK'] === 'true'); // If the grade book xml for moodle can be output then set to true, else if not required set to false
 
 //Automatic emailing options.
-//this is dependant on cron jobs being set for the following files;
-//  /tutors/assessments/email/TriggerReminder.php
-//  /tutors/assessments/email/ClosingReminber.php
+//this is dependant on a cron job being set to run against the following file:
+//  /jobs/Email.php
 define('APP__REMINDER_OPENING', $_ENV['SEND_OPENING_REMINDER'] === 'true');
 define('APP__REMINDER_CLOSING', $_ENV['SEND_CLOSING_REMINDER'] === 'true');
 

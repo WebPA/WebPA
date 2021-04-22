@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.1.2] - 2020-04-22
+### Changed
+- Emails are now triggered via a single script, `jobs/Email.php` instead of calling`tutors/asessments/email/ClosingReminder.php` and `tutors/assessments/email/TriggerReminder.php` directly. 
+
+### Removed
+- Removed LDAP functionality and options as the implementation did not work.
+
 ### Security
 - Fixed a large amount of SQL injection attacks
 - Change password hashing to use the native password_hash() function in PHP instead of MD5 hashing which is insecure
@@ -68,8 +74,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.1.1...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.1.2...HEAD
 
+[3.1.2]: https://github.com/WebPA/WebPA/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/WebPA/WebPA/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/WebPA/WebPA/compare/v3.0.7...v3.1.0
 [3.0.7]: https://github.com/WebPA/WebPA/compare/v3.0.6...v3.0.7
