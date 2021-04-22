@@ -1,6 +1,7 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+    ->exclude('mod')
     ->in(__DIR__ . '/src');
 
 $config = new PhpCsFixer\Config();
