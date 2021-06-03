@@ -42,7 +42,8 @@ ini_set('session.cookie_path', '/');
 define('APP__ACADEMIC_YEAR_START_MONTH', $_ENV['ACADEMIC_YEAR_START_MONTH']);
 
 //Database information
-define('APP__DB_HOST', $_ENV['DB_HOST']); // If on a non-standard port, use this format:  <server>:<port>
+define('APP__DB_HOST', $_ENV['DB_HOST']);
+define('APP__DB_PORT', $_ENV['DB_PORT']);
 define('APP__DB_USERNAME', $_ENV['DB_USER']);
 define('APP__DB_PASSWORD', $_ENV['DB_PASS']);
 define('APP__DB_DATABASE', $_ENV['DB_NAME']);
@@ -170,7 +171,7 @@ session_start();
 
 // Initialise DB object
 
-$DB = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+$DB = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE, APP__DB_PORT);
 
 // Initialise User Object
 
