@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Fixed
+- Fixed bug where students were told they had not submitted to a closed assessment when they had (PR #XXX)
+
 ## [3.1.2] - 2020-04-22
 ### Changed
 - Emails are now triggered via a single script, `jobs/Email.php` instead of calling`tutors/asessments/email/ClosingReminder.php` and `tutors/assessments/email/TriggerReminder.php` directly. 
