@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- You can now specify the MySQL port number in the environment variables (PR #88)
+
 ### Fixed
 - Fixed bug where students were told they had not submitted to a closed assessment when they had (PR #89)
 
