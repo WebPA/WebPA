@@ -78,7 +78,7 @@ $assessmentsWithResponseQuery =
     'AND user_id = ? ' .
     'ORDER BY assessment_id';
 
-$assessments_with_response = $DB->getConnection()->fetchFirstColumn($assessmentsWithResponseQuery, [$assessment_ids, $_user->id], [$DB->getConnection()::PARAM_INT_ARRAY, ParameterType::INTEGER]);
+$assessments_with_response = $DB->getConnection()->fetchFirstColumn($assessmentsWithResponseQuery, [$assessment_ids, $_user->id], [$DB->getConnection()::PARAM_STR_ARRAY, ParameterType::INTEGER]);
 
 // Split the assessments into pending, open and finished
 $pending_assessments = null;
