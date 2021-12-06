@@ -25,11 +25,11 @@ class DAO
      * @param string $user
      * @param string $password
      * @param string $database
-     * @param boolean $persistent
+     * @param int $port
      *
      * @return void
      */
-    public function __construct($host, $user, $password, $database, $persistent = false)
+    public function __construct($host, $user, $password, $database, $port = 3306)
     {
         $connectionParams = [
             'dbname' => $database,
@@ -37,6 +37,7 @@ class DAO
             'password' => $password,
             'host' => $host,
             'driver' => 'mysqli',
+            'port' => $port,
         ];
 
         $this->_conn = DriverManager::getConnection($connectionParams);
