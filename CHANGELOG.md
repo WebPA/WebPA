@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fixed bug where students were told they had not submitted to a closed assessment when they had (PR #89)
 
-## [3.1.2] - 2020-04-22
+## [3.1.2] - 2021-04-22
 ### Changed
 - Emails are now triggered via a single script, `jobs/Email.php` instead of calling`tutors/asessments/email/ClosingReminder.php` and `tutors/assessments/email/TriggerReminder.php` directly. 
 
