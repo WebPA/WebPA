@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.2.0] - 2021-12-06
 ### Added
 - You can now specify the MySQL port number in the environment variables (PR #88)
 
@@ -83,7 +85,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.1.2...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/WebPA/WebPA/compare/v3.1.2...v3.2.0
 [3.1.2]: https://github.com/WebPA/WebPA/compare/v3.1.1...v3.1.2
 [3.1.1]: https://github.com/WebPA/WebPA/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/WebPA/WebPA/compare/v3.0.7...v3.1.0
