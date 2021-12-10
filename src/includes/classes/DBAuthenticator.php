@@ -29,7 +29,7 @@ class DBAuthenticator extends Authenticator
         $this->_error = null;
 
         //match the username and password to the values in the database.
-        $this->dao = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+        $this->dao = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE, APP__DB_PORT);
 
         $dbConn = $this->dao->getConnection();
 
