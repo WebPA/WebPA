@@ -37,7 +37,7 @@ class EngCIS
         $this->sourceId = $sourceId;
         $this->moduleId = $moduleId;
 
-        $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+        $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE, APP__DB_PORT);
 
         $this->dbConn = $this->_DAO->getConnection();
     }

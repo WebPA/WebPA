@@ -225,7 +225,7 @@ class Authenticator
     public function get_DAO()
     {
         if (is_null($this->_DAO)) {
-            $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE);
+            $this->_DAO = new DAO(APP__DB_HOST, APP__DB_USERNAME, APP__DB_PASSWORD, APP__DB_DATABASE, APP__DB_PORT);
         }
 
         return $this->_DAO;
