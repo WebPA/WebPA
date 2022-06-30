@@ -30,25 +30,10 @@ class WizardStep1
     public function head()
     {
         ?>
-<script language="JavaScript" type="text/javascript">
-<!--
-
+<script>
   function body_onload() {
     document.getElementById('assessment_name').focus();
   }
-
-  function open_close(id) {
-    id = document.getElementById(id);
-
-      if (id.style.display == 'block' || id.style.display == '')
-          id.style.display = 'none';
-      else
-          id.style.display = 'block';
-
-      return;
-  }
-
-//-->
 </script>
 <?php
     }
@@ -149,11 +134,7 @@ class WizardStep1
       </table>
     </div>
 
-    <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
-    <br/><br/></div>
-    <div id="advanced" style="display:none;" class="advanced_options">
-
-      <h2>notification emails</h2>
+      <h2>Notification Emails</h2>
 
       <p><label>Do you want to email all students when this assessment is created?</label></p>
       <p>This option will send an email to all of the students who are in the groups for this assessment as soon as you click the finish button at the end of the wizard.</p>
@@ -168,7 +149,6 @@ class WizardStep1
           <td valign="top"><label class="small" for="email_no">No, don't email all students.</label></td>
         </tr>
         </table>
-      </div>
 
 <?php
     if (APP__REMINDER_OPENING) {
