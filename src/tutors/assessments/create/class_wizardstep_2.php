@@ -36,25 +36,8 @@ class WizardStep2
 
     public function head()
     {
-        ?>
-        <script>
-          function body_onload () {
-          }// /body_onload()
 
-          function open_close (id) {
-            id = document.getElementById(id);
-
-            if (id.style.display == 'block' || id.style.display == '') {
-              id.style.display = 'none';
-            } else {
-              id.style.display = 'block';
-            }
-          }
-        </script>
-        <?php
     }
-
-    // /->head()
 
     public function form()
     {
@@ -124,11 +107,7 @@ class WizardStep2
             //check that the system allows student Justification
             if (APP__ALLOW_TEXT_INPUT) {
                 //provide the academic the option?>
-                <div style="float:right"><b>Advanced Options</b> <a href="#" onclick="open_close('advanced')"><img
-                                src="../../../images/icons/advanced_options.gif" alt="view / hide advanced options"></a>
-                    <br/><br/></div>
-                <div id="advanced" style="display:none;" class="advanced_options">
-                    <h2>Feedback / justification</h2>
+                    <h2>Feedback / Justification</h2>
                     <p><label>Do you want students to be able to view feedback for this assesment?</label></p>
                     <p>Once an assessment is completed, students can login and view feedback related to their
                         performance within the group for this assessment. The feedback simply shows whether they were
@@ -197,7 +176,6 @@ class WizardStep2
                             </tr>
                         </table>
                     </div>
-                </div>
                 <?php
             }
         }
