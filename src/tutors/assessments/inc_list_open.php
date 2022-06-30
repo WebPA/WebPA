@@ -94,11 +94,11 @@ if (!$assessments) {
           <div class="obj_info_text">student responses: <?php echo "$num_responses / $num_members $completed_msg"; ?></div>
         </td>
         <td class="buttons">
-          <a href="<?php echo $edit_url; ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
-          <a href="<?php echo $email_url; ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
-          <a href="<?php echo $responded_url; ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
-          <a href="<?php echo $groupmark_url; ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
-          <a href="<?php echo $delete_marks_url; ?>"><img src="../../images/icons/group_delete.png" width="16" height="16" alt="Delete individual marks" title="Delete individual marks" /></a>
+          <a href="<?= $edit_url ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
+          <a href="<?= $email_url ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
+          <a href="<?= $responded_url ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
+          <a href="<?= $groupmark_url ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
+          <a href="<?= $delete_marks_url ?>"><img src="../../images/icons/group_delete.png" width="16" height="16" alt="Delete individual marks" title="Delete individual marks" /></a>
         </td>
       </tr>
       </table>
