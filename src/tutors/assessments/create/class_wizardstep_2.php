@@ -36,7 +36,28 @@ class WizardStep2
 
     public function head()
     {
+        ?>
+        <script>
+          function body_onload() {
+            const toggleHide = function (e) {
+              const viewAnonymisedFeedback = document.getElementById('view-anonymised-feedback');
 
+              if (e.target.id === 'allow_text_input_yes') {
+                viewAnonymisedFeedback.classList.remove('hide');
+              } else {
+                viewAnonymisedFeedback.classList.add('hide');
+              }
+            };
+
+            // Get the radiobutton to confirm you want justified feedback
+            const radioButtons = document.getElementsByName('allow_text_input');
+
+            for (radioButton of radioButtons) {
+              radioButton.onchange = toggleHide;
+            }
+          }
+        </script>
+        <?php
     }
 
     public function form()
@@ -108,11 +129,15 @@ class WizardStep2
             if (APP__ALLOW_TEXT_INPUT) {
                 //provide the academic the option?>
                     <h2>Feedback / Justification</h2>
-                    <p><label>Do you want students to be able to view feedback for this assesment?</label></p>
-                    <p>Once an assessment is completed, students can login and view feedback related to their
+                    <p>
+                        <b>Do you want students to be able to view relative performance feedback?</b>
+                    </p>
+                    <p>
+                        Once an assessment is completed, students can login and view feedback related to their
                         performance within the group for this assessment. The feedback simply shows whether they were
                         rated as performing below, at, or above average for each criterion within the group for this
-                        assessment.</p>
+                        assessment.
+                    </p>
                     <div class="form_section">
                         <table class="form" cellpadding="2" cellspacing="2">
                             <tr>
@@ -131,50 +156,69 @@ class WizardStep2
                             </tr>
                         </table>
                     </div>
-                    <p><label>Would you like students to provide text based feedback?</label></p>
-                    <p>If you would like students to provide textual information as either feedback or justification on
-                        the scores that they have assigned in the assessment, then you will need to select the option
-                        from below. The default option is to provide <b>no</b> mechanism for students to comment.</p>
+                    <p>
+                        <b>Would you like students to provide feedback to justify their scoring?</b>
+                    </p>
+                    <p>
+                        If you would like students to provide feedback or justification on the scores that they have
+                        assigned in the assessment, then you will need to select the option from below. The default
+                        option is to provide <strong>no</strong> mechanism for students to comment.
+                    </p>
                     <div class="form_section">
                         <table cellpadding="0" cellspacing="0">
                             <tr>
-                                <td><label class="small" for="feedback_name">Title </label></td>
-                                <td><input type="text" name="feedback_name" id="feedback_name" maxlength="100" size="40"
-                                           value="<?php echo $this->wizard->get_field('feedback_name'); ?>"></td>
+                                <td>
+                                    <label class="small" for="feedback_name">Feedback Form Title </label>
+                                </td>
+                                <td>
+                                    <input type="text" name="feedback_name" id="feedback_name" maxlength="100" size="40"
+                                           value="<?php echo $this->wizard->get_field('feedback_name'); ?>">
+                                </td>
                             </tr>
                             <tr>
                                 <!-- THIS IS WHERE I NEED TO ADD THE CUSTOM JS -->
-                                <td><input type="radio" name="allow_text_input" id="allow_text_input_yes"
+                                <td>
+                                    <input type="radio" name="allow_text_input" id="allow_text_input_yes"
                                            value="1" <?php echo ($this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
                                 </td>
-                                <td><label class="small" for="allow_text_input_yes"><b>Yes</b>, allow students to
-                                        comment.</label></td>
+                                <td>
+                                    <label class="small" for="allow_text_input_yes"><b>Yes</b>, allow students to
+                                        comment.</label>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input type="radio" name="allow_text_input" id="allow_text_input_no"
+                                <td>
+                                    <input type="radio" name="allow_text_input" id="allow_text_input_no"
                                            value="0" <?php echo (!$this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
                                 </td>
-                                <td><label class="small" for="allow_text_input_no"><b>No</b>, don't allow students to
-                                        comment.</label></td>
+                                <td>
+                                    <label class="small" for="allow_text_input_no">
+                                        <b>No</b>, don't allow students to comment.
+                                    </label>
+                                </td>
                             </tr>
                         </table>
                     </div>
-                    <p><label>Would you like students to see anonymised, text based feedback?</label></p>
-                    <p>
-                        Usually text based feedback can only be seen by tutors. By selecting this option, students will
-                        be able to see text based feedback that has been reviewed and anonymised.
-                    </p>
-                    <div class="form_section">
-                        <table cellpadding="2" cellspacing="2">
-                            <tr>
-                                <th valign="top" style="padding-top: 2px; vertical-align: top;">
-                                    <label class="small" for="view_feedback">View&nbsp;feedback</label>
-                                </th>
-                                <td width="100%">
-                                    <input type="checkbox" id="view_feedback" name="view_feedback" value="view_feedback">
-                                </td>
-                            </tr>
-                        </table>
+                    <div id="view-anonymised-feedback" class="hide">
+                        <p>
+                            <b>Would you like students to see anonymised  justifications for feedback from their peers?</b>
+                        </p>
+                        <p>
+                            Usually text based feedback can only be seen by tutors. By selecting this option, students will
+                            be able to see feedback from their peers that has been reviewed and anonymised.
+                        </p>
+                        <div class="form_section">
+                            <table cellpadding="2" cellspacing="2">
+                                <tr>
+                                    <th valign="top" style="padding-top: 2px; vertical-align: top;">
+                                        <label class="small" for="view_feedback">Show justification</label>
+                                    </th>
+                                    <td width="100%">
+                                        <input type="checkbox" id="view_feedback" name="view_feedback" value="view_feedback">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 <?php
             }

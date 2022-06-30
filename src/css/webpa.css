@@ -541,3 +541,6 @@ input.danger_button { background-color: #f99; }
 input.safe_button { background-color: #9f9; }
 input.warning_button { background-color: #ee9; }
 
+.hide {
+	display: none;
+}
