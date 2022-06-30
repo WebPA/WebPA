@@ -176,7 +176,6 @@ class WizardStep2
                                 </td>
                             </tr>
                             <tr>
-                                <!-- THIS IS WHERE I NEED TO ADD THE CUSTOM JS -->
                                 <td>
                                     <input type="radio" name="allow_text_input" id="allow_text_input_yes"
                                            value="1" <?php echo ($this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
