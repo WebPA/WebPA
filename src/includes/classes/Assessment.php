@@ -40,6 +40,8 @@ class Assessment
 
     public $email_closing = false;
 
+    public $view_feedback;
+
     // Private Vars
     private DAO $_DAO;
 
@@ -257,6 +259,7 @@ class Assessment
           ->set('feedback_name', '?')
           ->set('feedback_length', 0)
           ->set('feedback_optional', 0)
+          ->set('view_feedback', '?')
           ->where('assessment_id = ?')
           ->setParameter(0, $this->name)
           ->setParameter(1, $this->module_id, ParameterType::INTEGER)
@@ -267,7 +270,8 @@ class Assessment
           ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(7, $this->introduction)
           ->setParameter(8, $this->feedback_name)
-          ->setParameter(9, $this->id);
+          ->setParameter(9, $this->view_feedback)
+          ->setParameter(10, $this->id);
         } else {
             // the assessment does not exist. Create it
             $queryBuilder
@@ -292,6 +296,7 @@ class Assessment
                  'feedback_name' => '?',
                  'feedback_length' => 0,
                  'feedback_optional' => 0,
+                 'view_feedback' => '?',
               ]
           )
           ->setParameter(0, $this->id)
@@ -303,7 +308,8 @@ class Assessment
           ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(7, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(8, $this->introduction)
-          ->setParameter(9, $this->feedback_name);
+          ->setParameter(9, $this->feedback_name)
+          ->setParameter(10, $this->view_feedback, ParameterType::INTEGER);
         }
 
         $queryBuilder->execute();

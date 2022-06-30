@@ -37,24 +37,19 @@ class WizardStep2
     public function head()
     {
         ?>
-        <script language="JavaScript" type="text/javascript">
-          <!--
-
+        <script>
           function body_onload () {
           }// /body_onload()
 
           function open_close (id) {
-            id = document.getElementById(id)
+            id = document.getElementById(id);
 
-            if (id.style.display == 'block' || id.style.display == '')
-              id.style.display = 'none'
-            else
-              id.style.display = 'block'
-
-            return
+            if (id.style.display == 'block' || id.style.display == '') {
+              id.style.display = 'none';
+            } else {
+              id.style.display = 'block';
+            }
           }
-
-          //-->
         </script>
         <?php
     }
@@ -145,19 +140,19 @@ class WizardStep2
                                 <td><input type="radio" name="allow_feedback" id="allow_feedback_yes"
                                            value="1" <?php echo ($allow_feedback) ? 'checked="checked"' : ''; ?> />
                                 </td>
-                                <td valign="top"><label class="small" for="allow_feedback_yes">Yes, allow students to
+                                <td valign="top"><label class="small" for="allow_feedback_yes"><strong>Yes</strong>, allow students to
                                         view feedback.</label></td>
                             </tr>
                             <tr>
                                 <td><input type="radio" name="allow_feedback" id="allow_feedback_no"
                                            value="0" <?php echo (!$allow_feedback) ? 'checked="checked"' : ''; ?> />
                                 </td>
-                                <td valign="top"><label class="small" for="allow_feedback_no">No, there is no feedback
+                                <td valign="top"><label class="small" for="allow_feedback_no"><strong>No</strong>, there is no feedback
                                         for this assessment.</label></td>
                             </tr>
                         </table>
                     </div>
-                    <p><label>Would you like students to enter feedback textually?</label></p>
+                    <p><label>Would you like students to provide text based feedback?</label></p>
                     <p>If you would like students to provide textual information as either feedback or justification on
                         the scores that they have assigned in the assessment, then you will need to select the option
                         from below. The default option is to provide <b>no</b> mechanism for students to comment.</p>
@@ -169,6 +164,7 @@ class WizardStep2
                                            value="<?php echo $this->wizard->get_field('feedback_name'); ?>"></td>
                             </tr>
                             <tr>
+                                <!-- THIS IS WHERE I NEED TO ADD THE CUSTOM JS -->
                                 <td><input type="radio" name="allow_text_input" id="allow_text_input_yes"
                                            value="1" <?php echo ($this->wizard->get_field('allow_student_input')) ? 'checked="checked"' : ''; ?>>
                                 </td>
@@ -181,6 +177,23 @@ class WizardStep2
                                 </td>
                                 <td><label class="small" for="allow_text_input_no"><b>No</b>, don't allow students to
                                         comment.</label></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p><label>Would you like students to see anonymised, text based feedback?</label></p>
+                    <p>
+                        Usually text based feedback can only be seen by tutors. By selecting this option, students will
+                        be able to see text based feedback that has been reviewed and anonymised.
+                    </p>
+                    <div class="form_section">
+                        <table cellpadding="2" cellspacing="2">
+                            <tr>
+                                <th valign="top" style="padding-top: 2px; vertical-align: top;">
+                                    <label class="small" for="view_feedback">View&nbsp;feedback</label>
+                                </th>
+                                <td width="100%">
+                                    <input type="checkbox" id="view_feedback" name="view_feedback" value="view_feedback">
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -207,6 +220,8 @@ class WizardStep2
         if (APP__ALLOW_TEXT_INPUT) {
             $this->wizard->set_field('allow_student_input', Common::fetch_POST('allow_text_input'));
         }
+
+        $this->wizard->set_field('view_feedback', Common::fetch_POST('view_feedback'));
 
         return $errors;
     }
