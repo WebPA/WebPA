@@ -1,4 +1,4 @@
--- also made a change to the assessments table which will need to be included here
+ALTER TABLE `pa2_assessment` ADD COLUMN view_feedback TINYINT NOT NULL DEFAULT 0 AFTER allow_feedback;
 ALTER TABLE `pa2_user_justification` ADD CONSTRAINT `unique_user_justification` UNIQUE KEY(`assessment_id`, `group_id`, `user_id`, `marked_user_id`);
 ALTER TABLE `pa2_user_justification` DROP PRIMARY KEY;
 ALTER TABLE `pa2_user_justification` ADD COLUMN `id` INT AUTO_INCREMENT PRIMARY KEY FIRST;
