@@ -102,6 +102,7 @@ if (!$assessments) {
             $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}";
             $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
             $mark_url = "marks/mark_assessment.php?a={$assessment->id}&{$qs}";
+            $review_justifications_url = "marks/review_justification.php?a={$assessment->id}&{$qs}";
 
             $mark_sheets = $assessment->get_all_marking_params(); ?>
     <div class="obj">
@@ -119,6 +120,7 @@ if (!$assessments) {
           <a href="<?php echo $responded_url; ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
           <a href="<?php echo $groupmark_url; ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
           <a href="<?php echo $mark_url; ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
+          <a href="<?= $review_justifications_url ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="Review justifications" /></a>
         </td>
       </tr>
       </table>
