@@ -270,7 +270,7 @@ class Assessment
           ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(7, $this->introduction)
           ->setParameter(8, $this->feedback_name)
-          ->setParameter(9, $this->view_feedback)
+          ->setParameter(9, $this->view_feedback ? 1 : 0, ParameterType::INTEGER)
           ->setParameter(10, $this->id);
         } else {
             // the assessment does not exist. Create it
