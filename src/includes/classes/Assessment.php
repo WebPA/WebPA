@@ -309,7 +309,7 @@ class Assessment
           ->setParameter(7, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(8, $this->introduction)
           ->setParameter(9, $this->feedback_name)
-          ->setParameter(10, $this->view_feedback, ParameterType::INTEGER);
+          ->setParameter(10, $this->view_feedback ? 1 : 0, ParameterType::INTEGER);
         }
 
         $queryBuilder->execute();
