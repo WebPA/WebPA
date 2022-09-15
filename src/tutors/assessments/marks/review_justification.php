@@ -30,10 +30,10 @@ $command = Common::fetch_POST('command');
 
 $list_url = "../index.php?tab={$tab}&y={$year}";
 
+// retrieve the assessent details to make sure we are getting comments for an existing assessment
 $assessment = new Assessment($DB);
 
 if ($assessment->load($assessment_id)) {
-    // Not sure we need to load the assessment at the moment - anyways, here is the query to get the comments
     $feedbackCommentsQuery =
         'SELECT uj.id, uj.justification_text, mdj.moderated_comment, uj.group_id, ug.group_name ' .
         'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
@@ -70,23 +70,7 @@ if ($assessment->load($assessment_id)) {
     $assessment = null;
 }
 
-// --------------------------------------------------------------------------------
-// Process Form
-
-$errors = null;
-
-if (($command) && ($assessment)) {
-    switch ($command) {
-        case 'save':
-            // Generate hash for each user
-            // Save published date
-            // Generate email
-            break;
-    }
-}
-
-// --------------------------------------------------------------------------------
-// Begin Page
+// begin Page
 
 $UI->page_title = APP__NAME . ' review student justification comments';
 $UI->menu_selected = 'my assessments';
@@ -118,14 +102,6 @@ $UI->head();
 </style>
 <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 <script>
-  function do_command (com) {
-    switch (com) {
-      default :
-        document.groupmark_form.command.value = com
-        document.groupmark_form.submit()
-    }
-  }
-
   const editCommentToggle = function (e) {
     e.preventDefault();
 
@@ -222,6 +198,7 @@ $UI->head();
 <?php
 $UI->content_start();
 
+// TODO: Check this is needed
 $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
 
 ?>
@@ -234,67 +211,63 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 
 <div class="content_box">
 
-    <?php
-    if (!$assessment) {
-        ?>
-        <div class="nav_button_bar">
-            <a href="<?= $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to
-                assessments list</a>
-        </div>
+    <?php if (!$assessment) : ?>
+    <div class="nav_button_bar">
+        <a href="<?= $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to
+            assessments list</a>
+    </div>
 
-        <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
-        <?php
-    } else {
-        ?>
-        <div class="nav_button_bar">
-            <table cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                    <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif"
-                                                                alt="back -"> back to assessment list</a></td>
-                </tr>
-            </table>
-        </div>
+    <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
+    <?php else : ?>
+    <div class="nav_button_bar">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td><a href="<?php echo $list_url; ?>"><img src="../../../images/buttons/arrow_green_left.gif"
+                                                            alt="back -"> back to assessment list</a></td>
+            </tr>
+        </table>
+    </div>
 
-        <h2>Student Justification Comments</h2>
+    <h2>Student Justification Comments</h2>
 
-        <div style="display: flex; justify-content: flex-end">
-            <form action="post">
-                <button type="submit">Release Comments</button>
-            </form>
-        </div>
-        <div>
-            <?php foreach ($groupComments as $groupId => $comments) : ?>
-            <section>
-                <h3><?= $groupNameIdMap[$groupId] ?></h3>
-
-                <?php foreach ($comments as $comment) : ?>
-                <?php $displayComment = !empty($comment['moderatedComment']) ? $comment['moderatedComment'] : $comment['comment']; ?>
-                <div style="margin-bottom: 2em;">
-                    <p id="comment-<?= $comment['id'] ?>">
-                        <?= $displayComment ?>
-                    </p>
-                    <a href="#" class="edit-toggle" id="edit-toggle-<?= $comment['id'] ?>">Edit</a>
-                    <div class="hide">
-                        <form action="edit_comment.php" method="post" class="edit-comment">
-                            <textarea name="comment" style="width:100%;"><?= $displayComment ?></textarea>
-                            <input type="hidden" name="comment-id" value="<?= $comment['id'] ?>">
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </section>
-            <?php endforeach; ?>
-        </div>
-    <?php
-    }
-    ?>
     <div style="display: flex; justify-content: flex-end">
         <form action="release_comments.php" method="post">
             <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
             <button type="submit">Release Comments</button>
         </form>
     </div>
+    <div>
+        <?php foreach ($groupComments as $groupId => $comments) : ?>
+        <section>
+            <h3><?= $groupNameIdMap[$groupId] ?></h3>
+
+            <?php foreach ($comments as $comment) : ?>
+            <?php $displayComment = !empty($comment['moderatedComment']) ? $comment['moderatedComment'] : $comment['comment']; ?>
+            <div style="margin-bottom: 2em;">
+                <p id="comment-<?= $comment['id'] ?>">
+                    <?= $displayComment ?>
+                </p>
+                <a href="#" class="edit-toggle" id="edit-toggle-<?= $comment['id'] ?>">Edit</a>
+                <div class="hide">
+                    <form action="edit_comment.php" method="post" class="edit-comment">
+                        <textarea name="comment" style="width:100%;"><?= $displayComment ?></textarea>
+                        <input type="hidden" name="comment-id" value="<?= $comment['id'] ?>">
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </section>
+        <?php endforeach; ?>
+    </div>
+    <div style="display: flex; justify-content: flex-end">
+        <form action="release_comments.php" method="post">
+            <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
+            <button type="submit">Release Comments</button>
+        </form>
+    </div>
+    <?php endif; ?>
+
 </div>
 
 <?php
