@@ -1,7 +1,5 @@
 <?php
 
-// Validate the request?
-
 require_once '../../../includes/inc_global.php';
 
 use WebPA\includes\functions\Common;
@@ -21,9 +19,9 @@ $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'moderated_user_justification VAL
 try {
     $stmt = $dbConn->prepare($sql);
 
-    $stmt->bindValue(1, (int) $_POST['comment-id'], \Doctrine\DBAL\ParameterType::INTEGER);
-    $stmt->bindValue(2, $_POST['comment']);
-    $stmt->bindValue(3, $_POST['comment']);
+    $stmt->bindValue(1, (int) Common::fetch_POST('comment-id'), \Doctrine\DBAL\ParameterType::INTEGER);
+    $stmt->bindValue(2, Common::fetch_POST('comment'));
+    $stmt->bindValue(3, Common::fetch_POST('comment'));
 
     $response = $stmt->execute();
 } catch (\Doctrine\DBAL\Exception $ex) {

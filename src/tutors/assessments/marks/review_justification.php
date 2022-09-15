@@ -13,8 +13,6 @@ require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
-use WebPA\includes\classes\GroupHandler;
-use WebPA\includes\classes\XMLParser;
 use WebPA\includes\functions\Common;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
@@ -90,9 +88,7 @@ if (($command) && ($assessment)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$page_title = 'review student justification comments';
-
-$UI->page_title = APP__NAME . ' ' . $page_title;
+$UI->page_title = APP__NAME . ' review student justification comments';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
 $UI->breadcrumbs = ['home' => '../../',
@@ -216,7 +212,7 @@ $UI->head();
       editLink.onclick = editCommentToggle;
     }
 
-    const editCommentForms = document.querySelectorAll('form');
+    const editCommentForms = document.querySelectorAll('form.edit-comment');
 
     editCommentForms.forEach(submitEditCommentForm);
   }
@@ -279,10 +275,10 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
                     </p>
                     <a href="#" class="edit-toggle" id="edit-toggle-<?= $comment['id'] ?>">Edit</a>
                     <div class="hide">
-                        <form action="edit_comment.php" method="post">
+                        <form action="edit_comment.php" method="post" class="edit-comment">
                             <textarea name="comment" style="width:100%;"><?= $displayComment ?></textarea>
                             <input type="hidden" name="comment-id" value="<?= $comment['id'] ?>">
-                            <button type="submit">Edit</button>
+                            <button type="submit">Save</button>
                         </form>
                     </div>
                 </div>
@@ -294,7 +290,8 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
     }
     ?>
     <div style="display: flex; justify-content: flex-end">
-        <form action="post">
+        <form action="release_comments.php" method="post">
+            <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
             <button type="submit">Release Comments</button>
         </form>
     </div>
@@ -303,5 +300,3 @@ $UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', '
 <?php
 
 $UI->content_end();
-
-?>

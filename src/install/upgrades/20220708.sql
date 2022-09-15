@@ -18,10 +18,8 @@ CREATE TABLE `pa2_user_justification_publish_date` (
 CREATE TABLE `pa2_user_justification_report` (
     user_justification_report_id VARCHAR(255) NOT NULL,
     assessment_id CHAR(36) NOT NULL,
-    group_id CHAR(36) NOT NULL,
     user_id INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (user_justification_report_id),
     FOREIGN KEY (assessment_id) REFERENCES pa2_assessment(assessment_id),
-    FOREIGN KEY (group_id) REFERENCES pa2_user_group(group_id),
     FOREIGN KEY (user_id) REFERENCES pa2_user(user_id)
 );
