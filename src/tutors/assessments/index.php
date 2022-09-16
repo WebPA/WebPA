@@ -87,7 +87,8 @@ $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_a
 $UI->head();
 $change_onclick = ' onclick="change_academic_year()"';
 ?>
-<script language="JavaScript" type="text/javascript">
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
 <!--
 
   function change_academic_year() {
@@ -154,7 +155,10 @@ include_once $include_page;
 
   </form>
 </div>
-
+<script>
+    // insert feather icon sets
+    feather.replace({color: 'black', width: '20px', height: '20px'});
+</script>
 <?php
 
 $UI->content_end();
