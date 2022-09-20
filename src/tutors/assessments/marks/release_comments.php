@@ -69,7 +69,7 @@ foreach ($assessmentUsers as $user) {
     $email->set_bcc(['christopher.mckenzie@ed.ac.uk', 'k.lyszkiewicz@ed.ac.uk', 'vanessa.mather@ed.ac.uk']);
     $email->set_from(APP__EMAIL_NO_REPLY);
     $email->set_subject('WebPA - Peer Feedback Comments Available');
-    $email->set_body("You know it's just the same as it was $hash");
+    $email->set_body($body);
     $email->send();
 }
 
