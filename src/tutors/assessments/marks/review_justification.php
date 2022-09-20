@@ -199,7 +199,7 @@ $UI->head();
 $UI->content_start();
 
 // TODO: Check this is needed
-$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+//$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
 
 ?>
 

@@ -42,10 +42,12 @@ use WebPA\includes\classes\XMLParser;
 $now = date(MYSQL_DATETIME_FORMAT);
 
 $assessmentsQuery =
-    'SELECT DISTINCT a.* ' .
+    'SELECT DISTINCT a.*, pd.publish_date AS comments_publish_date ' .
     'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
     'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'assessment_marking am ' .
     'ON a.assessment_id = am.assessment_id ' .
+    'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date pd ' .
+    'ON a.assessment_id = pd.assessment_id ' .
     'WHERE a.module_id = ? ' .
     'AND a.open_date >= ? ' .
     'AND a.open_date < ? ' .
@@ -115,12 +117,14 @@ if (!$assessments) {
           <div class="obj_info_text">student responses: <?php echo "$num_responses / $num_members $completed_msg"; ?></div>
         </td>
         <td class="buttons">
-          <a href="<?php echo $edit_url; ?>"><img src="../../images/buttons/edit.gif" width="16" height="16" alt="Edit" title="Edit assessment" /></a>
-          <a href="<?php echo $email_url; ?>"><img src="../../images/buttons/email.gif" width="16" height="16" alt="Email" title="Email students" /></a>
-          <a href="<?php echo $responded_url; ?>"><img src="../../images/buttons/students_responded.gif" width="16" height="16" alt="Students responded" title="Check which students have responded" /></a>
-          <a href="<?php echo $groupmark_url; ?>"><img src="../../images/buttons/group_marks.gif" width="16" height="16" alt="Group Marks" title="Set group marks" /></a>
-          <a href="<?php echo $mark_url; ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="New mark sheet" /></a>
-          <a href="<?= $review_justifications_url ?>"><img src="../../images/buttons/mark_sheet.gif" width="16" height="16" alt="Mark Sheet" title="Review justifications" /></a>
+            <a href="<?= $edit_url ?>" title="Edit" aria-label="Edit"><i data-feather="edit-2" aria-hidden="true"></i></a>
+            <a href="<?= $email_url ?>" title="Email students" aria-label="Email students"><i data-feather="mail" aria-hidden="true"></i></a>
+            <a href="<?= $responded_url ?>" title="Which students responded" aria-label="Which students responded"><i data-feather="user-check" aria-hidden="true"></i></a>
+            <a href="<?= $groupmark_url ?>" title="Set group marks" aria-label="Set group marks"><i data-feather="check" aria-hidden="true"></i></a>
+            <a href="<?= $mark_url ?>" title="New marksheet" aria-label="New marksheet"><i data-feather="file-text" aria-hidden="true"></i></a>
+            <?php if (isset($assessment->student_feedback) && $assessment->comments_publish_date === null) : ?>
+            <a href="<?= $review_justifications_url ?>" title="Review justification comments" aria-label="Review justification comments"><i data-feather="message-circle" aria-hidden="true"></i></a>
+            <?php endif; ?>
         </td>
       </tr>
       </table>
