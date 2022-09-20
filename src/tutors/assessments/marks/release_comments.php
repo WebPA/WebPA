@@ -24,7 +24,7 @@ if (empty($assessmentId)) {
 
 // Get every user in the assessment
 $userQuery =
-    'SELECT             a.assessment_id, ugm.user_id, u.email ' .
+    'SELECT             a.assessment_id, a.assessment_name, ugm.user_id, u.forename, u.email ' .
     'FROM               ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
     'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
     'ON                 ug.collection_id = a.collection_id ' .
@@ -58,14 +58,15 @@ foreach ($assessmentUsers as $user) {
 
 
     $body =
-        "Dear Andrew, \n\n" .
+        "Dear " . $user['forename'] . ", \n\n" .
         "<a href=\"https://www-test.webpa.is.ed.ac.uk/students/assessments/reports/justification_comments.php?r=$hash\">" .
-        "Justification comments </a> for the marks you received from your peers for assessment X are now available " .
-        "for you to view, \n\n" .
+        "Justification comments </a> for the marks you received from your peers for assessment '" .
+        $user['assessment_name'] ."' are now available for you to view, \n\n" .
         "Many thanks,\n" .
         "WebPA";
 
-    $email->set_to( 'andrew.millington@ed.ac.uk'/* $user['email'] */);
+    $email->set_to($user['email']);
+    $email->set_bcc(['christopher.mckenzie@ed.ac.uk', 'k.lyszkiewicz@ed.ac.uk', 'vanessa.mather@ed.ac.uk']);
     $email->set_from(APP__EMAIL_NO_REPLY);
     $email->set_subject('WebPA - Peer Feedback Comments Available');
     $email->set_body("You know it's just the same as it was $hash");
