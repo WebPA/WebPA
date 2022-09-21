@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Release feedback comments to students
+ *
+ * @copyright Loughborough University
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
+ *
+ * @link https://github.com/webpa/webpa
+ */
+
 require_once '../../../includes/inc_global.php';
 
 use Doctrine\DBAL\ParameterType;
@@ -16,7 +25,6 @@ $errors = null;
 
 // Process the form submission
 $assessmentId = Common::fetch_POST('assessment-id');
-
 
 if (empty($assessmentId)) {
     $errors[] = 'No assessment ID provided.';
