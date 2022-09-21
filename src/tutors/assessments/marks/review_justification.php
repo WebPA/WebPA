@@ -30,7 +30,9 @@ $command = Common::fetch_POST('command');
 
 $list_url = "../index.php?tab={$tab}&y={$year}";
 
-// retrieve the assessent details to make sure we are getting comments for an existing assessment
+$errors = null;
+
+// retrieve the assessment details to make sure we are getting comments for an existing assessment
 $assessment = new Assessment($DB);
 
 if ($assessment->load($assessment_id)) {
@@ -44,27 +46,33 @@ if ($assessment->load($assessment_id)) {
         'WHERE assessment_id = ? ' .
         'ORDER BY group_id';
 
-    $comments = $DB
-        ->getConnection()
-        ->fetchAllAssociative($feedbackCommentsQuery, [$assessment_id], [ParameterType::STRING]);
+    try {
+        $comments = $DB
+            ->getConnection()
+            ->fetchAllAssociative($feedbackCommentsQuery, [$assessment_id], [ParameterType::STRING]);
 
-    $groupComments = [];
-    $groupNameIdMap = [];
+        $groupComments = [];
+        $groupNameIdMap = [];
 
-    // Format the comments into a friendly format to iterate through
-    foreach ($comments as $comment) {
-        // only add comments if we have a comment to add
-        if (!empty($comment['justification_text'])) {
-            $groupComments[$comment['group_id']][] = [
-                    'id' => $comment['id'],
-                    'comment' => $comment['justification_text'],
-                    'moderatedComment' => $comment['moderated_comment'],
-            ];
+        // Format the comments into a friendly format to iterate through
+        foreach ($comments as $comment) {
+            // only add comments if we have a comment to add
+            if (!empty($comment['justification_text'])) {
+                $groupComments[$comment['group_id']][] = [
+                        'id' => $comment['id'],
+                        'comment' => $comment['justification_text'],
+                        'moderatedComment' => $comment['moderated_comment'],
+                ];
+            }
+
+            if (!array_key_exists($comment['group_id'], $groupNameIdMap)) {
+                $groupNameIdMap[$comment['group_id']] = $comment['group_name'];
+            }
         }
+    } catch (\Doctrine\DBAL\Exception $e) {
+        error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 
-        if (!array_key_exists($comment['group_id'], $groupNameIdMap)) {
-            $groupNameIdMap[$comment['group_id']] = $comment['group_name'];
-        }
+        $errors[] = 'An error was encountered when getting the assessment details.';
     }
 } else {
     $assessment = null;
@@ -198,8 +206,11 @@ $UI->head();
 <?php
 $UI->content_start();
 
-// TODO: Check this is needed
-//$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list(
+        $errors,
+        'error_box',
+        'The following errors were found:',
+        'If this problem persists please report it to the WebPA admins.');
 
 ?>
 
@@ -237,6 +248,9 @@ $UI->content_start();
         </form>
     </div>
     <div>
+        <?php if (empty($groupComments)) : ?>
+        <p>There are no comments to display</p>
+        <?php else : ?>
         <?php foreach ($groupComments as $groupId => $comments) : ?>
         <section>
             <h3><?= $groupNameIdMap[$groupId] ?></h3>
@@ -259,6 +273,7 @@ $UI->content_start();
             <?php endforeach; ?>
         </section>
         <?php endforeach; ?>
+        <?php endif; ?>
     </div>
     <div style="display: flex; justify-content: flex-end">
         <form action="release_comments.php" method="post">
