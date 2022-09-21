@@ -200,7 +200,7 @@ class WizardStep2
                     </div>
                     <div id="view-anonymised-feedback" class="hide">
                         <p>
-                            <b>Would you like students to see anonymised  justifications for feedback from their peers?</b>
+                            <b>Would you like students to see anonymised justifications for feedback from their peers?</b>
                         </p>
                         <p>
                             Usually text based feedback can only be seen by tutors. By selecting this option, students will
