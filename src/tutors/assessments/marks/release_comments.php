@@ -12,14 +12,14 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     exit;
 }
 
+$errors = null;
+
 // Process the form submission
 $assessmentId = Common::fetch_POST('assessment-id');
 
 
 if (empty($assessmentId)) {
-
-} else  {
-
+    $errors[] = 'No assessment ID provided.';
 }
 
 // Get every user in the assessment
@@ -34,10 +34,15 @@ $userQuery =
     'ON                 u.user_id = ugm.user_id ' .
     'WHERE              a.assessment_id = ?';
 
-$assessmentUsers = $DB
-    ->getConnection()
-    ->fetchAllAssociative($userQuery, [$assessmentId], [ParameterType::STRING]);
+try {
+    $assessmentUsers = $DB
+        ->getConnection()
+        ->fetchAllAssociative($userQuery, [$assessmentId], [ParameterType::STRING]);
+} catch (\Doctrine\DBAL\Exception $e) {
+    error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 
+    $errors[] = 'Could not get the assessment users from the database.';
+}
 
 foreach ($assessmentUsers as $user) {
     $hash = hash('sha256', $user['assessment_id'] . $user['user_id'] . random_int(0, 1000000));
@@ -55,7 +60,6 @@ foreach ($assessmentUsers as $user) {
     $stmt->execute();
 
     $email = new Email();
-
 
     $body =
         "Dear " . $user['forename'] . ", \n\n" .
@@ -82,7 +86,11 @@ $stmt = $DB->getConnection()->prepare($publishedDateQuery);
 
 $stmt->bindValue(1, $user['assessment_id']);
 
-$stmt->execute();
+try {
+    $stmt->execute();
+} catch (\Doctrine\DBAL\Exception $e) {
+    $errors[] = 'Could not save the publish date for these reports.';
+}
 
 // Begin the page
 $UI->page_title = APP__NAME . ' ' . 'release student justification comments';
@@ -102,14 +110,21 @@ $UI->head();
 
 $UI->content_start();
 
-//$UI->draw_boxed_list($errors, 'error_box', 'The following errors were found:', 'No changes have been saved. Please check the details in the form, and try again.');
+$UI->draw_boxed_list(
+        $errors,
+        'error_box',
+        'The following errors were found:',
+        'If these problems persist, please report them to your WebPA admin.');
 ?>
 <div class="content_box">
     <strong>Feedback Released</strong>
-<!-- DISPLAY ERRORS GENERATING FEEDBACK HERE -->
     <p>
+        <?php if (empty($errors)) : ?>
         Feedback reports have been generated for all students. Links have been emailed to the students to let them view
         feedback from their peers.
+        <?php else: ?>
+        Feedback reports have <strong>not</strong> been created as errors were encountered.
+        <?php endif; ?>
     </p>
 </div>
 
