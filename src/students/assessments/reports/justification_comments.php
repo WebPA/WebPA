@@ -15,6 +15,7 @@ use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
 $report_hash = Common::fetch_GET('r');
+$errors = null;
 
 $userAssessmentQuery =
     'SELECT             uj.justification_text, u.forename ' .
@@ -26,9 +27,15 @@ $userAssessmentQuery =
     'ON                 u.user_id = ujr.user_id ' .
     'WHERE              ujr.user_justification_report_id = ?';
 
-$comments = $DB
-    ->getConnection()
-    ->fetchAllAssociative($userAssessmentQuery, [$report_hash], [ParameterType::STRING]);
+try {
+    $comments = $DB
+        ->getConnection()
+        ->fetchAllAssociative($userAssessmentQuery, [$report_hash], [ParameterType::STRING]);
+} catch (\Doctrine\DBAL\Exception $e) {
+    error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
+
+    $errors[] = 'A problem was encountered when retrieving the report.';
+}
 
 // Begin page
 
@@ -51,24 +58,39 @@ $UI->head();
 <?php
 $UI->body();
 $UI->content_start();
+
+$UI->draw_boxed_list(
+        $errors,
+        'error_box',
+        'The following errors were found:',
+        'If this problem continues, please report it to the WebPA admins'
+);
 ?>
 
-<h2>Peer Feedback Justification Comments</h2>
+<div class="content_box">
+ <h2 style="font-size: 150%">Peer Feedback Justification Comments</h2>
 
-<table class="grid">
-    <tr>
-        <th>#</th>
-        <th>Comment</th>
-    </tr>
-    <?php foreach ($comments as $index => $comment) : ?>
-    <tr>
-        <td><?= $index + 1 ?></td>
-        <td><?= $comment['justification_text'] ?></td>
-    </tr>
+    <?php if (!empty($comments)) : ?>
+    <table class="grid">
+        <tr>
+            <th>#</th>
+            <th>Comment</th>
+        </tr>
+        <?php foreach ($comments as $index => $comment) : ?>
+        <tr>
+            <td><?= $index + 1 ?></td>
+            <td><?= $comment['justification_text'] ?></td>
+        </tr>
 
-    <?php endforeach; ?>
-</table>
+        <?php endforeach; ?>
+    </table>
+    <?php else : ?>
+    <div>
+        <p>There are no comments available to display</p>
+    </div>
+    <?php endif; ?>
+</div>
 
 <?php
 
-$UI->content_end();
+$UI->content_end(false, false, false);
