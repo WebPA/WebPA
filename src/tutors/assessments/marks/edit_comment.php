@@ -23,11 +23,9 @@ try {
     $stmt->bindValue(2, Common::fetch_POST('comment'));
     $stmt->bindValue(3, Common::fetch_POST('comment'));
 
-    $response = $stmt->execute();
+    $stmt->execute();
 } catch (\Doctrine\DBAL\Exception $ex) {
     http_response_code(500);
 }
 
-
-// Return the response
-die('<pre>' . print_r($response, true) . '</pre>');
+http_response_code(200);
