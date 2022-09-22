@@ -60,6 +60,17 @@ $assessments = $DB->getConnection()->fetchAllAssociative(
         ]
 );
 
+/**
+ * Map assessment IDs to comment publication dates. This is neededed because the SimpleObjectIterator used on this page
+ * only deals with fields in the assessment table. The comment publication date is stored in a different table so is
+ * not included in the Assessment class
+ */
+$commentsPublicationDateMap = [];
+
+foreach ($assessments as $assessment) {
+    $commentsPublicationDateMap[$assessment['assessment_id']] = $assessment['comments_publish_date'];
+}
+
 if (!$assessments) {
     ?>
   <p>You do not have any assessments in this category.</p>
@@ -79,6 +90,8 @@ if (!$assessments) {
 
         for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
             $assessment =& $assessment_iterator->current();
+
+            $commentPublicationDate = $commentsPublicationDateMap[$assessment->id];
 
             $num_responses = (array_key_exists($assessment->id, $responses)) ? $responses[$assessment->id] : 0 ;
             $num_members =  (array_key_exists($assessment->id, $members)) ? $members[$assessment->id] : 0 ;
@@ -106,7 +119,7 @@ if (!$assessments) {
             <a href="<?= $responded_url ?>" title="Which students responded" aria-label="Which students responded"><i data-feather="user-check" aria-hidden="true"></i></a>
             <a href="<?= $groupmark_url ?>" title="Set group marks" aria-label="Set group marks"><i data-feather="check" aria-hidden="true"></i></a>
             <a href="<?= $mark_url ?>" title="New marksheet" aria-label="New marksheet"><i data-feather="file-text" aria-hidden="true"></i></a>
-            <?php if (isset($assessment->student_feedback) && $assessment->comments_publish_date === null) : ?>
+            <?php if ($assessment->view_feedback === 1 && $commentPublicationDate === null) : ?>
             <a href="<?= $review_justifications_url ?>" title="Review justification comments" aria-label="Review justification comments"><i data-feather="message-circle" aria-hidden="true"></i></a>
             <?php endif; ?>
         </td>

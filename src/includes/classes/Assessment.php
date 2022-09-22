@@ -206,12 +206,13 @@ class Assessment
         $this->open_date = strtotime($row['open_date']);
         $this->close_date = strtotime($row['close_date']);
         $this->introduction = $row['introduction'];
-        $this->allow_feedback = ($row['allow_feedback']==1);
-        $this->assessment_type = ($row['assessment_type']); //==1);
-        $this->allow_assessment_feedback = ($row['student_feedback']);
-        $this->email_opening = ($row['email_opening']);
-        $this->email_closing = ($row['email_closing']);
-        $this->feedback_name = ($row['feedback_name']);
+        $this->allow_feedback = $row['allow_feedback'] == 1;
+        $this->assessment_type = $row['assessment_type'];;
+        $this->allow_assessment_feedback = $row['student_feedback'];
+        $this->email_opening = $row['email_opening'];
+        $this->email_closing = $row['email_closing'];
+        $this->feedback_name = $row['feedback_name'];
+        $this->view_feedback = $row['view_feedback'];
 
         return true;
     }
