@@ -241,16 +241,17 @@ $UI->draw_boxed_list(
 
     <h2>Student Justification Comments</h2>
 
-    <div style="display: flex; justify-content: flex-end">
-        <form action="release_comments.php" method="post">
-            <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
-            <button type="submit">Release Comments</button>
-        </form>
-    </div>
+
     <div>
         <?php if (empty($groupComments)) : ?>
         <p>There are no comments to display</p>
         <?php else : ?>
+        <div style="display: flex; justify-content: flex-end">
+            <form action="release_comments.php" method="post">
+                <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
+                <button type="submit">Release Comments</button>
+            </form>
+        </div>
         <?php foreach ($groupComments as $groupId => $comments) : ?>
         <section>
             <h3><?= $groupNameIdMap[$groupId] ?></h3>
@@ -273,13 +274,13 @@ $UI->draw_boxed_list(
             <?php endforeach; ?>
         </section>
         <?php endforeach; ?>
+        <div style="display: flex; justify-content: flex-end">
+            <form action="release_comments.php" method="post">
+                <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
+                <button type="submit">Release Comments</button>
+            </form>
+        </div>
         <?php endif; ?>
-    </div>
-    <div style="display: flex; justify-content: flex-end">
-        <form action="release_comments.php" method="post">
-            <input type="hidden" name="assessment-id" value="<?= $assessment_id ?>">
-            <button type="submit">Release Comments</button>
-        </form>
     </div>
     <?php endif; ?>
 
