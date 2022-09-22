@@ -18,13 +18,11 @@ $report_hash = Common::fetch_GET('r');
 $errors = null;
 
 $userAssessmentQuery =
-    'SELECT             uj.justification_text, u.forename ' .
+    'SELECT             uj.justification_text ' .
     'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_report ujr ' .
     'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
     'ON                 ujr.assessment_id = uj.assessment_id ' .
     'AND                ujr.user_id = uj.marked_user_id ' .
-    'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user u ' .
-    'ON                 u.user_id = ujr.user_id ' .
     'WHERE              ujr.user_justification_report_id = ?';
 
 try {
