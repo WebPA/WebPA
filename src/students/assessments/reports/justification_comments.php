@@ -84,7 +84,6 @@ $UI->draw_boxed_list(
             <td><?= $index + 1 ?></td>
             <td><?= $comment['justification_text'] ?></td>
         </tr>
-
         <?php endforeach; ?>
     </table>
     <?php else : ?>
