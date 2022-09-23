@@ -14,25 +14,30 @@ require_once '../../../includes/inc_global.php';
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
-$report_hash = Common::fetch_GET('r');
+$comments = null;
 $errors = null;
+$report_hash = Common::fetch_GET('r');
 
-$userAssessmentQuery =
-    'SELECT             uj.justification_text ' .
-    'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_report ujr ' .
-    'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
-    'ON                 ujr.assessment_id = uj.assessment_id ' .
-    'AND                ujr.user_id = uj.marked_user_id ' .
-    'WHERE              ujr.user_justification_report_id = ?';
+if (empty($report_hash)) {
+    $errors[] = 'No report ID has been provided';
+} else {
+    $userAssessmentQuery =
+        'SELECT             uj.justification_text ' .
+        'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_report ujr ' .
+        'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
+        'ON                 ujr.assessment_id = uj.assessment_id ' .
+        'AND                ujr.user_id = uj.marked_user_id ' .
+        'WHERE              ujr.user_justification_report_id = ?';
 
-try {
-    $comments = $DB
-        ->getConnection()
-        ->fetchAllAssociative($userAssessmentQuery, [$report_hash], [ParameterType::STRING]);
-} catch (\Doctrine\DBAL\Exception $e) {
-    error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
+    try {
+        $comments = $DB
+            ->getConnection()
+            ->fetchAllAssociative($userAssessmentQuery, [$report_hash], [ParameterType::STRING]);
+    } catch (\Doctrine\DBAL\Exception $e) {
+        error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 
-    $errors[] = 'A problem was encountered when retrieving the report.';
+        $errors[] = 'A problem was encountered when retrieving the report.';
+    }
 }
 
 // Begin page
