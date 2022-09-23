@@ -11,6 +11,7 @@
 
 require_once '../../../includes/inc_global.php';
 
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Assessment;
 use WebPA\includes\functions\Common;
@@ -35,7 +36,31 @@ $errors = null;
 // retrieve the assessment details to make sure we are getting comments for an existing assessment
 $assessment = new Assessment($DB);
 
-if ($assessment->load($assessment_id)) {
+$assessmentLoaded = $assessment->load($assessment_id);
+
+// Query where the report has been published or not
+$commentsPublishQuery =
+    'SELECT             publish_date ' .
+    'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date ' .
+    'WHERE              assessment_id = ?';
+
+try {
+    $publishDate = $DB->getConnection()->fetchOne(
+        $commentsPublishQuery,
+        [$assessment_id],
+        [ParameterType::STRING]
+    );
+} catch (Exception $e) {
+    error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
+
+    $errors[] = 'Unable to check if comments have already been released to students';
+}
+
+if ($assessmentLoaded === false) {
+    $errors[] = 'The assessment was not found';
+} else if ($assessment->view_feedback === 0) {
+    $errors[] = 'This assessment does not permit students to view peer feedback comments';
+} else if (empty($errors)) {
     $feedbackCommentsQuery =
         'SELECT uj.id, uj.justification_text, mdj.moderated_comment, uj.group_id, ug.group_name ' .
         'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
@@ -59,9 +84,9 @@ if ($assessment->load($assessment_id)) {
             // only add comments if we have a comment to add
             if (!empty($comment['justification_text'])) {
                 $groupComments[$comment['group_id']][] = [
-                        'id' => $comment['id'],
-                        'comment' => $comment['justification_text'],
-                        'moderatedComment' => $comment['moderated_comment'],
+                    'id' => $comment['id'],
+                    'comment' => $comment['justification_text'],
+                    'moderatedComment' => $comment['moderated_comment'],
                 ];
             }
 
@@ -69,16 +94,14 @@ if ($assessment->load($assessment_id)) {
                 $groupNameIdMap[$comment['group_id']] = $comment['group_name'];
             }
         }
-    } catch (\Doctrine\DBAL\Exception $e) {
+    } catch (Exception $e) {
         error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 
         $errors[] = 'An error was encountered when getting the assessment details.';
     }
-} else {
-    $assessment = null;
 }
 
-// begin Page
+// begin page
 
 $UI->page_title = APP__NAME . ' review student justification comments';
 $UI->menu_selected = 'my assessments';
@@ -222,14 +245,26 @@ $UI->draw_boxed_list(
 
 <div class="content_box">
 
-    <?php if (!$assessment) : ?>
+    <?php if (!empty($errors)) : ?>
     <div class="nav_button_bar">
         <a href="<?= $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to
             assessments list</a>
     </div>
 
-    <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
-    <?php else : ?>
+    <p>
+        One or more problems were encountered when getting the assessment comments. Please contact the WebPA admins if
+        these issues continue, to get further assistance.
+    </p>
+    <?php elseif ($publishDate !== false) : ?>
+    <div class="nav_button_bar">
+        <a href="<?= $list_url ?>"><img src="../../../images/buttons/arrow_green_left.gif" alt="back -"> back to
+            assessments list</a>
+    </div>
+
+    <p>
+        The comments for this assessment have already been released to students and can no longer be edited.
+    </p>
+    <?php else: ?>
     <div class="nav_button_bar">
         <table cellpadding="0" cellspacing="0" width="100%">
             <tr>
