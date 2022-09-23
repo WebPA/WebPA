@@ -98,6 +98,7 @@ if ($assessment->load($assessment_id)) {
             $form_renderer->set_participants($people);
             $form_renderer->assessment_feedback = $assessment->allow_assessment_feedback;
             $form_renderer->assessment_feedback_title = $assessment->feedback_name;
+            $form_renderer->view_feedback = $assessment->view_feedback === 1;
         }
     }
 } else {
