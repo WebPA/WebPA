@@ -22,11 +22,13 @@ if (empty($report_hash)) {
     $errors[] = 'No report ID has been provided';
 } else {
     $userAssessmentQuery =
-        'SELECT             uj.justification_text ' .
+        'SELECT             uj.justification_text, muj.moderated_comment ' .
         'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_report ujr ' .
         'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
         'ON                 ujr.assessment_id = uj.assessment_id ' .
         'AND                ujr.user_id = uj.marked_user_id ' .
+        'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'moderated_user_justification muj ' .
+        'ON                 mdj.user_justification_id = uj.id ' .
         'WHERE              ujr.user_justification_report_id = ?';
 
     try {
@@ -82,7 +84,7 @@ $UI->draw_boxed_list(
         <?php foreach ($comments as $index => $comment) : ?>
         <tr>
             <td><?= $index + 1 ?></td>
-            <td><?= $comment['justification_text'] ?></td>
+            <td><?= !empty($comment['moderated_comment']) ? $comment['moderated_comment'] : $comment['justification_text']; ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
