@@ -28,7 +28,7 @@ if (empty($report_hash)) {
         'ON                 ujr.assessment_id = uj.assessment_id ' .
         'AND                ujr.user_id = uj.marked_user_id ' .
         'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'moderated_user_justification muj ' .
-        'ON                 mdj.user_justification_id = uj.id ' .
+        'ON                 muj.user_justification_id = uj.id ' .
         'WHERE              ujr.user_justification_report_id = ?';
 
     try {
