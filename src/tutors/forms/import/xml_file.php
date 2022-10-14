@@ -23,8 +23,6 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 
 $errno = $_FILES['uploadedfile']['error'];
 
-$errno = 1;
-
 if ($errno == 0) {
 
   //file information
@@ -118,7 +116,7 @@ if ($errno == 0) {
     // $FILE_ERRORS is a global variable imported from the inc_global file
     $action_notify = "<div class='error_box'><p>{$FILE_ERRORS[$errno]}</p></div>";
 } else {
-    $action_notify = '<p>Unable to upload file.</p>';
+    $action_notify = '<div class="error_box"></div><p>Unable to upload file.</p></div>';
 }
 
 $UI->page_title = APP__NAME . ' load form';
