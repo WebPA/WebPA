@@ -21,10 +21,9 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     exit;
 }
 
-$errno = -1;
-foreach ($_FILES as $file) {
-    $errno = $file['error'];
-}
+$errno = $_FILES['uploadedfile']['error'];
+
+$errno = 1;
 
 if ($errno == 0) {
 
@@ -35,9 +34,9 @@ if ($errno == 0) {
     $localfile = file_get_contents($source);
 
     //validate the XML
-    $isValid = XML::validate($localfile, 'schema.xsd');
+    $xmlErrors = XML::validate($localfile, 'schema.xsd');
 
-    if ($isValid === true) {
+    if (empty($xmlErrors)) {
         //get the ID for the current User
         $staff_id = $_user->id;
 
@@ -106,10 +105,18 @@ if ($errno == 0) {
             $action_notify = '<p>The form has been uploaded and can be found in your <a href="/tutors/forms">my forms</a> list.</p>';
         }
     } else {
-        $action_notify = '<p>The import has failed due to the following reasons &#59; <br/>' . print_r($isValid, true) . '</p>';
+        $action_notify = '<p>The import has failed due to the following reasons:</p>';
+        $action_notify .= '<ul>';
+
+        foreach ($xmlErrors as $xmlError) {
+            $action_notify .= '<li>' . $xmlError->message . '</li>';
+        }
+
+        $action_notify .= '</ul>';
     }
 } elseif (isset($FILE_ERRORS[$errno])) {
-    $action_notify = "<p>{$FILE_ERRORS[$errno]}</p>";
+    // $FILE_ERRORS is a global variable imported from the inc_global file
+    $action_notify = "<div class='error_box'><p>{$FILE_ERRORS[$errno]}</p></div>";
 } else {
     $action_notify = '<p>Unable to upload file.</p>';
 }
@@ -129,8 +136,8 @@ $UI->content_start();
 
 ?>
 <div class="content_box">
-  <h2>form loading</h2>
-  <?php echo $action_notify; ?>
+  <h2>Form Upload</h2>
+  <?= $action_notify; ?>
 </div>
 <?php
 
