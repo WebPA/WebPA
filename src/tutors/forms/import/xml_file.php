@@ -52,12 +52,17 @@ if ($errno == 0) {
 
         //check that the form doesn't already exist for the user or for another
         $resultsQuery =
-        'SELECT * ' .
-        'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
-        'WHERE form_id = ? ' .
-        'AND form_name = ?';
+            'SELECT             f.form_id ' .
+            'FROM               ' . APP__DB_TABLE_PREFIX . 'form f ' .
+            'INNER JOIN         ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+            'ON                 f.form_id = fm.form_id ' .
+            'INNER JOIN         ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON                 fm.module_id = um.module_id ' .
+            'WHERE              f.form_id = ? ' .
+            'AND                f.form_name = ? ' .
+            'AND                um.user_id = ?';
 
-        $results = $DB->getConnection()->fetchAssociative($resultsQuery, [$form_id, $formname], [ParameterType::STRING, ParameterType::STRING]);
+        $results = $DB->getConnection()->fetchAssociative($resultsQuery, [$form_id, $formname, $_user->id], [ParameterType::STRING, ParameterType::STRING, ParameterType::INTEGER]);
 
         if ($results) {
             //we need to prompt that they are the same - or send to clone form
@@ -91,14 +96,14 @@ if ($errno == 0) {
           ->createQueryBuilder()
           ->insert(APP__DB_TABLE_PREFIX . 'form_module')
           ->values([
-              'form_id' => $new_id,
-              'module_id' => $_module_id,
+              'form_id' => '?',
+              'module_id' => '?',
           ])
           ->setParameter(0, $new_id)
           ->setParameter(1, $_module_id, ParameterType::INTEGER)
           ->execute();
 
-            $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"index.php\">'my forms'</a> list.</p>";
+            $action_notify = '<p>The form has been uploaded and can be found in your <a href="/tutors/forms">my forms</a> list.</p>';
         }
     } else {
         $action_notify = '<p>The import has failed due to the following reasons &#59; <br/>' . print_r($isValid, true) . '</p>';

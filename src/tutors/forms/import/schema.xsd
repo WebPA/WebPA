@@ -27,7 +27,7 @@
       <xs:sequence>
         <xs:element ref="text" />
         <xs:element ref="desc" />
-        <xs:element ref="range" />
+        <xs:element ref="range" minOccurs="0" />
         <xs:element ref="scorelabel0" minOccurs="0" />
         <xs:element ref="scorelabel1" minOccurs="0" />
         <xs:element ref="scorelabel2" minOccurs="0" />
