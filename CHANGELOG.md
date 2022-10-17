@@ -42,10 +42,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Removed most include and require statements and replaced with PSR-4 autoloading (PR #69)
 - Remove all global variables from the application to make it easier to maintain the code (PR #70)
+
 ### Fixed
 - Change default authenticator to be database instead of SAML (PR #64)
-
-## [Unreleased]
 
 ## [3.0.7] - 2020-01-20
 ### Fixed
