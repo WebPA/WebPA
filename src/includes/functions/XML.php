@@ -23,9 +23,11 @@ class XML
         $objDom->loadXML($xml);
 
         if (!$objDom->schemaValidate($xsd)) {
-            libxml_get_errors();
-            return false;
+            return libxml_get_errors();
         }
-        return true;
+
+        libxml_use_internal_errors(false);
+
+        return [];
     }
 }

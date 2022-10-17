@@ -25,9 +25,11 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 
 //check that we have something to validate
 $empty = strlen(trim($xml));
-if ($empty>0) {
-    $isValid = XML::validate($xml, 'schema.xsd');
-    if ($isValid) {
+
+if ($empty > 0) {
+    $xmlErrors = XML::validate($xml, 'schema.xsd');
+
+    if (empty($xmlErrors)) {
         //get the ID for the current User
         $staff_id = $_user->id;
 
@@ -42,12 +44,17 @@ if ($empty>0) {
 
         //check that the form doesn't already exist for the user or for another
         $resultsQuery =
-        'SELECT * ' .
-        'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
-        'WHERE form_id = ? ' .
-        'AND form_name = ?';
+            'SELECT             f.form_id ' .
+            'FROM               ' . APP__DB_TABLE_PREFIX . 'form f ' .
+            'INNER JOIN         ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+            'ON                 f.form_id = fm.form_id ' .
+            'INNER JOIN         ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
+            'ON                 fm.module_id = um.module_id ' .
+            'WHERE              f.form_id = ? ' .
+            'AND                f.form_name = ? ' .
+            'AND                um.user_id = ?';
 
-        $results = $DB->getConnection()->fetchAssociative($resultsQuery, [$form_id, $formname], [ParameterType::STRING, ParameterType::STRING]);
+        $results = $DB->getConnection()->fetchAssociative($resultsQuery, [$form_id, $formname, $_user->id], [ParameterType::STRING, ParameterType::STRING, ParameterType::INTEGER]);
 
         if ($results) {
             //we need to prompt that they are the same - or send to clone form
@@ -73,10 +80,10 @@ if ($empty>0) {
           ->createQueryBuilder()
           ->insert(APP__DB_TABLE_PREFIX . 'form')
           ->values([
-              'form_id' => $new_id,
-              'form_name' => $formname,
-              'form_type' => $formtype,
-              'form_xml' => $xml,
+              'form_id' => '?',
+              'form_name' => '?',
+              'form_type' => '?',
+              'form_xml' => '?',
           ])
           ->setParameter(0, $new_id)
           ->setParameter(1, $formname)
@@ -90,7 +97,7 @@ if ($empty>0) {
           ->set('form_name', '?')
           ->set('form_type', '?')
           ->set('form_xml', '?')
-          ->where('form_id', '?')
+          ->where('form_id = ?')
           ->setParameter(0, $formname)
           ->setParameter(1, $formtype)
           ->setParameter(2, $xml)
@@ -101,20 +108,27 @@ if ($empty>0) {
           ->createQueryBuilder()
           ->insert(APP__DB_TABLE_PREFIX . 'form_module')
           ->values([
-              'form_id' => $new_id,
-              'module_id' => $_module_id,
+              'form_id' => '?',
+              'module_id' => '?',
           ])
           ->setParameter(0, $new_id)
           ->setParameter(1, $_module_id, ParameterType::INTEGER)
           ->execute();
 
-            $action_notify = "<p>The form has been uploaded and can be found in your <a href=\"../index.php\">'my forms'</a> list.</p>";
+            $action_notify = '<p>The form has been uploaded and can be found in your <a href="/tutors/forms">my forms</a> list.</p>';
         }
     } else {
-        $action_notify = "<p>The import has failed due to the following reasons &#59; <br/>{$isValid}</p>";
+        $action_notify = '<p>The import has failed due to the following reasons:</p>';
+        $action_notify .= '<ul>';
+
+        foreach ($xmlErrors as $xmlError) {
+            $action_notify .= '<li>' . $xmlError->message . '</li>';
+        }
+
+        $action_notify .= '</ul>';
     }
 } else {
-    $action_notify = '<p>There was no form information to upload.<br> Please go back and try again</p>';
+    $action_notify = '<div class="error_box"><p>There was no form information to upload.<br> Please go back and try again</p></div>';
 }
 
 $UI->page_title = APP__NAME . ' load form';
@@ -134,8 +148,8 @@ $UI->content_start();
 
 ?>
 <div class="content_box">
-  <h2>form loading</h2>
-  <?php echo $action_notify; ?>
+  <h2>Form Upload</h2>
+  <?= $action_notify; ?>
 </div>
 <?php
 

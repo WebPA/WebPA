@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Split 100 forms can now be imported into WebPA. Previously, only likert scale forms could be imported (PR #98)
+- XML Validation errors now display when uploading an invalid form (PR #98)
 
 ## [3.2.1] - 2021-12-10
 ### Fixed
