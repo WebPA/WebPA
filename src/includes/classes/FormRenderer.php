@@ -23,6 +23,8 @@ class FormRenderer
 
     public $assessment_feedback_title;
 
+    public $view_feedback = false;
+
     // Private Vars
     private $_form;
 
@@ -317,6 +319,13 @@ class FormRenderer
         <div class="question">
         <p><b><?php echo $this->assessment_feedback_title; ?></b></p>
           <p>This section of the assessment is for you to provide general feedback and/or justification of the <?php echo APP__MARK_TEXT; ?> you have awarded in the section above.</p>
+          <?php if ($this->view_feedback === true) : ?>
+          <div class="warning_box">
+              Please note that for this assessment, your peers will be able to see the justifications you have provided.
+              All comments will be reviewed by academic staff before being released. To maintain anonymity, please avoid
+              using any identifying information in your comments.
+          </div>
+          <?php endif; ?>
           <table class="question_grid" >
 <?php
           //now we know that the assessment feedback is allowed by the system we need to find out if the tutor has set feedback

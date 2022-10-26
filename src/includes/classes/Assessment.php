@@ -40,6 +40,8 @@ class Assessment
 
     public $email_closing = false;
 
+    public $view_feedback;
+
     // Private Vars
     private DAO $_DAO;
 
@@ -204,12 +206,13 @@ class Assessment
         $this->open_date = strtotime($row['open_date']);
         $this->close_date = strtotime($row['close_date']);
         $this->introduction = $row['introduction'];
-        $this->allow_feedback = ($row['allow_feedback']==1);
-        $this->assessment_type = ($row['assessment_type']); //==1);
-        $this->allow_assessment_feedback = ($row['student_feedback']);
-        $this->email_opening = ($row['email_opening']);
-        $this->email_closing = ($row['email_closing']);
-        $this->feedback_name = ($row['feedback_name']);
+        $this->allow_feedback = $row['allow_feedback'] == 1;
+        $this->assessment_type = $row['assessment_type'];;
+        $this->allow_assessment_feedback = $row['student_feedback'];
+        $this->email_opening = $row['email_opening'];
+        $this->email_closing = $row['email_closing'];
+        $this->feedback_name = $row['feedback_name'];
+        $this->view_feedback = $row['view_feedback'];
 
         return true;
     }
@@ -257,6 +260,7 @@ class Assessment
           ->set('feedback_name', '?')
           ->set('feedback_length', 0)
           ->set('feedback_optional', 0)
+          ->set('view_feedback', '?')
           ->where('assessment_id = ?')
           ->setParameter(0, $this->name)
           ->setParameter(1, $this->module_id, ParameterType::INTEGER)
@@ -267,7 +271,8 @@ class Assessment
           ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(7, $this->introduction)
           ->setParameter(8, $this->feedback_name)
-          ->setParameter(9, $this->id);
+          ->setParameter(9, $this->view_feedback ? 1 : 0, ParameterType::INTEGER)
+          ->setParameter(10, $this->id);
         } else {
             // the assessment does not exist. Create it
             $queryBuilder
@@ -292,6 +297,7 @@ class Assessment
                  'feedback_name' => '?',
                  'feedback_length' => 0,
                  'feedback_optional' => 0,
+                 'view_feedback' => '?',
               ]
           )
           ->setParameter(0, $this->id)
@@ -303,7 +309,8 @@ class Assessment
           ->setParameter(6, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(7, date(MYSQL_DATETIME_FORMAT, $this->close_date))
           ->setParameter(8, $this->introduction)
-          ->setParameter(9, $this->feedback_name);
+          ->setParameter(9, $this->feedback_name)
+          ->setParameter(10, $this->view_feedback ? 1 : 0, ParameterType::INTEGER);
         }
 
         $queryBuilder->execute();

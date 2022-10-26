@@ -87,16 +87,16 @@ $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_a
 $UI->head();
 $change_onclick = ' onclick="change_academic_year()"';
 ?>
-<script language="JavaScript" type="text/javascript">
-<!--
-
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
   function change_academic_year() {
     year_sbox = document.getElementById('academic_year');
     chosen_year = year_sbox.options[year_sbox.selectedIndex].value;
-    if (chosen_year) { window.location.href='<?php echo $page_url ."?tab={$tab}&y="; ?>'+chosen_year; }
-  }
 
-//-->
+    if (chosen_year) {
+        window.location.href='<?= $page_url ."?tab={$tab}&y="; ?>' + chosen_year;
+    }
+  }
 </script>
 <?php
 $UI->body();
@@ -154,7 +154,10 @@ include_once $include_page;
 
   </form>
 </div>
-
+<script>
+    // insert feather icon sets
+    feather.replace({color: 'black', width: '20px', height: '20px'});
+</script>
 <?php
 
 $UI->content_end();

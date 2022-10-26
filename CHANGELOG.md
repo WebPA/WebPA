@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Justification comments from students about why they gave scores can now be viewed by students after being moderated by academic staff (PR #97)
 
 ## [3.2.2] - 2022-10-17
 ### Fixed

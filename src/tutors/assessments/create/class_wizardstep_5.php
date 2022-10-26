@@ -137,6 +137,14 @@ class WizardStep5
         } ?>
     </div>
 
+    <h2>Feedback</h2>
+
+    <?php if ($this->wizard->get_field('view_feedback') === 'view_feedback') : ?>
+    <p>Students <strong>can</strong> see anonymised feedback justification</p>
+    <?php else : ?>
+    <p>Students <strong>cannot</strong> see anonymised feedback justification</p>
+    <?php endif; ?>
+
     <h2>Groups</h2>
     <div class="form_section">
 <?php

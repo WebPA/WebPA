@@ -74,6 +74,7 @@ class WizardStep6
         $assessment->email_opening = $this->wizard->get_field('email_opening') == 1;
         $assessment->email_closing = $this->wizard->get_field('email_closing') == 1;
         $assessment->feedback_name = $this->wizard->get_field('feedback_name');
+        $assessment->view_feedback = $this->wizard->get_field('view_feedback') === 'view_feedback' ? 1 : 0;
 
         // Set the form to use for assessment
         $form = new Form($DB);
