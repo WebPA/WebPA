@@ -71,12 +71,13 @@ try {
         $email = new Email();
 
         $body =
-            "Dear " . $user['forename'] . ", \n\n" .
+            'Dear ' . $user['forename'] . ', <br /><br />' .
             "<a href=\"https://www-test.webpa.is.ed.ac.uk/students/assessments/reports/justification_comments.php?r=$hash\">" .
-            "Justification comments </a> for the marks you received from your peers for assessment '" .
-            $user['assessment_name'] ."' are now available for you to view, \n\n" .
-            "Many thanks,\n" .
-            "WebPA";
+            'Comments providing justification</a> for the marks you received from your peers for assesement ' .
+            $user['assessment_name'] . ' are now ' .
+            'available</a> for you to view, <br /><br />' .
+            'Many thanks,<br />' .
+            'WebPA';
 
         $email->set_to($user['email']);
         $email->set_from(APP__EMAIL_NO_REPLY);
