@@ -79,10 +79,10 @@ try {
             "WebPA";
 
         $email->set_to($user['email']);
-        $email->set_bcc(['christopher.mckenzie@ed.ac.uk', 'k.lyszkiewicz@ed.ac.uk', 'vanessa.mather@ed.ac.uk']);
         $email->set_from(APP__EMAIL_NO_REPLY);
         $email->set_subject('WebPA - Peer Feedback Comments Available');
         $email->set_body($body);
+        $email->set_message_type('html');
         $email->send();
     }
 
