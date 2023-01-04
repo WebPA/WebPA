@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.3.0-RC1] - 2023-01-04
+### Fixed
+- The URL for the comments report was hardcoded instead of being retrieved from the application's settings. This has now
+been resolved (PR #XXX)
+
 ## [3.3.0-RC] - 2022-10-26
 ### Added
 - Justification comments from students about why they gave scores can now be viewed by students after being moderated by academic staff (PR #97, #99)
@@ -97,7 +102,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC1...HEAD
+[3.3.0-RC1]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC...v3.3.0-RC1
 [3.3.0-RC]: https://github.com/WebPA/WebPA/compare/v3.2.2...v3.3.0-RC
 [3.2.2]: https://github.com/WebPA/WebPA/compare/v3.2.1...v3.2.2
 [3.2.1]: https://github.com/WebPA/WebPA/compare/v3.2.0...v3.2.1
