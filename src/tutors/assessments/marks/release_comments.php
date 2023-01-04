@@ -72,7 +72,7 @@ try {
 
         $body =
             "Dear " . $user['forename'] . ", \n\n" .
-            "<a href=\"https://www-test.webpa.is.ed.ac.uk/students/assessments/reports/justification_comments.php?r=$hash\">" .
+            "<a href=\"" . APP__WWW . "/students/assessments/reports/justification_comments.php?r=$hash\">" .
             "Justification comments </a> for the marks you received from your peers for assessment '" .
             $user['assessment_name'] ."' are now available for you to view, \n\n" .
             "Many thanks,\n" .
