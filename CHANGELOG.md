@@ -12,7 +12,7 @@ been resolved (PR #XXX)
 
 ## [3.3.0-RC] - 2022-10-26
 ### Added
-- Justification comments from students about why they gave scores can now be viewed by students after being moderated by academic staff (PR #97)
+- Justification comments from students about why they gave scores can now be viewed by students after being moderated by academic staff (PR #97, #99)
 
 ## [3.2.2] - 2022-10-17
 ### Fixed

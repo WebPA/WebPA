@@ -71,18 +71,19 @@ try {
         $email = new Email();
 
         $body =
-            "Dear " . $user['forename'] . ", \n\n" .
+            'Dear ' . $user['forename'] . ', <br /><br />' .
             "<a href=\"" . APP__WWW . "/students/assessments/reports/justification_comments.php?r=$hash\">" .
-            "Justification comments </a> for the marks you received from your peers for assessment '" .
-            $user['assessment_name'] ."' are now available for you to view, \n\n" .
-            "Many thanks,\n" .
-            "WebPA";
+            'Comments providing justification</a> for the marks you received from your peers for assesement ' .
+            $user['assessment_name'] . ' are now ' .
+            'available</a> for you to view, <br /><br />' .
+            'Many thanks,<br />' .
+            'WebPA';
 
         $email->set_to($user['email']);
-        $email->set_bcc(['christopher.mckenzie@ed.ac.uk', 'k.lyszkiewicz@ed.ac.uk', 'vanessa.mather@ed.ac.uk']);
         $email->set_from(APP__EMAIL_NO_REPLY);
         $email->set_subject('WebPA - Peer Feedback Comments Available');
         $email->set_body($body);
+        $email->set_message_type('html');
         $email->send();
     }
 
