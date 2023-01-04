@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.3.0-RC1] - 2023-01-04
 ### Fixed
 - The URL for the comments report was hardcoded instead of being retrieved from the application's settings. This has now
-been resolved (PR #XXX)
+been resolved (PR #100)
 
 ## [3.3.0-RC] - 2022-10-26
 ### Added
