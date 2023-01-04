@@ -101,7 +101,8 @@ been resolved (PR #XXX)
 
 ## [1.1.0.1] - 2008-07-19
 
-[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC...HEAD
+[Unreleased]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC1...HEAD
+[3.3.0-RC1]: https://github.com/WebPA/WebPA/compare/v3.3.0-RC...v3.3.0-RC1
 [3.3.0-RC]: https://github.com/WebPA/WebPA/compare/v3.2.2...v3.3.0-RC
 [3.2.2]: https://github.com/WebPA/WebPA/compare/v3.2.1...v3.2.2
 [3.2.1]: https://github.com/WebPA/WebPA/compare/v3.2.0...v3.2.1
