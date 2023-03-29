@@ -172,7 +172,7 @@ class WizardStep2
                                 </td>
                                 <td>
                                     <input type="text" name="feedback_name" id="feedback_name" maxlength="40" size="40"
-                                           value="<?php echo $this->wizard->get_field('feedback_name'); ?>">
+                                           value="<?php echo $this->wizard->get_field('feedback_name'); ?>">&nbsp;max 40 characters.
                                 </td>
                             </tr>
                             <tr>
