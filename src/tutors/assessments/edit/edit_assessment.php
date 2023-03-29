@@ -500,7 +500,7 @@ if (!$assessment) {
         <table class="form" cellpadding="2" cellspacing="2">
         <tr>
           <td><label for="feedback_title">Title &nbsp;</label></td>
-          <td><input type="text" name="feedback_title" value="<?php echo $assessment->feedback_name; ?>" size="40" maxlength="40"/></td>
+          <td><input type="text" name="feedback_title" value="<?php echo $assessment->feedback_name; ?>" size="40" maxlength="40"/>&nbsp;max 40 characters.</td>
         </tr>
         <tr>
           <td><input type="radio" name="allow_assessment_feedback" id="allow_assessment_feedback_yes" value="1" <?php echo $assessment->allow_assessment_feedback ? 'checked="checked"' : ''; ?> /></td>
