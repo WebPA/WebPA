@@ -168,10 +168,10 @@ class WizardStep2
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td>
-                                    <label class="small" for="feedback_name">Feedback Form Title </label>
+                                    <label class="small" for="feedback_name" style="margin-right: 10px;">Feedback Form Title</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="feedback_name" id="feedback_name" maxlength="100" size="40"
+                                    <input type="text" name="feedback_name" id="feedback_name" maxlength="40" size="40"
                                            value="<?php echo $this->wizard->get_field('feedback_name'); ?>">
                                 </td>
                             </tr>
