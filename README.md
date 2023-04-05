@@ -66,7 +66,7 @@ variables in Apache, please [visit Apache's website](https://httpd.apache.org/do
 
 ### Initialise the Database
      
-Run the following scripts to initialise the database (edit the files to change the names and password as reqired):
+Run the following scripts to initialise the database (edit the files to change the names and password as required):
 
 - install/webpa2\_database.sql: create the database schema and user account;
 - install/webpa2\_tables.sql: create the database tables;
