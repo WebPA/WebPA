@@ -162,14 +162,16 @@ if ($action) {          //incase we want to do more than save changes in the fut
               if ($new_user && !$user_found) {
                   $user = $edit_user->add_user();
                   // assign current module to user
-                  $DB->getConnection()->executeQuery(
-                      'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
-                      '(user_id, module_id, user_type) ' .
-                      'VALUES (?, ?, ?) ' .
-                      'ON DUPLICATE KEY UPDATE user_type = ?',
-                      [$user, $_module_id, $type, $type],
-                      [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
-                  );
+                  if (!$edit_user->is_admin()){
+                      $DB->getConnection()->executeQuery(
+                          'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
+                          '(user_id, module_id, user_type) ' .
+                          'VALUES (?, ?, ?) ' .
+                          'ON DUPLICATE KEY UPDATE user_type = ?',
+                          [$user, $_module_id, $type, $type],
+                          [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
+                      );
+                  }
                   $user_row = $CIS->get_user($user);
                   //reload user
                   $edit_user = new User();
