@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- The icon pack, feather-icons, was loaded via a Content Delivery Network. If 
+the network was not available, no icons would display in WebPA. This change 
+makes the icon pack load from a local installation instead (PR #107)
 
 ## [3.3.0-RC1] - 2023-01-04
 ### Fixed
