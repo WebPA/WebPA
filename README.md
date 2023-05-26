@@ -7,6 +7,7 @@ student with an individual grade. The individual grade reflects the students con
 
 ## Requirements
 
+### PHP
 The following versions of PHP are supported for the latest version of WebPA:
 
 * PHP 7.4
@@ -17,6 +18,16 @@ Your PHP instance must also have the following extensions enabled:
 * MySQLi
 * Sessions
 * XML
+
+### NPM
+Node package manager is required to install feather-icons, an icon package used by WebPA. Once you have downloaded WebPA
+navigate to its root on the command line and run:
+
+- `npm install`
+- `npm run build`
+
+The first command will retrieve the feather-icons package and the second will move the relevant files to WebPA's _js_ 
+directory for use in the application.
 
 ## Installation
 
