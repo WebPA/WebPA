@@ -30,7 +30,7 @@ $group_handler = new GroupHandler();
 
 $collections = $group_handler->get_member_collections($_user->id, 'assessment');
 
-$collection_ids = ArrayFunctions::array_extract_column($collections, 'collection_id');
+$collection_ids = empty($collections) ? [] : ArrayFunctions::array_extract_column($collections, 'collection_id');
 
 // Get a list of assessments that match the user's collections (for this year)
 
