@@ -87,7 +87,7 @@ $UI->set_page_bar_button('Create Assessments', '../../../images/buttons/button_a
 $UI->head();
 $change_onclick = ' onclick="change_academic_year()"';
 ?>
-<script src="https://unpkg.com/feather-icons"></script>
+<script src="/js/feather.js"></script>
 <script>
   function change_academic_year() {
     year_sbox = document.getElementById('academic_year');

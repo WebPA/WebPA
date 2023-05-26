@@ -4,3 +4,4 @@ vendor/
 *.orig
 .env
 /src/mod/**
+node_modules/
