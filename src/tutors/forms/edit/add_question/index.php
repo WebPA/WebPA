@@ -46,14 +46,14 @@ if ($form) {
     $valid_types = ['likert', 'split100'];
 
     if ($form->type=='split100') {
-        $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
+        $wizard_path = DOC__ROOT . 'tutors/forms/edit/add_question/' . $form->type .'/';
 
         $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
         $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
 
         $wizard->show_steps(1); // Hide the last step from the user
     } else {
-        $wizard_path = DOC__ROOT . '/tutors/forms/edit/add_question/' . $form->type .'/';
+        $wizard_path = DOC__ROOT . 'tutors/forms/edit/add_question/' . $form->type .'/';
 
         $wizard->add_step(1, $wizard_path.'class_wizardstep_1.php');
         $wizard->add_step(2, $wizard_path.'class_wizardstep_2.php');
