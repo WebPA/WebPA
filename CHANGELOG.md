@@ -11,7 +11,7 @@ the network was not available, no icons would display in WebPA. This change
 makes the icon pack load from a local installation instead (PR #107)
 
 ### Fixed
-- Fixed an issue where viewing My Assessments page would crash for new users (PR #110)
+- Fixed an issue where viewing my assessments page would crash for new users (PR #110)
 
 ## [3.3.0-RC1] - 2023-01-04
 ### Fixed
