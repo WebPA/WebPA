@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 the network was not available, no icons would display in WebPA. This change 
 makes the icon pack load from a local installation instead (PR #107)
 
+### Fixed
+- Fixed an issue where viewing My Assessments page would crash for new users (PR #110)
+
 ## [3.3.0-RC1] - 2023-01-04
 ### Fixed
 - The URL for the comments report was hardcoded instead of being retrieved from the application's settings. This has now
