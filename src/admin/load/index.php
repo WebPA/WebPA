@@ -109,7 +109,7 @@ $pasteinstruction ='Copy and paste the contents of the file you want to add to t
       <?php echo $filename; ?>
     </td>
     <td>
-      <input name="uploadedfile" type="file" />
+      <input name="uploadedfile" type="file" required />
     </td>
 
   </tr>
