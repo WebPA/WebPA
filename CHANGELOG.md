@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 the network was not available, no icons would display in WebPA. This change 
 makes the icon pack load from a local installation instead (PR #107)
 
+### Fixed
+- When deleting a user, the process tries to delete all the forms linked to that user although there is no relationship 
+between the user and the form in the database. This PR fixes that. (PR #113)
+
 ## [3.3.0-RC1] - 2023-01-04
 ### Fixed
 - The URL for the comments report was hardcoded instead of being retrieved from the application's settings. This has now
