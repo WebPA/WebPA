@@ -258,12 +258,6 @@ class User
         );
 
         $dbConn->executeQuery(
-            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_owner_id = ?',
-            [$this->id],
-            [ParameterType::INTEGER]
-        );
-
-        $dbConn->executeQuery(
             'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE marked_user_id = ? OR user_id = ?',
             [$this->id, $this->id],
             [ParameterType::INTEGER, ParameterType::INTEGER]
