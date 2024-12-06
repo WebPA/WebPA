@@ -171,7 +171,7 @@ class WizardStep2
                                     <label class="small" for="feedback_name">Feedback Form Title </label>
                                 </td>
                                 <td>
-                                    <input type="text" name="feedback_name" id="feedback_name" maxlength="100" size="40"
+                                    <input type="text" name="feedback_name" id="feedback_name" maxlength="45" size="45"
                                            value="<?php echo $this->wizard->get_field('feedback_name'); ?>">
                                 </td>
                             </tr>

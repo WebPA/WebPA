@@ -46,11 +46,18 @@ class User
     * @param string $username
     * @param string $passsword
     */
-    public function __construct($username = null, $password = null)
+    //Changed $username to default to an empty string instead of null, as the database does not allow for it to be set to null values
+    public function __construct($username = "", $password = null)
     {
         $this->username = $username;
         $this->source_id = '';
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        if ($password === null)
+        {
+            $this->password = null;
+        } else
+        {
+            $this->password = password_hash($password, PASSWORD_DEFAULT);
+        }
         $this->id = null;
         $this->type = null;
         $this->id_number = null;
