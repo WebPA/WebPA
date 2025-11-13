@@ -66,19 +66,6 @@ class XMLParser
 
     // /XMLParser()
 
-    /**
-     * DESTRUCTOR for the xml parser
-     */
-    public function destroy()
-    {
-        if (is_resource($this->_parser)) {
-            xml_parser_free($this->_parser);
-        }
-        $this->_parser = null;
-    }
-
-    // /->destroy()
-
     /*
     * ================================================================================
     * Public Methods

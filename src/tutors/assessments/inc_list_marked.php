@@ -177,7 +177,6 @@ if (!$assessments) {
     }// /if(mark sheets)
             echo "    </div>\n";
         }
-        $xml_parser->destroy();
         echo "  </div>\n";
     }
 ?>
