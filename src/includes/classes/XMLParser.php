@@ -105,9 +105,8 @@ class XMLParser
         $this->_parser = xml_parser_create('');
 
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
-        xml_set_object($this->_parser, $this);
-        xml_set_element_handler($this->_parser, '_tag_open', '_tag_close');
-        xml_set_character_data_handler($this->_parser, '_tag_data');
+        xml_set_element_handler($this->_parser, [$this, '_tag_open'], [$this, '_tag_close']);
+        xml_set_character_data_handler($this->_parser, [$this, '_tag_data']);
 
         $this->xml_data = $xml_data;
         $this->xml_array = [];
