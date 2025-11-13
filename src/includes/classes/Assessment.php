@@ -12,6 +12,7 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
+use \Exception;
 
 class Assessment
 {
@@ -452,18 +453,25 @@ class Assessment
 
     /**
      * function to get the date string
+     *
      * @param date $date
+     * @throws Exception if an invalid date type is requested
+     * 
      * @return string formated date
     */
     public function get_date_string($date)
     {
         $date_format = 'D, jS F, Y \a\t G:i';
-        if ($date == 'open_date') {
+
+        if ($date === 'open_date') {
             return date($date_format, $this->open_date);
         }
-        if ($date == 'close_date') {
+
+        if ($date === 'close_date') {
             return date($date_format, $this->close_date);
         }
+
+        throw new Exception('Invalid date requested from function get_date_string()');
     }
 
     // /->get_date_string()
