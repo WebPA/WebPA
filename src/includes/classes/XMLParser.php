@@ -125,7 +125,7 @@ class XMLParser
      * Generate an xml document from the given array
      *
      * @param array $data xml array structure
-     * @return string  xml document
+     * @return string|void xml document will be returned if the level is set to 0 and nothing is returned if not
      */
     public function generate_xml(&$data, $level = 0, $prior_key = null)
     {

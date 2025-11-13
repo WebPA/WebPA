@@ -485,7 +485,7 @@ class GroupCollection
         $new_group->name = $group_name;
         $new_group->set_collection_object($this);
 
-        $this->_group[$new_group->id] = $new_group->get_as_array();
+        $this->_groups[$new_group->id] = $new_group->get_as_array();
         $this->_group_objects[$new_group->id] =& $new_group;
         return $new_group;
     }
@@ -605,11 +605,12 @@ class GroupCollection
      *
      * @param string $user_id user id of the member
      *
-     * @return array array of group objects
+     * @return array|void array of group objects or void if no member roles are found
      */
     public function & get_member_groups($user_id)
     {
         $member_roles = $this->get_member_roles($user_id);
+
         if ($member_roles) {
             $groups = null;
             foreach ($member_roles as $group_id => $role) {
