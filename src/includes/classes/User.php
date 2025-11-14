@@ -50,7 +50,7 @@ class User
     {
         $this->username = $username;
         $this->source_id = '';
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $password === null ? null : password_hash($password, PASSWORD_DEFAULT);
         $this->id = null;
         $this->type = null;
         $this->id_number = null;
