@@ -117,11 +117,7 @@ class WizardStep2
                 const introText = "<?php echo base64_encode($this->wizard->get_field('introduction')); ?>";
                 const moduleId = <?php echo $this->moduleId; ?>;
             </script>
-            <div class="form_section">
-                <table cellpadding="0" cellspacing="0">
-                    <div id="react-filter"></div>
-                </table>
-            </div>
+            <div id="react-filter"></div>
             <?php
 
             //check that the system allows student Justification

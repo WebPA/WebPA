@@ -19,44 +19,56 @@ function AssessmentFilter({
   return (
     <>
       <h2>Your assessment forms</h2>
-      <input
-        name="module-search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
       <div className="form_section">
         <table cellPadding="0" cellSpacing="0">
-          {filteredForms.map((item) => (
-            <tr key={item.form_id}>
+          <tbody>
+            <tr>
               <td>
-                <input
-                  type="radio"
-                  name="form_id"
-                  id={`form_${item.form_id}`}
-                  value={item.form_id}
-                />
-              </td>
-              <td>
-                <label className="small" htmlFor={`form_${item.form_id}`}>
-                  {item.form_name}{" "}
-                  {moduleId === item.module_id
-                    ? ""
-                    : `(${item.module_title} ${item.module_code})`}
+                <label className="small" htmlFor="module-search">
+                  Filter by module name
                 </label>
               </td>
               <td>
-                &nbsp; &nbsp; (
-                <a
-                  style={{ fontWeight: "normal", fontSize: "84%" }}
-                  href={`../../forms/edit/preview_form.php?f=${item.form_id}&amp;i=${introText}`}
-                  target="_blank"
-                >
-                  preview
-                </a>
-                )
+                <input
+                  id="module-search"
+                  name="module-search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </td>
             </tr>
-          ))}
+            {filteredForms.map((item) => (
+              <tr key={item.form_id}>
+                <td>
+                  <input
+                    type="radio"
+                    name="form_id"
+                    id={`form_${item.form_id}`}
+                    value={item.form_id}
+                  />
+                </td>
+                <td>
+                  <label className="small" htmlFor={`form_${item.form_id}`}>
+                    {item.form_name}{" "}
+                    {moduleId === item.module_id
+                      ? ""
+                      : `(${item.module_title} ${item.module_code})`}
+                  </label>
+                </td>
+                <td>
+                  &nbsp; &nbsp; (
+                  <a
+                    style={{ fontWeight: "normal", fontSize: "84%" }}
+                    href={`../../forms/edit/preview_form.php?f=${item.form_id}&amp;i=${introText}`}
+                    target="_blank"
+                  >
+                    preview
+                  </a>
+                  )
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>
