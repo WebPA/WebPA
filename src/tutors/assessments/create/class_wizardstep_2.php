@@ -91,8 +91,6 @@ class WizardStep2
             'OR fm.module_id = ? ' .
             'ORDER BY f.form_name ASC';
 
-        $user->id = 15;
-
         $forms = $DB->getConnection()->fetchAllAssociative($sql, [$user->id, $this->moduleId], [ParameterType::INTEGER, ParameterType::INTEGER]);
 
         $form_id = $this->wizard->get_field('form_id');
@@ -119,8 +117,6 @@ class WizardStep2
                 const introText = "<?php echo base64_encode($this->wizard->get_field('introduction')); ?>";
                 const moduleId = <?php echo $this->moduleId; ?>;
             </script>
-            <div id="react-filter"></div>
-            <h2>Your assessment forms</h2>
             <div class="form_section">
                 <table cellpadding="0" cellspacing="0">
                     <div id="react-filter"></div>
