@@ -28,15 +28,28 @@ $genericFormQuery =
 
 $generic_form = $DB->getConnection()->fetchAllAssociative($genericFormQuery);
 
-$formsQuery =
-    'SELECT f.* ' .
-    'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
-    'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
-    'ON f.form_id = fm.form_id ' .
-    'WHERE fm.module_id = ? ' .
-    'ORDER BY form_name ASC';
+$showAllForms = Common::fetch_GET('all-forms');
 
-$forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [$_module_id], [ParameterType::INTEGER]);
+if ($showAllForms === 'true') {
+  $formsQuery =
+      'SELECT f.* ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+      'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+      'ON f.form_id = fm.form_id ' .
+      'ORDER BY form_name ASC';
+
+  $forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [], [ParameterType::INTEGER]);
+} else {
+  $formsQuery =
+      'SELECT f.* ' .
+      'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
+      'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
+      'ON f.form_id = fm.form_id ' .
+      'WHERE fm.module_id = ? ' .
+      'ORDER BY form_name ASC';
+
+  $forms = $DB->getConnection()->fetchAllAssociative($formsQuery, [$_module_id], [ParameterType::INTEGER]);
+}
 
 // --------------------------------------------------------------------------------
 // Begin Page
@@ -65,7 +78,14 @@ $UI->content_start();
     <h2>Existing forms</h2>
     <div class="form_section">
 
-      <p>These are the forms you have already created. To edit a form, click on <img src="../../images/buttons/edit.gif" width="16" height="16" alt="edit form" title="edit" /> in the list below.</p>
+      <p>These are the forms you have already created<?= ($showAllForms === 'true') ? '' : ' for this module' ?>. To edit a form, click on <img src="../../images/buttons/edit.gif" width="16" height="16" alt="edit form" title="edit" /> in the list below.</p>
+      <p>
+      <?php if ($showAllForms === 'true') : ?>
+        <a href="/tutors/forms/">See forms for this module only</a>
+      <?php else : ?>
+        <a href="?all-forms=true">See all of your forms</a>
+      <?php endif; ?>
+      </p>
 
       <div class="obj_list">
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"assessmentForms.d.ts","sourceRoot":"","sources":["../../../js/interfaces/assessmentForms.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,WAAW,cAAc;IACrC,OAAO,EAAE,MAAM,CAAC;IAChB,SAAS,EAAE,MAAM,CAAC;IAClB,WAAW,EAAE,MAAM,CAAC;IACpB,SAAS,EAAE,MAAM,CAAC;IAClB,YAAY,EAAE,MAAM,CAAC;CACtB"}
