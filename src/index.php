@@ -1,4 +1,5 @@
 <?php
+
 /**
  * INDEX - Main page
  *
