@@ -8,4 +8,3 @@ function AssessmentFilter({ assessmentForms, introText, moduleId, }) {
                                                     : `(${item.module_title} ${item.module_code})`] }) }), _jsxs("td", { children: ["\u00A0 \u00A0 (", _jsx("a", { style: { fontWeight: "normal", fontSize: "84%" }, href: `../../forms/edit/preview_form.php?f=${item.form_id}&amp;i=${introText}`, target: "_blank", children: "preview" }), ")"] })] }, item.form_id)))] }) }) })] }));
 }
 export default AssessmentFilter;
-//# sourceMappingURL=AssessmentFilter.js.map
