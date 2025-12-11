@@ -4,9 +4,7 @@
     "build": "npm run copy"
   },
   "dependencies": {
-    "feather-icons": "^4.29.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "feather-icons": "^4.29.0"
   },
   "devDependencies": {
     "@types/react-dom": "^19.2.3",
