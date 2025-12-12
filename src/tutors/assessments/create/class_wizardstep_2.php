@@ -111,7 +111,6 @@ class WizardStep2
             <p>The form you select will be copied into your new assessment. Subsequent changes to the form '''will
                 not''' affect your assessment.</p>
 
-
             <script>
                 const assessmentForms = <?php echo json_encode($forms); ?>;
                 const introText = "<?php echo base64_encode($this->wizard->get_field('introduction')); ?>";
