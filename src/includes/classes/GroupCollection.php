@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class :  GroupCollection
  *
@@ -142,22 +143,22 @@ class GroupCollection
         }
 
         $this->dbConn->executeQuery(
-                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id IN (SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?)',
-                [$this->id],
-                [ParameterType::STRING]
-            );
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group_member WHERE group_id IN (SELECT group_id FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?)',
+            [$this->id],
+            [ParameterType::STRING]
+        );
 
         $this->dbConn->executeQuery(
-                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?',
-                [$this->id],
-                [ParameterType::STRING]
-            );
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_group WHERE collection_id = ?',
+            [$this->id],
+            [ParameterType::STRING]
+        );
 
         $this->dbConn->executeQuery(
-                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
-                [$this->id],
-                [ParameterType::STRING]
-            );
+            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
+            [$this->id],
+            [ParameterType::STRING]
+        );
 
         return true;
     }
@@ -173,20 +174,21 @@ class GroupCollection
             return false;
         }
         // load all necessary info
-        $fields = ['collection_id' => $this->id,
-                'module_id' => $this->module_id,
-                'collection_name' => $this->name,
-                'collection_created_on' => date(MYSQL_DATETIME_FORMAT, $this->_created_on),
-                'collection_locked_on' => ((!$this->_locked_on) ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on)),
-            ];
+        $fields = [
+            'collection_id' => $this->id,
+            'module_id' => $this->module_id,
+            'collection_name' => $this->name,
+            'collection_created_on' => date(MYSQL_DATETIME_FORMAT, $this->_created_on),
+            'collection_locked_on' => ((!$this->_locked_on) ? null : date(MYSQL_DATETIME_FORMAT, $this->_locked_on)),
+        ];
 
         // before saving, check if this collection already exists in the db
         $storedCollectionId =
-                $this->dbConn->fetchOne(
-                    'SELECT collection_id FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
-                    [$this->id],
-                    [ParameterType::STRING]
-                );
+            $this->dbConn->fetchOne(
+                'SELECT collection_id FROM ' . APP__DB_TABLE_PREFIX . 'collection WHERE collection_id = ?',
+                [$this->id],
+                [ParameterType::STRING]
+            );
 
         $queryBuilder = $this->dbConn->createQueryBuilder();
 
@@ -196,31 +198,31 @@ class GroupCollection
         if (!$storedCollectionId) {
             // the collection does not exist so create it
             $queryBuilder
-                    ->insert(APP__DB_TABLE_PREFIX . 'collection')
-                    ->values([
-                        'collection_id' => '?',
-                        'module_id' => '?',
-                        'collection_name' => '?',
-                        'collection_created_on' => '?',
-                        'collection_locked_on' => '?',
-                    ])
-                    ->setParameter(0, $this->id)
-                    ->setParameter(1, $this->module_id, ParameterType::INTEGER)
-                    ->setParameter(2, $this->name)
-                    ->setParameter(3, $createdOn)
-                    ->setParameter(4, $lockedOn);
+                ->insert(APP__DB_TABLE_PREFIX . 'collection')
+                ->values([
+                    'collection_id' => '?',
+                    'module_id' => '?',
+                    'collection_name' => '?',
+                    'collection_created_on' => '?',
+                    'collection_locked_on' => '?',
+                ])
+                ->setParameter(0, $this->id)
+                ->setParameter(1, $this->module_id, ParameterType::INTEGER)
+                ->setParameter(2, $this->name)
+                ->setParameter(3, $createdOn)
+                ->setParameter(4, $lockedOn);
         } else {
             // the collection exists so update it
             $queryBuilder
-                    ->update(APP__DB_TABLE_PREFIX . 'collection')
-                    ->set('module_id', '?')
-                    ->set('collection_name', '?')
-                    ->set('collection_created_on', '?')
-                    ->where('collection_id = ?')
-                    ->setParameter(0, $this->module_id, ParameterType::INTEGER)
-                    ->setParameter(1, $this->name)
-                    ->setParameter(2, $createdOn)
-                    ->setParameter(3, $this->id);
+                ->update(APP__DB_TABLE_PREFIX . 'collection')
+                ->set('module_id', '?')
+                ->set('collection_name', '?')
+                ->set('collection_created_on', '?')
+                ->where('collection_id = ?')
+                ->setParameter(0, $this->module_id, ParameterType::INTEGER)
+                ->setParameter(1, $this->name)
+                ->setParameter(2, $createdOn)
+                ->setParameter(3, $this->id);
 
             // check if the locked field needs to be set
             if (is_null($lockedOn)) {
@@ -401,7 +403,7 @@ class GroupCollection
         if (!$this->_groups) {
             $this->_groups = [];
         }
-        uasort($this->_groups, ['self', 'group_title_natural_sort']);
+        uasort($this->_groups, [self::class, 'group_title_natural_sort']);
     }
 
     // /->refresh_groups()
@@ -431,7 +433,7 @@ class GroupCollection
 
         if (is_object($group_object)) {
             $this->_groups[$group_object->id] = $group_object->get_as_array();
-            $this->_group_objects["{$group_object->id}"] =& $group_object;
+            $this->_group_objects["{$group_object->id}"] = &$group_object;
             $group_object->set_collection_object($this);
         }
     }
@@ -446,7 +448,7 @@ class GroupCollection
      *
      * @return object Group object (or NULL)
      */
-    public function & get_group_object($group_id)
+    public function &get_group_object($group_id)
     {
         if (!is_array($this->_groups)) {
             $this->refresh_groups();
@@ -462,7 +464,7 @@ class GroupCollection
             $new_group->set_dao_object($this->_DAO);
             $new_group->set_collection_object($this);
             $new_group->load($group_id);
-            $this->_group_objects[$group_id] =& $new_group;
+            $this->_group_objects[$group_id] = &$new_group;
             return $new_group;
         }
         return null;
@@ -477,7 +479,7 @@ class GroupCollection
      * @param string $group_name Name of new group to add
      * @return array
      */
-    public function & new_group($group_name = 'new group')
+    public function &new_group($group_name = 'new group')
     {
         $new_group = new Group();
         $new_group->set_dao_object($this->_DAO);
@@ -485,8 +487,8 @@ class GroupCollection
         $new_group->name = $group_name;
         $new_group->set_collection_object($this);
 
-        $this->_group[$new_group->id] = $new_group->get_as_array();
-        $this->_group_objects[$new_group->id] =& $new_group;
+        $this->_groups[$new_group->id] = $new_group->get_as_array();
+        $this->_group_objects[$new_group->id] = &$new_group;
         return $new_group;
     }
 
@@ -497,7 +499,7 @@ class GroupCollection
      *
      * @return object GroupIterator object
      */
-    public function & get_groups_iterator()
+    public function &get_groups_iterator()
     {
         if (!$this->_groups) {
             $this->refresh_groups();
@@ -605,15 +607,16 @@ class GroupCollection
      *
      * @param string $user_id user id of the member
      *
-     * @return array array of group objects
+     * @return array|void array of group objects or void if no member roles are found
      */
-    public function & get_member_groups($user_id)
+    public function &get_member_groups($user_id)
     {
         $member_roles = $this->get_member_roles($user_id);
+
         if ($member_roles) {
             $groups = null;
             foreach ($member_roles as $group_id => $role) {
-                $groups[] =& $this->get_group_object($group_id);
+                $groups[] = &$this->get_group_object($group_id);
             }
             return $groups;
         }
@@ -664,7 +667,7 @@ class GroupCollection
         $groups_iterator = $this->get_groups_iterator();
         if ($groups_iterator->size() > 0) {
             for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-                $group =& $groups_iterator->current();
+                $group = &$groups_iterator->current();
                 $group->purge_members($target_roles, $protect_roles);
             }
         }

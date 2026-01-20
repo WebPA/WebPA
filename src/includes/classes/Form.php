@@ -247,11 +247,12 @@ class Form
     /**
     * Get an individual question's info
     * @param integer $index
-    * @return array Questions at the point in the array
+    * @return array|void Questions at the point in the array or nothing if the index does not exist
     */
     public function get_question($index)
     {
         $index = (int) $index;
+
         if (array_key_exists($index, (array) $this->_questions)) {
             return $this->_questions[$index];
         }

@@ -66,19 +66,6 @@ class XMLParser
 
     // /XMLParser()
 
-    /**
-     * DESTRUCTOR for the xml parser
-     */
-    public function destroy()
-    {
-        if (is_resource($this->_parser)) {
-            xml_parser_free($this->_parser);
-        }
-        $this->_parser = null;
-    }
-
-    // /->destroy()
-
     /*
     * ================================================================================
     * Public Methods
@@ -118,9 +105,8 @@ class XMLParser
         $this->_parser = xml_parser_create('');
 
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
-        xml_set_object($this->_parser, $this);
-        xml_set_element_handler($this->_parser, '_tag_open', '_tag_close');
-        xml_set_character_data_handler($this->_parser, '_tag_data');
+        xml_set_element_handler($this->_parser, [$this, '_tag_open'], [$this, '_tag_close']);
+        xml_set_character_data_handler($this->_parser, [$this, '_tag_data']);
 
         $this->xml_data = $xml_data;
         $this->xml_array = [];
@@ -139,7 +125,7 @@ class XMLParser
      * Generate an xml document from the given array
      *
      * @param array $data xml array structure
-     * @return string  xml document
+     * @return string|void xml document will be returned if the level is set to 0 and nothing is returned if not
      */
     public function generate_xml(&$data, $level = 0, $prior_key = null)
     {

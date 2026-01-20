@@ -54,7 +54,7 @@ if (($username) && ($password)) {
         //but just to be sure check for an authorisation failed message
         $auth_failed = $_auth->get_error();
 
-        if (strlen($auth_failed) > 0) {
+        if (is_string($auth_failed) && strlen($auth_failed) > 0) {
             $msg = $auth_failed;
         }
     } elseif ($_auth->is_disabled()) {
