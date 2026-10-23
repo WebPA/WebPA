@@ -37,11 +37,11 @@ $command = Common::fetch_POST('command');
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
-    $assessment_url = "edit_assessment.php?{$assessment_qs}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
+    $assessment_url = "edit_assessment.php?$assessment_qs";
 
     $form = new Form($DB);
-    $form_xml =& $assessment->get_form_xml();
+    $form_xml = $assessment->get_form_xml();
     $form->load_from_xml($form_xml);
 } else {
     $assessment = null;
@@ -223,7 +223,7 @@ if (!$assessment) {
             echo '<tr>';
             echo "<td><input type=\"radio\" name=\"form_id\" id=\"form_{$new_form['form_id']}\" value=\"{$new_form['form_id']}\" $checked /></td>";
             echo "<td><label class=\"small\" for=\"form_{$new_form['form_id']}\">{$new_form['form_name']}</label></td>";
-            echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"/tutors/forms/edit/preview_form.php?f={$new_form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>";
+            echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"/tutors/forms/edit/preview_form.php?f={$new_form['form_id']}&amp;i=$intro_text\" target=\"_blank\">preview</a>)</td>";
             echo '</tr>';
         } ?>
           </table>

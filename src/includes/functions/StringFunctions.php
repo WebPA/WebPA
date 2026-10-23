@@ -26,13 +26,13 @@ class StringFunctions
     */
     public static function str_random($length = 8, $valid_chars = null)
     {
-        if (is_null($valid_chars)) {
+        if ($valid_chars === null) {
             $valid_chars = STR_ALPHANUM_CHARS;
         }
 
         $str = '';
-        while (strlen($str) < $length) {
-            $str .= substr($valid_chars, mt_rand(0, strlen($valid_chars) -1), 1);
+        while (strlen((string) $str) < $length) {
+            $str .= substr($valid_chars, mt_rand(0, strlen((string) $valid_chars) -1), 1);
         }
         return $str;
     }

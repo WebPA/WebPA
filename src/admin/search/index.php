@@ -152,7 +152,7 @@ if (empty($sMessage)) {
                 foreach ($rs[$recordcounter] as $field_name => $field_value) {
                     if ($field_name == 'source_id') {
                     } elseif (($field_name != 'user_id') && ($field_name != 'module_id')) {
-                        echo "<th>{$field_name}</th>";
+                        echo "<th>$field_name</th>";
                     } elseif (!$_source_id) {
                         echo '<th class="icon">&nbsp;</th>';
                     }
@@ -192,7 +192,7 @@ if (empty($sMessage)) {
     }
 } else {
     if (!empty($sMessage)) {
-        echo "<div class=\"warning_box\">{$sMessage}</div>";
+        echo "<div class=\"warning_box\">$sMessage</div>";
     }
     echo $page_description;
     echo '<form method="get" name="search" action="index.php">' ;

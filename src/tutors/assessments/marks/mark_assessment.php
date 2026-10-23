@@ -31,8 +31,8 @@ $year = Common::fetch_GET('y', date('Y'));
 
 $command = Common::fetch_POST('command');
 
-$list_url = "../index.php?tab={$tab}&y={$year}";
-$done_list_url = "../index.php?tab=marked&y={$year}";
+$list_url = "../index.php?tab=$tab&y=$year";
+$done_list_url = "../index.php?tab=marked&y=$year";
 
 $prev_url = $list_url;
 
@@ -40,7 +40,7 @@ $prev_url = $list_url;
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 
     $group_handler = new GroupHandler();
     $collection = $group_handler->get_collection($assessment->get_collection_id());
@@ -68,13 +68,13 @@ if (($command) && ($assessment)) {
       // Create Mark Sheet
       $weighting = Common::fetch_POST('pa_weighting', null);
       $weighting = (is_numeric($weighting)) ? (int) $weighting : null;
-      if ((is_null($weighting)) || ($weighting<=0) || ($weighting>100)) {
+      if (($weighting === null) || ($weighting<=0) || ($weighting>100)) {
           $errors[] = 'The PA Weighting must be a number between 1 - 100';
       }
 
       $penalty = Common::fetch_POST('pa_penalty', null);
       $penalty = (is_numeric($penalty)) ? (int) $penalty : null;
-      if ((is_null($penalty)) || ($penalty<$min_penalty) || ($penalty>$max_penalty)) {
+      if (($penalty === null) || ($penalty<$min_penalty) || ($penalty>$max_penalty)) {
           $errors[] = "The Non-completion Penalty must be a number between $min_penalty - $max_penalty";
       }
 
@@ -236,7 +236,7 @@ if (!$assessment) {
 <?php
   for ($i=5; $i<=100; $i=$i+5) {
       $selected = ($i==50) ? 'selected="selected"' : '' ;
-      echo "<option value=\"$i\" $selected> {$i}% </option>\n";
+      echo "<option value=\"$i\" $selected> $i% </option>\n";
   } ?>
         </select>
       </td>
@@ -253,7 +253,7 @@ if (!$assessment) {
 <?php
   for ($i=$min_penalty; $i<=$max_penalty; $i++) {
       $selected = ($i==0) ? 'selected="selected"' : '' ;
-      echo "<option value=\"$i\" $selected> {$i}% </option>\n";
+      echo "<option value=\"$i\" $selected> $i% </option>\n";
   } ?>
         </select>
       </td>
@@ -303,7 +303,7 @@ if (!$assessment) {
             <?php
               for($i=$min_tolerance; $i<=$max_tolerance; $i++) {
                 $selected = ($i==0) ? 'selected="selected"' : '' ;
-                echo("<option value=\"$i\" $selected> {$i}% </option>\n");
+                echo("<option value=\"$i\" $selected> $i% </option>\n");
               }
             ?>
           </select>

@@ -31,12 +31,10 @@ use WebPA\includes\classes\SimpleObjectIterator;
 $now = date(MYSQL_DATETIME_FORMAT);
 
 $assessmentsQuery =
-    'SELECT a.*, pd.publish_date AS comments_publish_date ' .
+    'SELECT a.*, NULL AS comments_publish_date ' .
     'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
     'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'assessment_marking am ' .
     'ON a.assessment_id = am.assessment_id ' .
-    'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date pd ' .
-    'ON a.assessment_id = pd.assessment_id ' .
     'WHERE a.module_id = ? ' .
     'AND a.open_date >= ? ' .
     'AND a.open_date < ? ' .
@@ -89,7 +87,7 @@ if (!$assessments) {
         $assessment_iterator = new SimpleObjectIterator($assessments, 'Assessment', $DB);
 
         for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-            $assessment =& $assessment_iterator->current();
+            $assessment = $assessment_iterator->current();
 
             $commentPublicationDate = $commentsPublicationDateMap[$assessment->id];
 
@@ -97,12 +95,12 @@ if (!$assessments) {
             $num_members =  (array_key_exists($assessment->id, $members)) ? $members[$assessment->id] : 0 ;
             $completed_msg = ($num_responses==$num_members) ? '- <strong>COMPLETED</strong>' : '';
 
-            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&{$qs}";
-            $email_url = "email/index.php?a={$assessment->id}&{$qs}";
-            $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
-            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}";
-            $mark_url = "marks/mark_assessment.php?a={$assessment->id}&{$qs}";
-            $review_justifications_url = "marks/review_justification.php?a={$assessment->id}&{$qs}";
+            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&$qs";
+            $email_url = "email/index.php?a={$assessment->id}&$qs";
+            $responded_url = "students_who_responded.php?a={$assessment->id}&$qs";
+            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&$qs";
+            $mark_url = "marks/mark_assessment.php?a={$assessment->id}&$qs";
+            $review_justifications_url = "marks/review_justification.php?a={$assessment->id}&$qs";
             ?>
     <div class="obj">
       <table class="obj" cellpadding="2" cellspacing="2">

@@ -36,7 +36,7 @@ class Form
     public static function render_options($arr, $selected = null, $switch_kv = false)
     {
         if (!$switch_kv) {
-            if (!is_null($selected)) {
+            if ($selected !== null) {
                 foreach ($arr as $k => $v) {
                     echo "<option value=\"$k\" ". (($k==$selected) ? 'selected="selected"' : '') ."> $v </option>";
                 }
@@ -89,7 +89,7 @@ class Form
     */
     public static function render_checkbox_grid($arr, $input_name, $selected_arr, $switch_value_label = false, $num_cols = 1)
     {
-        if (is_null($selected_arr)) {
+        if ($selected_arr === null) {
             $selected_arr = [];
         } else {
             $selected_arr = (array) $selected_arr;

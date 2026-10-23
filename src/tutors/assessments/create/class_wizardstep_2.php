@@ -12,6 +12,8 @@ use Doctrine\DBAL\ParameterType;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep2
 {
     public $wizard;
@@ -72,11 +74,9 @@ class WizardStep2
             'FROM ' . APP__DB_TABLE_PREFIX . 'form f ' .
             'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'form_module fm ' .
             'ON f.form_id = fm.form_id ' .
-            'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'user_module um ' .
-            'ON fm.module_id = um.module_id ' .
             'INNER JOIN ' . APP__DB_TABLE_PREFIX . 'module m ' .
-            'ON um.module_id = m.module_id ' .
-            'WHERE um.user_id = ? ' .
+            'ON fm.module_id = m.module_id ' .
+            'WHERE fm.module_id IN (SELECT um.module_id FROM ' . APP__DB_TABLE_PREFIX . 'user_module um WHERE um.user_id = ?) ' .
             'OR fm.module_id = ? ' .
             'ORDER BY f.form_name ASC';
 
@@ -117,8 +117,8 @@ class WizardStep2
                 }
                 echo '<tr>';
                 echo "<td><input type=\"radio\" name=\"form_id\" id=\"form_{$form['form_id']}\" value=\"{$form['form_id']}\" $checked /></td>";
-                echo "<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}{$module}</label></td>";
-                echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i={$intro_text}\" target=\"_blank\">preview</a>)</td>";
+                echo "<td><label class=\"small\" for=\"form_{$form['form_id']}\">{$form['form_name']}$module</label></td>";
+                echo "<td>&nbsp; &nbsp; (<a style=\"font-weight: normal; font-size: 84%;\" href=\"../../forms/edit/preview_form.php?f={$form['form_id']}&amp;i=$intro_text\" target=\"_blank\">preview</a>)</td>";
                 echo '</tr>';
             } ?>
                 </table>

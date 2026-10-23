@@ -11,6 +11,8 @@
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
+
+#[AllowDynamicProperties]
 class WizardStep1
 {
     // Public
@@ -75,8 +77,8 @@ class WizardStep1
             }
 
             for ($i=$range_start; $i<=$range_end; $i++) {
-                if (array_key_exists("scorelabel{$i}", $question)) {
-                    $this->wizard->set_field("scorelabel{$i}", $question["scorelabel{$i}"]);
+                if (array_key_exists("scorelabel$i", $question)) {
+                    $this->wizard->set_field("scorelabel$i", $question["scorelabel$i"]);
                 }
             }
 

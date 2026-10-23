@@ -75,5 +75,5 @@ if ($form->load($form_id)) {
     $form_qs = '';
 }
 
-header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?{$form_qs}#questions");
+header('Location: '. APP__WWW ."/tutors/forms/edit/edit_form.php?$form_qs#questions");
 exit;

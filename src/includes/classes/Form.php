@@ -13,6 +13,8 @@ namespace WebPA\includes\classes;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class Form
 {
     // Public Vars
@@ -38,7 +40,7 @@ class Form
     */
     public function __construct(DAO $DAO)
     {
-        $this->_DAO =& $DAO;
+        $this->_DAO = $DAO;
     }
 
     /*
@@ -113,7 +115,7 @@ class Form
     {
         $dbConn = $this->_DAO->getConnection();
 
-        $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'form  WHERE form_id = ?';
+        $query = 'SELECT form_id, form_name, form_type, form_xml FROM ' . APP__DB_TABLE_PREFIX . 'form  WHERE form_id = ?';
 
         $form = $dbConn->fetchAssociative($query, [$id], [ParameterType::STRING]);
 
@@ -127,11 +129,11 @@ class Form
     * @param array $row assoc array ( field => value, ... ) - corresponds to row in database
     * @return boolean  did load succeed
     */
-    public function load_from_row(&$row)
+    public function load_from_row(array $row): bool
     {
         $this->id = $row['form_id'];
         $this->name = $row['form_name'];
-        $this->type = (is_null($row['form_type'])) ? 'likert' : $row['form_type'];
+        $this->type = ($row['form_type'] === null) ? 'likert' : $row['form_type'];
         $this->_load_xml($row['form_xml']);
 
         return true;
@@ -146,7 +148,7 @@ class Form
      *
     * @return boolean did load succeed
     */
-    public function load_from_xml($xml)
+    public function load_from_xml($xml): bool
     {
         $this->_load_xml($xml);
 
@@ -211,7 +213,7 @@ class Form
     * Create a clone of this form
     * @return mixed returns the clone of the form
     */
-    public function & get_clone()
+    public function get_clone(): Form
     {
         $clone_form = new self($this->_DAO);
         $clone_form->create();  // Changes the form's ID so it is officially a new form
@@ -346,7 +348,7 @@ class Form
     * Load the xml data of the form (questions, etc)
     * @param mixed $xml_data
     */
-    public function _load_xml(&$xml_data)
+    public function _load_xml(string $xml_data): void
     {
         if (!is_object($this->_xml_parser)) {
             $this->_xml_parser = new XMLParser();
@@ -360,13 +362,13 @@ class Form
 
         // Load the questions
         if ((is_array($xml_array['form'])) && (array_key_exists('question', $xml_array['form']))) {
-            $temp_questions =& $xml_array['form']['question'];
+            $temp_questions = $xml_array['form']['question'];
             if ($temp_questions) {
                 // If there's only one question, make sure the array is restructured properly
                 if ((is_array($temp_questions)) && (array_key_exists(0, $temp_questions))) {
-                    $this->_questions =& $temp_questions;
+                    $this->_questions = $temp_questions;
                 } else {
-                    $this->_questions[] =& $temp_questions;
+                    $this->_questions[] = $temp_questions;
                 }
             }
         } else {

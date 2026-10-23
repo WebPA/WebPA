@@ -53,7 +53,7 @@ $page_intro = '';
 //----------------------------------------------------------------------
 //process request
 
-  if (strlen($module) > 0) {
+  if (strlen((string) $module) > 0) {
       if ((int) $module === $_module_id) {
           $sScreenMsg = '<p>You cannot delete the currently selected module!</p>';
       } else {
@@ -98,10 +98,10 @@ $page_intro = '';
 <?php
 
   if (!empty($sScreenMsg)) {
-      echo "<div class=\"success_box\">{$sScreenMsg}</div>";
+      echo "<div class=\"success_box\">$sScreenMsg</div>";
   }
 
-  if (isset($errorMsg) && strlen($errorMsg) > 0) {
+  if (isset($errorMsg) && strlen((string) $errorMsg) > 0) {
       echo "<div class=\"error_box\">$errorMsg</div>";
   }
 

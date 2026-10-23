@@ -11,6 +11,8 @@
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep3
 {
     // Public
@@ -50,10 +52,10 @@ class WizardStep3
 
     public function form()
     {
-        $config =& $this->wizard->get_var('config');
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
-        $form =& $this->wizard->get_var('form');
+        $config = $this->wizard->get_var('config');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
+        $form = $this->wizard->get_var('form');
 
         $range_start = $this->wizard->get_field('question_range_start');
         $range_end = $this->wizard->get_field('question_range_end');
@@ -61,12 +63,12 @@ class WizardStep3
         $new_question['text']['_data'] = $this->wizard->get_field('question_text');
         $new_question['desc']['_data'] = $this->wizard->get_field('question_desc');
 
-        $new_question['range']['_data'] = "{$range_start}-{$range_end}";
+        $new_question['range']['_data'] = "$range_start-$range_end";
 
         for ($i=$range_start; $i<=$range_end; $i++) {
-            $scorelabel = trim(Common::fetch_POST("scorelabel{$i}"));
+            $scorelabel = trim(Common::fetch_POST("scorelabel$i"));
             if (!empty($scorelabel)) {
-                $new_question["scorelabel{$i}"]['_data'] = $scorelabel;
+                $new_question["scorelabel$i"]['_data'] = $scorelabel;
             }
         }
 

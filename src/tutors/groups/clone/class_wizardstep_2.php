@@ -10,6 +10,8 @@
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep2
 {
     // Public

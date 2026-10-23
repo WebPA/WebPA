@@ -35,8 +35,8 @@ $marking_date = (int) Common::fetch_GET('md');
 
 $command = Common::fetch_POST('command');
 
-$qs = "a={$assessment_id}&md={$marking_date}&tab={$tab}&y={$year}";
-$list_url = "../index.php?tab={$tab}&y={$year}";
+$qs = "a=$assessment_id&md=$marking_date&tab=$tab&y=$year";
+$list_url = "../index.php?tab=$tab&y=$year";
 
 // --------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ $do_reports = false;
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
     $do_reports = true;
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 
     $form = new Form($DB);
     $form_xml = $assessment->get_form_xml();
@@ -109,6 +109,7 @@ if ($assessment->load($assessment_id)) {
     $assessment = null;
     $question_count = 0;
     $groups_count = 0;
+    $marking_params = null;
 }
 
 // --------------------------------------------------------------------------------
@@ -124,7 +125,7 @@ $UI->breadcrumbs = [
   $page_title       => null,
 ];
 $UI->help_link = '?q=node/235';
-$UI->set_page_bar_button('List Assessments', '../../../../images/buttons//button_assessment_list.gif', '../');
+$UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../../create/');
 
 $UI->head();

@@ -10,6 +10,8 @@
 
 namespace WebPA\includes\classes;
 
+
+#[AllowDynamicProperties]
 class UI
 {
     public $page_title = '';
@@ -275,7 +277,7 @@ class UI
                     $num_crumbs = count($this->breadcrumbs);
                     foreach ($this->breadcrumbs as $k => $v) {
                         --$num_crumbs;
-                        if (!is_null($v)) {
+                        if ($v !== null) {
                             echo "<a class=\"breadcrumb\" href=\"$v\">$k</a>";
                             if ($num_crumbs > 0) {
                                 echo ' &gt; ';
@@ -352,7 +354,11 @@ class UI
      */
     public function set_page_bar_button($text, $img, $link, $side = 'left')
     {
-        $this->_page_bar_buttons[$side][$text] = ['img' => "../images/buttons/$img", 'link' => $link];
+        // Auto-prepend APP__WWW to relative image paths for portability
+        if ($img !== null && preg_match('/^(\.\.?\/)/', $img)) {
+            $img = APP__WWW . '/' . ltrim($img, './');
+        }
+        $this->_page_bar_buttons[$side][$text] = ['img' => $img, 'link' => $link];
     }
 
     // /->set_page_bar_button()

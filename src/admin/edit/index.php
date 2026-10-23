@@ -33,13 +33,13 @@ if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
 //set the page information
 $UI->page_title = APP__NAME . ' Edit system users';
 $UI->menu_selected = 'view data';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
+$UI->set_page_bar_button('View Student Data', APP__WWW . '/images/buttons/button_student_user.png', '../review/student/index.php');
+$UI->set_page_bar_button('View Staff Data', APP__WWW . '/images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
-    $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
-    $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+    $UI->set_page_bar_button('View Admin Data', APP__WWW . '/images/buttons/button_admin_user.png', '../review/admin/index.php');
+    $UI->set_page_bar_button('View Module Data', APP__WWW . '/images/buttons/button_view_modules.png', '../review/module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../search/index.php');
+$UI->set_page_bar_button('Search for a user', APP__WWW . '/images/buttons/button_search_user.png', '../search/index.php');
 $UI->breadcrumbs = ['home' => '../', 'review data'=>'../review/', 'edit'=>null];
 $UI->help_link = '?q=node/237';
 
@@ -208,35 +208,48 @@ if ($action) {          //incase we want to do more than save changes in the fut
               }
           }
           if (isset($update)) {
-              if (isset($update[APP__USER_TYPE_TUTOR])) {
-                  $createUserModuleQuery =
-                'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
-                '(user_id, module_id, user_type) ' .
-                'VALUES (?, ? , ?) ' .
-                'ON DUPLICATE KEY UPDATE user_type = ?';
-
+              $conn = $DB->getConnection();
+              // Batch insert tutors: build VALUES clause for all modules at once
+              if (isset($update[APP__USER_TYPE_TUTOR]) && !empty($update[APP__USER_TYPE_TUTOR])) {
+                  $values = [];
+                  $params = [];
+                  $types = [];
                   foreach ($update[APP__USER_TYPE_TUTOR] as $module) {
-                      $DB->getConnection()->executeQuery(
-                          $createUserModuleQuery,
-                          [$user_id, $module, APP__USER_TYPE_TUTOR, APP__USER_TYPE_TUTOR],
-                          [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
-                      );
+                      $values[] = '(?, ?, ?)';
+                      $params[] = $user_id;
+                      $params[] = $module;
+                      $params[] = APP__USER_TYPE_TUTOR;
+                      $types[] = ParameterType::INTEGER;
+                      $types[] = ParameterType::INTEGER;
+                      $types[] = ParameterType::STRING;
+                  }
+                  if ($values) {
+                      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
+                             'VALUES ' . implode(', ', $values) .
+                             ' ON DUPLICATE KEY UPDATE user_type = VALUES(user_type)';
+                      $conn->executeQuery($sql, $params, $types);
                   }
               }
 
-              if (isset($update[APP__USER_TYPE_STUDENT])) {
-                  $createUserModuleQuery =
-                'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module ' .
-                '(user_id, module_id, user_type) ' .
-                'VALUES (?, ?, ?) ' .
-                'ON DUPLICATE KEY UPDATE user_type = ?';
-
+              // Batch insert students
+              if (isset($update[APP__USER_TYPE_STUDENT]) && !empty($update[APP__USER_TYPE_STUDENT])) {
+                  $values = [];
+                  $params = [];
+                  $types = [];
                   foreach ($update[APP__USER_TYPE_STUDENT] as $module) {
-                      $DB->getConnection()->executeQuery(
-                          $createUserModuleQuery,
-                          [$user_id, $module, APP__USER_TYPE_STUDENT, APP__USER_TYPE_STUDENT],
-                          [ParameterType::INTEGER, ParameterType::INTEGER, ParameterType::STRING, ParameterType::STRING]
-                      );
+                      $values[] = '(?, ?, ?)';
+                      $params[] = $user_id;
+                      $params[] = $module;
+                      $params[] = APP__USER_TYPE_STUDENT;
+                      $types[] = ParameterType::INTEGER;
+                      $types[] = ParameterType::INTEGER;
+                      $types[] = ParameterType::STRING;
+                  }
+                  if ($values) {
+                      $sql = 'INSERT INTO ' . APP__DB_TABLE_PREFIX . 'user_module (user_id, module_id, user_type) ' .
+                             'VALUES ' . implode(', ', $values) .
+                             ' ON DUPLICATE KEY UPDATE user_type = VALUES(user_type)';
+                      $conn->executeQuery($sql, $params, $types);
                   }
               }
           }
@@ -310,7 +323,7 @@ if ($type == APP__USER_TYPE_ADMIN) {
 echo '<p>' . $page_conditions . '</p>';
 
 if (!empty($sScreenMsg)) {
-    echo "<div class=\"success_box\">{$sScreenMsg}</div>";
+    echo "<div class=\"success_box\">$sScreenMsg</div>";
 }
 ?>
 
@@ -419,27 +432,27 @@ if (!empty($user_id) && !Common::check_user($edit_user, APP__USER_TYPE_ADMIN)) {
         }
 
         echo "<tr>\n";
-        echo "  <td>\n    {$tagStart}{$module['module_title']}{$tagEnd}&nbsp;&nbsp;&nbsp;\n  </td>\n";
+        echo "  <td>\n    $tagStart{$module['module_title']}$tagEnd&nbsp;&nbsp;&nbsp;\n  </td>\n";
         echo "  <td style=\"text-align: center;\">\n";
         echo '    <input type="radio" value="" name="rdo_type_' . $module['module_id'] . '"';
         if (empty($role)) {
             echo ' checked="checked"';
         }
-        echo "{$disabled}>\n";
+        echo "$disabled>\n";
         echo "  </td>\n";
         echo "  <td style=\"text-align: center;\">\n";
         echo '    <input type="radio" value="' . APP__USER_TYPE_TUTOR . '" name="rdo_type_' . $module['module_id'] . '"';
         if ($role == APP__USER_TYPE_TUTOR) {
             echo ' checked="checked"';
         }
-        echo "{$disabled}>\n";
+        echo "$disabled>\n";
         echo "  </td>\n";
         echo "  <td style=\"text-align: center;\">\n";
         echo '    <input type="radio" value="' . APP__USER_TYPE_STUDENT . '" name="rdo_type_' . $module['module_id'] . '"';
         if ($role == APP__USER_TYPE_STUDENT) {
             echo ' checked="checked"';
         }
-        echo "{$disabled}>\n";
+        echo "$disabled>\n";
         echo "  </td>\n";
         echo "</tr>\n";
     }

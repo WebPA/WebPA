@@ -103,7 +103,7 @@ $page_intro = '<p>Here you are able to edit the details of a module within the s
 <?php
 
   if (!empty($sScreenMsg)) {
-      echo "<div class=\"success_box\">{$sScreenMsg}</div>";
+      echo "<div class=\"success_box\">$sScreenMsg</div>";
   }
 
 ?>

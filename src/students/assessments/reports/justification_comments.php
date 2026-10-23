@@ -35,6 +35,9 @@ if (empty($report_hash)) {
         $comments = $DB
             ->getConnection()
             ->fetchAllAssociative($userAssessmentQuery, [$report_hash], [ParameterType::STRING]);
+    } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        // Tables don't exist — justification feature not available
+        $errors[] = 'The justification comments feature is not available on this system.';
     } catch (\Doctrine\DBAL\Exception $e) {
         error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 

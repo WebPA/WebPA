@@ -11,6 +11,8 @@
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\Wizard;
 
+
+#[AllowDynamicProperties]
 class WizardStep2
 {
     public $wizard;
@@ -49,9 +51,9 @@ class WizardStep2
 
     public function form()
     {
-        $config =& $this->wizard->get_var('config');
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
+        $config = $this->wizard->get_var('config');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
 
         $errors = null;
 
@@ -82,7 +84,7 @@ class WizardStep2
                 exit; ?>
         <p><strong>Your new assessment form has been created.</strong></p>
         <p style="margin-top: 20px;">To add question and marking information to your form, you can use the <a href="../index.php?f=<?php echo $form->id; ?>">form editor</a>.</p>
-        <p style="margin-top: 20px;">Alternatively, you can return to <a href="/tutors/forms/">my forms</a>, or to the <a href="/">WebPA home page</a>.</p>
+        <p style="margin-top: 20px;">Alternatively, you can return to <a href="<?php echo APP__WWW ?>/tutors/forms/">my forms</a>, or to the <a href="<?php echo APP__WWW ?>/">WebPA home page</a>.</p>
 <?php
             }
         }

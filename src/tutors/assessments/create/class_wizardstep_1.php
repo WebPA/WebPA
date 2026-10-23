@@ -12,6 +12,8 @@ use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
+
+#[AllowDynamicProperties]
 class WizardStep1
 {
     public $wizard;
@@ -44,12 +46,12 @@ class WizardStep1
 
         $open_date = $this->wizard->get_field('open_date');
 
-        if (is_null($open_date)) {
+        if ($open_date === null) {
             $open_date = mktime(9, 0, 0);
         }  // default start time, today @ 9am
 
         $close_date = $this->wizard->get_field('close_date');
-        if (is_null($close_date)) {
+        if ($close_date === null) {
             $close_date = mktime(17, 0, 0, date('m', $today), date('d', $today)+13, date('Y', $today));
         } // default start time, two-weeks today @ 5pm
 
@@ -208,15 +210,15 @@ class WizardStep1
 
         // open_date
         $time_parts = explode(':', Common::fetch_POST('open_date_time'));
-        $time_h = $time_parts[0];
-        $time_m = $time_parts[1];
-        $open_date = mktime($time_h, $time_m, 0, Common::fetch_POST('open_date_month'), Common::fetch_POST('open_date_day'), Common::fetch_POST('open_date_year'));
+        $time_h = (int) ($time_parts[0] ?? '0');
+        $time_m = (int) ($time_parts[1] ?? '0');
+        $open_date = mktime($time_h, $time_m, 0, (int) Common::fetch_POST('open_date_month'), (int) Common::fetch_POST('open_date_day'), (int) Common::fetch_POST('open_date_year'));
 
         // close_date
         $time_parts = explode(':', Common::fetch_POST('close_date_time'));
-        $time_h = $time_parts[0];
-        $time_m = $time_parts[1];
-        $close_date = mktime($time_h, $time_m, 0, Common::fetch_POST('close_date_month'), Common::fetch_POST('close_date_day'), Common::fetch_POST('close_date_year'));
+        $time_h = (int) ($time_parts[0] ?? '0');
+        $time_m = (int) ($time_parts[1] ?? '0');
+        $close_date = mktime($time_h, $time_m, 0, (int) Common::fetch_POST('close_date_month'), (int) Common::fetch_POST('close_date_day'), (int) Common::fetch_POST('close_date_year'));
 
 
         $this->wizard->set_field('open_date', $open_date);

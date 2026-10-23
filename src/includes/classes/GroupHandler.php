@@ -12,6 +12,8 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 
+
+#[AllowDynamicProperties]
 class GroupHandler
 {
     public $_DAO;  // [pmn] due to a poor iterator implementation, this is currently public
@@ -127,13 +129,13 @@ class GroupHandler
      *
      * @return object  GroupCollection object
      */
-    public function & clone_collection($collection_id, $include_roles = null)
+    public function clone_collection($collection_id, $include_roles = null): GroupCollection
     {
         // get the collection to clone
         $org_collection = new GroupCollection($this->_DAO);
         $org_collection->load($collection_id);
 
-        $group_iterator =& $org_collection->get_groups_iterator();
+        $group_iterator = $org_collection->get_groups_iterator();
 
         // clone the collection
         $clone_collection = new GroupCollection($this->_DAO);
@@ -142,7 +144,7 @@ class GroupHandler
         $clone_collection->save();
 
         // clone all the groups
-        $group_iterator =& $org_collection->get_groups_iterator();
+        $group_iterator = $org_collection->get_groups_iterator();
         for ($group_iterator->reset(); $group_iterator->is_valid(); $group_iterator->next()) {
             $org_group = $group_iterator->current();
 
@@ -156,15 +158,14 @@ class GroupHandler
             $org_group->refresh_members();
 
             // clone the group
-            $clone_group =& $org_group;
             $org_group->set_collection_object($clone_collection);
-            $clone_group->create(); // create a new ID number
+            $org_group->create(); // create a new ID number
 
             // Kill all members but those in the given roles
             if ($include_roles) {
-                $clone_group->purge_members(null, $include_roles);
+                $org_group->purge_members(null, $include_roles);
             }
-            $clone_group->save();
+            $org_group->save();
         }
 
         return $clone_collection;
@@ -177,9 +178,9 @@ class GroupHandler
      *
      * WARNING : The new GroupCollection object is NOT SAVED automatically
      *
-     * @return array
+     * @return GroupCollection
      */
-    public function & create_collection()
+    public function create_collection(): GroupCollection
     {
         $new_collection = new GroupCollection($this->_DAO);
         $new_collection->create();

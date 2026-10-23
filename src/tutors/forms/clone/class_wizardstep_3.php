@@ -11,6 +11,8 @@
 use WebPA\includes\classes\Form;
 use WebPA\includes\classes\Wizard;
 
+
+#[AllowDynamicProperties]
 class WizardStep3
 {
     public $wizard;
@@ -51,15 +53,15 @@ class WizardStep3
 
     public function form()
     {
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
 
         $errors = null;
 
         $existing_form = new Form($DB);
         $existing_form->load($this->wizard->get_field('form_id'));
 
-        $clone_form =& $existing_form->get_clone();
+        $clone_form = $existing_form->get_clone();
         $clone_form->name = $this->wizard->get_field('clone_form_name');
         $clone_form->modules[] = $this->moduleId;
 

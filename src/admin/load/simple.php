@@ -286,13 +286,13 @@ $UI->page_title = APP__NAME;
 $UI->menu_selected = 'upload data';
 $UI->breadcrumbs = ['home' => null];
 $UI->help_link = '?q=node/237';
-$UI->set_page_bar_button('View Student Data', '../../../images/buttons/button_student_user.png', '../review/student/index.php');
-$UI->set_page_bar_button('View Staff Data', '../../../images/buttons/button_staff_user.png', '../review/staff/index.php');
+$UI->set_page_bar_button('View Student Data', APP__WWW . '/images/buttons/button_student_user.png', '../review/student/index.php');
+$UI->set_page_bar_button('View Staff Data', APP__WWW . '/images/buttons/button_staff_user.png', '../review/staff/index.php');
 if (Common::check_user($_user, APP__USER_TYPE_ADMIN)) {
-    $UI->set_page_bar_button('View Admin Data', '../../../images/buttons/button_admin_user.png', '../review/admin/index.php');
-    $UI->set_page_bar_button('View Module Data', '../../../images/buttons/button_view_modules.png', '../review/module/index.php');
+    $UI->set_page_bar_button('View Admin Data', APP__WWW . '/images/buttons/button_admin_user.png', '../review/admin/index.php');
+    $UI->set_page_bar_button('View Module Data', APP__WWW . '/images/buttons/button_view_modules.png', '../review/module/index.php');
 }
-$UI->set_page_bar_button('Search for a user', '../../../images/buttons/button_search_user.png', '../review/search/index.php');
+$UI->set_page_bar_button('Search for a user', APP__WWW . '/images/buttons/button_search_user.png', '../review/search/index.php');
 
 $UI->head();
 $UI->body();
@@ -300,7 +300,7 @@ $UI->content_start();
 ?>
 <div class="content_box">
     <?php if (!empty($user_warning)) {
-    echo "<div class=\"warning_box\">{$user_warning}</div>";
+    echo "<div class=\"warning_box\">$user_warning</div>";
 } ?>
 
     <?php if (!empty($user_msg)) {

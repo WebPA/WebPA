@@ -84,8 +84,8 @@ $page_intro = 'Use this page to change the currently selected module.';
         foreach ($modules as $id => $module) {
             $checked_str = (isset($_module_id) && ($id == $_module_id)) ? ' checked="checked"' : '' ;
             echo '<tr>';
-            echo "  <td><input type=\"radio\" name=\"module_id\" id=\"module_{$id}\" value=\"{$id}\"{$checked_str} /></td>";
-            echo "  <td><label style=\"font-weight: normal;\" for=\"module_{$id}\">{$module['module_title']} [{$module['module_code']}]</label></td>";
+            echo "  <td><input type=\"radio\" name=\"module_id\" id=\"module_$id\" value=\"$id\"$checked_str /></td>";
+            echo "  <td><label style=\"font-weight: normal;\" for=\"module_$id\">{$module['module_title']} [{$module['module_code']}]</label></td>";
             echo '</tr>';
         }
     } else {

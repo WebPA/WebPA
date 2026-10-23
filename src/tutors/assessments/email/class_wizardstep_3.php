@@ -11,6 +11,8 @@
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 
+
+#[AllowDynamicProperties]
 class WizardStep3
 {
     // Public

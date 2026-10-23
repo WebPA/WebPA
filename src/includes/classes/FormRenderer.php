@@ -12,6 +12,8 @@ namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class FormRenderer
 {
     // Public Vars
@@ -52,9 +54,9 @@ class FormRenderer
     *
     * @param object $form_object  form object to use when rendering
     */
-    public function set_form(&$form_object)
+    public function set_form(Form $form_object): void
     {
-        $this->_form =& $form_object;
+        $this->_form = $form_object;
     }
 
     // /->set_form()
@@ -196,7 +198,7 @@ class FormRenderer
                 $q_num = $q + 1; ?>
         <div class="question">
 
-          <div class="question_text"><?php echo "{$q_num}. {$question['text']['_data']}"; ?></div>
+          <div class="question_text"><?php echo "$q_num. {$question['text']['_data']}"; ?></div>
 <?php
         if (array_key_exists('desc', $question)) {
             $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;
@@ -235,7 +237,7 @@ class FormRenderer
 
                     echo "<tr id=\"q_{$q}_{$id}\" $class>";
                     echo "<td class=\"participant\" width=\"200\" valign=\"middle\">$name</th>\n";
-                    echo "<td><input type=\"text\" name=\"q_{$q}_{$id}\" id=\"q_{$q}_{$index}\" size=\"6\" maxlength=\"4\" value=\"$score\" onchange=\"calcTotal({$q},{$participant_count})\" onkeyup=\"calcTotal({$q},{$participant_count})\" /></label></td>\n";
+                    echo "<td><input type=\"text\" name=\"q_{$q}_{$id}\" id=\"q_{$q}_{$index}\" size=\"6\" maxlength=\"4\" value=\"$score\" onchange=\"calcTotal($q,$participant_count)\" onkeyup=\"calcTotal($q,$participant_count)\" /></label></td>\n";
                     $index++;
                 }
                 echo "</tr>\n";
@@ -251,7 +253,7 @@ class FormRenderer
                     }
                 }
 
-                echo "<tr><th style=\"text-align: right;\">Total&nbsp;</th><th><div style=\"background-color: $bgcolor;\" id=\"total_{$q}\">$initial_total</div></th></tr>"; ?>
+                echo "<tr><th style=\"text-align: right;\">Total&nbsp;</th><th><div style=\"background-color: $bgcolor;\" id=\"total_$q\">$initial_total</div></th></tr>"; ?>
           </table>
         </div>
 <?php
@@ -265,7 +267,7 @@ class FormRenderer
                 $min_score = $range[0];
                 $max_score = $range[1]; ?>
         <div class="question">
-          <div class="question_text"><?php echo "{$q_num}. {$question['text']['_data']}"; ?></div>
+          <div class="question_text"><?php echo "$q_num. {$question['text']['_data']}"; ?></div>
 <?php
         if (array_key_exists('desc', $question)) {
             $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;

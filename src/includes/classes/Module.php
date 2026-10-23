@@ -14,6 +14,7 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 
+#[AllowDynamicProperties]
 class Module
 {
     // Public Vars

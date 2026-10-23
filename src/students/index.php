@@ -165,13 +165,13 @@ $UI->content_start();
 
       $assessment_iterator = new SimpleObjectIterator($open_assessments, 'Assessment', $DB);
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-          $assessment =& $assessment_iterator->current();
+          $assessment = $assessment_iterator->current();
           $take_url = "assessments/take/index.php?a={$assessment->id}";
 
           echo '<div class="assessment_open">';
           echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
           echo '<tr>';
-          echo "  <td width=\"24\"><img src=\"../images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+          echo "  <td width=\"24\"><img src=\"" . APP__WWW . "/images/icons/$status_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
           echo '  <td valign="top">';
           echo '    <div class="assessment_info">';
           echo "      <div class=\"assessment_name\">{$assessment->name}</div>";
@@ -201,13 +201,13 @@ $UI->content_start();
       $assessment_iterator = new SimpleObjectIterator($pending_assessments, 'Assessment', $DB);
 
       for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-          $assessment =& $assessment_iterator->current();
+          $assessment = $assessment_iterator->current();
           $take_url = "/assessments/take/index.php?a={$assessment->id}";
 
           echo '<div class="assessment">';
           echo '<table class="assessment_info" cellpadding="0" cellspacing="0">';
           echo '<tr>';
-          echo "  <td width=\"24\"><img src=\"/images/icons/{$status}_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
+          echo "  <td width=\"24\"><img src=\"" . APP__WWW . "/images/icons/$status_icon.gif\" alt=\"$status_capitalized\" title=\"$status_capitalized\" height=\"24\" width=\"24\" /></td>";
           echo '  <td valign="top">';
           echo '    <div class="assessment_info">';
           echo "      <div class=\"assessment_name\">{$assessment->name}</div>";

@@ -30,7 +30,7 @@ $year = Common::fetch_GET('y', date('Y'));
 
 $command = Common::fetch_POST('command');
 
-$list_url = "../index.php?tab={$tab}&y={$year}";
+$list_url = "../index.php?tab=$tab&y=$year";
 
 $prev_url = $list_url;
 
@@ -40,7 +40,7 @@ $group_marks = [];
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 
     $group_handler = new GroupHandler();
     $collection = $group_handler->get_collection($assessment->get_collection_id());
@@ -262,7 +262,7 @@ if (!$assessment) {
       </tr>
 <?php
     for ($groups->reset(); $groups->is_valid(); $groups->next()) {
-        $group =& $groups->current();
+        $group = $groups->current();
         $group_members = $group->get_members();
         $members = ($group_members) ? $CIS->get_user(array_keys($group_members)) : null;
 

@@ -22,6 +22,8 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class Group
 {
     // Public Vars
@@ -139,7 +141,7 @@ class Group
     *
     * @return boolean did load succeed
     */
-    public function load_from_row(&$row)
+    public function load_from_row(array $row): bool
     {
         $this->id = $row['group_id'];
         $this->name = $row['group_name'];
@@ -270,18 +272,18 @@ class Group
     /**
     * Set this group to use the given DAO object
     */
-    public function set_dao_object(&$DAO)
+    public function set_dao_object(DAO $DAO): void
     {
-        $this->_DAO =& $DAO;
+        $this->_DAO = $DAO;
         $this->dbConn = $this->_DAO->getConnection();
     }
 
     /**
     * Set this group to use the given GroupCollection as a parent
     */
-    public function set_collection_object(&$collection)
+    public function set_collection_object(GroupCollection $collection): void
     {
-        $this->_collection =& $collection;
+        $this->_collection = $collection;
         $this->collection_id = $this->_collection->id;
     }
 

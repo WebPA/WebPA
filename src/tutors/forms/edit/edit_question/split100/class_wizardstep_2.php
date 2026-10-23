@@ -7,6 +7,8 @@
  *
  * @link https://github.com/webpa/webpa
  */
+
+#[AllowDynamicProperties]
 class WizardStep2
 {
     // Public
@@ -67,7 +69,7 @@ class WizardStep2
         } else {// Else.. create the form!
             ?>
 			<p><strong>Your changes to this criterion have been saved.</strong></p>
-			<p style="margin-top: 20px;">You can now return to <a href="/tutors/forms/edit/edit_form.php?f=<?php echo $form->id; ?>">editing your form</a>.</p>
+			<p style="margin-top: 20px;">You can now return to <a href="<?php echo APP__WWW ?>/tutors/forms/edit/edit_form.php?f=<?php echo $form->id; ?>">editing your form</a>.</p>
 			<?php
         }
     }

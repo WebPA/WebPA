@@ -103,7 +103,7 @@ if ($assessment) {
         foreach ($questions as $question_id) {
             $q_index = $question_id+1;
             $question = $form->get_question($question_id);
-            $q_text = "Q{$q_index} : {$question['text']['_data']}";
+            $q_text = "Q$q_index : {$question['text']['_data']}";
 
 
             foreach ($g_members as $i => $member_id) {
@@ -126,7 +126,7 @@ if ($assessment) {
                     } else {
                         $score_array[$group_names[$group_id]][$mark_recipient][$q_text][$marker] = $algorithm->get_member_response($group_id, $target_member_id, $question_id, $member_id);
                     }
-                    if (is_null($score_array[$group_names[$group_id]][$mark_recipient][$q_text][$marker])) {
+                    if ($score_array[$group_names[$group_id]][$mark_recipient][$q_text][$marker] === null) {
                         $score_array[$group_names[$group_id]][$mark_recipient][$q_text][$marker] = '-';
                     }
 
@@ -177,10 +177,10 @@ if ($type == 'view') {
 <?php
   $teams = array_keys($score_array);
     foreach ($teams as $i=> $team) {
-        echo "<h2>{$team}</h2>";
+        echo "<h2>$team</h2>";
         $team_members = array_keys($score_array[$team]);
         foreach ($team_members as $team_member) {
-            echo "<h3>Results for: {$team_member}</h3>";
+            echo "<h3>Results for: $team_member</h3>";
             $questions = array_keys($score_array[$team][$team_member]);
             //print_r($questions);
             echo "<table class='grid' cellpadding='2' cellspacing='1' style='font-size: 0.8em'>";
@@ -191,15 +191,15 @@ if ($type == 'view') {
                 $markers_row = '';
                 $scores_row = '';
                 foreach ($markers as $marker) {
-                    $markers_row =  $markers_row ."<th>{$marker}</th>";
+                    $markers_row =  $markers_row ."<th>$marker</th>";
                     $score = $score_array[$team][$team_member][$question][$marker];
-                    $scores_row = $scores_row . "<td>{$score}</td>";
+                    $scores_row = $scores_row . "<td>$score</td>";
                 }
                 if ($q_count == 0) {
                     echo '<tr><th>&nbsp;</th>';
                     echo $markers_row;
                 }
-                echo "</tr><tr><th>{$question}</th>";
+                echo "</tr><tr><th>$question</th>";
                 echo $scores_row;
                 $q_count++;
             }
@@ -229,10 +229,10 @@ if ($type == 'download-rtf') {
 
     $teams = array_keys($score_array);
     foreach ($teams as $i=> $team) {
-        echo "{$team}\n\n";
+        echo "$team\n\n";
         $team_members = array_keys($score_array[$team]);
         foreach ($team_members as $team_member) {
-            echo "Results for: {$team_member}\n\n";
+            echo "Results for: $team_member\n\n";
             $questions = array_keys($score_array[$team][$team_member]);
             //print_r($questions);
             $q_count = 0;
@@ -242,16 +242,16 @@ if ($type == 'download-rtf') {
                 $markers_row = '';
                 $scores_row = '';
                 foreach ($markers as $marker) {
-                    $markers_row =  $markers_row ."{$marker}\t";
+                    $markers_row =  $markers_row ."$marker\t";
 
                     $score = $score_array[$team][$team_member][$question][$marker];
-                    $scores_row = $scores_row . "{$score}\t";
+                    $scores_row = $scores_row . "$score\t";
                 }
                 if ($q_count == 0) {
                     echo "\n\t\t";
                     echo $markers_row;
                 }
-                echo "\n{$question}\t";
+                echo "\n$question\t";
                 echo $scores_row . "\t";
                 $q_count++;
             }
@@ -268,10 +268,10 @@ if ($type == 'download-csv') {
 
     $teams = array_keys($score_array);
     foreach ($teams as $i=> $team) {
-        echo "\n{$team}\n";
+        echo "\n$team\n";
         $team_members = array_keys($score_array[$team]);
         foreach ($team_members as $team_member) {
-            echo "\n\"Results for: {$team_member}\"";
+            echo "\n\"Results for: $team_member\"";
             $questions = array_keys($score_array[$team][$team_member]);
 
             $q_count = 0;
@@ -281,16 +281,16 @@ if ($type == 'download-csv') {
                 $markers_row = '';
                 $scores_row = '';
                 foreach ($markers as $marker) {
-                    $markers_row =  $markers_row . ",\"{$marker}\"";
+                    $markers_row =  $markers_row . ",\"$marker\"";
 
                     $score = $score_array[$team][$team_member][$question][$marker];
-                    $scores_row = $scores_row . "\"{$score}\",";
+                    $scores_row = $scores_row . "\"$score\",";
                 }
                 if ($q_count == 0) {
                     echo "\n";
                     echo $markers_row;
                 }
-                echo "\n\"{$question}\",";
+                echo "\n\"$question\",";
                 echo $scores_row;
                 $q_count++;
             }

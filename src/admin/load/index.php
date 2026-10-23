@@ -58,7 +58,7 @@ $UI->content_start();
 
 $page_intro = 'You can upload the data the system requires from this page';
 $filename = 'Enter the file name to be used:';
-$filecontent = 'Select the type of information you are uploading:<br>';
+$filecontent = 'Select the type of information you are uploading:<br />';
 $filecontenttype = [4];
 //even though it appears second, the 'student data with groups' option has a filecontenttype.value of 4 (to prevent possible breakage)
 

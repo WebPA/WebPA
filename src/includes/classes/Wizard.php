@@ -14,6 +14,8 @@ namespace WebPA\includes\classes;
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class Wizard
 {
     // Public Vars
@@ -61,7 +63,8 @@ class Wizard
         $this->name = $name;
         $this->_page_url = $_SERVER['PHP_SELF'];
 
-        $this->_fields = unserialize(base64_decode(Common::fetch_POST('wiz_stored_fields', null)));
+        $stored = Common::fetch_POST('wiz_stored_fields', null);
+        $this->_fields = is_string($stored) ? unserialize(base64_decode($stored)) : [];
         if (!is_array($this->_fields)) {
             $this->_fields = [];
         }
@@ -198,7 +201,8 @@ class Wizard
             if (($do_last) && ($this->_current_step>1)) {
                 $last_wiz_num = $this->_current_step - 1;
                 include_once $this->_step_includes["$last_wiz_num"];
-                eval("\$this->_last_wizstep = new WizardStep{$last_wiz_num}(\$this);");
+                $class_name = 'WizardStep' . $last_wiz_num;
+                $this->_last_wizstep = new $class_name($this);
 
                 if ($this->_last_wizstep) {
                     $this->_errors = $this->_last_wizstep->process_form();
@@ -206,7 +210,7 @@ class Wizard
                     // if there are errors, we won't be showing the next page, we'll go back to the last one!
                     if (is_array($this->_errors)) {
                         $this->_current_step = $this->_last_wizstep->step;
-                        $this->_current_wizstep =& $this->_last_wizstep;
+                        $this->_current_wizstep = $this->_last_wizstep;
                     }
                 }
             }// /if checking last page
@@ -215,7 +219,8 @@ class Wizard
             if ($do_next) {
                 // get the current step
                 include_once $this->_step_includes["{$this->_current_step}"];
-                eval("\$this->_current_wizstep = new WizardStep{$this->_current_step}(\$this);");
+                $class_name = 'WizardStep' . $this->_current_step;
+                $this->_current_wizstep = new $class_name($this);
             }
         }
 
@@ -230,7 +235,7 @@ class Wizard
      */
     public function title()
     {
-        if (!is_null($this->_override_num_steps)) {
+        if ($this->_override_num_steps !== null) {
             if ($this->_current_step<=$this->_override_num_steps) {
                 echo "<p>You are on <strong>step {$this->_current_step}</strong> of <strong>{$this->_override_num_steps}</strong> in the {$this->name}.</p>";
             }

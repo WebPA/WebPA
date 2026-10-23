@@ -26,13 +26,13 @@ CREATE TABLE pa2_assessment (
   feedback_length varchar(45) NOT NULL,
   feedback_optional tinyint(4) NOT NULL,
   PRIMARY KEY (assessment_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_assessment_group_marks (
   assessment_id char(36) NOT NULL,
   group_mark_xml text NOT NULL,
   PRIMARY KEY (assessment_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_assessment_marking (
   assessment_id char(36) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE pa2_assessment_marking (
   date_last_marked datetime NOT NULL,
   marking_params varchar(255) NOT NULL,
   PRIMARY KEY (assessment_id,date_created)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_collection (
   collection_id char(36) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE pa2_collection (
   collection_created_on datetime NOT NULL,
   collection_locked_on datetime DEFAULT NULL,
   PRIMARY KEY (collection_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_form (
   form_id char(36) NOT NULL,
@@ -57,13 +57,13 @@ CREATE TABLE pa2_form (
   form_type varchar(20) NOT NULL,
   form_xml text NOT NULL,
   PRIMARY KEY (form_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_form_module (
   form_id char(36) NOT NULL,
   module_id int(10) unsigned NOT NULL,
   PRIMARY KEY (form_id,module_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_module (
   module_id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -71,7 +71,7 @@ CREATE TABLE pa2_module (
   module_code varchar(255) NOT NULL,
   module_title varchar(255) NOT NULL,
   PRIMARY KEY (module_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user (
   user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -88,20 +88,20 @@ CREATE TABLE pa2_user (
   date_last_login datetime DEFAULT NULL,
   last_module_id int(10) DEFAULT NULL,
   PRIMARY KEY (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_group (
   group_id char(36) NOT NULL,
   collection_id char(36) NOT NULL,
   group_name varchar(50) NOT NULL,
   PRIMARY KEY (group_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_group_member (
   group_id char(36) NOT NULL,
   user_id int(10) unsigned NOT NULL,
   PRIMARY KEY (group_id,user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_justification (
   assessment_id char(36) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE pa2_user_justification (
   justification_text text NOT NULL,
   date_marked datetime NOT NULL,
   PRIMARY KEY (assessment_id,group_id,user_id,marked_user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_mark (
   assessment_id char(36) NOT NULL,
@@ -122,21 +122,21 @@ CREATE TABLE pa2_user_mark (
   date_marked datetime NOT NULL,
   score tinyint(4) NOT NULL,
   PRIMARY KEY (assessment_id,group_id,user_id,marked_user_id,question_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_module (
   user_id int(10) unsigned NOT NULL,
   module_id int(10) unsigned NOT NULL,
   user_type char(1) NOT NULL DEFAULT 'S',
   PRIMARY KEY (user_id,module_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_reset_request (
   id tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   `hash` varchar(32) NOT NULL,
   user_id int(10) unsigned NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_response (
   assessment_id char(36) NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE pa2_user_response (
   date_responded datetime NOT NULL,
   date_opened datetime NOT NULL,
   PRIMARY KEY (assessment_id,group_id,user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE pa2_user_tracking (
   user_id int(10) unsigned NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE pa2_user_tracking (
   module_id int(11) DEFAULT NULL,
   object_id varchar(36) DEFAULT NULL,
   PRIMARY KEY (user_id,`datetime`, description)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 --

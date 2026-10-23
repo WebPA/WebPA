@@ -1,0 +1,17 @@
+.git
+.gitignore
+.github
+Dockerfile
+docker-compose.yml
+nginx.conf
+.env
+.env.*
+!.env.example
+node_modules
+vendor
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

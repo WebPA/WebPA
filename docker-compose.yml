@@ -1,0 +1,87 @@
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/webpa:delegated
+      - composer-cache:/root/.composer/cache
+      - vendor-cache:/var/www/webpa/vendor
+    environment:
+      - APP_WWW=http://localhost
+      - DOC_ROOT=/var/www/webpa/src/
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=webpa
+      - DB_PASS=webpa_password
+      - DB_NAME=webpa
+      - DB_PREFIX=pa2_
+      - CUSTOM_CSS_PATH=
+      - SESSION_NAME=WEBPA
+      - ACADEMIC_YEAR_START_MONTH=9
+      - HELP_EMAIL=admin@localhost
+      - NO_REPLY_EMAIL=noreply@localhost
+      - LOGO_PATH=/images/logo.png
+      - LOGO_ALT_TEXT=WebPA
+      - LOGO_HEIGHT=25
+      - LOGO_WIDTH=102
+      - ALLOW_TEXT_INPUT=true
+      - ENABLE_USER_DELETE=true
+      - ENABLE_MODULE_DELETE=true
+      - SMTP_HOST=localhost
+      - SMTP_PORT=25
+      - EMAIL_ADDRESS=admin@localhost
+      - ENABLE_MOODLE_GRADEBOOK=false
+      - SEND_OPENING_REMINDER=false
+      - SEND_CLOSING_REMINDER=false
+      - MARK_TERMINOLOGY=Scores
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - webpa
+    command: >
+      sh -c "if [ ! -f /var/www/webpa/vendor/autoload.php ]; then composer install --no-dev --optimize-autoloader; fi && php-fpm"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/webpa
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php-fpm
+    networks:
+      - webpa
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: webpa
+      MYSQL_USER: webpa
+      MYSQL_PASSWORD: webpa_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./src/install/webpa2_database.sql:/docker-entrypoint-initdb.d/01-webpa_database.sql:ro
+      - ./src/install/webpa2_tables.sql:/docker-entrypoint-initdb.d/02-webpa_tables.sql:ro
+      - ./src/install/webpa2_administrator.sql:/docker-entrypoint-initdb.d/03-webpa_administrator.sql:ro
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - webpa
+
+networks:
+  webpa:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  composer-cache:
+  vendor-cache:

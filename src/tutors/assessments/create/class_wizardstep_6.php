@@ -15,6 +15,8 @@ use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 use WebPA\tutors\assessments\email\AssessmentNotificationTrait;
 
+
+#[AllowDynamicProperties]
 class WizardStep6
 {
     use AssessmentNotificationTrait;

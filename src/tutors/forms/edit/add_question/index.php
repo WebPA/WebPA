@@ -80,7 +80,7 @@ $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
 $UI->breadcrumbs = [
   'home'              => '../../',
-  'my forms'            => '/../',
+  'my forms'            => '../',
   "edit: {$form->name}"     => "../edit_form.php?$form_qs",
   'add a new question'      => null,
 ];

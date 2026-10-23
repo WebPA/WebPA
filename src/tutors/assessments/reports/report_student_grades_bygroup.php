@@ -349,10 +349,10 @@ if ($type == 'download-rtf') {
             } else {
                 echo $individ['username'];
             }
-            echo "\n\tWebpa score:\t{$score}";
-            echo "\n\tIntermediate grade:\t{$intermediate_grade}";
-            echo "\n\tPenalty:\t{$penalty_str}";
-            echo "\n\tFinal grade:\t{$grade}";
+            echo "\n\tWebpa score:\t$score";
+            echo "\n\tIntermediate grade:\t$intermediate_grade";
+            echo "\n\tPenalty:\t$penalty_str";
+            echo "\n\tFinal grade:\t$grade";
         }
     }
 }

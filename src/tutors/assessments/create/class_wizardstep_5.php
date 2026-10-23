@@ -12,6 +12,8 @@ use WebPA\includes\classes\Form;
 use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\Wizard;
 
+
+#[AllowDynamicProperties]
 class WizardStep5
 {
     public $wizard;

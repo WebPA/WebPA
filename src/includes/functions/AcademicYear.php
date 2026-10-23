@@ -23,7 +23,7 @@ class AcademicYear
     */
     public static function get_academic_year($date = null)
     {
-        if (is_null($date)) {
+        if ($date === null) {
             $date = time();
         }
         $year = (int) date('Y', $date);

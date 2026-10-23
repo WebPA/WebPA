@@ -34,9 +34,9 @@ $marking_date = Common::fetch_GET('md');
 
 $command = Common::fetch_POST('command');
 
-$qs = "a={$assessment_id}&md={$md}&tab={$tab}&y={$year}";
+$qs = "a=$assessment_id&md=$md&tab=$tab&y=$year";
 
-$list_url = "?{$qs}";
+$list_url = "?$qs";
 
 // --------------------------------------------------------------------------------
 
@@ -230,7 +230,7 @@ foreach ($member_names as $i => $member) {
     echo '<tr>';
     echo "<td style=\"text-align: left\"> {$member['lastname']}, {$member['forename']} ({$member['id_number']})</td>";
     echo "<td>$score</td>";
-    echo "<td>{$grade}%</td>";
+    echo "<td>$grade%</td>";
     echo "<td>$penalty_str</td>";
     echo '</tr>';
 }

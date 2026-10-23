@@ -13,6 +13,8 @@ use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\classes\Wizard;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep3
 {
     public $wizard;

@@ -14,6 +14,7 @@
 
 namespace WebPA\includes\classes;
 
+#[AllowDynamicProperties]
 class SimpleObjectIterator
 {
     // Public Vars
@@ -36,7 +37,7 @@ class SimpleObjectIterator
     * @param string $class_name
     * @param string $constructor_args
     */
-    public function __construct(&$array, $class_name = '', $constructor_args = '')
+    public function __construct(array $array, $class_name = '', $constructor_args = '')
     {
         $this->_initialise($array);
         $this->class_name = $class_name;
@@ -50,10 +51,10 @@ class SimpleObjectIterator
     */
 
     /**
-    * Get object at current pointer position
-    * @return integer
-    */
-    public function &current()
+     * Get object at current pointer position
+     * @return object
+     */
+    public function current()
     {
         switch ($this->class_name) {
       case 'GroupCollection':
@@ -130,9 +131,9 @@ class SimpleObjectIterator
     * Initialise the object iterator
     * @param array $array
     */
-    public function _initialise(&$array)
+    public function _initialise(array $array)
     {
-        $this->array =& $array;
+        $this->array = $array;
         $this->count = count($array);
 
         if ($this->count==0) {

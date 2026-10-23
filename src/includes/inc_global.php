@@ -12,6 +12,7 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use Doctrine\DBAL\ParameterType;
+use WebPA\includes\classes\Cache;
 use WebPA\includes\classes\DAO;
 use WebPA\includes\classes\EngCIS;
 use WebPA\includes\classes\UI;
@@ -32,7 +33,16 @@ date_default_timezone_set('Europe/London');
 // User configuration section
 ////
 
-define('APP__WWW', $_ENV['APP_WWW']);
+// Detect APP__WWW dynamically when using localhost/127.0.0.1
+$www_base = $_ENV['APP_WWW'];
+if ($www_base !== null && preg_match('#^https?://(localhost|127\.0\.0\.1)(:\d+)?/?$#i', $www_base)) {
+    // Detect actual request host for remote access support
+    $proto = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http';
+    $host  = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    // APP__WWW is always the app root (web root), not the subdirectory of the current file
+    $www_base = $proto . '://' . $host;
+}
+define('APP__WWW', $www_base);
 define('DOC__ROOT', $_ENV['DOC_ROOT']); //must include the trailing /
 define('CUSTOM_CSS', $_ENV['CUSTOM_CSS_PATH']);  // Optional custom CSS file
 define('SESSION_NAME', $_ENV['SESSION_NAME']);
@@ -94,7 +104,7 @@ $INSTALLED_MODS = [];
 define('APP__NAME', 'WebPA OS');
 define('APP__TITLE', 'WebPA OS : Online Peer Assessment System');
 define('APP__ID', 'webpa');
-define('APP__VERSION', '3.3.0-RC1');
+define('APP__VERSION', '3.8.0-RC4');
 define('APP__DESCRIPTION', 'WebPA, an Open source, online peer assessment system.');
 define('APP__KEYWORDS', 'peer assessment, online, peer, assessment, tools, open source');
 
@@ -167,6 +177,12 @@ $_config['app_www'] = APP__WWW;
 // Initialisation
 
 session_name(SESSION_NAME);
+
+// Session security and performance settings
+ini_set('session.cookie_httponly', '1');
+ini_set('session.use_strict_mode', '1');
+ini_set('session.gc_maxlifetime', '86400'); // 24 hours
+
 session_start();
 
 // Initialise DB object
@@ -192,7 +208,13 @@ $BRANDING['css'] = Common::fetch_SESSION('branding_css', CUSTOM_CSS);
 $BRANDING['email.help'] = Common::fetch_SESSION('branding_email.help', APP__EMAIL_HELP);
 $BRANDING['email.noreply'] = Common::fetch_SESSION('branding_email.noreply', APP__EMAIL_NO_REPLY);
 
+// Initialise CIS
 $CIS = new EngCIS($_source_id, $_module_id);
+
+// Cache academic year (avoid repeated computation)
+if (!Cache::has('academic_year')) {
+    Cache::set('academic_year', \WebPA\includes\functions\AcademicYear::get_academic_year());
+}
 
 // If we found a user to load, load 'em!
 if ($_user_id) {
@@ -205,9 +227,14 @@ if ($_user_id) {
 
     // save session data
     $_SESSION['_user_id'] = $_user->id;
+
+    // Cache user modules for this user (avoid repeated DB queries)
+    if (!Cache::has("user_modules:$_user_id")) {
+        Cache::set("user_modules:$_user_id", $CIS->get_user_modules($_user_id));
+    }
 }
 
-if (!is_null($_user)) {
+if ($_user !== null) {
     $CIS->setUser($_user);
 }
 
@@ -216,11 +243,17 @@ $_module = null;
 
 // If we found a module to load, load it!
 if ($_module_id) {
-    $dbConn = $DB->getConnection();
-
-    $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
-
-    $_module = $dbConn->fetchAssociative($query, [$_SESSION['_module_id']], [ParameterType::INTEGER]);
+    $cache_key = "module:$_module_id";
+    if (Cache::has($cache_key)) {
+        $_module = Cache::get($cache_key);
+    } else {
+        $dbConn = $DB->getConnection();
+        $query = 'SELECT module_id, module_code, module_title FROM ' . APP__DB_TABLE_PREFIX . 'module WHERE module_id = ?';
+        $_module = $dbConn->fetchAssociative($query, [$_SESSION['_module_id']], [ParameterType::INTEGER]);
+        if ($_module) {
+            Cache::set($cache_key, $_module);
+        }
+    }
 
     $_module_code = $_module['module_code'];
 }

@@ -115,7 +115,7 @@ if ($empty > 0) {
           ->setParameter(1, $_module_id, ParameterType::INTEGER)
           ->execute();
 
-            $action_notify = '<p>The form has been uploaded and can be found in your <a href="/tutors/forms">my forms</a> list.</p>';
+            $action_notify = '<p>The form has been uploaded and can be found in your <a href="<?php echo APP__WWW ?>/tutors/forms">my forms</a> list.</p>';
         }
     } else {
         $action_notify = '<p>The import has failed due to the following reasons:</p>';
@@ -128,13 +128,13 @@ if ($empty > 0) {
         $action_notify .= '</ul>';
     }
 } else {
-    $action_notify = '<div class="error_box"><p>There was no form information to upload.<br> Please go back and try again</p></div>';
+    $action_notify = '<div class="error_box"><p>There was no form information to upload.<br /> Please go back and try again</p></div>';
 }
 
 $UI->page_title = APP__NAME . ' load form';
 $UI->menu_selected = 'my forms';
 $UI->help_link = '?q=node/244';
-$UI->breadcrumbs = ['home'      => '/',
+$UI->breadcrumbs = ['home'      => '../../',
             'my forms'  => null, ];
 
 $UI->set_page_bar_button('List Forms', '../../../../images/buttons/button_form_list.gif', '../');

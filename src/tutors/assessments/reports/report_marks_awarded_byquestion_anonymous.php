@@ -78,7 +78,7 @@ if ($assessment->load($assessment_id)) {
     $groups_iterator = $collection->get_groups_iterator();
     if ($groups_iterator->size()>0) {
         for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-            $group =& $groups_iterator->current();
+            $group = $groups_iterator->current();
             $group_members["{$group->id}"] = $group->get_member_ids();
             $group_names["{$group->id}"] = $group->name;
             $groups_and_marks["{$group->id}"] = null;
@@ -173,7 +173,7 @@ if ($type == 'view') {
       foreach ($questions as $question_id) {
           $q_index = $question_id+1;
           $question = $form->get_question($question_id);
-          echo "<p>Q{$q_index} : {$question['text']['_data']}"; ?>
+          echo "<p>Q$q_index : {$question['text']['_data']}"; ?>
           <?= array_key_exists('range', $question) ? "(range: {$question['range']['_data']})" : '' ?>
           </p>
           <table class="grid" cellpadding="2" cellspacing="1" style="font-size: 0.8em">
@@ -208,7 +208,7 @@ if ($type == 'view') {
                   }
 
                   $q_total[$target_member_id] += (int) $score;
-                  if (is_null($score)) {
+                  if ($score === null) {
                       $score = '-';
                   }
                   echo "<td>$score</td>";
@@ -238,9 +238,9 @@ if ($type == 'view') {
 
 /*
 * --------------------------------------------------------------------------------
-* If report type is download CSV
-* --------------------------------------------------------------------------------
-*/
+ * If report type is download CSV
+ * --------------------------------------------------------------------------------
+ */
 if ($type == 'download-csv') {
     header('Content-Disposition: attachment; filename="webpa_marks_awarded_byquestion.csv"');
     header('Content-Type: text/csv');
@@ -259,7 +259,7 @@ if ($type == 'download-csv') {
                 $question = $form->get_question($question_id);
 
                 echo "\n";
-                echo "\"Q{$q_index} : {$question['text']['_data']}";
+                echo "\"Q$q_index : {$question['text']['_data']}";
 
                 if (array_key_exists('range', $question)) {
                     echo "range: {$question['range']['_data']})\"\n";
@@ -267,7 +267,7 @@ if ($type == 'download-csv') {
                     echo "\"\n";
                 }
 
-                echo '"",';
+                echo '",';
 
                 foreach ($g_members as $i => $member_id) {
                     $char = chr(65+$i);
@@ -302,7 +302,7 @@ if ($type == 'download-csv') {
                             $q_total[$target_member_id] += (int) $score;
                         }
 
-                        if (is_null($score)) {
+                        if ($score === null) {
                             $score = '-';
                         }
 

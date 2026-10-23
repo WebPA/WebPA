@@ -26,13 +26,13 @@ $assessment_id = Common::fetch_GET('a');
 $tab = Common::fetch_GET('tab');
 $year = Common::fetch_GET('y', date('Y'));
 
-$list_url = "../index.php?tab={$tab}&y={$year}";
+$list_url = "../index.php?tab=$tab&y=$year";
 
 // --------------------------------------------------------------------------------
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 } else {
     $assessment = null;
 }
@@ -42,7 +42,7 @@ if ($assessment->load($assessment_id)) {
 
 if ($assessment) {
     $wizard = new Wizard('email your students wizard');
-    $wizard->set_wizard_url("index.php?a={$assessment->id}&tab={$tab}&y={$year}");
+    $wizard->set_wizard_url("index.php?a={$assessment->id}&tab=$tab&y=$year");
 
     $wizard->set_field('list_url', $list_url);
     $wizard->cancel_url = $wizard->get_field('list_url');

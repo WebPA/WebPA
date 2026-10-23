@@ -152,26 +152,15 @@ class Common
             return false;
         }
         return false;
-        
-
-
-        // If we didn't call 'return' then the user is denied access
-
-        // If they tried to access the main index page, assume they haven't logged in and go to the login page directly
-        if ($_SERVER['PHP_SELF']=='/index.php') {
-            header('Location: '. APP__WWW .'/login.php');
-        } else {  // log them out and give the DENIED message
-            header('Location:'. APP__WWW .'/logout.php?msg=denied');
-        }
-        exit;
     }
 
     /**
      * This function is a legacy function which appears to determine if a file is located in a particular directory.
      *
      */
-    public static function & rel1($struc, &$file)
+    public function rel1(string $struc, string $file): bool
     {
-        return file_exists(($file = (dirname($struc).'/'.$file)));
+        $file = dirname($struc).'/'.$file;
+        return file_exists($file);
     }
 }

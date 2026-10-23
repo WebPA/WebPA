@@ -18,6 +18,8 @@ namespace WebPA\includes\classes;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class GroupCollection
 {
     // Public Vars
@@ -33,6 +35,8 @@ class GroupCollection
     private $dbConn;
 
     private $_groups;
+
+    private $_group = [];
 
     private $_group_objects;
 
@@ -122,7 +126,7 @@ class GroupCollection
         $this->module_id = $row['module_id'];
         $this->name = $row['collection_name'];
         $this->_created_on = strtotime($row['collection_created_on']);
-        $this->_locked_on = ((is_null($row['collection_locked_on'])) ? null : strtotime($row['collection_locked_on']));
+        $this->_locked_on = (($row['collection_locked_on'] === null) ? null : strtotime($row['collection_locked_on']));
         $this->_assessment_id = $row['collection_assessment_id'] ?? null;
         return true;
     }
@@ -223,7 +227,7 @@ class GroupCollection
                     ->setParameter(3, $this->id);
 
             // check if the locked field needs to be set
-            if (is_null($lockedOn)) {
+            if ($lockedOn === null) {
                 $queryBuilder->set('collection_locked_on', 'NULL');
             } else {
                 $queryBuilder->set('collection_locked_on', '?')->setParameter(3, $lockedOn);
@@ -282,7 +286,7 @@ class GroupCollection
      */
     public function is_locked()
     {
-        return (!is_null($this->_locked_on)) || ($this->_locked_on);
+        return ($this->_locked_on !== null) || ($this->_locked_on);
     }
 
     // /->is_locked()
@@ -401,7 +405,7 @@ class GroupCollection
         if (!$this->_groups) {
             $this->_groups = [];
         }
-        uasort($this->_groups, ['self', 'group_title_natural_sort']);
+        uasort($this->_groups, [self::class, 'group_title_natural_sort']);
     }
 
     // /->refresh_groups()
@@ -446,7 +450,7 @@ class GroupCollection
      *
      * @return object Group object (or NULL)
      */
-    public function & get_group_object($group_id)
+    public function get_group_object($group_id): ?Group
     {
         if (!is_array($this->_groups)) {
             $this->refresh_groups();
@@ -462,7 +466,7 @@ class GroupCollection
             $new_group->set_dao_object($this->_DAO);
             $new_group->set_collection_object($this);
             $new_group->load($group_id);
-            $this->_group_objects[$group_id] =& $new_group;
+            $this->_group_objects[$group_id] = $new_group;
             return $new_group;
         }
         return null;
@@ -477,7 +481,7 @@ class GroupCollection
      * @param string $group_name Name of new group to add
      * @return array
      */
-    public function & new_group($group_name = 'new group')
+    public function new_group($group_name = 'new group'): Group
     {
         $new_group = new Group();
         $new_group->set_dao_object($this->_DAO);
@@ -486,7 +490,7 @@ class GroupCollection
         $new_group->set_collection_object($this);
 
         $this->_group[$new_group->id] = $new_group->get_as_array();
-        $this->_group_objects[$new_group->id] =& $new_group;
+        $this->_group_objects[$new_group->id] = $new_group;
         return $new_group;
     }
 
@@ -497,7 +501,7 @@ class GroupCollection
      *
      * @return object GroupIterator object
      */
-    public function & get_groups_iterator()
+    public function get_groups_iterator(): SimpleIterator
     {
         if (!$this->_groups) {
             $this->refresh_groups();
@@ -607,16 +611,17 @@ class GroupCollection
      *
      * @return array array of group objects
      */
-    public function & get_member_groups($user_id)
+    public function get_member_groups($user_id): array
     {
         $member_roles = $this->get_member_roles($user_id);
         if ($member_roles) {
-            $groups = null;
+            $groups = [];
             foreach ($member_roles as $group_id => $role) {
-                $groups[] =& $this->get_group_object($group_id);
+                $groups[] = $this->get_group_object($group_id);
             }
             return $groups;
         }
+        return [];
     }
 
     // /->get_member_groups()
@@ -664,7 +669,7 @@ class GroupCollection
         $groups_iterator = $this->get_groups_iterator();
         if ($groups_iterator->size() > 0) {
             for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-                $group =& $groups_iterator->current();
+                $group = $groups_iterator->current();
                 $group->purge_members($target_roles, $protect_roles);
             }
         }

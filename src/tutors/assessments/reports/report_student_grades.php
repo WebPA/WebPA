@@ -274,10 +274,10 @@ if ($type == 'download-xml') {
             echo $member['username'];
         }
         echo "</institutional_student_number>\n";
-        echo "\t\t<webpa_score>{$score}</webpa_score>\n";
-        echo "\t\t<intermediate_grade>{$intermediate_grade}</intermediate_grade>\n";
-        echo "\t\t<penalty>{$penalty_str}</penalty>\n";
-        echo "\t\t<final_grade>{$grade}</final_grade>\n";
+        echo "\t\t<webpa_score>$score</webpa_score>\n";
+        echo "\t\t<intermediate_grade>$intermediate_grade</intermediate_grade>\n";
+        echo "\t\t<penalty>$penalty_str</penalty>\n";
+        echo "\t\t<final_grade>$grade</final_grade>\n";
         echo "\t</student>\n";
     }
 
@@ -303,7 +303,7 @@ if ($type == 'download-moodle-xml') {
 
     echo '<?xml version="1.0" ?> ';
 
-    echo "<results batch=\"[{$tempAssessmentId}]\">";
+    echo "<results batch=\"[$tempAssessmentId]\">";
 
     foreach ($member_names as $i => $member) {
         $score = (array_key_exists($member['user_id'], $webpa_scores)) ? $webpa_scores["{$member['user_id']}"] : '-' ;
@@ -330,7 +330,7 @@ if ($type == 'download-moodle-xml') {
             echo $member['username'];
         }
         echo '</student>';
-        echo "<score>{$grade}</score>";
+        echo "<score>$grade</score>";
         echo '</result>';
     }
 
@@ -372,10 +372,10 @@ if ($type == 'download-rtf') {
         } else {
             echo $member['username'];
         }
-        echo "\nWebpa Score:\t{$score}";
-        echo "\nIntermediate grade:\t{$intermediate_grade}";
-        echo "\nPenalty:\t{$penalty_str}";
-        echo "\nFinal Grade:\t{$grade}\n";
+        echo "\nWebpa Score:\t$score";
+        echo "\nIntermediate grade:\t$intermediate_grade";
+        echo "\nPenalty:\t$penalty_str";
+        echo "\nFinal Grade:\t$grade\n";
     }
 }
 

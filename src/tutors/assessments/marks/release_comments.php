@@ -30,25 +30,26 @@ if (empty($assessmentId)) {
     $errors[] = 'No assessment ID provided.';
 }
 
-// Get every user in the assessment that has at least one comment associated with them
-$userQuery =
-    'SELECT             a.assessment_id, a.assessment_name, ugm.user_id, u.forename, u.email ' .
-    'FROM               ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
-    'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
-    'ON                 ug.collection_id = a.collection_id ' .
-    'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
-    'ON                 ugm.group_id = ug.group_id ' .
-    'LEFT JOIN          '. APP__DB_TABLE_PREFIX . 'user u ' .
-    'ON                 u.user_id = ugm.user_id ' .
-    'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
-    'ON                 a.assessment_id = uj.assessment_id ' .
-    'AND                ugm.group_id = uj.group_id ' .
-    'AND                uj.user_id = u.user_id ' .
-    'WHERE              a.assessment_id = ? ' .
-    'AND                uj.justification_text IS NOT NULL ' .
-    'GROUP BY           a.assessment_id, a.assessment_name, ugm.user_id, u.forename, u.email';
-
 try {
+    // Get every user in the assessment that has at least one comment associated with them
+    // Note: user_justification table may not exist — wrap in try/catch
+    $userQuery =
+        'SELECT             a.assessment_id, a.assessment_name, ugm.user_id, u.forename, u.email ' .
+        'FROM               ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
+        'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_group ug ' .
+        'ON                 ug.collection_id = a.collection_id ' .
+        'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_group_member ugm ' .
+        'ON                 ugm.group_id = ug.group_id ' .
+        'LEFT JOIN          '. APP__DB_TABLE_PREFIX . 'user u ' .
+        'ON                 u.user_id = ugm.user_id ' .
+        'LEFT JOIN          ' . APP__DB_TABLE_PREFIX . 'user_justification uj ' .
+        'ON                 a.assessment_id = uj.assessment_id ' .
+        'AND                ugm.group_id = uj.group_id ' .
+        'AND                uj.user_id = u.user_id ' .
+        'WHERE              a.assessment_id = ? ' .
+        'AND                uj.justification_text IS NOT NULL ' .
+        'GROUP BY           a.assessment_id, a.assessment_name, ugm.user_id, u.forename, u.email';
+
     $assessmentUsers = $DB
         ->getConnection()
         ->fetchAllAssociative($userQuery, [$assessmentId], [ParameterType::STRING]);
@@ -96,9 +97,14 @@ try {
     $stmt->bindValue(1, $user['assessment_id']);
 
     $stmt->execute();
+} catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+    // Required tables (user_justification, user_justification_report,
+    // user_justification_publish_date) do not exist in this database.
+    // The justification comments feature is not available.
+    error_log('Message: ' . $e->getMessage() . ' - Table not found — justification feature unavailable');
+    $errors[] = 'The justification comments feature requires database tables that are not present in this installation.';
 } catch (\Doctrine\DBAL\Exception $e) {
     error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
-
     $errors[] = 'A database error was encountered when trying to generate the comment reports.';
 }
 

@@ -40,7 +40,7 @@ $UI->page_title = APP__NAME . ' ' .  "finished: $assessment->name";
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/329';
 $UI->breadcrumbs = [
-  'home'             => '/',
+  'home'             => '../',
   $assessment->name  => null,
 ];
 

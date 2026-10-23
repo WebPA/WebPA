@@ -74,7 +74,7 @@ $results = $stmt->execute();
 
 $rs = $results->fetchAllAssociative();
 
-echo "<h2>{$rstitle} for {$user->forename} {$user->lastname} ({$user->username})</h2>";
+echo "<h2>$rstitle for {$user->forename} {$user->lastname} ({$user->username})</h2>";
 
 echo '<div class="obj">';
 
@@ -86,7 +86,7 @@ for ($recordcounter = 0; $recordcounter < count($rs); $recordcounter++) {
         //write the table field headers to the screen
         echo '<tr>';
         foreach ($rs[$recordcounter] as $field_name => $field_value) {
-            echo "<th>{$field_name}</th>";
+            echo "<th>$field_name</th>";
         }
         echo "</tr>\n";
     }

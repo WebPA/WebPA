@@ -10,6 +10,8 @@
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep2
 {
     // Public
@@ -56,8 +58,8 @@ class WizardStep2
 
         if ((is_array($question))) {
             for ($i=$range_start; $i<=$range_end; $i++) {
-                if ((array_key_exists("scorelabel{$i}", $question)) && (!$this->wizard->get_field("scorelabel{$i}"))) {
-                    $this->wizard->set_field("scorelabel{$i}", $question["scorelabel{$i}"]['_data']);
+                if ((array_key_exists("scorelabel$i", $question)) && (!$this->wizard->get_field("scorelabel$i"))) {
+                    $this->wizard->set_field("scorelabel$i", $question["scorelabel$i"]['_data']);
                 }
             }
         } ?>
@@ -71,8 +73,8 @@ class WizardStep2
 			<?php
                 for ($i=$range_start; $i<=$range_end; $i++) {
                     echo '<tr>';
-                    echo "<th><label for=\"scorelabel{$i}\">Score $i</label></th>";
-                    echo "<td><input type=\"text\" name=\"scorelabel{$i}\" id=\"scorelabel{$i}\" maxlength=\"255\" size=\"50\" value=\"". $this->wizard->get_field("scorelabel{$i}") .'" /></td>';
+                    echo "<th><label for=\"scorelabel$i\">Score $i</label></th>";
+                    echo "<td><input type=\"text\" name=\"scorelabel$i\" id=\"scorelabel$i\" maxlength=\"255\" size=\"50\" value=\"". $this->wizard->get_field("scorelabel$i") .'" /></td>';
                     if ($i==$range_start) {
                         echo '<td style="font-size: 0.9em; font-style: italic;">Lowest</td>';
                     } else {
@@ -99,10 +101,10 @@ class WizardStep2
         $range_end = $this->wizard->get_field('question_range_end');
 
         for ($i=$range_start; $i<=$range_end; $i++) {
-            $scorelabel = trim(Common::fetch_POST("scorelabel{$i}"));
+            $scorelabel = trim(Common::fetch_POST("scorelabel$i"));
 
             if (!empty($scorelabel)) {
-                $this->wizard->set_field("scorelabel{$i}", $scorelabel);
+                $this->wizard->set_field("scorelabel$i", $scorelabel);
             }
         }
 

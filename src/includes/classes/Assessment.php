@@ -13,6 +13,8 @@ namespace WebPA\includes\classes;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class Assessment
 {
     // Public Vars
@@ -68,7 +70,7 @@ class Assessment
     */
     public function __construct(DAO $DAO)
     {
-        $this->_DAO =& $DAO;
+        $this->_DAO = $DAO;
         $this->dbConn = $this->_DAO->getConnection();
         $this->_locked = null;
     }
@@ -135,11 +137,15 @@ class Assessment
             [ParameterType::STRING]
         );
 
-        $this->dbConn->executeQuery(
-            'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE assessment_id = ?',
-            [$this->id],
-            [ParameterType::STRING]
-        );
+        try {
+            $this->dbConn->executeQuery(
+                'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_justification WHERE assessment_id = ?',
+                [$this->id],
+                [ParameterType::STRING]
+            );
+        } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+            // Table doesn't exist — table was removed from schema
+        }
 
         $this->dbConn->executeQuery(
             'DELETE FROM ' . APP__DB_TABLE_PREFIX . 'user_response WHERE assessment_id = ?',
@@ -160,9 +166,11 @@ class Assessment
             [ParameterType::STRING]
         );
 
-        $group_handler = new GroupHandler();
-        $collection = $group_handler->get_collection($collection);
-        $collection->delete();
+        if ($collection) {
+            $group_handler = new GroupHandler();
+            $collection = $group_handler->get_collection($collection);
+            $collection->delete();
+        }
 
         return true;
     }
@@ -207,7 +215,7 @@ class Assessment
         $this->close_date = strtotime($row['close_date']);
         $this->introduction = $row['introduction'];
         $this->allow_feedback = $row['allow_feedback'] == 1;
-        $this->assessment_type = $row['assessment_type'];;
+        $this->assessment_type = $row['assessment_type'];
         $this->allow_assessment_feedback = $row['student_feedback'];
         $this->email_opening = $row['email_opening'];
         $this->email_closing = $row['email_closing'];
@@ -328,7 +336,7 @@ class Assessment
     * Create a clone of this assessment
     * @return mixed
     */
-    public function & get_clone()
+    public function get_clone(): Assessment
     {
         $clone_assessment = new Assessment($this->_DAO);
         $clone_assessment->load($this->id);   // Creates an EXACT clone of this assessment
@@ -351,7 +359,7 @@ class Assessment
     {
         // Get the number of questions used in this assessment, and create an array of that size
         $form = new Form($this->get_db());
-        $form_xml =& $this->_form_xml;
+        $form_xml = $this->_form_xml;
         $form->load_from_xml($form_xml);
 
         return $form;
@@ -536,7 +544,7 @@ class Assessment
     */
     public function is_locked()
     {
-        if (is_null($this->_locked)) {
+        if ($this->_locked === null) {
             $countAssessmentsQuery =
           'SELECT COUNT(assessment_id) ' .
           'FROM ' . APP__DB_TABLE_PREFIX . 'user_mark ' .
@@ -555,9 +563,9 @@ class Assessment
     * Set database connection
     * @param  object  $db  The database connection object to use
     */
-    public function set_db(& $db)
+    public function set_db(DAO $db): void
     {
-        $this->_DAO =& $db;
+        $this->_DAO = $db;
     }
 
     // /->set_db()
@@ -586,10 +594,10 @@ class Assessment
         $params = null;
 
         if (!is_object($this->_xml_parser)) {
-            $xml_parser = new XMLParser();
+            $this->_xml_parser = new XMLParser();
         }
 
-        $xml_array = $xml_parser->parse($marking_params_xml);
+        $xml_array = $this->_xml_parser->parse($marking_params_xml);
 
         $params['weighting'] = $xml_array['parameters']['weighting']['_attributes']['value'];
         $params['penalty'] = $xml_array['parameters']['penalty']['_attributes']['value'];

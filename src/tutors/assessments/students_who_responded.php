@@ -27,13 +27,13 @@ $tab = Common::fetch_GET('tab', 'pending');
 
 $assessment_id = Common::fetch_GET('a');
 
-$list_url = "index.php?tab={$tab}&y={$year}";
+$list_url = "index.php?tab=$tab&y=$year";
 
 // --------------------------------------------------------------------------------
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 
     $group_handler = new GroupHandler();
     $collection = $group_handler->get_collection($assessment->get_collection_id());
@@ -57,8 +57,8 @@ if ($assessment->load($assessment_id)) {
 $UI->page_title = APP__NAME . ' ' . 'students who responded';
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = ['home'           => '/',
-               'my assessments'     => $list_url,
+$UI->breadcrumbs = ['home'           => '../../',
+               'my assessments'     => '../',
                'students who responded' => null, ];
 
 $UI->set_page_bar_button('List Assessments', '../../../images/buttons/button_assessment_list.gif', '../');
@@ -93,7 +93,7 @@ $UI->content_start();
 <?php
 if ($groups_iterator->size()>0) {
     for ($groups_iterator->reset(); $groups_iterator->is_valid(); $groups_iterator->next()) {
-        $group =& $groups_iterator->current();
+        $group = $groups_iterator->current();
 
         $members = $CIS->get_user($group->get_member_ids());
         echo "<h2>{$group->name}</h2>";

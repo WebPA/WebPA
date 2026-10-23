@@ -12,6 +12,8 @@ namespace WebPA\tutors\assessments\email;
 
 use WebPA\includes\classes\DAO;
 
+
+#[AllowDynamicProperties]
 class TriggerReminder
 {
     use AssessmentNotificationTrait;

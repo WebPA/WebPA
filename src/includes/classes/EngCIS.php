@@ -11,10 +11,13 @@
 namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
+use WebPA\includes\classes\Cache;
 use WebPA\includes\functions\AcademicYear;
 use WebPA\includes\functions\ArrayFunctions;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class EngCIS
 {
     private $_DAO;
@@ -92,6 +95,9 @@ class EngCIS
                 [$this->sourceId, $modules],
                 [ParameterType::STRING, ParameterType::INTEGER]
             );
+        }
+        if (!$this->user) {
+            return [];
         }
         if ($this->user->is_admin()) {
             $queryBuilder
@@ -240,7 +246,7 @@ class EngCIS
         $queryBuilder = $this->_DAO->getConnection()->createQueryBuilder();
 
         $queryBuilder
-            ->select('module_id', 'COUNT(user_id')
+            ->select('module_id', 'COUNT(user_id)')
             ->from(APP__DB_TABLE_PREFIX . 'user_module', 'lcsm')
             ->where(
                 $queryBuilder->expr()->in('module_id', '?')
@@ -378,7 +384,7 @@ class EngCIS
      */
     public function get_user_for_email($email)
     {
-        $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE email = ? LIMIT 1';
+        $query = 'SELECT user_id, source_id, username, password, id_number, forename, lastname, email, admin, disabled, date_last_login, last_module_id FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE email = ? LIMIT 1';
 
         return $this->dbConn->fetchAssociative($query, [$email], [ParameterType::STRING]);
     }
@@ -392,16 +398,16 @@ class EngCIS
      */
     public function get_user_for_username($username, $source_id = null)
     {
-        if (is_null($source_id) && isset($_SESSION['_source_id'])) {
+        if ($source_id === null && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } elseif (is_null($source_id)) {
+        } elseif ($source_id === null) {
             $source_id = '';
         }
         $this->moduleId = Common::fetch_SESSION('_module_id', null);
 
-        $query = 'SELECT u.*, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
+        $query = 'SELECT u.user_id, u.source_id, u.username, u.password, u.id_number, u.forename, u.lastname, u.email, u.admin, u.disabled, u.date_last_login, u.last_module_id, um.user_type FROM ' . APP__DB_TABLE_PREFIX . 'user u '
                . 'LEFT OUTER JOIN ( '
-               . 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? '
+               . 'SELECT user_id, user_type FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE module_id = ? '
                . ') um '
                . 'ON u.user_id = um.user_id '
                . 'WHERE username = ? '
@@ -422,14 +428,20 @@ class EngCIS
      */
     public function get_user_modules($user_id, $username = null, $ordering = 'id', $source_id = null)
     {
-        $dbConn = $this->_DAO->getConnection();
-        $queryBuilder = $dbConn->createQueryBuilder();
-
-        if (is_null($source_id) && isset($_SESSION['_source_id'])) {
+        if ($source_id === null && isset($_SESSION['_source_id'])) {
             $source_id = $_SESSION['_source_id'];
-        } elseif (is_null($source_id)) {
+        } elseif ($source_id === null) {
             $source_id = '';
         }
+
+        // Build cache key from inputs
+        $cache_key = 'user_modules:' . md5((is_array($user_id) ? implode(',', $user_id) : ($user_id ?? '')) . ':' . ($username ?? 'admin') . ':' . $source_id);
+        if (Cache::has($cache_key)) {
+            return Cache::get($cache_key);
+        }
+
+        $dbConn = $this->_DAO->getConnection();
+        $queryBuilder = $dbConn->createQueryBuilder();
 
         $queryBuilder->orderBy($ordering === 'name' ? 'lcm.module_title' : 'lcm.module_id');
 
@@ -479,7 +491,9 @@ class EngCIS
             $queryBuilder->setParameter(0, $source_id);
         }
 
-        return $queryBuilder->execute()->fetchAllAssociativeIndexed();
+        $result = $queryBuilder->execute()->fetchAllAssociativeIndexed();
+        Cache::set($cache_key, $result);
+        return $result;
     }
 
     /*
@@ -507,7 +521,7 @@ class EngCIS
         }
 
         // Ensure that the first record contains some dates as we could return a null record
-        if (!empty($dates['first'])) {
+        if (!empty($dates) && !empty($dates['first'])) {
             $years[] = AcademicYear::dateToYear(strtotime($dates['first']));
             $years[] = AcademicYear::dateToYear(strtotime($dates['last']));
         } else {

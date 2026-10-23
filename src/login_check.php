@@ -54,7 +54,7 @@ if (($username) && ($password)) {
         //but just to be sure check for an authorisation failed message
         $auth_failed = $_auth->get_error();
 
-        if (strlen($auth_failed) > 0) {
+        if (strlen((string) $auth_failed) > 0) {
             $msg = $auth_failed;
         }
     } elseif ($_auth->is_disabled()) {
@@ -76,12 +76,12 @@ if (($username) && ($password)) {
         Common::logEvent($DB, 'Login');
         Common::logEvent($DB, 'Enter module', $_auth->module_id);
 
-        header('Location: ' . APP__WWW . "/index.php?id={$_user_id}"); // This doesn't log them in, the user_id just shows as a debug check
+        header('Location: ' . APP__WWW . "/index.php?id=$_user_id"); // This doesn't log them in, the user_id just shows as a debug check
         exit;
     }
 } else {
     $msg = '';
 }
 
-header('Location: ' . APP__WWW . "/login.php?msg={$msg}");
+header('Location: ' . APP__WWW . "/login.php?msg=$msg");
 exit;

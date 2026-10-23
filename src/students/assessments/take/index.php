@@ -40,7 +40,7 @@ if ($assessment->load($assessment_id)) {
 
     // Check if the assessment is open
     if ($assessment->get_status()!='open') {
-        header('Location: '. APP__WWW ."/students/assessments/take/not_open.php?{$assessment_qs}");
+        header('Location: '. APP__WWW ."/students/assessments/take/not_open.php?$assessment_qs");
         exit;
     }
 
@@ -49,7 +49,7 @@ if ($assessment->load($assessment_id)) {
     $result_handler->set_assessment($assessment);
 
     if ($result_handler->user_has_responded($_user->id, $assessment->id)) {
-        header('Location: '. APP__WWW ."/students/assessments/take/already_submitted.php?{$assessment_qs}");
+        header('Location: '. APP__WWW ."/students/assessments/take/already_submitted.php?$assessment_qs");
         exit;
     }
 
@@ -145,20 +145,20 @@ if (($command) && ($assessment)) {
 
                       // Loop through every person
                       foreach ($people as $id => $name) {
-                          $q_id = "q_{$q}_{$id}";
+                          $q_id = "q_$q_$id";
                           $score = Common::fetch_POST($q_id, null);
 
                           if (($score!=0) && (empty($score))) {
-                              $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                              $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q$q_num.";
                               $error_style_ids["$q_id"] = 1;
                           } else {
                               if (!is_numeric($score)) {
-                                  $errors[] = "You didn't give a valid " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                                  $errors[] = "You didn't give a valid " . APP__MARK_TEXT . " for '$name' in Q$q_num.";
                                   $error_style_ids["$q_id"] = 1;
                               } else {
                                   $score = (int) $score;
                                   if (($score<0) || ($score>$group_total)) {
-                                      $errors[] = 'Your ' . APP__MARK_TEXT . " of $score for '$name' in Q{$q_num} is invalid.<br /> " . APP__MARK_TEXT . " must be between 0 and $group_total.";
+                                      $errors[] = 'Your ' . APP__MARK_TEXT . " of $score for '$name' in Q$q_num is invalid.<br /> " . APP__MARK_TEXT . " must be between 0 and $group_total.";
                                       $error_style_ids["$q_id"] = 1;
                                   }
                                   $results["$q"]["$id"] = $score;
@@ -175,7 +175,7 @@ if (($command) && ($assessment)) {
                       $q_num = $q + 1;
 
                       if ($q_total!==$group_total) {
-                          $errors[] = 'The total ' . APP__MARK_TEXT . " for Q{$q_num} should be $group_total.  You have " . APP__MARK_TEXT . " totalling $q_total.";
+                          $errors[] = 'The total ' . APP__MARK_TEXT . " for Q$q_num should be $group_total.  You have " . APP__MARK_TEXT . " totalling $q_total.";
                       }
                   }
               } else {
@@ -191,11 +191,11 @@ if (($command) && ($assessment)) {
 
                       // Loop through every person
                       foreach ($people as $id => $name) {
-                          $q_id = "q_{$q}_{$id}";
+                          $q_id = "q_$q_$id";
                           $score = Common::fetch_POST($q_id, null);
 
-                          if (is_null($score)) {
-                              $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q{$q_num}.";
+                          if ($score === null) {
+                              $errors[] = "You didn't give a " . APP__MARK_TEXT . " for '$name' in Q$q_num.";
                               $error_style_ids["$q_id"] = 1;
                           } else {
                               // Check the score is within the allowed range
@@ -203,7 +203,7 @@ if (($command) && ($assessment)) {
                               if (($score>=$min_score) && ($score<=$max_score)) {
                                   $results["$q"]["$id"] = $score;
                               } else {
-                                  $errors[] = 'The ' . APP__MARK_TEXT . " of '$score' given in Q{$q_num} for '$name' is not allowed. " . APP__MARK_TEXT . " must be between $min_score and $max_score.";
+                                  $errors[] = 'The ' . APP__MARK_TEXT . " of '$score' given in Q$q_num for '$name' is not allowed. " . APP__MARK_TEXT . " must be between $min_score and $max_score.";
                                   $error_style_ids["$q_id"] = 1;
                               }
                           }
@@ -218,7 +218,7 @@ if (($command) && ($assessment)) {
                       foreach ($people as $id => $name) {
                           $justification_fetch = strip_tags(Common::fetch_POST($id));
 
-                          if (!is_null($justification_fetch)) {
+                          if ($justification_fetch !== null) {
                               $justification[] = ['assessment_id'    =>  $assessment->id,
                                    'group_id'       =>  $group->id,
                                    'user_id'        =>  $_user->id,
@@ -331,32 +331,36 @@ if (($command) && ($assessment)) {
 
           // along with the saved marks we want to save the justification section
           if (is_iterable($justification)) {
-              foreach ($justification as $userJustification) {
-                  $DB->getConnection()
-                      ->createQueryBuilder()
-                      ->insert(APP__DB_TABLE_PREFIX . 'user_justification')
-                      ->values([
-                          'assessment_id' => '?',
-                          'group_id' => '?',
-                          'user_id' => '?',
-                          'marked_user_id' => '?',
-                          'justification_text' => '?',
-                          'date_marked' => '?',
-                      ])
-                      ->setParameter(0, $userJustification['assessment_id'])
-                      ->setParameter(1, $userJustification['group_id'])
-                      ->setParameter(2, $userJustification['user_id'])
-                      ->setParameter(3, $userJustification['marked_user_id'])
-                      ->setParameter(4, $userJustification['justification_text'])
-                      ->setParameter(5, $userJustification['date_marked'])
-                      ->execute();
+              try {
+                  foreach ($justification as $userJustification) {
+                      $DB->getConnection()
+                          ->createQueryBuilder()
+                          ->insert(APP__DB_TABLE_PREFIX . 'user_justification')
+                          ->values([
+                              'assessment_id' => '?',
+                              'group_id' => '?',
+                              'user_id' => '?',
+                              'marked_user_id' => '?',
+                              'justification_text' => '?',
+                              'date_marked' => '?',
+                          ])
+                          ->setParameter(0, $userJustification['assessment_id'])
+                          ->setParameter(1, $userJustification['group_id'])
+                          ->setParameter(2, $userJustification['user_id'])
+                          ->setParameter(3, $userJustification['marked_user_id'])
+                          ->setParameter(4, $userJustification['justification_text'])
+                          ->setParameter(5, $userJustification['date_marked'])
+                          ->execute();
+                  }
+              } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+                  // Table doesn't exist — table was removed from schema, justification not stored
               }
           }
 
 
           Common::logEvent($DB, 'Assessment submission successful', $_module_id, $assessment->id);
 
-          header('Location: '. APP__WWW ."/students/assessments/take/finished.php?{$assessment_qs}");
+          header('Location: '. APP__WWW ."/students/assessments/take/finished.php?$assessment_qs");
           exit;
       }
           Common::logEvent($DB, 'Assessment submission failed', $_module_id, $assessment->id);
@@ -369,13 +373,22 @@ if (($command) && ($assessment)) {
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME . ' ' . $assessment->name;
-$UI->menu_selected = 'my assessments';
-$UI->help_link = '?q=node/329';
-$UI->breadcrumbs = [
-  'home'             => '/',
-  $assessment->name  => null,
-];
+if ($assessment) {
+    $UI->page_title = APP__NAME . ' ' . $assessment->name;
+    $UI->menu_selected = 'my assessments';
+    $UI->help_link = '?q=node/329';
+    $UI->breadcrumbs = [
+      'home'             => '../',
+      $assessment->name  => null,
+    ];
+} else {
+    $UI->page_title = APP__NAME . ' Assessment';
+    $UI->menu_selected = 'my assessments';
+    $UI->help_link = '?q=node/329';
+    $UI->breadcrumbs = [
+      'home' => '../',
+    ];
+}
 
 $UI->head();
 ?>
@@ -387,7 +400,7 @@ $UI->head();
 // rows to highlight because they have errors:
 if (is_array($error_style_ids)) {
     foreach ($error_style_ids as $id => $v) {
-        echo "#{$id} td { background-color: #fcc; }\n";
+        echo "#$id td { background-color: #fcc; }\n";
     }
 }
 
@@ -427,7 +440,7 @@ if (!$assessment) {
   </div>
 
   <p>The assessment you selected could not be loaded for some reason - please go back and try again.</p>
-  <p>If the problem persists, please use the contact system to <a href="/students/support/contact/index.php?q=bug">report the error</a>.</p>
+  <p>If the problem persists, please use the contact system to <a href="<?php echo APP__WWW ?>/students/support/contact/index.php?q=bug">report the error</a>.</p>
 <?php
 } else {
         ?>

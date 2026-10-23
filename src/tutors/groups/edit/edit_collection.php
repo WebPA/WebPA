@@ -170,7 +170,7 @@ if (!$collection) {
 <?php
   $num_module_students = $CIS->get_module_students_count($_module_id);
         // Group Information
-        $groups_iterator =& $collection->get_groups_iterator();
+        $groups_iterator = $collection->get_groups_iterator();
         $num_groups = $groups_iterator->size();
         $num_groups_units = ($num_groups==1) ? 'group' : 'groups';
 
@@ -195,9 +195,9 @@ if (!$collection) {
       <div class="obj">
         <table class="obj" cellpadding="2" cellspacing="2">
         <tr>
-          <td width="24"><a class="text" href="<?php echo $edit_url; ?>"><img src="../../../images/icons/groups.gif" alt="Groups" height="24" width="24" /></a></td>
+          <td width="24"><a href="<?php echo $edit_url; ?>" title="Groups"><img src="../../../images/icons/groups.gif" alt="Groups" height="24" width="24" /></a></td>
           <td class="obj_info">
-            <div class="obj_name"><a class="text" href="<?php echo $edit_url; ?>"><?php echo $group->name; ?></a></div>
+            <div class="obj_name"><a href="<?php echo $edit_url; ?>"><?php echo $group->name; ?></a></div>
             <div class="obj_info_text">Contains <?php echo "$num_members $num_members_units"; ?></div>
           </td>
           <td class="buttons">

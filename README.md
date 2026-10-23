@@ -10,8 +10,7 @@ student with an individual grade. The individual grade reflects the students con
 ### PHP
 The following versions of PHP are supported for the latest version of WebPA:
 
-* PHP 7.4
-* PHP 8.0
+* PHP 8.4
 
 Your PHP instance must also have the following extensions enabled:
 

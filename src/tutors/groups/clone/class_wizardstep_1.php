@@ -11,6 +11,8 @@
 use WebPA\includes\classes\SimpleObjectIterator;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep1
 {
     public $wizard;

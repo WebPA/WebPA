@@ -29,7 +29,7 @@ $year = Common::fetch_GET('y', date('Y'));
 
 $command = Common::fetch_POST('command');
 
-$list_url = "../index.php?tab={$tab}&y={$year}";
+$list_url = "../index.php?tab=$tab&y=$year";
 
 $errors = null;
 
@@ -38,21 +38,24 @@ $assessment = new Assessment($DB);
 
 $assessmentLoaded = $assessment->load($assessment_id);
 
-// Query where the report has been published or not
-$commentsPublishQuery =
-    'SELECT             publish_date ' .
-    'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date ' .
-    'WHERE              assessment_id = ?';
-
+// Query where the report has been published or not — table may not exist
+$publishDate = null;
 try {
+    $commentsPublishQuery =
+        'SELECT             publish_date ' .
+        'FROM               ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date ' .
+        'WHERE              assessment_id = ?';
+
     $publishDate = $DB->getConnection()->fetchOne(
         $commentsPublishQuery,
         [$assessment_id],
         [ParameterType::STRING]
     );
+} catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+    // Table doesn't exist — comments haven't been released (treat as not released)
+    $publishDate = null;
 } catch (Exception $e) {
     error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
-
     $errors[] = 'Unable to check if comments have already been released to students';
 }
 
@@ -94,6 +97,10 @@ if ($assessmentLoaded === false) {
                 $groupNameIdMap[$comment['group_id']] = $comment['group_name'];
             }
         }
+    } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        // Tables don't exist — justification feature not available
+        $groupComments = [];
+        $groupNameIdMap = [];
     } catch (Exception $e) {
         error_log('Message: ' . $e->getMessage() . ' - Trace: ' . $e->getTraceAsString());
 

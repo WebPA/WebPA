@@ -11,7 +11,7 @@
 require_once 'includes/inc_global.php';
 
 $mod = '';
-if (isset($_SERVER['PATH_INFO']) && (strlen($_SERVER['PATH_INFO']) > 0)) {
+if (isset($_SERVER['PATH_INFO']) && (strlen((string) $_SERVER['PATH_INFO']) > 0)) {
     $mod = substr($_SERVER['PATH_INFO'], 1);
 } elseif (isset($_SERVER['QUERY_STRING'])) {
     $mod = $_SERVER['QUERY_STRING'];
@@ -19,9 +19,9 @@ if (isset($_SERVER['PATH_INFO']) && (strlen($_SERVER['PATH_INFO']) > 0)) {
 
 if ($mod && in_array($mod, $INSTALLED_MODS)) {
     if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
-        include_once "mod/{$mod}/index.php";
+        include_once "mod/$mod/index.php";
     } else {
-        header('Location: ' . APP__WWW . "/mod/{$mod}/");
+        header('Location: ' . APP__WWW . "/mod/$mod/");
     }
 } elseif ($_user) {
     if ($_user->is_admin()) {

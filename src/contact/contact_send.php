@@ -119,7 +119,7 @@ $UI->content_start();
     		<li><?php echo $error?></li>
     	<?php } ?>
     	</ul>
-    	<br>
+    	<br />
     	<button onclick="javascript:window.history.back();">Fix Errors</button>
     <?php } ?>
   </div>

@@ -74,16 +74,16 @@ if (!$assessments) {
         $assessment_iterator = new SimpleObjectIterator($assessments, 'Assessment', $DB);
 
         for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-            $assessment =& $assessment_iterator->current();
+            $assessment = $assessment_iterator->current();
 
             $num_responses = (array_key_exists($assessment->id, $responses)) ? $responses[$assessment->id] : 0 ;
             $num_members =  (array_key_exists($assessment->id, $members)) ? $members[$assessment->id] : 0 ;
             $completed_msg = ($num_responses==$num_members) ? '- <strong>COMPLETED</strong>' : '';
 
-            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&{$qs}";
-            $email_url = "email/index.php?a={$assessment->id}&{$qs}";
-            $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
-            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}"; ?>
+            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&$qs";
+            $email_url = "email/index.php?a={$assessment->id}&$qs";
+            $responded_url = "students_who_responded.php?a={$assessment->id}&$qs";
+            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&$qs"; ?>
     <div class="obj">
       <table class="obj" cellpadding="2" cellspacing="2">
       <tr>

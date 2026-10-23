@@ -82,7 +82,7 @@ if (!empty($new_form_name)) {
   <input type="hidden" name="f" value="<?php echo $formid; ?>" size="40" maxlength="40"/>
 
 
- <!-- <td class="button"><a href="<?php echo "clone_example.php?f={$formid}&n="; ?>">OK</a></td> -->
+ <!-- <td class="button"><a href="<?php echo "clone_example.php?f=$formid&n="; ?>">OK</a></td> -->
 
   <input type="submit" name="ok" value="ok"/>
 

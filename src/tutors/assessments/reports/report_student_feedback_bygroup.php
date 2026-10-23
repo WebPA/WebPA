@@ -88,32 +88,36 @@ if (!$assessment->load($assessment_id)) {
 
     //------------------------------------------------------------
     //get the feedback / Justification
-    $feedbackQuery =
-      'SELECT * ' .
-      'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
-      'WHERE assessment_id = ?';
+    $feedback = [];
+    try {
+        $feedbackQuery =
+          'SELECT * ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
+          'WHERE assessment_id = ?';
 
-    $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
+        $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
 
-    $feedback = null;
+        foreach ($fetch_comments as $comment) {
+            if (!is_array($comment)) {
+                break;
+            }
 
-    foreach ($fetch_comments as $comment) {
-        if (!is_array($comment)) {
-            break;
+            $id = $CIS->get_user($comment['user_id']);
+            $marker_id = $id['user_id'];
+            $marker = $id['lastname'] . ', ' . $id['forename'];
+            $id = $CIS->get_user($comment['marked_user_id']);
+            $marked = $id['lastname'] . ', ' . $id['forename'];
+
+            $feedback []  = [
+                'marker_id' =>  $marker_id,
+                'marker' =>  $marker,
+                'marked' =>  $marked,
+                'feedback' =>  $comment['justification_text'],
+            ];
         }
-
-        $id = $CIS->get_user($comment['user_id']);
-        $marker_id = $id['user_id'];
-        $marker = $id['lastname'] . ', ' . $id['forename'];
-        $id = $CIS->get_user($comment['marked_user_id']);
-        $marked = $id['lastname'] . ', ' . $id['forename'];
-
-        $feedback []  = [
-            'marker_id' =>  $marker_id,
-            'marker' =>  $marker,
-            'marked' =>  $marked,
-            'feedback' =>  $comment['justification_text'],
-        ];
+    } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        // Table doesn't exist — table was removed from schema
+        $feedback = [];
     }
 
 

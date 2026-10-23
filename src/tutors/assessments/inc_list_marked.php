@@ -15,7 +15,7 @@
  * @param int $year e.g. 2005
  * @param mixed $academic_year e.g. 2005/06
  * @param string $tab eg pending
- * @param string $qs ="tab={$tab}&y={$year}";
+ * @param string $qs ="tab=$tab&y=$year";
  * @param string $page_url "/tutors/assessment/";
  *
  */
@@ -42,12 +42,10 @@ use WebPA\includes\classes\XMLParser;
 $now = date(MYSQL_DATETIME_FORMAT);
 
 $assessmentsQuery =
-    'SELECT DISTINCT a.*, pd.publish_date AS comments_publish_date ' .
+    'SELECT DISTINCT a.*, NULL AS comments_publish_date ' .
     'FROM ' . APP__DB_TABLE_PREFIX . 'assessment a ' .
     'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'assessment_marking am ' .
     'ON a.assessment_id = am.assessment_id ' .
-    'LEFT JOIN ' . APP__DB_TABLE_PREFIX . 'user_justification_publish_date pd ' .
-    'ON a.assessment_id = pd.assessment_id ' .
     'WHERE a.module_id = ? ' .
     'AND a.open_date >= ? ' .
     'AND a.open_date < ? ' .
@@ -104,7 +102,7 @@ if (!$assessments) {
         $assessment_iterator = new SimpleObjectIterator($assessments, 'Assessment', $DB);
 
         for ($assessment_iterator->reset(); $assessment_iterator->is_valid(); $assessment_iterator->next()) {
-            $assessment =& $assessment_iterator->current();
+            $assessment = $assessment_iterator->current();
             $assessment->set_db($DB);
 
             $commentPublicationDate = $commentsPublicationDateMap[$assessment->id];
@@ -113,12 +111,12 @@ if (!$assessments) {
             $num_members =  (array_key_exists($assessment->id, $members)) ? $members[$assessment->id] : 0 ;
             $completed_msg = ($num_responses==$num_members) ? '- <strong>COMPLETED</strong>' : '';
 
-            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&{$qs}";
-            $email_url = "email/index.php?a={$assessment->id}&{$qs}";
-            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&{$qs}";
-            $responded_url = "students_who_responded.php?a={$assessment->id}&{$qs}";
-            $mark_url = "marks/mark_assessment.php?a={$assessment->id}&{$qs}";
-            $review_justifications_url = "marks/review_justification.php?a={$assessment->id}&{$qs}";
+            $edit_url = "edit/edit_assessment.php?a={$assessment->id}&$qs";
+            $email_url = "email/index.php?a={$assessment->id}&$qs";
+            $groupmark_url = "marks/set_group_marks.php?a={$assessment->id}&$qs";
+            $responded_url = "students_who_responded.php?a={$assessment->id}&$qs";
+            $mark_url = "marks/mark_assessment.php?a={$assessment->id}&$qs";
+            $review_justifications_url = "marks/review_justification.php?a={$assessment->id}&$qs";
 
             $mark_sheets = $assessment->get_all_marking_params(); ?>
     <div class="obj">
@@ -146,7 +144,7 @@ if (!$assessments) {
     if ($mark_sheets) {
         foreach ($mark_sheets as $date_created => $params) {
             $date_created = strtotime($date_created);
-            $reports_url = "reports/index.php?a={$assessment->id}&md={$date_created}&{$qs}";
+            $reports_url = "reports/index.php?a={$assessment->id}&md=$date_created&$qs";
 
             $algorithm = $params['algorithm'];
             $penalty_type = ($params['penalty_type']=='pp') ? ' pp' : '%' ;   // Add a space to the 'pp'.
@@ -158,14 +156,14 @@ if (!$assessments) {
             echo '      <tr>';
             echo '        <td>';
             echo '          <div class="mark_sheet_title">Mark Sheet</div>';
-            echo "          <div class=\"info\" style=\"font-weight: bold;\">Algorithm: {$algorithm}.</div>";
+            echo "          <div class=\"info\" style=\"font-weight: bold;\">Algorithm: $algorithm.</div>";
             echo "          <div class=\"info\">PA weighting: {$params['weighting']}%</div>";
-            echo "          <div class=\"info\">Non-completion penalty: {$params['penalty']}{$penalty_type}</div>";
+            echo "          <div class=\"info\">Non-completion penalty: {$params['penalty']}$penalty_type</div>";
 
             // @todo : implement tolerances and show to users clearly.
-            //          echo("          <div class=\"info\">Score Tolerance: {$tolerance}</div>");
+            //          echo("          <div class=\"info\">Score Tolerance: $tolerance</div>");
 
-            echo "          <div class=\"info\">Grading: {$grading}</div>";
+            echo "          <div class=\"info\">Grading: $grading</div>";
             echo '        </td>';
             echo '        <td class="buttons" style="line-height: 2em;">';
             echo "          <a class=\"button\" href=\"$reports_url\">View&nbsp;Reports</a>";

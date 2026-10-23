@@ -14,6 +14,8 @@ namespace WebPA\includes\classes;
 
 use Doctrine\DBAL\ParameterType;
 
+
+#[AllowDynamicProperties]
 class DBAuthenticator extends Authenticator
 {
     private DAO $dao;
@@ -33,7 +35,7 @@ class DBAuthenticator extends Authenticator
 
         $dbConn = $this->dao->getConnection();
 
-        $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE username = ? AND source_id = ""';
+        $query = 'SELECT user_id, source_id, username, password, id_number, forename, lastname, email, admin, disabled, date_last_login, last_module_id FROM ' . APP__DB_TABLE_PREFIX . 'user WHERE username = ? AND source_id = ""';
 
         $user = $dbConn->fetchAssociative($query, [$this->username], [ParameterType::STRING]);
 

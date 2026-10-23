@@ -10,6 +10,8 @@
 
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class WizardStep3
 {
     // Public
@@ -54,13 +56,13 @@ class WizardStep3
 
         $new_question['text']['_data'] = $this->wizard->get_field('question_text');
         $new_question['desc']['_data'] = $this->wizard->get_field('question_desc');
-        $new_question['range']['_data'] = "{$range_start}-{$range_end}";
+        $new_question['range']['_data'] = "$range_start-$range_end";
 
         for ($i=$range_start; $i<=$range_end; $i++) {
-            $scorelabel = trim(Common::fetch_POST("scorelabel{$i}"));
+            $scorelabel = trim(Common::fetch_POST("scorelabel$i"));
 
             if (!empty($scorelabel)) {
-                $new_question["scorelabel{$i}"]['_data'] = $scorelabel;
+                $new_question["scorelabel$i"]['_data'] = $scorelabel;
             }
         }
 
@@ -82,7 +84,7 @@ class WizardStep3
         } else {// Else.. create the form!
             ?>
 			<p><strong>Your changes to this criterion have been saved.</strong></p>
-			<p style="margin-top: 20px;">You can now return to <a href="/tutors/forms/edit/edit_form.php?f=<?php echo $form->id; ?>">editing your form</a>.</p>
+			<p style="margin-top: 20px;">You can now return to <a href="<?php echo APP__WWW ?>/tutors/forms/edit/edit_form.php?f=<?php echo $form->id; ?>">editing your form</a>.</p>
 			<script language="JavaScript" type="text/javascript">
 			<!--
 				function body_onload() {

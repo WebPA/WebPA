@@ -187,7 +187,7 @@ if (!$form) {
       <div class="obj_list">
 <?php
     for ($i=0; $i<$question_count; $i++) {
-        $question_qs = "{$form_qs}&q=$i";
+        $question_qs = "$form_qs&q=$i";
         $question = $form->get_question($i);
 
         $edit_url = "edit_question/index.php?$question_qs"; ?>
@@ -195,7 +195,7 @@ if (!$form) {
           <table class="obj" cellpadding="0" cellspacing="0">
           <tr>
             <td class="obj_info" valign="top">
-              <div class="obj_name"><a class="text" href="<?php echo $edit_url; ?>"><?php echo $question['text']['_data']; ?></a></div>
+              <div class="obj_name"><a href="<?php echo $edit_url; ?>"><?php echo $question['text']['_data']; ?></a></div>
 <?php
       if (array_key_exists('desc', $question)) {
           $question_desc = (array_key_exists('desc', $question)) ? $question['desc']['_data'] : '' ;

@@ -24,6 +24,9 @@ try {
     $stmt->bindValue(3, Common::fetch_POST('comment'));
 
     $stmt->execute();
+} catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+    // Table doesn't exist — justification feature not available
+    http_response_code(501);
 } catch (\Doctrine\DBAL\Exception $ex) {
     http_response_code(500);
 }

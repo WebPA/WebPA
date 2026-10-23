@@ -192,9 +192,9 @@ class WebPAAlgorithm
     *
     *@param array $groups groups to use in this algorithm : array[group_id] = group_mark
     */
-    public function set_groups(& $groups)
+    public function set_groups(array $groups): void
     {
-        $this->_groups =& $groups;
+        $this->_groups = $groups;
     }
 
     // /->set_groups()
@@ -204,9 +204,9 @@ class WebPAAlgorithm
     *
     * $group_members  : (array) - members to use in this algorithm : array[group_id] = array ( member_id, ... )
     */
-    public function set_group_members(& $group_members)
+    public function set_group_members(array $group_members): void
     {
-        $this->_group_members =& $group_members;
+        $this->_group_members = $group_members;
     }
 
     // /->set_group_members()
@@ -216,9 +216,9 @@ class WebPAAlgorithm
     *
     * $params : (array) - marking parameters for this report : array ( int weighting , int penalty )
     */
-    public function set_marking_params(& $marking_params)
+    public function set_marking_params(array $marking_params): void
     {
-        $this->_marking_params =& $marking_params;
+        $this->_marking_params = $marking_params;
     }
 
     // /->set_marking_params()
@@ -229,9 +229,9 @@ class WebPAAlgorithm
     *
     * $questions  : (array) - questions in this assessment : array ( question_id, ... )
     */
-    public function set_questions(& $questions)
+    public function set_questions(array $questions): void
     {
-        $this->_questions =& $questions;
+        $this->_questions = $questions;
     }
 
     // /->set_questions()
@@ -241,9 +241,9 @@ class WebPAAlgorithm
     *
     * $responses  : (array) - responses given for this assessment : array[member_id][question_id][marked_member_id] = score
     */
-    public function set_responses(& $responses)
+    public function set_responses(array $responses): void
     {
-        $this->_responses =& $responses;
+        $this->_responses = $responses;
     }
 
     // /->set_responses()

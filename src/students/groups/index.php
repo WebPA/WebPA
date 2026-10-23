@@ -30,8 +30,8 @@ $collections = $group_handler->get_member_collections($_user->id, 'user');
 $UI->page_title = APP__NAME . ' my groups';
 $UI->menu_selected = 'my groups';
 $UI->help_link = '?q=node/329';
-$UI->breadcrumbs = ['home'         => '/',
-               'my groups'    => null, ];
+$UI->breadcrumbs = ['home'         => '../',
+                'my groups'    => null, ];
 
 $UI->head();
 ?>
@@ -78,7 +78,7 @@ if (!$collections) {
     <p>You belong to the following groups.</p>
 <?php
   for ($collection_iterator->reset(); $collection_iterator->is_valid(); $collection_iterator->next()) {
-      $collection =& $collection_iterator->current();
+      $collection = $collection_iterator->current();
       $groups = $collection->get_member_groups($_user->id);
 
 

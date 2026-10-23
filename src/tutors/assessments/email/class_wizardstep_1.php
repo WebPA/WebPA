@@ -11,6 +11,8 @@
 use WebPA\includes\functions\Common;
 use WebPA\includes\functions\Form;
 
+
+#[AllowDynamicProperties]
 class WizardStep1
 {
     // Public

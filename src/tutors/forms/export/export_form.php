@@ -25,7 +25,7 @@ use WebPA\includes\functions\Common;
 
  $dbConn = $DB->getConnection();
 
- $query = 'SELECT * FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_id = ? LIMIT 1';
+ $query = 'SELECT form_name, form_xml FROM ' . APP__DB_TABLE_PREFIX . 'form WHERE form_id = ? LIMIT 1';
 
  $form = $dbConn->fetchAssociative($query, [$form_id], [ParameterType::STRING]);
 

@@ -29,7 +29,7 @@ $group_id = Common::fetch_GET('g');
 
 $command = Common::fetch_POST('command');
 
-$collection_url = "edit_collection.php?c={$collection_id}";
+$collection_url = "edit_collection.php?c=$collection_id";
 
 // --------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ $collection = $group_handler->get_collection($collection_id);
 $allow_edit = false;
 
 if ($collection) {
-    $group =& $collection->get_group_object($group_id);
+    $group = $collection->get_group_object($group_id);
 
     // Check if the user can edit this group
     $allow_edit = !$collection->is_locked();
@@ -163,7 +163,7 @@ if ($collection->is_locked()) {
 if (!$group) {
     echo Tutors::GROUP__SELECTED;
 } else {
-    $group_qs = "{$collection_qs}&g={$group->id}"; ?>
+    $group_qs = "$collection_qs&g={$group->id}"; ?>
 
   <form action="edit_group.php?<?php echo $group_qs; ?>" method="post" name="group_form">
   <input type="hidden" name="command" value="none" />

@@ -13,6 +13,8 @@ use WebPA\includes\classes\GroupHandler;
 use WebPA\includes\classes\ResultHandler;
 use WebPA\includes\functions\ArrayFunctions;
 
+
+#[AllowDynamicProperties]
 class WizardStep4
 {
     // Public

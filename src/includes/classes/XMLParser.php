@@ -1,41 +1,8 @@
 <?php
-/**
- * Class  : XMLParser
- *
- * Creates the following general array structure for each element
- * <code>
- * parent-tag => array  ('tag' => array ('_attributes' => {attrs} ,
- *                     '_data'      => {data} ,
- *                     'sub-tag1'   => array (...) ,
- *                     'sub-tag2'   => array (...) ,
- *                     ...
- *                    )
- *            )
- *
- * XML element types supported
- * <tag />
- * Gives: {attrs} = null
- *          {data} = null
- *
- * <tag attr1="a" attr2="b" />
- * Gives: {attrs} = array ( 'attr1' => 'a', 'attr2' => 'b' )
- *          {data} = null
- *
- * <tag attr1="a">some value</tag>
- * Gives: {attrs} = array ( 'attr1' => 'a' )
- *          {data} = 'some value'
- *
- * etc...
- * </code>
- *
- * @copyright Loughborough University
- * @license https://www.gnu.org/licenses/gpl-3.0.en.html GPL version 3
- *
- * @link https://github.com/webpa/webpa
- */
-
 namespace WebPA\includes\classes;
 
+
+#[AllowDynamicProperties]
 class XMLParser
 {
     // Public Vars
@@ -118,14 +85,13 @@ class XMLParser
         $this->_parser = xml_parser_create('');
 
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, false);
-        xml_set_object($this->_parser, $this);
-        xml_set_element_handler($this->_parser, '_tag_open', '_tag_close');
-        xml_set_character_data_handler($this->_parser, '_tag_data');
+        xml_set_element_handler($this->_parser, [$this, '_tag_open'], [$this, '_tag_close']);
+        xml_set_character_data_handler($this->_parser, [$this, '_tag_data']);
 
         $this->xml_data = $xml_data;
         $this->xml_array = [];
         $this->_stack = [];
-        $this->_parent =& $this->xml_array;
+        $this->_parent = &$this->xml_array;
 
         $this->data = '';
         $this->_last_opened_tag = null;
@@ -159,7 +125,7 @@ class XMLParser
                 } else {
                     $tag = $prior_key ? $prior_key : $key;
                     $tab_indent = str_repeat("\t", $level);
-                    echo "{$tab_indent}<{$tag}";
+                    echo "$tab_indent<$tag";
 
                     // Get a list of all the sub-arrays
                     $sub_array = array_flip(array_keys((array) $value));
@@ -168,7 +134,7 @@ class XMLParser
                     // For backwards compatibility reasons, we do a check on if the sub_array is empty. Previously this was an in_array() check which always returned true
                     if (!empty($sub_array) && !empty($value['_attributes'])) {
                         foreach ($value['_attributes'] as $attr_name => $attr_value) {
-                            echo ' ' . $attr_name . '="' . htmlspecialchars($attr_value) . '"';
+                            echo ' ' . $attr_name . '="' . htmlspecialchars((string) $attr_value, ENT_QUOTES, 'UTF-8') . '"';
                         }
                     }
 
@@ -182,7 +148,7 @@ class XMLParser
                     // If there are still sub-arrays then they're probably tags, so process them
                     if (count($sub_array) > 0) {
                         echo ">\n";  // ->generate_xml returns the xml by reference, so need to do this in two halves
-                        echo $this->generate_xml($value, $level + 1) . "{$tab_indent}</$tag>\n";
+                        echo $this->generate_xml($value, $level + 1) . "$tab_indent</$tag>\n";
                     } else {  // need to process the tag value
                         // If the tag has no value, show an empty tag
                         if (!$tag_data) {
@@ -190,9 +156,9 @@ class XMLParser
                         } else {
                             // If this tag has been highlighted as a CDATA tag, use CDATA
                             if (in_array($tag, $this->_cdata_tags)) {
-                                echo "><![CDATA[{$tag_data}]]></$tag>\n";
+                                echo "><![CDATA[$tag_data]]></$tag>\n";
                             } else {  // Else, just use the value
-                                echo '>' . htmlspecialchars($tag_data) . "</$tag>\n";
+                                echo '>' . htmlspecialchars((string) $tag_data, ENT_QUOTES, 'UTF-8') . "</$tag>\n";
                             }
                         }
                     }

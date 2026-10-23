@@ -95,18 +95,22 @@ if (!$assessment->load($assessment_id)) {
 
     //------------------------------------------------------------
     //get the feedback / Justification
-    $feedbackQuery =
-      'SELECT * ' .
-      'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
-      'WHERE assessment_id = ?';
-
-    $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
-
     $feedback = null;
+    try {
+        $feedbackQuery =
+          'SELECT * ' .
+          'FROM ' . APP__DB_TABLE_PREFIX . 'user_justification ' .
+          'WHERE assessment_id = ?';
 
-    foreach ($fetch_comments as $i => $comment) {
-        $marked_id = $comment['marked_user_id'];
-        $feedback []  = ['marked_id' => $marked_id, 'feedback' => $comment['justification_text']];
+        $fetch_comments = $DB->getConnection()->fetchAllAssociative($feedbackQuery, [$assessment->id], [ParameterType::STRING]);
+
+        foreach ($fetch_comments as $i => $comment) {
+            $marked_id = $comment['marked_user_id'];
+            $feedback []  = ['marked_id' => $marked_id, 'feedback' => $comment['justification_text']];
+        }
+    } catch (\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        // Table doesn't exist — table was removed from schema
+        $feedback = [];
     }
 // /if-else(is assessment)
 

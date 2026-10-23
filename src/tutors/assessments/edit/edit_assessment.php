@@ -34,13 +34,13 @@ $year = Common::fetch_GET('y', date('Y'));
 
 $command = Common::fetch_POST('command');
 
-$list_url = "../index.php?tab={$tab}&y={$year}";
+$list_url = "../index.php?tab=$tab&y=$year";
 
 // --------------------------------------------------------------------------------
 
 $assessment = new Assessment($DB);
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
 
     $form = new Form($DB);
 
@@ -166,7 +166,7 @@ $renderDatetimeBoxes = function ($fieldName, $selectedDatetime) {
     echo '<table cellpadding="0" cellspacing="0"><tr>';
 
     // Draw day box
-    echo "<td><select name=\"{$fieldName}_day\">";
+    echo "<td><select name=\"$fieldName_day\">";
     FormFunctions::render_options_range(1, 31, 1, date('j', $selectedDatetime));
     echo '</select></td>';
 
@@ -186,12 +186,12 @@ $renderDatetimeBoxes = function ($fieldName, $selectedDatetime) {
     ];
 
     // Draw month box
-    echo "<td><select name=\"{$fieldName}_month\">";
+    echo "<td><select name=\"$fieldName_month\">";
     FormFunctions::render_options($formMonths, date('n', $selectedDatetime));
     echo '</select></td>';
 
     // Draw year box
-    echo "<td><select name=\"{$fieldName}_year\">";
+    echo "<td><select name=\"$fieldName_year\">";
     $year = (date('Y') < date('Y', $selectedDatetime)) ? date('Y') : date('Y', $selectedDatetime) ;
     FormFunctions::render_options_range($year, date('Y') + 1, 1, date('Y', $selectedDatetime));
     echo '</select></td>';
@@ -204,7 +204,7 @@ $renderDatetimeBoxes = function ($fieldName, $selectedDatetime) {
     $time_h = (int) $time_parts[0];
     $time_m = (int) $time_parts[1];
 
-    echo "<td><select name=\"{$fieldName}_time\">";
+    echo "<td><select name=\"$fieldName_time\">";
     for ($i = 0; $i <= 23; $i++) {
         for ($j = 0; $j <= 45; $j += 15) {
             $selected = (($i == $time_h) && ($j == $time_m)) ? 'selected="selected"' : '' ;
@@ -223,9 +223,11 @@ $page_title = $assessment ? "manage: {$assessment->name}" : 'manage assessment';
 
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
-$UI->breadcrumbs = ['home'       => '/',
-               'my assessments' => '/tutors/assessments/',
-               $page_title    => null, ];
+$UI->breadcrumbs = [
+  'home'          => '../../',
+  'my assessments' => '../',
+  $page_title     => null,
+];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');
@@ -540,7 +542,7 @@ if (!$assessment) {
         <?php
         $collection_total_members = 0;
             for ($groups->reset(); $groups->is_valid(); $groups->next()) {
-                $group =& $groups->current();
+                $group = $groups->current();
                 $num_responses = $result_handler->get_responses_count($group->id);
                 $num_responses = $num_responses ?: '-';
 

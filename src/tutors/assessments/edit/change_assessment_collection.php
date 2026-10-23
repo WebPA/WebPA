@@ -38,8 +38,8 @@ $group_handler = new GroupHandler();
 $assessment = new Assessment($DB);
 
 if ($assessment->load($assessment_id)) {
-    $assessment_qs = "a={$assessment->id}&tab={$tab}&y={$year}";
-    $assessment_url = "edit_assessment.php?{$assessment_qs}";
+    $assessment_qs = "a={$assessment->id}&tab=$tab&y=$year";
+    $assessment_url = "edit_assessment.php?$assessment_qs";
     $collection = $group_handler->get_collection($assessment->get_collection_id());
 } else {
     $assessment = null;
@@ -106,10 +106,12 @@ $manage_text = ($assessment) ? "manage: {$assessment->name}" : 'manage assessmen
 $UI->page_title = APP__NAME . ' ' . $page_title;
 $UI->menu_selected = 'my assessments';
 $UI->help_link = '?q=node/235';
-$UI->breadcrumbs = ['home'         => '/',
-               'my assessments'   => '/tutors/assessments/',
-               $manage_text     => $assessment_url,
-               'change collection'  => null, ];
+$UI->breadcrumbs = [
+  'home'          => '../../',
+  'my assessments' => '../',
+  $manage_text    => $assessment_url,
+  'change collection'  => null,
+];
 
 $UI->set_page_bar_button('List Assessments', '../../../../images/buttons/button_assessment_list.gif', '../');
 $UI->set_page_bar_button('Create Assessments', '../../../../images/buttons/button_assessment_create.gif', '../create/');

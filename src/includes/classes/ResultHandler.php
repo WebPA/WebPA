@@ -13,6 +13,8 @@ namespace WebPA\includes\classes;
 use Doctrine\DBAL\ParameterType;
 use WebPA\includes\functions\Common;
 
+
+#[AllowDynamicProperties]
 class ResultHandler
 {
     private $_DAO;
@@ -55,9 +57,9 @@ class ResultHandler
      * Set Assessment object
      * @param object $assessment assessment object to use
      */
-    public function set_assessment(&$assessment)
+    public function set_assessment(object $assessment): void
     {
-        $this->_assessment =& $assessment;
+        $this->_assessment = $assessment;
 
         $this->_collection_id = $this->_assessment->get_collection_id();
 
@@ -70,7 +72,7 @@ class ResultHandler
      * Return the Assessment object being used
      * @return object assessment object used
      */
-    public function & get_assessment()
+    public function get_assessment(): ?object
     {
         return $this->_assessment;
     }

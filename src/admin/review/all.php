@@ -63,7 +63,7 @@ if (!isset($stmt)) {
             foreach ($rs[$recordcounter] as $field_name => $field_value) {
                 if ($field_name == 'source_id') {
                 } elseif (($field_name != 'user_id') && ($field_name != 'module_id')) {
-                    echo "<th>{$field_name}</th>";
+                    echo "<th>$field_name</th>";
                 } elseif (($type == 'module') || !$_source_id) {
                     echo '<th class="icon">&nbsp;</th>';
                 }
@@ -75,12 +75,12 @@ if (!isset($stmt)) {
         } else {
             $style = '';
         }
-        echo "<tr{$style}>";
+        echo "<tr$style>";
         $consumer_instance_guid = null;
         $uid = '';
         foreach ($rs[$recordcounter] as $field_name => $field_value) {
             if (($field_name == 'id') && ($type != 'module')) {
-                $field_value = "<a href=\"../log.php?u={$uid}\" title=\"View activity log\">{$field_value}</a>";
+                $field_value = "<a href=\"../log.php?u=$uid\" title=\"View activity log\">$field_value</a>";
             }
             if ($field_name == 'source_id') {
                 $source_id = $field_value;
@@ -127,14 +127,14 @@ if (!isset($stmt)) {
                     echo 'No';
                 }
                 echo '</td>';
-            } elseif (strlen($field_value) <= 0) {
+            } elseif (strlen((string) $field_value) <= 0) {
                 echo '<td class="obj_info_text">&nbsp;</td>';
             } elseif (($field_name == 'id') && $style) {
-                echo "<td class=\"obj_info_text\"><span title=\"{$source_id}\">{$field_value}</span></td>";
+                echo "<td class=\"obj_info_text\"><span title=\"$source_id\">$field_value</span></td>";
             } elseif ($field_name == 'email') {
-                echo "<td class=\"obj_info_text\"><a href=\"mailto:'{$field_value}\">{$field_value}</a></td>";
+                echo "<td class=\"obj_info_text\"><a href=\"mailto:'$field_value\">$field_value</a></td>";
             } else {
-                echo "<td class=\"obj_info_text\">{$field_value}</td>";
+                echo "<td class=\"obj_info_text\">$field_value</td>";
             }
         }
         echo "</tr>\n";

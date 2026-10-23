@@ -9,6 +9,7 @@
  * @link https://github.com/webpa/webpa
  */
 
+#[AllowDynamicProperties]
 class WizardStep2
 {
     // Public
@@ -48,10 +49,10 @@ class WizardStep2
 
     public function form()
     {
-        $config =& $this->wizard->get_var('config');
-        $DB =& $this->wizard->get_var('db');
-        $user =& $this->wizard->get_var('user');
-        $form =& $this->wizard->get_var('form');
+        $config = $this->wizard->get_var('config');
+        $DB = $this->wizard->get_var('db');
+        $user = $this->wizard->get_var('user');
+        $form = $this->wizard->get_var('form');
 
         $new_question['text']['_data'] = $this->wizard->get_field('question_text');
         $new_question['desc']['_data'] = $this->wizard->get_field('question_desc');

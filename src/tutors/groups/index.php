@@ -29,12 +29,12 @@ $collections = $group_handler->get_module_collections($_module_id);
 // --------------------------------------------------------------------------------
 // Begin Page
 
-$UI->page_title = APP__NAME. ' ' . Generic::MY__GROUPS;;
+$UI->page_title = APP__NAME. ' ' . Generic::MY__GROUPS;
 $UI->menu_selected = Generic::MY__GROUPS;
 $UI->help_link = '?q=node/253';
 $UI->breadcrumbs = [
-  'home'        => '../../',
-  'my groups'   => '../',
+  'home'      => '../../',
+  'my groups' => null,
 ];
 
 $UI->set_page_bar_button(Generic::BTN__LIST_GROUPS, '../../../images/buttons/button_group_list.gif', '');
@@ -72,9 +72,9 @@ if (!$collections) {
         <div class="obj">
           <table class="obj" cellpadding="2" cellspacing="2">
           <tr>
-            <td class="obj_icon" width="24"><a class="text" href="<?php echo $edit_url; ?>"><img src="../../images/icons/groups.gif" alt="<?php Generic::GROUPS; ?>" height="24" width="24" /></a></td>
+            <td class="obj_icon" width="24"><a href="<?php echo $edit_url; ?>" title="Groups"><img src="../../images/icons/groups.gif" alt="Groups" height="24" width="24" /></a></td>
             <td class="obj_info">
-              <div class="obj_name"><a class="text" href="<?php echo $edit_url; ?>"><?php echo $collection->name; ?></a></div>
+              <div class="obj_name"><a href="<?php echo $edit_url; ?>"><?php echo $collection->name; ?></a></div>
               <div class="obj_info_text"><?php echo Generic::NO__GROUPS; ?> : <?php echo $group_count; ?></div>
             </td>
             <td class="buttons">
