@@ -97,6 +97,93 @@ If you already have WebPA installed and are upgrading from version 3.1.0 or belo
 		 
 Delete the _install_ folder when you're finished.
 
+## Docker Deployment
+
+WebPA ships with a ready-to-use `docker-compose.yml` for local development and deployment.
+
+### Requirements
+
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
+### Quick Start
+
+```bash
+# Copy example env (already done on fresh clone)
+cp .env.example .env   # skip if .env already present
+
+# Build and start all services
+docker compose up -d --build
+
+# Wait for the database to be ready, then verify
+docker compose ps
+```
+
+This starts three services:
+
+| Service   | Image           | Port   | Purpose                 |
+|-----------|-----------------|--------|-------------------------|
+| `webpa-db`    | `mysql:8.0`     | 3306   | Database (auto-initialised from `src/install/`) |
+| `webpa-app`   | `php:8.2-fpm`   | 9000   | PHP application + Composer/npm deps    |
+| `webpa-nginx` | `nginx:alpine`  | 80     | Web server / reverse proxy             |
+
+The application source is bind-mounted from `./src` into the containers, so you can edit files locally and see changes immediately (you may need a `docker compose restart app` after significant PHP changes).
+
+### Configuration
+
+Edit `.env` to customise credentials, ports, and feature flags. The key variables are:
+
+| Variable            | Default         | Description                    |
+|---------------------|-----------------|--------------------------------|
+| `DB_ROOT_PASSWORD`  | `password`      | MySQL root password            |
+| `DB_USER` / `DB_PASS`| `webpa_user`/`password` | Application DB credentials |
+| `DB_NAME`           | `webpa`         | Database name                  |
+| `WEB_PORT`          | `80`            | Nginx listening port           |
+| `APP_WWW`           | `http://localhost` | WebPA base URL              |
+
+After making changes to `.env`, restart the app container:
+
+```bash
+docker compose restart app
+```
+
+### Database
+
+The MySQL container is auto-initialised on first run using the SQL scripts in `src/install/`:
+
+1. `webpa2_database.sql` — creates the database and user
+2. `webpa2_tables.sql` — creates the schema tables
+3. `webpa2_administrator.sql` — creates the admin account (user: `admin`, password: `admin`)
+
+To reset the database completely:
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+### Useful Commands
+
+```bash
+# View logs
+docker compose logs -f app
+docker compose logs -f db
+
+# Run PHP inside the app container
+docker compose exec app php -v
+
+# Composer commands
+docker compose exec app composer install --no-dev
+
+# Rebuild npm assets
+docker compose exec app npm run build
+
+# Stop all services
+docker compose down
+
+# Stop and remove volumes (destroys database)
+docker compose down -v
+```
+
 ## LTI Extension
 
 The standard installation of WebPA does not include [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability) (Learning Tools Interoperability) support which allows it to integrate seamlessly with most popular Virtual Learning Environments. This can be added via an extension created by Stephen P Vickers. Please visit [Stephen's site](http://www.spvsoftwareproducts.com/php/webpa-lti/) for instructions on how to obtain and install this extension. 

@@ -1,0 +1,75 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: webpa-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: ${DB_NAME:-webpa}
+      MYSQL_USER: ${DB_USER:-webpa_user}
+      MYSQL_PASSWORD: ${DB_PASS:-password}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/install:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-password}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webpa-app
+    restart: unless-stopped
+    environment:
+      APP_WWW: ${APP_WWW:-http://localhost}
+      DOC_ROOT: ${DOC_ROOT:-/var/www/webpa/src/}
+      DB_HOST: db
+      DB_PORT: ${DB_PORT:-3306}
+      DB_USER: ${DB_USER:-webpa_user}
+      DB_PASS: ${DB_PASS:-password}
+      DB_NAME: ${DB_NAME:-webpa}
+      DB_PREFIX: ${DB_PREFIX:-pa2_}
+      CUSTOM_CSS_PATH: ${CUSTOM_CSS_PATH:-}
+      SESSION_NAME: ${SESSION_NAME:-WEBPA}
+      ACADEMIC_YEAR_START_MONTH: ${ACADEMIC_YEAR_START_MONTH:-9}
+      HELP_EMAIL: ${HELP_EMAIL:-someone@email.com}
+      NO_REPLY_EMAIL: ${NO_REPLY_EMAIL:-no-reply@email.com}
+      LOGO_PATH: ${LOGO_PATH:-/images/logo.png}
+      LOGO_ALT_TEXT: ${LOGO_ALT_TEXT:-"Your institution name"}
+      LOGO_HEIGHT: ${LOGO_HEIGHT:-25}
+      LOGO_WIDTH: ${LOGO_WIDTH:-102}
+      ALLOW_TEXT_INPUT: ${ALLOW_TEXT_INPUT:-true}
+      ENABLE_USER_DELETE: ${ENABLE_USER_DELETE:-true}
+      ENABLE_MODULE_DELETE: ${ENABLE_MODULE_DELETE:-true}
+      SMTP_HOST: ${SMTP_HOST:-localhost}
+      SMTP_PORT: ${SMTP_PORT:-25}
+      EMAIL_ADDRESS: ${EMAIL_ADDRESS:-someone@email.com}
+      ENABLE_MOODLE_GRADEBOOK: ${ENABLE_MOODLE_GRADEBOOK:-false}
+      SEND_OPENING_REMINDER: ${SEND_OPENING_REMINDER:-false}
+      SEND_CLOSING_REMINDER: ${SEND_CLOSING_REMINDER:-false}
+      MARK_TERMINOLOGY: ${MARK_TERMINOLOGY:-Scores(s)}
+    volumes:
+      - ./src:/var/www/webpa/src
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:alpine
+    container_name: webpa-nginx
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-80}:80"
+    volumes:
+      - ./src:/var/www/webpa/src
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+volumes:
+  db_data:

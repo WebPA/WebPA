@@ -1,0 +1,11 @@
+vendor/
+node_modules/
+src/vendor/
+src/node_modules/
+src/js/*.js
+src/js/*.min.js
+.DS_Store
+*.swp
+*.swo
+*~
+.git/

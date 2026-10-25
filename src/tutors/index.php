@@ -13,10 +13,26 @@ require_once '../includes/inc_global.php';
 use WebPA\includes\functions\Common;
 use WebPA\lang\en\Generic;
 use WebPA\lang\en\tutors\Tutors;
+use Doctrine\DBAL\ParameterType;
 
 if (!Common::check_user($_user, APP__USER_TYPE_TUTOR)) {
     header('Location:'. APP__WWW .'/logout.php?msg=denied');
     exit;
+}
+
+// Auto-select first module from user's module assignments if none selected
+if (empty($_module_id)) {
+    $dbConn = $DB->getConnection();
+    $row = $dbConn->fetchAssociative(
+        'SELECT module_id FROM ' . APP__DB_TABLE_PREFIX . 'user_module WHERE user_id = ? ORDER BY module_id LIMIT 1',
+        [$_user->id],
+        [ParameterType::INTEGER]
+    );
+    if ($row) {
+        $_module_id = $row['module_id'];
+        $_SESSION['_module_id'] = $_module_id;
+        $_module = $row;
+    }
 }
 
 // --------------------------------------------------------------------------------
@@ -76,3 +92,5 @@ echo '<p>' . Tutors::SECTIONS__INTRO . '</p>';
 <?php
 
 $UI->content_end();
+
+?>
